@@ -1,0 +1,604 @@
+{
+  "name": "Unified Vital Signs by Age Group",
+  "description": "Dynamic vital signs form with one-page layout",
+  "version": "1.0",
+  "published": true,
+  "retired": false,
+  "encounter": "Triage",
+  "processor": "EncounterFormProcessor",
+  "pages": [
+    {
+      "label": "Vital Signs",
+      "sections": [
+        {
+          "label": "Vital Type Selection",
+          "isExpanded": true,
+          "questions": [
+            {
+              "label": "Select Vital Type",
+              "type": "obs",
+              "id": "vitalType",
+              "questionOptions": {
+                "concept": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+                "rendering": "select",
+                "answers": [
+                  {
+                    "label": "Vitals Adult Set",
+                    "concept": "3df0f2a1-2981-40b7-b7de-d7ed202e39e1"
+                  },
+                  {
+                    "label": "Midwives Vital Sign Sheet",
+                    "concept": "c23a7266-609f-4985-9bb4-037b34fed6f0"
+                  },
+                  {
+                    "label": "Vital Sign and Pain Tracker Format",
+                    "concept": "ccfd3dab-bab5-4503-a338-87e12bdefaea"
+                  },
+                  {
+                    "label": "Vital Sign For Adolescents (above 12)",
+                    "concept": "9126c0d1-b99b-47f3-ab63-53201942c250"
+                  },
+                  {
+                    "label": "Vital Sign for School-age (6-12)",
+                    "concept": "78575063-66d9-4822-bedf-769334a6a4bd"
+                  },
+                  {
+                    "label": "Vital Sign for Pre School children (3-6)",
+                    "concept": "01a2b3c4-d5e6-f789-0123-456789abffff"
+                  },
+                  {
+                    "label": "Vital Sign for Toddlers (1-3yrs)",
+                    "concept": "bd710963-1b85-4598-8a86-517ec52e3145"
+                  },
+                  {
+                    "label": "Vital Sign for Infants",
+                    "concept": "8921fdf3-8ba9-466b-b803-6c83db614a69"
+                  },
+                  {
+                    "label": "Vital Sign for Neonates",
+                    "concept": "3bcabb7a-e4ad-43ca-af78-7c55ac35dcc2"
+                  },
+                  {
+                    "label": "Premature Vital Sign",
+                    "concept": "281f0520-af40-4399-9ab1-0bcce04ca74c"
+                  }
+                ]
+              },
+              "validators": [
+                {
+                  "type": "required"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Vital Signs Entry",
+          "isExpanded": true,
+          "hide": {
+            "hideWhenExpression": "!vitalType"
+          },
+          "questions": [
+            {
+              "label": "Pulse Rate (bpm)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number"
+              }
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number",
+                "min": "25",
+                "max": "43"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType == '281f0520-af40-4399-9ab1-0bcce04ca74c'"
+              }
+            },
+            {
+              "label": "Respiratory Rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number"
+              }
+            },
+            {
+              "label": "Oxygen Saturation (%)",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number",
+                "min": "0",
+                "max": "100"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType == '281f0520-af40-4399-9ab1-0bcce04ca74c'"
+              }
+            },
+            {
+              "label": "Systolic BP (mmHg)",
+              "type": "obs",
+              "id": "systolicBP",
+              "questionOptions": {
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType == 'c23a7266-609f-4985-9bb4-037b34fed6f0' || vitalType == '281f0520-af40-4399-9ab1-0bcce04ca74c'"
+              }
+            },
+            {
+              "label": "Diastolic BP (mmHg)",
+              "type": "obs",
+              "id": "diastolicBP",
+              "questionOptions": {
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType == 'c23a7266-609f-4985-9bb4-037b34fed6f0' || vitalType == '281f0520-af40-4399-9ab1-0bcce04ca74c'"
+              }
+            },
+            {
+              "label": "BP Measurement Posture",
+              "type": "obs",
+              "id": "bpPosture",
+              "questionOptions": {
+                "concept": "0a314b5c-6475-6782-901c-def012345678",
+                "rendering": "radio",
+                "answers": [
+                  {
+                    "label": "Sitting",
+                    "concept": "0b425c6d-7586-7893-012d-ef0123456789"
+                  },
+                  {
+                    "label": "Supine",
+                    "concept": "0c536d7e-8697-890a-123e-f01234567890"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != '3df0f2a1-2981-40b7-b7de-d7ed202e39e1'"
+              }
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number",
+                "min": "0.1",
+                "max": "200"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType == '3df0f2a1-2981-40b7-b7de-d7ed202e39e1' || vitalType == '9126c0d1-b99b-47f3-ab63-53201942c250' || vitalType == '78575063-66d9-4822-bedf-769334a6a4bd' || vitalType == '01a2b3c4-d5e6-f789-0123-456789abffff'"
+              }
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType == '3df0f2a1-2981-40b7-b7de-d7ed202e39e1' || vitalType == '9126c0d1-b99b-47f3-ab63-53201942c250' || vitalType == '78575063-66d9-4822-bedf-769334a6a4bd' || vitalType == '01a2b3c4-d5e6-f789-0123-456789abffff'"
+              }
+            },
+            {
+              "label": "Weight for BMI (kg)",
+              "type": "obs",
+              "id": "weightForBMI",
+              "questionOptions": {
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number",
+                "min": "0.1",
+                "max": "200"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != '3df0f2a1-2981-40b7-b7de-d7ed202e39e1' && vitalType != '9126c0d1-b99b-47f3-ab63-53201942c250' && vitalType != '78575063-66d9-4822-bedf-769334a6a4bd' && vitalType != '01a2b3c4-d5e6-f789-0123-456789abffff'"
+              }
+            },
+            {
+              "label": "Height for BMI (cm)",
+              "type": "obs",
+              "id": "heightForBMI",
+              "questionOptions": {
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number",
+                "min": "10",
+                "max": "272"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != '3df0f2a1-2981-40b7-b7de-d7ed202e39e1' && vitalType != '9126c0d1-b99b-47f3-ab63-53201942c250' && vitalType != '78575063-66d9-4822-bedf-769334a6a4bd' && vitalType != '01a2b3c4-d5e6-f789-0123-456789abffff'"
+              }
+            },
+            {
+              "label": "Length (cm)",
+              "type": "obs",
+              "id": "length",
+              "questionOptions": {
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != 'bd710963-1b85-4598-8a86-517ec52e3145' && vitalType != '8921fdf3-8ba9-466b-b803-6c83db614a69' && vitalType != '3bcabb7a-e4ad-43ca-af78-7c55ac35dcc2'"
+              }
+            },
+            {
+              "label": "MUAC (cm)",
+              "type": "obs",
+              "id": "muac",
+              "questionOptions": {
+                "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType == '3df0f2a1-2981-40b7-b7de-d7ed202e39e1' || vitalType == 'c23a7266-609f-4985-9bb4-037b34fed6f0' || vitalType == 'ccfd3dab-bab5-4503-a338-87e12bdefaea' || vitalType == '78575063-66d9-4822-bedf-769334a6a4bd'"
+              }
+            },
+            {
+              "label": "Head Circumference (cm)",
+              "type": "obs",
+              "id": "headCircumference",
+              "questionOptions": {
+                "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != '01a2b3c4-d5e6-f789-0123-456789abffff' && vitalType != '281f0520-af40-4399-9ab1-0bcce04ca74c'"
+              }
+            },
+            {
+              "label": "BMI (kg/m²)",
+              "type": "obs",
+              "id": "bmi",
+              "questionOptions": {
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number",
+                "min": "0",
+                "max": "100",
+                "calculate": {
+                  "calculateExpression": "calcBMI(heightForBMI,weightForBMI)"
+                }
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != '3df0f2a1-2981-40b7-b7de-d7ed202e39e1' && vitalType != '9126c0d1-b99b-47f3-ab63-53201942c250' && vitalType != '78575063-66d9-4822-bedf-769334a6a4bd' && vitalType != '01a2b3c4-d5e6-f789-0123-456789abffff'"
+              }
+            },
+            {
+              "label": "Pain Score (0-10)",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number",
+                "min": "0",
+                "max": "10"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != '3df0f2a1-2981-40b7-b7de-d7ed202e39e1' && vitalType != 'c23a7266-609f-4985-9bb4-037b34fed6f0' && vitalType != 'ccfd3dab-bab5-4503-a338-87e12bdefaea'"
+              }
+            },
+            {
+              "label": "Total Fluid Input (mL)",
+              "type": "obs",
+              "id": "totalFluidInput",
+              "questionOptions": {
+                "concept": "a93676f4-e2bf-446b-841f-c4853e92fd94",
+                "rendering": "number"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != 'c23a7266-609f-4985-9bb4-037b34fed6f0' && vitalType != 'ccfd3dab-bab5-4503-a338-87e12bdefaea'"
+              }
+            },
+            {
+              "label": "Total Fluid Output (mL)",
+              "type": "obs",
+              "id": "totalFluidOutput",
+              "questionOptions": {
+                "concept": "2115714d-d3f1-4671-9049-89b14ed9ce03",
+                "rendering": "number"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != 'c23a7266-609f-4985-9bb4-037b34fed6f0' && vitalType != 'ccfd3dab-bab5-4503-a338-87e12bdefaea'"
+              }
+            },
+            {
+              "label": "Glasgow Coma Scale",
+              "type": "obs",
+              "id": "glasgowComaScale",
+              "questionOptions": {
+                "concept": "0d647e8f-9708-901b-234f-012345678901",
+                "rendering": "number",
+                "min": "3",
+                "max": "15"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != 'ccfd3dab-bab5-4503-a338-87e12bdefaea'"
+              }
+            },
+            {
+              "label": "RBS/FBS (mg/dL)",
+              "type": "obs",
+              "id": "rbsFbs",
+              "questionOptions": {
+                "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != 'ccfd3dab-bab5-4503-a338-87e12bdefaea'"
+              }
+            },
+            {
+              "label": "Weight for Age",
+              "type": "obs",
+              "id": "weightForAge",
+              "questionOptions": {
+                "concept": "0e758f90-0819-012c-3450-123456789012",
+                "rendering": "select",
+                "answers": [
+                  {
+                    "label": "Below -3",
+                    "concept": "0f869001-1920-123d-4561-234567890123"
+                  },
+                  {
+                    "label": "Between -3 and -2",
+                    "concept": "10970112-2031-234e-5672-345678901234"
+                  },
+                  {
+                    "label": "Between -2 and -1",
+                    "concept": "11081223-3142-345f-6783-456789012345"
+                  },
+                  {
+                    "label": "Between -1 and 0",
+                    "concept": "12192334-4253-4560-7894-567890123456"
+                  },
+                  {
+                    "label": "Between 0 and 1",
+                    "concept": "13203445-5364-5671-8905-678901234567"
+                  },
+                  {
+                    "label": "Between 1 and 2",
+                    "concept": "14314556-6475-6782-9016-789012345678"
+                  },
+                  {
+                    "label": "Between 2 and 3",
+                    "concept": "15425667-7586-7893-0127-890123456789"
+                  },
+                  {
+                    "label": "Above 3",
+                    "concept": "16536778-8697-890a-1238-901234567890"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != '01a2b3c4-d5e6-f789-0123-456789abffff' && vitalType != 'bd710963-1b85-4598-8a86-517ec52e3145' && vitalType != '8921fdf3-8ba9-466b-b803-6c83db614a69' && vitalType != '3bcabb7a-e4ad-43ca-af78-7c55ac35dcc2'"
+              }
+            },
+            {
+              "label": "Weight for Height/Length",
+              "type": "obs",
+              "id": "weightForHeight",
+              "questionOptions": {
+                "concept": "17647889-9708-901b-2349-012345678901",
+                "rendering": "select",
+                "answers": [
+                  {
+                    "label": "Below -3",
+                    "concept": "18758990-0819-012c-3450-123456789012"
+                  },
+                  {
+                    "label": "Between -3 and -2",
+                    "concept": "19869001-1920-123d-4561-234567890123"
+                  },
+                  {
+                    "label": "Between -2 and -1",
+                    "concept": "20970112-2031-234e-5672-345678901234"
+                  },
+                  {
+                    "label": "Between -1 and 0",
+                    "concept": "21081223-3142-345f-6783-456789012345"
+                  },
+                  {
+                    "label": "Between 0 and 1",
+                    "concept": "22192334-4253-4560-7894-567890123456"
+                  },
+                  {
+                    "label": "Between 1 and 2",
+                    "concept": "23203445-5364-5671-8905-678901234567"
+                  },
+                  {
+                    "label": "Between 2 and 3",
+                    "concept": "24314556-6475-6782-9016-789012345678"
+                  },
+                  {
+                    "label": "Above 3",
+                    "concept": "25425667-7586-7893-0127-890123456789"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != '01a2b3c4-d5e6-f789-0123-456789abffff' && vitalType != 'bd710963-1b85-4598-8a86-517ec52e3145' && vitalType != '8921fdf3-8ba9-466b-b803-6c83db614a69' && vitalType != '3bcabb7a-e4ad-43ca-af78-7c55ac35dcc2'"
+              }
+            },
+            {
+              "label": "Height/Length for Age",
+              "type": "obs",
+              "id": "heightForAge",
+              "questionOptions": {
+                "concept": "26536778-8697-890a-1238-901234567890",
+                "rendering": "select",
+                "answers": [
+                  {
+                    "label": "Below -3",
+                    "concept": "27647889-9708-901b-2349-012345678901"
+                  },
+                  {
+                    "label": "Between -3 and -2",
+                    "concept": "28758990-0819-012c-3450-123456789012"
+                  },
+                  {
+                    "label": "Between -2 and -1",
+                    "concept": "29869001-1920-123d-4561-234567890123"
+                  },
+                  {
+                    "label": "Between -1 and 0",
+                    "concept": "30970112-2031-234e-5672-345678901234"
+                  },
+                  {
+                    "label": "Between 0 and 1",
+                    "concept": "31081223-3142-345f-6783-456789012345"
+                  },
+                  {
+                    "label": "Between 1 and 2",
+                    "concept": "32192334-4253-4560-7894-567890123456"
+                  },
+                  {
+                    "label": "Between 2 and 3",
+                    "concept": "33203445-5364-5671-8905-678901234567"
+                  },
+                  {
+                    "label": "Above 3",
+                    "concept": "34314556-6475-6782-9016-789012345678"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != '01a2b3c4-d5e6-f789-0123-456789abffff' && vitalType != 'bd710963-1b85-4598-8a86-517ec52e3145' && vitalType != '8921fdf3-8ba9-466b-b803-6c83db614a69' && vitalType != '3bcabb7a-e4ad-43ca-af78-7c55ac35dcc2'"
+              }
+            },
+            {
+              "label": "Moro Reflex",
+              "type": "obs",
+              "id": "moroReflex",
+              "questionOptions": {
+                "concept": "35425667-7586-7893-0127-890123456789",
+                "rendering": "radio",
+                "answers": [
+                  {
+                    "label": "Exaggerated",
+                    "concept": "36536778-8697-890a-1238-901234567890"
+                  },
+                  {
+                    "label": "Complete",
+                    "concept": "37647889-9708-901b-2349-012345678901"
+                  },
+                  {
+                    "label": "Incomplete",
+                    "concept": "38758990-0819-012c-3450-123456789012"
+                  },
+                  {
+                    "label": "Absent",
+                    "concept": "39869001-1920-123d-4561-234567890123"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != '8921fdf3-8ba9-466b-b803-6c83db614a69' && vitalType != '3bcabb7a-e4ad-43ca-af78-7c55ac35dcc2' && vitalType != '281f0520-af40-4399-9ab1-0bcce04ca74c'"
+              }
+            },
+            {
+              "label": "Grasp Reflex",
+              "type": "obs",
+              "id": "graspReflex",
+              "questionOptions": {
+                "concept": "40970112-2031-234e-5672-345678901234",
+                "rendering": "radio",
+                "answers": [
+                  {
+                    "label": "Strong",
+                    "concept": "41081223-3142-345f-6783-456789012345"
+                  },
+                  {
+                    "label": "Weak",
+                    "concept": "42192334-4253-4560-7894-567890123456"
+                  },
+                  {
+                    "label": "Absent",
+                    "concept": "43203445-5364-5671-8905-678901234567"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != '8921fdf3-8ba9-466b-b803-6c83db614a69' && vitalType != '3bcabb7a-e4ad-43ca-af78-7c55ac35dcc2' && vitalType != '281f0520-af40-4399-9ab1-0bcce04ca74c'"
+              }
+            },
+            {
+              "label": "Suckling Reflex",
+              "type": "obs",
+              "id": "sucklingReflex",
+              "questionOptions": {
+                "concept": "44314556-6475-6782-9016-789012345678",
+                "rendering": "radio",
+                "answers": [
+                  {
+                    "label": "Sustained",
+                    "concept": "45425667-7586-7893-0127-890123456789"
+                  },
+                  {
+                    "label": "Unsustained",
+                    "concept": "46536778-8697-890a-1238-901234567890"
+                  },
+                  {
+                    "label": "Absent",
+                    "concept": "47647889-9708-901b-2349-012345678901"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != '8921fdf3-8ba9-466b-b803-6c83db614a69' && vitalType != '3bcabb7a-e4ad-43ca-af78-7c55ac35dcc2' && vitalType != '281f0520-af40-4399-9ab1-0bcce04ca74c'"
+              }
+            },
+            {
+              "label": "Pain Severity",
+              "type": "obs",
+              "id": "painSeverity",
+              "questionOptions": {
+                "concept": "48758990-0819-012c-3450-123456789012",
+                "rendering": "select",
+                "answers": [
+                  {
+                    "label": "No Pain",
+                    "concept": "49869001-1920-123d-4561-234567890123"
+                  },
+                  {
+                    "label": "Mild",
+                    "concept": "50970112-2031-234e-5672-345678901234"
+                  },
+                  {
+                    "label": "Moderate",
+                    "concept": "51081223-3142-345f-6783-456789012345"
+                  },
+                  {
+                    "label": "Severe",
+                    "concept": "52192334-4253-4560-7894-567890123456"
+                  },
+                  {
+                    "label": "Worst",
+                    "concept": "53203445-5364-5671-8905-678901234567"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "vitalType != 'ccfd3dab-bab5-4503-a338-87e12bdefaea'"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

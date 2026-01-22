@@ -1,0 +1,1150 @@
+{
+  "name": "Triage Emergency",
+  "description": "Emergency Triage Form Sheet from Bahmni",
+  "version": "2.0",
+  "published": true,
+  "uuid": "4ff622f8-212e-4f0f-b6a6-1aa19d776ffb",
+  "retired": false,
+  "encounter": "Triage",
+  "pages": [
+    {
+      "label": "Patient Summary",
+      "sections": [
+        {
+          "label": "Patient Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date and Time of arrival",
+              "type": "obs",
+              "id": "arrivalDateTime",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "159622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": ""
+              }
+            },
+            {
+              "label": "Date and Time of triage",
+              "type": "obs",
+              "id": "triageDateTime",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "71c2d3e4-f5a6-7890-1234-567890abcdef"
+              },
+              "hide": {
+                "hideWhenExpression": ""
+              }
+            }
+          ]
+        },
+        {
+          "label": "Triage Category",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Any trauma to the patient within the past 48 hours?",
+              "type": "obs",
+              "id": "traumaInjury",
+              "questionOptions": {
+                "concept": "9c3d4e5f-6071-8901-2345-6789abcdef01",
+                "rendering": "radio",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Time of Arrival",
+              "type": "obs",
+              "id": "timeOfArrival",
+              "questionOptions": {
+                "concept": "0d4e5f60-7182-9012-3456-789abcdef012",
+                "rendering": "radio",
+                "answers": [
+                  {
+                    "concept": "1e5f6071-8293-0123-4567-89abcdef0123",
+                    "label": "Day"
+                  },
+                  {
+                    "concept": "2f6071a2-9304-1234-5678-9abcdef01234",
+                    "label": "Night"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(traumaInjury) || traumaInjury !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Is the patient ambulatory?",
+              "type": "obs",
+              "id": "ambulatoryStatus",
+              "questionOptions": {
+                "concept": "aa1b2c3d-4e5f-6789-0123-456789abcdef",
+                "rendering": "radio",
+                "answers": [
+                  {
+                    "concept": "bb2c3d4e-5f60-7890-1234-56789abcdef0",
+                    "label": "Ambulatory"
+                  },
+                  {
+                    "concept": "cc3d4e5f-6071-8901-2345-6789abcdef01",
+                    "label": "Non-Ambulatory"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(traumaInjury) || traumaInjury !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Condition of the patient on arrival?",
+              "type": "obs",
+              "id": "conditionOnArrival",
+              "questionOptions": {
+                "concept": "dd4e5f60-7182-9012-3456-789abcdef012",
+                "rendering": "radio",
+                "answers": [
+                  {
+                    "concept": "ee5f6071-8293-0123-4567-89abcdef0123",
+                    "label": "Acute"
+                  },
+                  {
+                    "concept": "ff607182-9304-1234-5678-9abcdef01234",
+                    "label": "Chronic"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(traumaInjury) || traumaInjury !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Contact Person & Mode of Arrival",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name of Contact Person",
+              "type": "obs",
+              "id": "conTactPerson",
+              "questionOptions": {
+                "concept": "163258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "text"
+              }
+            },
+            {
+              "type": "obs",
+              "label": "Telephone contact",
+              "questionInfo": "",
+              "id": "phoneNumberInitial",
+              "required": "false",
+              "questionOptions": {
+                "concept": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "text"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "myValue && doesNotMatchExpression('^0([0-9](?:(?:[0-9][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6})$',myValue)",
+                  "message": "Please enter the telephone number in the correct format e.g 0993888198 thats is 10 digits"
+                }
+              ]
+            },
+            {
+              "label": "Mode of Arrival",
+              "type": "obs",
+              "id": "ModeOfAArrival",
+              "questionOptions": {
+                "concept": "529a4b5c-6d7e-4567-890b-cdef01234567",
+                "rendering": "select",
+                "answers": [
+                  {
+                    "concept": "6e74d8e2-dd0e-4747-a973-ae0dd2e820ca",
+                    "label": "Ambulance"
+                  },
+                  {
+                    "concept": "74bc6d7e-8f90-6789-012d-ef0123456789",
+                    "label": "Taxi"
+                  },
+                  {
+                    "concept": "85cd7e8f-9001-789a-123e-f01234567890",
+                    "label": "Private Car"
+                  },
+                  {
+                    "concept": "96de8f90-0112-890b-234f-012345678901",
+                    "label": "Public Car"
+                  },
+                  {
+                    "concept": "4f694879-6290-411b-8140-b6562715854e",
+                    "label": "Walking"
+                  },
+                  {
+                    "concept": "b8f00112-2334-012d-4560-234567890123",
+                    "label": "Public Taxi"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "obs",
+              "label": "Other Specify Mode of Arrival",
+              "questionInfo": "",
+              "id": "ModeOfArrivalOther",
+              "required": "false",
+              "questionOptions": {
+                "concept": "d0122334-4556-234f-6782-456789012345",
+                "rendering": "text"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(ModeOfAArrival) || ModeOfAArrival !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Origin/Home",
+              "type": "obs",
+              "id": "originHome",
+              "questionOptions": {
+                "concept": "e1233445-5667-345f-7893-56789012345f",
+                "rendering": "radio",
+                "answers": [
+                  {
+                    "concept": "f2344556-6778-4560-8904-6789012345f0",
+                    "label": "Addis Ababa"
+                  },
+                  {
+                    "concept": "03455667-7889-5671-9015-789012345f01",
+                    "label": "Outside Addis Ababa"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Triage Addis Ababa",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Subcity",
+              "type": "obs",
+              "id": "subcityWereda",
+              "questionOptions": {
+                "concept": "14566778-8990-6782-0126-89012345f012",
+                "rendering": "text"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(originHome) || originHome !== '03455667-7889-5671-9015-789012345f01'"
+              }
+            },
+            {
+              "label": "Woreda",
+              "type": "obs",
+              "id": "woredaField",
+              "questionOptions": {
+                "concept": "25677889-9001-7893-1237-9012345f0123",
+                "rendering": "text"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(originHome) || originHome !== '03455667-7889-5671-9015-789012345f01'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Outside Addis Ababa",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Region",
+              "type": "obs",
+              "id": "reGionField",
+              "questionOptions": {
+                "concept": "36788990-0112-8904-2348-012345f01234",
+                "rendering": "text"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(originHome) || originHome !== '14566778-8990-6782-0126-89012345f012'"
+              }
+            },
+            {
+              "label": "Zone",
+              "type": "obs",
+              "id": "ZonEField",
+              "questionOptions": {
+                "concept": "47899001-1223-9015-3459-12345f012345",
+                "rendering": "text"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(originHome) || originHome !== '14566778-8990-6782-0126-89012345f012'"
+              }
+            },
+            {
+              "label": "Was the patient referred?",
+              "type": "obs",
+              "id": "referralStatus",
+              "questionOptions": {
+                "concept": "58900112-2334-0126-4560-2345f0123456",
+                "rendering": "radio",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(originHome) || originHome !== '14566778-8990-6782-0126-89012345f012'"
+              }
+            },
+            {
+              "label": "If yes, Source of Referral",
+              "type": "obs",
+              "id": "sourceOfReferral",
+              "questionOptions": {
+                "concept": "69011223-3445-1237-5671-345f01234567",
+                "rendering": "select",
+                "answers": [
+                  {
+                    "concept": "7a122334-4556-2348-6782-45f012345678",
+                    "label": "Addis Ababa Government Hospital"
+                  },
+                  {
+                    "concept": "8b233445-5667-3459-7893-5f0123456789",
+                    "label": "Addis Ababa Private Hospital"
+                  },
+                  {
+                    "concept": "9c344556-6778-4560-8904-f012345678a0",
+                    "label": "Regional Hospital"
+                  },
+                  {
+                    "concept": "ad455667-7889-5671-9015-012345678a01",
+                    "label": "Health Center"
+                  },
+                  {
+                    "concept": "be566778-8990-6782-0126-12345678a012",
+                    "label": "Police/Prison"
+                  },
+                  {
+                    "concept": "cf677889-9001-7893-1237-2345678a0123",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "referralStatus !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || isEmpty(originHome) || originHome !== '14566778-8990-6782-0126-89012345f012'"
+              }
+            },
+            {
+              "label": "If other, specify source of referral",
+              "type": "obs",
+              "id": "otherSourceReferral",
+              "questionOptions": {
+                "concept": "d0788990-0112-8904-2348-345678a01234",
+                "rendering": "text"
+              },
+              "hide": {
+                "hideWhenExpression": "sourceOfReferral !== 'cf677889-9001-7893-1237-2345678a0123' || isEmpty(originHome) || originHome !== '14566778-8990-6782-0126-89012345f012'"
+              }
+            },
+            {
+              "label": "Was communication made to the referral hospital?",
+              "type": "obs",
+              "id": "communicationToReferral",
+              "questionOptions": {
+                "concept": "e1899001-1223-9015-3459-45678a012345",
+                "rendering": "radio",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(originHome) || originHome !== '14566778-8990-6782-0126-89012345f012'"
+              }
+            },
+            {
+              "label": "Was pre-hospital care/First aid given?",
+              "type": "obs",
+              "id": "preHospitalCare",
+              "questionOptions": {
+                "concept": "f2900112-2334-0126-4560-5678a0123456",
+                "rendering": "radio",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(originHome) || originHome !== '14566778-8990-6782-0126-89012345f012'"
+              }
+            },
+            {
+              "label": "If yes, specify pre-hospital care/First aid given",
+              "type": "obs",
+              "id": "specifyPreHospitalCare",
+              "questionOptions": {
+                "concept": "03011223-3445-1237-5671-678a01234567",
+                "rendering": "textarea",
+                "rows": "5"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(preHospitalCare) || preHospitalCare !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || isEmpty(originHome) || originHome !== '14566778-8990-6782-0126-89012345f012'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Complaints and History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Chief Complaint",
+              "type": "obs",
+              "id": "cOmplaIntField",
+              "questionOptions": {
+                "concept": "5219AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "select",
+                "answers": [
+                  {
+                    "concept": "120749AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Chest pain"
+                  },
+                  {
+                    "concept": "4ad696eb-4426-4cf7-948b-48ef70a7749d",
+                    "label": "Sudden collapse"
+                  },
+                  {
+                    "concept": "160689AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Respiratory"
+                  },
+                  {
+                    "concept": "142412AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Diarrhea/Vomiting"
+                  },
+                  {
+                    "concept": "140238AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fever"
+                  },
+                  {
+                    "concept": "139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Headache"
+                  },
+                  {
+                    "concept": "151AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abdominal Pain"
+                  },
+                  {
+                    "concept": "118350AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Road traffic Injury"
+                  },
+                  {
+                    "concept": "113054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Convulsion"
+                  },
+                  {
+                    "concept": "118350AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fall injury"
+                  },
+                  {
+                    "concept": "116543AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Burn"
+                  },
+                  {
+                    "concept": "117746AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Gunshot"
+                  },
+                  {
+                    "concept": "c9520082-199d-42f7-9d97-8fe1c5760aff",
+                    "label": "Stab"
+                  },
+                  {
+                    "concept": "163AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Swallow Object"
+                  },
+                  {
+                    "concept": "b6c7e832-6ac3-42fa-9886-eb3213e90a89",
+                    "label": "Poisoning"
+                  },
+                  {
+                    "concept": "61587f91-8a80-4359-a91c-8264be4ac3d1",
+                    "label": "Other Medical"
+                  },
+                  {
+                    "concept": "dab2cb8a-f42f-46a6-9a98-dbe9d0a8b21a",
+                    "label": "Other Surgical"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Other, Specify",
+              "type": "obs",
+              "id": "OtherSpecificComplaints",
+              "questionOptions": {
+                "concept": "e1455667-7889-5671-9015-5a123456789a",
+                "rendering": "textarea"
+              },
+              "validators": [],
+              "hide": {
+                "hideWhenExpression": "cOmplaIntField !== '61587f91-8a80-4359-a91c-8264be4ac3d1' && cOmplaIntField !== 'dab2cb8a-f42f-46a6-9a98-dbe9d0a8b21a'"
+              }
+            },
+            {
+              "label": "Date of Onset",
+              "type": "obs",
+              "id": "dateOfOnset",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "164428AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": ""
+              }
+            },
+            {
+              "label": "Duration of Illness (Days)",
+              "type": "obs",
+              "id": "complaintDuration",
+              "questionOptions": {
+                "concept": "159368AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number",
+                "min": "0"
+              },
+              "validators": []
+            },
+            {
+              "label": "Mechanism of injury (Write if self inflicted)",
+              "type": "obs",
+              "id": "selfInflicted",
+              "questionOptions": {
+                "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "textarea"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Record Vital Sign and Triage Score",
+          "isExpanded": "true",
+          "questions": []
+        },
+        {
+          "label": "Blood Pressure",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic (90 - 120)",
+              "type": "obs",
+              "id": "systolicBP",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "300"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Systolic BP is abnormal (normal range: 90-120 mmHg)"
+                }
+              ]
+            },
+            {
+              "label": "Diastolic (60 - 90)",
+              "type": "obs",
+              "id": "diastolicBP",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "200"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Diastolic BP is abnormal (normal range: 60-90 mmHg)"
+                }
+              ]
+            },
+            {
+              "label": "Posture",
+              "type": "obs",
+              "id": "posture",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0a314b5c-6475-6782-901c-def012345678",
+                "answers": [
+                  {
+                    "concept": "0b425c6d-7586-7893-012d-ef0123456789",
+                    "label": "Sitting"
+                  },
+                  {
+                    "concept": "0c536d7e-8697-890a-123e-f01234567890",
+                    "label": "Supine"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "RR (16 - 24)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "100"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory Rate is abnormal (normal range: 16-24 breaths/min)"
+                }
+              ]
+            },
+            {
+              "label": "SPO2 (> 90)",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "100"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is abnormal (normal: >90%)"
+                }
+              ]
+            },
+            {
+              "label": "Heart Rate",
+              "type": "obs",
+              "id": "heartRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "300"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Heart Rate is abnormal (normal range: 60-100 bpm)"
+                }
+              ]
+            },
+            {
+              "label": "Temperature (36.5 - 37.5)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "30",
+                "max": "45"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is abnormal (normal range: 36.5-37.5°C)"
+                }
+              ]
+            },
+            {
+              "label": "Random Blood Sugar",
+              "type": "obs",
+              "id": "randomBloodSugar",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "1000"
+              }
+            },
+            {
+              "label": "Mobility",
+              "type": "obs",
+              "id": "mobility",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "162753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "162750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Walking"
+                  },
+                  {
+                    "concept": "162751AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "With help"
+                  },
+                  {
+                    "concept": "162752AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Stretcher/ Immobile"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "AVPU",
+              "type": "obs",
+              "id": "avpu",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "162643AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "160282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Alert"
+                  },
+                  {
+                    "concept": "162645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reacts to Voice"
+                  },
+                  {
+                    "concept": "162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reacts to pain"
+                  },
+                  {
+                    "concept": "159508AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "UNRESPONSIVE"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Trauma",
+              "type": "obs",
+              "id": "traumaVitalSigns",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9c3d4e5f-6071-8901-2345-6789abcdef01",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pain Score",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "160287AAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "10"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Triage History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Red",
+              "required": "true",
+              "id": "idRed",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "25899001-1223-9015-3459-9456789abcde",
+                "answers": [
+                  {
+                    "concept": "be469783-7a7b-4e02-8088-ef4c5e56afb0",
+                    "label": "Seizure"
+                  },
+                  {
+                    "concept": "36900112-2334-0126-4560-a56789abcdef",
+                    "label": "Burn (Face/Inhalation)"
+                  },
+                  {
+                    "concept": "2515ab83-19ce-499a-94d6-ca832c6d08f0",
+                    "label": "Hypoglycemia <50mg/dL"
+                  },
+                  {
+                    "concept": "58566778-8990-6782-0126-c23456789a12",
+                    "label": "Central Cyanosis"
+                  },
+                  {
+                    "concept": "cf233445-5667-3459-7893-389a12345678",
+                    "label": "Obstructed airway"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Orange",
+              "required": "true",
+              "id": "idOrange",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "47011223-3445-1237-5671-b6789abcdef0",
+                "answers": [
+                  {
+                    "concept": "435e13d7-b208-4c57-be03-535109803155",
+                    "label": "Reduced Consciousness"
+                  },
+                  {
+                    "concept": "d2e56e53-c517-4a78-8bd8-20deed1a5e8b",
+                    "label": "Seizure & Post-ictal Period"
+                  },
+                  {
+                    "concept": "236dcf87-a1a9-44db-9c8e-d7059aab154a",
+                    "label": "Acute Focal Neurologic Symptoms"
+                  },
+                  {
+                    "concept": "47455667-7889-5671-9015-b123456789a1",
+                    "label": "Psychosis/Aggression"
+                  },
+                  {
+                    "concept": "59233445-5667-3459-7893-d89abcdef012",
+                    "label": "Burn (>20%, electric, chemical or circumferential)"
+                  },
+                  {
+                    "concept": "c072c914-631b-4632-88a9-4ad09fe5de84",
+                    "label": "Uncontrolled Hemorrhage"
+                  },
+                  {
+                    "concept": "5a344556-6778-4560-8904-e9abcdef0123",
+                    "label": "Pregnant + abdominal/pelvic trauma or pain"
+                  },
+                  {
+                    "concept": "425f6fc0-efad-4751-9fc9-76478fddbf4d",
+                    "label": "Threatened limb"
+                  },
+                  {
+                    "concept": "5b455667-7889-5671-9015-fabcdef01234",
+                    "label": "Compound fracture"
+                  },
+                  {
+                    "concept": "5c566778-8990-6782-0126-0bcdef012345",
+                    "label": "Major Dislocation (not finger/toes)"
+                  },
+                  {
+                    "concept": "5d677889-9001-7893-1237-1cdef0123456",
+                    "label": "Diabetic Patient with Ketonuria"
+                  },
+                  {
+                    "concept": "5e788990-0112-8904-2348-2def01234567",
+                    "label": "SOB or Chest Pain (acute)"
+                  },
+                  {
+                    "concept": "45997a6f-d7e3-41ac-bfbe-fa149ccd49b9",
+                    "label": "Coughing blood or Vomiting blood"
+                  },
+                  {
+                    "concept": "b6c7e832-6ac3-42fa-9886-eb3213e90a89",
+                    "label": "Poisoning or drug overdose"
+                  },
+                  {
+                    "concept": "8b899001-1223-9015-3459-f56789a12345",
+                    "label": "Hyperemesis"
+                  },
+                  {
+                    "concept": "d0344556-6778-4560-8904-49a123456789",
+                    "label": "Purpuric rash"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Yellow",
+              "required": "true",
+              "id": "idYellow",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "60900112-2334-0126-4560-4f0123456789",
+                "answers": [
+                  {
+                    "concept": "61011223-3445-1237-5671-5012345678a0",
+                    "label": "Burn (other)"
+                  },
+                  {
+                    "concept": "163483AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hemorrhage (controlled)"
+                  },
+                  {
+                    "concept": "9213a5f1-3a62-414d-a622-a4114fed96bd",
+                    "label": "Closed Fracture"
+                  },
+                  {
+                    "concept": "4035722f-8d3c-49a6-9139-ae29e10fe57c",
+                    "label": "minor Dislocation"
+                  },
+                  {
+                    "concept": "62122334-4556-2348-6782-612345678a01",
+                    "label": "Pregnancy + Vaginal Bleeding"
+                  },
+                  {
+                    "concept": "63233445-5667-3459-7893-72345678a012",
+                    "label": "Pregnancy + non-abdominal/non-pelvic Trauma"
+                  },
+                  {
+                    "concept": "64344556-6778-4560-8904-8345678a0123",
+                    "label": "DM (Glu >17 W/o Ketonuria"
+                  },
+                  {
+                    "concept": "abe9b7fa-ec3c-4ec5-a401-2a019a280dca",
+                    "label": "Abdominal pain (acute)"
+                  },
+                  {
+                    "concept": "39747d43-00bb-46eb-9551-790981786d14",
+                    "label": "Vomiting (ongoing, no blood)"
+                  },
+                  {
+                    "concept": "65455667-7889-5671-9015-945678a01234",
+                    "label": "Diabetic /RBS > 350 without ketonuria"
+                  },
+                  {
+                    "concept": "9c900112-2334-0126-4560-056789a12345",
+                    "label": "Loss of skin turgor"
+                  },
+                  {
+                    "concept": "69677889-9001-7893-1237-d3456789a123",
+                    "label": "Dry crying"
+                  },
+                  {
+                    "concept": "be122334-4556-2348-6782-2789a1234567",
+                    "label": "Muscle cramps"
+                  },
+                  {
+                    "concept": "ad011223-3445-1237-5671-16789a123456",
+                    "label": "Luxation"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Green",
+              "required": "true",
+              "id": "idGreen",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "66566778-8990-6782-0126-a5678a012345",
+                "answers": [
+                  {
+                    "concept": "67677889-9001-7893-1237-b678a0123456",
+                    "label": "All Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Black",
+              "required": "true",
+              "id": "idBlack",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "68788990-0112-8904-2348-c78a01234567",
+                "answers": [
+                  {
+                    "concept": "142934AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Dead Arrival"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Specifiy:",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "69899001-1223-9015-3459-d8a012345678",
+                "rows": "2"
+              },
+              "id": "idSpecifiyTriageColor"
+            }
+          ]
+        },
+        {
+          "label": "Other History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Past Medical Illnessess:",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6a900112-2334-0126-4560-ea0123456789",
+                "rows": "2"
+              },
+              "id": "idPastMedicalIllness"
+            },
+            {
+              "label": "RAT",
+              "type": "obs",
+              "id": "rat",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7e1f2a3b-4c5d-6789-0123-456789abcdef",
+                "answers": [
+                  {
+                    "concept": "8f2a3b4c-5d6e-7890-1234-567890abcdef",
+                    "label": "Eligible"
+                  },
+                  {
+                    "concept": "9a3b4c5d-6e7f-8901-2345-678901abcdef",
+                    "label": "Non Eligible"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Allergies:",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6b011223-3445-1237-5671-fa012345678a",
+                "rows": "2"
+              },
+              "id": "idAllergies"
+            }
+          ]
+        },
+        {
+          "label": "Intervention and Medication Given",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Medication Given",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6c122334-4556-2348-6782-0b12345678ab",
+                "rows": "2"
+              },
+              "id": "idMedGiven"
+            },
+            {
+              "label": "Intervention Done:",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6d233445-5667-3459-7893-1c2345678abc",
+                "rows": "2"
+              },
+              "id": "idIntervDone"
+            },
+            {
+              "label": "Triage Officer Name:",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6e344556-6778-4560-8904-2d345678abcd",
+                "rows": "2"
+              },
+              "id": "triageOfficerName"
+            },
+            {
+              "label": "Triage Score Result:",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6f455667-7889-5671-9015-3e45678abcde",
+                "rows": "2"
+              },
+              "id": "idTriageScoreResult"
+            },
+            {
+              "label": "Triage Color Result:",
+              "type": "obs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "70566778-8990-6782-0126-4f5678abcde0",
+                "answers": [
+                  {
+                    "concept": "25899001-1223-9015-3459-9456789abcde",
+                    "label": "Red"
+                  },
+                  {
+                    "concept": "47011223-3445-1237-5671-b6789abcdef0",
+                    "label": "Orange"
+                  },
+                  {
+                    "concept": "60900112-2334-0126-4560-4f0123456789",
+                    "label": "Yellow"
+                  },
+                  {
+                    "concept": "66566778-8990-6782-0126-a5678a012345",
+                    "label": "Green"
+                  },
+                  {
+                    "concept": "68788990-0112-8904-2348-c78a01234567",
+                    "label": "Black"
+                  }
+                ]
+              },
+              "id": "triageColorResult"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "encounterType": "e22e39fd-7db2-45e7-80f1-60fa0d5a4378"
+}
