@@ -21,10 +21,10 @@ jobs:
           java-version: "8"
 
       - name: Build with Maven
-        # This is a workaround to fix the SSL certificate issue with the Maven repository
-        run: mvn clean verify --batch-mode --file pom.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true -Dmaven.resolver.transport=wagon
+        run: mvn clean verify --batch-mode --file pom.xml
 
   publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -36,10 +36,6 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "8"
-
-      - name: Build with Maven
-      # This is a workaround to fix the SSL certificate issue with the Maven repository
-        run: mvn clean verify --batch-mode --file pom.xml -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true -Dmaven.resolver.transport=wagon
 
       - name: Set settings.xml
         uses: s4u/maven-settings-action@v3.0.0
@@ -57,5 +53,4 @@ jobs:
             }]
 
       - name: Publish
-        # This is a workaround to fix the SSL certificate issue with the Maven repository
-        run: mvn --batch-mode deploy -DskipTests -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true -Dmaven.resolver.transport=wagon
+        run: mvn --batch-mode deploy -DskipTests
