@@ -1,359 +1,304 @@
 {
-    "name":  "DKA Follow up Sheet",
-    "description":  "Diabetic Ketoacidosis follow-up monitoring form migrated from Bahmni",
-    "published":  true,
-    "retired":  false,
-    "version":  "1.0",
-    "uuid":  "3351712e-2842-42cf-ace5-04b5ccb9d2d6",
-    "encounter": "Consultation",
-    "pages":  [
+  "name": "DKA Follow up Sheet",
+  "description": "Diabetic Ketoacidosis follow-up monitoring form migrated from Bahmni",
+  "published": true,
+  "retired": false,
+  "version": "1.0",
+  "uuid": "3351712e-2842-42cf-ace5-04b5ccb9d2d6",
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Vital Signs \u0026 Assessment",
+      "sections": [
+        {
+          "label": "Basic Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date and Time Form Filled in",
+              "type": "obs",
+              "required": true,
+              "id": "dateTimeFormFilled",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Vital Signs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulse Rate",
+              "type": "obs",
+              "required": false,
+              "id": "pulse",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "300",
+                "step": "0.01"
+              },
+              "alert": {
+                "alertWhenExpression": "myValue \u0026\u0026 (myValue \u003e= 100.5 || myValue \u003c 59.5)",
+                "message": "Pulse Rate is out of range (Normal range 60-100)"
+              },
+              "questionInfo": "Normal range: 60-100 bpm"
+            },
+            {
+              "label": "Systolic BP",
+              "type": "obs",
+              "required": false,
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01"
+              },
+              "alert": {
+                "alertWhenExpression": "myValue \u0026\u0026 (myValue \u003e= 130.5 || myValue \u003c 119.5)",
+                "message": "Systolic is out of range (Normal range 120-130)"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg"
+            },
+            {
+              "label": "Diastolic BP",
+              "type": "obs",
+              "required": false,
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01"
+              },
+              "alert": {
+                "alertWhenExpression": "myValue \u0026\u0026 (myValue \u003e= 85.5 || myValue \u003c 79.5)",
+                "message": "Diastolic is out of range (Normal range 80-85)"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg"
+            },
+            {
+              "label": "Posture",
+              "type": "obs",
+              "required": false,
+              "id": "posture",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "159633AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
                   {
-                      "label":  "Visit Details",
-                      "sections":  [
-                                       {
-                                           "label":  "Encounter Details",
-                                           "isExpanded":  "true",
-                                           "questions":  [
-                                                             {
-                                                                 "label":  "Visit Date:",
-                                                                 "type":  "encounterDatetime",
-                                                                 "required":  "true",
-                                                                 "id":  "encDate",
-                                                                 "readonly":  false,
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "date"
-                                                                                     },
-                                                                 "validators":  [
-                                                                                    {
-                                                                                        "type":  "date",
-                                                                                        "allowFutureDates":  "false"
-                                                                                    }
-                                                                                ]
-                                                             },
-                                                             {
-                                                                 "label":  "Provider:",
-                                                                 "type":  "encounterProvider",
-                                                                 "required":  "true",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "ui-select-extended"
-                                                                                     },
-                                                                 "id":  "encProvider ",
-                                                                 "readonly":  false
-                                                             },
-                                                             {
-                                                                 "label":  "Location:",
-                                                                 "type":  "encounterLocation",
-                                                                 "required":  "true",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "ui-select-extended",
-                                                                                         "datasource":  {
-                                                                                                            "name":  "location_datasource",
-                                                                                                            "config":  {
-                                                                                                                           "tag":  "Login Location"
-                                                                                                                       }
-                                                                                                        }
-                                                                                     },
-                                                                 "id":  "encLocation",
-                                                                 "readonly":  false
-                                                             }
-                                                         ]
-                                       }
-                                   ]
+                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sitting"
                   },
                   {
-                      "label":  "Vital Signs \u0026 Assessment",
-                      "sections":  [
-                                       {
-                                           "label":  "Basic Information",
-                                           "isExpanded":  "true",
-                                           "questions":  [
-                                                             {
-                                                                 "label":  "Date and Time Form Filled in",
-                                                                 "type":  "obs",
-                                                                 "required":  true,
-                                                                 "id":  "dateTimeFormFilled",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "datetime",
-                                                                                         "concept":  "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                                                                                     }
-                                                             }
-                                                         ]
-                                       },
-                                       {
-                                           "label":  "Vital Signs",
-                                           "isExpanded":  "true",
-                                           "questions":  [
-                                                             {
-                                                                 "label":  "Pulse Rate",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "pulse",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "number",
-                                                                                         "concept":  "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "min":  "0",
-                                                                                         "max":  "300",
-                                                                                         "step":  "0.01"
-                                                                                     },
-                                                                 "alert":  {
-                                                                               "alertWhenExpression":  "myValue \u0026\u0026 (myValue \u003e= 100.5 || myValue \u003c 59.5)",
-                                                                               "message":  "Pulse Rate is out of range (Normal range 60-100)"
-                                                                           },
-                                                                 "questionInfo":  "Normal range: 60-100 bpm"
-                                                             },
-                                                             {
-                                                                 "label":  "Systolic BP",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "systolic",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "number",
-                                                                                         "concept":  "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "step":  "0.01"
-                                                                                     },
-                                                                 "alert":  {
-                                                                               "alertWhenExpression":  "myValue \u0026\u0026 (myValue \u003e= 130.5 || myValue \u003c 119.5)",
-                                                                               "message":  "Systolic is out of range (Normal range 120-130)"
-                                                                           },
-                                                                 "questionInfo":  "Normal range: 90-120 mmHg"
-                                                             },
-                                                             {
-                                                                 "label":  "Diastolic BP",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "diastolic",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "number",
-                                                                                         "concept":  "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "step":  "0.01"
-                                                                                     },
-                                                                 "alert":  {
-                                                                               "alertWhenExpression":  "myValue \u0026\u0026 (myValue \u003e= 85.5 || myValue \u003c 79.5)",
-                                                                               "message":  "Diastolic is out of range (Normal range 80-85)"
-                                                                           },
-                                                                 "questionInfo":  "Normal range: 60-90 mmHg"
-                                                             },
-                                                             {
-                                                                 "label":  "Posture",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "posture",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "radio",
-                                                                                         "concept":  "159633AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "answers":  [
-                                                                                                         {
-                                                                                                             "concept":  "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                                             "label":  "Sitting"
-                                                                                                         },
-                                                                                                         {
-                                                                                                             "concept":  "159629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                                             "label":  "Supine"
-                                                                                                         }
-                                                                                                     ]
-                                                                                     }
-                                                             },
-                                                             {
-                                                                 "label":  "Temperature (Â°C)",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "temperature",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "number",
-                                                                                         "concept":  "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "min":  "25",
-                                                                                         "max":  "43",
-                                                                                         "step":  "0.01"
-                                                                                     },
-                                                                 "alert":  {
-                                                                               "alertWhenExpression":  "myValue \u0026\u0026 (myValue \u003e= 37.5 || myValue \u003c 35)",
-                                                                               "message":  "Temperature is out of range (Normal range 35-37.5Â°C)"
-                                                                           },
-                                                                 "questionInfo":  "Normal range: 36.5-37.5Â°C"
-                                                             },
-                                                             {
-                                                                 "label":  "Respiratory Rate",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "respiratoryRate",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "number",
-                                                                                         "concept":  "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "min":  "0",
-                                                                                         "step":  "0.01"
-                                                                                     },
-                                                                 "alert":  {
-                                                                               "alertWhenExpression":  "myValue \u0026\u0026 (myValue \u003e= 25 || myValue \u003c 12)",
-                                                                               "message":  "Respiratory Rate is out of range (Normal range 12-24)"
-                                                                           },
-                                                                 "questionInfo":  "Normal range: 16-24 breaths/min"
-                                                             },
-                                                             {
-                                                                 "label":  "Saturation (SPO2%)",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "spo2",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "number",
-                                                                                         "concept":  "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "min":  "0",
-                                                                                         "max":  "100",
-                                                                                         "step":  "0.01"
-                                                                                     },
-                                                                 "alert":  {
-                                                                               "alertWhenExpression":  "myValue \u0026\u0026 myValue \u003c 95",
-                                                                               "message":  "SPO2 is below normal (Normal range â‰¥95%)"
-                                                                           },
-                                                                 "questionInfo":  "Normal range: â‰¥90%"
-                                                             },
-                                                             {
-                                                                 "label":  "Weight (kg)",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "weight",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "number",
-                                                                                         "concept":  "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "min":  "0",
-                                                                                         "step":  "0.01"
-                                                                                     }
-                                                             },
-                                                             {
-                                                                 "label":  "Height (cm)",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "height",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "number",
-                                                                                         "concept":  "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "min":  "0",
-                                                                                         "step":  "0.01"
-                                                                                     }
-                                                             },
-                                                             {
-                                                                 "label":  "Pain Score",
-                                                                 "type":  "obs",
-                                                                 "required":  true,
-                                                                 "id":  "painScore",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "number",
-                                                                                         "concept":  "160287AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "min":  "0",
-                                                                                         "max":  "10",
-                                                                                         "step":  "0.01"
-                                                                                     }
-                                                             }
-                                                         ]
-                                       }
-                                   ]
-                  },
-                  {
-                      "label":  "Treatment \u0026 Monitoring",
-                      "sections":  [
-                                       {
-                                           "label":  "Laboratory and Treatment",
-                                           "isExpanded":  "true",
-                                           "questions":  [
-                                                             {
-                                                                 "label":  "RBS (Random Blood Sugar)",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "rbs",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "number",
-                                                                                         "concept":  "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "min":  "0",
-                                                                                         "step":  "0.01"
-                                                                                     }
-                                                             },
-                                                             {
-                                                                 "label":  "Urine Ketone Value",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "ketone",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "number",
-                                                                                         "concept":  "d9e8f7a6-b5c4-4d3e-8f2a-1b2c3d4e5f6a",
-                                                                                         "min":  "0",
-                                                                                         "step":  "0.1"
-                                                                                     }
-                                                             },
-                                                             {
-                                                                 "label":  "Potassium (K+)",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "potassium",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "number",
-                                                                                         "concept":  "1133AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "min":  "0",
-                                                                                         "step":  "0.1"
-                                                                                     }
-                                                             },
-                                                             {
-                                                                 "label":  "Insulin",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "insulin",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "textarea",
-                                                                                         "concept":  "e0f9a8b7-c6d5-4e4f-9a3b-2c3d4e5f6a7b"
-                                                                                     }
-                                                             }
-                                                         ]
-                                       },
-                                       {
-                                           "label":  "Fluid Management",
-                                           "isExpanded":  "true",
-                                           "questions":  [
-                                                             {
-                                                                 "label":  "Ringer Lactate Input",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "ringerLactateInput",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "number",
-                                                                                         "concept":  "166650AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "min":  "0",
-                                                                                         "step":  "0.01"
-                                                                                     }
-                                                             },
-                                                             {
-                                                                 "label":  "Total Fluid Output",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "totalFluidOutput",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "number",
-                                                                                         "concept":  "162659AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "min":  "0",
-                                                                                         "step":  "0.01"
-                                                                                     }
-                                                             }
-                                                         ]
-                                       },
-                                       {
-                                           "label":  "Notes",
-                                           "isExpanded":  "true",
-                                           "questions":  [
-                                                             {
-                                                                 "label":  "Remarks",
-                                                                 "type":  "obs",
-                                                                 "required":  false,
-                                                                 "id":  "remarks",
-                                                                 "questionOptions":  {
-                                                                                         "rendering":  "textarea",
-                                                                                         "concept":  "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                                                                                         "rows":  "3"
-                                                                                     }
-                                                             }
-                                                         ]
-                                       }
-                                   ]
+                    "concept": "159629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Supine"
                   }
-              ],
-    "processor":  "EncounterFormProcessor",
-    "referencedForms":  [
-
-                        ]
+                ]
+              }
+            },
+            {
+              "label": "Temperature (Â°C)",
+              "type": "obs",
+              "required": false,
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "max": "43",
+                "step": "0.01"
+              },
+              "alert": {
+                "alertWhenExpression": "myValue \u0026\u0026 (myValue \u003e= 37.5 || myValue \u003c 35)",
+                "message": "Temperature is out of range (Normal range 35-37.5Â°C)"
+              },
+              "questionInfo": "Normal range: 36.5-37.5Â°C"
+            },
+            {
+              "label": "Respiratory Rate",
+              "type": "obs",
+              "required": false,
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "alert": {
+                "alertWhenExpression": "myValue \u0026\u0026 (myValue \u003e= 25 || myValue \u003c 12)",
+                "message": "Respiratory Rate is out of range (Normal range 12-24)"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min"
+            },
+            {
+              "label": "Saturation (SPO2%)",
+              "type": "obs",
+              "required": false,
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "100",
+                "step": "0.01"
+              },
+              "alert": {
+                "alertWhenExpression": "myValue \u0026\u0026 myValue \u003c 95",
+                "message": "SPO2 is below normal (Normal range â‰¥95%)"
+              },
+              "questionInfo": "Normal range: â‰¥90%"
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "required": false,
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "required": false,
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Pain Score",
+              "type": "obs",
+              "required": true,
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "160287AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "10",
+                "step": "0.01"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Treatment \u0026 Monitoring",
+      "sections": [
+        {
+          "label": "Laboratory and Treatment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "RBS (Random Blood Sugar)",
+              "type": "obs",
+              "required": false,
+              "id": "rbs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Urine Ketone Value",
+              "type": "obs",
+              "required": false,
+              "id": "ketone",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "d9e8f7a6-b5c4-4d3e-8f2a-1b2c3d4e5f6a",
+                "min": "0",
+                "step": "0.1"
+              }
+            },
+            {
+              "label": "Potassium (K+)",
+              "type": "obs",
+              "required": false,
+              "id": "potassium",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1133AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.1"
+              }
+            },
+            {
+              "label": "Insulin",
+              "type": "obs",
+              "required": false,
+              "id": "insulin",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "e0f9a8b7-c6d5-4e4f-9a3b-2c3d4e5f6a7b"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Fluid Management",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Ringer Lactate Input",
+              "type": "obs",
+              "required": false,
+              "id": "ringerLactateInput",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "166650AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Total Fluid Output",
+              "type": "obs",
+              "required": false,
+              "id": "totalFluidOutput",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "162659AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Notes",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Remarks",
+              "type": "obs",
+              "required": false,
+              "id": "remarks",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": "3"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
 }
