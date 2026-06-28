@@ -1,0 +1,1411 @@
+{
+  "name": "Pediatrics Emergency Triage Form",
+  "description": "Pediatrics Triage Form migrated from Bahmni",
+  "version": "1.1",
+  "published": true,
+  "uuid": "070e7d10-c6b8-4540-9718-5908738039c3",
+  "retired": false,
+  "encounter": "Triage",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Pediatric Emergency Triage",
+      "sections": [
+        {
+          "label": "Vital Signs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulse not palpable",
+              "type": "obs",
+              "id": "pulseNotPalpable",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3db9c82a-c8f4-47c1-a874-788097eaf10b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "questionInfo": "If checked Yes, the pulse rate box is hidden."
+            },
+            {
+              "label": "Pulse Rate (PR) (bpm)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1",
+                "min": "0",
+                "max": "300"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ],
+              "questionInfo": "Beats per minute. Whole numbers only.",
+              "hide": {
+                "hideWhenExpression": "pulseNotPalpable === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Pulse strength",
+              "type": "obs",
+              "id": "pulseStrength",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2df0fb84-1367-4cc5-95ed-0991be7ffd99",
+                "answers": [
+                  {
+                    "concept": "158955AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Strong"
+                  },
+                  {
+                    "concept": "124823AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Weak"
+                  }
+                ]
+              },
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "pulseNotPalpable === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Pulse rhythm",
+              "type": "obs",
+              "id": "pulseRhythm",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d5f88633-71f9-48e2-9618-4c7dab53f73d",
+                "answers": [
+                  {
+                    "concept": "d721e26c-4b0d-4e3a-967b-e98bf8870117",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "1d8e7336-6ece-4b88-9335-abdd10074ed5",
+                    "label": "Irregular"
+                  }
+                ]
+              },
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "pulseNotPalpable === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "readonly": false
+            },
+            {
+              "label": "If irregular, type of irregular rhythm",
+              "type": "obs",
+              "id": "irregularType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "30e82928-1cb7-42dc-9d8c-65e4c50d7bad",
+                "answers": [
+                  {
+                    "concept": "ad645582-de45-46b7-9094-b61b5fb3248c",
+                    "label": "Regularly irregular"
+                  },
+                  {
+                    "concept": "458f9bbd-93c1-4b1a-b8cc-ea2cd8308771",
+                    "label": "Irregularly irregular"
+                  }
+                ]
+              },
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "pulseRhythm !== '1d8e7336-6ece-4b88-9335-abdd10074ed5' || pulseNotPalpable === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Respiratory Rate (RR) (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1",
+                "min": "0",
+                "max": "120"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ],
+              "questionInfo": "Breaths per minute. Whole numbers only."
+            },
+            {
+              "label": "Respiratory depth",
+              "type": "obs",
+              "id": "respDepth",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "818757cc-9250-4325-b386-a9080b8a0cbd",
+                "answers": [
+                  {
+                    "concept": "142887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Deep"
+                  },
+                  {
+                    "concept": "b5c6d7e8-f70e-4b98-1623-def01234567f",
+                    "label": "Shallow"
+                  }
+                ]
+              },
+              "required": "true",
+              "readonly": false
+            },
+            {
+              "label": "Respiratory rhythm",
+              "type": "obs",
+              "id": "respRhythm",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "19811f54-57f6-4546-976e-6ebbb7e90cf4",
+                "answers": [
+                  {
+                    "concept": "d721e26c-4b0d-4e3a-967b-e98bf8870117",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "1d8e7336-6ece-4b88-9335-abdd10074ed5",
+                    "label": "Irregular"
+                  }
+                ]
+              },
+              "required": "true",
+              "readonly": false
+            },
+            {
+              "label": "Oxygen Saturation (SpO2) (%)",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1",
+                "min": "0",
+                "max": "100"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ],
+              "questionInfo": "Percent. Whole numbers only."
+            },
+            {
+              "label": "Oxygen delivery",
+              "type": "obs",
+              "id": "oxygenDelivery",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2c9764d5-f646-4c1b-898e-b6f426c028b9",
+                "answers": [
+                  {
+                    "concept": "162735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Room air"
+                  },
+                  {
+                    "concept": "4fa4c5fa-bfcf-42ca-b608-316eb7a988c6",
+                    "label": "Nasal oxygen"
+                  },
+                  {
+                    "concept": "e9172fb7-3860-49de-ac30-678caf11f785",
+                    "label": "Face mask"
+                  },
+                  {
+                    "concept": "91e99b02-2be8-446f-9af2-ac07d77c9c0c",
+                    "label": "CPAP"
+                  },
+                  {
+                    "concept": "df8c16e2-838a-48ea-9bf1-cb7178c68eef",
+                    "label": "Mechanical ventilation"
+                  }
+                ]
+              },
+              "required": "true",
+              "readonly": false
+            },
+            {
+              "label": "Oxygen Liter (L)",
+              "type": "obs",
+              "id": "oxygenLiter",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "97f70c8d-95e9-42da-87d5-8a2a6ccd9c20",
+                "step": "0.5",
+                "min": "0"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!oxygenDelivery || oxygenDelivery === '162735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Fraction of Inspired Oxygen (FiO2) (%)",
+              "type": "obs",
+              "id": "fio2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f759d9d0-d25e-4aa0-8fd8-d7160f7b3859",
+                "step": "1",
+                "min": "0",
+                "max": "100"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "oxygenDelivery !== '91e99b02-2be8-446f-9af2-ac07d77c9c0c' && oxygenDelivery !== 'df8c16e2-838a-48ea-9bf1-cb7178c68eef'"
+              }
+            },
+            {
+              "label": "Oxygen Flow Rate (L/min)",
+              "type": "obs",
+              "id": "oxygenFlow",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a84241e7-a750-4821-8838-5f4d7ea18576",
+                "step": "0.5",
+                "min": "0"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDelivery !== '91e99b02-2be8-446f-9af2-ac07d77c9c0c' && oxygenDelivery !== 'df8c16e2-838a-48ea-9bf1-cb7178c68eef'"
+              }
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1",
+                "min": "25",
+                "max": "45"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ],
+              "questionInfo": "Degrees Centigrade. 1 decimal place."
+            },
+            {
+              "label": "Temperature route",
+              "type": "obs",
+              "id": "tempRoute",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c9528b14-d5ec-4c45-a7f6-619c6e7206e2",
+                "answers": [
+                  {
+                    "concept": "dec38730-9cd5-4ba9-b123-0e0f5aff1f15",
+                    "label": "Axillary"
+                  },
+                  {
+                    "concept": "e8bf0e40-3f47-4e28-a947-7784abd286a5",
+                    "label": "Oral"
+                  },
+                  {
+                    "concept": "2938ee83-ee6d-4ac3-b876-aa4ba794f310",
+                    "label": "Rectal"
+                  },
+                  {
+                    "concept": "c6ab3ad0-4f09-4408-8d78-cab2c3d2f792",
+                    "label": "Ear"
+                  },
+                  {
+                    "concept": "7656b86c-32a4-4b39-9b72-9238812a8b03",
+                    "label": "Forehead"
+                  }
+                ]
+              },
+              "required": "true",
+              "readonly": false
+            },
+            {
+              "label": "Systolic Blood Pressure (SBP) (mmHg)",
+              "type": "obs",
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1",
+                "min": "0",
+                "max": "300"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ],
+              "questionInfo": "Whole numbers only."
+            },
+            {
+              "label": "Diastolic Blood Pressure (DBP) (mmHg)",
+              "type": "obs",
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1",
+                "min": "0",
+                "max": "200"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ],
+              "questionInfo": "Whole numbers only."
+            }
+          ]
+        },
+        {
+          "label": "Anthropometry",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weightKg",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01",
+                "min": "0",
+                "max": "150"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d{1,2})?$/.test(''+myValue)",
+                  "message": "At most 2 decimal places allowed."
+                }
+              ],
+              "questionInfo": "Use kilograms for age ≥ 30 days (2 decimals allowed)."
+            },
+            {
+              "label": "Weight (g) - infants under 30 days",
+              "type": "obs",
+              "id": "weightG",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "fe8390e6-2457-4f97-976a-7ab48626b875",
+                "step": "1",
+                "min": "0",
+                "max": "10000"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ],
+              "questionInfo": "Use grams for infants under 30 days (no decimals)."
+            },
+            {
+              "label": "Height / Length (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1",
+                "min": "0",
+                "max": "220"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Mid Upper Arm Circumference (MUAC) (cm)",
+              "type": "obs",
+              "id": "muac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1",
+                "min": "0",
+                "max": "50"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Head Circumference (HC) (cm)",
+              "type": "obs",
+              "id": "headCircumference",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1",
+                "min": "0",
+                "max": "70"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Weight for Height/Length (WFH/L) z-score",
+              "type": "obs",
+              "id": "wfhz",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "98b6233c-7cf8-4218-b516-d2142dad9a0a",
+                "step": "0.1",
+                "min": "-5",
+                "max": "5"
+              },
+              "readonly": false,
+              "questionInfo": "Typical range -3 to 3 (extended -5 to 5 under discussion)."
+            },
+            {
+              "label": "Weight for Age (WFA) z-score",
+              "type": "obs",
+              "id": "wfaz",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "162584AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1",
+                "min": "-5",
+                "max": "5"
+              },
+              "readonly": false,
+              "questionInfo": "Typical range -3 to 3."
+            },
+            {
+              "label": "Height/Length for Age (H/LFA) z-score",
+              "type": "obs",
+              "id": "hfaz",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "d2ecb899-60de-48ad-bfe8-5b14e2b5c1ce",
+                "step": "0.1",
+                "min": "-5",
+                "max": "5"
+              },
+              "readonly": false,
+              "questionInfo": "Typical range -3 to 3."
+            },
+            {
+              "label": "Head Circumference for Age (HCFA) z-score",
+              "type": "obs",
+              "id": "hcfaz",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0b6da8af-6037-4e38-9e7e-5817a4a7c6d1",
+                "step": "0.1",
+                "min": "-5",
+                "max": "5"
+              },
+              "readonly": false,
+              "questionInfo": "Typical range -3 to 3."
+            },
+            {
+              "label": "Body Mass Index (BMI) (kg/m²)",
+              "type": "obs",
+              "id": "bmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1",
+                "calculate": {
+                  "calculateExpression": "(!isEmpty(weightKg) && !isEmpty(height) && Number(height) > 0) ? (Number(weightKg) / Math.pow(Number(height)/100, 2)).toFixed(1) : ''"
+                }
+              },
+              "readonly": true,
+              "questionInfo": "Auto-calculated from Weight (kg) and Height (rounded to 1 decimal). Note: unit is kg/m²."
+            }
+          ]
+        },
+        {
+          "label": "Clinical Assessment - ABCDO",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Airway and breathing problem",
+              "type": "obs",
+              "id": "airwayProblems",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "56d1a25a-afe5-4778-aa0b-09352c261148",
+                "answers": [
+                  {
+                    "concept": "892f9568-5086-4148-af4c-7d14f7d2cfe8",
+                    "label": "Obstructed or absent breathing"
+                  },
+                  {
+                    "concept": "2ea8d091-3b80-4289-aeee-f0fe8a7d56ce",
+                    "label": "Increased inspiratory effort with retraction"
+                  },
+                  {
+                    "concept": "125782AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Stridor"
+                  },
+                  {
+                    "concept": "c62f1cd1-897c-456a-867c-71bc2e0c1677",
+                    "label": "Absent breath sounds despite respiratory effort"
+                  },
+                  {
+                    "concept": "58566778-8990-6782-0126-c23456789a12",
+                    "label": "Central cyanosis"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Severe respiratory distress",
+              "type": "obs",
+              "id": "severeRespDistress",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "c547a15a-41d9-45b8-ba60-d72b4c2c296b",
+                "answers": [
+                  {
+                    "concept": "519b2d40-b640-4c43-ab26-365d0b1b41ad",
+                    "label": "Severe lower chest wall indrawing"
+                  },
+                  {
+                    "concept": "57e6124b-1aa0-4314-bfc8-53325114a205",
+                    "label": "Use of auxiliary respiratory muscles"
+                  },
+                  {
+                    "concept": "5207b02d-1178-4f54-b53b-36c1cad0b542",
+                    "label": "Head nodding"
+                  },
+                  {
+                    "concept": "b56a456d-ce7f-4f42-a8b6-86e3557df997",
+                    "label": "Inability to feed due to respiratory problems"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Circulation or shock: Cold hands",
+              "type": "obs",
+              "id": "coldHands",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a9a8149e-ed50-4e78-a9f4-bef8af0037ca",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "With capillary refill ≥ 3 seconds",
+              "type": "obs",
+              "id": "capRefill3",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5d903af3-fcf6-4822-8e67-ca1b5aed64bc",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "coldHands !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "With weak and fast pulse",
+              "type": "obs",
+              "id": "weakFastPulse",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b5b37992-eb8f-4d8a-bc06-85c567bed4c9",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "coldHands !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Coma or unconscious (AVPU)",
+              "type": "obs",
+              "id": "avpu",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ec858446-3c75-41e8-8a50-e84c3fc3a3b3",
+                "answers": [
+                  {
+                    "concept": "9694701e-109a-41d3-8adb-8f07670fbcb5",
+                    "label": "Alert"
+                  },
+                  {
+                    "concept": "162645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Responds to voice"
+                  },
+                  {
+                    "concept": "162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Responds to pain"
+                  },
+                  {
+                    "concept": "b9190517-408c-4898-b4e9-035d742fe97d",
+                    "label": "Unresponsive"
+                  }
+                ]
+              },
+              "required": "true",
+              "readonly": false
+            },
+            {
+              "label": "Convulsion during triage or while waiting",
+              "type": "obs",
+              "id": "convulsionTriage",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d9282919-d3ae-4978-840e-c0507c07071e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Dehydration: Diarrhoea present",
+              "type": "obs",
+              "id": "diarrhoea",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a9f06457-38d1-49ce-b5a2-852db39a4b4a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "questionInfo": "If Yes, severe dehydration signs are shown."
+            },
+            {
+              "label": "Severe dehydration signs (with diarrhoea)",
+              "type": "obs",
+              "id": "dehydrationSigns",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "b66e3b0e-be51-4c39-ac01-4ffc2dfc2117",
+                "answers": [
+                  {
+                    "concept": "14b52637-e859-6789-012d-ef0123456789",
+                    "label": "Lethargic or unconscious"
+                  },
+                  {
+                    "concept": "164457AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sunken eyes"
+                  },
+                  {
+                    "concept": "1983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unable to drink fluids"
+                  },
+                  {
+                    "concept": "edbfc52e-de3e-45cf-b52b-3c4425c5a172",
+                    "label": "Skin pinch goes back slowly"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "diarrhoea !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Any other emergency signs?",
+              "type": "obs",
+              "id": "otherSignsPresent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4a21ce22-059e-4e73-9e97-400e1d59c367",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Other emergency signs",
+              "type": "obs",
+              "id": "otherSigns",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "aaa42cc4-2d7c-4cf3-8f5f-9babc5de297b",
+                "answers": [
+                  {
+                    "concept": "147241AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Bleeding child"
+                  },
+                  {
+                    "concept": "cc1fc145-41f6-4c9c-acc1-45e3599781fd",
+                    "label": "Poisoning requiring immediate care"
+                  },
+                  {
+                    "concept": "132338AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Open fracture"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "otherSignsPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Clinical Assessment - 3TPR-MOB",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "3T (Tiny baby, Temperature, Trauma)",
+              "type": "obs",
+              "id": "signs3T",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "172d4036-f5d7-4f1f-89ef-10cc52bef47b",
+                "answers": [
+                  {
+                    "concept": "fe27d978-07be-4fc3-9d09-ee29c7f0f90d",
+                    "label": "Tiny baby under two months"
+                  },
+                  {
+                    "concept": "af12f3b3-b056-498c-9c5e-edd34dff72d6",
+                    "label": "Temperature very hot or very cold"
+                  },
+                  {
+                    "concept": "72d950f7-17c5-469d-abf0-8882d656e049",
+                    "label": "Trauma or urgent surgical condition"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "3P (Pallor, Poisoning, Pain)",
+              "type": "obs",
+              "id": "signs3P",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "d684d4ae-33b5-4c8d-a344-eea8945ee538",
+                "answers": [
+                  {
+                    "concept": "7dd9e0f1-5a2b-345c-789d-678901234567",
+                    "label": "Severe pallor"
+                  },
+                  {
+                    "concept": "0bcd3813-27dc-4f78-8d37-151f693500ee",
+                    "label": "History of poisoning"
+                  },
+                  {
+                    "concept": "163477AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe pain"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "3R (Respiratory distress, Restless, Referral)",
+              "type": "obs",
+              "id": "signs3R",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "0d199a3c-a624-40fa-85cb-66825da8fc45",
+                "answers": [
+                  {
+                    "concept": "127639AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Respiratory distress"
+                  },
+                  {
+                    "concept": "843b93f3-303a-4358-ae57-0ef855b5e79a",
+                    "label": "Restless irritable or lethargic"
+                  },
+                  {
+                    "concept": "ad5d211b-1701-4cd0-b55b-dd681598ddc6",
+                    "label": "Urgent referral"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "MOB (Malnutrition, Oedema, Burn)",
+              "type": "obs",
+              "id": "signsMOB",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "3e745228-31ab-48e0-b020-b34b5cb8a16d",
+                "answers": [
+                  {
+                    "concept": "c8c3d3cb-30e5-4e6b-980c-b78bfa289e1f",
+                    "label": "Malnutrition with visible severe wasting"
+                  },
+                  {
+                    "concept": "f4df0ad5-bbac-4b6d-81c5-2dbecd88ee1b",
+                    "label": "Oedema of both feet"
+                  },
+                  {
+                    "concept": "d1bb1ba2-c7f8-43cf-ac13-46ef76b9800e",
+                    "label": "Burn"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Triage Level",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Triage level",
+              "type": "obs",
+              "id": "triageLevel",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6bb7d7aa-df51-4cfd-90ee-9fcfb9bdad9f",
+                "answers": [
+                  {
+                    "concept": "ecee70d1-8ec1-42c4-9cc6-7ac6addf2517",
+                    "label": "Red"
+                  },
+                  {
+                    "concept": "876c9989-2492-422e-b034-1151860ae975",
+                    "label": "Orange"
+                  },
+                  {
+                    "concept": "f05aee3c-ba96-4a43-b0b4-2894db7999d0",
+                    "label": "Yellow"
+                  },
+                  {
+                    "concept": "668a4165-5515-405d-9fd1-d2aaedd1dbbd",
+                    "label": "Green"
+                  }
+                ]
+              },
+              "required": "true",
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Basic Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Chief complaint",
+              "type": "obsGroup",
+              "id": "chiefComplaintGroup",
+              "questionOptions": {
+                "concept": "5d0c0685-a166-4bd9-95ad-75cced418761",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Chief complaint",
+                  "type": "obs",
+                  "id": "chiefComplaint",
+                  "questionOptions": {
+                    "rendering": "ui-select-extended",
+                    "concept": "5219AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "answers": [
+                      {
+                        "concept": "140238AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Fever"
+                      },
+                      {
+                        "concept": "143264AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Cough"
+                      },
+                      {
+                        "concept": "142373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Difficulty breathing"
+                      },
+                      {
+                        "concept": "142412AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Diarrhoea"
+                      },
+                      {
+                        "concept": "122983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Vomiting"
+                      },
+                      {
+                        "concept": "113054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Convulsion"
+                      },
+                      {
+                        "concept": "112234AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Trauma or injury"
+                      },
+                      {
+                        "concept": "114088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Poisoning"
+                      },
+                      {
+                        "concept": "fa432089-99ca-4d65-b6dd-c3d7361f3688",
+                        "label": "Rash"
+                      },
+                      {
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Other"
+                      }
+                    ]
+                  },
+                  "questionInfo": "Select from the chief complaint list. Use the Add button for additional complaints.",
+                  "readonly": false
+                },
+                {
+                  "label": "Chief complaint notes",
+                  "type": "obs",
+                  "id": "chiefComplaintNotes",
+                  "questionOptions": {
+                    "rendering": "textarea",
+                    "concept": "1a2b3c4d-5e6f-7890-abcd-ef1234567890"
+                  },
+                  "readonly": false
+                }
+              ]
+            },
+            {
+              "label": "Time of illness / accident",
+              "type": "obs",
+              "id": "timeOfIllness",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "868d07ca-9eca-408a-a5ac-6482dcdb8b83"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Other known illness",
+              "type": "obs",
+              "id": "otherKnownIllness",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ba94514e-0642-4086-a8a5-7a3d014e37e6",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "If yes, specify (ICD-11)",
+              "type": "obs",
+              "id": "otherIllnessSpecify",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "3e40006f-c155-4e36-817c-cd2e63af7394"
+              },
+              "readonly": false,
+              "questionInfo": "Ideally coded to ICD-11.",
+              "hide": {
+                "hideWhenExpression": "otherKnownIllness !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Address",
+              "type": "obs",
+              "id": "address",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1d5ec27c-c250-40ef-8416-fa6034a7faf6"
+              },
+              "readonly": true,
+              "questionInfo": "Auto-populated from the patient's demographics."
+            },
+            {
+              "label": "Time of arrival",
+              "type": "obs",
+              "id": "timeOfArrival",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0d4e5f60-7182-9012-3456-789abcdef012",
+                "answers": [
+                  {
+                    "concept": "1e5f6071-8293-0123-4567-89abcdef0123",
+                    "label": "Day"
+                  },
+                  {
+                    "concept": "2f6071a2-9304-1234-5678-9abcdef01234",
+                    "label": "Night"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Triage time",
+              "type": "obs",
+              "id": "triageTime",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "71c2d3e4-f5a6-7890-1234-567890abcdef"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Mode of arrival",
+              "type": "obs",
+              "id": "modeOfArrival",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "529a4b5c-6d7e-4567-890b-cdef01234567",
+                "answers": [
+                  {
+                    "concept": "6e74d8e2-dd0e-4747-a973-ae0dd2e820ca",
+                    "label": "Ambulance"
+                  },
+                  {
+                    "concept": "b8f00112-2334-012d-4560-234567890123",
+                    "label": "Public transport"
+                  },
+                  {
+                    "concept": "85cd7e8f-9001-789a-123e-f01234567890",
+                    "label": "Private car"
+                  },
+                  {
+                    "concept": "4f694879-6290-411b-8140-b6562715854e",
+                    "label": "Walking"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Prehospital care / first aid",
+              "type": "obs",
+              "id": "prehospitalCare",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f2900112-2334-0126-4560-5678a0123456",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "If yes, please specify",
+              "type": "obs",
+              "id": "prehospitalSpecify",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d5487d56-ee66-4a53-9d96-a8887ecec868"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "prehospitalCare !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Referral Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Referral system",
+              "type": "obs",
+              "id": "referralSystem",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f21bd422-0d04-4e5b-aad5-9312110d2dc0",
+                "answers": [
+                  {
+                    "concept": "160551AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Self"
+                  },
+                  {
+                    "concept": "c4ab2fb4-7d34-42f9-950a-7e8261cba9f9",
+                    "label": "Institution"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Name of institution",
+              "type": "obs",
+              "id": "referralInstitution",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "82a3f5b6-7311-455c-84a2-362d4b5b04e2"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "referralSystem !== 'c4ab2fb4-7d34-42f9-950a-7e8261cba9f9'"
+              }
+            },
+            {
+              "label": "Date of referral",
+              "type": "obs",
+              "id": "referralDate",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "1162063a-5960-7890-1234-567890abcd31"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Diagnosis at referral (ICD-11)",
+              "type": "obs",
+              "id": "referralDiagnosis",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "00a98c63-746a-4b4a-b8bd-72d5fdaf1dfa"
+              },
+              "readonly": false,
+              "questionInfo": "Ideally coded to ICD-11."
+            },
+            {
+              "label": "Reason for referral",
+              "type": "obs",
+              "id": "referralReason",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6ba5e776-387c-4d28-b318-6ec04ba14c77",
+                "answers": [
+                  {
+                    "concept": "37a3f69d-5aac-4434-a927-20ead5a1c8a2",
+                    "label": "Higher level of care"
+                  },
+                  {
+                    "concept": "486bc0a1-5a06-4fec-8ddf-11acc3d671d5",
+                    "label": "Specialist consultation"
+                  },
+                  {
+                    "concept": "bc0b5de0-79d9-4989-8330-c7774fbc6be4",
+                    "label": "Investigation / diagnostics"
+                  },
+                  {
+                    "concept": "6386244e-959f-4e6b-9657-67f6459f8089",
+                    "label": "Admission"
+                  },
+                  {
+                    "concept": "9213e9d3-97e7-4403-b915-29a8543da604",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Attachment",
+              "type": "obs",
+              "id": "referralAttachment",
+              "questionOptions": {
+                "rendering": "file",
+                "concept": "0939ac62-6494-45f6-a1a7-2efc373924bb"
+              },
+              "readonly": false,
+              "questionInfo": "Upload referral document(s)."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

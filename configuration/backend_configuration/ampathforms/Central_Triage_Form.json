@@ -1,7 +1,7 @@
 {
-  "name": "Central Triage Form",
-  "description": "Central Triage Form for vital signs assessment",
-  "version": "1.0",
+  "name": "Central Triage Form (Team Review Extension)",
+  "description": "Central Triage Form for vital signs assessment — extended per team review.",
+  "version": "1.5",
   "published": true,
   "uuid": "ff723d59-0650-4b84-858d-c1045b690683",
   "retired": false,
@@ -15,11 +15,10 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
-              "readonly": false,
               "questionOptions": {
                 "rendering": "date"
               },
@@ -35,27 +34,77 @@
               "type": "encounterProvider",
               "required": "true",
               "questionOptions": {
-                "rendering": "ui-select-extended",
-                "isSearchable": true
+                "rendering": "ui-select-extended"
               },
-              "id": "encProvider",
-              "readonly": false
+              "id": "encProvider"
             },
             {
               "label": "Location:",
               "type": "encounterLocation",
               "required": "true",
               "questionOptions": {
-                "rendering": "ui-select-extended",
-                "datasource": {
-                  "name": "location_datasource",
-                  "config": {
-                    "tag": "Login Location"
-                  }
-                }
+                "rendering": "ui-select-extended"
               },
-              "id": "encLocation",
-              "readonly": false
+              "id": "encLocation"
+            }
+          ]
+        },
+        {
+          "label": "Patient Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Type",
+              "type": "obs",
+              "required": "true",
+              "id": "visitType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "164181AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "conceptMappings": [
+                  {
+                    "relationship": "SAME-AS",
+                    "type": "CIEL",
+                    "value": "164181"
+                  }
+                ],
+                "answers": [
+                  {
+                    "concept": "164180AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "New"
+                  },
+                  {
+                    "concept": "160530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Repeat"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date of Previous Visit",
+              "type": "obs",
+              "id": "dateOfPreviousVisit",
+              "required": {
+                "type": "conditionalRequired",
+                "referenceQuestionId": "visitType",
+                "referenceQuestionAnswers": [
+                  "160530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                ],
+                "message": "Date of Previous Visit is required when Visit Type is Repeat."
+              },
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "164093AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(visitType) || visitType !== '160530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             }
           ]
         }
@@ -65,172 +114,270 @@
       "label": "Central Triage Assessment",
       "sections": [
         {
-          "label": "Vital Signs",
+          "label": "Vitals",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse (60-100)",
-              "type": "obs",
-              "id": "pulse",
+              "label": "Vital Signs",
+              "type": "obsGroup",
+              "id": "vitalSignEntries",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
+                "concept": "3df0f2a1-2981-40b7-b7de-d7ed202e39e1",
+                "rendering": "repeating",
+                "min": "1"
               },
-              "questionInfo": "Normal range: 60-100 bpm",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
-                "message": "Pulse is outside the normal range (60–100 bpm). Abnormal"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Blood Pressure",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Systolic (90-120)",
-              "type": "obs",
-              "id": "systolicBP",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal range: 90-120 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
-                "message": "Systolic BP is outside the normal range (90–120 mmHg). Abnormal"
-              }
-            },
-            {
-              "label": "Diastolic (60-90)",
-              "type": "obs",
-              "id": "diastolicBP",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal range: 60-90 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
-                "message": "Diastolic BP is outside the normal range (60–90 mmHg). Abnormal"
-              }
-            },
-            {
-              "label": "Posture",
-              "type": "obs",
-              "id": "posture",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "159633AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "answers": [
-                  {
-                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Sitting"
+              "questions": [
+                {
+                  "label": "Date",
+                  "type": "obs",
+                  "id": "vitalEntryDate",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
-                  {
-                    "concept": "159629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Supine"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "label": "Additional Vital Signs",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Temperature (36.5-37.5)",
-              "type": "obs",
-              "id": "temperature",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "25",
-                "max": "43",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal range: 36.5-37.5°C",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
-                "message": "Temperature is out of range (Normal range 35-37.5°C)"
-              }
-            },
-            {
-              "label": "RR (16-24)",
-              "type": "obs",
-              "id": "respiratoryRate",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal range: 16-24 breaths/min",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
-                "message": "Respiratory Rate is outside the normal range (16–24 breaths/min). Abnormal"
-              }
-            },
-            {
-              "label": "Saturation (SPO2%)",
-              "type": "obs",
-              "id": "spo2",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "max": "100",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal: >90%",
-              "alert": {
-                "alertWhenExpression": "myValue && myValue <= 90",
-                "message": "SPO2 is below the normal range (>90%). Abnormal"
-              }
-            },
-            {
-              "label": "Weight",
-              "type": "obs",
-              "id": "weight",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
-              }
-            },
-            {
-              "label": "Height",
-              "type": "obs",
-              "id": "height",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
-              }
-            },
-            {
-              "label": "BMI (Kg/m2)",
-              "type": "obs",
-              "id": "bmi",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "calculate": {
-                  "calculateExpression": "calcBMI(height,weight)"
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+                  ]
                 },
-                "step": "0.01"
-              }
+                {
+                  "label": "Time",
+                  "type": "obs",
+                  "id": "vitalEntryTime",
+                  "datePickerFormat": "timer",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                },
+                {
+                  "label": "Blood Pressure",
+                  "type": "obsGroup",
+                  "id": "bloodPressure",
+                  "questionOptions": {
+                    "concept": "733aaf40-9c4c-41dd-8834-5f4fc72b538d",
+                    "rendering": "group"
+                  },
+                  "questions": [
+                    {
+                      "label": "Systolic (mmHg)",
+                      "type": "obs",
+                      "id": "systolicBP",
+                      "questionOptions": {
+                        "rendering": "number",
+                        "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "min": "0",
+                        "step": "0.01"
+                      },
+                      "questionInfo": "Normal range: 90–120 mmHg",
+                      "alert": {
+                        "alertWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                        "message": "Systolic BP is outside the normal range (90–120 mmHg)."
+                      }
+                    },
+                    {
+                      "label": "Diastolic (mmHg)",
+                      "type": "obs",
+                      "id": "diastolicBP",
+                      "questionOptions": {
+                        "rendering": "number",
+                        "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "min": "0",
+                        "step": "0.01"
+                      },
+                      "questionInfo": "Normal range: 60–90 mmHg",
+                      "alert": {
+                        "alertWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                        "message": "Diastolic BP is outside the normal range (60–90 mmHg)."
+                      }
+                    },
+                    {
+                      "label": "Posture",
+                      "type": "obs",
+                      "id": "posture",
+                      "questionOptions": {
+                        "rendering": "radio",
+                        "concept": "159633AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "answers": [
+                          {
+                            "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "label": "Sitting"
+                          },
+                          {
+                            "concept": "159629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            "label": "Supine"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "label": "Heart Rate (bpm)",
+                  "type": "obs",
+                  "id": "pulse",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "step": "0.01"
+                  },
+                  "questionInfo": "Normal range: 60–100 bpm",
+                  "alert": {
+                    "alertWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                    "message": "Heart rate is outside the normal range (60–100 bpm)."
+                  }
+                },
+                {
+                  "label": "Respiratory Rate (breaths/min)",
+                  "type": "obs",
+                  "id": "respiratoryRate",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "step": "0.01"
+                  },
+                  "questionInfo": "Normal range: 16–24 breaths/min",
+                  "alert": {
+                    "alertWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                    "message": "Respiratory rate is outside the normal range (16–24 breaths/min)."
+                  }
+                },
+                {
+                  "label": "Temperature (°C)",
+                  "type": "obs",
+                  "id": "temperature",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "25",
+                    "max": "43",
+                    "step": "0.01"
+                  },
+                  "questionInfo": "Normal range: 36.5–37.5 °C",
+                  "alert": {
+                    "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
+                    "message": "Temperature is out of range (normal 35–37.5 °C)."
+                  }
+                },
+                {
+                  "label": "SPO2 (%)",
+                  "type": "obs",
+                  "id": "spo2",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "100",
+                    "step": "0.01"
+                  },
+                  "questionInfo": "Normal: >90%",
+                  "alert": {
+                    "alertWhenExpression": "myValue && myValue <= 90",
+                    "message": "SPO2 is below the normal range (>90%)."
+                  }
+                },
+                {
+                  "label": "Pain Score (0–10)",
+                  "type": "obs",
+                  "id": "painScore",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "160287AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "10",
+                    "step": "1"
+                  }
+                },
+                {
+                  "label": "Height (cm)",
+                  "type": "obs",
+                  "id": "height",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "step": "0.01"
+                  },
+                  "questionInfo": "Normal range: 30–300 cm"
+                },
+                {
+                  "label": "Weight (kg)",
+                  "type": "obs",
+                  "id": "weight",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "step": "0.01"
+                  }
+                },
+                {
+                  "label": "BMI (kg/m²)",
+                  "type": "obs",
+                  "id": "bmi",
+                  "readonly": true,
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "calculate": {
+                      "calculateExpression": "calcBMI(height,weight)"
+                    },
+                    "step": "0.01"
+                  }
+                },
+                {
+                  "label": "BMI Category",
+                  "type": "obs",
+                  "id": "bmiCategory",
+                  "readonly": true,
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "ffbcbb16-7cd0-4335-8327-25f87dae5e41",
+                    "answers": [
+                      {
+                        "concept": "3421cdb9-4fa1-4b00-93dd-0d95b233bd7a",
+                        "label": "Underweight"
+                      },
+                      {
+                        "concept": "1bd0fac3-b5fe-4e1a-b362-b3fa7157f392",
+                        "label": "Healthy Weight"
+                      },
+                      {
+                        "concept": "590a7581-714a-4b47-a1c9-712501889e44",
+                        "label": "Overweight"
+                      },
+                      {
+                        "concept": "85229098-a599-4a79-8088-280ff4f45896",
+                        "label": "Obese"
+                      }
+                    ],
+                    "calculate": {
+                      "calculateExpression": "(isEmpty(height) || isEmpty(weight) || Number(height) <= 0 || Number(weight) <= 0) ? '' : (calcBMI(height,weight) < 18.5 ? '3421cdb9-4fa1-4b00-93dd-0d95b233bd7a' : calcBMI(height,weight) < 25 ? '1bd0fac3-b5fe-4e1a-b362-b3fa7157f392' : calcBMI(height,weight) < 30 ? '590a7581-714a-4b47-a1c9-712501889e44' : '85229098-a599-4a79-8088-280ff4f45896')"
+                    }
+                  },
+                  "questionInfo": "Auto-classified from BMI: <18.5 Underweight, 18.5–24.9 Healthy Weight, 25.0–29.9 Overweight, ≥30.0 Obese."
+                },
+                {
+                  "label": "Body Surface Area (m²)",
+                  "type": "obs",
+                  "id": "bodySurfaceArea",
+                  "readonly": true,
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "980AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "calculate": {
+                      "calculateExpression": "height && weight ? Math.round(Math.sqrt((Number(height) * Number(weight)) / 3600) * 100) / 100 : ''"
+                    },
+                    "min": "0",
+                    "step": "0.01"
+                  },
+                  "questionInfo": "Body surface area (BSA). Auto-calculated from height (cm) and weight (kg) using the Mosteller formula. Used to assist drug dosing calculations."
+                }
+              ]
             }
           ]
         }
