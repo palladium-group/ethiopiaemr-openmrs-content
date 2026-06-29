@@ -1,0 +1,475 @@
+{
+  "name": "Perinatal Asphyxia Follow up Chart",
+  "description": "Perinatal Asphyxia Follow up Chart for Eka Hospital (OpenMRS O3).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "a57ceae9-5f16-4b82-89e5-c049be863064",
+  "retired": false,
+  "encounter": "Admission",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Perinatal Asphyxia Follow up Chart",
+      "sections": [
+        {
+          "label": "Demographics and Tracking",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Follow-up Timeline",
+              "type": "obs",
+              "id": "followUpTimeline",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "84e65038-44e5-4d6a-9efd-bfff54c3b608",
+                "answers": [
+                  {
+                    "concept": "2192bceb-2c89-45a7-88d4-e379e9014acd",
+                    "label": "Day 1"
+                  },
+                  {
+                    "concept": "2f3f0dbe-6266-4162-b319-13a70851b52e",
+                    "label": "Day 2"
+                  },
+                  {
+                    "concept": "112cb702-94e3-48f8-bea7-bb69728fa339",
+                    "label": "Day 3"
+                  },
+                  {
+                    "concept": "b55c244e-84e0-40d4-af61-f882213ac321",
+                    "label": "Day 4"
+                  },
+                  {
+                    "concept": "7f8c744d-0c49-4ba7-9077-b2d14a53e743",
+                    "label": "Day 5"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Vital Signs and Measurements",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulse Rate (PR)",
+              "type": "obs",
+              "id": "pulseRatePr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Respiratory Rate (RR)",
+              "type": "obs",
+              "id": "respiratoryRateRr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Temperature (T°)",
+              "type": "obs",
+              "id": "temperatureT",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Oxygen Saturation (SPo2)",
+              "type": "obs",
+              "id": "oxygenSaturationSpo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "007155ea-ad0e-40ee-bb7c-9b0cb912755e",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Weight (Wt)",
+              "type": "obs",
+              "id": "weightWt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Head Circumference (HC)",
+              "type": "obs",
+              "id": "headCircumferenceHc",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Fluid Balance and Lab Values",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Total Input",
+              "type": "obs",
+              "id": "totalInput",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8b4817b1-4c04-4f4c-a5ea-a15d33832213",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Total Output",
+              "type": "obs",
+              "id": "totalOutput",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "3fd93e8c-1370-4ba1-9bc7-a7e3a9749aab",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Capillary Refill Time",
+              "type": "obs",
+              "id": "capillaryRefillTime",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "1d6e974a-5c97-43e7-bcb3-ff4ee4bbcf07",
+                "answers": [
+                  {
+                    "concept": "9be4cbeb-e958-4269-832c-e66889d628ce",
+                    "label": "< 2 secs"
+                  },
+                  {
+                    "concept": "9be4cbeb-e958-4269-832c-e66889d628ce",
+                    "label": "> 2 secs"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Random Blood Sugar (RBS)",
+              "type": "obs",
+              "id": "randomBloodSugarRbs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "502a5aa7-f44b-4f0c-969d-b3c9b65cf2e9",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Urinalysis Results",
+              "type": "obs",
+              "id": "urinalysisResults",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0cfc45f2-c676-4c57-a510-bd934ea3eee7"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Serum Electrolytes",
+              "type": "obs",
+              "id": "serumElectrolytes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d6b2651d-823b-4806-8d6e-2453aa45ee88"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Renal Function Test (RFT)",
+              "type": "obs",
+              "id": "renalFunctionTestRft",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0e07473f-8cb1-459d-a854-130d8b50ec0d"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Liver Function Test (LFT)",
+              "type": "obs",
+              "id": "liverFunctionTestLft",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1a2d82eb-491e-4d07-b8c3-2adb5ec148f1"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Gastrointestinal Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Gastric Content",
+              "type": "obs",
+              "id": "gastricContent",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2a7374dd-17b7-406b-ae76-f78879da33cc"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Bowel Sounds",
+              "type": "obs",
+              "id": "bowelSounds",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "11ae4e64-85a8-47af-ac3a-247cb5942697",
+                "answers": [
+                  {
+                    "concept": "2559521a-0cb3-4af7-8c2f-6a1bc0136c33",
+                    "label": "Normal / Present"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  },
+                  {
+                    "concept": "537a033b-a9a6-4b22-aaf9-49b7c53b7f99",
+                    "label": "Hyperactive"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Bloody Stool",
+              "type": "obs",
+              "id": "bloodyStool",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "346a79bb-1800-488d-aa34-0274d6f76ba5",
+                "answers": [
+                  {
+                    "concept": "163748AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Present"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Neurological Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Mental Status",
+              "type": "obs",
+              "id": "mentalStatus",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "44a44147-a58c-462b-aef2-0ddb537585b5",
+                "answers": [
+                  {
+                    "concept": "9694701e-109a-41d3-8adb-8f07670fbcb5",
+                    "label": "Alert"
+                  },
+                  {
+                    "concept": "0dc72c7e-235e-4542-9154-0a4b2aeb0857",
+                    "label": "Lethargic"
+                  },
+                  {
+                    "concept": "40b350e1-cfa5-4aa5-82d4-0baf5c0cb1ff",
+                    "label": "Comatose"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Neonatal Reflexes",
+              "type": "obs",
+              "id": "neonatalReflexes",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5cc22d0e-d7d7-4af3-a1d4-70a9063739c1"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Motor Tone",
+              "type": "obs",
+              "id": "motorTone",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "d66a5a36-7b79-46e3-b75b-13c59636d0fe",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "2e679812-7f71-428f-b7f0-bc8b6ec660fb",
+                    "label": "Hypotonia"
+                  },
+                  {
+                    "concept": "fef43917-2bf0-4ddc-9ada-8354f41ab937",
+                    "label": "Hypertonia"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Seizure Activity",
+              "type": "obs",
+              "id": "seizureActivity",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7768dc3f-f58d-4149-8d32-b5852d645a41",
+                "answers": [
+                  {
+                    "concept": "163748AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Present"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Clinical Progress and Plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Progressive Patient Assessment",
+              "type": "obs",
+              "id": "progressivePatientAssessment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9a1a3c8a-0794-41fd-9b41-b55f5782c5a6"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Treatment Plan",
+              "type": "obs",
+              "id": "treatmentPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "163104AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

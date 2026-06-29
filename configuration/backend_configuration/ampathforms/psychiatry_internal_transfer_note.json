@@ -1,0 +1,279 @@
+{
+  "name": "Psychiatry Internal Transfer Note",
+  "description": "Psychiatry Internal Transfer Note for Eka Hospital (OpenMRS O3).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "780c65d3-1528-4f57-bbe6-cf2c3f0a7a3b",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Psychiatry Internal Transfer Note",
+      "sections": [
+        {
+          "label": "Transfer Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date and Time of Transfer",
+              "type": "obs",
+              "id": "dateAndTimeOfTransfer",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9d62981f-184b-4fd9-8359-b9afff30ddf2"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Transferring Unit",
+              "type": "obs",
+              "id": "transferringUnit",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "e7ce2af5-da78-4ee3-bc3b-fdd58c38bf0a"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Accepting Unit",
+              "type": "obs",
+              "id": "acceptingUnit",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "deeabcf4-7aee-4b88-ad78-ea9968b54aba"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Clinical Summary",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Brief History",
+              "type": "obs",
+              "id": "briefHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "727b7d58-eb7f-4525-ac17-7df3fca056a9"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Pertinent Physical Examination and Investigation Findings",
+              "type": "obs",
+              "id": "pertinentPhysicalExaminationAndInvestiga",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2c3fba8d-5e65-4d38-8604-b1b00419e3e9"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Mental Status Examination",
+              "type": "obs",
+              "id": "mentalStatusExamination",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "163044AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Current Treatment",
+              "type": "obs",
+              "id": "currentTreatment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "26899baa-5cd4-404c-85db-af3d21471e87"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Reason for Transfer",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Reason for Transfer",
+              "type": "obs",
+              "id": "reasonForTransfer",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "905c5a6b-76a6-46c8-81ec-59e9dd490c84",
+                "answers": [
+                  {
+                    "concept": "0808d009-2b17-4769-bb3c-df060417e872",
+                    "label": "Intense suicidal thoughts/plans with high intent requiring close observation"
+                  },
+                  {
+                    "concept": "83e94e9b-32df-463b-9f89-758fbc462f1e",
+                    "label": "Repetitive suicide attempts requiring active suicide watch"
+                  },
+                  {
+                    "concept": "6a772477-0862-4d69-a5a7-b58d73f53c97",
+                    "label": "Persistent homicidal ideation"
+                  },
+                  {
+                    "concept": "62544495-2bb0-46f7-b990-4c0a0398af97",
+                    "label": "Homicidal plan"
+                  },
+                  {
+                    "concept": "5d8d59a2-4be5-402b-adcc-3a9883258d97",
+                    "label": "Physical threats toward patients or staff"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Specify Other Reason for Transfer",
+              "type": "obs",
+              "id": "specifyOtherReasonForTransfer",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6486757a-b9eb-48cf-8821-433edade0f07"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!(reasonForTransfer && reasonForTransfer.includes('5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+              }
+            },
+            {
+              "label": "Communication Between Units",
+              "type": "obs",
+              "id": "communicationBetweenUnits",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "df6e8ddd-b91e-48c5-a225-91a18b4ba700",
+                "answers": [
+                  {
+                    "concept": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Completed"
+                  },
+                  {
+                    "concept": "17090bb9-aad7-433c-b72c-30f141582dbe",
+                    "label": "Not Completed"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Receiving Clinician Name",
+              "type": "obs",
+              "id": "receivingClinicianName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d3e8204c-b25f-46a5-a806-d45115346954"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "communicationBetweenUnits !== '1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Transferring Physician",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Electronic Signature",
+              "type": "obs",
+              "id": "electronicSignature",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b5b26f02-d1ac-40c2-a7bb-4a5166524b21"
+              },
+              "readonly": false,
+              "questionInfo": "Not natively supported in O3 (O3 has no signature widget; flag for manual)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

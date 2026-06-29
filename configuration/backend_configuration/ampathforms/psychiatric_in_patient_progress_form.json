@@ -1,0 +1,667 @@
+{
+  "name": "Psychiatric In-Patient Progress Form",
+  "description": "Psychiatric In-Patient Progress Form for Eka Hospital (OpenMRS O3).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "d7d822bd-50db-46ce-8eb9-542e772c414a",
+  "retired": false,
+  "encounter": "Admission",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Psychiatric In-Patient Progress Form",
+      "sections": [
+        {
+          "label": "Subjective Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Sleep",
+              "type": "obs",
+              "id": "sleep",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "7297151c-81cc-4544-93b6-809380a5378a"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Appetite",
+              "type": "obs",
+              "id": "appetite",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "b38282a6-da07-42d2-bc6e-179abadbaed9",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fair"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  },
+                  {
+                    "concept": "164471AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Increased"
+                  },
+                  {
+                    "concept": "164470AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Decreased"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Medication Compliance",
+              "type": "obs",
+              "id": "medicationCompliance",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "8dcf85ca-ee71-4093-ae37-b6050d3f1152",
+                "answers": [
+                  {
+                    "concept": "f4a01bd9-93ba-4899-9d62-223af2f94892",
+                    "label": "Fully Compliant"
+                  },
+                  {
+                    "concept": "4fb6fa47-0fad-49c5-a5a4-834faab6ac2f",
+                    "label": "Partially Compliant"
+                  },
+                  {
+                    "concept": "e8110afa-2f17-42e6-9b90-21e5c511a44e",
+                    "label": "Non-Compliant"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Reason for Non-Compliance",
+              "type": "obs",
+              "id": "reasonForNonCompliance",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "809df17b-85c7-485f-9f77-033688cbc9d3"
+              },
+              "readonly": false,
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "medicationCompliance !== '4fb6fa47-0fad-49c5-a5a4-834faab6ac2f'"
+              }
+            },
+            {
+              "label": "Medication Side Effects",
+              "type": "obs",
+              "id": "medicationSideEffects",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "99efb67a-3bf7-4f65-9f30-a081c9fea542"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Psychiatric Symptoms Reported by Patient",
+              "type": "obs",
+              "id": "psychiatricSymptomsReportedByPatient",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "7b0b8093-16b5-48dc-83d6-0251627f1f53"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Patient's Engagement and Motivation for Treatment",
+              "type": "obs",
+              "id": "patientSEngagementAndMotivationForTreatm",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a1e6bb44-6aa0-4cf9-8322-8e22943cde21"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Self-Reported Symptom Status",
+              "type": "obs",
+              "id": "selfReportedSymptomStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fa12a820-4e2c-4e96-b036-3265a4cf8bf4",
+                "answers": [
+                  {
+                    "concept": "165b4679-5c0d-4edb-bb3d-e661d45122e4",
+                    "label": "Improved"
+                  },
+                  {
+                    "concept": "162679AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unchanged"
+                  },
+                  {
+                    "concept": "b6d89254-f3a6-43b6-b9cf-97d9354044f3",
+                    "label": "Worsened"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Objective Assessment (Mental Status Examination)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "General Appearance",
+              "type": "obs",
+              "id": "generalAppearance",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "47b3934e-cf87-4c43-a4b8-dba1b38533d9",
+                "answers": [
+                  {
+                    "concept": "61470ca8-896f-4ff5-a0a1-d8d248041712",
+                    "label": "Neat"
+                  },
+                  {
+                    "concept": "24d6dc53-ec50-4a95-9674-fa02964c0fde",
+                    "label": "Disheveled"
+                  },
+                  {
+                    "concept": "66f85921-edf2-4256-8a53-57e67e148fac",
+                    "label": "Unkempt"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Behaviour",
+              "type": "obs",
+              "id": "behaviour",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "3be71250-c3be-46a4-940e-e72dbac3caba",
+                "answers": [
+                  {
+                    "concept": "35ae1662-c801-40e4-a67a-1b623aa79d0b",
+                    "label": "Cooperative"
+                  },
+                  {
+                    "concept": "d94166e7-718a-42d2-9e3f-967f6628303b",
+                    "label": "Guarded"
+                  },
+                  {
+                    "concept": "8c4b8e3f-6579-4a51-92e2-108e8fe9cd25",
+                    "label": "Agitated"
+                  },
+                  {
+                    "concept": "d3b1e013-27ab-4b8c-a4f4-be2e7650ac77",
+                    "label": "Withdrawn"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Speech",
+              "type": "obs",
+              "id": "speech",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "ab26b7e2-6614-4f2f-8c3b-33551b53b2bf",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "11b71304-69bd-4d14-a48e-eadb71dbe35a",
+                    "label": "Pressured"
+                  },
+                  {
+                    "concept": "43ec4509-4cab-4800-a1da-eb1a597804b7",
+                    "label": "Slowed"
+                  },
+                  {
+                    "concept": "9e75c1a9-692d-4298-a59c-a2998fdd0088",
+                    "label": "Incoherent"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Mood",
+              "type": "obs",
+              "id": "mood",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4cf4f073-bd22-45bd-9390-26680370811c"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Affect",
+              "type": "obs",
+              "id": "affect",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "3c90ee06-af1f-4c30-9d18-57236193ec04",
+                "answers": [
+                  {
+                    "concept": "a6626bea-7ae2-4b75-a937-a4029010d219",
+                    "label": "Appropriate"
+                  },
+                  {
+                    "concept": "4cc20ea1-5d57-4ae3-a30f-23d38a21c7b7",
+                    "label": "Flat"
+                  },
+                  {
+                    "concept": "f73f263c-cb91-4b11-a27e-5791b48cfbc3",
+                    "label": "Labile"
+                  },
+                  {
+                    "concept": "7870f442-62ec-45bb-9ce7-0b6b8e7e436c",
+                    "label": "Blunted"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Thought Process",
+              "type": "obs",
+              "id": "thoughtProcess",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "f4d2de4c-a0ee-4a61-a0d7-53354db7db1e",
+                "answers": [
+                  {
+                    "concept": "662c1e2c-7c1a-442d-ac47-b066356e8167",
+                    "label": "Logical"
+                  },
+                  {
+                    "concept": "09f8c67f-9569-4cf1-bc74-ff81c9cee765",
+                    "label": "Tangential"
+                  },
+                  {
+                    "concept": "55f04455-b91d-4c65-badf-215003a890ea",
+                    "label": "Disorganized"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Thought Content",
+              "type": "obs",
+              "id": "thoughtContent",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "06e7471c-5be6-4995-bbdd-11e77218e6d5",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "142600AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Delusions"
+                  },
+                  {
+                    "concept": "b32a9db1-7172-42a7-aa95-7a305ad0f707",
+                    "label": "Paranoid Ideas"
+                  },
+                  {
+                    "concept": "139146AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hallucinations"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Insight and Judgment",
+              "type": "obs",
+              "id": "insightAndJudgment",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "7a567790-8fa6-47da-a77b-c3d7abe07807",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fair"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Orientation",
+              "type": "obs",
+              "id": "orientation",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "ce3c88ca-9fe0-44cb-8d01-0aa81a4005d6",
+                "answers": [
+                  {
+                    "concept": "460685be-e27b-4cb5-9d97-869e4dfec652",
+                    "label": "Person"
+                  },
+                  {
+                    "concept": "55eeabae-f612-4b1e-8ecb-02c4801c5cc6",
+                    "label": "Place"
+                  },
+                  {
+                    "concept": "9ddab0ca-b2e9-4aa8-8419-c6075bf789a2",
+                    "label": "Time"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Memory",
+              "type": "obs",
+              "id": "memory",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "2a8d5bb8-d868-42df-998a-6865b1926154",
+                "answers": [
+                  {
+                    "concept": "a6d00512-9786-45d6-8886-be160acfd5d4",
+                    "label": "Intact"
+                  },
+                  {
+                    "concept": "158ee43a-f72c-4a87-a39b-6d29a426d8a8",
+                    "label": "Impaired"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Clinical Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Clinical Assessment Summary",
+              "type": "obs",
+              "id": "clinicalAssessmentSummary",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f14d4033-1c5e-4771-8e67-d1a7aa2010cf"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Overall Clinical Status",
+              "type": "obs",
+              "id": "overallClinicalStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "12669d10-e5ee-4d5c-847f-fd05258be331",
+                "answers": [
+                  {
+                    "concept": "5fbf288f-5ba3-4abf-982d-6142d92f9930",
+                    "label": "Improvement"
+                  },
+                  {
+                    "concept": "f852e236-e96d-4e47-bdf0-9c98da633e36",
+                    "label": "No Change"
+                  },
+                  {
+                    "concept": "abe6f9e8-33ad-439d-91c7-4a58fb56ebba",
+                    "label": "Worsening Symptoms"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Treatment Plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Continue Current Medications",
+              "type": "obs",
+              "id": "continueCurrentMedications",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b1c41715-5c74-4156-92ff-d5d02c0759ae",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Reason for Medication Change",
+              "type": "obs",
+              "id": "reasonForMedicationChange",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "46cfe098-3d00-424e-9d39-e6a37aafcb1d"
+              },
+              "readonly": false,
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "continueCurrentMedications !== '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Medication Adjustments",
+              "type": "obs",
+              "id": "medicationAdjustments",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4d9b315a-bbf8-4755-81c8-4caf9d93fc11"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Psychotherapy",
+              "type": "obs",
+              "id": "psychotherapy",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "7a69c594-c7ca-433a-af8e-97983e8c99f4",
+                "answers": [
+                  {
+                    "concept": "a0190e22-e0dd-454e-a05e-27fe7627819a",
+                    "label": "Individual"
+                  },
+                  {
+                    "concept": "5be887dd-97c5-47ef-9919-f0f212b1fdf4",
+                    "label": "Group"
+                  },
+                  {
+                    "concept": "b7e66596-ba11-4fe2-bdc5-a3775c6cf4fa",
+                    "label": "Family"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Referrals / Consultations",
+              "type": "obs",
+              "id": "referralsConsultations",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d89c421f-2662-477b-b3c9-e5358de3b5ea"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Safety Plan / Interventions",
+              "type": "obs",
+              "id": "safetyPlanInterventions",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "49364955-e4f3-45d2-8b84-5375a5fe6ead"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Next Review Date",
+              "type": "obs",
+              "id": "nextReviewDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "7ad4c294-b06a-46d1-bac2-3fb265971810"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Discharge Plan Discussed",
+              "type": "obs",
+              "id": "dischargePlanDiscussed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2017638f-89e2-4b58-b4e9-14a48b97a606",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Discharge Planning Notes",
+              "type": "obs",
+              "id": "dischargePlanningNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "591c0cfa-a144-4aab-b008-d160a82255f3"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "dischargePlanDiscussed !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Additional Notes",
+              "type": "obs",
+              "id": "additionalNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "864e6c73-9884-4a9c-839a-39e956561366"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Clinician Sign-Off",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Electronic Signature",
+              "type": "obs",
+              "id": "electronicSignature",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b5b26f02-d1ac-40c2-a7bb-4a5166524b21"
+              },
+              "readonly": false,
+              "questionInfo": "Not natively supported in O3 (O3 has no signature widget; flag for manual)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

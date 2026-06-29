@@ -1,0 +1,1063 @@
+{
+  "name": "Assisted Vaginal Delivery (AVD) Form",
+  "description": "Assisted Vaginal Delivery (AVD) Form for Eka Hospital (OpenMRS O3).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "5b161a82-0a09-424b-aa29-e7a0842b7df9",
+  "retired": false,
+  "encounter": "Delivery",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Assisted Vaginal Delivery (AVD) Form",
+      "sections": [
+        {
+          "label": "Patient Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of Delivery",
+              "type": "obs",
+              "id": "dateOfDelivery",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "ee91c1ee-ef51-4f01-962b-ecee32966c8d"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Time of Delivery",
+              "type": "obs",
+              "id": "timeOfDelivery",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "52e16ee4-d0ae-46ab-b958-5cc746b58844"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Gestational Age at Delivery (weeks)",
+              "type": "obs",
+              "id": "gestationalAgeAtDeliveryWeeks",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "06ba03db-a4b8-4777-a270-dc9804091db6",
+                "step": "any"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Indication for Instrumental Delivery",
+              "type": "obs",
+              "id": "indicationForInstrumentalDelivery",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0533ee37-a0b1-4cb1-9707-d054d2ee76b6"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Maternal Clinical Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HIV Status",
+              "type": "obs",
+              "id": "hivStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7a18c5ce-9ef3-4905-9ddc-42bf1d54dbe1",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Prerequisites Assessment Before Instrumental Delivery",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Cervical Dilatation (cm)",
+              "type": "obs",
+              "id": "cervicalDilatationCm",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "7ee2ff7f-a39a-4894-93e4-7cfc6b328807",
+                "step": "any"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Cervix Fully Dilated",
+              "type": "obs",
+              "id": "cervixFullyDilated",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9480c4cf-15f8-4cc6-b33c-feeab19ecbd3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Fetal Presentation",
+              "type": "obs",
+              "id": "fetalPresentation",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "160090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "6d51af28-a156-4463-a031-1f1f459ddcb0",
+                    "label": "Cephalic"
+                  },
+                  {
+                    "concept": "1843AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Face"
+                  },
+                  {
+                    "concept": "bcd5f5b8-ba92-44f8-bab2-73570a68162a",
+                    "label": "Brow"
+                  },
+                  {
+                    "concept": "1ec0f5f1-1585-409d-87b0-26abe5fa19fe",
+                    "label": "Breech"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "If Other Presentation",
+              "type": "obs",
+              "id": "ifOtherPresentation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "90cb94d9-bde5-468e-9abe-92cc15a94878"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "fetalPresentation !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Fetal Station",
+              "type": "obs",
+              "id": "fetalStation",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "f1fe1a51-251f-40e1-a30b-dc05e8984946",
+                "answers": [
+                  {
+                    "concept": "7f8c744d-0c49-4ba7-9077-b2d14a53e743",
+                    "label": "+5"
+                  },
+                  {
+                    "concept": "b55c244e-84e0-40d4-af61-f882213ac321",
+                    "label": "+4"
+                  },
+                  {
+                    "concept": "112cb702-94e3-48f8-bea7-bb69728fa339",
+                    "label": "+3"
+                  },
+                  {
+                    "concept": "2f3f0dbe-6266-4162-b319-13a70851b52e",
+                    "label": "+2"
+                  },
+                  {
+                    "concept": "2192bceb-2c89-45a7-88d4-e379e9014acd",
+                    "label": "+1"
+                  },
+                  {
+                    "concept": "b312c6aa-d000-4adf-92c7-c04a5aacc9ef",
+                    "label": "0"
+                  },
+                  {
+                    "concept": "2192bceb-2c89-45a7-88d4-e379e9014acd",
+                    "label": "1"
+                  },
+                  {
+                    "concept": "2f3f0dbe-6266-4162-b319-13a70851b52e",
+                    "label": "2"
+                  },
+                  {
+                    "concept": "112cb702-94e3-48f8-bea7-bb69728fa339",
+                    "label": "3"
+                  },
+                  {
+                    "concept": "b55c244e-84e0-40d4-af61-f882213ac321",
+                    "label": "4"
+                  },
+                  {
+                    "concept": "7f8c744d-0c49-4ba7-9077-b2d14a53e743",
+                    "label": "5"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Fetal Position",
+              "type": "obs",
+              "id": "fetalPosition",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6b5bd0b3-40f0-4d83-a262-d120f71478b2"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Caput Present",
+              "type": "obs",
+              "id": "caputPresent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e6e85210-66f9-4b58-a172-eae79fcfa446",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Degree of Caput",
+              "type": "obs",
+              "id": "degreeOfCaput",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "6e43eda7-1fa5-4f9f-a91c-0303e138434a",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Molding Present",
+              "type": "obs",
+              "id": "moldingPresent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "858ede1a-8431-4f97-b93a-12eb2c15d02d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Degree of Molding",
+              "type": "obs",
+              "id": "degreeOfMolding",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "4cb34b4f-50e2-4108-9e55-fa95a02c4ceb",
+                "answers": [
+                  {
+                    "concept": "b312c6aa-d000-4adf-92c7-c04a5aacc9ef",
+                    "label": "0"
+                  },
+                  {
+                    "concept": "4d934e4c-cf97-40b9-bffe-8d6765acd4bc",
+                    "label": "+"
+                  },
+                  {
+                    "concept": "4d934e4c-cf97-40b9-bffe-8d6765acd4bc",
+                    "label": "++"
+                  },
+                  {
+                    "concept": "4d934e4c-cf97-40b9-bffe-8d6765acd4bc",
+                    "label": "+++"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Bladder Status",
+              "type": "obs",
+              "id": "bladderStatus",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "b08a7f9e-e748-4336-97fa-820ad6e820f8",
+                "answers": [
+                  {
+                    "concept": "3c461e91-4ac9-45c8-9932-476ae0fc8eaf",
+                    "label": "Empty"
+                  },
+                  {
+                    "concept": "35e2997d-f5e2-4fea-a7e5-4848139b4c9b",
+                    "label": "Catheterized"
+                  },
+                  {
+                    "concept": "e058b288-a3bf-4447-81f2-c27daf308fb4",
+                    "label": "Distended"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Remarks",
+              "type": "obs",
+              "id": "remarks",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Instrument Used",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Instrument Used",
+              "type": "obs",
+              "id": "instrumentUsed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "20040bdd-58ce-4235-9804-ffd596ec9356",
+                "answers": [
+                  {
+                    "concept": "b7b07c42-7251-4dc3-b10b-82e9fb17e5bd",
+                    "label": "Vacuum"
+                  },
+                  {
+                    "concept": "dd55a56d-315f-47d4-aba4-e430533cccb8",
+                    "label": "Forceps"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Forceps Classification",
+              "type": "obs",
+              "id": "forcepsClassification",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "04ab2181-39fc-4297-b58e-e519394882b5",
+                "answers": [
+                  {
+                    "concept": "7ca76c24-1a20-4841-981c-258aa1b3ad6d",
+                    "label": "Outlet Forceps"
+                  },
+                  {
+                    "concept": "774b9166-7bae-4a37-b481-35aa53e64a86",
+                    "label": "Low Forceps"
+                  },
+                  {
+                    "concept": "f81af728-9574-475e-9678-56d4b185e0fc",
+                    "label": "Mid Forceps"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "instrumentUsed !== 'dd55a56d-315f-47d4-aba4-e430533cccb8'"
+              }
+            },
+            {
+              "label": "Vacuum Classification",
+              "type": "obs",
+              "id": "vacuumClassification",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "777f5c7a-987f-4f02-a687-0e3651893127",
+                "answers": [
+                  {
+                    "concept": "548d0e31-811d-40c3-aba6-4ffdc8b90049",
+                    "label": "Outlet Vacuum"
+                  },
+                  {
+                    "concept": "4736bed3-34c7-47bb-a2ef-926635504d7f",
+                    "label": "Low Vacuum"
+                  },
+                  {
+                    "concept": "667056e3-c75a-4afc-b93b-8d0ec75d4075",
+                    "label": "Mid Vacuum"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "instrumentUsed !== 'b7b07c42-7251-4dc3-b10b-82e9fb17e5bd'"
+              }
+            },
+            {
+              "label": "Cup Size (cm)",
+              "type": "obs",
+              "id": "cupSizeCm",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1f16a80e-baaa-4b4b-a58f-ed1bf38b4685",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "instrumentUsed !== 'b7b07c42-7251-4dc3-b10b-82e9fb17e5bd'"
+              }
+            },
+            {
+              "label": "Number of Pulls",
+              "type": "obs",
+              "id": "numberOfPulls",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1f5d7d9b-e4eb-4948-a3e8-7216875783bf",
+                "step": "any"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Duration of Procedure (minutes)",
+              "type": "obs",
+              "id": "durationOfProcedureMinutes",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a62baecb-bcb1-417d-9de7-4f3f21c76e1f",
+                "step": "any"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Procedure Outcome",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Instrumental Delivery Successful",
+              "type": "obs",
+              "id": "instrumentalDeliverySuccessful",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c0fa55b3-b39d-4240-8726-ac1764242935",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Outcome",
+              "type": "obs",
+              "id": "outcome",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "07de3907-ad71-46d9-a6e2-18d1682faca6",
+                "answers": [
+                  {
+                    "concept": "2db638fe-fb8e-4a4d-b372-d1996492230c",
+                    "label": "Live Birth"
+                  },
+                  {
+                    "concept": "0878279e-af5b-4731-a1a2-915fce5725c5",
+                    "label": "Stillbirth"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "instrumentalDeliverySuccessful !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "APGAR Score at 1 Minute",
+              "type": "obs",
+              "id": "apgarScoreAt1Minute",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "159603AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "10",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "instrumentalDeliverySuccessful !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "APGAR Score at 5 Minutes",
+              "type": "obs",
+              "id": "apgarScoreAt5Minutes",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "159604AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "10",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "instrumentalDeliverySuccessful !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "APGAR Score at 10 Minutes",
+              "type": "obs",
+              "id": "apgarScoreAt10Minutes",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "159605AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "10",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "instrumentalDeliverySuccessful !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Birth Weight (grams)",
+              "type": "obs",
+              "id": "birthWeightGrams",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5916AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "instrumentalDeliverySuccessful !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Head Circumference (cm)",
+              "type": "obs",
+              "id": "headCircumferenceCm",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "instrumentalDeliverySuccessful !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Sex of Newborn",
+              "type": "obs",
+              "id": "sexOfNewborn",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d8c915e9-0cd2-451c-ace2-a2b6910f69d4",
+                "answers": [
+                  {
+                    "concept": "1241a7b5-0187-43ef-8a52-b52ee91f7c1f",
+                    "label": "Male"
+                  },
+                  {
+                    "concept": "8524bad5-7021-4a20-b55c-82b7d3985779",
+                    "label": "Female"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "instrumentalDeliverySuccessful !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Gestational Age After Newborn Assessment (weeks)",
+              "type": "obs",
+              "id": "gestationalAgeAfterNewbornAssessmentWeek",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f02f5bfb-3a6e-4d47-af3b-b5e155a96991",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "instrumentalDeliverySuccessful !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Reason for Failed Instrumental Delivery",
+              "type": "obs",
+              "id": "reasonForFailedInstrumentalDelivery",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0ebc96f5-fbbf-45c9-b2d1-a5c9aeab59b1"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "instrumentalDeliverySuccessful !== '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Sequential Use of Instruments",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Sequential Use of Instruments",
+              "type": "obs",
+              "id": "sequentialUseOfInstruments",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "91d80c7f-1986-4a52-88b9-12fed8b335ea",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Sequence Used",
+              "type": "obs",
+              "id": "sequenceUsed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cb08f85d-e18d-433f-adb3-9c8e1b10c0af",
+                "answers": [
+                  {
+                    "concept": "1d5c8cad-87d8-4914-bcfd-9d2f7a77e720",
+                    "label": "Vacuum then Forceps"
+                  },
+                  {
+                    "concept": "a0b9cd92-8f83-42eb-9dcc-4dcfac8cf786",
+                    "label": "Forceps then Vacuum"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "sequentialUseOfInstruments !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Reason for Sequential Use",
+              "type": "obs",
+              "id": "reasonForSequentialUse",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ccebf75c-ce2f-40fa-adc7-fb52dc7999b6"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "sequentialUseOfInstruments !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Newborn Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Newborn Complications Present",
+              "type": "obs",
+              "id": "newbornComplicationsPresent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b997078c-1614-46bd-89ba-202988064651",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Newborn Complications",
+              "type": "obs",
+              "id": "newbornComplications",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "b997078c-1614-46bd-89ba-202988064651",
+                "answers": [
+                  {
+                    "concept": "127155AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Scalp Injury"
+                  },
+                  {
+                    "concept": "a60de0d2-ddd3-431a-87d9-b117da4a2494",
+                    "label": "Cephalohematoma"
+                  },
+                  {
+                    "concept": "39f9101f-791f-4558-bb26-616251283bd8",
+                    "label": "Subgaleal Hemorrhage"
+                  },
+                  {
+                    "concept": "a76118c6-f3fb-4bf9-a374-50136a2564a3",
+                    "label": "Facial Nerve Injury"
+                  },
+                  {
+                    "concept": "60600744-cb4d-4d85-b0a4-9dded5240494",
+                    "label": "Brachial Plexus Injury"
+                  },
+                  {
+                    "concept": "e13b3779-8d02-4fef-b46d-8bae5a6796e8",
+                    "label": "Birth Asphyxia"
+                  },
+                  {
+                    "concept": "bade3381-08b2-45d8-ac46-b1fbdb0ebd98",
+                    "label": "Seizures"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "newbornComplicationsPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Other Complication Description",
+              "type": "obs",
+              "id": "otherComplicationDescription",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a481d910-6961-4c11-9898-79f84808e280"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!(newbornComplications && newbornComplications.includes('5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Neonatal Referral",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Referred to Neonatology/NICU",
+              "type": "obs",
+              "id": "referredToNeonatologyNicu",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7f0c091d-d270-4b5b-9254-85d11cd54635",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Reason for Referral",
+              "type": "obs",
+              "id": "reasonForReferral",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "164359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "referredToNeonatologyNicu !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Date and Time of Referral",
+              "type": "obs",
+              "id": "dateAndTimeOfReferral",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "1162063a-5960-7890-1234-567890abcd31"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "referredToNeonatologyNicu !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Maternal Outcome",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Maternal Complications Present",
+              "type": "obs",
+              "id": "maternalComplicationsPresent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b8d2d2e4-ca50-4b07-a305-9471fd032420",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Maternal Complications",
+              "type": "obs",
+              "id": "maternalComplications",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "b8d2d2e4-ca50-4b07-a305-9471fd032420",
+                "answers": [
+                  {
+                    "concept": "62db14e7-70a9-4a91-b624-23d1857e8979",
+                    "label": "Perineal Tear"
+                  },
+                  {
+                    "concept": "d6f769ab-a538-4c6b-9492-5fa02a773334",
+                    "label": "Cervical Tear"
+                  },
+                  {
+                    "concept": "0cb43949-23a6-4d3e-8351-fdc110de5af3",
+                    "label": "Vaginal Tear"
+                  },
+                  {
+                    "concept": "275bbf5f-a454-4298-b17e-1adc52b65980",
+                    "label": "Postpartum Hemorrhage"
+                  },
+                  {
+                    "concept": "6205d48e-5ed4-42c5-b8ff-8bace1d1e59f",
+                    "label": "Uterine Rupture"
+                  },
+                  {
+                    "concept": "fd5769b8-1443-471a-963d-8fa5fe8aa759",
+                    "label": "Infection"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "maternalComplicationsPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Other Maternal Complication",
+              "type": "obs",
+              "id": "otherMaternalComplication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5841a35c-02fb-4f29-98e3-6e12757413fe"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!(maternalComplications && maternalComplications.includes('5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Provider Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Cadre/Profession",
+              "type": "obs",
+              "id": "cadreProfession",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "8fdfb34f-56ce-4f9d-9c52-16b6d1d57dae",
+                "answers": [
+                  {
+                    "concept": "9d9e5d87-7aa2-46f5-b72f-39caca921b30",
+                    "label": "Obstetrician"
+                  },
+                  {
+                    "concept": "13d4fe75-618e-4e2e-a500-18a726374be7",
+                    "label": "Resident"
+                  },
+                  {
+                    "concept": "c0a8efd1-187c-4438-a04e-74ab0de43fcb",
+                    "label": "GP"
+                  },
+                  {
+                    "concept": "1578AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Midwife"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

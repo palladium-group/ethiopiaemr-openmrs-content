@@ -1,0 +1,559 @@
+{
+  "name": "Post Delivery Family Planning Checklist",
+  "description": "Post Delivery Family Planning Checklist migrated from Bahmni",
+  "version": "1.0",
+  "published": true,
+  "uuid": "981ee726-d61d-4e85-b411-99e7682f75a4",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": false
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Post Delivery Family Planning Assessment",
+      "sections": [
+        {
+          "label": "Patient and Delivery Demographics",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of Delivery",
+              "type": "obs",
+              "id": "dateOfDelivery",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "ee91c1ee-ef51-4f01-962b-ecee32966c8d"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Time Elapsed Since Delivery",
+              "type": "obs",
+              "id": "timeElapsedSinceDelivery",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "5127814f-9ec7-40a5-b52e-5d112a4c2f77",
+                "answers": [
+                  {
+                    "concept": "7ae130c0-8acf-4b3c-8418-ef247eb1d84f",
+                    "label": "Under 48 hours (Pre-discharge window)"
+                  },
+                  {
+                    "concept": "b20b9773-e993-4b4d-beef-5f29e83bc59c",
+                    "label": "48 hours to 4 weeks"
+                  },
+                  {
+                    "concept": "64628458-7d95-425c-9518-6df1d9e7077f",
+                    "label": "4 weeks to 6 weeks"
+                  },
+                  {
+                    "concept": "8c04b9a4-9099-433c-b4f8-52eec873382a",
+                    "label": "Greater than 6 weeks"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Patient Preferences and Clinical History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Does the client desire more children in the future?",
+              "type": "obs",
+              "id": "doesTheClientDesireMoreChildrenInTheFutu",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "39fbd823-b110-4507-9a82-2064e460d21b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No (Enables discussion of permanent methods like tubal ligation)"
+                  },
+                  {
+                    "concept": "87444ec0-6fd2-4140-920e-88e2f4aff768",
+                    "label": "Undecided"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Infant Feeding Intent / Status",
+              "type": "obs",
+              "id": "infantFeedingIntentStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e524706d-906d-4659-a2b7-582fc85cef86",
+                "answers": [
+                  {
+                    "concept": "67e54701-e4b3-462d-99a5-7aa1a52ae205",
+                    "label": "Fully or nearly fully breastfeeding (Eligible for LAM)"
+                  },
+                  {
+                    "concept": "a84ceec6-6263-4828-b55b-e7b3e7e1bb60",
+                    "label": "Mixed feeding"
+                  },
+                  {
+                    "concept": "11659bd4-d901-4b12-91ff-b841e168b197",
+                    "label": "Formula feeding exclusively"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Family Planning History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Contraception used in past",
+              "type": "obs",
+              "required": "false",
+              "id": "contraceptionUsedPast",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c01da2b3-4c5d-4e6f-8a7b-9c0d1e2f3041",
+                "answers": [
+                  {
+                    "concept": "190AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Condoms"
+                  },
+                  {
+                    "concept": "1359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Implant"
+                  },
+                  {
+                    "concept": "780AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pills"
+                  },
+                  {
+                    "concept": "5279AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "IUD"
+                  },
+                  {
+                    "concept": "907AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Depo"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Why did you discontinue use",
+              "type": "obs",
+              "required": "false",
+              "id": "reasonDiscontinuation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d12eb3c4-5d6e-4f70-9b8c-0d1e2f304152",
+                "answers": [
+                  {
+                    "concept": "e23fc4d5-6e7f-4081-ac9d-1e2f30415263",
+                    "label": "Husband gone"
+                  },
+                  {
+                    "concept": "f340d5e6-7f80-4192-bd0e-2f3041526374",
+                    "label": "Experienced negative side effects"
+                  },
+                  {
+                    "concept": "a451e6f7-8091-42a3-ce1f-304152637485",
+                    "label": "Wanted to get pregnant"
+                  },
+                  {
+                    "concept": "04c590e4-5134-4538-9757-3af1bbd81787",
+                    "label": "Worried about possible negative side effects"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Others"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Current Family Planning Interest",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Are you interested in",
+              "type": "obs",
+              "required": "false",
+              "id": "motherInterested",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c67308a1-a2b3-44c5-d6e7-415263748596",
+                "answers": [
+                  {
+                    "concept": "d78419b2-b3c4-45d6-e7f8-526374859607",
+                    "label": "Birth Spacing"
+                  },
+                  {
+                    "concept": "e8952ac3-c4d5-46e7-f809-637485960718",
+                    "label": "Birth Limiting"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Patient interested in",
+              "type": "obs",
+              "required": "false",
+              "id": "patientInterestedMethod",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f9a63bd4-d5e6-47f8-8091-748596071829",
+                "answers": [
+                  {
+                    "concept": "5279AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Intra Uterine Contraceptive Device"
+                  },
+                  {
+                    "concept": "1359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Implant"
+                  },
+                  {
+                    "concept": "907AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Depo"
+                  },
+                  {
+                    "concept": "5276AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mini-lap"
+                  },
+                  {
+                    "concept": "1489AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Vasectomy"
+                  },
+                  {
+                    "concept": "1472AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tubectomy"
+                  },
+                  {
+                    "concept": "780AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Combined Oral Contraceptive Pill"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Interested in FP at this time"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "FP method patient went home with",
+              "type": "obs",
+              "required": "false",
+              "id": "fpMethodWentHome",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a0b74ce5-e6f7-48a9-9120-85960718293a",
+                "answers": [
+                  {
+                    "concept": "190AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Condoms"
+                  },
+                  {
+                    "concept": "907AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Depo"
+                  },
+                  {
+                    "concept": "780AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Combined Oral Contraceptive Pill"
+                  },
+                  {
+                    "concept": "5279AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Intra Uterine Contraceptive Device"
+                  },
+                  {
+                    "concept": "1359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Implant"
+                  },
+                  {
+                    "concept": "1472AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tubectomy"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Nothing"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Patient referred to higher center for FP",
+              "type": "obs",
+              "required": "false",
+              "id": "referredHigherCenter",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b1c85df6-f708-49ba-a231-960718293a4b",
+                "answers": [
+                  {
+                    "concept": "5279AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Intra Uterine Contraceptive Device"
+                  },
+                  {
+                    "concept": "1359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Implant"
+                  },
+                  {
+                    "concept": "5276AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mini-lap"
+                  },
+                  {
+                    "concept": "1489AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Vasectomy"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Clinical Eligibility and Return of Fertility Screening",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Check all conditions that apply to the patient",
+              "type": "obs",
+              "id": "checkAllConditionsThatApplyToThePatient",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "e5106ec0-0df4-4c51-a7e2-4ec6b9464632",
+                "answers": [
+                  {
+                    "concept": "17934f26-331d-411a-9a75-1450e86e06c0",
+                    "label": "Has the patient resumed sexual intercourse since delivery?"
+                  },
+                  {
+                    "concept": "2843e66e-daf3-47b5-b28c-46bbe7e7f305",
+                    "label": "Has the patient experienced any return of monthly menstrual bleeding?"
+                  },
+                  {
+                    "concept": "e122d712-a317-4bcc-8671-9bd0bd00e128",
+                    "label": "Are there signs of a postpartum complication or infection? (e.g., severe fever, unexplained pelvic pain)"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Postpartum Method Selection Matrix",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Immediate Postpartum Methods (< 48 hours / Before Discharge)",
+              "type": "obs",
+              "id": "immediatePostpartumMethods48HoursBeforeD",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "f5d93f22-7547-4381-8e7a-c8790532cdc6",
+                "answers": [
+                  {
+                    "concept": "c69ea33f-4cc3-42ea-909b-5d7403bb3c3c",
+                    "label": "Postpartum IUD (PPIUD) insertion"
+                  },
+                  {
+                    "concept": "9937be1d-a516-48a1-8e56-68abf0e7d754",
+                    "label": "Progestin-only Implants"
+                  },
+                  {
+                    "concept": "e7b2e98b-4022-42d2-a2c7-6aa79ff184e5",
+                    "label": "Progestin-only Pills (POPs)"
+                  },
+                  {
+                    "concept": "bdb738f0-9b84-4d01-9d65-0eeb19c7516b",
+                    "label": "Lactational Amenorrhea Method (LAM) - Only if fully breastfeeding"
+                  },
+                  {
+                    "concept": "bb734330-1853-4842-8a8e-425e2257e298",
+                    "label": "Barrier Methods (Male/Female Condoms)"
+                  },
+                  {
+                    "concept": "3d006620-e869-4605-a69b-05589959dbe0",
+                    "label": "Permanent Method (Bilateral Tubal Ligation)"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Delayed Postpartum Methods (Delayed to 6 weeks)",
+              "type": "obs",
+              "id": "delayedPostpartumMethodsDelayedTo6Weeks",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "fe40122a-054d-42fc-b805-97a0e0f59d62",
+                "answers": [
+                  {
+                    "concept": "ba1f92b1-741a-49a0-bf35-57d66a5194b3",
+                    "label": "Progestin-only Injectables (e.g., DMPA)"
+                  },
+                  {
+                    "concept": "bbe2c152-7bc2-4507-851a-0716c68b269a",
+                    "label": "Combined Oral Contraceptive Pills (COCs) - If non-breastfeeding"
+                  },
+                  {
+                    "concept": "a5491569-807b-4c10-a338-f126bb631ea7",
+                    "label": "Interval IUD insertion"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Counseling and Patient Verification",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Check to confirm essential counseling steps have been completed",
+              "type": "obs",
+              "id": "checkToConfirmEssentialCounselingStepsHa",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "30567905-29cf-4f02-ba9e-95e8d055fb61",
+                "answers": [
+                  {
+                    "concept": "2e18275a-de4c-4552-b22c-6b3c92908f39",
+                    "label": "Client was counseled on the health benefits of spacing births at least 2 years apart."
+                  },
+                  {
+                    "concept": "f4cf3619-5a34-48c1-bfcb-778f936ddb32",
+                    "label": "Client was informed of common side effects, correct usage, and effectiveness of their chosen method."
+                  },
+                  {
+                    "concept": "c472e28e-2293-4db2-9b1e-726fb78af6e3",
+                    "label": "Client was informed of warning signs regarding their chosen method and when to return to the facility."
+                  },
+                  {
+                    "concept": "87e7b129-aa2b-4c06-9d7d-36b3733014ef",
+                    "label": "Client successfully repeated usage instructions back to the provider."
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Plan and Accountability",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Chosen Method Provided/Prescribed",
+              "type": "obs",
+              "id": "chosenMethodProvidedPrescribed",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "291a757d-a2a0-4f84-a366-b0dac790820d"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Follow-up Appointment Date",
+              "type": "obs",
+              "id": "followUpAppointmentDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "0a65e846-7815-43f4-b768-d645f39a65be"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Counseling Provider Name",
+              "type": "obs",
+              "id": "counselingProviderName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "693f200e-ed64-437e-9f57-8c8a17975cc6"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Provider Signature Field",
+              "type": "obs",
+              "id": "providerSignatureField",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b5b26f02-d1ac-40c2-a7bb-4a5166524b21"
+              },
+              "readonly": false,
+              "questionInfo": "Not natively supported in O3 (O3 has no signature widget; flag for manual)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

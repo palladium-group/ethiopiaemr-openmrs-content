@@ -1,0 +1,1214 @@
+{
+  "name": "Psychotherapy Followup Progress Note",
+  "description": "Psychotherapy Followup Progress Note for Eka Hospital (OpenMRS O3).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "01b7b353-80ff-4f39-992d-0bae2c1a7ba1",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Psychotherapy Followup Progress Note",
+      "sections": [
+        {
+          "label": "Patient Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Sending Source",
+              "type": "obs",
+              "id": "sendingSource",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b84c5ce9-35dc-43d9-ae60-7c181ecf2bda",
+                "answers": [
+                  {
+                    "concept": "57d9f29b-50b5-4c10-bfed-deb06be8aba5",
+                    "label": "In facility"
+                  },
+                  {
+                    "concept": "2a06d8c8-1bc6-4a2d-8d06-239cf1d2e2e9",
+                    "label": "Outside Facility"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "In facility type",
+              "type": "obs",
+              "id": "inFacilityType",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "841a92d3-5ed8-4b9a-bafb-d36e1ff9b0f3",
+                "answers": [
+                  {
+                    "concept": "ce243029-c835-4836-9d26-a07c39a7845b",
+                    "label": "In patient"
+                  },
+                  {
+                    "concept": "8e777f8f-120d-4f5a-9552-d17ac2b957ae",
+                    "label": "Outpatient"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "sendingSource !== '57d9f29b-50b5-4c10-bfed-deb06be8aba5'"
+              }
+            },
+            {
+              "label": "Outside Facility type",
+              "type": "obs",
+              "id": "outsideFacilityType",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "da88be9b-a0fa-45d7-bb79-e94cf446b77b",
+                "answers": [
+                  {
+                    "concept": "ce923c49-abf5-4d97-bad2-34ee4158c75c",
+                    "label": "Community/Self"
+                  },
+                  {
+                    "concept": "2a935d2a-a61f-4dae-aec8-3b8b8a0d3da1",
+                    "label": "Other facility"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "sendingSource !== '2a06d8c8-1bc6-4a2d-8d06-239cf1d2e2e9'"
+              }
+            },
+            {
+              "label": "Other facility",
+              "type": "obs",
+              "id": "otherFacility",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "435973c3-dd75-4b0d-b705-9a4d4a3d4ab2"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "outsideFacilityType !== '2a935d2a-a61f-4dae-aec8-3b8b8a0d3da1'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Reason for Follow-Up",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Reason for Follow-Up",
+              "type": "obs",
+              "id": "reasonForFollowUp",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "72e5f625-6fc8-43d2-b716-1bc6f138f964",
+                "answers": [
+                  {
+                    "concept": "9cdc3892-87dd-4fb7-b1db-cc41ff5ea3e8",
+                    "label": "Routine Follow-Up"
+                  },
+                  {
+                    "concept": "9a4df013-8f4b-4eab-ab13-af7e6189401c",
+                    "label": "Symptom Worsening"
+                  },
+                  {
+                    "concept": "8e9abc72-e9fb-401b-b7ea-0d889bcd4620",
+                    "label": "Crisis Visit"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "reasonForFollowUp !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Subjective (Patient Report)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Mood",
+              "type": "obs",
+              "id": "mood",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "30f65120-2910-45f7-bea6-5f8a5ddd8da9",
+                "min": "1",
+                "max": "10",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Description of Mood",
+              "type": "obs",
+              "id": "descriptionOfMood",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "adbc836c-1b76-419c-84c8-af106bee998c"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Sleep",
+              "type": "obs",
+              "id": "sleep",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7297151c-81cc-4544-93b6-809380a5378a"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Appetite",
+              "type": "obs",
+              "id": "appetite",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c448383e-29e2-41fa-ade5-7e036bb89063"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Functioning (work/school/social)",
+              "type": "obs",
+              "id": "functioningWorkSchoolSocial",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5b310520-7730-49e0-b6be-aa25912531d2"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Medication adherence",
+              "type": "obs",
+              "id": "medicationAdherence",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6b6a3970-32d5-4f43-bf6e-fc506efdd969",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fair"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Substance Use Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Type of Use",
+              "type": "obs",
+              "id": "typeOfUse",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "c5404c7a-8744-45ae-bc0d-3b7ac9108a01",
+                "answers": [
+                  {
+                    "concept": "380069fd-def8-4bcf-93a8-b3a745088442",
+                    "label": "Tobacco"
+                  },
+                  {
+                    "concept": "f9744e3e-b394-4f56-85b2-08be1447a8b9",
+                    "label": "Alcohol"
+                  },
+                  {
+                    "concept": "56de197f-3fc1-4815-8ea8-bebfde220929",
+                    "label": "Marijuana"
+                  },
+                  {
+                    "concept": "cd15152c-33c8-4aa9-9b25-10e284ad785c",
+                    "label": "Khat"
+                  },
+                  {
+                    "concept": "85275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tramadol"
+                  },
+                  {
+                    "concept": "117916AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Gambling"
+                  },
+                  {
+                    "concept": "443aa5a7-319c-4c96-a272-e4dec401a878",
+                    "label": "Gaming"
+                  },
+                  {
+                    "concept": "56c2d8b2-62a0-4921-87cf-6b1fb08dddc1",
+                    "label": "Social Media"
+                  },
+                  {
+                    "concept": "c4b40dc8-bcee-4e67-aee6-f7dc7ecaa26c",
+                    "label": "Pornography"
+                  },
+                  {
+                    "concept": "3f52af6a-9c7a-4fe0-beff-8e25a3c033e2",
+                    "label": "Compulsive Sexual Behavior"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!(typeOfUse && typeOfUse.includes('5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+              }
+            },
+            {
+              "label": "Pattern of Use",
+              "type": "obs",
+              "id": "patternOfUse",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2e15e417-50ce-4bd9-a46b-b02be963b4f8",
+                "answers": [
+                  {
+                    "concept": "8b2783b8-6206-463c-9f58-b4c39f42cd5d",
+                    "label": "Daily"
+                  },
+                  {
+                    "concept": "f3434a31-2517-45bf-bee9-875fbdaa4738",
+                    "label": "Several times weekly"
+                  },
+                  {
+                    "concept": "1099AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Weekly"
+                  },
+                  {
+                    "concept": "ce04e913-0df8-47fa-b90a-314c67ca5d36",
+                    "label": "Occasional"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Duration",
+              "type": "obs",
+              "id": "duration",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1732AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "9a5be520-ff89-42f0-bb45-1eebe6accfe0",
+                    "label": "< 6 months"
+                  },
+                  {
+                    "concept": "eec6eba9-7405-4a7a-9d2e-5c13193b23d9",
+                    "label": "6–12 months"
+                  },
+                  {
+                    "concept": "cca40c45-a128-4b2b-a3d7-3bd648baa3e7",
+                    "label": "1–5 years"
+                  },
+                  {
+                    "concept": "80a4d303-a27b-47da-86b7-534b633b3b95",
+                    "label": "> 5 years"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Quantity / Severity",
+              "type": "obs",
+              "id": "quantitySeverity",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "dd56b1d1-082b-4d5a-9e64-ebb94bb62d88",
+                "answers": [
+                  {
+                    "concept": "159562AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Small"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "159563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Large"
+                  },
+                  {
+                    "concept": "db33ed5a-5dd5-4907-bbd3-36af6401104d",
+                    "label": "Loss of control"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Last Use Date",
+              "type": "obs",
+              "id": "lastUseDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "293c0bba-2908-4800-b986-8e4480e1acbe"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Patient concerns/stressors",
+              "type": "obs",
+              "id": "patientConcernsStressors",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a1080688-a427-45ec-97d4-570d76d24e59"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Objective (Clinician Observation)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Appearance",
+              "type": "obs",
+              "id": "appearance",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "47b3934e-cf87-4c43-a4b8-dba1b38533d9",
+                "answers": [
+                  {
+                    "concept": "54c03a43-af22-4b3d-94de-15d053c46c9e",
+                    "label": "Well-groomed"
+                  },
+                  {
+                    "concept": "24d6dc53-ec50-4a95-9674-fa02964c0fde",
+                    "label": "Disheveled"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Appearance - Other",
+              "type": "obs",
+              "id": "appearanceOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f5d010cb-4200-4983-b20e-678ec9751a11"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "appearance !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Behavior",
+              "type": "obs",
+              "id": "behavior",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8d83b799-62f0-4679-acfa-e8ff80397052",
+                "answers": [
+                  {
+                    "concept": "35ae1662-c801-40e4-a67a-1b623aa79d0b",
+                    "label": "Cooperative"
+                  },
+                  {
+                    "concept": "8c4b8e3f-6579-4a51-92e2-108e8fe9cd25",
+                    "label": "Agitated"
+                  },
+                  {
+                    "concept": "d3b1e013-27ab-4b8c-a4f4-be2e7650ac77",
+                    "label": "Withdrawn"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Behavior - Other",
+              "type": "obs",
+              "id": "behaviorOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f4275835-e3f4-4332-ad51-1fa64c742008"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "behavior !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Speech",
+              "type": "obs",
+              "id": "speech",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ab26b7e2-6614-4f2f-8c3b-33551b53b2bf",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "69089e91-a03c-469f-9f41-56391c96d3ae",
+                    "label": "Slow"
+                  },
+                  {
+                    "concept": "11b71304-69bd-4d14-a48e-eadb71dbe35a",
+                    "label": "Pressured"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Speech - Other",
+              "type": "obs",
+              "id": "speechOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d680ba8f-b114-4e9d-82f7-7322e2354acb"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "speech !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Mood/Affect",
+              "type": "obs",
+              "id": "moodAffect",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c08a234b-c36c-429b-9738-feab2bd84271"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Thought process",
+              "type": "obs",
+              "id": "thoughtProcess",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f4d2de4c-a0ee-4a61-a0d7-53354db7db1e",
+                "answers": [
+                  {
+                    "concept": "662c1e2c-7c1a-442d-ac47-b066356e8167",
+                    "label": "Logical"
+                  },
+                  {
+                    "concept": "55f04455-b91d-4c65-badf-215003a890ea",
+                    "label": "Disorganized"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Thought process - Other",
+              "type": "obs",
+              "id": "thoughtProcessOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3b7b5ff5-09bd-4767-a753-766cc493c138"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "thoughtProcess !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Orientation to time, place and person",
+              "type": "obs",
+              "id": "orientationToTimePlaceAndPerson",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "dde85c03-7e28-470c-9bae-aba5fb41f32b",
+                "answers": [
+                  {
+                    "concept": "a6d00512-9786-45d6-8886-be160acfd5d4",
+                    "label": "Intact"
+                  },
+                  {
+                    "concept": "158ee43a-f72c-4a87-a39b-6d29a426d8a8",
+                    "label": "Impaired"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Impaired orientation",
+              "type": "obs",
+              "id": "impairedOrientation",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "5d720c49-28ff-4756-82f4-8295e064211d",
+                "answers": [
+                  {
+                    "concept": "9ddab0ca-b2e9-4aa8-8419-c6075bf789a2",
+                    "label": "Time"
+                  },
+                  {
+                    "concept": "55eeabae-f612-4b1e-8ecb-02c4801c5cc6",
+                    "label": "Place"
+                  },
+                  {
+                    "concept": "460685be-e27b-4cb5-9d97-869e4dfec652",
+                    "label": "Person"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "orientationToTimePlaceAndPerson !== '158ee43a-f72c-4a87-a39b-6d29a426d8a8'"
+              }
+            },
+            {
+              "label": "Eye contact",
+              "type": "obs",
+              "id": "eyeContact",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a102a74d-e4fa-4feb-a1c9-0be2d9a24549",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Psychomotor",
+              "type": "obs",
+              "id": "psychomotor",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "92d81ee0-3b58-4242-b54c-677c6a57093f",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "8c4b8e3f-6579-4a51-92e2-108e8fe9cd25",
+                    "label": "Agitated"
+                  },
+                  {
+                    "concept": "97735cdf-7c7e-41dc-9b76-1dc3ddc3f6a6",
+                    "label": "Retarded"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Clinical Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Progress",
+              "type": "obs",
+              "id": "progress",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "160116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "165b4679-5c0d-4edb-bb3d-e661d45122e4",
+                    "label": "Improved"
+                  },
+                  {
+                    "concept": "f852e236-e96d-4e47-bdf0-9c98da633e36",
+                    "label": "No Change"
+                  },
+                  {
+                    "concept": "8bc2e752-a1a7-4426-929d-43f228c2f74d",
+                    "label": "Deteriorated"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Current symptoms",
+              "type": "obs",
+              "id": "currentSymptoms",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "59b5391d-344e-4200-87b1-183146c0b53a"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Working diagnosis",
+              "type": "obs",
+              "id": "workingDiagnosis",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "8141ca9b-f165-4036-bc49-ec94030490ed"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Protective factors",
+              "type": "obs",
+              "id": "protectiveFactors",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f48eab79-62ef-4874-a493-1ebfe2c848bc"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Suicidal ideation",
+              "type": "obs",
+              "id": "suicidalIdeation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8d1ab0e1-61b3-40b3-b687-da81c3cc8b46",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6e9fcf93-9ed6-4c83-8f71-86e750a32472",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Intent",
+              "type": "obs",
+              "id": "intent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1bcde0f5-a91a-4ab7-9949-5fb4fa146b8e",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Means",
+              "type": "obs",
+              "id": "means",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a03d561d-34bd-4026-945b-294de58eead2",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Homicidal ideation",
+              "type": "obs",
+              "id": "homicidalIdeation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9adccdd5-773d-4224-b1bb-4ad9d69818a9",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "If yes, details",
+              "type": "obs",
+              "id": "ifYesDetails",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b34b663e-aa65-4e9e-9831-835797a82382"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "homicidalIdeation !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Self-harm risk",
+              "type": "obs",
+              "id": "selfHarmRisk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "380cff99-a60d-4f6f-8d47-6e07777c8df9",
+                "answers": [
+                  {
+                    "concept": "3a140057-d512-407d-99cf-17ab9e65e228",
+                    "label": "Low"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "02b03370-c4da-4591-9910-b55a9e37d808",
+                    "label": "High"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Interventions Provided Today",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Session duration",
+              "type": "obs",
+              "id": "sessionDuration",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c4e2e25b-cd85-417c-8ad7-22279f8e7e47",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Interventions",
+              "type": "obs",
+              "id": "interventions",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "10628b26-c102-46c5-8773-082ed4672961",
+                "answers": [
+                  {
+                    "concept": "163313AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Psychoeducation"
+                  },
+                  {
+                    "concept": "4ced48d0-5f3c-4511-9e72-65e86808fc9c",
+                    "label": "CBT"
+                  },
+                  {
+                    "concept": "0dfbbf5c-02cb-48cb-ba3b-780210a0dc42",
+                    "label": "Motivational Interviewing"
+                  },
+                  {
+                    "concept": "021d7ff2-db7e-416f-8b88-a20fc2340cbf",
+                    "label": "Crisis Counseling"
+                  },
+                  {
+                    "concept": "bb35baff-f288-4d99-ab09-3714e25d3508",
+                    "label": "Relaxation Techniques"
+                  },
+                  {
+                    "concept": "e3b80b24-3b54-4a00-8251-e6459499ab95",
+                    "label": "Family Counseling"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Interventions - Other",
+              "type": "obs",
+              "id": "interventionsOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c950c653-f8bd-42eb-936e-ef56da4d153f"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!(interventions && interventions.includes('5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+              }
+            },
+            {
+              "label": "Details",
+              "type": "obs",
+              "id": "details",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a3b9a351-e657-4e01-b46c-11a536ae3092"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Summary of Interventions Provided",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Summary of Interventions Provided",
+              "type": "obs",
+              "id": "summaryOfInterventionsProvided",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4eee4131-edd9-4a6d-bd1d-f23b9cc774c8"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Patient Response",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Engagement",
+              "type": "obs",
+              "id": "engagement",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4e354c77-5851-4b7c-bd24-6b06b6791af4",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fair"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Insight",
+              "type": "obs",
+              "id": "insight",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3178949e-f1df-4b7c-aec8-6fd977093001",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "46969e18-a3c4-4fcc-ba87-907917ac0986",
+                    "label": "Partial"
+                  },
+                  {
+                    "concept": "8d82393f-2ca0-43e1-99b7-1cc73cac19ee",
+                    "label": "Limited"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Response to intervention",
+              "type": "obs",
+              "id": "responseToIntervention",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e7d14ed9-7fc3-4367-a873-d01a00760d26",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "7fa2d574-5f17-4595-9e8a-8e75dcfdef2b",
+                    "label": "Minimal"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "ace4d1fb-f8e4-4a7d-a29e-986faa4460de",
+                    "label": "Adverse"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Homework adherence (if applicable)",
+              "type": "obs",
+              "id": "homeworkAdherenceIfApplicable",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "8df0d97f-d0c6-4937-9d06-d21e7c54eb5c"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Plan / Follow-Up",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Continue therapy",
+              "type": "obs",
+              "id": "continueTherapy",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4e22b707-1a8d-4b09-a27a-15d15dbb2119",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Next appointment",
+              "type": "obs",
+              "id": "nextAppointment",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "25db5489-c63c-48f8-a0ba-4f484884a061"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Treatment goals for next session",
+              "type": "obs",
+              "id": "treatmentGoalsForNextSession",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c602b29c-77fe-49ad-a25e-9ba0237368be"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Safety plan reviewed",
+              "type": "obs",
+              "id": "safetyPlanReviewed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "13ceab90-40e6-443b-b322-d466749e4553",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Crisis plan discussed",
+              "type": "obs",
+              "id": "crisisPlanDiscussed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6d979399-5f17-4ce2-b839-b849da306628",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

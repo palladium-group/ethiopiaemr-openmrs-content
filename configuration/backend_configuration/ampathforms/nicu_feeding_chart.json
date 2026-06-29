@@ -1,0 +1,310 @@
+{
+  "name": "NICU Feeding Chart",
+  "description": "NICU Feeding Chart for Eka Hospital (OpenMRS O3).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "0f7ea6e2-4904-47c9-8bdc-1afaffde6e09",
+  "retired": false,
+  "encounter": "Admission",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "NICU Feeding Chart",
+      "sections": [
+        {
+          "label": "Feeding Metrics",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Feeding Metrics",
+              "type": "obsGroup",
+              "id": "feeding_metricsGroup",
+              "questionOptions": {
+                "concept": "90ae72d3-9aff-4f63-8b53-b1c1acda004c",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Date",
+                  "type": "obs",
+                  "id": "date",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "9637081c-6071-8901-2345-678901abce00"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Time Given",
+                  "type": "obs",
+                  "id": "timeGiven",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "48489d16-d5a4-403d-a3a4-1275ff1755b6"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Type of Feeding",
+                  "type": "obs",
+                  "id": "typeOfFeeding",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "d31b70f1-9878-4fb8-8be4-3eae868ad516",
+                    "answers": [
+                      {
+                        "concept": "1a7fa97a-711e-4400-bad1-a2bf376b0805",
+                        "label": "EBM (Expressed Breast Milk)"
+                      },
+                      {
+                        "concept": "ed6d2bd5-e5d6-4d91-8dfa-52791010d7f1",
+                        "label": "Donor Milk"
+                      },
+                      {
+                        "concept": "1a1b61eb-7131-4b4c-81c2-f6ee62946967",
+                        "label": "Formula"
+                      },
+                      {
+                        "concept": "73babbdc-526f-43c3-8c52-5353817a9d1a",
+                        "label": "NGT Feeding"
+                      },
+                      {
+                        "concept": "9a39f702-3b2f-4357-8194-65d2b11046fe",
+                        "label": "TPN (Total Parenteral Nutrition)"
+                      },
+                      {
+                        "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Other"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Other",
+                  "type": "obs",
+                  "id": "other",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+                  },
+                  "readonly": false,
+                  "hide": {
+                    "hideWhenExpression": "typeOfFeeding !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  }
+                },
+                {
+                  "label": "Amount of Feeding",
+                  "type": "obs",
+                  "id": "amountOfFeeding",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "61f1dd43-265a-4652-ac93-036c66bf4ad1",
+                    "step": "any"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Feeding Interval",
+                  "type": "obs",
+                  "id": "feedingInterval",
+                  "questionOptions": {
+                    "rendering": "ui-select-extended",
+                    "concept": "f1b13c1a-c08c-45d5-84d9-c01ab6574331",
+                    "answers": [
+                      {
+                        "concept": "a47181d9-5eb3-4750-b3cd-8dfc286bf26b",
+                        "label": "Every 2 hours"
+                      },
+                      {
+                        "concept": "72e6e20f-3451-48cd-b31e-9407afafd03e",
+                        "label": "Every 3 hours"
+                      },
+                      {
+                        "concept": "202e5b1c-886c-4a81-846f-d306847bf385",
+                        "label": "Every 4 hours"
+                      },
+                      {
+                        "concept": "e7397a74-ada5-4c96-8e3c-6974f81a8e94",
+                        "label": "Continuous Infusion"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Time of Next Feeding",
+                  "type": "obs",
+                  "id": "timeOfNextFeeding",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "c9e43224-f310-4e35-98a6-479ca02ca1c0"
+                  },
+                  "readonly": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Clinical Tolerability",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Gastric Residual Volume",
+              "type": "obs",
+              "id": "gastricResidualVolume",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "fc1c4054-37ea-4f9a-8b01-616dc0d9c1f9",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "4ca8c9ef-59ba-4bad-8a81-cc4ceb7d41c4",
+                    "label": "Clear / Milky"
+                  },
+                  {
+                    "concept": "4e642221-f647-423f-9ec5-b1aefb791c9c",
+                    "label": "Green / Bilious"
+                  },
+                  {
+                    "concept": "c0e211e6-e503-4b66-aed3-6f2d92b8c67a",
+                    "label": "Blood-stained"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Clear / Milky",
+              "type": "obs",
+              "id": "clearMilky",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c3e868cc-2d80-499c-b462-7501e319a5db",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "gastricResidualVolume !== '4ca8c9ef-59ba-4bad-8a81-cc4ceb7d41c4'"
+              }
+            },
+            {
+              "label": "Green / Bilious",
+              "type": "obs",
+              "id": "greenBilious",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "61a4173e-22fa-4105-8105-d736308112aa",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "gastricResidualVolume !== '4e642221-f647-423f-9ec5-b1aefb791c9c'"
+              }
+            },
+            {
+              "label": "Blood-stained",
+              "type": "obs",
+              "id": "bloodStained",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ecae5a1f-5351-4841-ab5d-d94962cd55a2",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "gastricResidualVolume !== 'c0e211e6-e503-4b66-aed3-6f2d92b8c67a'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Accountability",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Care Provider Name",
+              "type": "obs",
+              "id": "careProviderName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Digital Signature",
+              "type": "obs",
+              "id": "digitalSignature",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b5b26f02-d1ac-40c2-a7bb-4a5166524b21"
+              },
+              "readonly": false,
+              "questionInfo": "Not natively supported in O3 (manual)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

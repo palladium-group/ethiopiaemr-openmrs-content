@@ -1,0 +1,163 @@
+{
+  "name": "Diabetic Mothers Follow Up Sheet",
+  "description": "Diabetic Mothers Follow Up Sheet for Eka Hospital (OpenMRS O3).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "e98f3530-855b-456a-82d5-f525f7acc662",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Diabetic Mothers Follow Up Sheet",
+      "sections": [
+        {
+          "label": "Assessment Timing",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "9637081c-6071-8901-2345-678901abce00"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Time",
+              "type": "obs",
+              "id": "time",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "48489d16-d5a4-403d-a3a4-1275ff1755b6"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Blood Glucose Monitoring",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Type of Glucose Check",
+              "type": "obs",
+              "id": "typeOfGlucoseCheck",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "f291a7e6-b7b7-4556-8cc1-31091829f1eb",
+                "answers": [
+                  {
+                    "concept": "13aab196-42db-422c-b906-c7087817d048",
+                    "label": "Fasting Blood Sugar (FBS)"
+                  },
+                  {
+                    "concept": "ad2af1a4-59fe-4de9-bb57-5398b11c8448",
+                    "label": "2 hours after Breakfast"
+                  },
+                  {
+                    "concept": "8f35bf8b-d656-4cb5-9073-2f8d8ebf8f11",
+                    "label": "2 hours after Lunch"
+                  },
+                  {
+                    "concept": "00aab2a8-39a0-4d5b-9bc0-110904a24457",
+                    "label": "2 hours after Dinner"
+                  },
+                  {
+                    "concept": "18a757a2-d482-49b6-be80-68afe27b1b0f",
+                    "label": "2 hours after Midnight / at 2:00 AM"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Blood Glucose Level",
+              "type": "obs",
+              "id": "bloodGlucoseLevel",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "b3a9efc6-412b-4ed9-9679-e7fc656bb731",
+                "step": "any"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Accountability",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Clinician Name and Signature",
+              "type": "obs",
+              "id": "clinicianNameSignature",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4550525b-47c2-41c3-8442-ac87c81ba73d"
+              },
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

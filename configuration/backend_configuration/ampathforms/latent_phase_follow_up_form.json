@@ -1,0 +1,404 @@
+{
+  "name": "Latent Phase Follow Up Form",
+  "description": "Latent Phase Follow Up Form for Eka Hospital (OpenMRS O3).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "16c7a8ef-3399-4415-b8d6-68d71aef0e0e",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Latent Phase Follow Up Form",
+      "sections": [
+        {
+          "label": "Patient Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Bed Number",
+              "type": "obs",
+              "id": "bedNumber",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "42fa59ea-9457-4f04-a469-5cd49f59d98f"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Monitoring Entries",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Monitoring Entries",
+              "type": "obsGroup",
+              "id": "monitoring_entriesGroup",
+              "questionOptions": {
+                "concept": "7887fa56-e6ee-4888-b855-6453be4315a3",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Date",
+                  "type": "obs",
+                  "id": "date",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "9637081c-6071-8901-2345-678901abce00"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Time",
+                  "type": "obs",
+                  "id": "time",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "48489d16-d5a4-403d-a3a4-1275ff1755b6"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Blood Pressure (Systolic)",
+                  "type": "obs",
+                  "id": "bloodPressureSystolic",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "1145e8f4-17a4-43af-a28a-94399aef3c0b",
+                    "min": "0",
+                    "max": "300",
+                    "step": "1"
+                  },
+                  "readonly": false,
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                      "message": "Whole numbers only (no decimals)."
+                    }
+                  ]
+                },
+                {
+                  "label": "Blood Pressure (Diastolic)",
+                  "type": "obs",
+                  "id": "bloodPressureDiastolic",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "1145e8f4-17a4-43af-a28a-94399aef3c0b",
+                    "min": "0",
+                    "max": "200",
+                    "step": "1"
+                  },
+                  "readonly": false,
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                      "message": "Whole numbers only (no decimals)."
+                    }
+                  ]
+                },
+                {
+                  "label": "Pulse Rate (PR)",
+                  "type": "obs",
+                  "id": "pulseRatePr",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "300",
+                    "step": "1"
+                  },
+                  "readonly": false,
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                      "message": "Whole numbers only (no decimals)."
+                    }
+                  ]
+                },
+                {
+                  "label": "Respiratory Rate (RR)",
+                  "type": "obs",
+                  "id": "respiratoryRateRr",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "max": "120",
+                    "step": "1"
+                  },
+                  "readonly": false,
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                      "message": "Whole numbers only (no decimals)."
+                    }
+                  ]
+                },
+                {
+                  "label": "Temperature",
+                  "type": "obs",
+                  "id": "temperature",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "25",
+                    "max": "45",
+                    "step": "0.1"
+                  },
+                  "readonly": false,
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                      "message": "At most 1 decimal place allowed."
+                    }
+                  ]
+                },
+                {
+                  "label": "Fetal Heart Beat (FHB)",
+                  "type": "obs",
+                  "id": "fetalHeartBeatFhb",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "61c417bc-49a9-41b8-a7a4-d640c824b95b",
+                    "min": "0",
+                    "max": "300",
+                    "step": "1"
+                  },
+                  "readonly": false,
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                      "message": "Whole numbers only (no decimals)."
+                    }
+                  ]
+                },
+                {
+                  "label": "Contraction Frequency",
+                  "type": "obs",
+                  "id": "contractionFrequency",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "5ac2b392-6007-459f-b80a-a0eca7bf709e",
+                    "min": "0",
+                    "step": "1"
+                  },
+                  "readonly": false,
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                      "message": "Whole numbers only (no decimals)."
+                    }
+                  ]
+                },
+                {
+                  "label": "Contraction Duration",
+                  "type": "obs",
+                  "id": "contractionDuration",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "3167689e-a1d8-43c0-bc80-c1103a42d19f",
+                    "min": "0",
+                    "step": "1"
+                  },
+                  "readonly": false,
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                      "message": "Whole numbers only (no decimals)."
+                    }
+                  ]
+                },
+                {
+                  "label": "Cervical Dilatation",
+                  "type": "obs",
+                  "id": "cervicalDilatation",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "7ee2ff7f-a39a-4894-93e4-7cfc6b328807",
+                    "min": "0",
+                    "max": "10",
+                    "step": "1"
+                  },
+                  "readonly": false,
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                      "message": "Whole numbers only (no decimals)."
+                    }
+                  ]
+                },
+                {
+                  "label": "Membrane Status",
+                  "type": "obs",
+                  "id": "membraneStatus",
+                  "questionOptions": {
+                    "rendering": "ui-select-extended",
+                    "concept": "7415869c-4859-6789-0123-456789abcd14",
+                    "answers": [
+                      {
+                        "concept": "a6d00512-9786-45d6-8886-be160acfd5d4",
+                        "label": "Intact"
+                      },
+                      {
+                        "concept": "127252AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Ruptured"
+                      },
+                      {
+                        "concept": "15d529e0-2f29-48b5-bc41-5ade28396910",
+                        "label": "Artificial Rupture of Membrane (ARM)"
+                      },
+                      {
+                        "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Unknown"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Hemoglobin (Hgb)",
+                  "type": "obs",
+                  "id": "hemoglobinHgb",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "21AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "step": "0.1"
+                  },
+                  "readonly": false,
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                      "message": "At most 1 decimal place allowed."
+                    }
+                  ]
+                },
+                {
+                  "label": "Blood Group",
+                  "type": "obs",
+                  "id": "bloodGroup",
+                  "questionOptions": {
+                    "rendering": "ui-select-extended",
+                    "concept": "163126AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "answers": [
+                      {
+                        "concept": "c85790b1-398f-4797-b5f4-25018a96fffc",
+                        "label": "A+"
+                      },
+                      {
+                        "concept": "c85790b1-398f-4797-b5f4-25018a96fffc",
+                        "label": "A"
+                      },
+                      {
+                        "concept": "03dbdf85-7184-431f-a5c2-f7428c66f18d",
+                        "label": "B+"
+                      },
+                      {
+                        "concept": "03dbdf85-7184-431f-a5c2-f7428c66f18d",
+                        "label": "B"
+                      },
+                      {
+                        "concept": "62d85dd0-f9ce-47d5-8a6f-4f1ba99543d9",
+                        "label": "AB+"
+                      },
+                      {
+                        "concept": "62d85dd0-f9ce-47d5-8a6f-4f1ba99543d9",
+                        "label": "AB"
+                      },
+                      {
+                        "concept": "73d8593d-edcd-454f-b2e8-c25f4c1b46a2",
+                        "label": "O+"
+                      },
+                      {
+                        "concept": "73d8593d-edcd-454f-b2e8-c25f4c1b46a2",
+                        "label": "O"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Additional Notes",
+                  "type": "obs",
+                  "id": "additionalNotes",
+                  "questionOptions": {
+                    "rendering": "textarea",
+                    "concept": "864e6c73-9884-4a9c-839a-39e956561366"
+                  },
+                  "readonly": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

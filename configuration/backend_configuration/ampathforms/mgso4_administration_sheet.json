@@ -1,0 +1,1021 @@
+{
+  "name": "MgSO4 Administration Sheet",
+  "description": "MgSO4 Administration Sheet for Eka Hospital (OpenMRS O3).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "e3991244-6e83-45a2-9a99-b538f61957e6",
+  "retired": false,
+  "encounter": "Admission",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "MgSO4 Administration Sheet",
+      "sections": [
+        {
+          "label": "Patient Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Bed Number",
+              "type": "obs",
+              "id": "bedNumber",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "93cb6f8c-e601-4e57-9bac-2d31336a3744"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Diagnosis (Dx)",
+              "type": "obs",
+              "id": "diagnosisDx",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Date of Admission",
+              "type": "obs",
+              "id": "dateOfAdmission",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "421719a0-eef5-4181-b55d-fff16d845314"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Date/Time MgSO4 Started",
+              "type": "obs",
+              "id": "dateTimeMgso4Started",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "538bcfe5-42d3-48a2-bafc-0f49d6d3ec40"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Loading Dose Administration",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Loading Dose Given",
+              "type": "obs",
+              "id": "loadingDoseGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "298b25f9-d586-47b6-92cd-27a557990cd0",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Date and Time Given",
+              "type": "obs",
+              "id": "dateTimeGiven",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              },
+              "readonly": false
+            },
+            {
+              "label": "IV Route Given",
+              "type": "obs",
+              "id": "ivRouteGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4028fd85-341d-4d5a-b484-ada20f7a1591",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "IM Route Given",
+              "type": "obs",
+              "id": "imRouteGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6cf307aa-7986-4995-abaa-4672138fe5a0",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "IV Dose Administered",
+              "type": "obs",
+              "id": "ivDoseAdministered",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "95afb696-e3cb-4132-9044-1e3e97cf356d",
+                "step": "any"
+              },
+              "readonly": false
+            },
+            {
+              "label": "IM Dose Administered",
+              "type": "obs",
+              "id": "imDoseAdministered",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "3ed56d96-4863-4ccc-b59e-412c7a366e59",
+                "step": "any"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Diluent Used",
+              "type": "obs",
+              "id": "diluentUsed",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d8481801-d998-4f04-83ce-e43b65221caa"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Lidocaine Given",
+              "type": "obs",
+              "id": "lidocaineGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9b3b0d5f-3f27-4d3c-8c0b-eea3fda27361",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Injection Site Right Buttock",
+              "type": "obs",
+              "id": "injectionSiteRightButtock",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cdc9f938-6eb3-401f-8bea-07d38b3b3346",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Injection Site Left Buttock",
+              "type": "obs",
+              "id": "injectionSiteLeftButtock",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cfbfcda6-4a96-46e1-80b8-80368e267fd3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Staff Name",
+              "type": "obs",
+              "id": "staffName",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "a9b0af74-d36b-424c-8989-9ae93fa10f7b"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Remarks",
+              "type": "obs",
+              "id": "remarks",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Recurrent Convulsion Dose (optional)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Additional Dose Required",
+              "type": "obs",
+              "id": "additionalDoseRequired",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d3abe7b6-0a5f-4aa7-839d-dedaede93ffe",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Date and Time Given",
+              "type": "obs",
+              "id": "dateTimeGiven2",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Dose Administered",
+              "type": "obs",
+              "id": "doseAdministered",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c52aa24d-30a0-4126-8c01-8d522cabafc9",
+                "step": "any"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Route",
+              "type": "obs",
+              "id": "route",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "0925e76f-84fa-48b7-8c98-8075038ab89a",
+                "answers": [
+                  {
+                    "concept": "0041f9d1-20e5-43f8-a9ee-43a0aa297d5c",
+                    "label": "IV"
+                  },
+                  {
+                    "concept": "2052f1c6-9ee9-4b18-857f-5cdce1879b70",
+                    "label": "IM"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Staff Name",
+              "type": "obs",
+              "id": "staffName2",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "a9b0af74-d36b-424c-8989-9ae93fa10f7b"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Remarks",
+              "type": "obs",
+              "id": "remarks2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Maintenance Dose Administration",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Maintenance Dose Administration",
+              "type": "obsGroup",
+              "id": "maintenance_dose_administrationGroup",
+              "questionOptions": {
+                "concept": "799fc567-03ea-4b24-9c27-cf0f8d4f6ea4",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Dose Number",
+                  "type": "obs",
+                  "id": "doseNumber",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "77459bff-b817-46f3-94a1-67aec5da5133",
+                    "step": "any"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Date and Time Given",
+                  "type": "obs",
+                  "id": "dateTimeGiven3",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Dose Administered",
+                  "type": "obs",
+                  "id": "doseAdministered2",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "c52aa24d-30a0-4126-8c01-8d522cabafc9",
+                    "step": "any"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Lidocaine Used",
+                  "type": "obs",
+                  "id": "lidocaineUsed",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "1e5bf2d9-a484-4426-bc99-7eaa61b0ea67",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Yes"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Route",
+                  "type": "obs",
+                  "id": "route2",
+                  "questionOptions": {
+                    "rendering": "ui-select-extended",
+                    "concept": "0925e76f-84fa-48b7-8c98-8075038ab89a",
+                    "answers": [
+                      {
+                        "concept": "2052f1c6-9ee9-4b18-857f-5cdce1879b70",
+                        "label": "IM"
+                      },
+                      {
+                        "concept": "0041f9d1-20e5-43f8-a9ee-43a0aa297d5c",
+                        "label": "IV"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Right Thigh",
+                  "type": "obs",
+                  "id": "rightThigh",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "318b906a-9b57-4e36-995a-2b5eec38bf3f",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Yes"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Left Thigh",
+                  "type": "obs",
+                  "id": "leftThigh",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "c46b71a2-f7d6-4982-a645-97e7d5c257c9",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Yes"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Staff Name",
+                  "type": "obs",
+                  "id": "staffName3",
+                  "questionOptions": {
+                    "rendering": "ui-select-extended",
+                    "concept": "a9b0af74-d36b-424c-8989-9ae93fa10f7b"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Remarks",
+                  "type": "obs",
+                  "id": "remarks3",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+                  },
+                  "readonly": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Maintenance Dose Post Delivery",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Maintenance Dose Post Delivery",
+              "type": "obsGroup",
+              "id": "maintenance_dose_post_deliveryGroup",
+              "questionOptions": {
+                "concept": "52d87ac1-16e5-4251-a365-2511f0026a8e",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Dose Number",
+                  "type": "obs",
+                  "id": "doseNumber2",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "77459bff-b817-46f3-94a1-67aec5da5133",
+                    "step": "any"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Date and Time Given",
+                  "type": "obs",
+                  "id": "dateTimeGiven4",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Dose Administered",
+                  "type": "obs",
+                  "id": "doseAdministered3",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "c52aa24d-30a0-4126-8c01-8d522cabafc9",
+                    "step": "any"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Route",
+                  "type": "obs",
+                  "id": "route3",
+                  "questionOptions": {
+                    "rendering": "ui-select-extended",
+                    "concept": "0925e76f-84fa-48b7-8c98-8075038ab89a",
+                    "answers": [
+                      {
+                        "concept": "2052f1c6-9ee9-4b18-857f-5cdce1879b70",
+                        "label": "IM"
+                      },
+                      {
+                        "concept": "0041f9d1-20e5-43f8-a9ee-43a0aa297d5c",
+                        "label": "IV"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Right Thigh",
+                  "type": "obs",
+                  "id": "rightThigh2",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "318b906a-9b57-4e36-995a-2b5eec38bf3f",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Yes"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Left Thigh",
+                  "type": "obs",
+                  "id": "leftThigh2",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "c46b71a2-f7d6-4982-a645-97e7d5c257c9",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Yes"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Staff Name",
+                  "type": "obs",
+                  "id": "staffName4",
+                  "questionOptions": {
+                    "rendering": "ui-select-extended",
+                    "concept": "a9b0af74-d36b-424c-8989-9ae93fa10f7b"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Remarks",
+                  "type": "obs",
+                  "id": "remarks4",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+                  },
+                  "readonly": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Monitoring Before Each Dose",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Monitoring Before Each Dose",
+              "type": "obsGroup",
+              "id": "monitoring_before_each_doseGroup",
+              "questionOptions": {
+                "concept": "f02db60e-299c-450b-9060-91ff7b540929",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Assessment Time",
+                  "type": "obs",
+                  "id": "assessmentTime",
+                  "questionOptions": {
+                    "rendering": "datetime",
+                    "concept": "1517b74b-b213-4b49-ae52-4ccffcb5ba43"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Blood Pressure (mmHg)",
+                  "type": "obs",
+                  "id": "bloodPressureMmhg",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "1145e8f4-17a4-43af-a28a-94399aef3c0b",
+                    "step": "any"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Respiratory Rate (/min)",
+                  "type": "obs",
+                  "id": "respiratoryRateMin",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "step": "any"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Oxygen Saturation (%)",
+                  "type": "obs",
+                  "id": "oxygenSaturation",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "007155ea-ad0e-40ee-bb7c-9b0cb912755e",
+                    "step": "any"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "On Room Air",
+                  "type": "obs",
+                  "id": "onRoomAir",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "c246b6b2-69f4-4a23-90d7-eb5f9d36edee",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Yes"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "On Oxygen",
+                  "type": "obs",
+                  "id": "onOxygen",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "650acff8-4921-4237-8fca-57ff678f48e9",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Yes"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Oxygen Flow Rate (L/min)",
+                  "type": "obs",
+                  "id": "oxygenFlowRateLMin",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "d269a661-f1bf-4a11-8b82-1207de30a4da",
+                    "step": "any"
+                  },
+                  "readonly": false,
+                  "hide": {
+                    "hideWhenExpression": "onOxygen !== '452a6250-5d3d-4ada-8fd5-41dcc3286998'"
+                  }
+                },
+                {
+                  "label": "Deep Tendon Reflexes",
+                  "type": "obs",
+                  "id": "deepTendonReflexes",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "c3187dfc-7359-4e11-a33e-3dbdb6facc68",
+                    "answers": [
+                      {
+                        "concept": "163748AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "present"
+                      },
+                      {
+                        "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "absent"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Urine Output (mL/4 hrs)",
+                  "type": "obs",
+                  "id": "urineOutputMl4Hrs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "161929AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "step": "any"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Fluid Intake (mL/4 hrs)",
+                  "type": "obs",
+                  "id": "fluidIntakeMl4Hrs",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f",
+                    "step": "any"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Staff Name",
+                  "type": "obs",
+                  "id": "staffName5",
+                  "questionOptions": {
+                    "rendering": "ui-select-extended",
+                    "concept": "a9b0af74-d36b-424c-8989-9ae93fa10f7b"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Remarks",
+                  "type": "obs",
+                  "id": "remarks5",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Vital Signs Trend Chart",
+                  "type": "obs",
+                  "id": "vitalSignsTrendChart",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "b5b26f02-d1ac-40c2-a7bb-4a5166524b21"
+                  },
+                  "readonly": false,
+                  "questionInfo": "Not natively supported in O3 (manual)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "MgSO4 Toxicity Screening",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Respiratory Rate <12/min",
+              "type": "obs",
+              "id": "respiratoryRate12Min",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f265856c-8fb7-4b1f-bcc7-2e4b9c291220",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Urine Output <100 mL in 4 hrs",
+              "type": "obs",
+              "id": "urineOutput100MlIn4Hrs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1a9f755a-20ca-4850-920d-abd1ace597b6",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Deep Tendon Reflexes Absent",
+              "type": "obs",
+              "id": "deepTendonReflexesAbsent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5e9c8422-22cd-41bd-9f6b-ef82a1f1ae2c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Suspected MgSO4 Toxicity",
+              "type": "obs",
+              "id": "suspectedMgso4Toxicity",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "77cb2d59-2ef7-43ab-8773-caf5beb5fe3e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Action Taken",
+              "type": "obs",
+              "id": "actionTaken",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "164378AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Clinical Alert",
+              "type": "obs",
+              "id": "clinicalAlert",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b5b26f02-d1ac-40c2-a7bb-4a5166524b21"
+              },
+              "readonly": false,
+              "questionInfo": "Not natively supported in O3 (manual)."
+            }
+          ]
+        },
+        {
+          "label": "Discontinuation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "MgSO4 Discontinued",
+              "type": "obs",
+              "id": "mgso4Discontinued",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1e9722da-5b27-4e9a-9afe-7d75c0811f32",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Date and Time Stopped",
+              "type": "obs",
+              "id": "dateTimeStopped",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "c3c2c358-8a30-4458-9056-2958acddb5d0"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Reason for Discontinuation",
+              "type": "obs",
+              "id": "reasonForDiscontinuation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "334309df-2668-453a-b654-1e5175f956e4"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Staff Name",
+              "type": "obs",
+              "id": "staffName6",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "a9b0af74-d36b-424c-8989-9ae93fa10f7b"
+              },
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

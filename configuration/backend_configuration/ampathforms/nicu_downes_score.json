@@ -1,0 +1,833 @@
+{
+  "name": "NICU Downes' Score",
+  "description": "NICU Downes' Score for Eka Hospital (OpenMRS O3).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "83d165f9-a91b-4eda-9919-d38b67f66c85",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "NICU Downes' Score",
+      "sections": [
+        {
+          "label": "Baseline Demographics and Admission Data",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of Birth",
+              "type": "obs",
+              "id": "dateOfBirth",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "d7a95bc4-0f96-42ce-bb9f-034ebb148a0d"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Gestational Age",
+              "type": "obs",
+              "id": "gestationalAge",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "3820fed7-c2d9-4f7d-aae4-08b0cd728ed3",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Birth Weight",
+              "type": "obs",
+              "id": "birthWeight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5916AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Current Weight",
+              "type": "obs",
+              "id": "currentWeight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "bb44f625-9dfc-433c-a36c-0fc48879ac93",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Assessment Timing and Vitals",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Time of Evaluation (Check every 3 hours)",
+              "type": "obs",
+              "id": "timeOfEvaluationCheckEvery3Hours",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a13e9816-9826-4648-9114-4b2381cf054a"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Temperature",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Respiratory Rate",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Heart Rate",
+              "type": "obs",
+              "id": "heartRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "02187b0e-a4e4-49aa-8043-fdca00c3bc65",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Capillary Refill Time",
+              "type": "obs",
+              "id": "capillaryRefillTime",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "1d6e974a-5c97-43e7-bcb3-ff4ee4bbcf07",
+                "answers": [
+                  {
+                    "concept": "8871e3f8-b960-45c4-8199-9743ed857691",
+                    "label": "<2s"
+                  },
+                  {
+                    "concept": "8871e3f8-b960-45c4-8199-9743ed857691",
+                    "label": ">2s"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "SpO2",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0c5ec4fa-f41a-4a6d-bd07-969872b69165",
+                "min": "0",
+                "max": "100",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Downes' Score (Respiratory Distress Assessment)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Respiratory Rate",
+              "type": "obs",
+              "id": "respiratoryRate2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "16e1eaac-2160-455a-a62e-986389edd0fc",
+                "answers": [
+                  {
+                    "concept": "3b40da3a-415f-42b7-a362-d0248341f908",
+                    "label": "<60/min"
+                  },
+                  {
+                    "concept": "e3f8f465-2863-4a77-b5d0-da623203a3ce",
+                    "label": "60-80/min"
+                  },
+                  {
+                    "concept": "f90ff969-7d68-42bc-a0a5-5e4e41c205a6",
+                    "label": ">80/min"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Retractions",
+              "type": "obs",
+              "id": "retractions",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "71ee01e7-3d0b-47fa-a75e-25a32d5d9981",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Cyanosis",
+              "type": "obs",
+              "id": "cyanosis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "887846fd-9709-4388-ba57-b1fa487538ac",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "06dd147d-2afa-4a55-a8aa-8f52a1fe69fc",
+                    "label": "Cyanosis relieved by oxygen"
+                  },
+                  {
+                    "concept": "5544ced5-0fad-4dcf-af80-09798fa30da0",
+                    "label": "Cyanosis not relieved by oxygen"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Air Entry",
+              "type": "obs",
+              "id": "airEntry",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9168fd9b-2455-4cc1-9459-4c974eb6f547",
+                "answers": [
+                  {
+                    "concept": "1f4305ec-2a5b-42e8-a56d-c12311d6927e",
+                    "label": "Good bilaterally"
+                  },
+                  {
+                    "concept": "3f2f74ff-6061-40a0-bf04-401f55365285",
+                    "label": "Mildly decreased"
+                  },
+                  {
+                    "concept": "8769edca-b37a-4f6d-bbe0-fd712eab70c6",
+                    "label": "Markedly decreased"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Grunting",
+              "type": "obs",
+              "id": "grunting",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ad672fbd-bcc2-4a70-8a9e-e11350b724a2",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "f85e25ba-ea54-48f5-8ff1-ee91f3203706",
+                    "label": "Audible with stethoscope"
+                  },
+                  {
+                    "concept": "8da81516-fd4d-48b8-9426-8e6aefe2e7c1",
+                    "label": "Audible with ear"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Total Downes' Score",
+              "type": "obs",
+              "id": "totalDownesScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "cb954dad-451e-466a-9b4a-fa7d200f225f",
+                "step": "any"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Respiratory Support System",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Respiratory Modality",
+              "type": "obs",
+              "id": "respiratoryModality",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8737e0e4-7fc7-4807-a058-bf4386ab6eee",
+                "answers": [
+                  {
+                    "concept": "74d3c750-8066-4491-8b48-626fa3086a26",
+                    "label": "CPAP"
+                  },
+                  {
+                    "concept": "7944948c-0a13-474c-a5c6-8b302a90f686",
+                    "label": "Nasal Cannula"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "CPAP System",
+              "type": "obs",
+              "id": "cpapSystem",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "7c45a9ea-53d0-477e-b3b4-c221893dbf7e",
+                "answers": [
+                  {
+                    "concept": "929cdc13-6f0d-4c38-b42b-d90e6513275e",
+                    "label": "Diamedica (D)"
+                  },
+                  {
+                    "concept": "8770a17f-9f9f-4150-995b-bea934826c49",
+                    "label": "Home grown (HG)"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "respiratoryModality !== '74d3c750-8066-4491-8b48-626fa3086a26'"
+              }
+            },
+            {
+              "label": "Interface Type",
+              "type": "obs",
+              "id": "interfaceType",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "9a20c522-af9b-4ee1-a8a2-d587a2bc8085",
+                "answers": [
+                  {
+                    "concept": "c7c9a8f7-cd2f-4c6c-b482-935f3677d430",
+                    "label": "RAM"
+                  },
+                  {
+                    "concept": "bdd025f1-c787-4802-a4c2-cbd4fe0dfd5c",
+                    "label": "Hudson (H)"
+                  },
+                  {
+                    "concept": "7944948c-0a13-474c-a5c6-8b302a90f686",
+                    "label": "Nasal cannula (NC)"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "respiratoryModality !== '74d3c750-8066-4491-8b48-626fa3086a26'"
+              }
+            },
+            {
+              "label": "Air Flow",
+              "type": "obs",
+              "id": "airFlow",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "fc4fa9bd-9da5-4d62-a3a8-bb704a85180a",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "respiratoryModality !== '74d3c750-8066-4491-8b48-626fa3086a26'"
+              }
+            },
+            {
+              "label": "Percent",
+              "type": "obs",
+              "id": "percent",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "320d2ce9-2b71-42c6-a4a3-4029e7ed615b",
+                "min": "0",
+                "max": "100",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "respiratoryModality !== '74d3c750-8066-4491-8b48-626fa3086a26'"
+              }
+            },
+            {
+              "label": "Pressure",
+              "type": "obs",
+              "id": "pressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "744e82a4-79c8-4e04-9673-3e0959056e92",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "respiratoryModality !== '74d3c750-8066-4491-8b48-626fa3086a26'"
+              }
+            },
+            {
+              "label": "Water Level",
+              "type": "obs",
+              "id": "waterLevel",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "f2e5b317-d624-470b-8298-1890b2801cba",
+                "answers": [
+                  {
+                    "concept": "f2026b49-0790-49cb-937e-72632c2b3686",
+                    "label": "Adequate"
+                  },
+                  {
+                    "concept": "7da849bf-3fd3-441e-9715-7af376de4949",
+                    "label": "Refill Needed"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "respiratoryModality !== '74d3c750-8066-4491-8b48-626fa3086a26'"
+              }
+            },
+            {
+              "label": "Nasal Septum Findings",
+              "type": "obs",
+              "id": "nasalSeptumFindings",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "4a5a0ea0-5ab9-4e93-b7d9-23a706994481",
+                "answers": [
+                  {
+                    "concept": "a6d00512-9786-45d6-8886-be160acfd5d4",
+                    "label": "Intact (I)"
+                  },
+                  {
+                    "concept": "309ecfa6-f682-4867-8462-25f12344d2c9",
+                    "label": "Red (R)"
+                  },
+                  {
+                    "concept": "8e2e9801-921f-4600-a0f1-9df967d1142c",
+                    "label": "Breakdown (B)"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "respiratoryModality !== '74d3c750-8066-4491-8b48-626fa3086a26'"
+              }
+            },
+            {
+              "label": "Suction Performed",
+              "type": "obs",
+              "id": "suctionPerformed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e4a71855-21dd-4a0f-85f9-d29e002c872d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "respiratoryModality !== '74d3c750-8066-4491-8b48-626fa3086a26'"
+              }
+            },
+            {
+              "label": "Flow",
+              "type": "obs",
+              "id": "flow",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "42456201-59a1-42c3-a8e8-7509cb5495e1",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "respiratoryModality !== '7944948c-0a13-474c-a5c6-8b302a90f686'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Laboratory Results",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Blood Glucose",
+              "type": "obs",
+              "id": "bloodGlucose",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "b3a9efc6-412b-4ed9-9679-e7fc656bb731",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Hematocrit",
+              "type": "obs",
+              "id": "hematocrit",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1015AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "100",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Bilirubin",
+              "type": "obs",
+              "id": "bilirubin",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f13f46d6-a281-4c0b-bc4e-bca9a5c1d8e3",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Other Lab Tests (Specify)",
+              "type": "obs",
+              "id": "otherLabTestsSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e8d7c1eb-6432-48b7-8458-782d4a9827a7"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "GI, Abdomen, and Feeding Tracker",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "OG Tube Check",
+              "type": "obs",
+              "id": "ogTubeCheck",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "dcaae3e2-8fe8-4d47-9b1b-526eb8d09501",
+                "answers": [
+                  {
+                    "concept": "888065b6-4fe6-4584-b62c-7698bba2582d",
+                    "label": "Patent"
+                  },
+                  {
+                    "concept": "afceb83f-2543-43e5-b022-ba0f271deae1",
+                    "label": "Displaced"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Applicable"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Type of Milk",
+              "type": "obs",
+              "id": "typeOfMilk",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "a9ebd893-e7bc-4c51-a6b9-59ab4bc67ae4",
+                "answers": [
+                  {
+                    "concept": "1a7fa97a-711e-4400-bad1-a2bf376b0805",
+                    "label": "EBM"
+                  },
+                  {
+                    "concept": "1a1b61eb-7131-4b4c-81c2-f6ee62946967",
+                    "label": "Formula"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Amount Given",
+              "type": "obs",
+              "id": "amountGiven",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "45bd999e-2abf-44d0-a544-d83b4c31635c",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Abdominal Distention",
+              "type": "obs",
+              "id": "abdominalDistention",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "17dc402d-00d0-43c8-a042-a62ef0c73df1",
+                "answers": [
+                  {
+                    "concept": "163748AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Present"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Abdominal Girth",
+              "type": "obs",
+              "id": "abdominalGirth",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "586ad85f-6190-4f65-8de6-dd56b57b88ee",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Urine Output",
+              "type": "obs",
+              "id": "urineOutput",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2ea51496-938d-48c2-b5a7-44ebdf9ade3d",
+                "answers": [
+                  {
+                    "concept": "562ca076-8bc4-4d11-8961-10720395fc6c",
+                    "label": "Passed"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Stool",
+              "type": "obs",
+              "id": "stool",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "175d2e8d-4a8d-46ab-80ec-3299980c91e4",
+                "answers": [
+                  {
+                    "concept": "562ca076-8bc4-4d11-8961-10720395fc6c",
+                    "label": "Passed"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Fluid Management and IV Access",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Type of IV Fluid",
+              "type": "obs",
+              "id": "typeOfIvFluid",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "716e6220-3475-4f94-a3af-aed9885fd7b4"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Total Hourly Infusion",
+              "type": "obs",
+              "id": "totalHourlyInfusion",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c20fd536-e211-440c-99cb-5d00cfcb93cc",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "IV Site Check",
+              "type": "obs",
+              "id": "ivSiteCheck",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "33b2d439-3f46-4ef0-9164-5f9d3678264c",
+                "answers": [
+                  {
+                    "concept": "145ae1ea-24c7-430f-9fb3-6c439634f599",
+                    "label": "Normal / Intact"
+                  },
+                  {
+                    "concept": "26127232-328e-43cb-8d85-93613456f780",
+                    "label": "Painful (P)"
+                  },
+                  {
+                    "concept": "cbb5c0bf-a8cf-4f49-83c0-7f92e9049a94",
+                    "label": "Swelling (S)"
+                  },
+                  {
+                    "concept": "b6f8afb4-5b0c-45f9-9cfc-ea8d35b29624",
+                    "label": "Erythematous (E)"
+                  },
+                  {
+                    "concept": "5a2315f3-6c66-45d8-8a1b-29919927c42d",
+                    "label": "Skin Breakdown (B)"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
