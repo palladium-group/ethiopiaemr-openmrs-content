@@ -6,6 +6,8 @@
   "uuid": "8b9c0d1e-2f3a-4b4c-5d6e-7f8a9b0c1d2e",
   "retired": false,
   "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
   "pages": [
     {
       "label": "Visit Details",
@@ -206,10 +208,294 @@
               }
             }
           ]
+        },
+        {
+          "label": "Clinical Status and Symptom Progression",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Current Functional Capacity (NYHA Classification)",
+              "type": "obs",
+              "id": "currentFunctionalCapacityNyhaClassificat",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4abd56e8-46df-44e9-8320-bce1276bb529",
+                "answers": [
+                  {
+                    "concept": "ca721ea3-54fa-4b07-988a-23167dcf43fc",
+                    "label": "Class I: No limitation of physical activity."
+                  },
+                  {
+                    "concept": "976f9a71-024d-457d-b99e-aef583634845",
+                    "label": "Class II: Slight limitation of physical activity."
+                  },
+                  {
+                    "concept": "b745e721-bae6-4445-b75d-2710a1debe10",
+                    "label": "Class III: Marked limitation of physical activity."
+                  },
+                  {
+                    "concept": "24cc0e8a-7579-4cdc-bfe1-48ba4b2c0332",
+                    "label": "Class IV: Unable to carry out any physical activity without discomfort."
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "New or Worsening Symptoms since last visit (Select all that apply)",
+              "type": "obs",
+              "id": "newOrWorseningSymptomsSinceLastVisitSele",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "b79096db-76a5-4fd8-9869-9e99dad3c3f5",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None (Stable)"
+                  },
+                  {
+                    "concept": "6c2096b3-bc3d-4788-a9b2-10f71091f1c1",
+                    "label": "Exertional Dyspnea (Shortness of breath)"
+                  },
+                  {
+                    "concept": "5a5a924e-801c-4690-9e14-830f04dc9bda",
+                    "label": "Orthopnea / Paroxysmal Nocturnal Dyspnea (PND)"
+                  },
+                  {
+                    "concept": "987831ed-45fc-41b3-b739-6900797b4d70",
+                    "label": "Palpitations / Irregular Heartbeat (Suspected Atrial Fibrillation)"
+                  },
+                  {
+                    "concept": "130428AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Peripheral Edema (Swelling in feet/ankles)"
+                  },
+                  {
+                    "concept": "70b04504-e217-4ff4-8a0e-aac388e1d418",
+                    "label": "Recurrent Joint Pain or Fever (Suspected Acute Rheumatic Fever relapse)"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Secondary Prophylaxis Adherence",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Prescribed Prophylaxis Regimen",
+              "type": "obs",
+              "id": "prescribedProphylaxisRegimen",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a7eedbb3-9c86-4b55-a3f9-368ea2b636f5",
+                "answers": [
+                  {
+                    "concept": "63f9d0cc-bb7b-48fa-975a-bf7ad8ffd89d",
+                    "label": "Benzathine Penicillin G (BPG) Injection (Every 3 or 4 weeks)"
+                  },
+                  {
+                    "concept": "0a23beb4-67c5-45ea-b1f2-6306e3037840",
+                    "label": "Oral Penicillin V (Daily)"
+                  },
+                  {
+                    "concept": "9b11a375-2613-4747-849b-94f23c0e9031",
+                    "label": "Oral Erythromycin (For Penicillin-allergic patients)"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Adherence Tracking (Over the past 3 months)",
+              "type": "obs",
+              "id": "adherenceTrackingOverThePast3Months",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "58f2f59c-3627-4491-a0e2-f160d9d9338c",
+                "answers": [
+                  {
+                    "concept": "6f68d071-9922-4849-8c39-67175213f19c",
+                    "label": "Excellent: Received all scheduled doses on time (100%)"
+                  },
+                  {
+                    "concept": "6e01d490-0ad0-481f-bac1-e4b865502237",
+                    "label": "Partial: Missed 1 dose or delayed by more than a week"
+                  },
+                  {
+                    "concept": "32eed3e1-a392-4e23-bf43-691f4b6774bc",
+                    "label": "Poor: Missed multiple doses / Stopped taking medication"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Reason for Missed Doses (If applicable)",
+              "type": "obs",
+              "id": "reasonForMissedDosesIfApplicable",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "269a3549-c82d-483d-b971-60c75ba57eeb",
+                "answers": [
+                  {
+                    "concept": "7509d90e-7188-4100-bc0a-216ac44855fe",
+                    "label": "Stockout"
+                  },
+                  {
+                    "concept": "114403AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pain"
+                  },
+                  {
+                    "concept": "f568e872-cb03-4f24-8123-8b1624443b3f",
+                    "label": "Distance to facility"
+                  },
+                  {
+                    "concept": "3ad83a4d-e936-4746-98b1-2bc282f17e68",
+                    "label": "Forgot"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Echocardiographic and Diagnostic Milestones",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Has an Echo been performed since the last review?",
+              "type": "obs",
+              "id": "hasAnEchoBeenPerformedSinceTheLastReview",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "839bb84b-c4ca-4e34-bc53-818f71f066f4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No (Skip to next section)"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Valvular Lesions Present (Select all that apply and rate severity)",
+              "type": "obs",
+              "id": "valvularLesionsPresentSelectAllThatApply",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "e117378a-01d1-41de-b807-37d17e1bc9f7"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "hasAnEchoBeenPerformedSinceTheLastReview !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Complications Noted on Echo/ECG",
+              "type": "obs",
+              "id": "complicationsNotedOnEchoEcg",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "92f602c6-7519-4aa5-ba19-dead60db841e",
+                "answers": [
+                  {
+                    "concept": "609dbca3-fa34-461a-97a1-c62d76de62a0",
+                    "label": "Left Atrial (LA) Enlargement"
+                  },
+                  {
+                    "concept": "128125AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pulmonary Hypertension (PASP greater than 30 mmHg)"
+                  },
+                  {
+                    "concept": "938dde2b-9183-42bd-ad61-5b48649b46f5",
+                    "label": "Atrial Fibrillation confirmed on ECG"
+                  },
+                  {
+                    "concept": "157472AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Left Ventricular Dysfunction (EF less than 50%)"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "hasAnEchoBeenPerformedSinceTheLastReview !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Management and Plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Current Medical Management Adjustments",
+              "type": "obs",
+              "id": "currentMedicalManagementAdjustments",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "f079c8c0-c84a-4eec-9403-3f91dd5228c1",
+                "answers": [
+                  {
+                    "concept": "d0cec53d-92f2-43eb-b321-9f8ffed7110f",
+                    "label": "Diuretics adjusted (e.g., Furosemide)"
+                  },
+                  {
+                    "concept": "3cfa8323-5df6-4430-b8ae-c46c432edbb6",
+                    "label": "Anticoagulation initiated/adjusted (for Atrial Fibrillation or Mechanical Valve)"
+                  },
+                  {
+                    "concept": "66d49124-2634-4ed7-83ab-f7844ad6f3e2",
+                    "label": "Rate/Rhythm control initiated (e.g., Beta-blockers, Digoxin)"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Surgical Referral Status",
+              "type": "obs",
+              "id": "surgicalReferralStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "78b4fa73-78ed-453a-ab14-46144f181a52",
+                "answers": [
+                  {
+                    "concept": "f96088b0-326b-4a68-bb24-0ed6ae4b9143",
+                    "label": "Not required at this stage"
+                  },
+                  {
+                    "concept": "511523e9-e3b4-4962-a859-67b82c1d1586",
+                    "label": "Patient referred to Cardiothoracic Surgery for Valve Repair/Replacement"
+                  },
+                  {
+                    "concept": "fc734174-a9e0-4e21-8de0-57e1b1d4ee04",
+                    "label": "Post-operative follow-up (Valve surgery completed)"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Next Scheduled Follow-up Date",
+              "type": "obs",
+              "id": "nextScheduledFollowUpDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "1ac81d3a-1462-418f-8e2f-454b46e1b5e2"
+              },
+              "readonly": false
+            }
+          ]
         }
       ]
     }
-  ],
-  "processor": "EncounterFormProcessor",
-  "referencedForms": []
+  ]
 }

@@ -1,0 +1,1243 @@
+{
+  "name": "Psychological Intake and Initial Assessment",
+  "description": "Psychological Intake and Initial Assessment for Eka Hospital (OpenMRS O3).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "6864d18e-234e-40c0-a3ea-640f57e397c5",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Psychological Intake and Initial Assessment",
+      "sections": [
+        {
+          "label": "Patient Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Sending Source",
+              "type": "obs",
+              "id": "sendingSource",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b84c5ce9-35dc-43d9-ae60-7c181ecf2bda",
+                "answers": [
+                  {
+                    "concept": "57d9f29b-50b5-4c10-bfed-deb06be8aba5",
+                    "label": "In facility"
+                  },
+                  {
+                    "concept": "2a06d8c8-1bc6-4a2d-8d06-239cf1d2e2e9",
+                    "label": "Outside Facility"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "In Facility Type",
+              "type": "obs",
+              "id": "inFacilityType",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "841a92d3-5ed8-4b9a-bafb-d36e1ff9b0f3",
+                "answers": [
+                  {
+                    "concept": "ce243029-c835-4836-9d26-a07c39a7845b",
+                    "label": "In patient"
+                  },
+                  {
+                    "concept": "8e777f8f-120d-4f5a-9552-d17ac2b957ae",
+                    "label": "Outpatient"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "sendingSource !== '57d9f29b-50b5-4c10-bfed-deb06be8aba5'"
+              }
+            },
+            {
+              "label": "Outside Facility Type",
+              "type": "obs",
+              "id": "outsideFacilityType",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "da88be9b-a0fa-45d7-bb79-e94cf446b77b",
+                "answers": [
+                  {
+                    "concept": "ce923c49-abf5-4d97-bad2-34ee4158c75c",
+                    "label": "Community/Self"
+                  },
+                  {
+                    "concept": "2a935d2a-a61f-4dae-aec8-3b8b8a0d3da1",
+                    "label": "Other facility"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "sendingSource !== '2a06d8c8-1bc6-4a2d-8d06-239cf1d2e2e9'"
+              }
+            },
+            {
+              "label": "Facility",
+              "type": "obs",
+              "id": "facility",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "7f9ae92b-ecd4-4590-918b-526fb4e79d4b"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "outsideFacilityType !== '2a935d2a-a61f-4dae-aec8-3b8b8a0d3da1'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Presenting Complaints / Symptoms",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Source of Information",
+              "type": "obs",
+              "id": "sourceOfInformation",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "162568AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "978AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Self"
+                  },
+                  {
+                    "concept": "bffe3da4-030e-4426-84e8-f3b7d0ca69b6",
+                    "label": "Observation"
+                  },
+                  {
+                    "concept": "f873b17c-d331-49fe-b713-157c73abacd2",
+                    "label": "Collateral"
+                  },
+                  {
+                    "concept": "8fefcd53-4299-4e66-a070-0ae6773b9d74",
+                    "label": "Records"
+                  },
+                  {
+                    "concept": "a491532c-d262-46b2-ad93-45f215dd0633",
+                    "label": "Tests"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Reliability",
+              "type": "obs",
+              "id": "reliability",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "106d931e-c179-4f03-a41e-5e399719d0b9",
+                "answers": [
+                  {
+                    "concept": "9d92b3ae-f9a8-44a5-bdc6-e3a6aff7669d",
+                    "label": "Reliable"
+                  },
+                  {
+                    "concept": "0497ba5a-8463-4b23-b5aa-120903ad4e11",
+                    "label": "Partially Reliable"
+                  },
+                  {
+                    "concept": "0bdd6db9-5769-4ddb-a716-070dac4f263a",
+                    "label": "Unreliable"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Presenting Symptoms",
+              "type": "obs",
+              "id": "presentingSymptoms",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "11a8ab8b-3617-493e-acfb-00cd9b3a9356"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Onset and Duration",
+              "type": "obs",
+              "id": "onsetAndDuration",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b3aa0877-b93a-4c08-9adf-2801cf4307b5",
+                "answers": [
+                  {
+                    "concept": "7bf57815-87b9-4369-852f-b9e991c716ff",
+                    "label": "Acute (hours–days)"
+                  },
+                  {
+                    "concept": "b9e63df4-dbc6-45b7-9ea3-b0013f437d3b",
+                    "label": "Sub acute (days–weeks)"
+                  },
+                  {
+                    "concept": "2ce41dc2-8425-4e57-9d03-e5b0dd244651",
+                    "label": "Chronic (months–years)"
+                  },
+                  {
+                    "concept": "8fa7e472-8ee5-4b64-9b4a-50ea8b7ef00b",
+                    "label": "Lifelong/since childhood"
+                  },
+                  {
+                    "concept": "5d5e7d38-4bc0-45a9-8202-040339147f4a",
+                    "label": "Acute on Chronic (an acute exacerbation on a chronic setup)"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Course and Progression",
+              "type": "obs",
+              "id": "courseAndProgression",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f42d6564-2004-402a-abc5-15d87c250902",
+                "answers": [
+                  {
+                    "concept": "163053AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Improving"
+                  },
+                  {
+                    "concept": "163055AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Worsening"
+                  },
+                  {
+                    "concept": "43606a0e-3a9c-4888-8941-cf555f825b76",
+                    "label": "Fluctuating"
+                  },
+                  {
+                    "concept": "06398754-8865-4004-805e-926636d6d6c2",
+                    "label": "Stable"
+                  },
+                  {
+                    "concept": "ed20c24d-91fb-45da-9d24-12a25d54b594",
+                    "label": "Episodic"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Severity",
+              "type": "obs",
+              "id": "severity",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "59b6d30a-6bc5-47ca-8eaf-95fa664e0d2c",
+                "answers": [
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Risk Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Suicidal ideation",
+              "type": "obs",
+              "id": "suicidalIdeation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8d1ab0e1-61b3-40b3-b687-da81c3cc8b46",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Suicidal ideation Details",
+              "type": "obs",
+              "id": "suicidalIdeationDetails",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6fc8e4f9-2d7e-44ce-9e0b-24abba0be7b1"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Suicide plan",
+              "type": "obs",
+              "id": "suicidePlan",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "70d6044c-d082-43ef-a173-665e2b9a34f1",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Suicide plan Details",
+              "type": "obs",
+              "id": "suicidePlanDetails",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3f439a71-27d1-4d8f-88dd-0b194997d5a2"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Past attempts",
+              "type": "obs",
+              "id": "pastAttempts",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b7f192cf-4f4a-4330-a6d7-ec204489b512",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Past attempts Details",
+              "type": "obs",
+              "id": "pastAttemptsDetails",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a4b1c3a3-8e1d-45e8-9fc5-cdc0c0b52eb1"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Harm to others",
+              "type": "obs",
+              "id": "harmToOthers",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b57a4231-262d-4410-899b-61f9226b5863",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Harm to others Details",
+              "type": "obs",
+              "id": "harmToOthersDetails",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a8f67f5a-1497-49ec-8b4f-45456a3ada3a"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Risk Level",
+              "type": "obs",
+              "id": "riskLevel",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1f63337a-4696-460c-b874-7204f8a1d905",
+                "answers": [
+                  {
+                    "concept": "3a140057-d512-407d-99cf-17ab9e65e228",
+                    "label": "Low"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "02b03370-c4da-4591-9910-b55a9e37d808",
+                    "label": "High"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Protective Factors",
+              "type": "obs",
+              "id": "protectiveFactors",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "ca6bfa32-93a1-4966-94c5-6c989ef362a0",
+                "answers": [
+                  {
+                    "concept": "b43d5781-2d28-4026-b30b-46e6a9a4aa62",
+                    "label": "Strong family support"
+                  },
+                  {
+                    "concept": "6aebbbaf-462c-4c41-ab59-8bc423274775",
+                    "label": "Supportive friends / social network"
+                  },
+                  {
+                    "concept": "7c93eeb2-c3f8-4a74-8627-e771091f1e18",
+                    "label": "Religious / spiritual beliefs"
+                  },
+                  {
+                    "concept": "25639fca-22c7-4821-bfc0-f9dbcb4d05bc",
+                    "label": "Engagement in treatment"
+                  },
+                  {
+                    "concept": "36909e36-5141-4744-a07b-5fdcd5878b27",
+                    "label": "Insight into illness"
+                  },
+                  {
+                    "concept": "041ef669-a0ea-40b9-a375-a44bf67bff12",
+                    "label": "Motivation for recovery"
+                  },
+                  {
+                    "concept": "32afe028-41dc-4d2a-a6a7-a9ecb9109667",
+                    "label": "Employment / school involvement"
+                  },
+                  {
+                    "concept": "5880ba16-de9c-4a83-8f01-909bf041b8e8",
+                    "label": "Responsibility toward family (e.g., children)"
+                  },
+                  {
+                    "concept": "81fb9328-f6ac-45a3-b09b-7ec6aad29ced",
+                    "label": "Stable housing"
+                  },
+                  {
+                    "concept": "290b01dd-fe5d-48f4-be43-893a6fc06019",
+                    "label": "Good coping skills"
+                  },
+                  {
+                    "concept": "fc7d5526-2adf-46b7-881b-b5acd5a4104a",
+                    "label": "Positive future plans"
+                  },
+                  {
+                    "concept": "7f76d4a6-7ae1-43d1-ace8-d2c90006fd16",
+                    "label": "Access to healthcare"
+                  },
+                  {
+                    "concept": "2e97743c-a59b-45d3-b2d4-418dbb3c9e6a",
+                    "label": "No access to means"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Protective Factors - Other",
+              "type": "obs",
+              "id": "protectiveFactorsOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "609ddaa1-871e-4f99-ab61-2dae6476d922"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "protectiveFactors !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Functional Impairment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Functional Impairment",
+              "type": "obs",
+              "id": "functionalImpairment",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "8fc5a39a-343f-4079-a66c-339da3ce03ee",
+                "answers": [
+                  {
+                    "concept": "78a4e276-ddc8-421e-8009-6b63d31f725d",
+                    "label": "Self-care (ADLs)"
+                  },
+                  {
+                    "concept": "0549d740-18b5-4678-829f-6a9a1a06a6f8",
+                    "label": "Occupational functioning"
+                  },
+                  {
+                    "concept": "73edf75d-240e-48c4-93d3-fadd0b96eca0",
+                    "label": "Social functioning"
+                  },
+                  {
+                    "concept": "455f723e-b9ac-4df1-8fec-c9d0b4eb524b",
+                    "label": "Family functioning"
+                  },
+                  {
+                    "concept": "047b7b4b-bd8f-45df-a6c3-d2bb26d86104",
+                    "label": "Financial functioning"
+                  },
+                  {
+                    "concept": "38b19c5f-fcda-42c0-8f4a-f24dc99e0686",
+                    "label": "Housing situation"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Mental Status Examination (MSE)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Appearance",
+              "type": "obs",
+              "id": "appearance",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "193c945c-d5cc-4399-bd22-7571f6aeae9c"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Behavior",
+              "type": "obs",
+              "id": "behavior",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cd093525-1f35-4e91-8c15-204c1d932175"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Speech",
+              "type": "obs",
+              "id": "speech",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6bceeae9-93a8-4326-ab23-9863ab938428"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Mood",
+              "type": "obs",
+              "id": "mood",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4cf4f073-bd22-45bd-9390-26680370811c"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Affect",
+              "type": "obs",
+              "id": "affect",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0e9cb32a-a012-49b5-b31e-11a87262c8f5"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Thought Process",
+              "type": "obs",
+              "id": "thoughtProcess",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0f09da40-837b-4797-b405-38cbc44a19d2"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Thought Content",
+              "type": "obs",
+              "id": "thoughtContent",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e023e64d-c632-452e-9596-8bdd06c13e9c"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Perception",
+              "type": "obs",
+              "id": "perception",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "32b3a08f-d3fc-4fbd-9e79-24436e44a34b"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Cognition",
+              "type": "obs",
+              "id": "cognition",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "67a6f635-a3a5-4d81-9661-c9628642f2ff"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Insight",
+              "type": "obs",
+              "id": "insight",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3178949e-f1df-4b7c-aec8-6fd977093001",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "46969e18-a3c4-4fcc-ba87-907917ac0986",
+                    "label": "Partial"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Judgment",
+              "type": "obs",
+              "id": "judgment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "eb9bc1ad-f503-40c6-8710-66a066c8efc8",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "158ee43a-f72c-4a87-a39b-6d29a426d8a8",
+                    "label": "Impaired"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Psychiatric and Medical History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Past Psychiatric History",
+              "type": "obs",
+              "id": "pastPsychiatricHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "15e50795-bb71-4199-8a91-eb9d1ca37233"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Previous Treatment",
+              "type": "obs",
+              "id": "previousTreatment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1a1a577a-3f23-4988-8e07-6a90ca0bb80a"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Medical History",
+              "type": "obs",
+              "id": "medicalHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0948f769-a5c7-4fba-a3e6-9676dcbf2f48"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Substance Use and Behavioral Addictions",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Type",
+              "type": "obs",
+              "id": "type",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "7ea3d5d4-e4b9-4807-a7e6-e9a5c17706d6",
+                "answers": [
+                  {
+                    "concept": "f9744e3e-b394-4f56-85b2-08be1447a8b9",
+                    "label": "Alcohol"
+                  },
+                  {
+                    "concept": "cd15152c-33c8-4aa9-9b25-10e284ad785c",
+                    "label": "Khat"
+                  },
+                  {
+                    "concept": "380069fd-def8-4bcf-93a8-b3a745088442",
+                    "label": "Tobacco"
+                  },
+                  {
+                    "concept": "56de197f-3fc1-4815-8ea8-bebfde220929",
+                    "label": "Marijuana"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Pattern",
+              "type": "obs",
+              "id": "pattern",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d189f98e-2cde-419e-ac34-4fd7b1e35ffe",
+                "answers": [
+                  {
+                    "concept": "8b2783b8-6206-463c-9f58-b4c39f42cd5d",
+                    "label": "Daily"
+                  },
+                  {
+                    "concept": "1099AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Weekly"
+                  },
+                  {
+                    "concept": "ce04e913-0df8-47fa-b90a-314c67ca5d36",
+                    "label": "Occasional"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Duration",
+              "type": "obs",
+              "id": "duration",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1732AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "9a5be520-ff89-42f0-bb45-1eebe6accfe0",
+                    "label": "<6 months"
+                  },
+                  {
+                    "concept": "cca40c45-a128-4b2b-a3d7-3bd648baa3e7",
+                    "label": "1–5 years"
+                  },
+                  {
+                    "concept": "80a4d303-a27b-47da-86b7-534b633b3b95",
+                    "label": ">5 years"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Impact",
+              "type": "obs",
+              "id": "impact",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "b92a2c85-809e-4e77-a35c-2090c5dc7dda",
+                "answers": [
+                  {
+                    "concept": "29692478-ece5-463e-9424-16c0318a5985",
+                    "label": "Health"
+                  },
+                  {
+                    "concept": "b7e66596-ba11-4fe2-bdc5-a3775c6cf4fa",
+                    "label": "Family"
+                  },
+                  {
+                    "concept": "7f643c27-80e0-4bc8-8473-9cd8fd08d9f0",
+                    "label": "Work"
+                  },
+                  {
+                    "concept": "f7708de5-a510-4b55-8126-7d87c1e85d46",
+                    "label": "Legal"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Psychosocial Factors",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Psychosocial Factors",
+              "type": "obs",
+              "id": "psychosocialFactors",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "f8c9551f-7d77-4579-b1ec-329d8f1906b7",
+                "answers": [
+                  {
+                    "concept": "afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4",
+                    "label": "Trauma"
+                  },
+                  {
+                    "concept": "140537AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Family conflict"
+                  },
+                  {
+                    "concept": "c898365e-4b4e-4e55-94f6-bc1fe0176432",
+                    "label": "financial problems"
+                  },
+                  {
+                    "concept": "ef11f3a3-bc84-45c3-8f80-be529aa6c6e2",
+                    "label": "Legal issues"
+                  },
+                  {
+                    "concept": "697c7806-d269-4ed5-b669-97fecbabdd0c",
+                    "label": "Unemployment"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Interventions Provided",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Interventions Provided",
+              "type": "obs",
+              "id": "interventionsProvided",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "b4bdb9ad-6dab-484f-b68d-69a48114e9cd"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Diagnosis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "353f678f-fd7b-4d33-a096-e87f057cea31"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Differential Diagnosis",
+              "type": "obs",
+              "id": "differentialDiagnosis",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "d7403091-4782-4ceb-a312-dba9e0e5e1a0"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Diagnosis Notes",
+              "type": "obs",
+              "id": "diagnosisNotes",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5809a2b3-3ca3-b23e-8567-9ef012345678"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Treatment Modality",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Treatment Modality",
+              "type": "obs",
+              "id": "treatmentModality",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "7fa392be-d408-4193-82c5-2a57f2d5a3bc",
+                "answers": [
+                  {
+                    "concept": "d9d47adf-11db-4614-9e8a-26a8d98ed555",
+                    "label": "Individual Therapy"
+                  },
+                  {
+                    "concept": "01f37406-40a8-4a9e-9901-03649fa361eb",
+                    "label": "Group Therapy"
+                  },
+                  {
+                    "concept": "72380894-8412-4b0e-bef0-18de883fd32d",
+                    "label": "Family Therapy"
+                  },
+                  {
+                    "concept": "e5b51400-7cab-446b-8161-37bed4c82bcb",
+                    "label": "Substance Use Counseling"
+                  },
+                  {
+                    "concept": "163313AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Psychoeducation"
+                  },
+                  {
+                    "concept": "6a024780-469e-4397-a69a-d823b83f8af3",
+                    "label": "Occupational Therapy"
+                  },
+                  {
+                    "concept": "fbe48307-73af-4a2f-a20e-afeafa428763",
+                    "label": "Life Skills Training"
+                  },
+                  {
+                    "concept": "5d9e7003-3b3d-434b-88a4-dd4487411675",
+                    "label": "Art therapy"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Treatment Modality - Other",
+              "type": "obs",
+              "id": "treatmentModalityOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3a12e9c3-f578-4a69-aa77-5c163967e621"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "treatmentModality !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Treatment Intervention Plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Planned Interventions",
+              "type": "obs",
+              "id": "plannedInterventions",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4b3d4bbe-62f4-431b-9f5a-e395a6134767"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Therapeutic Approach",
+              "type": "obs",
+              "id": "therapeuticApproach",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "180879dc-ece9-40ea-b08d-5146812ef5c7",
+                "answers": [
+                  {
+                    "concept": "4ced48d0-5f3c-4511-9e72-65e86808fc9c",
+                    "label": "CBT"
+                  },
+                  {
+                    "concept": "4c40ec0d-2611-434e-85e6-d3c1baacb746",
+                    "label": "DBT"
+                  },
+                  {
+                    "concept": "0dfbbf5c-02cb-48cb-ba3b-780210a0dc42",
+                    "label": "Motivational Interviewing"
+                  },
+                  {
+                    "concept": "f0115012-ad2b-41b7-b273-3551de91f315",
+                    "label": "Relapse Prevention"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Therapeutic Approach - Other",
+              "type": "obs",
+              "id": "therapeuticApproachOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b89183ac-66b8-4cb5-b8e7-b710e49dfae8"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "therapeuticApproach !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Frequency",
+              "type": "obs",
+              "id": "frequency",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "6e167626-7ec0-4030-9e3b-94d3ec23a4e1",
+                "answers": [
+                  {
+                    "concept": "8b2783b8-6206-463c-9f58-b4c39f42cd5d",
+                    "label": "Daily"
+                  },
+                  {
+                    "concept": "11c8283b-ed42-4635-90d4-8a4ae3ee3f37",
+                    "label": "Every otherday"
+                  },
+                  {
+                    "concept": "162245AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Every Two days"
+                  },
+                  {
+                    "concept": "72e6e20f-3451-48cd-b31e-9407afafd03e",
+                    "label": "Every 3 days"
+                  },
+                  {
+                    "concept": "202e5b1c-886c-4a81-846f-d306847bf385",
+                    "label": "Every 4 days"
+                  },
+                  {
+                    "concept": "4f9ad1e9-9853-4c60-90e8-d03f3669a340",
+                    "label": "Every 5 days"
+                  },
+                  {
+                    "concept": "051720eb-0034-430d-b619-e93f1df90901",
+                    "label": "Once per week"
+                  },
+                  {
+                    "concept": "d8a35aab-ed7c-40ab-8dcc-073d6c50dd04",
+                    "label": "Twice weekly"
+                  },
+                  {
+                    "concept": "a47181d9-5eb3-4750-b3cd-8dfc286bf26b",
+                    "label": "Every 2 weeks"
+                  },
+                  {
+                    "concept": "e602b903-01a1-4bb3-872a-e9e2ad0534db",
+                    "label": "Every Other week"
+                  },
+                  {
+                    "concept": "71e2a5b6-4ea5-4a5f-9b01-353aa172dfb4",
+                    "label": "Once per 3 week"
+                  },
+                  {
+                    "concept": "c1266278-54d4-4fef-a2fc-a1e1b695ba68",
+                    "label": "Once Per month"
+                  },
+                  {
+                    "concept": "e9a931ba-5910-439e-8760-d4ef368c991d",
+                    "label": "Every other Month"
+                  },
+                  {
+                    "concept": "3e1e601c-b68a-477e-aef5-27555f529bdc",
+                    "label": "Every 6 week"
+                  },
+                  {
+                    "concept": "b9bb963c-6c5e-4fc4-afed-cabef10c7461",
+                    "label": "Once Per 2 month"
+                  },
+                  {
+                    "concept": "43c9e295-da49-4d58-80ee-9a9f4ddb3eae",
+                    "label": "Once Per 3 month"
+                  },
+                  {
+                    "concept": "d65d37d5-b60a-4d23-8703-d8693dbd6831",
+                    "label": "Once Per 4 month"
+                  },
+                  {
+                    "concept": "3ebd5c95-dfbb-4c7c-b0ce-a3caa9de801f",
+                    "label": "Once Per 5 month"
+                  },
+                  {
+                    "concept": "e915db4f-bcb3-42b6-bfae-75b593da9fc9",
+                    "label": "Once Per 6 month"
+                  },
+                  {
+                    "concept": "726788a9-eec8-403e-a771-3630fd09318e",
+                    "label": "Once a year"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Frequency - Other",
+              "type": "obs",
+              "id": "frequencyOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e338e305-37c6-4572-bd2c-276e599a8d36"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "frequency !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Treatment Goals",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Short-Term Goals",
+              "type": "obs",
+              "id": "shortTermGoals",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "fffa1a53-8db2-416e-9c2d-a5f39a9a447b"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Long-Term Goals",
+              "type": "obs",
+              "id": "longTermGoals",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "217eb64b-324a-4411-83a7-3a667c37f3df"
+              },
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

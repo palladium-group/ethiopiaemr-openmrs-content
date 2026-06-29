@@ -1,0 +1,789 @@
+{
+  "name": "Psych Vocational Therapy",
+  "description": "Psych Vocational Therapy for Eka Hospital (OpenMRS O3).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "227c3a95-341a-44ab-b06e-6cadb3a9f5f6",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Psych Vocational Therapy",
+      "sections": [
+        {
+          "label": "Patient Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Education Level",
+              "type": "obs",
+              "id": "educationLevel",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "569c60da-6284-4908-ae07-07b0b49eddf7",
+                "answers": [
+                  {
+                    "concept": "160294AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No formal education"
+                  },
+                  {
+                    "concept": "71be8c02-af00-40fb-8c09-f2ed52382763",
+                    "label": "Primary Education"
+                  },
+                  {
+                    "concept": "594ca3f5-8918-4c06-954a-17a81d379d3c",
+                    "label": "Secondary Education"
+                  },
+                  {
+                    "concept": "b614b6bf-0b2e-46be-b986-46dcd5f407bf",
+                    "label": "Diploma"
+                  },
+                  {
+                    "concept": "e38571e6-de99-4c7d-844e-711c3b500562",
+                    "label": "University/College"
+                  },
+                  {
+                    "concept": "099f5cf0-9c82-4f75-91f5-ea92012e0af9",
+                    "label": "Masters"
+                  },
+                  {
+                    "concept": "303e1071-ac36-45b0-a8be-dc068678616e",
+                    "label": "PhD"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Occupation",
+              "type": "obs",
+              "id": "occupation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b37c797c-8b51-4a61-9ab7-cf40792d0bdf"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Session Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Session Type",
+              "type": "obs",
+              "id": "sessionType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b1a6fe4f-37b3-43b8-917e-946022ad5f51",
+                "answers": [
+                  {
+                    "concept": "5be887dd-97c5-47ef-9919-f0f212b1fdf4",
+                    "label": "Group"
+                  },
+                  {
+                    "concept": "a0190e22-e0dd-454e-a05e-27fe7627819a",
+                    "label": "Individual"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "9637081c-6071-8901-2345-678901abce00"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Duration (in minutes)",
+              "type": "obs",
+              "id": "durationInMinutes",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "482e588d-0da9-4ac5-845b-a3614a0ba6c9",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Therapist",
+              "type": "obs",
+              "id": "therapist",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2745ef2b-2944-4f8d-8825-ba362f25c2c8"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Activity Type",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Activity Type",
+              "type": "obs",
+              "id": "activityType",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "356d0c65-d245-4637-b4c8-b6b2117dfc01",
+                "answers": [
+                  {
+                    "concept": "b721a37b-79b6-4a15-a1d4-f5a3cb21f978",
+                    "label": "Sewing"
+                  },
+                  {
+                    "concept": "1f9b961b-b682-4d71-99c9-32271ad3903d",
+                    "label": "Weaving"
+                  },
+                  {
+                    "concept": "4bd4c788-58e0-463b-83d1-583dcac32b21",
+                    "label": "Handicraft"
+                  },
+                  {
+                    "concept": "31088b52-7a48-4b20-878c-54f9a2e97b80",
+                    "label": "Woodwork"
+                  },
+                  {
+                    "concept": "bb148095-1fef-46f1-a1e2-299c6d5e6fc5",
+                    "label": "ADL Training"
+                  },
+                  {
+                    "concept": "160130AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Vocational Training"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!(activityType && activityType.includes('5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+              }
+            },
+            {
+              "label": "Specific Task",
+              "type": "obs",
+              "id": "specificTask",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "25644755-9182-473f-8100-3fa686495eef"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Participation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Attendance",
+              "type": "obs",
+              "id": "attendance",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f4e8cad1-d99f-4003-8843-dda9289f64f8",
+                "answers": [
+                  {
+                    "concept": "490dca17-a568-49e8-9da4-b5982d36a3ce",
+                    "label": "Full"
+                  },
+                  {
+                    "concept": "46969e18-a3c4-4fcc-ba87-907917ac0986",
+                    "label": "Partial"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Participation",
+              "type": "obs",
+              "id": "participation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1a79e80a-01b9-448f-888d-fb27ea03e446",
+                "answers": [
+                  {
+                    "concept": "d8136dfa-cfb1-46a6-95e8-771fc1e83dc4",
+                    "label": "Active"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "7fa2d574-5f17-4595-9e8a-8e75dcfdef2b",
+                    "label": "Minimal"
+                  },
+                  {
+                    "concept": "8b67c373-0c20-44df-ae66-8d0180172f1c",
+                    "label": "Refused"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Engagement",
+              "type": "obs",
+              "id": "engagement",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4e354c77-5851-4b7c-bd24-6b06b6791af4",
+                "answers": [
+                  {
+                    "concept": "a7fdde71-d503-428f-abd2-7d7e3631790d",
+                    "label": "Focused"
+                  },
+                  {
+                    "concept": "888c1cad-c890-47a8-90ef-e17827184801",
+                    "label": "Distracted"
+                  },
+                  {
+                    "concept": "657dd4f6-45b7-41cb-9c08-fa5f90727c3b",
+                    "label": "Requires prompting"
+                  },
+                  {
+                    "concept": "d3b1e013-27ab-4b8c-a4f4-be2e7650ac77",
+                    "label": "Withdrawn"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Functional Performance",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Task Completion",
+              "type": "obs",
+              "id": "taskCompletion",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "41c4553b-8ea1-4e96-a3ba-cf47157b1dd8",
+                "answers": [
+                  {
+                    "concept": "e9e9bbbc-202a-4ca1-97f4-98e47417f55e",
+                    "label": "Independent"
+                  },
+                  {
+                    "concept": "03fc9c50-dfba-43e2-98ab-2e0f3a573321",
+                    "label": "Assisted"
+                  },
+                  {
+                    "concept": "46969e18-a3c4-4fcc-ba87-907917ac0986",
+                    "label": "Partial"
+                  },
+                  {
+                    "concept": "71d682c5-f656-48a1-bbbf-fbbd44bd18a7",
+                    "label": "Unable"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Motor Skills",
+              "type": "obs",
+              "id": "motorSkills",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f823fb62-2e38-425e-8e7a-5515db0dfa57",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fair"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  },
+                  {
+                    "concept": "112200AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tremor"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Cognitive Skills",
+              "type": "obs",
+              "id": "cognitiveSkills",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c7b2bccc-6f8a-4277-89c6-712035115a46",
+                "answers": [
+                  {
+                    "concept": "39e0a5bf-fe52-4b0a-9a8b-9ceeb35ae410",
+                    "label": "Follows instructions"
+                  },
+                  {
+                    "concept": "2297f560-783c-402b-96c4-998a7c395116",
+                    "label": "Needs repetition"
+                  },
+                  {
+                    "concept": "622d9d77-28d9-4761-9b3c-31ec8b9b2a2c",
+                    "label": "Difficulty"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Attention",
+              "type": "obs",
+              "id": "attention",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d054c10e-c85a-4d26-86fa-d660d19f9424",
+                "answers": [
+                  {
+                    "concept": "c41b15a2-dc67-4a06-a536-1e9ddefce795",
+                    "label": "Sustained"
+                  },
+                  {
+                    "concept": "0cc91536-7a27-445a-a88c-125509b71514",
+                    "label": "Intermittent"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Behavior and Emotion",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Behavior",
+              "type": "obs",
+              "id": "behavior",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "8d83b799-62f0-4679-acfa-e8ff80397052",
+                "answers": [
+                  {
+                    "concept": "35ae1662-c801-40e4-a67a-1b623aa79d0b",
+                    "label": "Cooperative"
+                  },
+                  {
+                    "concept": "3c6e893a-9f61-456f-8fa5-57dc6370c274",
+                    "label": "Motivated"
+                  },
+                  {
+                    "concept": "cb3e06aa-9fc1-4183-89a1-b977f70607bb",
+                    "label": "Frustrated"
+                  },
+                  {
+                    "concept": "983a7c88-7107-4c2b-b0f7-887446419152",
+                    "label": "Impulsive"
+                  },
+                  {
+                    "concept": "b79763c4-d518-43ae-8472-a9415aa6b64a",
+                    "label": "Calm"
+                  },
+                  {
+                    "concept": "24555540-c82c-4664-a76b-5b7157739afd",
+                    "label": "Social"
+                  },
+                  {
+                    "concept": "43fa3695-72fc-415d-9506-6fd5154e0889",
+                    "label": "Isolated"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Emotion",
+              "type": "obs",
+              "id": "emotion",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "59b25614-9167-4b88-bd2c-2739b474879b",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "beff6fc5-9272-46d5-a342-636b42e484b9",
+                    "label": "Neutral"
+                  },
+                  {
+                    "concept": "4da36be2-b458-4020-b14f-fcf711364157",
+                    "label": "Anxious"
+                  },
+                  {
+                    "concept": "053b4d95-c66b-4772-a094-8b43bc9d4123",
+                    "label": "Irritable"
+                  },
+                  {
+                    "concept": "2fb79112-6fd1-4b24-a953-1a3e1c23a5ed",
+                    "label": "Low mood"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Goals and Progress",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Goals",
+              "type": "obs",
+              "id": "goals",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "f3a4dba5-f8d3-48cc-afb5-21555f8e6989",
+                "answers": [
+                  {
+                    "concept": "7cefc04e-d7f7-40b3-b624-589dec7e4c60",
+                    "label": "Fine motor"
+                  },
+                  {
+                    "concept": "f9c6274e-ec0a-4b94-89a3-17b2c94b0d9e",
+                    "label": "Coordination"
+                  },
+                  {
+                    "concept": "4fe4c9a9-9094-43b8-ad9e-b5e26056be97",
+                    "label": "Concentration"
+                  },
+                  {
+                    "concept": "952b636c-0975-4f59-962b-b7c99d2b9551",
+                    "label": "Persistence"
+                  },
+                  {
+                    "concept": "bc45066b-934d-4646-9301-372adf62e964",
+                    "label": "Creativity"
+                  },
+                  {
+                    "concept": "dc14ef72-d26f-42bc-89dc-49aa242009be",
+                    "label": "ADL"
+                  },
+                  {
+                    "concept": "991f768f-b22f-467a-bb76-def76c694ac5",
+                    "label": "Vocational"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Progress",
+              "type": "obs",
+              "id": "progress",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "160116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "164493AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Some"
+                  },
+                  {
+                    "concept": "f852e236-e96d-4e47-bdf0-9c98da633e36",
+                    "label": "No change"
+                  },
+                  {
+                    "concept": "49d2d6d9-92f0-4e35-bb40-3baf7f4c69ed",
+                    "label": "Regression"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Independence",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Independence",
+              "type": "obs",
+              "id": "independence",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "dbe3b9cb-edfd-452b-a211-b23533ea11d4",
+                "answers": [
+                  {
+                    "concept": "e9e9bbbc-202a-4ca1-97f4-98e47417f55e",
+                    "label": "Independent"
+                  },
+                  {
+                    "concept": "eca5eee0-b3a3-490e-9a63-223d357396fc",
+                    "label": "Minimal assist"
+                  },
+                  {
+                    "concept": "1dd737e9-2648-4902-a6f5-197d80f98e4b",
+                    "label": "Moderate assist"
+                  },
+                  {
+                    "concept": "dc3e1fc9-2c6d-45e4-a9ed-85ca4adb912f",
+                    "label": "Full assist"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Intervention",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Intervention",
+              "type": "obs",
+              "id": "intervention",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "6e25a687-c2fc-41d0-a2b2-2a62c54c7c98",
+                "answers": [
+                  {
+                    "concept": "393a20e6-e8a6-48fc-b59b-ecc364e5a07b",
+                    "label": "Demonstration"
+                  },
+                  {
+                    "concept": "2f13f74a-843a-486d-953a-1bbc22002940",
+                    "label": "Verbal cueing"
+                  },
+                  {
+                    "concept": "af652d0e-f93d-4d7d-98ea-68663ead27cf",
+                    "label": "Physical assistance"
+                  },
+                  {
+                    "concept": "315e17a4-e381-468b-b43d-0d97a288af00",
+                    "label": "Reinforcement"
+                  },
+                  {
+                    "concept": "445985d8-6217-4797-9be3-aae0d412288a",
+                    "label": "Problem-solving"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Safety",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Safety",
+              "type": "obs",
+              "id": "safety",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "69029bb4-ac91-4f25-ae12-756bf76b2ec1",
+                "answers": [
+                  {
+                    "concept": "44c42c2f-efad-45ee-9d8b-043da50e83ac",
+                    "label": "No concern"
+                  },
+                  {
+                    "concept": "ad499879-dbe7-4b74-a0d0-779a99a3c2e1",
+                    "label": "Needs supervision"
+                  },
+                  {
+                    "concept": "ef6b89c1-7134-45ed-9b23-3d7d1ea2f21f",
+                    "label": "Injury risk"
+                  },
+                  {
+                    "concept": "7b8c3c25-546a-418d-be16-5c1bc512915b",
+                    "label": "Behavioral risk"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Action Taken",
+              "type": "obs",
+              "id": "actionTaken",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "164378AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6e9fcf93-9ed6-4c83-8f71-86e750a32472",
+                "answers": [
+                  {
+                    "concept": "159835AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Continue"
+                  },
+                  {
+                    "concept": "22d31fe6-2c74-4a1c-abf5-ae23e19391ac",
+                    "label": "Increase complexity"
+                  },
+                  {
+                    "concept": "65bd61a6-c59e-4913-acdc-e5de1091d3bd",
+                    "label": "More assistance"
+                  },
+                  {
+                    "concept": "a92aa9c8-0861-4809-9498-5d270d9ea417",
+                    "label": "New activity"
+                  },
+                  {
+                    "concept": "61955040-f8a0-4d94-b40b-8a8ed0bcc19e",
+                    "label": "Refer"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Next Session",
+              "type": "obs",
+              "id": "nextSession",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5e973148-34f4-4f59-8c55-57e362289706"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Summary of Progress/Observation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Summary of Progress/Observation",
+              "type": "obs",
+              "id": "summaryOfProgressObservation",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "16509644-6887-416f-ace8-a274e8f32f53"
+              },
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,620 @@
+{
+  "name": "Assessment of Clients with Substance Use Disorder",
+  "description": "Assessment of Clients with Substance Use Disorder for Eka Hospital (OpenMRS O3).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "3f7a182e-4fe2-4031-af3c-ca209693dd0b",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Assessment of Clients with Substance Use Disorder",
+      "sections": [
+        {
+          "label": "Patient Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Marital Status",
+              "type": "obs",
+              "id": "maritalStatus",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "f634d574-3925-4bbe-97c8-bdc2a9b89a04",
+                "answers": [
+                  {
+                    "concept": "7659c02c-a969-4de4-a9c8-bdd6b6d17ebe",
+                    "label": "Single"
+                  },
+                  {
+                    "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Married"
+                  },
+                  {
+                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Divorced"
+                  },
+                  {
+                    "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Widowed"
+                  },
+                  {
+                    "concept": "1056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Separated"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Specify Marital Status",
+              "type": "obs",
+              "id": "specifyMaritalStatus",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5593777f-9e00-479e-bb6f-155ee941fa18"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "maritalStatus !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Educational Status",
+              "type": "obs",
+              "id": "educationalStatus",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "7756753d-e8ec-4b8e-b4d3-f6d3bf2389d1"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Specify Education Level",
+              "type": "obs",
+              "id": "specifyEducationLevel",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "380c16ad-238e-44dd-b0f2-cfc1ba09159c"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "educationalStatus !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Occupation",
+              "type": "obs",
+              "id": "occupation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b37c797c-8b51-4a61-9ab7-cf40792d0bdf"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Source of History",
+              "type": "obs",
+              "id": "sourceOfHistory",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "93bbbbc8-ac8f-4fca-955a-a23e25f87724",
+                "answers": [
+                  {
+                    "concept": "162571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Patient"
+                  },
+                  {
+                    "concept": "b7e66596-ba11-4fe2-bdc5-a3775c6cf4fa",
+                    "label": "Family"
+                  },
+                  {
+                    "concept": "af481562-cf0f-42c9-b2ce-8f01d251e857",
+                    "label": "Caregiver"
+                  },
+                  {
+                    "concept": "c9ea5e58-6f10-484a-88f9-075fa641c018",
+                    "label": "Police"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Specify Source of History",
+              "type": "obs",
+              "id": "specifySourceOfHistory",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0ad94662-9ba0-4094-a5a1-c2c7e802f548"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "sourceOfHistory !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Date and Time of Evaluation",
+              "type": "obs",
+              "id": "dateTimeOfEvaluation",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "801de9d6-4e75-42eb-95e0-a62b86cdefdc"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Chief Complaint",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Chief Complaint / Presenting Complaint",
+              "type": "obs",
+              "id": "chiefComplaintPresentingComplaint",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "8fb4a7b7-0cfa-4f3b-a380-afde8332cd31"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Substance Use History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "History of Substance Use Disorder",
+              "type": "obs",
+              "id": "historyOfSubstanceUseDisorder",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "3e247c00-a353-4220-9039-910569c22d24"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Psychiatric History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Psychiatric History",
+              "type": "obs",
+              "id": "psychiatricHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c6a0cda9-6d1e-43d5-a0cb-08a6757f4263"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Past Medical and Surgical History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Medical and Surgical History",
+              "type": "obs",
+              "id": "medicalSurgicalHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "7e21e259-12b5-4751-9c3a-c32ff54934e3"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Family History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Family History",
+              "type": "obs",
+              "id": "familyHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "04fb586f-8342-450c-8b0d-90c4bf1ff9ae"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Social and Developmental History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Social and Developmental History",
+              "type": "obs",
+              "id": "socialDevelopmentalHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "3393996a-dee5-4b66-aa2d-0925b091f7a8"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Readiness to Change (Motivation Assessment)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Importance Ruler",
+              "type": "obs",
+              "id": "importanceRuler",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5109d66a-241d-462f-ae74-ed8a10363c23",
+                "min": "1",
+                "max": "10",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Confidence Ruler",
+              "type": "obs",
+              "id": "confidenceRuler",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "564201be-3a78-48c4-a231-26f2bb7ba3c7",
+                "min": "1",
+                "max": "10",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Forensic History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Forensic History",
+              "type": "obs",
+              "id": "forensicHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "82c2d72d-31cc-45f5-8476-b8256df42e0e"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Mental Status Examination (MSE)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Appearance and Behaviour",
+              "type": "obs",
+              "id": "appearanceAndBehaviour",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9be12c5a-db24-4e8f-949d-e2cf77739b47"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Speech",
+              "type": "obs",
+              "id": "speech",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6bceeae9-93a8-4326-ab23-9863ab938428"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Mood",
+              "type": "obs",
+              "id": "mood",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4cf4f073-bd22-45bd-9390-26680370811c"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Affect",
+              "type": "obs",
+              "id": "affect",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0e9cb32a-a012-49b5-b31e-11a87262c8f5"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Perception",
+              "type": "obs",
+              "id": "perception",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "32b3a08f-d3fc-4fbd-9e79-24436e44a34b"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Thought (Form and Content)",
+              "type": "obs",
+              "id": "thoughtFormAndContent",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "04a9e8d5-9ec0-4371-8a78-ea3f015a102c"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Cognition",
+              "type": "obs",
+              "id": "cognition",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "67a6f635-a3a5-4d81-9661-c9628642f2ff"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Judgment and Insight",
+              "type": "obs",
+              "id": "judgmentAndInsight",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4575f556-1e3a-4411-92c3-43c95feae501"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Vital Signs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Blood Pressure (BP)",
+              "type": "obs",
+              "id": "bloodPressureBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1145e8f4-17a4-43af-a28a-94399aef3c0b",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Pulse Rate (PR)",
+              "type": "obs",
+              "id": "pulseRatePr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Respiratory Rate (RR)",
+              "type": "obs",
+              "id": "respiratoryRateRr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Temperature",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "SpO₂",
+              "type": "obs",
+              "id": "spo",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "57300135-db51-42e7-b086-f06d0ab25424",
+                "min": "0",
+                "max": "100",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Physical Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pertinent Physical Findings",
+              "type": "obs",
+              "id": "pertinentPhysicalFindings",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f7439191-f29e-44d5-b95e-02d7e37be2cf"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Investigations",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Laboratory Investigations",
+              "type": "obs",
+              "id": "laboratoryInvestigations",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2f0eae6a-19b5-445b-bddb-3ee875c9416a"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Diagnosis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Treatment Plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Treatment Plan",
+              "type": "obs",
+              "id": "treatmentPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "163104AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Evaluating Physician",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Electronic Signature",
+              "type": "obs",
+              "id": "electronicSignature",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b5b26f02-d1ac-40c2-a7bb-4a5166524b21"
+              },
+              "readonly": false,
+              "questionInfo": "Not natively supported in O3 (O3 has no signature widget; flag for manual)."
+            },
+            {
+              "label": "Date and Time",
+              "type": "obs",
+              "id": "dateTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

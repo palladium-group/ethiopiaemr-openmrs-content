@@ -6,6 +6,8 @@
   "uuid": "72d06752-3c8f-488a-9052-5996b6434576",
   "retired": false,
   "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
   "pages": [
     {
       "label": "Visit Details",
@@ -78,6 +80,401 @@
                 "concept": "162725AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
               "validators": []
+            },
+            {
+              "label": "Order Type",
+              "type": "obs",
+              "id": "orderType",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "d208e4b4-4543-4ea8-abf7-f5fe0e3d6465",
+                "answers": [
+                  {
+                    "concept": "fcdad924-1fd6-49c9-ad03-016948deacd4",
+                    "label": "Diet / Nutrition"
+                  },
+                  {
+                    "concept": "f8c17c3a-2cf5-403f-b1ae-954e2593cd65",
+                    "label": "Activity and Ambulation"
+                  },
+                  {
+                    "concept": "ee9b33fc-0aaa-494a-bec6-e887289be71f",
+                    "label": "Nursing Care / Interventions"
+                  },
+                  {
+                    "concept": "a980059f-261d-425f-a06d-72f636026766",
+                    "label": "Respiratory Care (Non-Medication)"
+                  },
+                  {
+                    "concept": "9bc867f5-2cd1-44df-b1b9-d14097bcb3fe",
+                    "label": "Vascular Access Care"
+                  },
+                  {
+                    "concept": "d129e9d0-fccd-46cc-9d27-cdbfdc0260ba",
+                    "label": "Isolation"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Order Detail / Specifics",
+              "type": "obs",
+              "id": "orderDetailSpecifics",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "84bb0676-b4e9-4d90-8d69-179f213bb94c"
+              },
+              "readonly": false
+            },
+            {
+              "label": "If Diet",
+              "type": "obs",
+              "id": "ifDiet",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "c1d96e12-cad6-4f6f-8fe4-7e702d84ee8b",
+                "answers": [
+                  {
+                    "concept": "566b3685-226a-4136-bf26-83d08575a8bd",
+                    "label": "NPO"
+                  },
+                  {
+                    "concept": "d5be35b5-f65f-480b-b66b-a1fdb6416e5c",
+                    "label": "Clear Liquids"
+                  },
+                  {
+                    "concept": "22e3978c-aace-418f-aa8d-5aa9c2cf0f24",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "ed8159a9-a6c8-4b5d-8d6c-8e03fe71ba98",
+                    "label": "Low Sodium"
+                  },
+                  {
+                    "concept": "7de82b44-0cb1-4614-b8bf-1edefaaf6729",
+                    "label": "Diabetic"
+                  },
+                  {
+                    "concept": "16559292-cce9-460f-970b-b11bd2c127b5",
+                    "label": "Fluid Restricted"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "orderType !== 'fcdad924-1fd6-49c9-ad03-016948deacd4'"
+              }
+            },
+            {
+              "label": "Fluid Restriction Amount",
+              "type": "obs",
+              "id": "fluidRestrictionAmount",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "32962fc3-2416-4312-98d5-9d9b8ed0775f",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "ifDiet !== '16559292-cce9-460f-970b-b11bd2c127b5'"
+              }
+            },
+            {
+              "label": "If Activity",
+              "type": "obs",
+              "id": "ifActivity",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "097114bf-1afc-483a-bfb0-710687f65fdd",
+                "answers": [
+                  {
+                    "concept": "6dc2f7f6-2afb-4337-aa70-725d7482723e",
+                    "label": "Bed Rest"
+                  },
+                  {
+                    "concept": "dec671ea-cc7f-4fa4-8b82-e48e3a3e9db1",
+                    "label": "Commode Privileges"
+                  },
+                  {
+                    "concept": "c5d54f83-76d8-44ee-8abf-9f70d4b46ed9",
+                    "label": "Ambulate with Assistance"
+                  },
+                  {
+                    "concept": "c5a05e50-7b99-492b-a028-f4dabcb25bc6",
+                    "label": "Out of Bed to Chair"
+                  },
+                  {
+                    "concept": "e4e6c741-37aa-4b5b-8c4e-16c7428f0b07",
+                    "label": "Ad Lib"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "orderType !== 'f8c17c3a-2cf5-403f-b1ae-954e2593cd65'"
+              }
+            },
+            {
+              "label": "If Nursing Care",
+              "type": "obs",
+              "id": "ifNursingCare",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "85862263-2106-4c12-98df-d97eab93c8e2",
+                "answers": [
+                  {
+                    "concept": "b10d0a08-73b0-4eef-ba4a-a86f9d730917",
+                    "label": "Turn every 2 hours"
+                  },
+                  {
+                    "concept": "e64da8c0-87be-47cb-ae11-60fdb7099142",
+                    "label": "Wound Care"
+                  },
+                  {
+                    "concept": "2f47ab4b-da74-41d4-9a8c-95dc30b5f723",
+                    "label": "Intake/Output (I/O) Monitoring"
+                  },
+                  {
+                    "concept": "41f567cc-fb75-441e-9d02-2d9576e2631c",
+                    "label": "Weight Daily"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "orderType !== 'ee9b33fc-0aaa-494a-bec6-e887289be71f'"
+              }
+            },
+            {
+              "label": "Frequency",
+              "type": "obs",
+              "id": "frequency2",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "6e167626-7ec0-4030-9e3b-94d3ec23a4e1",
+                "answers": [
+                  {
+                    "concept": "1079AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Continuous"
+                  },
+                  {
+                    "concept": "051720eb-0034-430d-b619-e93f1df90901",
+                    "label": "Once"
+                  },
+                  {
+                    "concept": "130eb6a7-b7d2-4e83-83ce-e57c6f566537",
+                    "label": "Every Shift"
+                  },
+                  {
+                    "concept": "8b2783b8-6206-463c-9f58-b4c39f42cd5d",
+                    "label": "Daily"
+                  },
+                  {
+                    "concept": "1d8bcc19-0537-4b63-905c-df6ccecfd1ff",
+                    "label": "PRN"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Start Date",
+              "type": "obs",
+              "id": "startDate2",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "27944de0-6d92-4c52-bd0a-1d8d68d88ffa"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Start Time",
+              "type": "obs",
+              "id": "startTime",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c48170e6-022c-40d8-a26d-89541982761b"
+              },
+              "readonly": false
+            },
+            {
+              "label": "End/Expiration Date",
+              "type": "obs",
+              "id": "endExpirationDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "2dc8a667-c685-442f-a389-bd1d9072b71c"
+              },
+              "readonly": false
+            },
+            {
+              "label": "End/Expiration Time",
+              "type": "obs",
+              "id": "endExpirationTime",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6fe68801-1ae8-4a43-958e-f523e65e1881"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Ordering Provider",
+              "type": "obs",
+              "id": "orderingProvider2",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "a31b68b0-2ebc-4c70-b64a-8f5974d76280"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Scheduled Time",
+              "type": "obs",
+              "id": "scheduledTime",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "203b26d9-dba2-4652-8ad6-4f3aa9883b95"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Actual Administration Time",
+              "type": "obs",
+              "id": "actualAdministrationTime",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a76d147c-bddf-4e8c-ba8f-c5090fdea0e6"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Administering Nurse",
+              "type": "obs",
+              "id": "administeringNurse",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5f870ee2-4f01-4360-80ea-4b945e635b64"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Medication Status",
+              "type": "obs",
+              "id": "medicationStatus",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "5f1b80e3-a99a-4f3a-ab4d-3ec42f069860",
+                "answers": [
+                  {
+                    "concept": "842cf386-80dc-42b1-a8c9-e7ccd616f91d",
+                    "label": "Given"
+                  },
+                  {
+                    "concept": "5f988086-1dbf-480b-97c5-e015053f46e4",
+                    "label": "Held"
+                  },
+                  {
+                    "concept": "8b67c373-0c20-44df-ae66-8d0180172f1c",
+                    "label": "Refused"
+                  },
+                  {
+                    "concept": "6bcf0dc7-0738-4e77-8f61-9f9716e1059f",
+                    "label": "Delayed"
+                  },
+                  {
+                    "concept": "8c6689e5-1382-48bf-8598-e49d34742db9",
+                    "label": "Omitted"
+                  },
+                  {
+                    "concept": "1f181513-2a20-40ed-bd35-5e2ef8872789",
+                    "label": "Not Available"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Reason for Exception",
+              "type": "obs",
+              "id": "reasonForException",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ae3c0bcd-583a-4f72-89a5-dcfa13a4c78b"
+              },
+              "readonly": false,
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "medicationStatus !== '5f988086-1dbf-480b-97c5-e015053f46e4'"
+              }
+            },
+            {
+              "label": "Response Status",
+              "type": "obs",
+              "id": "responseStatus",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "5704f76a-c13f-4d7c-af72-225f505c0c82",
+                "answers": [
+                  {
+                    "concept": "165b4679-5c0d-4edb-bb3d-e661d45122e4",
+                    "label": "Improved"
+                  },
+                  {
+                    "concept": "f852e236-e96d-4e47-bdf0-9c98da633e36",
+                    "label": "No Change"
+                  },
+                  {
+                    "concept": "b6d89254-f3a6-43b6-b9cf-97d9354044f3",
+                    "label": "Worsened"
+                  },
+                  {
+                    "concept": "20048f20-0064-4b82-a5d7-133c960c4dbd",
+                    "label": "Monitoring Required"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Adverse Reaction?",
+              "type": "obs",
+              "id": "adverseReaction",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "523554ec-cb7c-4fb4-8330-85cae025ed74",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Side Effects Observed",
+              "type": "obs",
+              "id": "sideEffectsObserved",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c1086239-cb5b-40a4-a90c-05404d455ba2"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Follow-up Action",
+              "type": "obs",
+              "id": "followUpAction",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "59d52916-48cf-4f32-8ccc-639cc0b87545"
+              },
+              "readonly": false
             }
           ]
         },
@@ -198,12 +595,248 @@
                   ]
                 }
               ]
+            },
+            {
+              "label": "Medication Name",
+              "type": "obs",
+              "id": "medicationName",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "593c92c5-6d69-42b8-a6ca-f28fee78008a"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Strength",
+              "type": "obs",
+              "id": "strength",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4e4df57f-75c0-4d9c-822d-54abc065cea3"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Ordered Dose",
+              "type": "obs",
+              "id": "orderedDose",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f7b39152-e072-4717-8ce8-ae53407bd848",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Start Date",
+              "type": "obs",
+              "id": "startDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "27944de0-6d92-4c52-bd0a-1d8d68d88ffa"
+              },
+              "readonly": false
+            },
+            {
+              "label": "End Date",
+              "type": "obs",
+              "id": "endDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "6a63ba3c-c5cb-4846-a61d-79191f526a28"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Ordering Provider",
+              "type": "obs",
+              "id": "orderingProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "a31b68b0-2ebc-4c70-b64a-8f5974d76280"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Current Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Blood Pressure (BP) - Systolic",
+              "type": "obs",
+              "id": "bloodPressureBpSystolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f31befaf-eb3d-41da-97dc-63c1cd362679",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Blood Pressure (BP) - Diastolic",
+              "type": "obs",
+              "id": "bloodPressureBpDiastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "72b2c7c3-15f6-43c7-aac5-9227da64f41f",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Pulse Rate",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Respiratory Rate",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Temperature",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Oxygen Saturation (sp02)",
+              "type": "obs",
+              "id": "oxygenSaturationSp02",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "007155ea-ad0e-40ee-bb7c-9b0cb912755e",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Oxygen Saturation (sp02) measured on",
+              "type": "obs",
+              "id": "oxygenSaturationSp02MeasuredOn",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "25c6c719-7a22-414d-974f-50f3b9ad5d85",
+                "answers": [
+                  {
+                    "concept": "162735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Room Air"
+                  },
+                  {
+                    "concept": "81341AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Oxygen"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Pain Score (0–10)",
+              "type": "obs",
+              "id": "painScore010",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "2597367c-e4c8-4327-9fcf-08fcada95ad1",
+                "answers": [
+                  {
+                    "concept": "b312c6aa-d000-4adf-92c7-c04a5aacc9ef",
+                    "label": "0"
+                  },
+                  {
+                    "concept": "2192bceb-2c89-45a7-88d4-e379e9014acd",
+                    "label": "1"
+                  },
+                  {
+                    "concept": "2f3f0dbe-6266-4162-b319-13a70851b52e",
+                    "label": "2"
+                  },
+                  {
+                    "concept": "112cb702-94e3-48f8-bea7-bb69728fa339",
+                    "label": "3"
+                  },
+                  {
+                    "concept": "b55c244e-84e0-40d4-af61-f882213ac321",
+                    "label": "4"
+                  },
+                  {
+                    "concept": "7f8c744d-0c49-4ba7-9077-b2d14a53e743",
+                    "label": "5"
+                  },
+                  {
+                    "concept": "580bb81f-e14e-4821-844d-976a01e4c501",
+                    "label": "6"
+                  },
+                  {
+                    "concept": "f252aef4-00b3-48a7-919a-95a7e9775e77",
+                    "label": "7"
+                  },
+                  {
+                    "concept": "df46852b-73d0-4575-85cd-a5f3f44ff225",
+                    "label": "8"
+                  },
+                  {
+                    "concept": "27bb96ef-4f0e-4351-b96c-85dae1270bb9",
+                    "label": "9"
+                  },
+                  {
+                    "concept": "a1abf370-cf96-452d-b2bb-3a59ea864c55",
+                    "label": "10"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Blood Glucose (if applicable)",
+              "type": "obs",
+              "id": "bloodGlucoseIfApplicable",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "b3a9efc6-412b-4ed9-9679-e7fc656bb731",
+                "step": "any"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Clinical Notes",
+              "type": "obs",
+              "id": "clinicalNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1976f18f-e3e0-4f26-b226-b964e8b3b82f"
+              },
+              "readonly": false
             }
           ]
         }
       ]
     }
-  ],
-  "processor": "EncounterFormProcessor",
-  "referencedForms": []
+  ]
 }

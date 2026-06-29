@@ -6,6 +6,8 @@
   "uuid": "83dc9c9b-4d14-431b-a1b1-26fe3006dddb",
   "retired": false,
   "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
   "pages": [
     {
       "label": "Visit Details",
@@ -136,64 +138,28 @@
               }
             },
             {
-              "label": "APGAR Score at 1 Minute",
+              "label": "Infant Sex",
               "type": "obs",
-              "required": false,
-              "id": "apgar1Min",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "159603AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
-              },
-              "questionInfo": "Newborn assessment score (0-10). Normal: 7-10"
-            },
-            {
-              "label": "APGAR Score at 5 Minutes",
-              "type": "obs",
-              "required": false,
-              "id": "apgar5Min",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "159604AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
-              },
-              "questionInfo": "Newborn assessment score (0-10). Normal: 7-10"
-            },
-            {
-              "label": "APGAR Score at 10 min",
-              "type": "obs",
-              "required": false,
-              "id": "apgar10Min",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "159605AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
-              },
-              "questionInfo": "Newborn assessment score (0-10). Normal: 7-10"
-            },
-            {
-              "label": "Stillbirth Type",
-              "type": "obs",
-              "required": false,
-              "id": "stillbirthType",
+              "id": "infantSex",
               "questionOptions": {
                 "rendering": "radio",
-                "concept": "9c3d4e5f-6071-8901-2345-678901abcd03",
+                "concept": "0da193c1-6822-41b6-812a-d50bc0537730",
                 "answers": [
                   {
-                    "concept": "0d4e5f60-7182-9012-3456-789012abcd04",
-                    "label": "Not Applicable"
+                    "concept": "1241a7b5-0187-43ef-8a52-b52ee91f7c1f",
+                    "label": "Male"
                   },
                   {
-                    "concept": "1e5f6071-8293-0123-4567-890123abcd05",
-                    "label": "Fresh Stillbirth"
+                    "concept": "8524bad5-7021-4a20-b55c-82b7d3985779",
+                    "label": "Female"
                   },
                   {
-                    "concept": "2f607182-9304-1234-5678-901234abcd06",
-                    "label": "Macerated Stillbirth"
+                    "concept": "1138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Indeterminate"
                   }
                 ]
-              }
+              },
+              "readonly": false
             },
             {
               "label": "Sex",
@@ -280,44 +246,399 @@
                   }
                 ]
               }
+            },
+            {
+              "label": "System Auto-Classification",
+              "type": "obs",
+              "id": "systemAutoClassification",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0e3a44df-2b8b-4d9b-9e89-40a47644760f"
+              },
+              "readonly": false
             }
           ]
         },
         {
-          "label": "Immunizations",
+          "label": "Neonatal Assessment and Vitality",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Bcg Date",
+              "label": "APGAR Score (1 Min)",
               "type": "obs",
-              "required": false,
-              "id": "bcgDate",
+              "id": "apgarScore1Min",
               "questionOptions": {
-                "rendering": "date",
-                "concept": "4182b3c4-1526-3456-7890-123456abcde7"
+                "rendering": "ui-select-extended",
+                "concept": "d9a014f6-fe6a-46ba-8cf4-b6aa0f90fea9",
+                "answers": [
+                  {
+                    "concept": "b312c6aa-d000-4adf-92c7-c04a5aacc9ef",
+                    "label": "0"
+                  },
+                  {
+                    "concept": "2192bceb-2c89-45a7-88d4-e379e9014acd",
+                    "label": "1"
+                  },
+                  {
+                    "concept": "2f3f0dbe-6266-4162-b319-13a70851b52e",
+                    "label": "2"
+                  },
+                  {
+                    "concept": "112cb702-94e3-48f8-bea7-bb69728fa339",
+                    "label": "3"
+                  },
+                  {
+                    "concept": "b55c244e-84e0-40d4-af61-f882213ac321",
+                    "label": "4"
+                  },
+                  {
+                    "concept": "7f8c744d-0c49-4ba7-9077-b2d14a53e743",
+                    "label": "5"
+                  },
+                  {
+                    "concept": "580bb81f-e14e-4821-844d-976a01e4c501",
+                    "label": "6"
+                  },
+                  {
+                    "concept": "f252aef4-00b3-48a7-919a-95a7e9775e77",
+                    "label": "7"
+                  },
+                  {
+                    "concept": "df46852b-73d0-4575-85cd-a5f3f44ff225",
+                    "label": "8"
+                  },
+                  {
+                    "concept": "27bb96ef-4f0e-4351-b96c-85dae1270bb9",
+                    "label": "9"
+                  },
+                  {
+                    "concept": "a1abf370-cf96-452d-b2bb-3a59ea864c55",
+                    "label": "10"
+                  }
+                ]
               },
-              "validators": [
-                {
-                  "type": "date",
-                  "allowFutureDates": "false"
-                }
-              ]
+              "readonly": false,
+              "required": "true"
             },
             {
-              "label": "Polio 0 Date",
+              "label": "APGAR Score (5 Min)",
+              "type": "obs",
+              "id": "apgarScore5Min",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "d9a014f6-fe6a-46ba-8cf4-b6aa0f90fea9",
+                "answers": [
+                  {
+                    "concept": "b312c6aa-d000-4adf-92c7-c04a5aacc9ef",
+                    "label": "0"
+                  },
+                  {
+                    "concept": "2192bceb-2c89-45a7-88d4-e379e9014acd",
+                    "label": "1"
+                  },
+                  {
+                    "concept": "2f3f0dbe-6266-4162-b319-13a70851b52e",
+                    "label": "2"
+                  },
+                  {
+                    "concept": "112cb702-94e3-48f8-bea7-bb69728fa339",
+                    "label": "3"
+                  },
+                  {
+                    "concept": "b55c244e-84e0-40d4-af61-f882213ac321",
+                    "label": "4"
+                  },
+                  {
+                    "concept": "7f8c744d-0c49-4ba7-9077-b2d14a53e743",
+                    "label": "5"
+                  },
+                  {
+                    "concept": "580bb81f-e14e-4821-844d-976a01e4c501",
+                    "label": "6"
+                  },
+                  {
+                    "concept": "f252aef4-00b3-48a7-919a-95a7e9775e77",
+                    "label": "7"
+                  },
+                  {
+                    "concept": "df46852b-73d0-4575-85cd-a5f3f44ff225",
+                    "label": "8"
+                  },
+                  {
+                    "concept": "27bb96ef-4f0e-4351-b96c-85dae1270bb9",
+                    "label": "9"
+                  },
+                  {
+                    "concept": "a1abf370-cf96-452d-b2bb-3a59ea864c55",
+                    "label": "10"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "APGAR Score (10 Min)",
+              "type": "obs",
+              "id": "apgarScore10Min",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "d9a014f6-fe6a-46ba-8cf4-b6aa0f90fea9",
+                "answers": [
+                  {
+                    "concept": "b312c6aa-d000-4adf-92c7-c04a5aacc9ef",
+                    "label": "0"
+                  },
+                  {
+                    "concept": "2192bceb-2c89-45a7-88d4-e379e9014acd",
+                    "label": "1"
+                  },
+                  {
+                    "concept": "2f3f0dbe-6266-4162-b319-13a70851b52e",
+                    "label": "2"
+                  },
+                  {
+                    "concept": "112cb702-94e3-48f8-bea7-bb69728fa339",
+                    "label": "3"
+                  },
+                  {
+                    "concept": "b55c244e-84e0-40d4-af61-f882213ac321",
+                    "label": "4"
+                  },
+                  {
+                    "concept": "7f8c744d-0c49-4ba7-9077-b2d14a53e743",
+                    "label": "5"
+                  },
+                  {
+                    "concept": "580bb81f-e14e-4821-844d-976a01e4c501",
+                    "label": "6"
+                  },
+                  {
+                    "concept": "f252aef4-00b3-48a7-919a-95a7e9775e77",
+                    "label": "7"
+                  },
+                  {
+                    "concept": "df46852b-73d0-4575-85cd-a5f3f44ff225",
+                    "label": "8"
+                  },
+                  {
+                    "concept": "27bb96ef-4f0e-4351-b96c-85dae1270bb9",
+                    "label": "9"
+                  },
+                  {
+                    "concept": "a1abf370-cf96-452d-b2bb-3a59ea864c55",
+                    "label": "10"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "APGAR Score at 1 Minute",
               "type": "obs",
               "required": false,
-              "id": "polio0Date",
+              "id": "apgar1Min",
               "questionOptions": {
-                "rendering": "date",
-                "concept": "5293c4d5-2637-4567-8901-234567abcde8"
+                "rendering": "number",
+                "concept": "159603AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01"
               },
-              "validators": [
-                {
-                  "type": "date",
-                  "allowFutureDates": "false"
-                }
-              ]
+              "questionInfo": "Newborn assessment score (0-10). Normal: 7-10"
+            },
+            {
+              "label": "APGAR Score at 5 Minutes",
+              "type": "obs",
+              "required": false,
+              "id": "apgar5Min",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "159604AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01"
+              },
+              "questionInfo": "Newborn assessment score (0-10). Normal: 7-10"
+            },
+            {
+              "label": "APGAR Score at 10 min",
+              "type": "obs",
+              "required": false,
+              "id": "apgar10Min",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "159605AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01"
+              },
+              "questionInfo": "Newborn assessment score (0-10). Normal: 7-10"
+            },
+            {
+              "label": "Birth Outcome Status",
+              "type": "obs",
+              "id": "birthOutcomeStatus",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "f75ef962-87dc-498d-aac7-425ac8636e1f",
+                "answers": [
+                  {
+                    "concept": "2db638fe-fb8e-4a4d-b372-d1996492230c",
+                    "label": "Live Birth"
+                  },
+                  {
+                    "concept": "159916AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fresh Stillbirth (FSB)"
+                  },
+                  {
+                    "concept": "135436AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Macerated Stillbirth (MSB)"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Stillbirth Type",
+              "type": "obs",
+              "required": false,
+              "id": "stillbirthType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9c3d4e5f-6071-8901-2345-678901abcd03",
+                "answers": [
+                  {
+                    "concept": "0d4e5f60-7182-9012-3456-789012abcd04",
+                    "label": "Not Applicable"
+                  },
+                  {
+                    "concept": "1e5f6071-8293-0123-4567-890123abcd05",
+                    "label": "Fresh Stillbirth"
+                  },
+                  {
+                    "concept": "2f607182-9304-1234-5678-901234abcd06",
+                    "label": "Macerated Stillbirth"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Neonatal Resuscitation Initiated?",
+              "type": "obs",
+              "id": "neonatalResuscitationInitiated",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3ad9ba43-0576-4c95-86f4-94c94168ac18",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "apgarScore5Min !== '072ec6fd-c3e1-40a6-a14e-52f634025efc'"
+              }
+            },
+            {
+              "label": "Resuscitation Details",
+              "type": "obs",
+              "id": "resuscitationDetails",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "3ccbabf1-45d4-43a3-9ca7-5090669e4721",
+                "answers": [
+                  {
+                    "concept": "6ead2b51-b199-4cd2-8798-680f76d7de25",
+                    "label": "Tactile Stimulation"
+                  },
+                  {
+                    "concept": "8a741d24-55d3-4b94-8628-343e720c80ca",
+                    "label": "Suctioning"
+                  },
+                  {
+                    "concept": "089773bf-4080-4ecf-ae02-ce11dfa444cc",
+                    "label": "Bag-Valve-Mask (PPV)"
+                  },
+                  {
+                    "concept": "38d3a45d-3d9c-408c-bbec-637c324c02dc",
+                    "label": "Intubation"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "apgarScore5Min !== '072ec6fd-c3e1-40a6-a14e-52f634025efc'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Essential Newborn Care (ENC) Bundle",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Select all interventions successfully completed within the first hour of birth",
+              "type": "obs",
+              "id": "selectAllInterventionsSuccessfullyComple",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "55f69240-1af9-44c7-812d-c31b17d30951",
+                "answers": [
+                  {
+                    "concept": "7d8882cc-f05a-4727-abce-5a9ab8110289",
+                    "label": "Immediate drying and stimulation"
+                  },
+                  {
+                    "concept": "e72fbc6a-01ce-4889-8ddb-9b757964739b",
+                    "label": "Skin-to-skin contact initiated (> 1 hour)"
+                  },
+                  {
+                    "concept": "75b6a873-39cb-4697-93df-cbc87d23ca07",
+                    "label": "Delayed cord clamping (> or = 1–3 minutes)"
+                  },
+                  {
+                    "concept": "f4d78c1f-89a0-48f2-9866-a902821087b4",
+                    "label": "Chlorhexidine applied to cord stump"
+                  },
+                  {
+                    "concept": "7eff0f2c-e05c-4528-9c0b-24ab5e3cfb8f",
+                    "label": "Early initiation of breastfeeding (within 1 hour)"
+                  },
+                  {
+                    "concept": "6ee2ebb0-d5c2-4ed5-84fd-99fafcebf20d",
+                    "label": "Tetracycline Ophthalmic Ointment (1%) applied"
+                  },
+                  {
+                    "concept": "cd0b047b-9fee-4d13-8028-cdaa7366d69d",
+                    "label": "Vitamin K1 administered"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Vitamin K1 administered route",
+              "type": "obs",
+              "id": "vitaminK1AdministeredRoute",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "090ef0a9-1e95-498c-855b-e82edbf3bad2",
+                "answers": [
+                  {
+                    "concept": "e3d066f5-f8ab-4e8d-bc21-df2fcbe4af30",
+                    "label": "IM 1mg"
+                  },
+                  {
+                    "concept": "160240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Oral"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!(selectAllInterventionsSuccessfullyComple && selectAllInterventionsSuccessfullyComple.includes('cd0b047b-9fee-4d13-8028-cdaa7366d69d'))"
+              }
             },
             {
               "label": "Essential Newborn Care",
@@ -347,7 +668,181 @@
           ]
         },
         {
-          "label": "Post-delivery Checklist",
+          "label": "Prophylaxis and Routine Immunizations",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "BCG Vaccine Administered",
+              "type": "obs",
+              "id": "bcgVaccineAdministered",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cabe288f-5728-4d99-bdd5-55e4a89e52ce",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "BCG Vaccine Date",
+              "type": "obs",
+              "id": "bcgVaccineDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "ce0ac621-7856-4a72-a157-3c444d7816c9"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "bcgVaccineAdministered !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Bcg Date",
+              "type": "obs",
+              "required": false,
+              "id": "bcgDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4182b3c4-1526-3456-7890-123456abcde7"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "OPV-0 Administered",
+              "type": "obs",
+              "id": "opv0Administered",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7e613438-bcac-4804-bd7a-951ca21d1696",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "OPV-0 Date",
+              "type": "obs",
+              "id": "opv0Date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5293c4d5-2637-4567-8901-234567abcde8"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "opv0Administered !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Polio 0 Date",
+              "type": "obs",
+              "required": false,
+              "id": "polio0Date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5293c4d5-2637-4567-8901-234567abcde8"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Is the mother known to be HIV Positive?",
+              "type": "obs",
+              "id": "isTheMotherKnownToBeHivPositive",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d157ef34-c211-4c56-accb-654b2fd6c92b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Mother currently on Antiretroviral Therapy (ART)?",
+              "type": "obs",
+              "id": "motherCurrentlyOnAntiretroviralTherapyAr",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d4fd847b-bbe9-4641-b8e7-300f65d0d128",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "isTheMotherKnownToBeHivPositive !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Infant Nevirapine (NVP) Syrup initiated?",
+              "type": "obs",
+              "id": "infantNevirapineNvpSyrupInitiated",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5a2e5c8f-c59b-4f41-bd79-02a1ba86dd2e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "isTheMotherKnownToBeHivPositive !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Post-Delivery Discharge Checklist",
           "isExpanded": "true",
           "questions": [
             {
@@ -358,6 +853,26 @@
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "6304d5e6-3748-5678-9012-345678abcd10",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Is Baby Feeding Well",
+              "type": "obs",
+              "required": false,
+              "id": "babyFeedingWell",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9637081a-6071-8901-2345-678901abcd13",
                 "answers": [
                   {
                     "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -391,6 +906,26 @@
               }
             },
             {
+              "label": "Mother Needs Prophylactic/Therapeutic Antibiotics?",
+              "type": "obs",
+              "id": "motherNeedsProphylacticTherapeuticAntibi",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "eb00ed2c-f21b-42c3-8201-5aa7d1ea2c26",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
               "label": "Baby Need to Start Antibiotics",
               "type": "obs",
               "required": false,
@@ -411,13 +946,12 @@
               }
             },
             {
-              "label": "Is Baby Feeding Well",
+              "label": "Baby Needs Prophylactic/Therapeutic Antibiotics?",
               "type": "obs",
-              "required": false,
-              "id": "babyFeedingWell",
+              "id": "babyNeedsProphylacticTherapeuticAntibiot",
               "questionOptions": {
                 "rendering": "radio",
-                "concept": "9637081a-6071-8901-2345-678901abcd13",
+                "concept": "9ccbbcc6-9461-430e-a046-b0060ef08168",
                 "answers": [
                   {
                     "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -428,7 +962,8 @@
                     "label": "No"
                   }
                 ]
-              }
+              },
+              "readonly": false
             },
             {
               "label": "If Mother Hiv Positive, mother is on ART and baby has neverapin syrup for 6 weeks",
@@ -471,6 +1006,26 @@
               }
             },
             {
+              "label": "Family Planning Counseling Completed?",
+              "type": "obs",
+              "id": "familyPlanningCounselingCompleted",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "697e5245-0ca1-4ae3-8879-2e9d3e503606",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
               "label": "Health Education Offered",
               "type": "obs",
               "required": false,
@@ -489,6 +1044,26 @@
                   }
                 ]
               }
+            },
+            {
+              "label": "Postnatal Health Education Provided?",
+              "type": "obs",
+              "id": "postnatalHealthEducationProvided",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "97a1bf66-04d8-4d81-8628-e8967df53e59",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
             },
             {
               "label": "Appointment Given If Needed",
@@ -511,6 +1086,39 @@
               }
             },
             {
+              "label": "Follow-up Appointment Scheduled?",
+              "type": "obs",
+              "id": "followUpAppointmentScheduled",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cae03b8e-16f0-43d5-9291-26c0e3c92b0a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Follow-up Appointment Date",
+              "type": "obs",
+              "id": "followUpAppointmentDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "0a65e846-7815-43f4-b768-d645f39a65be"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "followUpAppointmentScheduled !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
               "label": "Midwife Name",
               "type": "encounterProvider",
               "required": false,
@@ -525,7 +1133,5 @@
         }
       ]
     }
-  ],
-  "processor": "EncounterFormProcessor",
-  "referencedForms": []
+  ]
 }

@@ -1,0 +1,264 @@
+{
+  "name": "NICU Daily Activities & Procedures",
+  "description": "NICU Daily Activities & Procedures for Eka Hospital (OpenMRS O3).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "1dc12e81-4e7e-42a5-a4d4-7501b56ce493",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "NICU Daily Activities and Procedures",
+      "sections": [
+        {
+          "label": "Care Tracking Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Shift / Time of Entry",
+              "type": "obs",
+              "id": "shiftTimeOfEntry",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "41333d8a-19ff-45b1-8100-c0468dcd6cc2",
+                "answers": [
+                  {
+                    "concept": "8ce23c63-f9b3-4234-ae24-79e20a14819c",
+                    "label": "Morning"
+                  },
+                  {
+                    "concept": "d0cbec71-b7ee-4745-8f56-3b14909d3647",
+                    "label": "Afternoon"
+                  },
+                  {
+                    "concept": "99b09cea-6460-4b81-8d80-c2814b11cbb8",
+                    "label": "Night"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Routine Nursing Activities and Procedures",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Routine Daily Care",
+              "type": "obs",
+              "id": "routineDailyCare",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "93ffe250-9416-4485-a2f0-39aa1a3dae83",
+                "answers": [
+                  {
+                    "concept": "05c08765-c45c-4f8b-b431-b5f5e67c3d40",
+                    "label": "Bath / Skin care given and recorded (Moist, clean skin and lips)"
+                  },
+                  {
+                    "concept": "4d740bc6-1174-45f8-853c-8cfb151f5aba",
+                    "label": "Bed making"
+                  },
+                  {
+                    "concept": "ddeaf4fb-e863-4b2b-8a12-4704f2c46e20",
+                    "label": "Feeding"
+                  },
+                  {
+                    "concept": "63eee848-5376-4497-bc71-e67619f4e27b",
+                    "label": "Changing wet cloth"
+                  },
+                  {
+                    "concept": "f5cf6948-9861-4e20-a05f-12decf465aac",
+                    "label": "Changing diaper"
+                  },
+                  {
+                    "concept": "7164fe52-3543-492e-b010-ef898e2ee922",
+                    "label": "Positioning accordingly"
+                  },
+                  {
+                    "concept": "65704992-6565-4ca2-bc4f-d4132ad431ab",
+                    "label": "Health Education"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Clinical Procedures and Interventions",
+              "type": "obs",
+              "id": "clinicalProceduresInterventions",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "95e5e7d1-3d91-442c-8ef7-ab6664b52a1b",
+                "answers": [
+                  {
+                    "concept": "07de20cc-6ac2-4c11-a2af-b63b960f27e4",
+                    "label": "Sample collection / Blood draw"
+                  },
+                  {
+                    "concept": "e80a84c5-e1dd-418e-835a-a968ab1a2de5",
+                    "label": "IV cannula insertion"
+                  },
+                  {
+                    "concept": "a1c5f920-077b-452e-b6dd-62e27495e74b",
+                    "label": "NGT insertion"
+                  },
+                  {
+                    "concept": "22c1dcb5-ebc5-41a8-aad5-0a452e227f23",
+                    "label": "Blood transfusion (Followed by transfusion form and recorded)"
+                  },
+                  {
+                    "concept": "bc4e7e34-1f22-4dee-9c97-dc2d30c1d7b5",
+                    "label": "Catheterization"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Emergency Interventions",
+              "type": "obs",
+              "id": "emergencyInterventions",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "00dbb52c-ca25-4517-a921-8be7d426196d",
+                "answers": [
+                  {
+                    "concept": "90b6aebc-e797-4e1e-ad5f-4c3c15384fa9",
+                    "label": "Resuscitation"
+                  },
+                  {
+                    "concept": "ae939d92-b049-41c9-9de7-005456829ef3",
+                    "label": "CPR"
+                  },
+                  {
+                    "concept": "78be40ce-c8d4-4d0d-bec9-3a932c7150f7",
+                    "label": "Post-mortem care"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Quantitative Tracking (For Frequent Tasks)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Number of Feedings Administered",
+              "type": "obs",
+              "id": "numberOfFeedingsAdministered",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0480fa63-b6c2-4230-953c-55eb9c093cd8",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Number of Diaper / Wet Cloth Changes",
+              "type": "obs",
+              "id": "numberOfDiaperWetClothChanges",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0d4b1526-fcb8-4ae6-9541-2affa8529022",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Number of Blood Draws / Samples Collected",
+              "type": "obs",
+              "id": "numberOfBloodDrawsSamplesCollected",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "874163af-d4c0-4ebe-9aec-369809b8cf9b",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

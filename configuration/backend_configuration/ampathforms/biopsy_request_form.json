@@ -1,0 +1,248 @@
+{
+  "name": "Biopsy Request Form",
+  "description": "Biopsy requisition for histopathology. Concepts use CIEL, project master_new_concepts.csv, and biopsy_request_form_new_concepts.csv (no Bahmni UUIDs). Town uses existing Subcity text concept; requesting clinician uses a Provider-type obs with provider search.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "75832a16-903b-4274-b9da-87dd8091a0a4",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": false
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Biopsy Request Form",
+      "sections": [
+        {
+          "label": "Specimen Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Nature of Specimen",
+              "type": "obs",
+              "id": "natureOfSpecimen",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "819390ed-6665-463b-80a4-7141db1b5235"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Fixative",
+              "type": "obs",
+              "id": "fixative",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "c3a14782-0985-4168-94a9-df2744c907c1",
+                "answers": [
+                  {
+                    "concept": "3d9050de-7f6a-4ac2-ad7e-116e77d2ea2b",
+                    "label": "10% Formalin"
+                  },
+                  {
+                    "concept": "06d981e4-ae28-40d7-ba37-ad4cd788e58d",
+                    "label": "Saline"
+                  },
+                  {
+                    "concept": "a30faed8-f3dc-4780-be86-64a7a7d108cd",
+                    "label": "Fresh"
+                  },
+                  {
+                    "concept": "f879d4bb-96a0-4e7b-acf0-8f06d3f2f4a8",
+                    "label": "Frozen"
+                  },
+                  {
+                    "concept": "f9744e3e-b394-4f56-85b2-08be1447a8b9",
+                    "label": "Alcohol"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Specify Fixative",
+              "type": "obs",
+              "id": "specifyFixative",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "941c275a-b40c-4d5e-a497-15e639e691cf"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "fixative !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Date of Specimen Taken",
+              "type": "obs",
+              "id": "dateOfSpecimenTaken",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "db294d57-a10c-46de-8f03-a3f4d2a51326"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Date Received",
+              "type": "obs",
+              "id": "dateReceived",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "da6005ce-be83-40db-bf69-759535c4d9d5"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Lesion Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Site and Description of Lesion",
+              "type": "obs",
+              "id": "siteAndDescriptionOfLesion",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "59a2b27b-7866-43f1-89f1-7c724a681e50"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Duration of Lesion",
+              "type": "obs",
+              "id": "durationOfLesion",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1ee2c81f-97a0-4241-8745-084642974fc7"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Clinical History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Clinical History",
+              "type": "obs",
+              "id": "clinicalHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6921db30-39f2-4564-bdb2-700e6e402659"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Last Menstrual Period",
+              "type": "obs",
+              "id": "lastMenstrualPeriod",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "d1b8a5b1-753c-49f8-8c2c-0e4ffe7865e2"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Diagnosis and Laboratory Investigations",
+              "type": "obs",
+              "id": "diagnosisAndLaboratoryInvestigations",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f8b9f018-3828-4ef8-8eef-fc8308544718"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Requesting Physician Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Signature of Doctor",
+              "type": "obs",
+              "id": "signatureOfDoctor",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b5b26f02-d1ac-40c2-a7bb-4a5166524b21"
+              },
+              "readonly": false,
+              "questionInfo": "Not natively supported in O3 (O3 has no signature widget; flag for manual)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
