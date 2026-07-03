@@ -1,0 +1,575 @@
+{
+  "name": "Malaria Registeration Form",
+  "description": "Malaria Registration Form for case identification, diagnosis, treatment, and foci investigation",
+  "version": "1.0",
+  "published": true,
+  "uuid": "28394ab5-c6d7-4ef0-1789-2a3b4c5d6e78",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Patient Information",
+      "sections": [
+        {
+          "label": "Identification",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Registration Date:",
+              "type": "obs",
+              "id": "mgDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "a1b2c3d4-e5f6-4789-abcd-ef0123456701"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Patient Name:",
+              "type": "obs",
+              "id": "mgPtname",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b2c3d4e5-f601-4890-bcde-f01234567812"
+              }
+            },
+            {
+              "label": "Medical Record Number (MRN):",
+              "type": "obs",
+              "id": "mgMrn",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c3d4e5f6-0712-4901-cdef-012345678923"
+              }
+            },
+            {
+              "label": "Age (years):",
+              "type": "obs",
+              "id": "mgAge",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "d4e5f607-1823-4012-def0-123456789034",
+                "min": "0",
+                "max": "120"
+              }
+            },
+            {
+              "label": "Sex:",
+              "type": "obs",
+              "id": "mgSex",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3071a2b3-0415-2345-6789-012345abcd07",
+                "answers": [
+                  {
+                    "concept": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Male"
+                  },
+                  {
+                    "concept": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pregnancy Status:",
+              "type": "obs",
+              "id": "mgPs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e5f60718-2934-4123-ef01-234567890145",
+                "answers": [
+                  {
+                    "concept": "f6071829-3a4b-4234-f012-345678901256",
+                    "label": "Pregnant"
+                  },
+                  {
+                    "concept": "07182940-4b5c-4345-0123-456789012367",
+                    "label": "Not Pregnant"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "mgSex !== '1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Contact",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Kebele:",
+              "type": "obs",
+              "id": "mgKeble",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1e5f6071-8293-0123-4567-890123abcde4"
+              }
+            },
+            {
+              "label": "Phone Number:",
+              "type": "obs",
+              "id": "mgPhoneNo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "159635AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "myValue && doesNotMatchExpression('^0([0-9](?:(?:[0-9][0-9])|(?:0[0-8])|(4[0-1]))[0-9]{6})$',myValue)",
+                  "message": "Please enter the telephone number in the correct format e.g 0993888198 (10 digits)"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Clinical Presentation",
+      "sections": [
+        {
+          "label": "Symptoms and Travel",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "History of Fever:",
+              "type": "obs",
+              "id": "mgHistoryOfFever",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "18293a4b-5c6d-4456-1234-567890123478",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Temperature (°C) (?C):",
+              "type": "obs",
+              "id": "mgTemp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01",
+                "min": "25",
+                "max": "43"
+              }
+            },
+            {
+              "label": "History of Travel to Endemic Area:",
+              "type": "obs",
+              "id": "mgTravelHistor",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "160906AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Travel Location:",
+              "type": "obs",
+              "id": "mgTravelLocation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "293a4b5c-6d7e-4567-2345-678901234589"
+              },
+              "hide": {
+                "hideWhenExpression": "mgTravelHistor !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Diagnosis and Treatment",
+      "sections": [
+        {
+          "label": "Diagnosis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diagnosis Method:",
+              "type": "obs",
+              "id": "mgDiagnosis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3a4b5c6d-7e8f-4678-3456-789012345690",
+                "answers": [
+                  {
+                    "concept": "4b5c6d7e-8f90-4789-4567-890123456701",
+                    "label": "Microscopy"
+                  },
+                  {
+                    "concept": "5c6d7e8f-9001-4890-5678-901234567812",
+                    "label": "RDT"
+                  },
+                  {
+                    "concept": "6d7e8f90-0112-4901-6789-012345678923",
+                    "label": "Clinical"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Test Result:",
+              "type": "obs",
+              "id": "mgResult",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7e8f9001-1223-4012-789a-123456789034",
+                "answers": [
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "5dd7e8f9-3b0c-123d-567e-345678901234",
+                    "label": "P. falciparum"
+                  },
+                  {
+                    "concept": "6ee8f9a0-4c1d-234e-678f-456789012345",
+                    "label": "P. vivax"
+                  },
+                  {
+                    "concept": "8f900112-2334-4123-89ab-234567890145",
+                    "label": "Mixed"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Treatment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Treatment Given:",
+              "type": "obs",
+              "id": "mgTreatment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "900112ab-3445-4234-9abc-345678901256",
+                "answers": [
+                  {
+                    "concept": "1447AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "ACT (Artemether-Lumefantrine)"
+                  },
+                  {
+                    "concept": "012345cd-5667-4456-abcd-567890123478",
+                    "label": "ACT + Single Low-Dose Primaquine"
+                  },
+                  {
+                    "concept": "73300AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Chloroquine (CQ)"
+                  },
+                  {
+                    "concept": "12345def-6778-4567-bcde-678901234589",
+                    "label": "Chloroquine + Radical Cure Primaquine"
+                  },
+                  {
+                    "concept": "71561AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Artesunate Injection"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  },
+                  {
+                    "concept": "def01234-8990-4789-789a-890123456701",
+                    "label": "Referred"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Foci Investigation",
+      "sections": [
+        {
+          "label": "Visitor Status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Is Visitor Case:",
+              "type": "obs",
+              "id": "mgVisitorCase",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "23456ef0-7889-4678-cdef-789012345690",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Did Visitor Stay Overnight:",
+              "type": "obs",
+              "id": "mgVisitorStayed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "345670f1-8990-4789-def0-890123456701",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "mgVisitorCase !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Eligible for Foci Investigation:",
+              "type": "obs",
+              "id": "mgEligibleForIx",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "45678012-9001-4890-ef01-901234567812",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Index Case Tested:",
+              "type": "obs",
+              "id": "mgIndexTested",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "567890ab-0112-4901-f012-012345678923",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Applicable"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "FTAT and Investigation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date FTAT Started:",
+              "type": "obs",
+              "id": "mgDateFtatStarted",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "678901bc-1223-4012-0123-123456789034"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Date FTAT Ended:",
+              "type": "obs",
+              "id": "mgDateFtatEnded",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "789012cd-2334-4123-1234-234567890145"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Index Case Tested and Identified:",
+              "type": "obs",
+              "id": "mgIndexTestedAndIdentified",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "89abcdef-3445-4234-2345-345678901256",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Number of Households Investigated:",
+              "type": "obs",
+              "id": "mgNoOfHouseHoldsIx",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "9abcdef0-4556-4345-3456-456789012367",
+                "min": "0"
+              }
+            },
+            {
+              "label": "Number of Secondary Cases Identified:",
+              "type": "obs",
+              "id": "mgNoOfSecodaryCasesIdentified",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "abcdef01-5667-4456-4567-567890123478",
+                "min": "0"
+              }
+            },
+            {
+              "label": "Number of Secondary Cases Moved to Treatment:",
+              "type": "obs",
+              "id": "mgNoOfSecondaryCasesMoved",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "bcdef012-6778-4567-5678-678901234589",
+                "min": "0"
+              }
+            },
+            {
+              "label": "Foci Investigation Completed:",
+              "type": "obs",
+              "id": "mgFociIxDone",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cdef0123-7889-4678-6789-789012345690",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

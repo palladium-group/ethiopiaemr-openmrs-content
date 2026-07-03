@@ -1,0 +1,458 @@
+{
+  "name": "HBV Treatment Register",
+  "description": "Hepatitis B virus (HBV) treatment register. Uses CIEL (e.g. HBV DNA IU/mL, HBeAg assay, treatment start date, Entecavir), master concepts (e.g. Case registration date for register enrollment), and hbv_treatment_register_new_concepts.csv. Register-specific codes use generic numbered local categories that sites can map to their paper register.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "d3e4f506-7182-49ab-c234-d5e6f7081923",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Patient Demographics",
+      "sections": [
+        {
+          "label": "Identification",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient name",
+              "type": "obs",
+              "id": "hbvName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b2c3d4e5-f601-4890-bcde-f01234567812"
+              }
+            },
+            {
+              "label": "Case registration date",
+              "type": "obs",
+              "id": "hbvDateEnrolled",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "a1b2c3d4-e5f6-4789-abcd-ef0123456701"
+              }
+            },
+            {
+              "label": "Medical record number",
+              "type": "obs",
+              "id": "hbvMrn",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5a9aa304-a80d-4315-909a-70875754e74e"
+              }
+            },
+            {
+              "label": "Age (years)",
+              "type": "obs",
+              "id": "hbvAge",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "d4e5f607-1823-4012-def0-123456789034",
+                "min": "0"
+              }
+            },
+            {
+              "label": "Sex at birth",
+              "type": "obs",
+              "id": "hbvSex",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "166025AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Male"
+                  },
+                  {
+                    "concept": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Baseline and coinfections",
+      "sections": [
+        {
+          "label": "HBV viral load and serology",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HBV DNA (IU/mL), baseline",
+              "type": "obs",
+              "id": "hbvHbvl",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "168323AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "HBV DNA (IU/mL) at treatment initiation",
+              "type": "obs",
+              "id": "hbvHbvlAtRx",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "26258022-e12a-4f45-bdb6-40dd1dfaf11b"
+              }
+            },
+            {
+              "label": "HBeAg assay",
+              "type": "obs",
+              "id": "hbvHbveag",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "167785AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "1138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Indeterminate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Co-infections",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Co-infection (HIV / HCV)",
+              "type": "obs",
+              "id": "hbvCoOther",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9b7cf5a8-0d5a-4da5-95c4-456701ea5321",
+                "answers": [
+                  {
+                    "concept": "c201d808-64e2-47c5-a305-0d9752c85f11",
+                    "label": "HIV co-infection"
+                  },
+                  {
+                    "concept": "4ab60275-32de-4743-b760-d2cecb25b190",
+                    "label": "HCV co-infection"
+                  },
+                  {
+                    "concept": "6972fb07-fc7e-4650-b3b3-618890fd45e6",
+                    "label": "HIV and HCV co-infection"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If HIV-positive: clinical detail",
+              "type": "obs",
+              "id": "hbvIfHivPositive",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9285367a-9f25-4613-bc10-abd72491ad76"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Clinical status and eligibility",
+      "sections": [
+        {
+          "label": "Clinical status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Clinical category (register staging)",
+              "type": "obs",
+              "id": "hbvCs5",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "aad81d80-1c7f-404e-a4f9-b954f44b419f",
+                "answers": [
+                  {
+                    "concept": "ec88d3af-82e2-4cbe-99d4-25f6d751f73a",
+                    "label": "Category I"
+                  },
+                  {
+                    "concept": "9c79a87e-864f-4329-82e3-0806ce3324a4",
+                    "label": "Category II"
+                  },
+                  {
+                    "concept": "f8658dd1-6599-48d7-835c-111c28e7a6dd",
+                    "label": "Category III"
+                  },
+                  {
+                    "concept": "0a28c8c0-fd04-4efa-a61d-030f8ee72ae9",
+                    "label": "Category IV"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Eligible for HBV treatment",
+              "type": "obs",
+              "id": "hbvEligibleForTreatment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "bf109068-e3f5-4905-bed4-90da5bb17e81",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Treatment indication codes",
+              "type": "obs",
+              "id": "hbvTreatmentCode",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "c59f6bcd-0656-47f0-9b22-19bc47420f4d",
+                "answers": [
+                  {
+                    "concept": "11c454d8-e21d-44b8-9314-7ab373d1995e",
+                    "label": "Indication code 1"
+                  },
+                  {
+                    "concept": "d062506c-e50d-40cd-a10e-944b9b064427",
+                    "label": "Indication code 2"
+                  },
+                  {
+                    "concept": "ae0d5a27-2c74-48eb-a493-73417a32de18",
+                    "label": "Indication code 3"
+                  },
+                  {
+                    "concept": "a9218cf3-6f98-4f4b-b7b4-8a300874369b",
+                    "label": "Indication code 4"
+                  },
+                  {
+                    "concept": "6f43baae-c6ed-49b2-91a3-a740cf18560e",
+                    "label": "Indication code 5"
+                  },
+                  {
+                    "concept": "401724fd-3d7b-41bc-954d-90472c39f128",
+                    "label": "Indication code 6"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Treatment",
+      "sections": [
+        {
+          "label": "Treatment initiation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Antiviral treatment start date",
+              "type": "obs",
+              "id": "hbvTreatmentStartDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "163526AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Current antiviral agent",
+              "type": "obs",
+              "id": "hbvTreatmentCodeMed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "bf8034ef-9e34-477c-ae96-440d632ef5bb",
+                "answers": [
+                  {
+                    "concept": "75694AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Entecavir"
+                  },
+                  {
+                    "concept": "4b9bdc4a-2d67-4236-9684-6b2d5d7cf5d3",
+                    "label": "Regimen code 1"
+                  },
+                  {
+                    "concept": "f6f37028-3110-4bf6-910b-d4dd80f82c71",
+                    "label": "Regimen code 2"
+                  },
+                  {
+                    "concept": "3a121f53-2936-43b7-a7fe-121a9ee751af",
+                    "label": "Regimen code 3"
+                  },
+                  {
+                    "concept": "7aeaadf2-a0b1-4753-a041-12cd1ca0b98c",
+                    "label": "Regimen code 4"
+                  },
+                  {
+                    "concept": "182cc777-5fe0-4df4-b8f6-4d83d2f655d5",
+                    "label": "Regimen code 5"
+                  },
+                  {
+                    "concept": "3d287cb2-9ee7-4e37-830b-d829f2f0b262",
+                    "label": "Regimen code 6"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Months on current antiviral therapy",
+              "type": "obs",
+              "id": "hbvTreatmentMonth",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "985c6633-6c5c-4f31-8e0c-4d15047a4752",
+                "min": "0"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Follow-up",
+      "sections": [
+        {
+          "label": "Status and discontinuation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Follow-up status",
+              "type": "obs",
+              "id": "hbvFollowUpStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d72b05b4-f5db-4f43-b7df-9403e35147ea",
+                "answers": [
+                  {
+                    "concept": "b64448e0-482d-49bc-98c8-67a2a27b98b6",
+                    "label": "Follow-up code 1"
+                  },
+                  {
+                    "concept": "e813a226-373c-488f-850e-9e4b3ac16313",
+                    "label": "Follow-up code 2"
+                  },
+                  {
+                    "concept": "d99d4056-fa8f-4869-a371-5e604ad002b5",
+                    "label": "Follow-up code 3"
+                  },
+                  {
+                    "concept": "c7f730f8-ee6c-448a-a0ff-47ad478d49ae",
+                    "label": "Follow-up code 4"
+                  },
+                  {
+                    "concept": "8d1149c0-ff62-452a-b295-ae254e1876e3",
+                    "label": "Follow-up code 5"
+                  },
+                  {
+                    "concept": "87606a08-2e4d-48d8-9d8b-5b15ff3a4f5e",
+                    "label": "Follow-up code 6"
+                  },
+                  {
+                    "concept": "63d7303b-be32-4a7e-b03e-95edbdaa35fc",
+                    "label": "Follow-up code 7"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Reason for discontinuation",
+              "type": "obs",
+              "id": "hbvReasonsForDiscontinuation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3fbbdfc8-0093-4604-8722-b67a0ec94a63",
+                "answers": [
+                  {
+                    "concept": "bf0d8e11-c57e-4fd2-9672-d7cc193d9dc8",
+                    "label": "Discontinuation code 1"
+                  },
+                  {
+                    "concept": "422bcbae-b675-4cd1-b45c-d0e173eb0ff8",
+                    "label": "Discontinuation code 2"
+                  },
+                  {
+                    "concept": "7a2fc273-bfbd-454b-942a-ed595abd2a44",
+                    "label": "Discontinuation code 3"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}
