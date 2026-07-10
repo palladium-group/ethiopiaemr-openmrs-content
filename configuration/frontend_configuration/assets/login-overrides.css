@@ -1,0 +1,123 @@
+html:has([class*='esm-login__login__container']),
+body:has([class*='esm-login__login__container']) {
+  background-color: #003B76;
+  overflow: hidden !important;
+  height: 100% !important;
+}
+
+[class*='esm-login__login__container'] {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+  z-index: 9000 !important;
+  overflow-y: auto !important;
+}
+
+/* the whole footer becomes the capsule */
+[class*='esm-login__footer__footer'] {
+  position: fixed !important;
+  left: 1.25rem !important;
+  bottom: 1.25rem !important;
+  width: auto !important;
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.6rem !important;
+  padding: 0.4rem 1rem 0.4rem 0.5rem !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 999px !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* MoH logo on a white chip, first in the pill (flex order beats DOM order) */
+[class*='esm-login__footer__logosContainer'] {
+  order: 1;
+  max-height: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+  justify-content: flex-start !important;
+}
+
+[class*='esm-login__footer__logosContainer'] img {
+  height: 1.5rem !important;
+  width: auto !important;
+  max-width: none !important;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 0.15rem 0.45rem;
+}
+
+/* strip the Carbon tile chrome; hairline divider drawn via ::before */
+[class*='esm-login__footer__poweredByTile'] {
+  order: 2;
+  display: flex !important;
+  align-items: center;
+  gap: 0.4rem !important;
+  width: auto !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+[class*='esm-login__footer__poweredByContainer'] {
+  gap: 0.3rem !important;
+  height: auto !important;
+}
+
+[class*='esm-login__footer__poweredByTile'] > * {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+}
+
+[class*='esm-login__footer__poweredByTile']::before {
+  content: '';
+  width: 1px;
+  height: 1.2rem;
+  background: rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+}
+
+/* hide the marketing subtext and "Learn more" link */
+[class*='esm-login__footer__poweredByTile'] [class*='poweredBySubtext'],
+[class*='esm-login__footer__poweredByTile'] [class*='learnMoreButton'] {
+  display: none !important;
+}
+
+[class*='esm-login__footer__poweredByTile'] [class*='poweredByText']:not([class*='poweredBySubtext']) {
+  font-size: 0 !important;
+  margin: 0 !important;
+}
+
+[class*='esm-login__footer__poweredByTile']
+  [class*='poweredByText']:not([class*='poweredBySubtext'])::after {
+  content: 'Powered by';
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+[class*='esm-login__footer__poweredByTile'] svg[class*='poweredByLogo'] {
+  height: 1.25rem !important;
+  width: auto !important;
+  filter: brightness(0) invert(1);
+}
+
+@media only screen and (max-width: 480px) {
+  [class*='esm-login__footer__footer'] {
+    left: 50% !important;
+    bottom: 0.85rem !important;
+    transform: translateX(-50%);
+  }
+}

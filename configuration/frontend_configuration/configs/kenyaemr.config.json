@@ -1,65 +1,15 @@
 {
-  "@kenyaemr/esm-appointments-app": {
-    "concepts": {
-      "visitQueueNumberAttributeUuid": "c61ce16f-272a-41e7-9924-4c555d0932c5"
-    },
-    "includePhoneNumberInExcelSpreadsheet": true,
-    "allowAllDayAppointments": true,
-    "showServiceQueueFields": true,
-    "defaultFacilityUrl": "/ws/rest/v1/kenyaemr/default-facility",
-    "patientIdentifierType": "Unique Patient Number",
-    "showUnscheduledAppointmentsTab": false,
-    "appointmentStatuses": ["Scheduled"],
-    "appointmentTypes": ["Scheduled"],
-    "extensionSlots": {
-      "scheduled-appointments-panels-slot": {
-        "remove": ["cancelled-appointments-panel"],
-        "configure": {
-          "expected-appointments-panel": {
-            "showForPastDate": true,
-            "showForFutureDate": true
-          },
-          "completed-appointments-panel": {
-            "showForPastDate": true,
-            "showForFutureDate": false
-          }
-        }
-      }
-    },
-    "checkInButton": {
-      "enabled": false
-    },
-    "checkOutButton": {
-      "enabled": false
-    }
-  },
   "@kenyaemr/esm-bed-management-app": {
     "patientListForAdmissionUrl": "/ws/rest/v1/kenyaemr/sql?q=bedManagement.sqlGet.patientListForAdmission",
     "admissionLocationTagUuid": "0815e0b2-1182-4157-9340-bee371ea41e4"
-  },
-  "@kenyaemr/esm-login-app": {
-    "logo": {
-      "src": "/openmrs/spa/config/assets/ethiopiaemr-package/login-logo-new.png"
-    },
-    "links": {
-      "src": "/openmrs/spa/home/service-queues"
-    },
-    "footer": {
-      "additionalLogos": [
-        {
-          "src": "/openmrs/spa/config/assets/ethiopiaemr-package/ethiopia_moh_logo.png",
-          "alt": "EthiopiaEMR"
-        },
-        {
-          "src": "/openmrs/spa/config/assets/ethiopiaemr-package/login-logo-new.png",
-          "alt": "EthiopiaEMR"
-        }
-      ]
-    },
-    "backgroundImage": "/openmrs/spa/config/assets/ethiopiaemr-package/login-background.png"
-  },
-  "@kenyaemr/esm-stock-management-app": {
-    "stockTakeReasonUUID": "b1267598-6048-4146-af84-98716b88a25a"
+  }, 
+ "@kenyaemr/esm-stock-management-app": {
+    "autoPopulateResponsiblePerson": true,
+    "stockTakeReasonUUID": "b1267598-6048-4146-af84-98716b88a25a",
+    "enablePrintButton": true,
+    "Display conditions": {
+      "privileges": ["o3: Manage Stocks"]
+    }
   },
   "@kenyaemr/esm-procedure-app": {
     "procedureOrderTypeUuid": "b4a7c280-369e-4d12-9ce8-18e36783fed6"
@@ -67,18 +17,41 @@
   "@kenyaemr/esm-patient-flags-app": {
     "excludeLinks": [
       "ADR Assessment",
+      "Appointments",
       "Case Management",
       "Cross Border",
       "Lab Manifest App",
       "Supplies Dispensing",
-      "Manage Stocks",
       "Facility Dashboard",
       "Dispensing App",
       "KenyaEMR Home",
       "Reports",
       "Referrals"
     ],
-    "instanceName": "EthioEMR 3.0 "
+    "instanceName": "TenaEHR",
+    "extensionSlots": {
+      "navbar-items-slot": {
+        "add": [],
+        "remove": [],
+        "configure": {
+          "ethiopiaemr-etl-admin-dashboard-link": {
+            "Display conditions": {
+              "privileges": ["ethiopiaemr: View ETL Dashboard"]
+            }
+          },
+          "ethiopiaemr-reports-dashboard-link": {
+            "Display conditions": {
+              "privileges": ["ethiopiaemr: View Reports Dashboard"]
+            }
+          },
+          "orders-admin-nav-link": {
+            "Display conditions": {
+              "privileges": ["Manage OrderTemplates"]
+            }
+          }
+        }
+      }
+    }
   },
   "@kenyaemr/esm-imaging-orders-app": {
     "extensionSlots": {
@@ -101,7 +74,7 @@
     "defaultIdentifierTypes": ["24aedd37-b5be-4e08-8311-3721b8d5100d"]
   },
   "@kenyaemr/esm-version-app": {
-    "defaultLogoPath": "/openmrs/spa/config/assets/ethiopiaemr-package/login-logo-new.png"
+    "defaultLogoPath": "/openmrs/spa/config/assets/ethiopiaemr-package/tenaehr-logo-horizontal.png"
   },
   "@kenyaemr/esm-facility-dashboard-app": {
     "showAirAndReportLinks": true,
@@ -109,12 +82,45 @@
   },
   "@kenyaemr/esm-ward-app": {
     "extensionSlots": {
+      "ward-patients-admitted-slot": {
+        "remove": ["ward-patients-admitted"]
+      },
       "default-ward": {
         "add": ["add-patient-to-ward-siderail-button"]
+      },
+      "inpatient-dashboard-tabs-slot": {
+        "add": [
+          "ipd-medication-administration"
+        ],
+        "remove": [
+          "in-patient-treatment-chart"
+        ]
       }
     },
+    "admissionRequestFormUuid": "5e725bad-750e-4d31-b4bc-cab4c9ea63ff",
+    "inpatientDischargeFormUuid": "ea36f403-c2d3-42e7-93d1-af5cf59d6f22",
+    "ipdDischargeEncounterTypeUuid": "7e618d13-ffdb-4650-9a97-10ccd16ca36d",
+    "dailyBedFeeBillableService": "0a5a23e3-c953-428c-92e3-3b99f8a822f0",
     "Display conditions": {
       "privileges": ["o3: View Ward Dashboard"]
+    }
+  },
+  "@kenyaemr/esm-express-workflow-app": {
+    "extensionSlots": {
+      "ewf-admissions-dashboard-slot": {
+        "add": ["in-patient-dashboard"]
+      }
+    },
+    "Translation overrides": {
+      "am": {
+        "mch": "የእናትና ህፃናት ጤና",
+        "pharmacy": "መድሃኒት ቤት",
+        "reports": "መረጃዎች",
+        "radiologyAndImaging": "ራዲዮሎጂ እና ኢሜጂንግ",
+        "inPatient": "ውስጣዊ ሕመምተኛ",
+        "labOrders": "የላቦራቶሪ ትዕዛዞች",
+        "prescription": "የመድኃኒት ውል"
+      }
     }
   }
 }

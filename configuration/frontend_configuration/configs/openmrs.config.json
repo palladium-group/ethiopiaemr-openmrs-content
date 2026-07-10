@@ -31,14 +31,47 @@
     "queueTables": {
       "columnDefinitions": [
         {
-          "id": "serve-patient",
-          "columnType": "extension",
-          "header": "Serve Patient"
+          "id": "patient-name",
+          "header": "Patient Name"
+        },
+        {
+          "id": "queue-number",
+          "header": "Queue Number"
+        },
+        {
+          "id": "coming-from",
+          "header": "Coming From"
+        },
+        {
+          "id": "priority",
+          "header": "Priority"
+        },
+        {
+          "id": "status",
+          "header": "Status"
         },
         {
           "id": "transfer-status",
           "columnType": "extension",
-          "header": "Transfer"
+          "header": "Linkage"
+        },
+        {
+          "id": "room-assignment",
+          "columnType": "extension",
+          "header": "Room"
+        },
+        {
+          "id": "queue",
+          "header": "Queue"
+        },
+        {
+          "id": "wait-time",
+          "header": "Wait Time"
+        },
+        {
+          "id": "actions",
+          "columnType": "extension",
+          "header": "Actions"
         }
       ],
       "tableDefinitions": [
@@ -50,13 +83,35 @@
             "priority",
             "status",
             "transfer-status",
+            "room-assignment",
             "queue",
             "wait-time",
-            "serve-patient",
             "actions"
           ]
         }
       ]
+    },
+    "extensionSlots": {
+      "service-queues-dashboard-slot": {
+        "remove": [
+          "service-queues-dashboard"
+        ],
+        "order": [
+          "service-queues-dashboard-shell",
+          "service-queue-table-dashboard",
+          "queue-table-by-status-menu-dashboard-link"
+        ]
+      },
+      "service-queues-metrics-slot": {
+        "remove": [
+          "metrics-card-checked-in-patients"
+        ],
+        "order": [
+          "clinical-metrics-card-checked-in-patients",
+          "metrics-card-waiting-patients",
+          "metrics-card-average-wait-time"
+        ]
+      }
     },
     "showQueueTableTab": false,
     "defaultIdentifierTypes": [
@@ -90,8 +145,7 @@
     },
     "extensionSlots": {
       "prescription-action-button-slot": {
-        "remove": ["dispense-action-button"],
-        "add": ["billing-test-order-action"]
+        "remove": ["order-action-button"]
       }
     },
     "endVisitOnDispense": {
@@ -109,14 +163,49 @@
       }
     }
   },
+  "@openmrs/esm-appointments-app": {
+    "includePhoneNumberInExcelSpreadsheet": true,
+    "allowAllDayAppointments": true,
+    "patientIdentifierType": "Unique Patient Number",
+    "showUnscheduledAppointmentsTab": false,
+    "showEarlyAppointmentsTab": false,
+    "appointmentStatuses": ["Scheduled"],
+    "appointmentTypes": ["Scheduled"],
+    "checkInButton": {
+      "enabled": true
+    },
+    "checkOutButton": {
+      "enabled": true
+    }
+  },
   "@openmrs/esm-laboratory-app": {
     "extensionSlots": {
       "tests-ordered-actions-slot": {
         "remove": ["pick-lab-request-action"]
+      },
+      "inprogress-tests-actions-slot": {
+        "remove": ["launch-malaria-results-workspace"],
+        "configure": {
+          "add-lab-request-results-action": {
+            "Display conditions": {
+              "privileges": ["o3: Add Lab Request Results"]
+            }
+          },
+          "reject-lab-request-worklist-action": {
+            "Display conditions": {
+              "privileges": ["o3: Reject Lab Request"]
+            }
+          }
+        }
       }
     },
     "Display conditions": {
       "privileges": ["o3: View Laboratory Dashboard"]
+    }
+  },
+  "@openmrs/esm-patient-search-app": {
+    "excludePatientIdentifierCodeTypes": {
+      "uuids": ["dfacd928-0370-4315-99d7-6ec1c9f7ae76"]
     }
   },
   "@openmrs/esm-patient-banner-app": {
@@ -128,6 +217,9 @@
     ],
     "Display conditions": {
       "privileges": ["o3: View Patient Banner"]
+    },
+    "excludePatientIdentifierCodeTypes": {
+      "uuids": ["dfacd928-0370-4315-99d7-6ec1c9f7ae76"]
     },
     "extensionSlots": {
       "patient-actions-slot": {
@@ -206,7 +298,11 @@
         "remove": ["patient-flag-tags"]
       },
       "patient-chart-summary-dashboard-slot": {
-        "remove": ["biometrics-overview-widget", "vitals-overview-widget"],
+        "remove": [
+          "biometrics-overview-widget",
+          "vitals-overview-widget",
+          "patient-summary-dashboard"
+        ],
         "add": ["allergies-details-widget", "immunization-overview-widget"],
         "configure": {
           "allergies-details-widget": {
@@ -259,7 +355,11 @@
         "remove": ["past-visits-detail-overview"]
       },
       "patient-actions-slot": {
-        "remove": ["start-visit-button"]
+        "remove": [
+          "start-visit-button",
+          "mortuary-mark-patient-deceased-button",
+          "custom-start-visit-overflow-menu-item"
+        ]
       },
       "extra-visit-attribute-slot": {
         "remove": ["billing-check-in-form"]
@@ -280,8 +380,23 @@
             }
           }
         }
+      },
+      "patient-chart-dashboard-slot": {
+        "configure": {
+          "charts-summary-dashboard": {
+            "layoutMode": "anchored"
+          }
+        }
+      },
+      "patient-chart-immunizations-dashboard-slot": {
+        "order": [
+          "immunization-detailed-history-card",
+          "immunization-register-action-button",
+          "immunization-details-widget"
+        ]
       }
     },
+    "encounterEditableDuration": 30,
     "showExtraVisitAttributesSlot": true,
     "showServiceQueueFields": true,
     "showUpcomingAppointments": true,
@@ -387,10 +502,6 @@
       "careSettingUuid": "6f0c9a92-6f24-11e3-af88-005056821db0"
     }
   },
-  "@openmrs/esm-patient-medications-app": {
-    "maxDispenseDurationInDays": 365,
-    "requireIndication": false
-  },
   "@openmrs/esm-patient-notes-app": {
     "visitNoteConfig": {
       "encounterTypeUuid": "465a92f2-baf8-42e9-9612-53064be868e8",
@@ -418,7 +529,8 @@
   },
   "@openmrs/esm-primary-navigation-app": {
     "logo": {
-      "src": "/openmrs/spa/config/assets/ethiopiaemr-package/primary-logo-blue-bg.png"
+      "src": "/openmrs/spa/config/assets/ethiopiaemr-package/primary-logo-blue-bg.png",
+      "link": "${openmrsSpaBase}/home/patient-scoreboard"
     },
     "extensionSlots": {
       "app-menu-slot": {
@@ -453,7 +565,6 @@
       "homepage-dashboard-slot": {
         "remove": [
           "reports-homepage-dashboard-link",
-          "clinical-appointments-dashboard-link",
           "patient-services-dashboard-nav-group",
           "linkage-services-dashboard-nav-group",
           "diagnostics-dashboard-nav-group",
@@ -463,9 +574,26 @@
           "triage-dashboard-link",
           "mch-dashboard-link",
           "mortuary-dashboard-link",
-          "consultation-dashboard-link"
+          "consultation-dashboard-link",
+          "adult-triage-dashboard-link",
+          "pediatric-triage-dashboard-link",
+          "emergency-triage-dashboard-link",
+          "gynecological-triage-dashboard-link",
+          "adult-triage-dashboard",
+          "pediatric-triage-dashboard",
+          "emergency-triage-dashboard",
+          "gynecological-triage-dashboard"
         ],
         "add": [],
+        "order": [
+          "clinical-appointments-dashboard-link",
+          "clinical-workflow-triage-hp-link-adult",
+          "clinical-workflow-triage-hp-link-pediatric",
+          "clinical-workflow-triage-hp-link-emergency",
+          "clinical-workflow-triage-hp-link-gynecological",
+          "ewf-mru-dashboard-link",
+          "patient-scoreboard-link"
+        ],
         "configure": {
           "home-widget-db-link": {
             "Display conditions": {
@@ -579,14 +707,29 @@
               "privileges": ["o3: View Claims Management Dashboard"]
             }
           },
-          "central-triage-dashboard-link": {
+          "clinical-workflow-triage-hp-link-adult": {
             "Display conditions": {
-              "privileges": ["ethiopiaemr: Triage: View Triage"]
+              "privileges": ["ethiopiaemr: Triage: View Adult Triage Dashboard"]
             }
           },
-          "emergency-triage-dashboard-link": {
+          "clinical-workflow-triage-hp-link-pediatric": {
             "Display conditions": {
-              "privileges": ["ethiopiaemr: Triage: View Triage"]
+              "privileges": ["ethiopiaemr: Triage: View Pediatric Triage Dashboard"]
+            }
+          },
+          "clinical-workflow-triage-hp-link-emergency": {
+            "Display conditions": {
+              "privileges": ["ethiopiaemr: Triage: View Emergency Triage Dashboard"]
+            }
+          },
+          "clinical-workflow-triage-hp-link-gynecological": {
+            "Display conditions": {
+              "privileges": ["ethiopiaemr: Triage: View Gynecological Triage Dashboard"]
+            }
+          },
+          "clinical-workflow-triage-hp-link-psychiatry": {
+            "Display conditions": {
+              "privileges": ["ethiopiaemr: Triage: View Psychiatry Triage Dashboard"]
             }
           },
           "ewf-mru-dashboard-link": {
@@ -613,6 +756,21 @@
             "Display conditions": {
               "privileges": ["o3: Pharmacy"]
             }
+          },
+          "ward-dashboard-link": {
+            "Display conditions": {
+              "privileges": ["o3: View Ward Dashboard"]
+            }
+          },
+          "ot-dashboard-left-panel-link": {
+            "Display conditions": {
+              "privileges": ["o3: View Operation Theater Dashboard"]
+            }
+          },
+          "consultation-inbox-dashboard-link": {
+            "Display conditions": {
+              "privileges": ["ethiopiaemr: Consultation: View Consultations"]
+            }
           }
         }
       },
@@ -620,13 +778,11 @@
         "add": ["care-panel-summary-dashboard-link"],
         "remove": [
           "ewf-homepage-dashboard-link",
-          "ewf-admissions-dashboard-link",
           "ewf-clinical-encounter-link",
           "ewf-laboratory-dashboard-link",
           "ewf-pharmacy-dashboard-link",
-          "ewf-procedures-dashboard-link",
-          "ewf-radiology-and-imaging-dashboard-link",
-          "hiv-care-and-treatment-dashboard-link"
+          "hiv-care-and-treatment-dashboard-link",
+          "ewf-preauth-dashboard-link"
         ],
         "configure": {
           "allergies-summary-dashboard": {
@@ -728,15 +884,35 @@
             "Display conditions": {
               "privileges": ["o3: View Patient Vitals and Biometrics"]
             }
+          },
+          "diagnoses-summary-dashboard": {
+            "Display conditions": {
+              "privileges": ["o3: View Patient Chart Diagnoses"]
+            }
+          },
+          "ewf-radiology-and-imaging-dashboard-link": {
+            "Display conditions": {
+              "privileges": ["o3: View Patient Chart Radiology and Imaging"]
+            }
+          },
+          "ewf-procedures-dashboard-link": {
+            "Display conditions": {
+              "privileges": ["o3: View Patient Chart Procedures"]
+            }
+          },
+          "ewf-admissions-dashboard-link": {
+            "Display conditions": {
+              "privileges": ["o3: View Patient Chart Admissions"]
+            }
           }
         }
       }
     }
   },
   "@openmrs/esm-styleguide": {
-    "Brand color #1": "#1372b6",
-    "Brand color #2": "#1372b6",
-    "Brand color #3": "#1372b6",
+    "Brand color #1": "#003B76",
+    "Brand color #2": "#39A54D",
+    "Brand color #3": "#003B76",
     "preferredDateLocale": {
       "en": "am",
       "en-GB": "am"
@@ -767,9 +943,55 @@
     }
   },
   "@openmrs/esm-app-shell": {
-    "Enabled feature flags": ["mpiFlag", "rde"]
+    "Enabled feature flags": ["rde","bedmanagement-module"]
   },
   "@openmrs/esm-patient-attachments-app": {
     "maxFileSize": 5
+  },
+  "@openmrs/esm-patient-orders-app": {
+    "orderTypeEncounterTypeMap": [
+      {
+        "encounterTypeUuid": "a86c239a-d6f2-48c9-942f-ce76b32aa5b1",
+        "orderBasketGrouping": "imaging"
+      },
+      {
+        "encounterTypeUuid": "ea074b9a-1ed4-453a-8ed8-d7eda96414fc",
+        "orderBasketGrouping": "procedures"
+      },
+      {
+        "orderBasketGrouping": "medications",
+        "encounterTypeUuid": "39da3525-afe4-45ff-8977-c53b7b359158"
+      },
+      {
+        "orderBasketGrouping": "52a447d3-a64a-11e3-9aeb-50e549534c5e",
+        "encounterTypeUuid": "55e2d641-3adb-4624-9eec-d6f82656590b"
+      }
+    ],
+    "extensionSlots": {
+      "visit-context-header-slot": {
+        "remove": [
+          "patient-diagnosis"
+        ]
+      }
+    }
+  },
+  "@openmrs/esm-login-app": {
+    "logo": {
+      "src": "/openmrs/spa/config/assets/ethiopiaemr-package/tenaehr-logo-horizontal.png"
+    },
+    "links": {
+      "loginSuccess": "${openmrsSpaBase}/home/patient-scoreboard"
+    },
+    "footer": {
+      "additionalLogos": [
+        {
+          "src": "/openmrs/spa/config/assets/ethiopiaemr-package/ethiopia_moh_logo.png",
+          "alt": "FDRE Ministry of Health"
+        }
+      ]
+    },
+    "background": {
+      "image": "/openmrs/spa/config/assets/ethiopiaemr-package/login-background-brand.svg"
+    }
   }
 }
