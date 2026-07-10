@@ -1,0 +1,916 @@
+{
+  "name": "Inpatient Psychiatry - Incident Report Form",
+  "description": "Inpatient psychiatry incident report: incident type, circumstances, persons involved, actions taken, and outcome.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "0aebb346-d100-445b-82d0-5fd4c28ad2a8",
+  "retired": false,
+  "encounter": "Admission",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Inpatient Psychiatry - Incident Report Form",
+      "sections": [
+        {
+          "label": "Basic Incident Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of Incident",
+              "type": "obs",
+              "id": "dateOfIncident",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "839f0998-44ce-451f-9bd6-20772039316f"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Time of Incident",
+              "type": "obs",
+              "id": "timeOfIncident",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9d19d8cf-5f79-46d0-a9db-f54ddf20901a"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Location/Ward",
+              "type": "obs",
+              "id": "locationWard",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "674bde73-22c5-4517-9160-24d6d0a8183c"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Bed Number",
+              "type": "obs",
+              "id": "bedNumber",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "8ad7dd07-8743-46bc-997c-925937537bca"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Shift",
+              "type": "obs",
+              "id": "shift",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e8c1ae15-bd77-43cf-a54b-6ddaa80784f6",
+                "answers": [
+                  {
+                    "concept": "db22b342-fbbf-49b0-a43e-22abbb53c6b3",
+                    "label": "Morning"
+                  },
+                  {
+                    "concept": "ea96b311-bbc5-407c-859e-e5a4c1ec71e9",
+                    "label": "Evening"
+                  },
+                  {
+                    "concept": "99b09cea-6460-4b81-8d80-c2814b11cbb8",
+                    "label": "Night"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Reported Date and Time",
+              "type": "obs",
+              "id": "reportedDateTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "eff16393-b569-4a8a-b3a2-98b4c624600b"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Reporter Role",
+              "type": "obs",
+              "id": "reporterRole",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "280c2efa-c1d2-49f1-9602-932f9ae0f2d1",
+                "answers": [
+                  {
+                    "concept": "1577AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Nurse"
+                  },
+                  {
+                    "concept": "404b7818-c1ce-450f-9d57-a5d548cd6978",
+                    "label": "Psychiatrist"
+                  },
+                  {
+                    "concept": "3ff1bf58-bceb-4463-b479-6e40df67e809",
+                    "label": "Resident"
+                  },
+                  {
+                    "concept": "af346dd1-5470-44f7-8df3-59a5fea1f634",
+                    "label": "GP"
+                  },
+                  {
+                    "concept": "99160c83-13c9-4e30-8ac5-784a1eababd3",
+                    "label": "Health Officer"
+                  },
+                  {
+                    "concept": "8bf06daf-950f-408c-a562-7ee344211e83",
+                    "label": "Security"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Patient Diagnosis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Suicide Risk",
+              "type": "obs",
+              "id": "suicideRisk",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f6b9ba9b-13ba-4c78-8915-d4a73e4330cf",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "acddd261-594a-4c15-9d78-f8c98ffa9470",
+                    "label": "Low"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "693f4784-9933-4a3b-856e-6ccaa382247f",
+                    "label": "High"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Violence Risk",
+              "type": "obs",
+              "id": "violenceRisk",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "55fef24a-b6cb-435b-b06a-d542ee4e8254",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "acddd261-594a-4c15-9d78-f8c98ffa9470",
+                    "label": "Low"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "693f4784-9933-4a3b-856e-6ccaa382247f",
+                    "label": "High"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Type of Incident",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Type of Incident",
+              "type": "obs",
+              "id": "typeOfIncident",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "ed548eea-3b3c-4ea8-a4b8-e29feaea7a30",
+                "answers": [
+                  {
+                    "concept": "e1831303-404a-4277-9e15-2ad3937958d1",
+                    "label": "Aggression / Violence"
+                  },
+                  {
+                    "concept": "270faa43-e7cf-4638-b2d3-6db198824d38",
+                    "label": "Self-harm / Suicide Attempt"
+                  },
+                  {
+                    "concept": "f6fdeddf-1888-49eb-bc91-b05fb13105a6",
+                    "label": "Fall"
+                  },
+                  {
+                    "concept": "f6d69ecd-c769-49d2-a1ef-4beaf87f6873",
+                    "label": "Absconding"
+                  },
+                  {
+                    "concept": "604166f7-2134-4fc1-9cfe-36a5a9e436b9",
+                    "label": "Medication Error"
+                  },
+                  {
+                    "concept": "2147a792-d04d-41ad-88aa-9223069e0a13",
+                    "label": "Restraint Related"
+                  },
+                  {
+                    "concept": "b5a17318-998f-46f4-ab83-3d259f2cd1b4",
+                    "label": "Seclusion Related"
+                  },
+                  {
+                    "concept": "330846b4-c2c7-4640-833b-ec38698edd18",
+                    "label": "Property Damage"
+                  },
+                  {
+                    "concept": "6bf960c5-4d4f-4bdc-b198-15fe28b2a7df",
+                    "label": "Medical Emergency"
+                  },
+                  {
+                    "concept": "1a3d0b42-02d0-418f-8d9a-a2bbd5e97c87",
+                    "label": "Abuse / Neglect Allegation"
+                  },
+                  {
+                    "concept": "9c1770e7-3a82-4dc6-bbf4-c8a9683ec91c",
+                    "label": "Seizure Related"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other (Specify)"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Specify Incident Type",
+              "type": "obs",
+              "id": "specifyIncidentType",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ae2aebf8-c22c-4448-858f-46b1fb356513"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!(typeOfIncident && typeOfIncident.includes('5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Incident Description",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Detailed Description of Incident",
+              "type": "obs",
+              "id": "detailedDescriptionOfIncident",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "3041a171-394f-4b49-9cb3-934e05703d86"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Antecedents (Events Before Incident)",
+              "type": "obs",
+              "id": "antecedentsEventsBeforeIncident",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c1774897-a1a0-4276-9fa2-c7770c62f93a"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Behavior Observed",
+              "type": "obs",
+              "id": "behaviorObserved",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "8965baa1-47dc-4eb9-bc32-dc1aac3e8a6e"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Duration of Incident",
+              "type": "obs",
+              "id": "durationOfIncident",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "dc2aa8e7-5de8-4208-8696-2b94d901157f",
+                "step": "any"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Staff Present",
+              "type": "obs",
+              "id": "staffPresent",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "3d5f1beb-fa7c-4c68-a642-f91c7124f526"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Witness(es)",
+              "type": "obs",
+              "id": "witnessEs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "767907b8-7f37-484a-88a6-a3bd464d0945"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Persons Involved",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient(s)",
+              "type": "obs",
+              "id": "patientS",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b4573e8a-08ba-4400-8a07-86e22d67ab52"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Staff",
+              "type": "obs",
+              "id": "staff",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c9dfe0c8-f543-414c-bdd8-ffb59b6d25f8"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Visitors",
+              "type": "obs",
+              "id": "visitors",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f6dc6ed0-ee57-4678-87a1-fdf66e74cfe8"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Others",
+              "type": "obs",
+              "id": "others",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e4eb3efc-7bae-4e00-9425-c7fafc7f3ca0"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Injury / Harm Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Injury Occurred",
+              "type": "obs",
+              "id": "injuryOccurred",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4d270afa-af5a-44b8-a31c-ef04a7228079",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Who was injured",
+              "type": "obs",
+              "id": "whoWasInjured",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "dac4fc64-bf01-471f-ba54-ce2c1a2d2473",
+                "answers": [
+                  {
+                    "concept": "162571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Patient"
+                  },
+                  {
+                    "concept": "278983f5-8cd2-48bb-aa0c-51fa170cb264",
+                    "label": "Staff"
+                  },
+                  {
+                    "concept": "00a72dc5-b0e4-4622-bfa1-4b1eaa00c426",
+                    "label": "Visitor"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "injuryOccurred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Type of Injury",
+              "type": "obs",
+              "id": "typeOfInjury",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2f7021e0-9457-409e-9b39-5d3ab3895dcb"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "injuryOccurred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Body Part Affected",
+              "type": "obs",
+              "id": "bodyPartAffected",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3f28533b-1b35-4e97-9e39-819368d277c4"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "injuryOccurred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Severity",
+              "type": "obs",
+              "id": "severity",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "bdfcd55f-d0b8-4643-9aeb-e9c23f55c955",
+                "answers": [
+                  {
+                    "concept": "9e5e916f-80a7-4b75-b727-f0c2f5991a36",
+                    "label": "Minor"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  },
+                  {
+                    "concept": "d46c1cd5-79f0-412f-a854-978bed3d7cc4",
+                    "label": "Life-threatening"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "injuryOccurred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "First Aid Provided",
+              "type": "obs",
+              "id": "firstAidProvided",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "53c21705-15d8-4fce-8372-41a7a412f085",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "injuryOccurred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Referred to Medical Care",
+              "type": "obs",
+              "id": "referredToMedicalCare",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "db5a3d93-4a88-4b16-a1b8-909818d0c57e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "injuryOccurred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Clinical Notes",
+              "type": "obs",
+              "id": "clinicalNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "914470cc-a483-4561-83a4-77c7f0206e18"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "injuryOccurred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Immediate Action Taken",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Immediate Action Taken",
+              "type": "obs",
+              "id": "immediateActionTaken",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "58b3a804-f08a-404f-9205-6ab5c21ea446"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Risk Factors Identified",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Risk Factors Identified",
+              "type": "obs",
+              "id": "riskFactorsIdentified",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4a82e10b-b119-4d1e-9572-7f9e9b27b48d"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Outcome of Incident",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient Condition After Incident",
+              "type": "obs",
+              "id": "patientConditionAfterIncident",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1c571e21-4180-4dd0-8a59-5f5b5de0be50",
+                "answers": [
+                  {
+                    "concept": "06398754-8865-4004-805e-926636d6d6c2",
+                    "label": "Stable"
+                  },
+                  {
+                    "concept": "162677AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Improved"
+                  },
+                  {
+                    "concept": "162679AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unchanged"
+                  },
+                  {
+                    "concept": "8bc2e752-a1a7-4426-929d-43f228c2f74d",
+                    "label": "Deteriorated"
+                  },
+                  {
+                    "concept": "823f1bb8-bfab-45c5-9aa7-c59cb0fc853e",
+                    "label": "Transferred"
+                  },
+                  {
+                    "concept": "159AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Deceased"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Patient Condition After Incident - Other, specify",
+              "type": "obs",
+              "id": "patientConditionAfterIncidentOtherSpecif",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f093e561-7fd3-4ceb-ace5-28a45d974b85"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "patientConditionAfterIncident !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Staff Condition",
+              "type": "obs",
+              "id": "staffCondition",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "e8e6e9cf-af72-4817-be38-49bdc0f2422e"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Ward Safety Restored",
+              "type": "obs",
+              "id": "wardSafetyRestored",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c9ec999d-e220-4b51-a636-6f3fc9c6ee23",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Property Damage",
+              "type": "obs",
+              "id": "propertyDamage",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ef7db5f7-ee61-448e-859c-b42bad8dc0f4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Property Damage Description",
+              "type": "obs",
+              "id": "propertyDamageDescription",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7b1e55f2-5580-492e-b046-0cbe4cf40c21"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "propertyDamage !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Incident Resolved",
+              "type": "obs",
+              "id": "incidentResolved",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c5325d59-46ba-4c99-a315-856651325904",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Notification and Escalation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Persons Notified",
+              "type": "obs",
+              "id": "personsNotified",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "54830751-f482-46d4-b560-fbc36aabea0d",
+                "answers": [
+                  {
+                    "concept": "8617f1ec-56dc-45e5-b3ed-76e3cbe808d7",
+                    "label": "Consultant Psychiatrist"
+                  },
+                  {
+                    "concept": "5598dd37-4640-4b14-a5dc-fff394b65aa8",
+                    "label": "Ward Nurse"
+                  },
+                  {
+                    "concept": "64cf4f9f-45a7-4bde-a6fe-ca130172d2f0",
+                    "label": "Nurse Manager"
+                  },
+                  {
+                    "concept": "591f70d7-2766-4dee-8dc5-68c7264585e3",
+                    "label": "Hospital Administration"
+                  },
+                  {
+                    "concept": "8bf06daf-950f-408c-a562-7ee344211e83",
+                    "label": "Security"
+                  },
+                  {
+                    "concept": "aba6997d-82bf-4221-8bce-767e159123e9",
+                    "label": "Family/Caregiver"
+                  },
+                  {
+                    "concept": "c9ea5e58-6f10-484a-88f9-075fa641c018",
+                    "label": "Police"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Persons Notified - Other, specify",
+              "type": "obs",
+              "id": "personsNotifiedOtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5a7894d7-577b-44e7-984b-2cf670e4ce73"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!(personsNotified && personsNotified.includes('5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+              }
+            },
+            {
+              "label": "Notification Time",
+              "type": "obs",
+              "id": "notificationTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "78bb5fbf-4702-4143-8c2f-8d08e7304150"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Comments",
+              "type": "obs",
+              "id": "comments",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9143ad25-4416-40c2-a13f-22c79013c28e"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Follow-up Plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Follow-up Plan",
+              "type": "obs",
+              "id": "followUpPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0b3d2f81-891b-4c41-b705-0f85366a39a4"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Preventive Measures",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Preventive Measures",
+              "type": "obs",
+              "id": "preventiveMeasures",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d0e2751a-95d3-4eb8-9b22-7bb2cbfc97ad"
+              },
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

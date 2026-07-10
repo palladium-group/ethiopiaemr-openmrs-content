@@ -1,0 +1,1134 @@
+{
+  "name": "Psych Rehab Inpatient Psychiatry Form",
+  "description": "Inpatient psychiatric rehabilitation assessment: functional status, vital signs, rehabilitation goals, and plan.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "2687c3be-6e1a-40e8-bfd6-0ff7801544ed",
+  "retired": false,
+  "encounter": "Admission",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Psych Rehab Inpatient Psychiatry Form",
+      "sections": [
+        {
+          "label": "Ward initial assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Reason for Admission",
+              "type": "obs",
+              "id": "reasonForAdmission",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "162879AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Clinical Status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "History of present illness",
+              "type": "obs",
+              "id": "historyOfPresentIllness",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1390AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Past psychiatry history",
+              "type": "obs",
+              "id": "pastPsychiatryHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "e9739b23-b803-4a4f-a8ef-7f7883596752"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Family history",
+              "type": "obs",
+              "id": "familyHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2c347aaf-a5e7-4b2f-b791-47adff9c293f"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Medical and Substance",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Medical comorbidity",
+              "type": "obs",
+              "id": "medicalComorbidity",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "56d5c4c4-fd8e-4762-8578-935adff0d4be"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Substance use comorbidity",
+              "type": "obs",
+              "id": "substanceUseComorbidity",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a10b2a3f-55cb-456b-b232-544d433d9eb5"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Physical Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulse Rate (PR)",
+              "type": "obs",
+              "id": "pulseRatePr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Non palpable",
+              "type": "obs",
+              "id": "nonPalpable",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "168c1f77-9ffd-4b9b-a5a8-c58ee2d2e5b2",
+                "answers": [
+                  {
+                    "concept": "9f0f09c7-7e54-4b3e-8c9f-d1eed1c67480",
+                    "label": "Non palpable"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Pulse strength",
+              "type": "obs",
+              "id": "pulseStrength",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2df0fb84-1367-4cc5-95ed-0991be7ffd99",
+                "answers": [
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  },
+                  {
+                    "concept": "750c7a46-03f0-4cba-aa58-f5dc0efca955",
+                    "label": "Weak"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Pulse rhythm",
+              "type": "obs",
+              "id": "pulseRhythm",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d5f88633-71f9-48e2-9618-4c7dab53f73d",
+                "answers": [
+                  {
+                    "concept": "72e760d6-f370-4c9c-bf3b-e2ca284fc950",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "0319d9c9-acdf-495d-8147-45d0f2eded5a",
+                    "label": "Irregular"
+                  },
+                  {
+                    "concept": "2167bf41-8839-4ef7-ae8b-06b605d762ef",
+                    "label": "Regularly Irregular"
+                  },
+                  {
+                    "concept": "3f20305f-ef44-40ff-b7c0-9c6fa7a29b10",
+                    "label": "Irregularly Irregular"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Respiratory Rate (RR)",
+              "type": "obs",
+              "id": "respiratoryRateRr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Respiratory depth",
+              "type": "obs",
+              "id": "respiratoryDepth",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "818757cc-9250-4325-b386-a9080b8a0cbd",
+                "answers": [
+                  {
+                    "concept": "164487AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Deep"
+                  },
+                  {
+                    "concept": "14e83323-26c1-49a7-b2da-7aa9de79d2b4",
+                    "label": "Shallow"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Respiratory rhythm",
+              "type": "obs",
+              "id": "respiratoryRhythm",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "19811f54-57f6-4546-976e-6ebbb7e90cf4",
+                "answers": [
+                  {
+                    "concept": "72e760d6-f370-4c9c-bf3b-e2ca284fc950",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "0319d9c9-acdf-495d-8147-45d0f2eded5a",
+                    "label": "Irregular"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Oxygen Saturation (SPO2)",
+              "type": "obs",
+              "id": "oxygenSaturationSpo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "54385c49-43f8-41df-bd58-4f92c36a6735",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Oxygen delivery method",
+              "type": "obs",
+              "id": "oxygenDeliveryMethod",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2c9764d5-f646-4c1b-898e-b6f426c028b9",
+                "answers": [
+                  {
+                    "concept": "02ef98f2-06a0-4282-bb7b-f83765495696",
+                    "label": "At room air"
+                  },
+                  {
+                    "concept": "8ef9cb2d-96e6-45c6-9c4e-fd8df821c0ee",
+                    "label": "On Nasal Oxygen"
+                  },
+                  {
+                    "concept": "6616f57c-0dc8-441d-88e7-4197a2ced454",
+                    "label": "On Face Mask"
+                  },
+                  {
+                    "concept": "326e8ff2-cb5e-4cc5-beac-bb38e493fec1",
+                    "label": "On CPAP"
+                  },
+                  {
+                    "concept": "2caaf622-fb39-4a02-8d9f-35900d5605cf",
+                    "label": "On Mechanical Ventilation"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Oxygen Liter (Nasal Oxygen)",
+              "type": "obs",
+              "id": "oxygenLiterNasalOxygen",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6afa667e-f345-4f0b-afc3-aa5d42f6522d",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '8ef9cb2d-96e6-45c6-9c4e-fd8df821c0ee'"
+              }
+            },
+            {
+              "label": "Oxygen Liter (Face Mask)",
+              "type": "obs",
+              "id": "oxygenLiterFaceMask",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6afa667e-f345-4f0b-afc3-aa5d42f6522d",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '6616f57c-0dc8-441d-88e7-4197a2ced454'"
+              }
+            },
+            {
+              "label": "Fraction of Inspired Oxygen (FiO2) (CPAP)",
+              "type": "obs",
+              "id": "fractionOfInspiredOxygenFio2Cpap",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f759d9d0-d25e-4aa0-8fd8-d7160f7b3859",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '326e8ff2-cb5e-4cc5-beac-bb38e493fec1'"
+              }
+            },
+            {
+              "label": "Oxygen Flow Rate (CPAP)",
+              "type": "obs",
+              "id": "oxygenFlowRateCpap",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ac21a619-68c5-47e6-9b56-cc897dc964c1",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '326e8ff2-cb5e-4cc5-beac-bb38e493fec1'"
+              }
+            },
+            {
+              "label": "Oxygen Liter (CPAP)",
+              "type": "obs",
+              "id": "oxygenLiterCpap",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6afa667e-f345-4f0b-afc3-aa5d42f6522d",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '326e8ff2-cb5e-4cc5-beac-bb38e493fec1'"
+              }
+            },
+            {
+              "label": "Fraction of Inspired Oxygen (FiO2) (Mechanical Ventilation)",
+              "type": "obs",
+              "id": "fractionOfInspiredOxygenFio2MechanicalVe",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f759d9d0-d25e-4aa0-8fd8-d7160f7b3859",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '2caaf622-fb39-4a02-8d9f-35900d5605cf'"
+              }
+            },
+            {
+              "label": "Oxygen Flow Rate (Mechanical Ventilation)",
+              "type": "obs",
+              "id": "oxygenFlowRateMechanicalVentilation",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ac21a619-68c5-47e6-9b56-cc897dc964c1",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '2caaf622-fb39-4a02-8d9f-35900d5605cf'"
+              }
+            },
+            {
+              "label": "Oxygen Liter (Mechanical Ventilation)",
+              "type": "obs",
+              "id": "oxygenLiterMechanicalVentilation",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6afa667e-f345-4f0b-afc3-aa5d42f6522d",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '2caaf622-fb39-4a02-8d9f-35900d5605cf'"
+              }
+            },
+            {
+              "label": "Temperature (T)",
+              "type": "obs",
+              "id": "temperatureT",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Temperature measurement site",
+              "type": "obs",
+              "id": "temperatureMeasurementSite",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "eb8f1c58-ed95-41f3-ade9-c73a636eaf4d",
+                "answers": [
+                  {
+                    "concept": "5112AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Axillary"
+                  },
+                  {
+                    "concept": "160240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Oral"
+                  },
+                  {
+                    "concept": "6f56af83-c15a-4b92-9a8e-848275ae8294",
+                    "label": "Rectal"
+                  },
+                  {
+                    "concept": "b8c21d04-6424-480a-8987-7ee7b6e884e4",
+                    "label": "Ear"
+                  },
+                  {
+                    "concept": "3591287e-f4c1-4325-976f-e19951718c70",
+                    "label": "Forehead(Gun Thermometer)"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Systolic Blood Pressure (SBP)",
+              "type": "obs",
+              "id": "systolicBloodPressureSbp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "cbf5a376-e659-42f6-9345-be9e98cbdd17",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Diastolic Blood Pressure (DBP)",
+              "type": "obs",
+              "id": "diastolicBloodPressureDbp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Weight (Wt)",
+              "type": "obs",
+              "id": "weightWt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d{1,2})?$/.test(''+myValue)",
+                  "message": "At most 2 decimal places allowed."
+                }
+              ]
+            },
+            {
+              "label": "Height (Ht)",
+              "type": "obs",
+              "id": "heightHt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Body Mass Index (BMI)",
+              "type": "obs",
+              "id": "bodyMassIndexBmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Pain Score (0–10)",
+              "type": "obs",
+              "id": "painScore010",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "bd8288fd-223b-4bbb-a1e5-16be65c75c74",
+                "min": "0",
+                "max": "10",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "General Appearance",
+              "type": "obs",
+              "id": "generalAppearance",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6f708192-a314-2345-f678-90123456bcde"
+              },
+              "readonly": false
+            },
+            {
+              "label": "H.E.E.N.T",
+              "type": "obs",
+              "id": "hEENT",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "54bd868a-a9a5-49ba-9aa7-830ecd46a00c"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Lymphoglandular System",
+              "type": "obs",
+              "id": "lymphoglandularSystem",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8a6f2874-5826-43c0-a9bb-d1af9829656e"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Respiratory System",
+              "type": "obs",
+              "id": "respiratorySystem",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "85d6e157-0300-4160-a046-afbea6fd3010"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Cardiovascular System",
+              "type": "obs",
+              "id": "cardiovascularSystem",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "97418a86-fb19-45d3-9681-cf40bfc6ca7e"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Abdomen",
+              "type": "obs",
+              "id": "abdomen",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7c3cc7df-0544-41db-bc04-3d6538d006f5"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Genitourinary System",
+              "type": "obs",
+              "id": "genitourinarySystem",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6ab88e73-0d91-482c-8370-a12502976e8d"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Integumentary System",
+              "type": "obs",
+              "id": "integumentarySystem",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2451c3b3-9e1b-40a2-b4da-9b885967cfa6"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Musculoskeletal System",
+              "type": "obs",
+              "id": "musculoskeletalSystem",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "51c17fc8-9778-455c-bdc8-09973c625e36"
+              },
+              "readonly": false
+            },
+            {
+              "label": "CNS",
+              "type": "obs",
+              "id": "cns",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0903af90-01d1-48c0-9e00-69182e63c6da"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Meningeal sign",
+              "type": "obs",
+              "id": "meningealSign",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3e05d98a-776a-4b72-9a91-ba34cfb0131b",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Risk Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Suicidal thoughts",
+              "type": "obs",
+              "id": "suicidalThoughts",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "caa2da86-6575-4104-a606-3aba919be793",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Aggression",
+              "type": "obs",
+              "id": "aggression",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "762a60ba-fba6-4e0b-9316-6641cea40960",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Intoxication",
+              "type": "obs",
+              "id": "intoxication",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4b0eb0c6-025c-4b78-9359-864e7dcb63bd",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Withdrawal risk",
+              "type": "obs",
+              "id": "withdrawalRisk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "02484b4e-a082-4d74-8935-fa95241291ff",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Mental Status Examination (Brief)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Appearance",
+              "type": "obs",
+              "id": "appearance",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "47b3934e-cf87-4c43-a4b8-dba1b38533d9",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "66f85921-edf2-4256-8a53-57e67e148fac",
+                    "label": "Unkempt"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Behavior",
+              "type": "obs",
+              "id": "behavior",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "deee3bf9-ba36-43a9-b1ba-ac8bedd5cb00",
+                "answers": [
+                  {
+                    "concept": "185984d1-5d94-4fa9-ab15-96632e039daf",
+                    "label": "Calm"
+                  },
+                  {
+                    "concept": "3cc851e5-6fbe-4515-97df-0064c0241e11",
+                    "label": "Agitated"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Speech",
+              "type": "obs",
+              "id": "speech",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "29402901-303c-45bd-b290-0ecdcb77f887",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "ab506f53-3430-4521-b6ea-b93f50447744",
+                    "label": "Slurred"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Mood",
+              "type": "obs",
+              "id": "mood",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fa747c79-cd17-4c89-9ae3-65cab085bb91",
+                "answers": [
+                  {
+                    "concept": "b0981c4c-bf20-446e-94b8-28ef84c2c807",
+                    "label": "Depressed"
+                  },
+                  {
+                    "concept": "c3fcb551-08f3-41bb-8b45-813addf03eb5",
+                    "label": "Anxious"
+                  },
+                  {
+                    "concept": "40d60fa7-47b0-46a0-a4d4-2f040014dc80",
+                    "label": "Irritable"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Thought",
+              "type": "obs",
+              "id": "thought",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d4d99567-3bc3-43d7-a2ed-7672b7dd8c6d",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "db3dbd0d-b506-480f-8002-4fece8917490",
+                    "label": "Delusion"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Perception",
+              "type": "obs",
+              "id": "perception",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6a189a16-e897-4105-a59e-c50832a93885",
+                "answers": [
+                  {
+                    "concept": "425cf922-cfca-4696-92e2-d43fa99b3fb0",
+                    "label": "Hallucination"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Insight",
+              "type": "obs",
+              "id": "insight",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a21f1d64-3213-48f1-b489-3e50acd94352",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Functional Baseline",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "ADL",
+              "type": "obs",
+              "id": "adl",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "98f58b87-ff43-42fd-976a-098196ebbc86",
+                "answers": [
+                  {
+                    "concept": "83ed948b-9604-423e-981a-b3c2dbc2d0aa",
+                    "label": "Independent"
+                  },
+                  {
+                    "concept": "46969e18-a3c4-4fcc-ba87-907917ac0986",
+                    "label": "Partial"
+                  },
+                  {
+                    "concept": "0b7cf0f6-fd21-4978-9f34-5b52dc6d0100",
+                    "label": "Dependent"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Social",
+              "type": "obs",
+              "id": "social",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fc8b6db1-a0f3-47a5-80ff-db6ff561d1b4",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "d444fd09-b6a1-477c-bf73-000cf877ac2a",
+                    "label": "Limited"
+                  },
+                  {
+                    "concept": "f7a8ee1c-e416-40c4-baa2-0e09b1b8ae78",
+                    "label": "Isolated"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Occupation skills",
+              "type": "obs",
+              "id": "occupationSkills",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "92a0a836-c5c5-4b88-87a5-20253b5cc261",
+                "answers": [
+                  {
+                    "concept": "249a137c-c05d-4acc-843b-2392132f6a5f",
+                    "label": "Functional"
+                  },
+                  {
+                    "concept": "7acf2842-fb7d-4c80-8e86-5e84615cf7a8",
+                    "label": "Impaired"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Revised Diagnosis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Revised Diagnosis",
+              "type": "obs",
+              "id": "revisedDiagnosis",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "a6836bce-3cec-4ac1-b89b-ed50d1967941"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Treatment plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Treatment plan",
+              "type": "obs",
+              "id": "treatmentPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "163104AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Rehab Goals",
+              "type": "obs",
+              "id": "rehabGoals",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "2f37dd77-d03d-4674-ba8c-e92ee59786d3",
+                "answers": [
+                  {
+                    "concept": "d35b2630-388e-414e-8e58-333b94220350",
+                    "label": "Self-care improvement"
+                  },
+                  {
+                    "concept": "8e412e1e-84ec-44df-80b2-fdfda8e95159",
+                    "label": "Social skills"
+                  },
+                  {
+                    "concept": "5d87412e-ffd3-417f-bc45-8fc7c72c089b",
+                    "label": "Medication adherence"
+                  },
+                  {
+                    "concept": "d44d2cdd-d58d-47f0-a0a2-821b0627d34f",
+                    "label": "Vocational skills"
+                  },
+                  {
+                    "concept": "bc1e232c-ba5c-4b14-baf2-a339bcb4e6aa",
+                    "label": "Relapse prevention"
+                  },
+                  {
+                    "concept": "5ec51542-6a40-4f25-8654-6af7628002a9",
+                    "label": "Others"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Others (specify)",
+              "type": "obs",
+              "id": "othersSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e4eb3efc-7bae-4e00-9425-c7fafc7f3ca0"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!(rehabGoals && rehabGoals.includes('5ec51542-6a40-4f25-8654-6af7628002a9'))"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
