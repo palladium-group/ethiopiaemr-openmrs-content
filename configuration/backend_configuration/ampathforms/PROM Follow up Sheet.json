@@ -1,0 +1,331 @@
+{
+  "name": "PROM Follow up Sheet",
+  "description": "Premature Rupture of Membranes follow-up monitoring form",
+  "version": "1.0",
+  "published": true,
+  "uuid": "22b825f9-f3e8-4875-9661-822acf6e7cac",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": false
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "PROM Follow up Sheet",
+      "sections": [
+        {
+          "label": "Basic Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date & Time",
+              "type": "obs",
+              "required": true,
+              "id": "dateTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "159622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Blood Pressure",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic",
+              "type": "obs",
+              "required": false,
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "300"
+              },
+              "validators": [
+                {
+                  "type": "warning",
+                  "jsExpression": "value > 140 || value < 90 ? 'Abnormal systolic BP (Normal: 90-140 mmHg)' : null"
+                }
+              ]
+            },
+            {
+              "label": "Diastolic",
+              "type": "obs",
+              "required": false,
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "200"
+              },
+              "validators": [
+                {
+                  "type": "warning",
+                  "jsExpression": "value > 90 || value < 60 ? 'Abnormal diastolic BP (Normal: 60-90 mmHg)' : null"
+                }
+              ]
+            },
+            {
+              "label": "Posture",
+              "type": "obs",
+              "required": false,
+              "id": "posture",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "159633AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sitting"
+                  },
+                  {
+                    "concept": "159629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Supine"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pulse",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulse Rate",
+              "type": "obs",
+              "required": false,
+              "id": "pulse",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "300"
+              },
+              "validators": [
+                {
+                  "type": "warning",
+                  "jsExpression": "value > 100 || value < 60 ? 'Abnormal pulse rate (Normal: 60-100 bpm)' : null"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Temperature",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "required": false,
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "max": "50"
+              },
+              "validators": [
+                {
+                  "type": "warning",
+                  "jsExpression": "value > 37.5 || value < 36.0 ? 'Abnormal temperature (Normal: 36.0-37.5°C)' : null"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Fetal Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Fetal Heart Beat",
+              "type": "obs",
+              "required": false,
+              "id": "fetalHeartBeat",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1440AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "300"
+              }
+            },
+            {
+              "label": "Fetal Kick Count",
+              "type": "obs",
+              "required": false,
+              "id": "fetalKick",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8f2c9b71-9d8f-4a42-9a40-1e6e4bb7c822",
+                "min": "0"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Clinical Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Presence of Abdominal Tenderness",
+              "type": "obs",
+              "required": false,
+              "id": "abdominalTenderness",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9c1d2e3f-4a5b-6c7d-8e9f-0a1b2c3d4e5f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Presence of Leakage of Amniotic Fluid",
+              "type": "obs",
+              "required": false,
+              "id": "leakageAmnioticFluid",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7f4a2b91-3c5e-4d68-9a01-2b3c4d5e6f70",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Present"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Foul Smell Vaginal Discharge",
+              "type": "obs",
+              "required": false,
+              "id": "foulSmellVaginalDischarge",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f0a1b2c3-d4e5-46f7-a8b9-0c1d2e3f4050",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Urine Output",
+              "type": "obs",
+              "required": false,
+              "id": "urineOutput",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161929AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
+              }
+            },
+            {
+              "label": "WBC Description",
+              "type": "obs",
+              "required": false,
+              "id": "wbcDescription",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8a5b3c92-4d6e-4e79-0b12-3c4d5e6f7081"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Remark",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Remark",
+              "type": "obs",
+              "required": false,
+              "id": "remark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": "3"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}
