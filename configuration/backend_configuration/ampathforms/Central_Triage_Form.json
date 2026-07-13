@@ -1,6 +1,6 @@
 {
-  "name": "Central Triage Form (Team Review Extension)",
-  "description": "Central Triage Form for vital signs assessment — extended per eka team review.",
+  "name": "Central Triage Form",
+  "description": "Central Triage Form for vital signs assessment — extended per team review.",
   "version": "1.5",
   "published": true,
   "uuid": "ff723d59-0650-4b84-858d-c1045b690683",
@@ -48,65 +48,6 @@
               "id": "encLocation"
             }
           ]
-        },
-        {
-          "label": "Patient Details",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Visit Type",
-              "type": "obs",
-              "required": "true",
-              "id": "visitType",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "164181AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "conceptMappings": [
-                  {
-                    "relationship": "SAME-AS",
-                    "type": "CIEL",
-                    "value": "164181"
-                  }
-                ],
-                "answers": [
-                  {
-                    "concept": "164180AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "New"
-                  },
-                  {
-                    "concept": "160530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Repeat"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Date of Previous Visit",
-              "type": "obs",
-              "id": "dateOfPreviousVisit",
-              "required": {
-                "type": "conditionalRequired",
-                "referenceQuestionId": "visitType",
-                "referenceQuestionAnswers": [
-                  "160530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                ],
-                "message": "Date of Previous Visit is required when Visit Type is Repeat."
-              },
-              "questionOptions": {
-                "rendering": "date",
-                "concept": "164093AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "validators": [
-                {
-                  "type": "date",
-                  "allowFutureDates": "false"
-                }
-              ],
-              "hide": {
-                "hideWhenExpression": "isEmpty(visitType) || visitType !== '160530AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
-            }
-          ]
         }
       ]
     },
@@ -127,31 +68,6 @@
                 "min": "1"
               },
               "questions": [
-                {
-                  "label": "Date",
-                  "type": "obs",
-                  "id": "vitalEntryDate",
-                  "questionOptions": {
-                    "rendering": "date",
-                    "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  "validators": [
-                    {
-                      "type": "date",
-                      "allowFutureDates": "false"
-                    }
-                  ]
-                },
-                {
-                  "label": "Time",
-                  "type": "obs",
-                  "id": "vitalEntryTime",
-                  "datePickerFormat": "timer",
-                  "questionOptions": {
-                    "rendering": "date",
-                    "concept": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
-                },
                 {
                   "label": "Blood Pressure",
                   "type": "obsGroup",
@@ -336,14 +252,14 @@
                   "readonly": true,
                   "questionOptions": {
                     "rendering": "radio",
-                    "concept": "ffbcbb16-7cd0-4335-8327-25f87dae5e41",
+                    "concept": "255b89fc-8a01-4dae-90b3-613d65bb76bb",
                     "answers": [
                       {
-                        "concept": "3421cdb9-4fa1-4b00-93dd-0d95b233bd7a",
+                        "concept": "f1ac86a2-5934-49c5-aecc-16426e6b1d59",
                         "label": "Underweight"
                       },
                       {
-                        "concept": "1bd0fac3-b5fe-4e1a-b362-b3fa7157f392",
+                        "concept": "ad106589-fb33-4ce5-9159-0cf793996bce",
                         "label": "Healthy Weight"
                       },
                       {
@@ -351,12 +267,12 @@
                         "label": "Overweight"
                       },
                       {
-                        "concept": "85229098-a599-4a79-8088-280ff4f45896",
+                        "concept": "9f2f66bf-dc75-47ac-b201-c891a9d5bbd6",
                         "label": "Obese"
                       }
                     ],
                     "calculate": {
-                      "calculateExpression": "(isEmpty(height) || isEmpty(weight) || Number(height) <= 0 || Number(weight) <= 0) ? '' : (calcBMI(height,weight) < 18.5 ? '3421cdb9-4fa1-4b00-93dd-0d95b233bd7a' : calcBMI(height,weight) < 25 ? '1bd0fac3-b5fe-4e1a-b362-b3fa7157f392' : calcBMI(height,weight) < 30 ? '590a7581-714a-4b47-a1c9-712501889e44' : '85229098-a599-4a79-8088-280ff4f45896')"
+                      "calculateExpression": "(isEmpty(height) || isEmpty(weight) || Number(height) <= 0 || Number(weight) <= 0) ? '' : (calcBMI(height,weight) < 18.5 ? 'f1ac86a2-5934-49c5-aecc-16426e6b1d59' : calcBMI(height,weight) < 25 ? 'ad106589-fb33-4ce5-9159-0cf793996bce' : calcBMI(height,weight) < 30 ? '590a7581-714a-4b47-a1c9-712501889e44' : '9f2f66bf-dc75-47ac-b201-c891a9d5bbd6')"
                     }
                   },
                   "questionInfo": "Auto-classified from BMI: <18.5 Underweight, 18.5–24.9 Healthy Weight, 25.0–29.9 Overweight, ≥30.0 Obese."

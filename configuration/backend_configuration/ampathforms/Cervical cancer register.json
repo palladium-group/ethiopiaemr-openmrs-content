@@ -1,0 +1,802 @@
+{
+  "name": "Cervical cancer register",
+  "description": "Cervical cancer register for client identification, reproductive history, examination, screening outcome and follow up",
+  "version": "1.0",
+  "published": true,
+  "uuid": "b1c2d3e4-5f60-4789-a012-b3c4d5e6f701",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Client Identification",
+      "sections": [
+        {
+          "label": "Cervreg Client Identification",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Cervreg Date of Visit",
+              "type": "obs",
+              "id": "cervregDateOfVisit",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "a1b2c3d4-e5f6-4789-abcd-ef0123456701"
+              }
+            },
+            {
+              "label": "VIA registration No",
+              "type": "obs",
+              "id": "viaRegistrationNo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "aa12bc34-de56-4789-8f01-23456789abcd"
+              }
+            },
+            {
+              "label": "Cervreg Educational Status",
+              "type": "obs",
+              "id": "cervregEducationalStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2fce6210-ce7a-4979-b632-2712f2b7cc3f",
+                "answers": [
+                  {
+                    "concept": "81186ffc-ec61-4de8-b82f-a23acd2c62d9",
+                    "label": "Illiterate"
+                  },
+                  {
+                    "concept": "1e679edb-3d0b-4edf-85b8-58f8d2476978",
+                    "label": "Can read and write"
+                  },
+                  {
+                    "concept": "44ee0bdb-6a32-4a4d-828f-ca2483addabd",
+                    "label": "Elementary/junior high"
+                  },
+                  {
+                    "concept": "009c273e-1d57-4cb5-9a47-d3abaf32f6fc",
+                    "label": "High School"
+                  },
+                  {
+                    "concept": "09291ed5-d168-482b-bf68-3d4c2b223dad",
+                    "label": "Tertiary School"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Time of examination",
+              "type": "obs",
+              "id": "timeOfExamination",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b0948acc-9979-4cdd-b21f-68a651970bba",
+                "answers": [
+                  {
+                    "concept": "fc569aba-27a8-4ab2-ad3e-edd88dd6439b",
+                    "label": "First examination"
+                  },
+                  {
+                    "concept": "12721386-b5ce-4179-a7cc-9ed4a835ee1c",
+                    "label": "UOGCFUC A Follow Up"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Reproductive History",
+      "sections": [
+        {
+          "label": "Marital and Obstetric History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HIVTC, Marital Status",
+              "type": "obs",
+              "id": "hivtcMaritalStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1057AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Single"
+                  },
+                  {
+                    "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Married"
+                  },
+                  {
+                    "concept": "1056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Divorced"
+                  },
+                  {
+                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Widowed"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "ANC, Parity",
+              "type": "obs",
+              "id": "ancParity",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1053AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Age at first intercourse",
+              "type": "obs",
+              "id": "ageAtFirstIntercourse",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8d2d098a-3295-4d9d-a850-c6cfcd49e162"
+              }
+            },
+            {
+              "label": "Pregnant, If pregnant STOP screening",
+              "type": "obs",
+              "id": "pregnantStopScreening",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5272AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Contraceptive Use",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Current contraceptive",
+              "type": "obs",
+              "id": "currentContraceptive",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3b96324b-c6e9-4361-9709-9f7f25f7c131",
+                "answers": [
+                  {
+                    "concept": "164813AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "MaC-Male Condom"
+                  },
+                  {
+                    "concept": "164814AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "FeC-Female Condom"
+                  },
+                  {
+                    "concept": "5279AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Inj-Injectable"
+                  },
+                  {
+                    "concept": "160570AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "EC-Emergency Contraception"
+                  },
+                  {
+                    "concept": "5274AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "OC-Oral Contraceptive"
+                  },
+                  {
+                    "concept": "1472AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "TL-Tubal Ligation"
+                  },
+                  {
+                    "concept": "1489AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "V-Vasectomy"
+                  },
+                  {
+                    "concept": "76022AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Imp-Implanon"
+                  },
+                  {
+                    "concept": "1359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Nr-Norplant"
+                  },
+                  {
+                    "concept": "1873AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "JD-Jedale"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "ER, Specify",
+              "type": "obs",
+              "id": "erSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Menstrual History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Menstrual Bleeding Pattern",
+              "type": "obs",
+              "id": "menstrualBleedingPattern",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f8e9e56f-6140-4a2d-bd35-a702a1b9949c",
+                "answers": [
+                  {
+                    "concept": "75267d78-dab0-43ee-bc45-69cdb6eba0da",
+                    "label": "Regular(23-35 Intervals)"
+                  },
+                  {
+                    "concept": "e8141d18-7ace-44c6-8992-5538150923a0",
+                    "label": "Irregular"
+                  },
+                  {
+                    "concept": "00d42f23-bf21-4f90-a186-72f5eaab3cab",
+                    "label": "Menopause"
+                  },
+                  {
+                    "concept": "d6aa0bea-237b-420f-9513-7df1dfeb62df",
+                    "label": "Postcoital Spotting or Bleeding"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "STI History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Number of sexual partners of client",
+              "type": "obs",
+              "id": "numberOfSexualPartnersOfClient",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "bb23cd45-ef67-4890-9a12-3456789abcde"
+              }
+            },
+            {
+              "label": "Number of sexual partners of Partner",
+              "type": "obs",
+              "id": "numberOfSexualPartnersOfPartner",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "9d267b5a-f7e4-495e-87bf-590eff9b6da1"
+              }
+            },
+            {
+              "label": "History of STI of client",
+              "type": "obs",
+              "id": "historyOfStiOfClient",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b7aad04a-0e82-455b-bd43-c4bb8e651142",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "History of STI of Partner",
+              "type": "obs",
+              "id": "historyOfStiOfPartner",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f42222d9-bb69-401e-88df-e54ae4d7b50e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Coronary Artery Disease Risk Factors",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Coronary Artery Disease, Risk factors",
+              "type": "obs",
+              "id": "cadRiskFactors",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "1361fba1-17d3-4ce3-bd14-185062f1691c",
+                "answers": [
+                  {
+                    "concept": "117399AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Comorbidities, Hypertension"
+                  },
+                  {
+                    "concept": "119481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Comorbidities, Diabetes"
+                  },
+                  {
+                    "concept": "117441AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Comorbidities, Hyperlipidemia"
+                  },
+                  {
+                    "concept": "9ddbec10-a4a3-4794-b7c8-1592570e2305",
+                    "label": "Age > 60/65 m/f"
+                  },
+                  {
+                    "concept": "155600AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Smoking"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "HIV/AIDS Testing",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HIV/AIDS Testing",
+              "type": "obs",
+              "id": "hivAidsTesting",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cc34de56-f078-49a1-ab23-456789abcdef",
+                "answers": [
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  },
+                  {
+                    "concept": "dd45ef67-0189-4ab2-bc34-56789abcdef0",
+                    "label": "If Yes, enter chart status"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Yes, enter chart status",
+              "type": "obs",
+              "id": "ifYesEnterChartStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "dd45ef67-0189-4ab2-bc34-56789abcdef0",
+                "answers": [
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reactive"
+                  },
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "VCT, Non-Reactive"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(hivAidsTesting) || hivAidsTesting !== 'dd45ef67-0189-4ab2-bc34-56789abcdef0'"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Examination",
+      "sections": [
+        {
+          "label": "Tuberculosis, Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Tuberculosis, Examination",
+              "type": "obs",
+              "id": "tuberculosisExamination",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "ee56f078-129a-4bc3-cd45-6789abcdef01",
+                "answers": [
+                  {
+                    "concept": "ff670189-23ab-4cd4-de56-789abcdef012",
+                    "label": "Icterus"
+                  },
+                  {
+                    "concept": "0a78129a-34bc-4de5-ef67-89abcdef0123",
+                    "label": "Lymph Nodes"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Screening Outcome and Treatment",
+      "sections": [
+        {
+          "label": "Screening",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Counselled on VIA/ crypto/ LEEP/Tx",
+              "type": "obs",
+              "id": "counselledOnViaCryptoLeepTx",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1b8923ab-45cd-4ef6-a078-9abcdef01234",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Screened with VIA",
+              "type": "obs",
+              "id": "screenedWithVia",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2c9a34bc-56de-40f7-b189-abcdef012345",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Screening Result",
+              "type": "obs",
+              "id": "screeningResult",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3dab45cd-67ef-4128-c29a-bcdef0123456",
+                "answers": [
+                  {
+                    "concept": "4ebc56de-78f0-4239-d3ab-cdef01234567",
+                    "label": "AFF C Cx VIA Negative"
+                  },
+                  {
+                    "concept": "5fcd67ef-8901-434a-e4bc-def012345678",
+                    "label": "VIA Positive Non eligible for crayo"
+                  },
+                  {
+                    "concept": "6ade78f0-9012-445b-f5cd-ef0123456789",
+                    "label": "VIA Positive eligible for crayo"
+                  },
+                  {
+                    "concept": "7bef8901-a123-456c-067d-f0123456789a",
+                    "label": "Cervical Cancer Screening, Suspicious for Cervical Cancer"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Cervreg Treatment",
+              "type": "obs",
+              "id": "cervregTreatment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "66ce8174-0d19-4c87-8789-ccb9e13c504e",
+                "answers": [
+                  {
+                    "concept": "162812AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "cryotherapy"
+                  },
+                  {
+                    "concept": "162810AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "LEEP"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Breast Cancer, Breast Examination Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Breast Cancer, Breast Side",
+              "type": "obs",
+              "id": "breastCancerBreastSide",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3bcdf092-864b-4d5b-b705-e0be613456c8",
+                "answers": [
+                  {
+                    "concept": "5141AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Right Side"
+                  },
+                  {
+                    "concept": "5139AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Left Side"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Breast Cancer, Breast Mobility",
+              "type": "obs",
+              "id": "breastCancerBreastMobility",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fe86c821-3b29-44c8-bdd8-2b6e4c2d336f",
+                "answers": [
+                  {
+                    "concept": "5643853e-0e24-4c02-8710-14f59052bbd9",
+                    "label": "Fixed"
+                  },
+                  {
+                    "concept": "2790147c-a22b-45dd-b5ed-7a59abbd0797",
+                    "label": "Mobile"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Breast Cancer, Breast Size",
+              "type": "obs",
+              "id": "breastCancerBreastSize",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ec85354a-1dbd-4839-80a3-d9a09138c60e"
+              }
+            },
+            {
+              "label": "Breast Cancer, Skin Involvement",
+              "type": "obs",
+              "id": "breastCancerSkinInvolvement",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4cf6d9a6-fd74-4978-b3db-12a50c1124c3",
+                "answers": [
+                  {
+                    "concept": "51d70167-c82e-47f6-93e4-b285bd8cf99d",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "130677AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Peau dorange"
+                  },
+                  {
+                    "concept": "112934AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ulcer"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Referral",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Cerv If other Specify",
+              "type": "obs",
+              "id": "cervIfOtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ea1d64b6-9924-43bd-b674-a7e481e35f0e"
+              }
+            },
+            {
+              "label": "Referral Reason",
+              "type": "obs",
+              "id": "referralReason",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a02ce6e6-df4a-47af-a761-4345c4ab2cbf",
+                "answers": [
+                  {
+                    "concept": "7bef8901-a123-456c-067d-f0123456789a",
+                    "label": "Cervical Cancer Screening, Suspicious for Cervical Cancer"
+                  },
+                  {
+                    "concept": "5fcd67ef-8901-434a-e4bc-def012345678",
+                    "label": "Non eligible for cryo"
+                  },
+                  {
+                    "concept": "8cf09a12-b234-467d-178e-0123456789ab",
+                    "label": "Breast further examination"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Oth-Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Cervreg If other Specify",
+              "type": "obs",
+              "id": "cervregIfOtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ea1d64b6-9924-43bd-b674-a7e481e35f0e"
+              }
+            },
+            {
+              "label": "Date appointed for follow up",
+              "type": "obs",
+              "id": "dateAppointedForFollowUp",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "9da1ab23-c345-478e-289f-123456789abc"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Follow up Visit",
+      "sections": [
+        {
+          "label": "Cervreg Follow up Visit",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of rescreening",
+              "type": "obs",
+              "id": "dateOfRescreening",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "aeb2bc34-d456-489f-39a0-23456789abcd"
+              }
+            },
+            {
+              "label": "Follow up screening result",
+              "type": "obs",
+              "id": "followUpScreeningResult",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3dab45cd-67ef-4128-c29a-bcdef0123456",
+                "answers": [
+                  {
+                    "concept": "4ebc56de-78f0-4239-d3ab-cdef01234567",
+                    "label": "AFF C Cx VIA Negative"
+                  },
+                  {
+                    "concept": "6ade78f0-9012-445b-f5cd-ef0123456789",
+                    "label": "VIA Positive eligible for crayo"
+                  },
+                  {
+                    "concept": "5fcd67ef-8901-434a-e4bc-def012345678",
+                    "label": "VIA Positive Non eligible for crayo"
+                  },
+                  {
+                    "concept": "7bef8901-a123-456c-067d-f0123456789a",
+                    "label": "Cervical Cancer Screening, Suspicious for Cervical Cancer"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Cervreg Treatment",
+              "type": "obs",
+              "id": "cervregTreatmentFollowUp",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "66ce8174-0d19-4c87-8789-ccb9e13c504e",
+                "answers": [
+                  {
+                    "concept": "162812AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "cryotherapy"
+                  },
+                  {
+                    "concept": "162810AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "LEEP"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Cervreg Remark",
+              "type": "obs",
+              "id": "cervregRemark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

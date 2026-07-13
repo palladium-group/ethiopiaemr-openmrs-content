@@ -1,0 +1,1379 @@
+{
+  "name": "ECT Administration Form",
+  "description": "Electroconvulsive therapy (ECT) administration record: pre-ECT assessment, stimulus parameters, seizure and recovery monitoring, and complications.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "a90e8923-9e9f-441a-a99e-c688fc939f77",
+  "retired": false,
+  "encounter": "Procedure",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "ECT Administration Form",
+      "sections": [
+        {
+          "label": "Pre-Procedure Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Ward",
+              "type": "obs",
+              "id": "ward",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "deb5d4bb-c169-4c58-9cb0-675a518dabce",
+                "answers": [
+                  {
+                    "concept": "aa076803-e955-4043-a296-8b475b2dc56b",
+                    "label": "Psychiatry Ward"
+                  },
+                  {
+                    "concept": "d6bfd6a6-cd00-445e-863e-e23fed6e2649",
+                    "label": "Medical Ward"
+                  },
+                  {
+                    "concept": "dc328bd2-ec6e-4aab-befb-53c178d2f318",
+                    "label": "Emergency"
+                  },
+                  {
+                    "concept": "286f264a-7e2e-4b1e-baa5-072654863f32",
+                    "label": "ICU"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Current Diagnosis",
+              "type": "obs",
+              "id": "currentDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "03e853aa-5630-4f31-9fe5-9ae34dc45427"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Indication for ECT",
+              "type": "obs",
+              "id": "indicationForEct",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "1b77d735-8649-455c-a1ec-d37a797c6d19",
+                "answers": [
+                  {
+                    "concept": "f299be3c-573b-5803-84c0-07a70ab5c932",
+                    "label": "Severe Depression"
+                  },
+                  {
+                    "concept": "d554ec79-ceea-404e-b34e-0da261749324",
+                    "label": "Treatment Resistant Depression"
+                  },
+                  {
+                    "concept": "3ff0fa95-f50f-50e8-b35f-26035608092f",
+                    "label": "Catatonia"
+                  },
+                  {
+                    "concept": "8518a807-8785-4f1f-a111-8d7555afe61e",
+                    "label": "Mania"
+                  },
+                  {
+                    "concept": "113155AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Schizophrenia"
+                  },
+                  {
+                    "concept": "c2d9fb45-f250-5042-97f4-b82352e91a6a",
+                    "label": "Psychosis"
+                  },
+                  {
+                    "concept": "f3dcc97b-8ef9-41f6-98ee-410bbb918535",
+                    "label": "Suicidal Risk"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Indication for ECT - Other, specify",
+              "type": "obs",
+              "id": "indicationForEctOtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5156b8c9-c512-4ede-823d-b4fa474feadb"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!(indicationForEct && indicationForEct.includes('5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+              }
+            },
+            {
+              "label": "Consent Obtained",
+              "type": "obs",
+              "id": "consentObtained",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3c99ac8e-4fed-4110-a458-d83e0ed6243f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Consent Obtained From",
+              "type": "obs",
+              "id": "consentObtainedFrom",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6b7a6b4d-84ff-484c-842f-0cf373f51250",
+                "answers": [
+                  {
+                    "concept": "162571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Patient"
+                  },
+                  {
+                    "concept": "1527AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Parent"
+                  },
+                  {
+                    "concept": "160639AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Guardian"
+                  },
+                  {
+                    "concept": "2d44565e-f1b9-4d61-8ff6-22135da6550f",
+                    "label": "Spouse"
+                  },
+                  {
+                    "concept": "66111b42-5925-4b56-bd17-89bc083bebdd",
+                    "label": "Next of Kin"
+                  },
+                  {
+                    "concept": "bb18efa6-0b27-4b06-abfc-d43ecbad1fb2",
+                    "label": "Legal Representative"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "consentObtained !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Consent Obtained From - Other, specify",
+              "type": "obs",
+              "id": "consentObtainedFromOtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "95cab602-2f8a-4d96-a5bf-1d7dc18b0616"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "consentObtainedFrom !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "NPO Status Confirmed",
+              "type": "obs",
+              "id": "npoStatusConfirmed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e3b2b7b3-1bff-4595-ad5b-3f37f68e322c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Previous ECT History",
+              "type": "obs",
+              "id": "previousEctHistory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e63923bc-f308-41ff-a3de-60687b47fe0b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Previous ECT Details",
+              "type": "obs",
+              "id": "previousEctDetails",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "58ce2f22-c7bc-4c95-9d22-cd2a887d8da5"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "previousEctHistory !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Current CNS Medications - Medication",
+              "type": "obs",
+              "id": "currentCnsMedicationsMedication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c0b037f5-d64e-4c5d-bf03-f95901650c2b"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Current CNS Medications - Dose",
+              "type": "obs",
+              "id": "currentCnsMedicationsDose",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ca061619-58e6-4059-a12c-2260e2fcca2d"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Current CNS Medications - Frequency",
+              "type": "obs",
+              "id": "currentCnsMedicationsFrequency",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "62da1a95-ef32-4641-a309-98bf83a0c136"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Current CNS Medications - Route",
+              "type": "obs",
+              "id": "currentCnsMedicationsRoute",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "2764d828-04b0-4c74-99b6-d71bdd18ca90"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Other Medications - Medication",
+              "type": "obs",
+              "id": "otherMedicationsMedication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "90eaee4b-1ac1-4b59-be67-997fd7b588cc"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Other Medications - Dose",
+              "type": "obs",
+              "id": "otherMedicationsDose",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f92cd6ac-fd38-4c23-81e0-27da26a0a7dc"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Other Medications - Frequency",
+              "type": "obs",
+              "id": "otherMedicationsFrequency",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "bc5f9db1-c984-4727-87b4-08022731801e"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Other Medications - Route",
+              "type": "obs",
+              "id": "otherMedicationsRoute",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "374668f2-b94f-43ca-b3c6-148cd404f45d"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Pre-treatment Laboratory Results - CBC",
+              "type": "obs",
+              "id": "preTreatmentLaboratoryResultsCbc",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "510e0b8f-9b03-4c24-8867-345b551da380"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Pre-treatment Laboratory Results - Electrolytes",
+              "type": "obs",
+              "id": "preTreatmentLaboratoryResultsElectrolyte",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d1e20adb-b510-465c-ab19-f2182d80b337"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Pre-treatment Laboratory Results - Renal Function",
+              "type": "obs",
+              "id": "preTreatmentLaboratoryResultsRenalFuncti",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "01d86c86-5394-45b2-8bf3-6898545c3f19"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Pre-treatment Laboratory Results - Liver Function",
+              "type": "obs",
+              "id": "preTreatmentLaboratoryResultsLiverFuncti",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e433fade-f937-4537-b153-8120bd49fcff"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Pre-treatment Laboratory Results - Blood Glucose",
+              "type": "obs",
+              "id": "preTreatmentLaboratoryResultsBloodGlucos",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "00ae94cc-f245-424d-915f-f14508551fa5"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Pre-treatment Laboratory Results - Pregnancy Test (if applicable)",
+              "type": "obs",
+              "id": "preTreatmentLaboratoryResultsPregnancyTe",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b6bf5efc-9713-48f6-a16b-7a418f26db49"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Attach Laboratory Report",
+              "type": "obs",
+              "id": "attachLaboratoryReport",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b5b26f02-d1ac-40c2-a7bb-4a5166524b21"
+              },
+              "readonly": false,
+              "questionInfo": "Not natively supported in O3 (complex datatype attachment)."
+            },
+            {
+              "label": "ECG",
+              "type": "obs",
+              "id": "ecg",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ccfea680-1702-49b3-8913-f859add98183",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  },
+                  {
+                    "concept": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Done"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "ECG Abnormality Details",
+              "type": "obs",
+              "id": "ecgAbnormalityDetails",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "25750095-cd45-4cf1-a874-8b1d5f0da58e"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "ecg2 !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pre-Procedure Vital Signs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Blood Pressure Systolic",
+              "type": "obs",
+              "id": "bloodPressureSystolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f31befaf-eb3d-41da-97dc-63c1cd362679",
+                "step": "1"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Blood Pressure Diastolic",
+              "type": "obs",
+              "id": "bloodPressureDiastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "72b2c7c3-15f6-43c7-aac5-9227da64f41f",
+                "step": "1"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Pulse Rate",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Respiratory Rate",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Temperature",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Oxygen Saturation (SpO₂)",
+              "type": "obs",
+              "id": "oxygenSaturationSpo",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "54385c49-43f8-41df-bd58-4f92c36a6735",
+                "step": "1"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Oxygen Delivery",
+              "type": "obs",
+              "id": "oxygenDelivery",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0a1b6af2-5fa3-40b2-858a-791c237b44af",
+                "answers": [
+                  {
+                    "concept": "162735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Room Air"
+                  },
+                  {
+                    "concept": "81341AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Oxygen"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Oxygen Flow Rate",
+              "type": "obs",
+              "id": "oxygenFlowRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ac21a619-68c5-47e6-9b56-cc897dc964c1",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDelivery !== '81341AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Weight",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Blood Sugar (Optional)",
+              "type": "obs",
+              "id": "bloodSugarOptional",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1f672169-16c1-44d1-9041-b6fc780adc44",
+                "step": "any"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Procedure Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "ECT Method",
+              "type": "obs",
+              "id": "ectMethod",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2a404895-d861-46c6-b2d3-7d621a1f771b",
+                "answers": [
+                  {
+                    "concept": "160406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Bilateral"
+                  },
+                  {
+                    "concept": "7125f223-a6b6-411a-850e-1726760ea419",
+                    "label": "Unilateral"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Anesthesia Medication - Medication",
+              "type": "obs",
+              "id": "anesthesiaMedicationMedication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "377b8ceb-ee21-4d35-aa21-9f376b430aaf"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Anesthesia Medication - Dose",
+              "type": "obs",
+              "id": "anesthesiaMedicationDose",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "bbdcda1c-1b0b-493e-83b9-2e8778e63e12"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Anesthesia Medication - Route",
+              "type": "obs",
+              "id": "anesthesiaMedicationRoute",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "c657a886-c5bc-4c73-83a4-af0ba290489f"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Anesthesia Medication - Time Given",
+              "type": "obs",
+              "id": "anesthesiaMedicationTimeGiven",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "75fd468a-0efc-420e-bf16-48a39a98e69d"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Muscle Relaxant - Medication",
+              "type": "obs",
+              "id": "muscleRelaxantMedication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3cc06298-75f5-4679-8085-2697c9754abd"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Muscle Relaxant - Dose",
+              "type": "obs",
+              "id": "muscleRelaxantDose",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "394e4041-5539-4e00-854e-8e1495a6af0e"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Muscle Relaxant - Route",
+              "type": "obs",
+              "id": "muscleRelaxantRoute",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "concept": "3a9e54fc-1019-4858-a586-f8648a22670a"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Muscle Relaxant - Time Given",
+              "type": "obs",
+              "id": "muscleRelaxantTimeGiven",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "18159e12-4030-404b-a06b-b367b43cc83e"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Session Number",
+              "type": "obs",
+              "id": "sessionNumber",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1da61c6f-7c5c-495a-901b-a3679c0b4287",
+                "step": "1"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Procedure Date",
+              "type": "obs",
+              "id": "procedureDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "cfd98ff7-cbe3-4dc8-8987-291ba8fb5ec5"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "ECT Attempt Number",
+              "type": "obs",
+              "id": "ectAttemptNumber",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "414a7a3f-d942-4d08-b7e8-f794b7a89570",
+                "step": "1"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "ECT Machine Settings",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Frequency",
+              "type": "obs",
+              "id": "frequency",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "86e24a7d-6bbc-4996-9e30-cfeb5efc6cb0",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Pulse Width",
+              "type": "obs",
+              "id": "pulseWidth",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e2456cf4-29c2-4398-8372-128275841178",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Stimulus Duration",
+              "type": "obs",
+              "id": "stimulusDuration",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "b648363f-a4d9-403c-b55a-cf87bf6c11f3",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Current",
+              "type": "obs",
+              "id": "current",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "36866f8c-7aa0-4565-8573-2ab618bab70d",
+                "step": "any"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Seizure Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Convulsion Present",
+              "type": "obs",
+              "id": "convulsionPresent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c01d301c-25ad-4ee6-b957-60d5db91c66d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Motor Seizure Duration",
+              "type": "obs",
+              "id": "motorSeizureDuration",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e450cbdc-4687-4c57-be6a-5cf428a0a1a3",
+                "step": "any"
+              },
+              "readonly": false
+            },
+            {
+              "label": "EEG Seizure Duration",
+              "type": "obs",
+              "id": "eegSeizureDuration",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "cec8261b-a84c-4d30-94b5-11b88e71cfda",
+                "step": "any"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Adequate Seizure Achieved",
+              "type": "obs",
+              "id": "adequateSeizureAchieved",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d87f0dd2-2ffc-46ae-92d8-83a481b1fa4d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Immediate Complications",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Post-ECT Complication",
+              "type": "obs",
+              "id": "postEctComplication",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a094c5f0-ec2f-46f0-98a7-57dc59c0232f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Post-ECT Complications",
+              "type": "obs",
+              "id": "postEctComplications",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "b9ed290e-f13b-440a-8014-a291350e0b87",
+                "answers": [
+                  {
+                    "concept": "feb9095e-5c0e-4398-9268-56d091830a49",
+                    "label": "Prolonged Seizure"
+                  },
+                  {
+                    "concept": "e61e9cb0-95d8-5015-a43b-e19a6e4f0bff",
+                    "label": "Bradycardia"
+                  },
+                  {
+                    "concept": "125063AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tachycardia"
+                  },
+                  {
+                    "concept": "116214AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hypotension"
+                  },
+                  {
+                    "concept": "117399AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hypertension"
+                  },
+                  {
+                    "concept": "139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Headache"
+                  },
+                  {
+                    "concept": "c9dcbea6-0cf5-4d07-83f3-aa7683090736",
+                    "label": "Respiratory Depression"
+                  },
+                  {
+                    "concept": "120148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Arrhythmia"
+                  },
+                  {
+                    "concept": "c712a067-e07e-47ce-8d7e-156b377c174b",
+                    "label": "Aspiration"
+                  },
+                  {
+                    "concept": "94bd4ea2-6651-4da4-9cf4-bbae6bd69a54",
+                    "label": "Injury"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "postEctComplication !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Post-ECT Complications - Other, specify",
+              "type": "obs",
+              "id": "postEctComplicationsOtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "95cb7fda-9ed8-40e2-8cfc-89f5d64f78b4"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!(postEctComplications && postEctComplications.includes('5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Recovery Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Recovery Time",
+              "type": "obs",
+              "id": "recoveryTime",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "be6b6086-e5d4-4fbd-b7b2-cba0b4535c0a",
+                "step": "any"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Post-ECT Blood Pressure Systolic",
+              "type": "obs",
+              "id": "postEctBloodPressureSystolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "65602fbd-26a3-4fdf-b8b1-e54a378196fb",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Post-ECT Blood Pressure Diastolic",
+              "type": "obs",
+              "id": "postEctBloodPressureDiastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "584c44e6-fd24-47b6-b9eb-1dc8dbf6f5fc",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Post-ECT Pulse Rate",
+              "type": "obs",
+              "id": "postEctPulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "174ba258-53cf-4e62-90ac-355aadf273ce",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Post-ECT Respiratory Rate",
+              "type": "obs",
+              "id": "postEctRespiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6c1531d9-3e3f-4c74-a06a-8d8380e348c3",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Post-ECT Temperature",
+              "type": "obs",
+              "id": "postEctTemperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "df24952f-da5a-4e24-9950-ad53cc2cf09f",
+                "step": "0.1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Post-ECT SpO₂",
+              "type": "obs",
+              "id": "postEctSpo",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a9d2226d-4868-461d-9918-378b3de27b93",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Level of Consciousness",
+              "type": "obs",
+              "id": "levelOfConsciousness",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a9433e3b-0a7f-50ad-a6d3-d7aad4ba00bc",
+                "answers": [
+                  {
+                    "concept": "9694701e-109a-41d3-8adb-8f07670fbcb5",
+                    "label": "Alert"
+                  },
+                  {
+                    "concept": "400734bc-8f54-5366-bd91-a24082896842",
+                    "label": "Drowsy"
+                  },
+                  {
+                    "concept": "162645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Responds to Voice"
+                  },
+                  {
+                    "concept": "162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Responds to Pain"
+                  },
+                  {
+                    "concept": "60c7864e-4a90-468f-81bf-94a6dea9c898",
+                    "label": "Unresponsive"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Immediate Side Effects",
+              "type": "obs",
+              "id": "immediateSideEffects",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "6b5cb07d-797b-42c9-8e5b-4e05d7c8ea4b",
+                "answers": [
+                  {
+                    "concept": "139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Headache"
+                  },
+                  {
+                    "concept": "120345AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Confusion"
+                  },
+                  {
+                    "concept": "5978AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Nausea"
+                  },
+                  {
+                    "concept": "133632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Muscle Pain"
+                  },
+                  {
+                    "concept": "122983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Vomiting"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Management Given",
+              "type": "obs",
+              "id": "managementGiven",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6b7da9d0-dbba-46e3-8faf-1dbf906a7ccc"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Clinical Outcome",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Clinical Response",
+              "type": "obs",
+              "id": "clinicalResponse",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cbffa234-827b-47a3-a447-a93de53275f9",
+                "answers": [
+                  {
+                    "concept": "162677AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Improved"
+                  },
+                  {
+                    "concept": "162679AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No Change"
+                  },
+                  {
+                    "concept": "b6d89254-f3a6-43b6-b9cf-97d9354044f3",
+                    "label": "Worsened"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Plan for Next Session",
+              "type": "obs",
+              "id": "planForNextSession",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6002e744-d6dd-4407-833b-aa397cd64b78"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Providers",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Responsible Psychiatrist",
+              "type": "obs",
+              "id": "responsiblePsychiatrist",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9e8ce44b-7d75-454d-b123-905348667264"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Anesthetist",
+              "type": "obs",
+              "id": "anesthetist",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4ee56c04-eaa8-425a-8a08-d61feef5dc6c"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Assisting Nurse",
+              "type": "obs",
+              "id": "assistingNurse",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8f83c9b7-56a0-46c1-ae24-ba07ef938fc7"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Attachments",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "ECG",
+              "type": "obs",
+              "id": "ecg2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b5b26f02-d1ac-40c2-a7bb-4a5166524b21"
+              },
+              "readonly": false,
+              "questionInfo": "Not natively supported in O3 (complex datatype attachment)."
+            },
+            {
+              "label": "Consent Form",
+              "type": "obs",
+              "id": "consentForm",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b5b26f02-d1ac-40c2-a7bb-4a5166524b21"
+              },
+              "readonly": false,
+              "questionInfo": "Not natively supported in O3 (complex datatype attachment)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,541 @@
+{
+  "name": "Unit Leprosy Register",
+  "description": "Unit Leprosy Register including diagnosis, disability grade, household contacts, treatment outcome",
+  "version": "1.0",
+  "published": true,
+  "uuid": "6c7d8e9f-a0b1-4234-5012-6e7f89012345",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Patient Identification",
+      "sections": [
+        {
+          "label": "Contact Person",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name of contact person",
+              "type": "obs",
+              "id": "nameOfContactPerson",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "18293a4b-5c6d-412e-8078-3d4e5f607189"
+              }
+            },
+            {
+              "label": "Address of contact person",
+              "type": "obs",
+              "id": "addressOfContactPerson",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d616d6d4-2548-4b68-99e7-f3c85fa96328"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Diagnosis",
+      "sections": [
+        {
+          "label": "Bacteriology",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Bacteriology, Smear result",
+              "type": "obs",
+              "id": "bacteriologySmearResult",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "91f2a3b4-c5d6-4789-a012-b345c678d901",
+                "answers": [
+                  {
+                    "concept": "a2b3c4d5-e6f7-4890-b123-c456d789e012",
+                    "label": "Scanty 1-3"
+                  },
+                  {
+                    "concept": "b3c4d5e6-f708-4901-c234-d567e890f123",
+                    "label": "Scanty 4-9"
+                  },
+                  {
+                    "concept": "c4d5e6f7-0819-4a12-d345-e678f9012345",
+                    "label": "Not read"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. Negative"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Lab no.",
+              "type": "obs",
+              "id": "labNo",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "d5e6f708-192a-4b23-e456-f78901234567"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Category and Type",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Category N.R.F.L.T.O",
+              "type": "obs",
+              "id": "categoryNrflto",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e6f70819-2a3b-4c34-f567-890123456789",
+                "answers": [
+                  {
+                    "concept": "6a1b2c3d-4e5f-4a60-8b71-c2d3e4f50617",
+                    "label": "New case"
+                  },
+                  {
+                    "concept": "160033AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Relapse,"
+                  },
+                  {
+                    "concept": "f708192a-3b4c-4d45-8678-90123456789a",
+                    "label": "treatment after failure, category"
+                  },
+                  {
+                    "concept": "08192a3b-4c5d-4e56-9789-0123456789ab",
+                    "label": "Treatment after loss to follow up"
+                  },
+                  {
+                    "concept": "160563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Transfer in, category"
+                  },
+                  {
+                    "concept": "192a3b4c-5d6e-4f67-a89a-123456789abc",
+                    "label": "Other previously treated patients"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Type of Leprosy",
+              "type": "obs",
+              "id": "typeOfLeprosy",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "693fb77e-4a0a-564e-8b8e-56e7a7c38a3f",
+                "answers": [
+                  {
+                    "concept": "164353AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Multibacilary"
+                  },
+                  {
+                    "concept": "164354AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Paucibacillary"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Affected Body Parts",
+      "sections": [
+        {
+          "label": "Affected body parts, leprosy",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Eyes (R)",
+              "type": "obs",
+              "id": "affectedEyesR",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "2a3b4c5d-6e7f-4078-b9ab-23456789abcd"
+              }
+            },
+            {
+              "label": "Eyes (L)",
+              "type": "obs",
+              "id": "affectedEyesL",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "3b4c5d6e-7f80-4189-cabc-3456789abcde"
+              }
+            },
+            {
+              "label": "Hands (R)",
+              "type": "obs",
+              "id": "affectedHandsR",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "4c5d6e7f-8091-429a-dbcd-456789abcdef"
+              }
+            },
+            {
+              "label": "Hands (L)",
+              "type": "obs",
+              "id": "affectedHandsL",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5d6e7f80-91a2-43ab-ecde-56789abcdef0"
+              }
+            },
+            {
+              "label": "Feet (R)",
+              "type": "obs",
+              "id": "affectedFeetR",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6e7f8091-a2b3-44bc-fdef-6789abcdef01"
+              }
+            },
+            {
+              "label": "Feet (L)",
+              "type": "obs",
+              "id": "affectedFeetL",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "7f8091a2-b3c4-45cd-0ef0-789abcdef012"
+              }
+            },
+            {
+              "label": "Disability status",
+              "type": "obs",
+              "id": "affectedDisabilityStatus",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8091a2b3-c4d5-46de-1f01-89abcdef0123"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Disability Grade",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Leprosy, Disability Grade",
+              "type": "obs",
+              "id": "leprosyDisabilityGrade",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "91a2b3c4-d5e6-47ef-2012-9abcdef01234",
+                "answers": [
+                  {
+                    "concept": "a2b3c4d5-e6f7-4801-3123-abcdef012345",
+                    "label": "Grade 0"
+                  },
+                  {
+                    "concept": "b3c4d5e6-f708-4912-4234-bcdef0123456",
+                    "label": "Grade 1"
+                  },
+                  {
+                    "concept": "c4d5e6f7-0819-4a23-5345-cdef01234567",
+                    "label": "Grade 2"
+                  },
+                  {
+                    "concept": "160737AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not examined"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Treatment and Household Contacts",
+      "sections": [
+        {
+          "label": "Treatment Start",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Treatment started date",
+              "type": "obs",
+              "id": "treatmentStartedDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "d5e6f708-192a-4b34-6456-def012345678"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Household Contact Counts",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Total number of household contacts",
+              "type": "obs",
+              "id": "totalNumberOfHouseholdContacts",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6f70819-2a3b-4c45-7567-ef0123456789"
+              }
+            },
+            {
+              "label": "Number of household contacts screened for leprosy at diagnosis",
+              "type": "obs",
+              "id": "numberOfHouseholdContactsScreened",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f708192a-3b4c-4d56-8678-f0123456789a"
+              }
+            },
+            {
+              "label": "Number of household contacts diagnosed with leprosy",
+              "type": "obs",
+              "id": "numberOfHouseholdContactsDiagnosed",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "08192a3b-4c5d-4e67-9789-0123456789ab"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Household contacts",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name of household contact",
+              "type": "obs",
+              "id": "nameOfHouseholdContact",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "18293a4b-5c6d-412e-8078-3d4e5f607189"
+              }
+            },
+            {
+              "label": "ER, Age",
+              "type": "obs",
+              "id": "erAge",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "d4e5f607-1823-4012-def0-123456789034"
+              }
+            },
+            {
+              "label": "ER, Sex",
+              "type": "obs",
+              "id": "erSex",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3071a2b3-0415-2345-6789-012345abcd07",
+                "answers": [
+                  {
+                    "concept": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "ER, Male"
+                  },
+                  {
+                    "concept": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "ER, Female"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Is the contact screened?",
+              "type": "obs",
+              "id": "isTheContactScreened",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4d5e6f70-8192-4a89-ab01-23456789abcd",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Treatment Outcome",
+      "sections": [
+        {
+          "label": "Outcome",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date outcome assigned",
+              "type": "obs",
+              "id": "dateOutcomeAssigned",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "2a3b4c5d-6e7f-4090-b9ab-23456789abcd"
+              }
+            },
+            {
+              "label": "Treatment Outcome, leprosy",
+              "type": "obs",
+              "id": "treatmentOutcomeLeprosy",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3b4c5d6e-7f80-41a1-cabc-3456789abcde",
+                "answers": [
+                  {
+                    "concept": "160035AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Rx Completed"
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died"
+                  },
+                  {
+                    "concept": "160031AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Left The Follow Up"
+                  },
+                  {
+                    "concept": "160036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Transferred Out"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Disability grades at completion of treatment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Eyes (R)",
+              "type": "obs",
+              "id": "completionEyesR",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "2a3b4c5d-6e7f-4078-b9ab-23456789abcd"
+              }
+            },
+            {
+              "label": "Eyes (L)",
+              "type": "obs",
+              "id": "completionEyesL",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "3b4c5d6e-7f80-4189-cabc-3456789abcde"
+              }
+            },
+            {
+              "label": "Hands (R)",
+              "type": "obs",
+              "id": "completionHandsR",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "4c5d6e7f-8091-429a-dbcd-456789abcdef"
+              }
+            },
+            {
+              "label": "Hands (L)",
+              "type": "obs",
+              "id": "completionHandsL",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5d6e7f80-91a2-43ab-ecde-56789abcdef0"
+              }
+            },
+            {
+              "label": "Feet (R)",
+              "type": "obs",
+              "id": "completionFeetR",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6e7f8091-a2b3-44bc-fdef-6789abcdef01"
+              }
+            },
+            {
+              "label": "Feet (L)",
+              "type": "obs",
+              "id": "completionFeetL",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "7f8091a2-b3c4-45cd-0ef0-789abcdef012"
+              }
+            },
+            {
+              "label": "Disability status",
+              "type": "obs",
+              "id": "completionDisabilityStatus",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8091a2b3-c4d5-46de-1f01-89abcdef0123"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

@@ -149,6 +149,97 @@
           ]
         },
         {
+          "label": "Anthropometrics",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 30–300 cm"
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "BMI (kg/m²)",
+              "type": "obs",
+              "id": "bmi",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "calculate": {
+                  "calculateExpression": "calcBMI(height,weight)"
+                },
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "BMI Category",
+              "type": "obs",
+              "id": "bmiCategory",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "255b89fc-8a01-4dae-90b3-613d65bb76bb",
+                "answers": [
+                  {
+                    "concept": "f1ac86a2-5934-49c5-aecc-16426e6b1d59",
+                    "label": "Underweight"
+                  },
+                  {
+                    "concept": "ad106589-fb33-4ce5-9159-0cf793996bce",
+                    "label": "Healthy Weight"
+                  },
+                  {
+                    "concept": "590a7581-714a-4b47-a1c9-712501889e44",
+                    "label": "Overweight"
+                  },
+                  {
+                    "concept": "9f2f66bf-dc75-47ac-b201-c891a9d5bbd6",
+                    "label": "Obese"
+                  }
+                ],
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight) || Number(height) <= 0 || Number(weight) <= 0) ? '' : (calcBMI(height,weight) < 18.5 ? 'f1ac86a2-5934-49c5-aecc-16426e6b1d59' : calcBMI(height,weight) < 25 ? 'ad106589-fb33-4ce5-9159-0cf793996bce' : calcBMI(height,weight) < 30 ? '590a7581-714a-4b47-a1c9-712501889e44' : '9f2f66bf-dc75-47ac-b201-c891a9d5bbd6')"
+                }
+              },
+              "questionInfo": "Auto-classified from BMI: <18.5 Underweight, 18.5–24.9 Healthy Weight, 25.0–29.9 Overweight, ≥30.0 Obese."
+            },
+            {
+              "label": "Body Surface Area (m²)",
+              "type": "obs",
+              "id": "bodySurfaceArea",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "980AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "calculate": {
+                  "calculateExpression": "height && weight ? Math.round(Math.sqrt((Number(height) * Number(weight)) / 3600) * 100) / 100 : ''"
+                },
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Body surface area (BSA). Auto-calculated from height (cm) and weight (kg) using the Mosteller formula. Used to assist drug dosing calculations."
+            }
+          ]
+        },
+        {
           "label": "SEVERITY OF ILLNESS CRITERIA",
           "isExpanded": "true",
           "questions": [
