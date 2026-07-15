@@ -53,9 +53,10 @@
                 {
                   "id": "admitToLocationSurgical",
                   "label": "Admitted to location",
-                  "type": "control",
+                  "type": "obs",
                   "questionOptions": {
                     "rendering": "ui-select-extended",
+                    "concept": "CIEL:169403",
                     "datasource": {
                       "name": "location_datasource",
                       "config": {
@@ -77,9 +78,10 @@
                 {
                   "id": "admitToLocationOther",
                   "label": "Admitted to location",
-                  "type": "control",
+                  "type": "obs",
                   "questionOptions": {
                     "rendering": "ui-select-extended",
+                    "concept": "CIEL:169403",
                     "datasource": {
                       "name": "location_datasource",
                       "config": {
@@ -94,28 +96,6 @@
                     {
                       "type": "js_expression",
                       "failsWhenExpression": "admissionWardCategory === 'f47a1011-1a2b-4c3d-8e4f-100100101103' && isEmpty(myValue)",
-                      "message": "Admitted to location is required"
-                    }
-                  ]
-                },
-                {
-                  "id": "admitToLocation",
-                  "label": "Admitted to location",
-                  "type": "obs",
-                  "questionOptions": {
-                    "rendering": "text",
-                    "concept": "CIEL:169403",
-                    "calculate": {
-                      "calculateExpression": "admissionWardCategory === 'f47a1011-1a2b-4c3d-8e4f-100100101102' ? admitToLocationSurgical : (admissionWardCategory === 'f47a1011-1a2b-4c3d-8e4f-100100101103' ? admitToLocationOther : '')"
-                    }
-                  },
-                  "hide": {
-                    "hideWhenExpression": "true"
-                  },
-                  "validators": [
-                    {
-                      "type": "js_expression",
-                      "failsWhenExpression": "!isEmpty(admissionWardCategory) && isEmpty(myValue)",
                       "message": "Admitted to location is required"
                     }
                   ]
