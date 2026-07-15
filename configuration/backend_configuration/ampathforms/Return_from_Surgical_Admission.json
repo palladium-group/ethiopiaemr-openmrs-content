@@ -1,0 +1,95 @@
+{
+  "name": "Return from Surgical Admission",
+  "uuid": "f47a6003-1a2b-4c3d-8e4f-100600600301",
+  "version": "1.0.0",
+  "description": "Documents why a patient returned from surgical admission without proceeding to surgery",
+  "processor": "EncounterFormProcessor",
+  "encounter": "Return from Surgical Admission",
+  "encounterType": "Return from Surgical Admission",
+  "published": true,
+  "retired": false,
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Return from Admission",
+      "sections": [
+        {
+          "label": "Return Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Return from admission reason",
+              "type": "obs",
+              "id": "returnFromAdmissionReason",
+              "required": true,
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f47a1010-1a2b-4c3d-8e4f-100100101001"
+              }
+            },
+            {
+              "label": "Anesthesia evaluation notes",
+              "type": "obs",
+              "id": "returnNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f47a1007-1a2b-4c3d-8e4f-100100100701"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
