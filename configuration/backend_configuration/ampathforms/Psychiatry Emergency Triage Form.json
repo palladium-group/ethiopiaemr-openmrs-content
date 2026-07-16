@@ -1,7 +1,7 @@
 {
   "name": "Psychiatry Emergency Triage Form",
   "description": "Psychiatric emergency triage structured severity criteria (OpenMRS O3).",
-  "version": "1.0",
+  "version": "1.2",
   "published": true,
   "uuid": "fe0f8f4c-98ae-46a6-a882-66e61ef4b500",
   "retired": false,
@@ -184,7 +184,7 @@
                 "rendering": "number",
                 "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "calculate": {
-                  "calculateExpression": "calcBMI(height,weight)"
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight)) ? null : calcBMI(height,weight)"
                 },
                 "step": "0.01"
               }
@@ -193,7 +193,6 @@
               "label": "BMI Category",
               "type": "obs",
               "id": "bmiCategory",
-              "readonly": true,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "255b89fc-8a01-4dae-90b3-613d65bb76bb",
@@ -216,10 +215,11 @@
                   }
                 ],
                 "calculate": {
-                  "calculateExpression": "(isEmpty(height) || isEmpty(weight) || Number(height) <= 0 || Number(weight) <= 0) ? '' : (calcBMI(height,weight) < 18.5 ? '3421cdb9-4fa1-4b00-93dd-0d95b233bd7a' : calcBMI(height,weight) < 25 ? '1bd0fac3-b5fe-4e1a-b362-b3fa7157f392' : calcBMI(height,weight) < 30 ? '590a7581-714a-4b47-a1c9-712501889e44' : '85229098-a599-4a79-8088-280ff4f45896')"
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight) || Number(height) <= 0 || Number(weight) <= 0) ? null : (calcBMI(height,weight) < 18.5 ? 'f1ac86a2-5934-49c5-aecc-16426e6b1d59' : calcBMI(height,weight) < 25 ? 'ad106589-fb33-4ce5-9159-0cf793996bce' : calcBMI(height,weight) < 30 ? '590a7581-714a-4b47-a1c9-712501889e44' : '9f2f66bf-dc75-47ac-b201-c891a9d5bbd6')"
                 }
               },
-              "questionInfo": "Auto-classified from BMI: <18.5 Underweight, 18.5–24.9 Healthy Weight, 25.0–29.9 Overweight, ≥30.0 Obese."
+              "questionInfo": "Auto-classified from BMI: <18.5 Underweight, 18.5–24.9 Healthy Weight, 25.0–29.9 Overweight, ≥30.0 Obese.",
+              "readonly": true
             },
             {
               "label": "Body Surface Area (m²)",
@@ -230,7 +230,7 @@
                 "rendering": "number",
                 "concept": "980AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "calculate": {
-                  "calculateExpression": "height && weight ? Math.round(Math.sqrt((Number(height) * Number(weight)) / 3600) * 100) / 100 : ''"
+                  "calculateExpression": "height && weight ? Math.round(Math.sqrt((Number(height) * Number(weight)) / 3600) * 100) / 100 : null"
                 },
                 "min": "0",
                 "step": "0.01"

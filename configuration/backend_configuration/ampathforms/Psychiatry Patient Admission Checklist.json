@@ -1,0 +1,341 @@
+{
+  "name": "Psychiatry Patient Admission Checklist",
+  "description": "Psychiatry inpatient admission checklist documenting emergency, safety, and comorbidity criteria used to determine admission eligibility.",
+  "version": "1.1",
+  "published": true,
+  "uuid": "76c3f544-9a2a-4c4a-8074-7099f4392ec0",
+  "retired": false,
+  "encounter": "Admission",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Psychiatry Patient Admission Checklist",
+      "sections": [
+        {
+          "label": "Patient and Administrative Metadata",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diagnosis (Dx)",
+              "type": "obs",
+              "id": "diagnosisDx",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "085b663b-4729-4553-9499-723487852532"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Admitted From",
+              "type": "obs",
+              "id": "admittedFrom",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "803441e5-e206-4e41-8b01-ba070e1efd7a"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Admitted To",
+              "type": "obs",
+              "id": "admittedTo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "109bae0a-7ed5-4976-aa3c-f27ac34325db"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Category A: Emergency Admission",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Emergency admission criteria",
+              "type": "obs",
+              "id": "emergencyAdmissionCriteria",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "347036f6-5a7c-4749-9056-c73318ba5d8a",
+                "answers": [
+                  {
+                    "concept": "7874d9f2-822b-472e-ac21-8622caf8c536",
+                    "label": "Highly suicidal"
+                  },
+                  {
+                    "concept": "61fee09e-d682-437b-aa29-08460a6910d7",
+                    "label": "Patient has delirium tremens"
+                  },
+                  {
+                    "concept": "d8caf3af-91fd-4cd4-8ede-35d5d23ac924",
+                    "label": "Severe catatonia"
+                  },
+                  {
+                    "concept": "0ab4f633-7d24-420d-be8f-f7fb7c9bb6ba",
+                    "label": "Highly homicidal"
+                  },
+                  {
+                    "concept": "f9325089-a04a-426d-b0a5-068ead036afd",
+                    "label": "Highly destructive"
+                  },
+                  {
+                    "concept": "ba2cbb4d-5599-4ad8-aa14-43a1d8fe0090",
+                    "label": "Complications from eating disorder"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Category B: Substance Dependence Admission",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Substance dependence admission criteria",
+              "type": "obs",
+              "id": "substanceDependenceAdmissionCriteria",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "b072f386-0254-40a7-a7a8-9288ac204aa7",
+                "answers": [
+                  {
+                    "concept": "2b67f300-59fb-4455-974f-fdcfc21e23fe",
+                    "label": "Patient is committed to treatment"
+                  },
+                  {
+                    "concept": "5694beba-b221-4eb2-bbe8-8077431f9753",
+                    "label": "Withdrawal symptoms present"
+                  },
+                  {
+                    "concept": "e6093ae0-db6c-4b28-b7bd-d1c3a1d482ce",
+                    "label": "Psychotic disorder directly linked to substance abuse"
+                  },
+                  {
+                    "concept": "41e5a541-fe4c-4033-92d7-6b0d26596abc",
+                    "label": "Psychotic disorder directly non-emergency comorbidity with substance abuse"
+                  },
+                  {
+                    "concept": "e7972d3b-cd3b-4374-8dc0-68921294fca9",
+                    "label": "Unmanageable at outpatient level"
+                  },
+                  {
+                    "concept": "ebab863f-b174-4d49-8a48-8d0de7700442",
+                    "label": "Absence of other unmanaged physical illness"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Category C: General Psychiatry Admission",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Select all clinical criteria that apply",
+              "type": "obs",
+              "id": "selectAllClinicalCriteriaThatApply",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "b13921ae-1e61-44da-b007-f62f8e84687d",
+                "answers": [
+                  {
+                    "concept": "0ab4f633-7d24-420d-be8f-f7fb7c9bb6ba",
+                    "label": "Highly homicidal"
+                  },
+                  {
+                    "concept": "7874d9f2-822b-472e-ac21-8622caf8c536",
+                    "label": "Highly suicidal"
+                  },
+                  {
+                    "concept": "2846f831-acfa-408f-81f2-b111ef5ee6b0",
+                    "label": "Disordered and/or bizarre thinking / retarded"
+                  },
+                  {
+                    "concept": "ba2cbb4d-5599-4ad8-aa14-43a1d8fe0090",
+                    "label": "Complications from eating disorder"
+                  },
+                  {
+                    "concept": "70cbf3e0-d796-43d3-bd8b-4f6e3dd0e32b",
+                    "label": "Lack of adequate family or social support"
+                  },
+                  {
+                    "concept": "e0282caa-279e-5376-a07f-63d66fa38b8d",
+                    "label": "Destructive behavior"
+                  },
+                  {
+                    "concept": "b642ae48-c069-49ab-8206-37519c568dde",
+                    "label": "No home or home is far away plus at least one of the above risks"
+                  },
+                  {
+                    "concept": "9eb3114b-2af7-4206-8d54-43bf16f3c3d6",
+                    "label": "Catatonic and/or catatonic with refusal to eat"
+                  },
+                  {
+                    "concept": "ef3f0aa9-09aa-4f33-b424-8807cceb50a6",
+                    "label": "Shock and refusal to eat"
+                  },
+                  {
+                    "concept": "69465abe-14e6-4f37-812b-1284a17ec249",
+                    "label": "Drug failure or resistance to treatment"
+                  },
+                  {
+                    "concept": "d4bb71cd-a987-4218-b564-df45825f9f1f",
+                    "label": "Electroconvulsive Therapy (ECT) candidate"
+                  },
+                  {
+                    "concept": "58170b4a-7660-443c-be19-f8072d464cd4",
+                    "label": "Observation required"
+                  },
+                  {
+                    "concept": "105d6a51-2445-48de-8d3c-1fa3a2410a42",
+                    "label": "Drug non-compliance or refusal"
+                  },
+                  {
+                    "concept": "0afb2f27-69af-4860-8d92-5ec3e17c0307",
+                    "label": "Forensic case"
+                  },
+                  {
+                    "concept": "f299be3c-573b-5803-84c0-07a70ab5c932",
+                    "label": "Severe depression"
+                  },
+                  {
+                    "concept": "69b128f6-d04d-4a59-9aa1-dae80dc26f0b",
+                    "label": "Severe mania with psychotic features"
+                  },
+                  {
+                    "concept": "e7b9a4a0-c4dc-53a1-82f5-0e84f83c5565",
+                    "label": "Paranoid schizophrenia"
+                  },
+                  {
+                    "concept": "6c56eb15-58b8-4200-877b-f2424686b320",
+                    "label": "Severe emotional trauma / PTSD"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Admitting Physician Sign-off",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name of Physician",
+              "type": "obs",
+              "id": "nameOfPhysician",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6db17571-2573-417b-bdc7-b3831b684807"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Qualification",
+              "type": "obs",
+              "id": "qualification",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3703ac87-755e-4e8c-b23b-145065a63cbd"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              },
+              "readonly": false,
+              "required": "true",
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Time",
+              "type": "obs",
+              "id": "time",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "bea998f6-65f7-4eab-82aa-37d277dd3eef"
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
