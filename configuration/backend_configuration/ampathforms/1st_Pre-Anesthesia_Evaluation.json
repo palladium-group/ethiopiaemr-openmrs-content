@@ -1,0 +1,145 @@
+{
+  "name": "1st Pre-Anesthesia Evaluation",
+  "uuid": "f47a6001-1a2b-4c3d-8e4f-100600600101",
+  "version": "1.0.0",
+  "description": "First pre-anesthesia evaluation for elective surgery scheduling workflow",
+  "processor": "EncounterFormProcessor",
+  "encounter": "Pre-Anesthesia Evaluation",
+  "encounterType": "Pre-Anesthesia Evaluation",
+  "published": true,
+  "retired": false,
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "1st Pre-Anesthesia Evaluation",
+      "sections": [
+        {
+          "label": "Evaluation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Evaluation type",
+              "type": "obs",
+              "id": "evaluationType",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f47a1002-1a2b-4c3d-8e4f-100100100201",
+                "answers": [
+                  {
+                    "concept": "f47a1002-1a2b-4c3d-8e4f-100100100202",
+                    "label": "1st evaluation"
+                  }
+                ]
+              },
+              "behaviours": [
+                {
+                  "intent": "*",
+                  "defaultValue": "f47a1002-1a2b-4c3d-8e4f-100100100202"
+                }
+              ]
+            },
+            {
+              "label": "Fit to be scheduled for elective surgery?",
+              "type": "obs",
+              "id": "fitToBeScheduled",
+              "required": true,
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f47a1003-1a2b-4c3d-8e4f-100100100301",
+                "answers": [
+                  {
+                    "concept": "f47a1003-1a2b-4c3d-8e4f-100100100302",
+                    "label": "Fit"
+                  },
+                  {
+                    "concept": "f47a1003-1a2b-4c3d-8e4f-100100100303",
+                    "label": "Unfit"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Re-evaluation appointment date",
+              "type": "obs",
+              "id": "reEvaluationAppointmentDate",
+              "required": true,
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "f47a1006-1a2b-4c3d-8e4f-100100100601"
+              },
+              "validators": [
+                {
+                  "type": "date"
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(fitToBeScheduled) || fitToBeScheduled !== 'f47a1003-1a2b-4c3d-8e4f-100100100303'"
+              }
+            },
+            {
+              "label": "Anesthesia evaluation notes",
+              "type": "obs",
+              "id": "anesthesiaEvaluationNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f47a1007-1a2b-4c3d-8e4f-100100100701"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
