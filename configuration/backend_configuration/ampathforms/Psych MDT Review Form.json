@@ -1,0 +1,575 @@
+{
+  "name": "Psych MDT Review Form",
+  "description": "Psychiatry multidisciplinary team (MDT) review: team members, clinical progress, formulation, and management decisions.",
+  "version": "1.1",
+  "published": true,
+  "uuid": "d476d6be-e2a0-4e5f-844c-ba623489e21b",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Psych MDT Review Form",
+      "sections": [
+        {
+          "label": "Patient Info",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Primary Diagnosis",
+              "type": "obs",
+              "id": "primaryDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f57a9e57-be46-471c-9c82-0d9a4b588d83"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Secondary Diagnoses",
+              "type": "obs",
+              "id": "secondaryDiagnoses",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "40115f96-95ab-4d7a-889e-5be6b11cdbc2"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Notes",
+              "type": "obs",
+              "id": "notes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "5204cdd7-0b9e-4147-a151-e1a0ba73db9c"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "MDT Review Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Review Type",
+              "type": "obs",
+              "id": "reviewType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5c1f2222-0f09-4e9e-8e5a-d060e646f26c",
+                "answers": [
+                  {
+                    "concept": "355251bf-b021-4c5b-b192-a4eb91461086",
+                    "label": "Initial"
+                  },
+                  {
+                    "concept": "1099AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Weekly"
+                  },
+                  {
+                    "concept": "1098AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Monthly"
+                  },
+                  {
+                    "concept": "3e1492a4-15e0-4a75-a7bd-ef6273800233",
+                    "label": "Urgent"
+                  },
+                  {
+                    "concept": "d55e663a-240f-4661-8229-c15d7bdd77b3",
+                    "label": "Pre-Discharge"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "MDT Members Present",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "MDT Members Present",
+              "type": "obsGroup",
+              "id": "mdt_members_presentGroup",
+              "questionOptions": {
+                "concept": "72dc3099-72f1-43f5-8903-8a8a277131ce",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "MDT Member",
+                  "type": "obs",
+                  "id": "mdtMember",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "6c2ba8e8-85b1-41d5-ab0f-58f6b2a62376"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Lead by",
+                  "type": "obs",
+                  "id": "leadBy",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "01554f86-2414-4d99-9d24-6e660bae7d5f"
+                  },
+                  "readonly": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Current Clinical Summary",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Presenting Problems",
+              "type": "obs",
+              "id": "presentingProblems",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1dea1ab1-9b5f-44de-a828-c9b46c5ae29e"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Current Mental State",
+              "type": "obs",
+              "id": "currentMentalState",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "b20ed28b-079d-4e53-ad63-d15eac6711d5"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Behavioral Observations",
+              "type": "obs",
+              "id": "behavioralObservations",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "e0610ba4-abc5-4d1a-bec3-66e0614b0bc9"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Level of Functioning",
+              "type": "obs",
+              "id": "levelOfFunctioning",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2aad15ff-5ce7-4001-92ec-ea25d0a9986c"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Engagement with Treatment",
+              "type": "obs",
+              "id": "engagementWithTreatment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "dc1d8ec8-3ba5-465e-8b27-9af565b6be2c"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Risk Review",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Suicide Risk",
+              "type": "obs",
+              "id": "suicideRisk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f6b9ba9b-13ba-4c78-8915-d4a73e4330cf",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "acddd261-594a-4c15-9d78-f8c98ffa9470",
+                    "label": "Low"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "693f4784-9933-4a3b-856e-6ccaa382247f",
+                    "label": "High"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Violence/Aggression Risk",
+              "type": "obs",
+              "id": "violenceAggressionRisk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "aac44e69-ccf4-4db7-ae5e-6aeeb1fbeab8",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "acddd261-594a-4c15-9d78-f8c98ffa9470",
+                    "label": "Low"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "693f4784-9933-4a3b-856e-6ccaa382247f",
+                    "label": "High"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Self-Neglect Risk",
+              "type": "obs",
+              "id": "selfNeglectRisk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "44195b65-6994-4fb5-b770-30910c577f4d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Medication Review",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Response to Current Medication",
+              "type": "obs",
+              "id": "responseToCurrentMedication",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4e6ffdcb-d141-414b-bb68-e1d148c9d9d1"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Side Effects",
+              "type": "obs",
+              "id": "sideEffects",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "21f5767e-cc33-4990-889f-018d2d9e327d"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Adherence",
+              "type": "obs",
+              "id": "adherence",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "51d4ffa9-13c9-4d15-a1af-fb9385ef8134"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Changes Recommended",
+              "type": "obs",
+              "id": "changesRecommended",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0aee29c8-3b0d-4028-861e-306da18b7a3f"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Monitoring Required",
+              "type": "obs",
+              "id": "monitoringRequired",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f48939f2-8c95-4b05-a535-af8a63425905"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Clinical Decisions and Plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Continue current plan",
+              "type": "obs",
+              "id": "continueCurrentPlan",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8dfe4ead-fb7f-4044-985e-8fb9ff383c8b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Medication adjustment",
+              "type": "obs",
+              "id": "medicationAdjustment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a08b1655-0250-4481-b942-7da5c6512b82",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Therapy modification",
+              "type": "obs",
+              "id": "therapyModification",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2e84e9c8-de2f-4fe5-a5c8-d574bdbb3398",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Change in observation level",
+              "type": "obs",
+              "id": "changeInObservationLevel",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6a97a2e9-5533-4519-a22b-280e42aa6767",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Risk management update",
+              "type": "obs",
+              "id": "riskManagementUpdate",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1212cefd-d043-49f0-a3f0-9fe272e9513b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "New interventions",
+              "type": "obs",
+              "id": "newInterventions",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "826116e0-ead4-4a4e-b11c-0c2a73a81b48"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Discharge Planning (If applicable)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Expected discharge date",
+              "type": "obs",
+              "id": "expectedDischargeDate",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "c9e85601-2bca-4da0-9635-ee4dda3d30c8"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Readiness for discharge",
+              "type": "obs",
+              "id": "readinessForDischarge",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "44b1cd22-59ef-493d-a394-e795d2add940",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Criteria met",
+              "type": "obs",
+              "id": "criteriaMet",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2200d32e-4ebc-493f-8fdd-1db19c7aacd7"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Follow-up plan",
+              "type": "obs",
+              "id": "followUpPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0b3d2f81-891b-4c41-b705-0f85366a39a4"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Relapse prevention plan",
+              "type": "obs",
+              "id": "relapsePreventionPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ab11b65e-f7be-4c93-a38e-23e6eddfe7f6"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Next Review",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of Next MDT",
+              "type": "obs",
+              "id": "dateOfNextMdt",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "1f12bde1-8f71-4c38-930e-a0cd86840a27"
+              },
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

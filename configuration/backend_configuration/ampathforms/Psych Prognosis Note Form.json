@@ -1,0 +1,1406 @@
+{
+  "name": "Psych Prognosis Note Form",
+  "description": "Psychiatric prognosis note: vital signs, clinical course, prognostic factors, response to treatment, and disposition.",
+  "version": "1.1",
+  "published": true,
+  "uuid": "0bad66ab-0e7b-41f7-9b7b-ff6a62875fb9",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Psych Prognosis Note Form",
+      "sections": [
+        {
+          "label": "Follow Up",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Follow up type",
+              "type": "obs",
+              "id": "followUpType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "dd785d57-054f-4920-b6f9-394ded9ad499",
+                "answers": [
+                  {
+                    "concept": "6755b785-1a7c-4c5f-b650-3f0e2d37c691",
+                    "label": "Daily"
+                  },
+                  {
+                    "concept": "1099AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Weekly"
+                  },
+                  {
+                    "concept": "c4571176-a1c5-49e7-801b-9a9f914b98e4",
+                    "label": "Biweekly"
+                  },
+                  {
+                    "concept": "1098AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Monthly"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Subjective",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Subjective data",
+              "type": "obs",
+              "id": "subjectiveData",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d38cfc50-62e1-47d4-896e-090cc8d1e68c"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Objective Findings - General Observation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Appearance",
+              "type": "obs",
+              "id": "appearance",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "47b3934e-cf87-4c43-a4b8-dba1b38533d9",
+                "answers": [
+                  {
+                    "concept": "5dcdf4e9-085b-4d3b-ad3d-8e329ccc28cc",
+                    "label": "Clean"
+                  },
+                  {
+                    "concept": "66f85921-edf2-4256-8a53-57e67e148fac",
+                    "label": "Unkempt"
+                  },
+                  {
+                    "concept": "24d6dc53-ec50-4a95-9674-fa02964c0fde",
+                    "label": "Disheveled"
+                  },
+                  {
+                    "concept": "fd84e104-7207-40f1-a0bc-cd3a55f9c7f2",
+                    "label": "Unusual"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Behavior",
+              "type": "obs",
+              "id": "behavior",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "deee3bf9-ba36-43a9-b1ba-ac8bedd5cb00",
+                "answers": [
+                  {
+                    "concept": "185984d1-5d94-4fa9-ab15-96632e039daf",
+                    "label": "Calm"
+                  },
+                  {
+                    "concept": "3cc851e5-6fbe-4515-97df-0064c0241e11",
+                    "label": "Agitated"
+                  },
+                  {
+                    "concept": "f55c5742-2e90-4b43-b342-ab3a0db67d9e",
+                    "label": "Guarded"
+                  },
+                  {
+                    "concept": "91c35190-6651-46a4-9eb8-409c4a5cf007",
+                    "label": "Withdrawn"
+                  },
+                  {
+                    "concept": "fb58dd15-b7cb-4f7c-a670-c6c40f9e008e",
+                    "label": "Cooperative"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Motor Activity",
+              "type": "obs",
+              "id": "motorActivity",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7ceee4cd-08c0-4e81-b013-d0ef73e7938d",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "4b102da6-13cb-45ed-b708-650c1e517141",
+                    "label": "Restless"
+                  },
+                  {
+                    "concept": "3cc851e5-6fbe-4515-97df-0064c0241e11",
+                    "label": "Agitated"
+                  },
+                  {
+                    "concept": "1d460eb3-c9f0-469c-86bb-1bdac581395c",
+                    "label": "Slowed"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Mental Status Examination (MSE)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Speech",
+              "type": "obs",
+              "id": "speech",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "29402901-303c-45bd-b290-0ecdcb77f887",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "9d3627b2-813a-4a03-be43-e2e2df3aef96",
+                    "label": "Pressured"
+                  },
+                  {
+                    "concept": "67aa3165-2067-4165-8d7b-1e9d4ec26c65",
+                    "label": "Slow"
+                  },
+                  {
+                    "concept": "b7d259c0-321c-48d7-b5fa-fa60a5ef5dae",
+                    "label": "Low volume"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Mood",
+              "type": "obs",
+              "id": "mood",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fa747c79-cd17-4c89-9ae3-65cab085bb91",
+                "answers": [
+                  {
+                    "concept": "27f67e09-0a71-497c-a73c-a1c23e9c9770",
+                    "label": "Euthymic"
+                  },
+                  {
+                    "concept": "b0981c4c-bf20-446e-94b8-28ef84c2c807",
+                    "label": "Depressed"
+                  },
+                  {
+                    "concept": "c3fcb551-08f3-41bb-8b45-813addf03eb5",
+                    "label": "Anxious"
+                  },
+                  {
+                    "concept": "40d60fa7-47b0-46a0-a4d4-2f040014dc80",
+                    "label": "Irritable"
+                  },
+                  {
+                    "concept": "8a09ea33-6afe-4e98-857e-045e47b07ab6",
+                    "label": "Elevated"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Affect",
+              "type": "obs",
+              "id": "affect",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d8260e41-0e3a-413a-b692-a2c83d1e70b0",
+                "answers": [
+                  {
+                    "concept": "dbeacd0b-a575-4fd4-9db5-fd514474ac7c",
+                    "label": "Appropriate"
+                  },
+                  {
+                    "concept": "3ff0362c-6ef1-4703-aa94-21bedc44c875",
+                    "label": "Restricted"
+                  },
+                  {
+                    "concept": "2acde057-a91b-4f91-bf57-26e625c81e53",
+                    "label": "Flat"
+                  },
+                  {
+                    "concept": "41c0d582-d06f-449a-8753-bf570a37793c",
+                    "label": "Labile"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Thought Process",
+              "type": "obs",
+              "id": "thoughtProcess",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "452da203-f6ae-40a2-a98c-10c9039d5303",
+                "answers": [
+                  {
+                    "concept": "c3ab9aa7-4c91-4685-8640-a150ad9750e4",
+                    "label": "Logical"
+                  },
+                  {
+                    "concept": "445056ab-f8c3-41fd-a925-c30d58953ba3",
+                    "label": "Disorganized"
+                  },
+                  {
+                    "concept": "7451413b-dbac-4888-b173-47e02c613874",
+                    "label": "Tangential"
+                  },
+                  {
+                    "concept": "e45f9895-44f7-480d-bdf6-909366cfa781",
+                    "label": "Circumstantial"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Suicidal Ideation",
+              "type": "obs",
+              "id": "suicidalIdeation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "73dbdacc-6bd8-4699-a196-e35ac8e90995",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "ec97b844-082b-4d9e-b58f-d39d1ad48b5c",
+                    "label": "Passive"
+                  },
+                  {
+                    "concept": "f172a581-9d3f-4d01-ae4b-99ff1b943127",
+                    "label": "Active"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Suicidal Ideation details",
+              "type": "obs",
+              "id": "suicidalIdeationDetails",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d82b1ea0-a473-4a23-abf2-5efe10d36085"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Homicidal Ideation",
+              "type": "obs",
+              "id": "homicidalIdeation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "331738aa-92fb-4eb3-8e35-66aa629d731c",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "ec97b844-082b-4d9e-b58f-d39d1ad48b5c",
+                    "label": "Passive"
+                  },
+                  {
+                    "concept": "f172a581-9d3f-4d01-ae4b-99ff1b943127",
+                    "label": "Active"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Delusions",
+              "type": "obs",
+              "id": "delusions",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "52cc588c-c34e-46c4-b7d2-a73b5ba587b7",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "4303cea1-5917-4e74-bb47-1f6a8d4dda94",
+                    "label": "Persecutory"
+                  },
+                  {
+                    "concept": "1908da4d-969e-4f4b-95b5-214a98da04d8",
+                    "label": "Grandiose"
+                  },
+                  {
+                    "concept": "9c25ed3f-3803-4d96-afb3-c91d5e0c8343",
+                    "label": "Somatic"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Delusions, other (specify)",
+              "type": "obs",
+              "id": "delusionsOtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d8275643-0c89-4454-883f-6d28dcc5c014"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "delusions !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Hallucinations",
+              "type": "obs",
+              "id": "hallucinations",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2bf9e5f3-a4f7-4aae-b44f-edd3a7204b21",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "8ebff391-a3ad-40e9-bdce-7cfe8c4c3d9a",
+                    "label": "Auditory"
+                  },
+                  {
+                    "concept": "37887ad0-ee93-4f54-87e3-0627e3111bb4",
+                    "label": "Visual"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Hallucinations, other (specify)",
+              "type": "obs",
+              "id": "hallucinationsOtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6f7cccb9-831d-4be6-bcc6-9f6dc36c7b8d"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "hallucinations !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Orientation",
+              "type": "obs",
+              "id": "orientation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "aab5bc8e-31e5-4d2f-ac18-bfa1c4581864",
+                "answers": [
+                  {
+                    "concept": "4725fae8-d299-4f5a-aabd-883d6ebbdda9",
+                    "label": "Person"
+                  },
+                  {
+                    "concept": "713824d0-0295-4e15-ba87-ef8dc55d2891",
+                    "label": "Place"
+                  },
+                  {
+                    "concept": "1c4f3893-7991-4292-a06f-af9fda1a2b6b",
+                    "label": "Time"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Cognition",
+              "type": "obs",
+              "id": "cognition",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "eb5e9a4b-d81e-4a84-940c-5d4a79edbcf4",
+                "answers": [
+                  {
+                    "concept": "a6d00512-9786-45d6-8886-be160acfd5d4",
+                    "label": "Intact"
+                  },
+                  {
+                    "concept": "7acf2842-fb7d-4c80-8e86-5e84615cf7a8",
+                    "label": "Impaired"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Cognition, if impaired specify",
+              "type": "obs",
+              "id": "cognitionIfImpairedSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "bcecda7e-ec1c-4806-bc1a-958d5c5223c3"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "cognition !== '7acf2842-fb7d-4c80-8e86-5e84615cf7a8'"
+              }
+            },
+            {
+              "label": "Insight/Judgment",
+              "type": "obs",
+              "id": "insightJudgment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9d9746e8-48c2-4447-9937-c57d0d30fe91",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fair"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Vital Signs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulse Rate (PR)",
+              "type": "obs",
+              "id": "pulseRatePr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Pulse non-palpable",
+              "type": "obs",
+              "id": "pulseNonPalpable",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "926d5ab3-9dff-436d-bfd0-0e2bfe072434",
+                "answers": [
+                  {
+                    "concept": "9f0f09c7-7e54-4b3e-8c9f-d1eed1c67480",
+                    "label": "Non palpable"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Pulse strength",
+              "type": "obs",
+              "id": "pulseStrength",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2df0fb84-1367-4cc5-95ed-0991be7ffd99",
+                "answers": [
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  },
+                  {
+                    "concept": "750c7a46-03f0-4cba-aa58-f5dc0efca955",
+                    "label": "Weak"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Pulse rhythm",
+              "type": "obs",
+              "id": "pulseRhythm",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d5f88633-71f9-48e2-9618-4c7dab53f73d",
+                "answers": [
+                  {
+                    "concept": "72e760d6-f370-4c9c-bf3b-e2ca284fc950",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "0319d9c9-acdf-495d-8147-45d0f2eded5a",
+                    "label": "Irregular"
+                  },
+                  {
+                    "concept": "2167bf41-8839-4ef7-ae8b-06b605d762ef",
+                    "label": "Regularly Irregular"
+                  },
+                  {
+                    "concept": "3f20305f-ef44-40ff-b7c0-9c6fa7a29b10",
+                    "label": "Irregularly Irregular"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Respiratory Rate (RR)",
+              "type": "obs",
+              "id": "respiratoryRateRr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Respiratory depth",
+              "type": "obs",
+              "id": "respiratoryDepth",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "818757cc-9250-4325-b386-a9080b8a0cbd",
+                "answers": [
+                  {
+                    "concept": "164487AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Deep"
+                  },
+                  {
+                    "concept": "14e83323-26c1-49a7-b2da-7aa9de79d2b4",
+                    "label": "Shallow"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Respiratory rhythm",
+              "type": "obs",
+              "id": "respiratoryRhythm",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "19811f54-57f6-4546-976e-6ebbb7e90cf4",
+                "answers": [
+                  {
+                    "concept": "72e760d6-f370-4c9c-bf3b-e2ca284fc950",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "0319d9c9-acdf-495d-8147-45d0f2eded5a",
+                    "label": "Irregular"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Oxygen Saturation (SPO2)",
+              "type": "obs",
+              "id": "oxygenSaturationSpo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "54385c49-43f8-41df-bd58-4f92c36a6735",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Oxygen delivery method",
+              "type": "obs",
+              "id": "oxygenDeliveryMethod",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2c9764d5-f646-4c1b-898e-b6f426c028b9",
+                "answers": [
+                  {
+                    "concept": "02ef98f2-06a0-4282-bb7b-f83765495696",
+                    "label": "At room air"
+                  },
+                  {
+                    "concept": "8ef9cb2d-96e6-45c6-9c4e-fd8df821c0ee",
+                    "label": "On Nasal Oxygen"
+                  },
+                  {
+                    "concept": "6616f57c-0dc8-441d-88e7-4197a2ced454",
+                    "label": "On Face Mask"
+                  },
+                  {
+                    "concept": "326e8ff2-cb5e-4cc5-beac-bb38e493fec1",
+                    "label": "On CPAP"
+                  },
+                  {
+                    "concept": "2caaf622-fb39-4a02-8d9f-35900d5605cf",
+                    "label": "On Mechanical Ventilation"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Oxygen Liter (Nasal Oxygen)",
+              "type": "obs",
+              "id": "oxygenLiterNasalOxygen",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6afa667e-f345-4f0b-afc3-aa5d42f6522d",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '8ef9cb2d-96e6-45c6-9c4e-fd8df821c0ee'"
+              }
+            },
+            {
+              "label": "Oxygen Liter (Face Mask)",
+              "type": "obs",
+              "id": "oxygenLiterFaceMask",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6afa667e-f345-4f0b-afc3-aa5d42f6522d",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '6616f57c-0dc8-441d-88e7-4197a2ced454'"
+              }
+            },
+            {
+              "label": "Fraction of Inspired Oxygen (FiO2) (CPAP)",
+              "type": "obs",
+              "id": "fractionOfInspiredOxygenFio2Cpap",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f759d9d0-d25e-4aa0-8fd8-d7160f7b3859",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '326e8ff2-cb5e-4cc5-beac-bb38e493fec1'"
+              }
+            },
+            {
+              "label": "Oxygen Flow Rate (CPAP)",
+              "type": "obs",
+              "id": "oxygenFlowRateCpap",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ac21a619-68c5-47e6-9b56-cc897dc964c1",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '326e8ff2-cb5e-4cc5-beac-bb38e493fec1'"
+              }
+            },
+            {
+              "label": "Oxygen Liter (CPAP)",
+              "type": "obs",
+              "id": "oxygenLiterCpap",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6afa667e-f345-4f0b-afc3-aa5d42f6522d",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '326e8ff2-cb5e-4cc5-beac-bb38e493fec1'"
+              }
+            },
+            {
+              "label": "Fraction of Inspired Oxygen (FiO2) (Mechanical Ventilation)",
+              "type": "obs",
+              "id": "fractionOfInspiredOxygenFio2MechanicalVe",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f759d9d0-d25e-4aa0-8fd8-d7160f7b3859",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '2caaf622-fb39-4a02-8d9f-35900d5605cf'"
+              }
+            },
+            {
+              "label": "Oxygen Flow Rate (Mechanical Ventilation)",
+              "type": "obs",
+              "id": "oxygenFlowRateMechanicalVentilation",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ac21a619-68c5-47e6-9b56-cc897dc964c1",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '2caaf622-fb39-4a02-8d9f-35900d5605cf'"
+              }
+            },
+            {
+              "label": "Oxygen Liter (Mechanical Ventilation)",
+              "type": "obs",
+              "id": "oxygenLiterMechanicalVentilation",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6afa667e-f345-4f0b-afc3-aa5d42f6522d",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '2caaf622-fb39-4a02-8d9f-35900d5605cf'"
+              }
+            },
+            {
+              "label": "Temperature (T)",
+              "type": "obs",
+              "id": "temperatureT",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Temperature route",
+              "type": "obs",
+              "id": "temperatureRoute",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c9528b14-d5ec-4c45-a7f6-619c6e7206e2",
+                "answers": [
+                  {
+                    "concept": "5112AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Axillary"
+                  },
+                  {
+                    "concept": "160240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Oral"
+                  },
+                  {
+                    "concept": "6f56af83-c15a-4b92-9a8e-848275ae8294",
+                    "label": "Rectal"
+                  },
+                  {
+                    "concept": "b8c21d04-6424-480a-8987-7ee7b6e884e4",
+                    "label": "Ear"
+                  },
+                  {
+                    "concept": "3591287e-f4c1-4325-976f-e19951718c70",
+                    "label": "Forehead(Gun Thermometer)"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Systolic Blood Pressure (SBP)",
+              "type": "obs",
+              "id": "systolicBloodPressureSbp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "cbf5a376-e659-42f6-9345-be9e98cbdd17",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Diastolic Blood Pressure (DBP)",
+              "type": "obs",
+              "id": "diastolicBloodPressureDbp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Anthropometry",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weight (Wt)",
+              "type": "obs",
+              "id": "weightWt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d{1,2})?$/.test(''+myValue)",
+                  "message": "At most 2 decimal places allowed."
+                }
+              ]
+            },
+            {
+              "label": "Height (Ht)",
+              "type": "obs",
+              "id": "heightHt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Body Mass Index (BMI)",
+              "type": "obs",
+              "id": "bodyMassIndexBmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Other",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pain Score",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "bd8288fd-223b-4bbb-a1e5-16be65c75c74",
+                "min": "0",
+                "max": "10",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Physical complaints",
+              "type": "obs",
+              "id": "physicalComplaints",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6d836032-7537-448d-89e7-c947cf7205cb"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Functioning",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "ADL",
+              "type": "obs",
+              "id": "adl",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "98f58b87-ff43-42fd-976a-098196ebbc86",
+                "answers": [
+                  {
+                    "concept": "162677AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Improved"
+                  },
+                  {
+                    "concept": "164381AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Same"
+                  },
+                  {
+                    "concept": "162678AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Worse"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Participation",
+              "type": "obs",
+              "id": "participation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ae6b1935-445c-494c-9ef7-d5fd3a5dd3c7",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Social interaction",
+              "type": "obs",
+              "id": "socialInteraction",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cd2e4cc9-846d-4349-ac0a-856bda4f8bb2",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "d444fd09-b6a1-477c-bf73-000cf877ac2a",
+                    "label": "Limited"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Risk Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Suicide Risk",
+              "type": "obs",
+              "id": "suicideRisk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f6b9ba9b-13ba-4c78-8915-d4a73e4330cf",
+                "answers": [
+                  {
+                    "concept": "acddd261-594a-4c15-9d78-f8c98ffa9470",
+                    "label": "Low"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "693f4784-9933-4a3b-856e-6ccaa382247f",
+                    "label": "High"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Homicide/Violence Risk",
+              "type": "obs",
+              "id": "homicideViolenceRisk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a7677530-3869-4edb-960e-456838e94318",
+                "answers": [
+                  {
+                    "concept": "acddd261-594a-4c15-9d78-f8c98ffa9470",
+                    "label": "Low"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "693f4784-9933-4a3b-856e-6ccaa382247f",
+                    "label": "High"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Escape/Absconding Risk",
+              "type": "obs",
+              "id": "escapeAbscondingRisk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4b2742ad-a064-40bc-a6d4-12e6216a6bbf",
+                "answers": [
+                  {
+                    "concept": "acddd261-594a-4c15-9d78-f8c98ffa9470",
+                    "label": "Low"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "693f4784-9933-4a3b-856e-6ccaa382247f",
+                    "label": "High"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Overdose Risk",
+              "type": "obs",
+              "id": "overdoseRisk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "deb0dfa2-dd8f-4f0e-a462-fbd0a1b865d9",
+                "answers": [
+                  {
+                    "concept": "acddd261-594a-4c15-9d78-f8c98ffa9470",
+                    "label": "Low"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "693f4784-9933-4a3b-856e-6ccaa382247f",
+                    "label": "High"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Current Medications",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Current Medications",
+              "type": "obsGroup",
+              "id": "current_medicationsGroup",
+              "questionOptions": {
+                "concept": "4a2d804e-ad2a-48d3-8d39-8bf061a10bd3",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Medication",
+                  "type": "obs",
+                  "id": "medication",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "c92b24c6-bf40-4e74-bb38-16954b1fd676"
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "Side effects",
+                  "type": "obs",
+                  "id": "sideEffects",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "79f0b95d-83f0-4662-80a5-8ecdebbef6c3",
+                    "answers": [
+                      {
+                        "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Yes"
+                      },
+                      {
+                        "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "No"
+                      }
+                    ]
+                  },
+                  "readonly": false
+                },
+                {
+                  "label": "If Yes, specify side effects",
+                  "type": "obs",
+                  "id": "ifYesSpecifySideEffects",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "c5a325c9-2115-488c-8c2c-f1e6ea6af551"
+                  },
+                  "readonly": false,
+                  "hide": {
+                    "hideWhenExpression": "sideEffects !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Response to Treatment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Improvement in symptoms",
+              "type": "obs",
+              "id": "improvementInSymptoms",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b9ffb42c-13b4-48db-92aa-ebbde405b530",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "46969e18-a3c4-4fcc-ba87-907917ac0986",
+                    "label": "Partial"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Participation in therapy",
+              "type": "obs",
+              "id": "participationInTherapy",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8b49de81-dd55-4815-824e-469c0bc883fc",
+                "answers": [
+                  {
+                    "concept": "f172a581-9d3f-4d01-ae4b-99ff1b943127",
+                    "label": "Active"
+                  },
+                  {
+                    "concept": "7fa2d574-5f17-4595-9e8a-8e75dcfdef2b",
+                    "label": "Minimal"
+                  },
+                  {
+                    "concept": "f7e08750-8385-41c6-95c7-86f3b29c0b97",
+                    "label": "Refusal"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Behavioral changes",
+              "type": "obs",
+              "id": "behavioralChanges",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "b01f1d0f-407c-4873-811d-9a4b46e03492"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Diagnosis / Revised Diagnosis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diagnosis / revised diagnosis",
+              "type": "obs",
+              "id": "diagnosisRevisedDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ced8abea-226c-4bb8-a5dd-efc432d08d06"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Comorbid diagnosis",
+              "type": "obs",
+              "id": "comorbidDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "746bcb82-b420-4398-baf1-6a7f7e8bd357"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Plan / Revised Plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Plan / revised plan",
+              "type": "obs",
+              "id": "planRevisedPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "b5e06c49-97c2-4b2b-a4db-ae6dba331d07"
+              },
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

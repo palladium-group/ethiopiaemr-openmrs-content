@@ -1,0 +1,861 @@
+{
+  "name": "Psychiatric Patient Readiness Assessment for Therapeutic Engagement",
+  "description": "Psychiatric patient readiness assessment for therapeutic engagement: motivation, insight, and suitability for therapy.",
+  "version": "1.1",
+  "published": true,
+  "uuid": "d4e3e249-0a11-4e66-8933-2cf54bbd23eb",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Psychiatric Patient Readiness Assessment for Therapeutic Engagement",
+      "sections": [
+        {
+          "label": "Patient Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "62c3f2f7-c9ab-4ead-bffc-4f780d4de04a"
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Rehabilitation MDT Member(s)",
+              "type": "obs",
+              "id": "rehabilitationMdtMemberS",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ee257392-30c1-4964-9356-f0742913dbc0"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Physical Readiness",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Overall Physical Health Status",
+              "type": "obs",
+              "id": "overallPhysicalHealthStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9a1b8a61-9305-4d8e-9629-fa50fc846957",
+                "answers": [
+                  {
+                    "concept": "164076AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Excellent"
+                  },
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fair"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Energy and Stamina Levels",
+              "type": "obs",
+              "id": "energyAndStaminaLevels",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fcd062dd-9b1b-4a72-8e4b-2a3396b533ac",
+                "answers": [
+                  {
+                    "concept": "693f4784-9933-4a3b-856e-6ccaa382247f",
+                    "label": "High"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "acddd261-594a-4c15-9d78-f8c98ffa9470",
+                    "label": "Low"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Presence of Pain or Physical Discomfort",
+              "type": "obs",
+              "id": "presenceOfPainOrPhysicalDiscomfort",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b297fa28-ce24-4e93-8b0f-b2829f7738e7",
+                "answers": [
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Mobility Status",
+              "type": "obs",
+              "id": "mobilityStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5e73193d-a8ad-48cd-80f0-7c13b17f24dd",
+                "answers": [
+                  {
+                    "concept": "91f73c81-b99c-49eb-ab71-e8893814cfab",
+                    "label": "Full"
+                  },
+                  {
+                    "concept": "46969e18-a3c4-4fcc-ba87-907917ac0986",
+                    "label": "Partial"
+                  },
+                  {
+                    "concept": "d444fd09-b6a1-477c-bf73-000cf877ac2a",
+                    "label": "Limited"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Motor Coordination",
+              "type": "obs",
+              "id": "motorCoordination",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0f2281fe-9ffd-4176-b6c2-d8f4fadfc66d",
+                "answers": [
+                  {
+                    "concept": "b03764e6-2bf8-4789-b48b-4e4b7485313b",
+                    "label": "Adequate"
+                  },
+                  {
+                    "concept": "d444fd09-b6a1-477c-bf73-000cf877ac2a",
+                    "label": "Limited"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Strength and Endurance",
+              "type": "obs",
+              "id": "strengthAndEndurance",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7f6af9d1-2f46-4f33-bb4f-9953514f3bb7",
+                "answers": [
+                  {
+                    "concept": "693f4784-9933-4a3b-856e-6ccaa382247f",
+                    "label": "High"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "acddd261-594a-4c15-9d78-f8c98ffa9470",
+                    "label": "Low"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Impact of Medication Side Effects on Functional Participation",
+              "type": "obs",
+              "id": "impactOfMedicationSideEffectsOnFunctiona",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e4909b80-412b-48f5-8498-f6010df59a8c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Is the patient physically prepared for sustained therapeutic engagement?",
+              "type": "obs",
+              "id": "isThePatientPhysicallyPreparedForSustain",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "deda28b1-4181-4379-bd86-bef062568780",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Emotional Readiness",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Current Emotional State",
+              "type": "obs",
+              "id": "currentEmotionalState",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "58271d8b-120d-4899-9d07-adafc0b859f0",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "30012781-525a-4828-a7e9-25ac987cc122",
+                    "label": "Neutral"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Emotional Stability",
+              "type": "obs",
+              "id": "emotionalStability",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0a270b0d-56aa-41c4-9612-237cc74b0884",
+                "answers": [
+                  {
+                    "concept": "06398754-8865-4004-805e-926636d6d6c2",
+                    "label": "Stable"
+                  },
+                  {
+                    "concept": "0aabbe1b-baf6-41bb-b99c-96cbe27e6415",
+                    "label": "Fluctuating"
+                  },
+                  {
+                    "concept": "7a37fa21-587e-437d-846f-6c29e7fad9d9",
+                    "label": "Volatile"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Ability to Regulate Emotions",
+              "type": "obs",
+              "id": "abilityToRegulateEmotions",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a24c0011-dba0-4d2b-a0e9-8239191a4439",
+                "answers": [
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "750c7a46-03f0-4cba-aa58-f5dc0efca955",
+                    "label": "Weak"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Stress and Anxiety Levels",
+              "type": "obs",
+              "id": "stressAndAnxietyLevels",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1e31e925-c3f7-40e2-9ec6-5e1a0862bf28",
+                "answers": [
+                  {
+                    "concept": "acddd261-594a-4c15-9d78-f8c98ffa9470",
+                    "label": "Low"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "693f4784-9933-4a3b-856e-6ccaa382247f",
+                    "label": "High"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Impact of Trauma on Therapeutic Participation",
+              "type": "obs",
+              "id": "impactOfTraumaOnTherapeuticParticipation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "866b18a2-87f6-4d23-b2b7-04696d0d149b",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "052c10cc-633e-4c49-8541-a469c94d0318",
+                    "label": "Significant"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Is the patient emotionally prepared for structured therapeutic interventions?",
+              "type": "obs",
+              "id": "isThePatientEmotionallyPreparedForStruct",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d7b43d70-7737-4df9-b813-2f42a0cab310",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Behavioral Readiness",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Task Focus and Completion",
+              "type": "obs",
+              "id": "taskFocusAndCompletion",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d02856eb-a0f7-4e1a-9d6a-13e5779dbdbd",
+                "answers": [
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  },
+                  {
+                    "concept": "a2dd62ce-d401-4615-8f48-aeb972478487",
+                    "label": "Inconsistent"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Willingness to Engage in Therapy",
+              "type": "obs",
+              "id": "willingnessToEngageInTherapy",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "aa35177b-ba14-4cb9-9c6f-d7825f5b8190",
+                "answers": [
+                  {
+                    "concept": "a990e867-d1aa-4a3b-9cca-f6c2e42cc1ed",
+                    "label": "Enthusiastic"
+                  },
+                  {
+                    "concept": "fb58dd15-b7cb-4f7c-a670-c6c40f9e008e",
+                    "label": "Cooperative"
+                  },
+                  {
+                    "concept": "fa510000-0000-4000-8000-000000000003",
+                    "label": "Resistant"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Ability to Follow Therapeutic Instructions",
+              "type": "obs",
+              "id": "abilityToFollowTherapeuticInstructions",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9ad335db-0f7e-45a1-b263-41f69799455a",
+                "answers": [
+                  {
+                    "concept": "693f4784-9933-4a3b-856e-6ccaa382247f",
+                    "label": "High"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "acddd261-594a-4c15-9d78-f8c98ffa9470",
+                    "label": "Low"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Presence of Disruptive Behaviors",
+              "type": "obs",
+              "id": "presenceOfDisruptiveBehaviors",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a31b4eec-a015-41c8-915d-5145082114c0",
+                "answers": [
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "a91d2ae3-a7ff-47df-bf9d-0048b6888432",
+                    "label": "Frequent"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Does the patient exhibit behaviors conducive to therapeutic participation?",
+              "type": "obs",
+              "id": "doesThePatientExhibitBehaviorsConduciveT",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4296ba95-8094-4d78-b10c-0537c50322ce"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Cognitive Readiness",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Attention Span",
+              "type": "obs",
+              "id": "attentionSpan",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "90043fb5-cd10-42ce-a361-e38682f9cba4",
+                "answers": [
+                  {
+                    "concept": "afc7c7d0-a599-4741-9335-00d1c63dbad7",
+                    "label": "Sustained"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "d444fd09-b6a1-477c-bf73-000cf877ac2a",
+                    "label": "Limited"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Memory and Recall Ability",
+              "type": "obs",
+              "id": "memoryAndRecallAbility",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ba86483e-6cf4-48f2-925b-4395a05cbad9",
+                "answers": [
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "750c7a46-03f0-4cba-aa58-f5dc0efca955",
+                    "label": "Weak"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Problem-Solving and Critical Thinking Skills",
+              "type": "obs",
+              "id": "problemSolvingAndCriticalThinkingSkills",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "77bd6c40-0e5b-45e8-b2bf-923f3e8bf4f5",
+                "answers": [
+                  {
+                    "concept": "693f4784-9933-4a3b-856e-6ccaa382247f",
+                    "label": "High"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Comprehension of Complex Instructions",
+              "type": "obs",
+              "id": "comprehensionOfComplexInstructions",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "be13e771-755c-4a9f-825c-16d7118f30ed",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Can the patient cognitively engage with structured therapeutic activities?",
+              "type": "obs",
+              "id": "canThePatientCognitivelyEngageWithStruct",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5e72cd38-9bba-4840-944c-499847713785"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Memory and Insight Readiness",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Insight Into Condition and Treatment",
+              "type": "obs",
+              "id": "insightIntoConditionAndTreatment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "92034d06-c0f1-4a64-922b-476442c89d9a",
+                "answers": [
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "7fa2d574-5f17-4595-9e8a-8e75dcfdef2b",
+                    "label": "Minimal"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Ability to Process and Reflect on Therapeutic Concepts",
+              "type": "obs",
+              "id": "abilityToProcessAndReflectOnTherapeuticC",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6034cdf3-de44-4c9a-9710-87d4b42a67f6",
+                "answers": [
+                  {
+                    "concept": "693f4784-9933-4a3b-856e-6ccaa382247f",
+                    "label": "High"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "d444fd09-b6a1-477c-bf73-000cf877ac2a",
+                    "label": "Limited"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Short-Term Memory Function",
+              "type": "obs",
+              "id": "shortTermMemoryFunction",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8ce3ca26-6cc9-4001-9fed-a03290d0cf5c",
+                "answers": [
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "750c7a46-03f0-4cba-aa58-f5dc0efca955",
+                    "label": "Weak"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Long-Term Memory Function",
+              "type": "obs",
+              "id": "longTermMemoryFunction",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d8982f86-b2be-4e82-9bdd-52bb1c7967a0",
+                "answers": [
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "750c7a46-03f0-4cba-aa58-f5dc0efca955",
+                    "label": "Weak"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Does the patient demonstrate sufficient memory and insight to benefit from therapeutic services?",
+              "type": "obs",
+              "id": "doesThePatientDemonstrateSufficientMemor",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "34b736ca-63f2-4bb3-8403-4ec255e0918d"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Summary and Service Utilization Plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Identified Strengths",
+              "type": "obs",
+              "id": "identifiedStrengths",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "dcf9adec-f881-41b8-bffd-18bbef6262c6"
+              },
+              "readonly": false
+            },
+            {
+              "label": "Areas for Improvement",
+              "type": "obs",
+              "id": "areasForImprovement",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6ea6e128-da3f-4f43-8d7e-8acab299a899"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Recommended Therapeutic Interventions",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Recommended Therapeutic Interventions",
+              "type": "obs",
+              "id": "recommendedTherapeuticInterventions",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "5acbf421-d912-4de7-9010-0c040eadf79c",
+                "answers": [
+                  {
+                    "concept": "5d9e7003-3b3d-434b-88a4-dd4487411675",
+                    "label": "Art Therapy"
+                  },
+                  {
+                    "concept": "186ce776-7ae1-4db7-b988-6821b38d52ed",
+                    "label": "Music Therapy"
+                  },
+                  {
+                    "concept": "7d4f3f32-5217-40a9-8a25-ad24e20ca50f",
+                    "label": "Psychodrama"
+                  },
+                  {
+                    "concept": "022bddb4-4acc-4460-ba23-06cce66cdbe4",
+                    "label": "Occupational Therapy"
+                  },
+                  {
+                    "concept": "160130AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Vocational training"
+                  },
+                  {
+                    "concept": "3ab362da-0a95-448e-8027-565090e2dde3",
+                    "label": "Recreational activities"
+                  },
+                  {
+                    "concept": "3301f8b0-5f59-49c2-8f9f-dbde6d9a3838",
+                    "label": "Mindfulness Practices"
+                  },
+                  {
+                    "concept": "159364AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Physical Exercise"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Additional Observations and Recommendations",
+              "type": "obs",
+              "id": "additionalObservationsAndRecommendations",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "247a0c22-012c-4f54-8768-e5eddce120e6"
+              },
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
