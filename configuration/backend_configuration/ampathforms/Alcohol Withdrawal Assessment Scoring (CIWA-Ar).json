@@ -1,0 +1,502 @@
+{
+  "name": "Alcohol Withdrawal Assessment Scoring (CIWA-Ar)",
+  "description": "Clinical Institute Withdrawal Assessment for Alcohol (CIWA-Ar): 10 scored items with computed total score and management guidance.",
+  "version": "1.1",
+  "published": true,
+  "uuid": "82232b79-43c8-4273-bb6a-ec62435c9566",
+  "retired": false,
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Alcohol Withdrawal Assessment Scoring (CIWA-Ar)",
+      "sections": [
+        {
+          "label": "CIWA-Ar Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Nausea and Vomiting",
+              "type": "obs",
+              "id": "nauseaAndVomiting",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f802b1c3-5f9e-48bd-8ad6-1d1ad228990b",
+                "answers": [
+                  {
+                    "concept": "83c81e40-7c95-4372-ae8a-1de542d91534",
+                    "label": "0 no nausea and no vomiting"
+                  },
+                  {
+                    "concept": "e533564d-0713-42e4-aeb9-6eb28c278385",
+                    "label": "1 mild nausea with no vomiting"
+                  },
+                  {
+                    "concept": "4ecc593f-9bf1-46af-b35b-855710706917",
+                    "label": "4 intermittent nausea with dry heaves"
+                  },
+                  {
+                    "concept": "4428799f-e0fe-41b0-9d63-af6f4262fbbf",
+                    "label": "7 constant nausea, frequent dry heaves and vomiting"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Tactile Disturbance",
+              "type": "obs",
+              "id": "tactileDisturbance",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fe5b5f0c-bb56-482c-8ac0-5414b3d9fd3e",
+                "answers": [
+                  {
+                    "concept": "51183727-6cfb-4696-9105-35da4f8f52bf",
+                    "label": "0 none"
+                  },
+                  {
+                    "concept": "e5a06640-9714-46a9-bebd-dc080b4f1c33",
+                    "label": "1 very mild itching, pins and needles, burning or numbness"
+                  },
+                  {
+                    "concept": "77549b49-e301-447d-9152-5fac50225f88",
+                    "label": "2 mild itching, pins and needles, burning or numbness"
+                  },
+                  {
+                    "concept": "4e767a33-0bb4-40d1-9285-f02e2e1366d9",
+                    "label": "3 moderate itching, pins and needles, burning or numbness"
+                  },
+                  {
+                    "concept": "135ef07a-cbd6-4ef8-ae04-9a7bc69ef966",
+                    "label": "4 moderately severe hallucinations"
+                  },
+                  {
+                    "concept": "1452dca9-2788-4e89-9b7e-d4e2e74102a3",
+                    "label": "5 severe hallucinations"
+                  },
+                  {
+                    "concept": "4bd3e641-41be-4234-b2c2-c4d1ecebdfd4",
+                    "label": "6 extremely severe hallucinations"
+                  },
+                  {
+                    "concept": "ade5289c-27ca-4b34-9d30-5923cfb2995a",
+                    "label": "7 continuous hallucinations"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Tremor",
+              "type": "obs",
+              "id": "tremor",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0758a1bf-36b9-4758-964a-821b21c35fbd",
+                "answers": [
+                  {
+                    "concept": "bf0b40a2-fad6-42dd-8f31-7e15d115c749",
+                    "label": "0 no tremor"
+                  },
+                  {
+                    "concept": "8fdddf9d-b15c-42da-91f5-edb82f8906c4",
+                    "label": "1 not visible, but can be felt fingertip to fingertip"
+                  },
+                  {
+                    "concept": "2c33a29a-3566-49ad-a539-2ffb49f189d0",
+                    "label": "4 moderate with patient's arms extended"
+                  },
+                  {
+                    "concept": "5e11a999-6572-4c11-9305-9fc8f82aa9d6",
+                    "label": "7 severe, even with arms not extended"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Auditory Disturbances",
+              "type": "obs",
+              "id": "auditoryDisturbances",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6353b96e-1670-4c12-9488-c8339596384a",
+                "answers": [
+                  {
+                    "concept": "ecf349d5-eb12-4498-af7f-83c34a524a1e",
+                    "label": "0 not present"
+                  },
+                  {
+                    "concept": "4a362fda-0c80-4c52-b507-5d9227792f75",
+                    "label": "1 very mild harshness or ability to frighten"
+                  },
+                  {
+                    "concept": "8f72733b-4bc5-4121-b2e7-a51b0a257d59",
+                    "label": "2 mild harshness or ability to frighten"
+                  },
+                  {
+                    "concept": "28f4588b-8f0a-403b-9854-02707e3a6eaf",
+                    "label": "3 moderate harshness or ability to frighten"
+                  },
+                  {
+                    "concept": "135ef07a-cbd6-4ef8-ae04-9a7bc69ef966",
+                    "label": "4 moderately severe hallucinations"
+                  },
+                  {
+                    "concept": "1452dca9-2788-4e89-9b7e-d4e2e74102a3",
+                    "label": "5 severe hallucinations"
+                  },
+                  {
+                    "concept": "4bd3e641-41be-4234-b2c2-c4d1ecebdfd4",
+                    "label": "6 extremely severe hallucinations"
+                  },
+                  {
+                    "concept": "ade5289c-27ca-4b34-9d30-5923cfb2995a",
+                    "label": "7 continuous hallucinations"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Paroxysmal Sweats",
+              "type": "obs",
+              "id": "paroxysmalSweats",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a20427de-e469-48bb-b100-36263479ee70",
+                "answers": [
+                  {
+                    "concept": "f9d5e01b-4c03-4a07-9660-80292c82101c",
+                    "label": "0 no sweat visible"
+                  },
+                  {
+                    "concept": "68747763-a749-43b4-a31c-53f22ea1475b",
+                    "label": "1 barely perceptible sweating, palms moist"
+                  },
+                  {
+                    "concept": "a1eb9855-cad1-47f6-9642-7fbcf238093a",
+                    "label": "4 beads of sweat obvious on forehead"
+                  },
+                  {
+                    "concept": "7ff733bc-2fe0-43bd-be1d-4e66b9410cf2",
+                    "label": "7 drenching sweats"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Visual Disturbances",
+              "type": "obs",
+              "id": "visualDisturbances",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1b3f74ff-9a28-4082-a721-8acf25587f3d",
+                "answers": [
+                  {
+                    "concept": "ecf349d5-eb12-4498-af7f-83c34a524a1e",
+                    "label": "0 not present"
+                  },
+                  {
+                    "concept": "93950d50-6c4d-44c4-9f5d-aa1a18da04a2",
+                    "label": "1 very mild sensitivity"
+                  },
+                  {
+                    "concept": "3189789e-e034-4836-8155-ab4b9225cbf9",
+                    "label": "2 mild sensitivity"
+                  },
+                  {
+                    "concept": "c692fe0f-ae99-4786-a102-eac6570e5a80",
+                    "label": "3 moderate sensitivity"
+                  },
+                  {
+                    "concept": "135ef07a-cbd6-4ef8-ae04-9a7bc69ef966",
+                    "label": "4 moderately severe hallucinations"
+                  },
+                  {
+                    "concept": "1452dca9-2788-4e89-9b7e-d4e2e74102a3",
+                    "label": "5 severe hallucinations"
+                  },
+                  {
+                    "concept": "4bd3e641-41be-4234-b2c2-c4d1ecebdfd4",
+                    "label": "6 extremely severe hallucinations"
+                  },
+                  {
+                    "concept": "ade5289c-27ca-4b34-9d30-5923cfb2995a",
+                    "label": "7 continuous hallucinations"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Anxiety",
+              "type": "obs",
+              "id": "anxiety",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "06db0e94-5ae8-4368-856c-1eac49390e81",
+                "answers": [
+                  {
+                    "concept": "265ec950-3744-435e-9d5a-3b0e1c89ac3b",
+                    "label": "0 (no anxiety, at ease)"
+                  },
+                  {
+                    "concept": "93582f48-936b-49a8-b1ba-4916625404bd",
+                    "label": "1 (mildly anxious)"
+                  },
+                  {
+                    "concept": "78503633-3d69-42fa-9776-faf7a2e1da9b",
+                    "label": "4 (moderately anxious, or guarded, so anxiety is inferred)"
+                  },
+                  {
+                    "concept": "5245f7d7-ed17-47cd-bc07-bff460da2535",
+                    "label": "7 (equivalent to acute panic states as seen in severe delirium or acute schizophrenic reactions)"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Headache, Fullness in Head",
+              "type": "obs",
+              "id": "headacheFullnessInHead",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f513a22b-2c97-41ca-882d-8f6e6d3b8374",
+                "answers": [
+                  {
+                    "concept": "ecf349d5-eb12-4498-af7f-83c34a524a1e",
+                    "label": "0 not present"
+                  },
+                  {
+                    "concept": "3f1060a3-0e10-4bc8-a18f-6de03ca9a03b",
+                    "label": "1 very mild"
+                  },
+                  {
+                    "concept": "fbba74ee-d2bc-4881-9dde-5f881c6d59d4",
+                    "label": "2 mild"
+                  },
+                  {
+                    "concept": "14b0c4a6-7fd9-4c58-a53f-c8d55dd3036a",
+                    "label": "3 moderate"
+                  },
+                  {
+                    "concept": "6b04ee42-2d6a-4a68-ab63-170a1b0cc1f0",
+                    "label": "4 moderately severe"
+                  },
+                  {
+                    "concept": "de3b9a1b-732b-4c9b-bc82-5d0bd2a3a0d9",
+                    "label": "5 severe"
+                  },
+                  {
+                    "concept": "f327c515-d5c8-49e7-bdee-904515ae9eee",
+                    "label": "6 very severe"
+                  },
+                  {
+                    "concept": "80a6ff02-7b62-4104-a207-f60cf83f944a",
+                    "label": "7 extremely severe"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Agitation",
+              "type": "obs",
+              "id": "agitation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e5ac2cdc-4d76-4ac1-8a6c-d90aee2c0c81",
+                "answers": [
+                  {
+                    "concept": "caaaa28a-4134-4250-8411-73b9f26f9aa7",
+                    "label": "0 normal activity"
+                  },
+                  {
+                    "concept": "5d47df07-1fdd-4871-b8c3-6cd11d8daaaa",
+                    "label": "1 somewhat more than normal activity"
+                  },
+                  {
+                    "concept": "a47baf16-12a8-41f8-8653-e30da2766616",
+                    "label": "4 moderately fidgety and restless"
+                  },
+                  {
+                    "concept": "78830e12-41e8-43f0-92b3-8446fa8f9aa1",
+                    "label": "7 paces back and forth during most of the interview, or constantly thrashes about"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Orientation and Clouding of Sensorium",
+              "type": "obs",
+              "id": "orientationAndCloudingOfSensorium",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "83aa23e4-d0aa-4564-9b10-d57e3f0cd238",
+                "answers": [
+                  {
+                    "concept": "e165d582-e691-4311-8bc2-0a0cfd812544",
+                    "label": "0 oriented and can do serial additions"
+                  },
+                  {
+                    "concept": "3e3efdcc-33e9-41e6-8516-47cd70b187bf",
+                    "label": "1 cannot do serial additions or is uncertain about date"
+                  },
+                  {
+                    "concept": "660a6640-cc83-4a36-98a8-4d12799ceb85",
+                    "label": "2 disoriented for date by no more than 2 calendar days"
+                  },
+                  {
+                    "concept": "9456e518-49e1-4e60-ba47-2d95b61855ca",
+                    "label": "3 disoriented for date by more than 2 calendar days"
+                  },
+                  {
+                    "concept": "10912ec7-d2f5-43cd-a64b-bb000a4bf7cf",
+                    "label": "4 disoriented for place and/or person"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Total CIWA-Ar Score",
+              "type": "obs",
+              "id": "totalCiwaArScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "864e74c9-abbe-4962-a707-410e080e7bd6",
+                "min": "0",
+                "max": "67",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Severity Interpretation and Management Guidance",
+              "type": "obs",
+              "id": "severityInterpretationAndManagementGuida",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0402306e-b084-4dc4-85da-1f9fc37dcdb4"
+              },
+              "readonly": false
+            }
+          ]
+        },
+        {
+          "label": "Other Questions to Determine Admission",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Admission criteria present (SRD Ward)",
+              "type": "obs",
+              "id": "admissionCriteriaPresentSrdWard",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "19e3d0be-4dd7-4d30-9248-e3dd1b0995fb",
+                "answers": [
+                  {
+                    "concept": "de064d9b-0a57-442e-9110-99d40f5d5aac",
+                    "label": "Severe withdrawal symptoms"
+                  },
+                  {
+                    "concept": "af318775-e711-4abd-a8e4-b35a152aa45a",
+                    "label": "Past history of alcohol withdrawal seizure"
+                  },
+                  {
+                    "concept": "a1621daf-d49d-4d01-99e2-928c7ae680c2",
+                    "label": "Past history of delirium tremens"
+                  },
+                  {
+                    "concept": "687de801-1186-4e44-95a8-bbd16512c683",
+                    "label": "Severe opioid dependence"
+                  },
+                  {
+                    "concept": "eee53490-e9ff-4603-9fce-41169238420a",
+                    "label": "Severe benzodiazepine dependence"
+                  },
+                  {
+                    "concept": "bb9b093b-692e-453d-bb4c-4f98784e4806",
+                    "label": "Evidence of physical health complications"
+                  },
+                  {
+                    "concept": "cd46b3e7-608f-41fa-acbb-a3278e391961",
+                    "label": "Lack of social support"
+                  }
+                ]
+              },
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

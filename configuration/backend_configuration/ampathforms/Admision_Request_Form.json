@@ -31,19 +31,112 @@
                   }
                 },
                 {
-                  "id": "admitToLocation",
+                  "id": "admissionWardCategory",
+                  "label": "Admission ward category",
                   "type": "obs",
                   "required": true,
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "f47a1011-1a2b-4c3d-8e4f-100100101101",
+                    "answers": [
+                      {
+                        "concept": "f47a1011-1a2b-4c3d-8e4f-100100101102",
+                        "label": "Surgical ward"
+                      },
+                      {
+                        "concept": "f47a1011-1a2b-4c3d-8e4f-100100101103",
+                        "label": "Other inpatient ward"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "id": "admitToLocationSurgical",
+                  "label": "Admitted to location",
+                  "type": "obs",
                   "questionOptions": {
                     "rendering": "ui-select-extended",
                     "concept": "CIEL:169403",
                     "datasource": {
                       "name": "location_datasource",
                       "config": {
-                        "tag": "Admission Location"
+                        "tag": "0b333d24-9933-446e-bec6-ce3f4df431b9"
                       }
                     }
-                  }
+                  },
+                  "hide": {
+                    "hideWhenExpression": "isEmpty(admissionWardCategory) || admissionWardCategory !== 'f47a1011-1a2b-4c3d-8e4f-100100101102'"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "admissionWardCategory === 'f47a1011-1a2b-4c3d-8e4f-100100101102' && isEmpty(myValue)",
+                      "message": "Admitted to location is required"
+                    }
+                  ]
+                },
+                {
+                  "id": "admitToLocationOther",
+                  "label": "Admitted to location",
+                  "type": "obs",
+                  "questionOptions": {
+                    "rendering": "ui-select-extended",
+                    "concept": "CIEL:169403",
+                    "datasource": {
+                      "name": "location_datasource",
+                      "config": {
+                        "tag": "f5b9737b-14d5-402b-8475-dd558808e172"
+                      }
+                    }
+                  },
+                  "hide": {
+                    "hideWhenExpression": "isEmpty(admissionWardCategory) || admissionWardCategory !== 'f47a1011-1a2b-4c3d-8e4f-100100101103'"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "admissionWardCategory === 'f47a1011-1a2b-4c3d-8e4f-100100101103' && isEmpty(myValue)",
+                      "message": "Admitted to location is required"
+                    }
+                  ]
+                },
+                {
+                  "id": "surgeryAdmissionPriority",
+                  "label": "Surgery admission priority",
+                  "type": "obs",
+                  "required": true,
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "f47a1001-1a2b-4c3d-8e4f-100100100101",
+                    "answers": [
+                      {
+                        "concept": "f47a1001-1a2b-4c3d-8e4f-100100100102",
+                        "label": "Emergency"
+                      },
+                      {
+                        "concept": "f47a1001-1a2b-4c3d-8e4f-100100100103",
+                        "label": "Elective – Category 1 (within 1 month)"
+                      },
+                      {
+                        "concept": "f47a1001-1a2b-4c3d-8e4f-100100100104",
+                        "label": "Elective – Category 2 (within 3 months)"
+                      },
+                      {
+                        "concept": "f47a1001-1a2b-4c3d-8e4f-100100100105",
+                        "label": "Elective – Category 3 (within 1 year)"
+                      }
+                    ]
+                  },
+                  "hide": {
+                    "hideWhenExpression": "isEmpty(admissionWardCategory) || admissionWardCategory !== 'f47a1011-1a2b-4c3d-8e4f-100100101102'"
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "admissionWardCategory === 'f47a1011-1a2b-4c3d-8e4f-100100101102' && isEmpty(myValue)",
+                      "message": "Surgery admission priority is required for surgical ward admissions"
+                    }
+                  ]
                 }
               ]
             }
@@ -55,8 +148,8 @@
   "processor": "EncounterFormProcessor",
   "encounter": "Transfer Request",
   "referencedForms": [],
-  "description": "Create an admission request to an inpatient ward",
-  "version": "1.0.0",
+  "description": "Create an admission request to an inpatient ward. Location is captured once (CIEL:169403) so emrapi inpatient requests do not fail on duplicate disposition location obs.",
+  "version": "1.3.0",
   "published": true,
   "retired": false,
   "encounterType": "Transfer Request",

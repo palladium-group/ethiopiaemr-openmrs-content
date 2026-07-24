@@ -1,0 +1,680 @@
+{
+  "name": "Leishmaniasis Register",
+  "description": "Leishmaniasis Register for diagnosis, treatment and follow up of VL, CL and MCL with PITC",
+  "version": "1.2",
+  "published": true,
+  "uuid": "1728394a-b5c6-4def-0678-192a3b4c5d67",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "History",
+      "sections": [
+        {
+          "label": "Travel and Illness History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Travel history",
+              "type": "obs",
+              "id": "travelHistory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5a0b1c2d-3e4f-4960-8a71-b2c3d4e5f607",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Number of months sick before admission",
+              "type": "obs",
+              "id": "numberOfMonthsSickBeforeAdmission",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "7b2c3d4e-5f60-4b71-9c82-d3e4f5061728"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pregnancy",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pregnancy, leishmaniasis",
+              "type": "obs",
+              "id": "pregnancyLeishmaniasis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8c3d4e5f-6071-4c82-ad93-e4f506172839",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pregnancy trimester",
+              "type": "obs",
+              "id": "pregnancyTrimester",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "9d4e5f60-7182-4d93-bea4-f5061728394a"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Diagnosis",
+      "sections": [
+        {
+          "label": "Daignosis, Leishmaniasis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "VL, leishmaniasis",
+              "type": "obs",
+              "id": "vlLeishmaniasis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ae5f6071-8293-4ea4-cfb5-061728394a5b",
+                "answers": [
+                  {
+                    "concept": "d1829304-1526-41d7-f2e8-394a5b6c7d8e",
+                    "label": "Primary, leishmaniasis"
+                  },
+                  {
+                    "concept": "e2930415-2637-42e8-a3f9-4a5b6c7d8e9f",
+                    "label": "tbrf, relapse"
+                  },
+                  {
+                    "concept": "f3041526-3748-43f9-b40a-5b6c7d8e9f0a",
+                    "label": "PKDL"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "CL, leishmaniasis",
+              "type": "obs",
+              "id": "clLeishmaniasis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "bf607182-9304-4fb5-d0c6-1728394a5b6c",
+                "answers": [
+                  {
+                    "concept": "6a1b2c3d-4e5f-4a60-8b71-c2d3e4f50617",
+                    "label": "New"
+                  },
+                  {
+                    "concept": "e2930415-2637-42e8-a3f9-4a5b6c7d8e9f",
+                    "label": "tbrf, relapse"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "MCL, Leishmaniasis",
+              "type": "obs",
+              "id": "mclLeishmaniasis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c0718293-0415-40c6-e1d7-28394a5b6c7d",
+                "answers": [
+                  {
+                    "concept": "6a1b2c3d-4e5f-4a60-8b71-c2d3e4f50617",
+                    "label": "New"
+                  },
+                  {
+                    "concept": "e2930415-2637-42e8-a3f9-4a5b6c7d8e9f",
+                    "label": "tbrf, relapse"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "VL (Visceral Leishmaniasis)",
+      "sections": [
+        {
+          "label": "Lab Result, Leishmaniasis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "DAT, Leishmaniasis",
+              "type": "obs",
+              "id": "datLeishmaniasis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "04152637-4859-440a-c51b-6c7d8e9f0a1b",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive, cerv"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. Negative"
+                  },
+                  {
+                    "concept": "37485960-7182-473d-f84e-9f0a1b2c3d4e",
+                    "label": "Borderline"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "RDT, Leishmaniasis",
+              "type": "obs",
+              "id": "rdtLeishmaniasis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "15263748-5960-451b-d62c-7d8e9f0a1b2c",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive, cerv"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. Negative"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Aspirate, Leishmaniasis",
+              "type": "obs",
+              "id": "aspirateLeishmaniasis",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "26374859-6071-462c-e73d-8e9f0a1b2c3d"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Nutrition and Comorbidities",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Nutrition, Nutritional Status",
+              "type": "obs",
+              "id": "nutritionNutritionalStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e1a2b3c4-d5e6-47f8-89a0-b1c2d3e4f501",
+                "answers": [
+                  {
+                    "concept": "f1a2b3c4-d5e6-47f8-89a0-b1c2d3e4f502",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "f1a2b3c4-d5e6-47f8-89a0-b1c2d3e4f503",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "f1a2b3c4-d5e6-47f8-89a0-b1c2d3e4f504",
+                    "label": "Severe"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Concomittant OI",
+              "type": "obs",
+              "id": "concomittantOi",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "82930415-2637-4c82-ed93-4e5f60718293",
+                "answers": [
+                  {
+                    "concept": "18c7d8e9-eafb-82ff-45cc-7b43cef60b29",
+                    "label": "Tuberculosis, coded"
+                  },
+                  {
+                    "concept": "233AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pneumonia, coded"
+                  },
+                  {
+                    "concept": "93041526-3748-4d93-fea4-5f6071829304",
+                    "label": "Skin infection"
+                  },
+                  {
+                    "concept": "b4634d4e-f379-4136-a1a0-0c17555f8d65",
+                    "label": "Sepsis, coded"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Drug side effect",
+              "type": "obs",
+              "id": "drugSideEffect",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "a4152637-4859-4ea4-afb5-607182930415",
+                "answers": [
+                  {
+                    "concept": "b5263748-5960-4fb5-b0c6-718293041526",
+                    "label": "Cardiotoxicity"
+                  },
+                  {
+                    "concept": "c6374859-6071-40c6-c1d7-829304152637",
+                    "label": "Pancreatitis, side effect"
+                  },
+                  {
+                    "concept": "d7485960-7182-41d7-d2e8-930415263748",
+                    "label": "Nephrotoxicity"
+                  },
+                  {
+                    "concept": "e8596071-8293-42e8-e3f9-041526374859",
+                    "label": "Hepatotoxicity"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Treatment and Outcome (Visceral Leishmaniasis)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Treatment Regimen VL, Leishmaniasis",
+              "type": "obs",
+              "id": "treatmentRegimenVlLeishmaniasis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f9607182-9304-43f9-f40a-152637485960",
+                "answers": [
+                  {
+                    "concept": "0a718293-0415-440a-a51b-263748596071",
+                    "label": "SSG"
+                  },
+                  {
+                    "concept": "1b829304-1526-451b-b62c-374859607182",
+                    "label": "SSG+PM"
+                  },
+                  {
+                    "concept": "2c930415-2637-462c-c73d-485960718293",
+                    "label": "Ambisome"
+                  },
+                  {
+                    "concept": "3d041526-3748-473d-d84e-596071829304",
+                    "label": "Ambisome + Miltefosine"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Initial treatment outcome",
+              "type": "obs",
+              "id": "vlInitialTreatmentOutcome",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4e152637-4859-484e-e95f-607182930415",
+                "answers": [
+                  {
+                    "concept": "5f263748-5960-495f-fa60-718293041526",
+                    "label": "Cured"
+                  },
+                  {
+                    "concept": "6a374859-6071-4a60-ab71-829304152637",
+                    "label": "Referral, coded"
+                  },
+                  {
+                    "concept": "7b485960-7182-4b71-bc82-930415263748",
+                    "label": "Defaulted, treatment outcome"
+                  },
+                  {
+                    "concept": "8c596071-8293-4c82-cd93-041526374859",
+                    "label": "Died"
+                  },
+                  {
+                    "concept": "9d607182-9304-4d93-dea4-152637485960",
+                    "label": "Failure of Treatment"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Conformation of Cure",
+              "type": "obs",
+              "id": "conformationOfCure",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ae718293-0415-4ea4-efb5-263748596071",
+                "answers": [
+                  {
+                    "concept": "bf829304-1526-4fb5-f0c6-374859607182",
+                    "label": "Clinical, confirm cure"
+                  },
+                  {
+                    "concept": "c0930415-2637-40c6-a1d7-485960718293",
+                    "label": "Parasitological, confirmation of cure"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "TBGH_DS Date of Discharge",
+              "type": "obs",
+              "id": "vlTbghDsDateOfDischarge",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "d1041526-3748-41d7-b2e8-596071829304"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "CL (Cutaneous Leishmaniasis)",
+      "sections": [
+        {
+          "label": "Skin Test and Lesions",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Skin test result, Leishmaniasis",
+              "type": "obs",
+              "id": "skinTestResultLeishmaniasis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e2152637-4859-42e8-c3f9-607182930415",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive, cerv"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. Negative"
+                  },
+                  {
+                    "concept": "f3263748-5960-43f9-d40a-718293041526",
+                    "label": "Inconclusive, coded"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Size of lesions",
+              "type": "obs",
+              "id": "sizeOfLesions",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "04748596-0718-440a-e51b-829304152637",
+                "answers": [
+                  {
+                    "concept": "15859607-1829-451b-f62c-930415263748",
+                    "label": "< 4cm"
+                  },
+                  {
+                    "concept": "26960718-2930-462c-a73d-041526374859",
+                    "label": "> 4cm"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Time elapsed",
+              "type": "obs",
+              "id": "timeElapsed",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "37a71829-3041-473d-b84e-152637485960"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Treatment and Outcome (Cutaneous Leishmaniasis)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Treatment Regimen CL, Leishmaniasis",
+              "type": "obs",
+              "id": "treatmentRegimenClLeishmaniasis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "48b82930-4152-484e-c95f-263748596071",
+                "answers": [
+                  {
+                    "concept": "59c93041-5263-495f-da60-374859607182",
+                    "label": "Megilumine Antimoniate (glucantime)"
+                  },
+                  {
+                    "concept": "0a718293-0415-440a-a51b-263748596071",
+                    "label": "SSG"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "TBGH_DS Date of Discharge",
+              "type": "obs",
+              "id": "clTbghDsDateOfDischarge",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "d1041526-3748-41d7-b2e8-596071829304"
+              }
+            },
+            {
+              "label": "Initial treatment outcome",
+              "type": "obs",
+              "id": "clInitialTreatmentOutcome",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4e152637-4859-484e-e95f-607182930415",
+                "answers": [
+                  {
+                    "concept": "5f263748-5960-495f-fa60-718293041526",
+                    "label": "Cured"
+                  },
+                  {
+                    "concept": "6a374859-6071-4a60-ab71-829304152637",
+                    "label": "Referral, coded"
+                  },
+                  {
+                    "concept": "7b485960-7182-4b71-bc82-930415263748",
+                    "label": "Defaulted, treatment outcome"
+                  },
+                  {
+                    "concept": "8c596071-8293-4c82-cd93-041526374859",
+                    "label": "Died"
+                  },
+                  {
+                    "concept": "9d607182-9304-4d93-dea4-152637485960",
+                    "label": "Failure of Treatment"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "PITC",
+      "sections": [
+        {
+          "label": "PITC",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HIV test offered",
+              "type": "obs",
+              "id": "hivTestOffered",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "164163AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HIV test performed",
+              "type": "obs",
+              "id": "hivTestPerformed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "VCT, HIV Test Result",
+              "type": "obs",
+              "id": "vctHivTestResult",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f1871e41-8238-4c06-9944-b367ac2aea42",
+                "answers": [
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "VCT, Reactive"
+                  },
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "VCT, Non-Reactive"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Remark",
+      "sections": [
+        {
+          "label": "Cervreg Remark",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Cervreg Remark",
+              "type": "obs",
+              "id": "cervregRemark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9d037485-9607-4d93-bea4-718293041526"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

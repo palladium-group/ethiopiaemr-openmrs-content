@@ -1,0 +1,477 @@
+{
+  "name": "HCV Treatment Register",
+  "description": "Hepatitis C virus (HCV) treatment register. Uses CIEL concepts (e.g. HCV RNA IU/mL, ALT, treatment start date, DAA regimen drugs, liver disease diagnoses), master concepts from hcv_treatment_register_new_concepts.csv and shared register fields (same as HBV register where applicable), and reuses Co-infection with HIV from the HBV co-infection set.",
+  "version": "1.2",
+  "published": true,
+  "uuid": "e4f50617-8293-4abc-d345-e6f708192a34",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Patient Demographics",
+      "sections": [
+        {
+          "label": "Identification",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient name",
+              "type": "obs",
+              "id": "hcvName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b2c3d4e5-f601-4890-bcde-f01234567812"
+              }
+            },
+            {
+              "label": "Case registration date",
+              "type": "obs",
+              "id": "hcvEnrollmentDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "a1b2c3d4-e5f6-4789-abcd-ef0123456701"
+              }
+            },
+            {
+              "label": "Medical record number",
+              "type": "obs",
+              "id": "hcvMrn",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5a9aa304-a80d-4315-909a-70875754e74e"
+              }
+            },
+            {
+              "label": "Age (years)",
+              "type": "obs",
+              "id": "hcvAge",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "d4e5f607-1823-4012-def0-123456789034",
+                "min": "0"
+              }
+            },
+            {
+              "label": "Sex at birth",
+              "type": "obs",
+              "id": "hcvSex",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "166025AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Male"
+                  },
+                  {
+                    "concept": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Baseline Status",
+      "sections": [
+        {
+          "label": "Viral Load and ALT",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HCV RNA quantitative (IU/mL), baseline",
+              "type": "obs",
+              "id": "hcvVlq",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "167787AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "ALT / SGPT (IU/L), baseline",
+              "type": "obs",
+              "id": "hcvInitialAlt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "654AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Co-infection",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Co-infection (HIV and or HBV)",
+              "type": "obs",
+              "id": "hcvCoInfection",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f3e0c1c4-2a74-4ad9-9cf7-4d673af69210",
+                "answers": [
+                  {
+                    "concept": "c201d808-64e2-47c5-a305-0d9752c85f11",
+                    "label": "HIV co-infection"
+                  },
+                  {
+                    "concept": "b006c864-03e3-4d2a-831c-4b6b4385cea9",
+                    "label": "HBV co-infection"
+                  },
+                  {
+                    "concept": "be35708f-d6e8-45ff-b563-a0364f148b46",
+                    "label": "HIV and HBV co-infection"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If HIV-positive: ART or clinical notes",
+              "type": "obs",
+              "id": "hcvIfHivPositiveRegimen",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9285367a-9f25-4613-bc10-abd72491ad76"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Liver Status and History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Initial liver disease stage",
+              "type": "obs",
+              "id": "hcvInitialLiverStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "05cbbc4c-8989-4665-95f9-d37d78ffa5ad",
+                "answers": [
+                  {
+                    "concept": "924b36a2-4d0e-414b-a437-5a224e9360eb",
+                    "label": "No cirrhosis"
+                  },
+                  {
+                    "concept": "814b128e-31fe-4d23-a50a-ff7752c92adc",
+                    "label": "Cirrhosis, compensated (without portal hypertension)"
+                  },
+                  {
+                    "concept": "30190f8d-55f4-5b17-b96c-77c441f38120",
+                    "label": "Cirrhosis, clinically decompensated"
+                  },
+                  {
+                    "concept": "a67c14de-1ba9-4d07-8bcf-7a84361dfef3",
+                    "label": "Hepatocellular carcinoma due to hepatitis C"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Prior hepatitis C treatment",
+              "type": "obs",
+              "id": "hcvHxOfTreatmentOfHcv",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cce795b1-a6c5-4861-86a4-f263189b8bd8",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HCV genotype",
+              "type": "obs",
+              "id": "hcvGenotype",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1b89659b-192f-4d75-a2b6-a7ecb55189d2"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Treatment",
+      "sections": [
+        {
+          "label": "HCV Treatment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HCV antiviral regimen",
+              "type": "obs",
+              "id": "hcvTreatmentCode",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "009e9669-45ee-400d-b8e3-084129b30227",
+                "answers": [
+                  {
+                    "concept": "3654dc4f-c8ca-584d-a0ab-23079a74d368",
+                    "label": "Daclatasvir / sofosbuvir"
+                  },
+                  {
+                    "concept": "2bb831f9-ae1b-4a29-9d83-b0ad928b562e",
+                    "label": "Sofosbuvir / velpatasvir"
+                  },
+                  {
+                    "concept": "d264419e-e0b9-4c8c-98b6-3701e965dfce",
+                    "label": "Ledipasvir / sofosbuvir"
+                  },
+                  {
+                    "concept": "7a96ad3d-099a-4f46-a672-cecc67cd5a69",
+                    "label": "Sofosbuvir with ribavirin"
+                  },
+                  {
+                    "concept": "d6f5688b-7260-4eb2-aa57-cfe90a67cf0d",
+                    "label": "Sofosbuvir / velpatasvir / voxilaprevir"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date antiviral treatment started",
+              "type": "obs",
+              "id": "hcvDateTreatmentInitiated",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "163526AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Follow Up",
+      "sections": [
+        {
+          "label": "Follow Up Visit",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Follow-up week (protocol)",
+              "type": "obs",
+              "id": "hcvFollowUpWeek",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f2424fd9-d0ad-4c6b-92a2-b92db6fde419",
+                "answers": [
+                  {
+                    "concept": "82c3a519-cbfe-463a-81b5-8ebc4ba4ea69",
+                    "label": "Week 0"
+                  },
+                  {
+                    "concept": "a481b402-55d7-49a3-b9fa-4da93a4eee6a",
+                    "label": "Week 4"
+                  },
+                  {
+                    "concept": "f01d90be-c346-4702-83e6-f57833084338",
+                    "label": "Week 8"
+                  },
+                  {
+                    "concept": "08776c46-63fe-4845-8c9e-c922ba5044fb",
+                    "label": "Week 24"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Follow-up status (register code)",
+              "type": "obs",
+              "id": "hcvFollowUpStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1ab82be2-a3dc-4d0d-8720-e704871a6cff",
+                "answers": [
+                  {
+                    "concept": "eaffbc74-f440-46ed-9e76-a5537bed977e",
+                    "label": "Follow-up status code 1"
+                  },
+                  {
+                    "concept": "400bceed-d97b-43a1-b1d8-72521b6663a5",
+                    "label": "Follow-up status code 2"
+                  },
+                  {
+                    "concept": "887aaa6a-5fec-4a12-b34a-086809d546ea",
+                    "label": "Follow-up status code 3"
+                  },
+                  {
+                    "concept": "05f87410-9b46-4d74-8899-a5b080143e24",
+                    "label": "Follow-up status code 4"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Outcome",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Treatment course completed",
+              "type": "obs",
+              "id": "hcvTxCompleted",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2ecaa5d9-8231-4395-977d-1f58731a5c05",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HCV RNA quantitative (IU/mL), outcome",
+              "type": "obs",
+              "id": "hcvVlno",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "167787AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Treatment stopped before completion",
+              "type": "obs",
+              "id": "hcvTxStopped",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "710a8e24-a210-4772-a78a-05cf025e1f72",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Lost to follow-up / dropped from care",
+              "type": "obs",
+              "id": "hcvDropped",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9b399d7f-0f6b-499c-b521-cd6efea53f5d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Died",
+              "type": "obs",
+              "id": "hcvDied",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8b2a3cce-c33d-4d65-96be-81e7c9833117",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

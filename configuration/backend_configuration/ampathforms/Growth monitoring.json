@@ -1,0 +1,106 @@
+{
+  "name": "Growth monitoring",
+  "description": "Growth monitoring with weight and Z-score of WFA",
+  "version": "1.1",
+  "published": true,
+  "uuid": "9fa0b1c2-d3e4-4567-8012-90123456789b",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Growth monitoring",
+      "sections": [
+        {
+          "label": "Growth monitoring",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date & Time",
+              "type": "obs",
+              "id": "dateAndTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "b7e4c2a1-9f08-4d6e-b5c3-2a1f0e9d8c7b"
+              }
+            },
+            {
+              "label": "Weight (Kg)",
+              "type": "obs",
+              "id": "weightKg",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Z-score of WFA",
+              "type": "obs",
+              "id": "zScoreOfWfa",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6f76bbf3-9880-4571-a9b9-7efb3d345be0"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

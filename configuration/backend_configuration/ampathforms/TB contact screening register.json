@@ -1,0 +1,482 @@
+{
+  "name": "TB contact screening register",
+  "description": "TB contact screening register including index TB info, contact details, screening, action and TPT treatment",
+  "version": "1.2",
+  "published": true,
+  "uuid": "5b6c7d8e-9fa0-4123-4012-5d6e7f890123",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Index TB Patient",
+      "sections": [
+        {
+          "label": "Index TB Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Type of TB of index patient",
+              "type": "obs",
+              "id": "typeOfTbOfIndexPatient",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a1b2c3d4-e5f6-4a78-9b01-c234d567e890",
+                "answers": [
+                  {
+                    "concept": "164412AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "P/Pos"
+                  },
+                  {
+                    "concept": "164413AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "P/Neg"
+                  },
+                  {
+                    "concept": "d4e5f607-1829-4dab-ce34-f5670a1b2c23",
+                    "label": "EP"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "DST result of the Index TB patient",
+              "type": "obs",
+              "id": "dstResultOfTheIndexTbPatient",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e5f60718-293a-4ebc-df45-0a1b2c3d4e34",
+                "answers": [
+                  {
+                    "concept": "f6071829-3a4b-4fcd-e056-1b2c3d4e5f45",
+                    "label": "No RR, TB register"
+                  },
+                  {
+                    "concept": "0718293a-4b5c-40de-f167-2c3d4e5f6078",
+                    "label": "Hr-TB, Tb register"
+                  },
+                  {
+                    "concept": "3b0106c0-bc4b-5bf5-a7c9-7869d3ee3033",
+                    "label": "RR, TB register"
+                  },
+                  {
+                    "concept": "e3de3f5d-bd2b-42de-8d07-8b15056d96f6",
+                    "label": "MDR, TB register"
+                  },
+                  {
+                    "concept": "6ed306d8-c0c7-4573-9366-df111f8f56cd",
+                    "label": "Pre-XDR, TB register"
+                  },
+                  {
+                    "concept": "dd690053-0020-47b2-9d67-37f1071fa465",
+                    "label": "XDR, TB register"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Contact Person",
+      "sections": [
+        {
+          "label": "Contact Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name of contact / other TPT eligible groups",
+              "type": "obs",
+              "id": "nameOfContactOtherTptEligibleGroups",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "18293a4b-5c6d-412e-8078-3d4e5f607189"
+              }
+            },
+            {
+              "label": "Age of contact person",
+              "type": "obs",
+              "id": "ageOfContactPerson",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "d4e5f607-1823-4012-def0-123456789034"
+              }
+            },
+            {
+              "label": "ER, Sex",
+              "type": "obs",
+              "id": "erSex",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3071a2b3-0415-2345-6789-012345abcd07",
+                "answers": [
+                  {
+                    "concept": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "ER, Male"
+                  },
+                  {
+                    "concept": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "ER, Female"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Reason for registration",
+              "type": "obs",
+              "id": "reasonForRegistration",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3a4b5c6d-7e8f-4340-a29a-5f60718293ab",
+                "answers": [
+                  {
+                    "concept": "4b5c6d7e-8f90-4451-b3ab-60718293a4bc",
+                    "label": "Household"
+                  },
+                  {
+                    "concept": "cb3719c5-239c-475a-ae8f-88c9b996bfa1",
+                    "label": "Close contact"
+                  },
+                  {
+                    "concept": "5c6d7e8f-9001-4562-c4bc-718293a4b5cd",
+                    "label": "Casual contact"
+                  },
+                  {
+                    "concept": "6d7e8f90-0112-4673-d5cd-8293a4b5c6de",
+                    "label": "Other non-contact"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HIV status of the contact",
+              "type": "obs",
+              "id": "hivStatusOfTheContact",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7e8f9001-1223-4784-e6de-93a4b5c6d7ef",
+                "answers": [
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "VCT, Positive"
+                  },
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "VCT, Negative"
+                  },
+                  {
+                    "concept": "1402AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not tested"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Initial Contact Assessment",
+      "sections": [
+        {
+          "label": "Initial contact assessment: TB screening result and date of assessement",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "TB screening result, contact",
+              "type": "obs",
+              "id": "tbScreeningResultContact",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8f900112-2334-4895-f7ef-a4b5c6d7e8f0",
+                "answers": [
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "VCT, Positive"
+                  },
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "VCT, Negative"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date screened",
+              "type": "obs",
+              "id": "dateScreened",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "90011223-3445-49a6-a8f0-b5c6d7e8f901"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Diagnosis and Action",
+      "sections": [
+        {
+          "label": "Final Diagnosis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Final diagnosis TB",
+              "type": "obs",
+              "id": "finalDiagnosisTb",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "01122334-4556-4ab7-b901-c6d7e8f90112",
+                "answers": [
+                  {
+                    "concept": "164412AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "P/Pos"
+                  },
+                  {
+                    "concept": "164413AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "P/Neg"
+                  },
+                  {
+                    "concept": "12233445-5667-4bc8-ca12-d7e8f9011223",
+                    "label": "DR-TB"
+                  },
+                  {
+                    "concept": "d4e5f607-1829-4dab-ce34-f5670a1b2c23",
+                    "label": "EP"
+                  },
+                  {
+                    "concept": "23344556-6778-4cd9-db23-e8f901122334",
+                    "label": "No DS TB / DR TB"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Action Taken",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Action taken, TB",
+              "type": "obs",
+              "id": "actionTakenTb",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "34455667-7889-4dea-ec34-f90112233445",
+                "answers": [
+                  {
+                    "concept": "45566778-8990-4efb-fd45-011223344556",
+                    "label": "DS TB treatment started"
+                  },
+                  {
+                    "concept": "56677889-9001-40fc-0e56-112233445667",
+                    "label": "linked to DR-TB TIC"
+                  },
+                  {
+                    "concept": "67788990-0112-41ad-1f67-223344556778",
+                    "label": "TB prevention treatment (TPT) started"
+                  },
+                  {
+                    "concept": "def01234-8990-4789-789a-890123456701",
+                    "label": "Referred"
+                  },
+                  {
+                    "concept": "78899001-1223-42be-2078-334455667889",
+                    "label": "Released from care"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "CF other"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "TPT Treatment",
+      "sections": [
+        {
+          "label": "TPT treatment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "TPT treatment started date",
+              "type": "obs",
+              "id": "tptTreatmentStartedDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "89900112-2334-43cf-3189-445566778990"
+              }
+            },
+            {
+              "label": "Name of TPT regimen",
+              "type": "obs",
+              "id": "nameOfTptRegimen",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "90011223-3445-44d0-429a-556677889901",
+                "answers": [
+                  {
+                    "concept": "a0112233-4556-45e1-53ab-667788990112",
+                    "label": "3HP"
+                  },
+                  {
+                    "concept": "b1223344-5667-46f2-64bc-778899001123",
+                    "label": "3RH"
+                  },
+                  {
+                    "concept": "c2334455-6778-4703-75cd-889900112234",
+                    "label": "6H"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Weight (Kg)",
+              "type": "obs",
+              "id": "weightKg",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Dose, TB register",
+              "type": "obs",
+              "id": "doseTbRegister",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d3445566-7889-4814-86de-990011223345"
+              }
+            },
+            {
+              "label": "Follow up for TPT",
+              "type": "obs",
+              "id": "followUpForTpt",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "e4556677-8990-4925-97ef-a00112233456"
+              }
+            },
+            {
+              "label": "Outcome of TPT treatment",
+              "type": "obs",
+              "id": "outcomeOfTptTreatment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f5667788-9001-4a36-a8f0-b11223344567",
+                "answers": [
+                  {
+                    "concept": "160035AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Completed"
+                  },
+                  {
+                    "concept": "160031AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Left The Follow Up"
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died"
+                  },
+                  {
+                    "concept": "07182930-0112-4b47-b901-c22334455678",
+                    "label": "Developed TB"
+                  },
+                  {
+                    "concept": "160737AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Evaluated"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "CF other"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Remarks",
+      "sections": [
+        {
+          "label": "OI, Remarks",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "OI, Remarks",
+              "type": "obs",
+              "id": "oiRemarks",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6f789012-3456-7890-6f78-901234567890"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}
