@@ -1,7 +1,7 @@
 {
   "name": "Breast Cancer - Intake",
-  "description": "Breast Cancer - Intake migrated from Bahmni",
-  "version": "1.2",
+  "description": "Breast cancer clinical intake: presentation, risk factors, imaging, histopathology and biomarkers, clinical staging and multidisciplinary referral",
+  "version": "2.0",
   "published": true,
   "uuid": "7a0a898b-a31d-47b5-b4fe-73fe12eedd31",
   "retired": false,
@@ -64,6 +64,527 @@
     {
       "label": "Breast Cancer - Intake",
       "sections": [
+        {
+          "label": "Presentation and Clinical History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Menopausal Status",
+              "type": "obs",
+              "id": "menopausalStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "41ec8e46-420c-4790-a67f-366a67a3c0a6",
+                "answers": [
+                  {
+                    "concept": "33638cf3-4281-444e-94ae-06a11b9745d4",
+                    "label": "Premenopausal"
+                  },
+                  {
+                    "concept": "7df17a4d-eeae-46be-8072-da8ee258274b",
+                    "label": "Perimenopausal"
+                  },
+                  {
+                    "concept": "cbfdecf0-799c-4f47-a376-6c67e11a1ec5",
+                    "label": "Post-menopausal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Which side is affected?",
+              "type": "obs",
+              "id": "affectedSide",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f937247c-1ec4-49c4-93b3-224a305df9e2",
+                "answers": [
+                  {
+                    "concept": "5139AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Left Side Only"
+                  },
+                  {
+                    "concept": "5141AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Right Side Only"
+                  },
+                  {
+                    "concept": "160406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Both Sides (Bilateral)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Primary Reason for Intake / Presentation",
+              "type": "obs",
+              "id": "reasonForIntake",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9f09a01c-7671-421e-99b4-936c17015a49",
+                "answers": [
+                  {
+                    "concept": "0e38b26e-6676-4391-933e-e869c70cb55b",
+                    "label": "Abnormal Screening Mammogram"
+                  },
+                  {
+                    "concept": "5d93e7e7-4f3b-4f56-8a56-ce228392c91d",
+                    "label": "Palpable Breast Mass"
+                  },
+                  {
+                    "concept": "cb5a3e1d-ed47-4f96-9e64-7156352f3e9b",
+                    "label": "Symptomatic Changes (e.g. skin changes, nipple discharge)"
+                  },
+                  {
+                    "concept": "5e26e745-5e88-417c-adfc-2e4785c57b52",
+                    "label": "Secondary Opinion / Transfer of Care"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Symptom Duration",
+              "type": "obs",
+              "id": "symptomDuration",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "15a1a1db-3fc0-42e2-8d03-e7f583baf762"
+              }
+            },
+            {
+              "label": "Symptom Checklist (Affected Side)",
+              "type": "obs",
+              "id": "symptomChecklist",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "c4b9a393-fe04-40c9-b112-a8e6991c45c7",
+                "answers": [
+                  {
+                    "concept": "4cc8c19d-b785-4361-912e-ed69529f5c5f",
+                    "label": "Palpable lump or thickening (breast or axilla)"
+                  },
+                  {
+                    "concept": "49748ee5-e7c1-4e8e-9efe-b6a7376e6d4e",
+                    "label": "Skin dimpling, puckering or erythema (peau d'orange)"
+                  },
+                  {
+                    "concept": "8707e313-826b-40b9-a4f8-b15fcd38ab96",
+                    "label": "Nipple retraction or inversion (new onset)"
+                  },
+                  {
+                    "concept": "33362304-2a92-4449-bf0f-b70b05f594e5",
+                    "label": "Spontaneous nipple discharge"
+                  },
+                  {
+                    "concept": "f758ead6-a473-41b0-b9bb-9c5921d2a46e",
+                    "label": "Localized breast pain or mastalgia (unrelated to menstrual cycle)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Nipple Discharge Characteristics",
+              "type": "obs",
+              "id": "dischargeCharacter",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "58ba865f-c411-422a-a6b9-0f87dc839743",
+                "answers": [
+                  {
+                    "concept": "6e606f9a-3403-4e94-8cfa-1a7a3462956c",
+                    "label": "Serous"
+                  },
+                  {
+                    "concept": "ebc046fb-1383-49c7-801e-f36430c2c6b2",
+                    "label": "Bloody"
+                  },
+                  {
+                    "concept": "45b2b5bd-4f14-46a8-ba64-0d1040c8004f",
+                    "label": "Clear"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "!(symptomChecklist && symptomChecklist.includes('33362304-2a92-4449-bf0f-b70b05f594e5'))"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Family and Medical Risk Factors",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Personal History of Breast or Ovarian Cancer?",
+              "type": "obs",
+              "id": "personalCancerHistory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a594861e-0e49-446c-9d81-8d1d4dada5f1",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Family History of Cancer (First or Second-Degree Relatives)",
+              "type": "obs",
+              "id": "familyCancerHistory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c62bfb45-1076-4457-bd43-2c2e370b1081",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Yes, check all that apply",
+              "type": "obs",
+              "id": "familyCancerTypes",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "63c9a9e3-4e2d-42fe-ba29-a07f2eff4670",
+                "answers": [
+                  {
+                    "concept": "0eeb1c7e-5cfd-4730-aff6-e75bd4097908",
+                    "label": "Breast Cancer (< 50 years old)"
+                  },
+                  {
+                    "concept": "5df4ffc1-1ca9-4efb-817d-a6259000ac4a",
+                    "label": "Breast Cancer (> 50 years old)"
+                  },
+                  {
+                    "concept": "0c3d6bce-e03e-4a31-b1c8-9e1c8bd5d9fb",
+                    "label": "Ovarian Cancer"
+                  },
+                  {
+                    "concept": "48769edb-0515-4bb4-8d48-b8a7dae35753",
+                    "label": "Prostate or Pancreatic Cancer"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "familyCancerHistory !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Known Genetic Mutations Testing",
+              "type": "obs",
+              "id": "geneticTesting",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c2522212-5755-4b5e-a6ce-c0032f05fcb2",
+                "answers": [
+                  {
+                    "concept": "73d5ef75-9a1a-4ae4-8bbe-6c35ac703a9a",
+                    "label": "Not Tested"
+                  },
+                  {
+                    "concept": "c8f492e2-1690-4132-ba19-75e6e6774054",
+                    "label": "Tested Negative"
+                  },
+                  {
+                    "concept": "52e32d78-d4b7-4f8d-a608-af9925f53b95",
+                    "label": "BRCA1 Positive"
+                  },
+                  {
+                    "concept": "f33cc1b6-e1bf-4051-b1d8-1bf3daf0f0d7",
+                    "label": "BRCA2 Positive"
+                  },
+                  {
+                    "concept": "5012445d-3159-420e-b664-522647eb90ee",
+                    "label": "Other Mutation Positive"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Specify Other Mutation",
+              "type": "obs",
+              "id": "otherMutation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3285b735-b5ea-4fa3-bc89-ebef117e8f48"
+              },
+              "hide": {
+                "hideWhenExpression": "geneticTesting !== '5012445d-3159-420e-b664-522647eb90ee'"
+              }
+            },
+            {
+              "label": "Prior Thoracic Radiation Therapy (Age 10-30)?",
+              "type": "obs",
+              "id": "priorThoracicRadiation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a8a8cec6-cefa-457c-b449-012711985317",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Diagnostic Imaging and Biopsy Status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Latest Imaging Performed",
+              "type": "obs",
+              "id": "latestImaging",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "d6cacfac-b149-4c21-adbd-5564625b653a",
+                "answers": [
+                  {
+                    "concept": "7e6f39b4-dae5-432f-89f5-d5294530ab4c",
+                    "label": "Diagnostic Mammogram"
+                  },
+                  {
+                    "concept": "4b39818d-7f5d-4e0a-a67f-c0f6a9ad4e84",
+                    "label": "Breast Ultrasound"
+                  },
+                  {
+                    "concept": "363a77c8-85ac-40ee-9d85-38eea150f485",
+                    "label": "Breast MRI"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "BI-RADS Category",
+              "type": "obs",
+              "id": "biradsCategory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "558b18e4-9d01-4346-91a1-fbe45c310c05",
+                "answers": [
+                  {
+                    "concept": "e799649c-6508-4660-9d9d-4df3449df20e",
+                    "label": "0"
+                  },
+                  {
+                    "concept": "2ab46b88-b87a-4321-839f-b1351410335d",
+                    "label": "3"
+                  },
+                  {
+                    "concept": "deec6439-884f-4921-b9d3-cfa77666d6e6",
+                    "label": "4"
+                  },
+                  {
+                    "concept": "fbfd99cf-2be1-403d-b8c3-15b686d5cc78",
+                    "label": "5"
+                  },
+                  {
+                    "concept": "89683205-f2c6-45e7-824d-9db0a29ca6c8",
+                    "label": "6"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "!(latestImaging && latestImaging.includes('7e6f39b4-dae5-432f-89f5-d5294530ab4c'))"
+              }
+            },
+            {
+              "label": "Biopsy Status",
+              "type": "obs",
+              "id": "biopsyStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "afe7367b-6061-4acc-8472-df06e5ca7933",
+                "answers": [
+                  {
+                    "concept": "254e2357-6516-4be4-a390-1d7f7883c106",
+                    "label": "Done"
+                  },
+                  {
+                    "concept": "b08507ec-fb2e-4e74-940b-0840ff896126",
+                    "label": "Pending"
+                  },
+                  {
+                    "concept": "00f21523-d40b-45cf-a11e-e858b1ca8fc5",
+                    "label": "Scheduled"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Histopathology and Tumour Characteristics",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Histologic Type",
+              "type": "obs",
+              "id": "histologicType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "82e00dd1-53cc-4ac6-90c5-0e443c4ebdb0",
+                "answers": [
+                  {
+                    "concept": "589c2323-1411-4761-9541-4fbc3a702c2a",
+                    "label": "In Situ (DCIS/LCIS)"
+                  },
+                  {
+                    "concept": "7a8f728d-da6a-4737-bad4-1b812f1320a8",
+                    "label": "Invasive Ductal (IDC)"
+                  },
+                  {
+                    "concept": "ecc5e4d6-3637-4baa-9f4f-413e7b79df14",
+                    "label": "Invasive Lobular (ILC)"
+                  },
+                  {
+                    "concept": "58143734-8ed6-475d-b58e-798f293549ae",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Tumour Grade",
+              "type": "obs",
+              "id": "tumourGrade",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d2bfa9eb-bd4f-4b92-8705-ab3abf4ef902",
+                "answers": [
+                  {
+                    "concept": "54ba2e0e-8fec-4957-88c7-209189a34ae7",
+                    "label": "Grade 1 (Well-differentiated)"
+                  },
+                  {
+                    "concept": "2fd7ab90-fbac-4c3b-b506-039793ca9ca7",
+                    "label": "Grade 2"
+                  },
+                  {
+                    "concept": "fa2a519a-e830-41a7-a6a0-01cf5c43705c",
+                    "label": "Grade 3 (Poorly-differentiated)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Estrogen Receptor (ER)",
+              "type": "obs",
+              "id": "erStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "94771c35-424c-4c77-81f6-01d5d587f577",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Progesterone Receptor (PR)",
+              "type": "obs",
+              "id": "prStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c6d1a659-4e00-435c-8c10-7c43b803c633",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HER2/neu Status",
+              "type": "obs",
+              "id": "her2Status",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e7a58497-2822-475d-a395-766038c526c4",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "1300AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Equivocal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Triple-Negative Status",
+              "type": "obs",
+              "id": "tripleNegative",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "81f71c94-0c56-49df-90d2-87a4e72cd04a",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(erStatus) || isEmpty(prStatus) || isEmpty(her2Status)) ? null : ((erStatus === '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && prStatus === '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && her2Status === '664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') ? '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' : '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                },
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Triple-negative"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not triple-negative"
+                  }
+                ]
+              },
+              "questionInfo": "Derived automatically: true only when ER, PR and HER2 are all Negative."
+            },
+            {
+              "label": "Ki-67 Index (%)",
+              "type": "obs",
+              "id": "ki67Index",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c96d6e8c-9fd8-4d2e-bf5d-a861f78ea8a3",
+                "min": "0",
+                "max": "100",
+                "step": "1",
+                "disallowDecimals": true
+              }
+            }
+          ]
+        },
         {
           "label": "Diagnostic Workup",
           "isExpanded": "true",
@@ -383,7 +904,133 @@
           ]
         },
         {
-          "label": "Staging & Plan",
+          "label": "Initial Clinical Staging (AJCC cTNM)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Clinical T (Tumour Size)",
+              "type": "obs",
+              "id": "clinicalT",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d8c2d2eb-4a7b-40e9-991c-b20411566529",
+                "answers": [
+                  {
+                    "concept": "160795AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tx"
+                  },
+                  {
+                    "concept": "160797AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "T0"
+                  },
+                  {
+                    "concept": "160796AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tis"
+                  },
+                  {
+                    "concept": "160798AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "T1"
+                  },
+                  {
+                    "concept": "160799AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "T2"
+                  },
+                  {
+                    "concept": "160800AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "T3"
+                  },
+                  {
+                    "concept": "160801AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "T4"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Clinical N (Regional Lymph Nodes)",
+              "type": "obs",
+              "id": "clinicalN",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4edc8610-a862-4872-a6c7-47df20a94900",
+                "answers": [
+                  {
+                    "concept": "160804AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Nx"
+                  },
+                  {
+                    "concept": "160803AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "N0"
+                  },
+                  {
+                    "concept": "160805AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "N1"
+                  },
+                  {
+                    "concept": "160806AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "N2"
+                  },
+                  {
+                    "concept": "160807AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "N3"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Clinical M (Distant Metastasis)",
+              "type": "obs",
+              "id": "clinicalM",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e0aa4084-97da-4bb8-9d7b-3bfa28c42f35",
+                "answers": [
+                  {
+                    "concept": "160815AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "M0"
+                  },
+                  {
+                    "concept": "160812AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "M1 (Suspected/Confirmed)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Overall Clinical Stage",
+              "type": "obs",
+              "id": "overallClinicalStage",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c4875520-b710-46cf-b082-4fd8a2709066",
+                "answers": [
+                  {
+                    "concept": "d6ea369d-d35d-43d3-b182-929ae727705a",
+                    "label": "Stage 0"
+                  },
+                  {
+                    "concept": "f4d3af38-d993-45a9-8b47-816075bc1b74",
+                    "label": "Stage I"
+                  },
+                  {
+                    "concept": "94f95157-605e-4a28-bab3-53fd51282e66",
+                    "label": "Stage II"
+                  },
+                  {
+                    "concept": "64d33de7-7987-4dad-9499-0373f9a9ac46",
+                    "label": "Stage III"
+                  },
+                  {
+                    "concept": "0bee0bd5-7b78-479a-9738-8d6339b94904",
+                    "label": "Stage IV"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pathologic Staging & Treatment Plan",
           "isExpanded": "true",
           "questions": [
             {
@@ -566,6 +1213,71 @@
                   "id": "treatmentIntent"
                 }
               ]
+            }
+          ]
+        },
+        {
+          "label": "Care Plan and Multidisciplinary Referral",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Referrals Initiated",
+              "type": "obs",
+              "id": "referralsInitiated",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "87217696-dbd7-4631-b19b-01f64fe0e645",
+                "answers": [
+                  {
+                    "concept": "c57d7661-3440-4f2a-bdcf-0716b5908870",
+                    "label": "Breast / Surgical Oncology"
+                  },
+                  {
+                    "concept": "64298027-681a-4941-a267-1f30dcdae099",
+                    "label": "Medical Oncology"
+                  },
+                  {
+                    "concept": "6f44f5e4-4cdd-4d45-abd0-77b065565767",
+                    "label": "Radiation Oncology"
+                  },
+                  {
+                    "concept": "8a02d198-ad28-466b-a565-93aa4e2a0ba4",
+                    "label": "Genetic Counseling"
+                  },
+                  {
+                    "concept": "cb7440ff-a138-4afb-bae7-6bcf89866810",
+                    "label": "Plastic & Reconstructive Surgery"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Intake Case Scheduled for Tumour Board Evaluation?",
+              "type": "obs",
+              "id": "tumourBoard",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "27b31b4f-c6d4-419b-a8bd-67a348c66072",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Reviewing Clinician Name",
+              "type": "obs",
+              "id": "reviewingClinician",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8f144302-9663-47bd-acb6-3610235e3ee0"
+              }
             }
           ]
         }

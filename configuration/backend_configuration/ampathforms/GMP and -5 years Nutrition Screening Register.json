@@ -1,7 +1,7 @@
 {
   "name": "GMP and -5 years Nutrition Screening Register",
   "description": "Growth monitoring and promotion (GMP) and Nutritional screening for under-five years register",
-  "version": "1.1",
+  "version": "2.0",
   "published": true,
   "uuid": "c2d3e4f5-6071-489a-b123-c4d5e6f70812",
   "retired": false,
@@ -64,42 +64,6 @@
     {
       "label": "Growth Monitoring and Promotion (GMP)",
       "sections": [
-        {
-          "label": "Anthropometric Measurements",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Weight (Kg)",
-              "type": "obs",
-              "id": "gmpWeight",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
-              }
-            },
-            {
-              "label": "Height/length (cm)",
-              "type": "obs",
-              "id": "gmpHeightLength",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
-              }
-            },
-            {
-              "label": "MUAC (cm)",
-              "type": "obs",
-              "id": "gmpMuac",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
-                "step": "0.01"
-              }
-            }
-          ]
-        },
         {
           "label": "Growth Classification",
           "isExpanded": "true",
@@ -235,66 +199,119 @@
       "label": "Nutritional Screening for < 5 Years",
       "sections": [
         {
-          "label": "Anthropometric Measurements",
+          "label": "Anthropometric Measurements (Screening)",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Weight (Kg)",
+              "label": "Weight (kg)",
               "type": "obs",
-              "id": "nutWeight",
+              "id": "screenWeight",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "300",
                 "step": "0.01"
               }
             },
             {
-              "label": "Height/length (cm)",
+              "label": "Height / Length (cm)",
               "type": "obs",
-              "id": "nutHeightLength",
+              "id": "screenHeight",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
+                "min": "30",
+                "max": "300",
+                "step": "0.1"
               }
             },
             {
-              "label": "MUAC (cm)",
+              "label": "Mid-Upper Arm Circumference (MUAC) (cm)",
               "type": "obs",
-              "id": "nutMuac",
+              "id": "screenMuac",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
-                "step": "0.01"
-              }
+                "min": "5",
+                "max": "30",
+                "step": "0.1"
+              },
+              "questionInfo": "One decimal place, e.g. 11.5"
             },
             {
-              "label": "Bilateral pitting edema",
+              "label": "Bilateral Pitting Edema",
               "type": "obs",
-              "id": "bilateralPittingEdema",
+              "id": "oedemaGrade",
               "questionOptions": {
                 "rendering": "radio",
-                "concept": "475f2b41-c3fa-4266-9612-18f8b72fc8c4",
+                "concept": "1f7ee031-c173-42be-b048-ab27024c818a",
                 "answers": [
                   {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Grade 0 (None)"
                   },
                   {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
+                    "concept": "165598AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Grade + (Mild - both feet/ankles)"
+                  },
+                  {
+                    "concept": "165599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Grade ++ (Moderate - feet, legs, hands, lower arms)"
+                  },
+                  {
+                    "concept": "165600AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Grade +++ (Severe - generalized/anasarca)"
                   }
                 ]
               }
+            },
+            {
+              "label": "BMI (kg/m²)",
+              "type": "obs",
+              "id": "screenBmi",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(screenHeight) || isEmpty(screenWeight)) ? null : calcBMI(screenHeight,screenWeight)"
+                }
+              },
+              "questionInfo": "Calculated automatically from Height and Weight."
             }
           ]
         },
         {
-          "label": "Classification",
+          "label": "Nutritional Status Classification",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Screening classification",
+              "label": "Weight-for-Age Status (GMP Trend)",
+              "type": "obs",
+              "id": "growthTrend",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "137356b7-d4b9-4052-89e8-519bbc01594c",
+                "answers": [
+                  {
+                    "concept": "11b0862a-12b1-4d5f-96e4-942fc815747c",
+                    "label": "Gaining Weight / Normal Trend"
+                  },
+                  {
+                    "concept": "78ef25c1-f273-49cb-a539-184d9b7fe642",
+                    "label": "Static / Flat Trend (No growth)"
+                  },
+                  {
+                    "concept": "a7744852-4046-4e60-912c-e3534f937950",
+                    "label": "Losing Weight / Growth Faltering"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Acute Malnutrition Classification",
               "type": "obs",
               "id": "screeningClassification",
               "questionOptions": {
@@ -303,38 +320,194 @@
                 "answers": [
                   {
                     "concept": "f1a2b3c4-d5e6-47f8-89a0-b1c2d3e4f502",
-                    "label": "Normal"
+                    "label": "Normal (MUAC ≥ 12.5 cm)"
                   },
                   {
                     "concept": "f1a2b3c4-d5e6-47f8-89a0-b1c2d3e4f503",
-                    "label": "MAM"
+                    "label": "Moderate Acute Malnutrition (MAM) - MUAC 11.5 to <12.5 cm"
                   },
                   {
                     "concept": "f1a2b3c4-d5e6-47f8-89a0-b1c2d3e4f504",
-                    "label": "SAM"
+                    "label": "Severe Acute Malnutrition (SAM) - MUAC <11.5 cm or any grade of oedema"
                   }
                 ]
               }
             },
             {
-              "label": "Developmental milestone classification",
+              "label": "Ocular Signs (Vitamin A Deficiency)",
               "type": "obs",
-              "id": "developmentalMilestoneClassification",
+              "id": "ocularSigns",
               "questionOptions": {
-                "rendering": "radio",
-                "concept": "e6f7a8b9-c0d1-4c45-9f20-0123456789ab",
+                "rendering": "checkbox",
+                "concept": "b1b1a72a-d092-4ed0-b36b-28caa04490d6",
                 "answers": [
                   {
-                    "concept": "b9c0d1e2-f3a4-4f78-a253-3456789abcde",
-                    "label": "CDD"
+                    "concept": "d5bbec6b-31de-45bb-bf86-7a640a7ce803",
+                    "label": "Bitot's Spots"
                   },
                   {
-                    "concept": "a8b9c0d1-e2f3-4e67-9142-23456789abcd",
-                    "label": "SDD"
+                    "concept": "b9964f3c-6cc6-457a-9e7d-37c698d3e13e",
+                    "label": "Corneal Xerosis"
                   },
                   {
-                    "concept": "f7a8b9c0-d1e2-4d56-8031-123456789abc",
-                    "label": "NDD"
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Anaemia Signs",
+              "type": "obs",
+              "id": "anaemiaSigns",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5cae35f4-3f0d-4b59-b7d8-46c6729da95c",
+                "answers": [
+                  {
+                    "concept": "7dd9e0f1-5a2b-345c-789d-678901234567",
+                    "label": "Severe Palmar / Conjunctival Pallor"
+                  },
+                  {
+                    "concept": "8ee0f1a2-6b3c-456d-890e-789012345678",
+                    "label": "Mild / Moderate Pallor"
+                  },
+                  {
+                    "concept": "9ff1a2b3-7c4d-567e-901f-890123456789",
+                    "label": "None"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Skin & Hair Changes (Protein-Energy Malnutrition)",
+              "type": "obs",
+              "id": "skinHairChanges",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "b071b6c6-e80e-4761-b13f-d747a3842f9b",
+                "answers": [
+                  {
+                    "concept": "94a43599-f087-47e6-a21f-f07e17bdf92f",
+                    "label": "Flaky-paint dermatosis (skin peeling/ulceration)"
+                  },
+                  {
+                    "concept": "6bde37d1-dac9-40a8-b3b2-5ad36b1f7031",
+                    "label": "Easily pluckable hair / \"Flag Sign\""
+                  },
+                  {
+                    "concept": "d53a93df-504a-455e-8d09-e7886702a001",
+                    "label": "Angular Stomatitis (cracked corners of the mouth)"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Skeletal Deformities (Vitamin D / Rickets)",
+              "type": "obs",
+              "id": "skeletalDeformities",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "f8f42bbf-b5dd-43f0-a64c-50c71aa24c75",
+                "answers": [
+                  {
+                    "concept": "ffaab2b0-1fa5-4cac-b99c-86a5fcf7e5b0",
+                    "label": "Bow-legs / Knock-knees"
+                  },
+                  {
+                    "concept": "f1a68b6a-6683-48b6-b635-8a15ceb00e70",
+                    "label": "Rachitic Rosary (beading on ribs)"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Interventions & Counselling",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Nutritional Supplements Administered",
+              "type": "obs",
+              "id": "supplements",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "b76f9b23-2e60-47f5-a0a3-1fab71371474",
+                "answers": [
+                  {
+                    "concept": "e38105c8-d1f4-4dce-a970-2d70c2980f46",
+                    "label": "Vitamin A Capsule"
+                  },
+                  {
+                    "concept": "20334c47-ddeb-4567-aaf0-5d9b8029b8ae",
+                    "label": "Deworming (Albendazole/Mebendazole if aged over 12 months)"
+                  },
+                  {
+                    "concept": "f99711ba-7fcb-4ce1-88a4-585ba26273cd",
+                    "label": "Ready-to-Use Therapeutic Food (RUTF / Plumpy'Nut)"
+                  },
+                  {
+                    "concept": "165417AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Micronutrient Powder (MNP)"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Caregiver Counselling Topics Covered",
+              "type": "obs",
+              "id": "counsellingTopics",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "742d7ef2-f297-448c-b44d-04b004594bd9",
+                "answers": [
+                  {
+                    "concept": "64cb147d-08ab-4f30-8e19-e6170930f7c9",
+                    "label": "Exclusive Breastfeeding (infants under 6 months)"
+                  },
+                  {
+                    "concept": "e54422e7-2262-4b06-89e9-65706713cbec",
+                    "label": "Complementary Feeding practices (6 to 23 months)"
+                  },
+                  {
+                    "concept": "a35f4668-de9c-4b60-ace3-83eb75a26be3",
+                    "label": "Dietary Diversity & Hygiene"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Action Taken / Triage",
+              "type": "obs",
+              "id": "nutritionAction",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9ec27631-5e9a-43ab-b7e5-f7f710214cba",
+                "answers": [
+                  {
+                    "concept": "74609142-82d2-4fb2-994b-e0b8189387df",
+                    "label": "Routine Follow-up next month"
+                  },
+                  {
+                    "concept": "f2a3b4c5-d6e7-48f9-9ab1-c2d3e4f5a508",
+                    "label": "Admit to Outpatient Therapeutic Program"
+                  },
+                  {
+                    "concept": "f2a3b4c5-d6e7-48f9-9ab1-c2d3e4f5a507",
+                    "label": "Refer to Stabilization Center"
                   }
                 ]
               }

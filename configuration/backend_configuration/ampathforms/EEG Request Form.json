@@ -1,0 +1,362 @@
+{
+  "name": "EEG Request Form",
+  "description": "Electroencephalogram request: referral source, seizure history, current illness and anticonvulsant medication",
+  "version": "1.0",
+  "published": true,
+  "retired": false,
+  "uuid": "3d6f1e58-4f2a-4a51-9a1e-2f7cbb1e7f21",
+  "encounter": "Procedure Order",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "EEG Request Form",
+      "sections": [
+        {
+          "label": "Referral",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Referring institution / department",
+              "type": "obs",
+              "id": "referralSource",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "bb360173-9609-411e-aeaf-1195405aee58",
+                "answers": [
+                  {
+                    "concept": "978AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Self"
+                  },
+                  {
+                    "concept": "0c4ee1b0-dfda-41d7-9e2c-f4033b877bd7",
+                    "label": "Institution"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Name of institution",
+              "type": "obs",
+              "id": "institutionName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "79c6b3ea-274f-494b-b9a7-098908dc66b6"
+              },
+              "hide": {
+                "hideWhenExpression": "referralSource !== '0c4ee1b0-dfda-41d7-9e2c-f4033b877bd7'"
+              }
+            },
+            {
+              "label": "Date of referral",
+              "type": "obs",
+              "id": "referralDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "82893eb9-638b-4ed0-9c58-c4c363183143"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Seizure History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Seizure",
+              "type": "obs",
+              "id": "seizure",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7f0246b5-1d1d-4d59-b567-88eae46701ef",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "639173e6-7d13-4bb9-b6a3-4d3840566f82",
+                    "label": "Uncertain"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes, type of seizure",
+              "type": "obs",
+              "id": "seizureType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a4194c70-adbe-4f6c-922a-9c0457b53a6d",
+                "answers": [
+                  {
+                    "concept": "5a6edfda-9e1a-46d4-a9fc-27523fd6742c",
+                    "label": "GM epilepsy"
+                  },
+                  {
+                    "concept": "35c5ac3f-1263-4178-a274-84c4d3ce7558",
+                    "label": "Complex partial seizure"
+                  },
+                  {
+                    "concept": "23559a29-c41d-4952-933c-427d070737b4",
+                    "label": "Petit mal epilepsy"
+                  },
+                  {
+                    "concept": "3d1a9566-6b75-40e6-a2a5-b905c3834c9e",
+                    "label": "Myoclonic epilepsy"
+                  },
+                  {
+                    "concept": "19c78de8-29bd-485c-89d3-1678028836e3",
+                    "label": "Unclear"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "seizure !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Duration of seizure",
+              "type": "obs",
+              "id": "seizureDuration",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "9976a860-69b2-4b03-8823-3d0fce4dadb6",
+                "min": "0",
+                "max": "1200",
+                "step": "1",
+                "disallowDecimals": true
+              },
+              "questionInfo": "Whole numbers only. Select the unit alongside.",
+              "hide": {
+                "hideWhenExpression": "seizure !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Duration unit",
+              "type": "obs",
+              "id": "seizureDurationUnit",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "89142717-7297-53d3-909e-79df117e7695",
+                "answers": [
+                  {
+                    "concept": "1733AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Minutes"
+                  },
+                  {
+                    "concept": "1822AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hours"
+                  },
+                  {
+                    "concept": "1072AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Days"
+                  },
+                  {
+                    "concept": "1073AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Weeks"
+                  },
+                  {
+                    "concept": "1074AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Months"
+                  },
+                  {
+                    "concept": "1734AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Years"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "seizure !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Family history of epilepsy",
+              "type": "obs",
+              "id": "familyHistoryEpilepsy",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fec71fc9-46b1-48cb-8b95-71466c72c869",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Past history of severe head injury",
+              "type": "obs",
+              "id": "severeHeadInjury",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "32d208f1-cdab-4499-87fb-8507fe2e667f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Current Illness and Medication",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Current medical illness / Psychiatric disorder",
+              "type": "obs",
+              "id": "currentIllness",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "f90f40fd-6465-4781-b7ae-43686eae7dbb",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Current Medication",
+              "type": "obs",
+              "id": "currentMedication",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0004a17a-a654-47b5-a552-c2d8a94be3db",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Anticonvulsant drug",
+              "type": "obs",
+              "id": "anticonvulsants",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "390b2731-fb34-4b0b-a51b-f0467d4e8692",
+                "answers": [
+                  {
+                    "concept": "5fc59931-d43d-4c30-8f95-705e681f4c1f",
+                    "label": "DZP (Diazepam)"
+                  },
+                  {
+                    "concept": "79889683-9f5d-45d2-90a9-d68d05cb4094",
+                    "label": "PHB (Phenobarbital)"
+                  },
+                  {
+                    "concept": "3b4f7692-d80e-42a7-ac17-4eda3f869fa9",
+                    "label": "PHT (Phenytoin)"
+                  },
+                  {
+                    "concept": "f1d50a43-5f0a-4b52-bd1d-e3c3f0976a59",
+                    "label": "CBM (Carbamazepine)"
+                  },
+                  {
+                    "concept": "a06f9277-de8e-42c6-8636-07da85dd8f9f",
+                    "label": "SVP (Sodium valproate)"
+                  },
+                  {
+                    "concept": "2f0d890f-e0bf-41ed-a107-fd673cf27561",
+                    "label": "CLN (Clonazepam)"
+                  },
+                  {
+                    "concept": "cab0f78c-1adb-4d76-9500-9bd8ee4ada59",
+                    "label": "LTG (Lamotrigine)"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "currentMedication !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Other drug(s)",
+              "type": "obs",
+              "id": "otherDrugs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "db5dce16-4bba-4541-beca-48d7660ed840"
+              },
+              "hide": {
+                "hideWhenExpression": "currentMedication !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

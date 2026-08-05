@@ -1,7 +1,7 @@
 {
   "name": "Psych Recreational Therapy",
   "description": "Psych Recreational Therapy for Eka Hospital (OpenMRS O3).",
-  "version": "1.1",
+  "version": "1.2",
   "published": true,
   "uuid": "ff21e11b-c721-4732-8ec3-8efda92ab671",
   "retired": false,
@@ -71,24 +71,37 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Diagnosis",
-              "type": "obs",
-              "id": "diagnosis",
+              "label": "Diagnoses",
+              "type": "obsGroup",
+              "id": "diagnosisGroup",
               "questionOptions": {
-                "rendering": "radio",
-                "concept": "353f678f-fd7b-4d33-a096-e87f057cea31",
-                "answers": [
-                  {
-                    "concept": "0c15c9f0-c6a5-4030-8849-4e4ebb8010cf",
-                    "label": "No previous diagnosis"
-                  },
-                  {
-                    "concept": "8035248d-63b2-4d7f-bf10-22223a711fd3",
-                    "label": "Confirmed elsewhere"
-                  }
-                ]
+                "rendering": "repeating",
+                "concept": "c37e8f82-bacf-41a9-a84f-341b1b77f321",
+                "repeatOptions": {
+                  "limit": "5",
+                  "addText": "Add another diagnosis"
+                }
               },
-              "readonly": false
+              "questions": [
+                {
+                  "label": "Diagnosis",
+                  "type": "obs",
+                  "id": "diagnosis",
+                  "questionOptions": {
+                    "rendering": "problem",
+                    "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                    "isSearchable": true,
+                    "datasource": {
+                      "name": "problem_datasource",
+                      "config": {
+                        "class": [
+                          "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
             },
             {
               "label": "Linked Goal #",
@@ -191,22 +204,19 @@
               "readonly": false
             },
             {
-              "label": "Duration",
+              "label": "Duration (in minutes)",
               "type": "obs",
               "id": "duration",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "482e588d-0da9-4ac5-845b-a3614a0ba6c9",
-                "step": "1"
+                "step": "1",
+                "min": "0",
+                "max": "480",
+                "disallowDecimals": true
               },
               "readonly": false,
-              "validators": [
-                {
-                  "type": "js_expression",
-                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
-                  "message": "Whole numbers only (no decimals)."
-                }
-              ]
+              "questionInfo": "Whole minutes only. Negative values are not permitted."
             }
           ]
         },
@@ -220,7 +230,7 @@
               "id": "level",
               "questionOptions": {
                 "rendering": "radio",
-                "concept": "26509b2b-ed1f-4a61-b59c-2ed5901f5bd5",
+                "concept": "8b49de81-dd55-4815-824e-469c0bc883fc",
                 "answers": [
                   {
                     "concept": "d8136dfa-cfb1-46a6-95e8-771fc1e83dc4",

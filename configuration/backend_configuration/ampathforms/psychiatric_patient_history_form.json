@@ -1,9 +1,9 @@
 {
-  "name": "Psychiatry History",
-  "description": "Comprehensive psychiatric history and assessment form",
+  "name": "Psychiatric History and Physical Examination",
+  "description": "Comprehensive psychiatric history, risk and forensic assessment, mental status examination and physical examination",
   "published": true,
   "retired": false,
-  "version": "1.2",
+  "version": "1.6",
   "uuid": "ccad3dce-900e-479e-8ea2-65d4ecb20e4e",
   "encounter": "Consultation",
   "processor": "EncounterFormProcessor",
@@ -58,7 +58,13 @@
               },
               "id": "encLocation",
               "readonly": false
-            },
+            }
+          ]
+        },
+        {
+          "label": "Referral and Social History",
+          "isExpanded": "true",
+          "questions": [
             {
               "label": "Referral Source",
               "type": "obs",
@@ -336,7 +342,7 @@
               "type": "obsGroup",
               "id": "ComplaintLodgeByClient",
               "questionOptions": {
-                "concept": "160531AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "5d0c0685-a166-4bd9-95ad-75cced418761",
                 "rendering": "repeating"
               },
               "validators": [],
@@ -484,7 +490,7 @@
                 {
                   "label": "Duration",
                   "type": "obs",
-                  "id": "complaint-duration",
+                  "id": "complaintDuration",
                   "questionOptions": {
                     "concept": "159368AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "rendering": "number",
@@ -495,7 +501,7 @@
                 {
                   "label": "Duration Unit",
                   "type": "obs",
-                  "required": false,
+                  "required": "false",
                   "id": "durationUnit",
                   "questionOptions": {
                     "rendering": "select",
@@ -539,7 +545,7 @@
             {
               "label": "HPI (History of Present Illness)",
               "type": "obs",
-              "required": false,
+              "required": "false",
               "id": "historyPresentIllness",
               "questionOptions": {
                 "rendering": "textarea",
@@ -583,7 +589,7 @@
             {
               "label": "Past Psychiatric History",
               "type": "obs",
-              "required": false,
+              "required": "false",
               "id": "pastPsychiatricHistory",
               "questionOptions": {
                 "rendering": "textarea",
@@ -594,7 +600,7 @@
             {
               "label": "Past Medical and Surgical History",
               "type": "obs",
-              "required": false,
+              "required": "false",
               "id": "pastMedicalHistory",
               "questionOptions": {
                 "rendering": "textarea",
@@ -605,7 +611,7 @@
             {
               "label": "Family History",
               "type": "obs",
-              "required": false,
+              "required": "false",
               "id": "familyHistory",
               "questionOptions": {
                 "rendering": "textarea",
@@ -616,7 +622,7 @@
             {
               "label": "Personal History",
               "type": "obs",
-              "required": false,
+              "required": "false",
               "id": "personalHistory",
               "questionOptions": {
                 "rendering": "textarea",
@@ -730,7 +736,14 @@
                 "concept": "49084b31-b53e-4a89-a43a-3c0775e0e6f5"
               },
               "readonly": false,
-              "required": "true",
+              "required": {
+                "type": "conditionalRequired",
+                "referenceQuestionId": "previousSuicideAttempt",
+                "referenceQuestionAnswers": [
+                  "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                ],
+                "message": "Attempt details are required when a previous suicide attempt is recorded."
+              },
               "hide": {
                 "hideWhenExpression": "previousSuicideAttempt !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
@@ -1023,7 +1036,7 @@
             {
               "label": "Appearance and Behavior",
               "type": "obs",
-              "required": false,
+              "required": "false",
               "id": "appearance",
               "questionOptions": {
                 "rendering": "textarea",
@@ -1034,7 +1047,7 @@
             {
               "label": "Speech",
               "type": "obs",
-              "required": false,
+              "required": "false",
               "id": "speech",
               "questionOptions": {
                 "rendering": "textarea",
@@ -1087,7 +1100,7 @@
             {
               "label": "Perception",
               "type": "obs",
-              "required": false,
+              "required": "false",
               "id": "perception",
               "questionOptions": {
                 "rendering": "textarea",
@@ -1098,7 +1111,7 @@
             {
               "label": "Sensorium",
               "type": "obs",
-              "required": false,
+              "required": "false",
               "id": "sensorium",
               "questionOptions": {
                 "rendering": "textarea",
@@ -1109,7 +1122,7 @@
             {
               "label": "Alertness",
               "type": "obs",
-              "required": false,
+              "required": "false",
               "id": "alertness",
               "questionOptions": {
                 "rendering": "textarea",
@@ -1120,7 +1133,7 @@
             {
               "label": "Orientation",
               "type": "obs",
-              "required": false,
+              "required": "false",
               "id": "orientation",
               "questionOptions": {
                 "rendering": "textarea",
@@ -1131,7 +1144,7 @@
             {
               "label": "Concentration",
               "type": "obs",
-              "required": false,
+              "required": "false",
               "id": "concentration",
               "questionOptions": {
                 "rendering": "textarea",
@@ -1142,7 +1155,7 @@
             {
               "label": "Fund of Knowledge",
               "type": "obs",
-              "required": false,
+              "required": "false",
               "id": "fundOfKnowledge",
               "questionOptions": {
                 "rendering": "textarea",
@@ -1153,7 +1166,7 @@
             {
               "label": "Abstract Reasoning",
               "type": "obs",
-              "required": false,
+              "required": "false",
               "id": "abstractReasoning",
               "questionOptions": {
                 "rendering": "textarea",
@@ -1202,97 +1215,239 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Blood Pressure",
+              "label": "Systolic (mmHg)",
               "type": "obs",
-              "id": "bloodPressure",
+              "id": "systolicBP",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1145e8f4-17a4-43af-a28a-94399aef3c0b",
-                "step": "any"
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "300",
+                "step": "1",
+                "disallowDecimals": true
               },
-              "readonly": false,
-              "required": "true"
+              "required": "true",
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Systolic BP is outside the normal range (90-120 mmHg)."
+                }
+              ]
             },
             {
-              "label": "Pulse Rate",
+              "label": "Diastolic (mmHg)",
               "type": "obs",
-              "id": "pulseRate",
+              "id": "diastolicBP",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "200",
+                "step": "1",
+                "disallowDecimals": true
+              },
+              "required": "true",
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Diastolic BP is outside the normal range (60-90 mmHg)."
+                }
+              ]
+            },
+            {
+              "label": "Posture",
+              "type": "obs",
+              "id": "posture",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "159633AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sitting"
+                  },
+                  {
+                    "concept": "159629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Recumbent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pulse Rate (bpm)",
+              "type": "obs",
+              "id": "pulse",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "any"
+                "min": "0",
+                "max": "300",
+                "step": "1",
+                "disallowDecimals": true
               },
-              "readonly": false,
-              "required": "true"
+              "required": "true",
+              "questionInfo": "Normal range: 60-100 bpm",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Heart rate is outside the normal range (60-100 bpm)."
+                }
+              ]
             },
             {
-              "label": "Respiratory Rate",
+              "label": "Respiratory Rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "any"
+                "min": "0",
+                "max": "80",
+                "step": "1",
+                "disallowDecimals": true
               },
-              "readonly": false,
-              "required": "true"
+              "required": "true",
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ]
             },
             {
-              "label": "Temperature",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "temperature",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "any"
+                "min": "25",
+                "max": "43",
+                "step": "0.1"
               },
-              "readonly": false,
-              "required": "true"
+              "required": "true",
+              "questionInfo": "Normal range: 36.5-37.5 °C. One decimal place.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
+                }
+              ]
             },
             {
-              "label": "Oxygen Saturation (SpO₂)",
+              "label": "Oxygen Saturation (SpO₂) (%)",
               "type": "obs",
-              "id": "oxygenSaturationSpo",
+              "id": "spo2",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "007155ea-ad0e-40ee-bb7c-9b0cb912755e",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "max": "100",
-                "step": "any"
+                "step": "1",
+                "disallowDecimals": true
               },
-              "readonly": false
+              "questionInfo": "Normal: greater than 90%",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SpO₂ is below the normal range (>90%)."
+                }
+              ]
             },
             {
-              "label": "Height",
+              "label": "Pain Score (0-10)",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "166082AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "10",
+                "step": "1",
+                "disallowDecimals": true
+              }
+            },
+            {
+              "label": "Height (cm)",
               "type": "obs",
               "id": "height",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "any"
+                "min": "30",
+                "max": "300",
+                "step": "0.1"
               },
-              "readonly": false
+              "questionInfo": "One decimal place."
             },
             {
-              "label": "Weight",
+              "label": "Weight (kg)",
               "type": "obs",
               "id": "weight",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "any"
+                "min": "0",
+                "max": "300",
+                "step": "0.01"
               },
-              "readonly": false
+              "questionInfo": "Two decimal places allowed."
             },
             {
               "label": "Body Mass Index (BMI)",
               "type": "obs",
-              "id": "bodyMassIndexBmi",
+              "id": "bmi",
+              "readonly": true,
               "questionOptions": {
-                "rendering": "text",
-                "concept": "e409215e-2e9d-4fa6-9c94-362eaf8263b1"
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight)) ? null : calcBMI(height,weight)"
+                }
               },
-              "readonly": false
+              "questionInfo": "Calculated automatically from Height and Weight."
+            },
+            {
+              "label": "BMI Category",
+              "type": "obs",
+              "id": "bmiCategory",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "255b89fc-8a01-4dae-90b3-613d65bb76bb",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight)) ? null : (calcBMI(height,weight) < 18.5 ? 'f1ac86a2-5934-49c5-aecc-16426e6b1d59' : (calcBMI(height,weight) < 25 ? 'ad106589-fb33-4ce5-9159-0cf793996bce' : (calcBMI(height,weight) < 30 ? '590a7581-714a-4b47-a1c9-712501889e44' : '9f2f66bf-dc75-47ac-b201-c891a9d5bbd6')))"
+                },
+                "answers": [
+                  {
+                    "concept": "f1ac86a2-5934-49c5-aecc-16426e6b1d59",
+                    "label": "Underweight"
+                  },
+                  {
+                    "concept": "ad106589-fb33-4ce5-9159-0cf793996bce",
+                    "label": "Healthy Weight"
+                  },
+                  {
+                    "concept": "590a7581-714a-4b47-a1c9-712501889e44",
+                    "label": "Overweight"
+                  },
+                  {
+                    "concept": "9f2f66bf-dc75-47ac-b201-c891a9d5bbd6",
+                    "label": "Obese"
+                  }
+                ]
+              },
+              "questionInfo": "Auto-classified from BMI: <18.5 Underweight, 18.5-24.9 Healthy Weight, 25.0-29.9 Overweight, >=30.0 Obese."
             },
             {
               "label": "Pertinent Physical Findings",
@@ -1300,9 +1455,9 @@
               "id": "pertinentPhysicalFindings",
               "questionOptions": {
                 "rendering": "textarea",
-                "concept": "f7439191-f29e-44d5-b95e-02d7e37be2cf"
-              },
-              "readonly": false
+                "concept": "f7439191-f29e-44d5-b95e-02d7e37be2cf",
+                "rows": "3"
+              }
             }
           ]
         },
@@ -1330,32 +1485,53 @@
               "label": "Primary Diagnosis",
               "type": "obs",
               "id": "primaryDiagnosis",
+              "required": "true",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "c3c38db3-cdf3-40dc-9850-8e2bc16943c0"
-              },
-              "readonly": false,
-              "required": "true"
+                "rendering": "problem",
+                "concept": "c3c38db3-cdf3-40dc-9850-8e2bc16943c0",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
             },
             {
-              "label": "ICD-10/ICD-11 Code",
-              "type": "obs",
-              "id": "icd10Icd11Code",
+              "label": "Additional Diagnoses",
+              "type": "obsGroup",
+              "id": "additionalDiagnosisGroup",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "4c50a82f-b138-4029-b7b9-4766e8069e7e"
+                "rendering": "repeating",
+                "concept": "c37e8f82-bacf-41a9-a84f-341b1b77f321",
+                "repeatOptions": {
+                  "limit": "5",
+                  "addText": "Add another diagnosis"
+                }
               },
-              "readonly": false
-            },
-            {
-              "label": "Secondary Diagnosis",
-              "type": "obs",
-              "id": "secondaryDiagnosis",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "bd8601e5-d7c2-4522-bef3-97911e650804"
-              },
-              "readonly": false
+              "questions": [
+                {
+                  "label": "Diagnosis",
+                  "type": "obs",
+                  "id": "secondaryDiagnosis",
+                  "questionOptions": {
+                    "rendering": "problem",
+                    "concept": "bd8601e5-d7c2-4522-bef3-97911e650804",
+                    "isSearchable": true,
+                    "datasource": {
+                      "name": "problem_datasource",
+                      "config": {
+                        "class": [
+                          "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
             },
             {
               "label": "Differential Diagnosis",
@@ -1364,8 +1540,7 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "9fb3017f-22e9-4f49-b8e5-7145b18ae533"
-              },
-              "readonly": false
+              }
             }
           ]
         },
