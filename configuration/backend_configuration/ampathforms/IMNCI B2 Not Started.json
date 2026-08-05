@@ -1,7 +1,7 @@
 {
-  "name": "IMNCI B2 Not Started",
-  "description": "Register notes when IMNCI immunization tracking (e.g. B2) has not been started. Uses project concept from concepts/newconcepts/finished/imnci_b2_not_started_new_concepts.csv (immunization not started narrative), not legacy Bahmni UUIDs.",
-  "version": "1.1",
+  "name": "IMNCI B2",
+  "description": "IMNCI B2 assessment of main symptoms, nutrition screening, caregiver counselling and follow-up",
+  "version": "2.0",
   "published": true,
   "uuid": "b1c2d3e4-f506-4789-a012-b0123456789c",
   "retired": false,
@@ -62,19 +62,466 @@
       ]
     },
     {
-      "label": "IMNCI B2 Not Started",
+      "label": "IMNCI B2 Assessment",
       "sections": [
         {
-          "label": "Not Started",
+          "label": "Cough or Difficulty Breathing",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "IMNCI B2 not started — notes",
+              "label": "Cough / Difficulty Breathing",
               "type": "obs",
-              "id": "imnciB2NotStarted",
+              "id": "coughPresent",
               "questionOptions": {
-                "rendering": "textarea",
-                "concept": "674b473f-e7d0-4614-9efa-8e72d8e2f084"
+                "rendering": "radio",
+                "concept": "6b7c8d9e-0f1a-2b3c-4d5e-6f7890123456",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Respiratory Rate (breaths per minute)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "120",
+                "step": "1",
+                "disallowDecimals": true
+              },
+              "hide": {
+                "hideWhenExpression": "coughPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Signs present",
+              "type": "obs",
+              "id": "coughSigns",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "15c63748-f96a-789b-123e-f01234567890",
+                "answers": [
+                  {
+                    "concept": "16d7485a-0a7b-890c-234f-012345678901",
+                    "label": "Chest Indrawing"
+                  },
+                  {
+                    "concept": "17e8596b-1b8c-901d-345f-123456789012",
+                    "label": "Stridor"
+                  },
+                  {
+                    "concept": "18f96a7c-2c9d-012e-456f-234567890123",
+                    "label": "Fast Breathing"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "coughPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Diarrhoea",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diarrhoea",
+              "type": "obs",
+              "id": "diarrhoeaPresent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a1b2c3d4-e5f6-7890-1234-56789abcdef0",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Duration of Diarrhoea (days)",
+              "type": "obs",
+              "id": "diarrhoeaDuration",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "7f37739a-b9a3-4593-93c8-5224dac5f1f5",
+                "min": "0",
+                "max": "90",
+                "step": "1",
+                "disallowDecimals": true
+              },
+              "hide": {
+                "hideWhenExpression": "diarrhoeaPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "questionInfo": "Whole days only."
+            },
+            {
+              "label": "Skin Pinch Test",
+              "type": "obs",
+              "id": "skinPinch",
+              "hide": {
+                "hideWhenExpression": "diarrhoeaPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "164459AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "164458AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Goes back very slowly (longer than 2 seconds)"
+                  },
+                  {
+                    "concept": "1841AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Goes back slowly"
+                  },
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Goes back immediately"
+                  }
+                ]
+              },
+              "questionInfo": "Pinch the skin of the abdomen for 1 second, then release."
+            },
+            {
+              "label": "Signs present",
+              "type": "obs",
+              "id": "diarrhoeaSigns",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "19a7b8c9-3d0e-123f-567a-345678901234",
+                "answers": [
+                  {
+                    "concept": "1aa8c9d0-4e1f-234a-678b-456789012345",
+                    "label": "Blood in Stool (suspected dysentery)"
+                  },
+                  {
+                    "concept": "1dd1f2a3-7b4c-567d-901e-789012345678",
+                    "label": "Sunken Eyes"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "diarrhoeaPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Fever",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Fever",
+              "type": "obs",
+              "id": "feverPresent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b2c3d4e5-f607-8901-2345-6789abcdef33",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Duration of Fever (days)",
+              "type": "obs",
+              "id": "feverDuration",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "3f20102d-2eed-424c-a0f2-eeec90c5392d",
+                "min": "0",
+                "max": "90",
+                "step": "1",
+                "disallowDecimals": true
+              },
+              "hide": {
+                "hideWhenExpression": "feverPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "questionInfo": "Whole days only."
+            },
+            {
+              "label": "Signs present",
+              "type": "obs",
+              "id": "feverSigns",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "73ffc7dc-b550-47af-b7e8-39655bf8a3c1",
+                "answers": [
+                  {
+                    "concept": "5170AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Stiff Neck (high risk flag)"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "feverPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Malaria RDT / Blood Film",
+              "type": "obs",
+              "id": "malariaRdt",
+              "hide": {
+                "hideWhenExpression": "feverPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0a1b2c3d-4e5f-6789-0123-456789abcdef",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Done / Not Available"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Measles Complications Screening",
+              "type": "obs",
+              "id": "measlesComplications",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "1fd82b4f-ed66-446d-b18d-8909c155a818",
+                "answers": [
+                  {
+                    "concept": "3aa5b6c7-1d8e-901f-345a-123456789012",
+                    "label": "Yes - Mouth Ulcers present"
+                  },
+                  {
+                    "concept": "5bb7c8d9-3e0f-123a-567b-456789012345",
+                    "label": "Yes - Pus draining from the eye"
+                  },
+                  {
+                    "concept": "e5584d10-40bb-46d7-8fdb-a56424c5c1d0",
+                    "label": "Yes - Corneal Clouding (Opacity)"
+                  },
+                  {
+                    "concept": "fc2db1cf-f5b6-4fc7-99fe-1cea3d3927cf",
+                    "label": "No features of Measles"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "feverPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Ear Problem",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Ear Problem",
+              "type": "obs",
+              "id": "earProblemPresent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0f607182-9304-1234-5678-9abcdef01234",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Signs present",
+              "type": "obs",
+              "id": "earSigns",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "03c4d5e6-f708-901b-2345-6789abcd0000",
+                "answers": [
+                  {
+                    "concept": "6cc8d9e0-4f1a-234b-678c-567890123456",
+                    "label": "Tender Swelling Behind the Ear (suspected mastoiditis)"
+                  },
+                  {
+                    "concept": "5bb7c8d9-3e0f-123a-567b-456789012345",
+                    "label": "Pus Draining"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "earProblemPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Duration of Ear Discharge (days)",
+              "type": "obs",
+              "id": "earDischargeDuration",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "267bbd0a-d349-4bd1-9ba1-4673134359c2",
+                "min": "0",
+                "max": "90",
+                "step": "1",
+                "disallowDecimals": true
+              },
+              "hide": {
+                "hideWhenExpression": "earProblemPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "questionInfo": "Whole days only."
+            }
+          ]
+        },
+        {
+          "label": "Nutrition and Weight Screening",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Mid-Upper Arm Circumference (MUAC) (cm)",
+              "type": "obs",
+              "id": "muac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "5",
+                "max": "30",
+                "step": "0.1"
+              },
+              "questionInfo": "One decimal place, e.g. 11.5"
+            },
+            {
+              "label": "Bilateral Pitting Edema",
+              "type": "obs",
+              "id": "bilateralPittingEdema",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "475f2b41-c3fa-4266-9612-18f8b72fc8c4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Counselling to the Caregiver",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Counselling topics covered",
+              "type": "obs",
+              "id": "counsellingTopics",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "bd515ac7-eebf-4db8-a3fe-c11596783c89",
+                "answers": [
+                  {
+                    "concept": "95d09be0-f77b-485b-a866-44079726d2ab",
+                    "label": "Instructed to increase breastfeeding/fluid frequency during illness"
+                  },
+                  {
+                    "concept": "7522a3d0-1f92-4cdf-8a98-5926d8543bc3",
+                    "label": "Reviewed IYCF guidelines (dietary diversity and meal frequency)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "When to Return Immediately",
+              "type": "obs",
+              "id": "returnWarningSigns",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "822d2fc0-34db-42f4-996f-8acbb286e93e",
+                "answers": [
+                  {
+                    "concept": "11829304-b526-3456-789a-bcdef0123456",
+                    "label": "Inability to drink or breastfeed"
+                  },
+                  {
+                    "concept": "e1dbe387-43e9-417b-aed7-c78fc68d6136",
+                    "label": "Worsening illness or new fever"
+                  },
+                  {
+                    "concept": "18f96a7c-2c9d-012e-456f-234567890123",
+                    "label": "Fast breathing or difficult breathing"
+                  },
+                  {
+                    "concept": "1aa8c9d0-4e1f-234a-678b-456789012345",
+                    "label": "Blood in the stool"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Arrange Follow-Up Care",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Scheduled Follow-Up Horizon",
+              "type": "obs",
+              "id": "followUpHorizon",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3e826d17-d956-4b68-b1ce-17ac1ee9a529",
+                "answers": [
+                  {
+                    "concept": "e530fa73-37a8-411f-afc4-329aafe63e6e",
+                    "label": "2 Days: Pneumonia, Dysentery, Some Dehydration, Malaria, Acute Ear Infection"
+                  },
+                  {
+                    "concept": "05527844-57dc-439f-b9a2-c3daca95a0d3",
+                    "label": "5 Days: Persistent Diarrhoea, Feeding problem, Anaemia/Low weight monitoring"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Next Appointment Date",
+              "type": "obs",
+              "id": "nextAppointmentDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             }
           ]

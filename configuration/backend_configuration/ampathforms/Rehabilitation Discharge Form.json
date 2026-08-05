@@ -1,0 +1,222 @@
+{
+  "name": "Rehabilitation Discharge Form",
+  "description": "Rehabilitation service discharge: administrative detail, functional status, follow-up plan and goal outcome",
+  "version": "1.0",
+  "published": true,
+  "retired": false,
+  "uuid": "7e2c9a41-3b86-4d5f-9c07-1a8e4b6d2f35",
+  "encounter": "Discharge",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Rehabilitation Discharge Form",
+      "sections": [
+        {
+          "label": "Centre and Administrative Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Registration Date",
+              "type": "obs",
+              "id": "registrationDate",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "30d9baeb-d0a7-4a5f-8ef4-8a88349531dd"
+              }
+            },
+            {
+              "label": "Discharge Date",
+              "type": "encounterDatetime",
+              "id": "dischargeDate",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "datetime"
+              }
+            },
+            {
+              "label": "Service Provided",
+              "type": "obs",
+              "id": "serviceProvided",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "d230bb4d-d1c5-4616-83e6-cb9fbcba0d52",
+                "answers": [
+                  {
+                    "concept": "287565ae-02ed-4a44-aa44-75739ac837fc",
+                    "label": "Physiotherapy"
+                  },
+                  {
+                    "concept": "39298c3f-3658-4c27-ad6d-e50ea2e11568",
+                    "label": "Prosthetic Service"
+                  },
+                  {
+                    "concept": "f0a43659-a6f7-4101-afbd-a1a8c1ac35f2",
+                    "label": "Orthotic Service"
+                  },
+                  {
+                    "concept": "90f49bc8-6c3c-4793-8d39-8130c9edafa2",
+                    "label": "Mobility Aid Unit"
+                  },
+                  {
+                    "concept": "23971405-3c43-4c2c-b441-aac152c104cb",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If other, specify",
+              "type": "obs",
+              "id": "serviceOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "41968e23-7ecb-4487-852b-76f3327f7dd2"
+              },
+              "hide": {
+                "hideWhenExpression": "!(serviceProvided && serviceProvided.includes('23971405-3c43-4c2c-b441-aac152c104cb'))"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Functional Status at Discharge",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Mobility",
+              "type": "obs",
+              "id": "mobilityAtDischarge",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "96a1ba40-ebaa-403b-a997-e4b11a3c06a4",
+                "answers": [
+                  {
+                    "concept": "ab938a86-d5a6-4e26-9751-86b10313f921",
+                    "label": "Independent"
+                  },
+                  {
+                    "concept": "1f573884-ee18-4660-935a-c58f8d261982",
+                    "label": "With a walking aid"
+                  },
+                  {
+                    "concept": "0b7cf0f6-fd21-4978-9f34-5b52dc6d0100",
+                    "label": "Dependent"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Follow-Up Plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Next appointment",
+              "type": "obs",
+              "id": "nextAppointment",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Follow-up location",
+              "type": "obs",
+              "id": "followUpLocation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b68be110-ab05-4d22-9c5f-3dcb047bd762",
+                "answers": [
+                  {
+                    "concept": "d130ff36-b7fe-4d04-b4b4-f47fffc42dc9",
+                    "label": "Same centre"
+                  },
+                  {
+                    "concept": "30f9d552-af8a-4004-b439-258806962f37",
+                    "label": "Outreach service"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Outcome of Service",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Goals achieved",
+              "type": "obs",
+              "id": "goalsAchieved",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "bfdb0243-40e1-4c79-b75c-1ba3becb774b",
+                "answers": [
+                  {
+                    "concept": "06acab73-a4c9-413c-9e22-9460730d7ae3",
+                    "label": "Fully achieved"
+                  },
+                  {
+                    "concept": "3bb30b19-722f-487c-99e6-093bbebf9f63",
+                    "label": "Partially achieved"
+                  },
+                  {
+                    "concept": "396099aa-5c1a-44e1-a7cb-8ad54331b2b3",
+                    "label": "Not achieved"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1300 @@
+{
+  "name": "OR Check List",
+  "description": "Perioperative nursing record: surgical information, pre-operative checklist, team, intra-operative detail, operative findings, post-operative assessment and handover",
+  "version": "1.1",
+  "published": true,
+  "retired": false,
+  "uuid": "6b3f8d24-0a57-4e91-8c62-4d95a1f7be03",
+  "encounter": "Procedure",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "OR Check List",
+      "sections": [
+        {
+          "label": "Surgical Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Surgical Specialty",
+              "type": "obs",
+              "id": "surgicalSpecialty",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "53609a00-82d9-44e6-ade6-24753292e621",
+                "answers": [
+                  {
+                    "concept": "e18a48f8-153d-44db-aa5f-468ee0faed79",
+                    "label": "General Surgery"
+                  },
+                  {
+                    "concept": "4dd15537-897e-4be5-965c-6394471d03a6",
+                    "label": "Gynecology & Obstetrics"
+                  },
+                  {
+                    "concept": "7dd05184-a87e-4c40-9019-a601647cd54b",
+                    "label": "Urology"
+                  },
+                  {
+                    "concept": "68e63533-5225-42a5-b5a4-b9b1b59eef70",
+                    "label": "Orthopedics"
+                  },
+                  {
+                    "concept": "8395b6a8-925f-4ddc-b9fe-8845e25184be",
+                    "label": "Maxillofacial Surgery"
+                  },
+                  {
+                    "concept": "810ff463-576e-4451-97d0-31291d240d2f",
+                    "label": "ENT"
+                  },
+                  {
+                    "concept": "ef3e0e02-dde2-4bbf-b21e-7b25c2d748fe",
+                    "label": "Plastic Surgery"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Specify Surgical Specialty",
+              "type": "obs",
+              "id": "surgicalSpecialtyOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "85187f00-83c5-45cf-a89d-106e98ba4bee"
+              },
+              "hide": {
+                "hideWhenExpression": "surgicalSpecialty !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Operating Room",
+              "type": "obs",
+              "id": "operatingRoom",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "26b46304-072a-42cb-b7d4-29647ac0ba12",
+                "answers": [
+                  {
+                    "concept": "a83563a6-0c3a-41e3-9368-5399f2900b58",
+                    "label": "OR 1"
+                  },
+                  {
+                    "concept": "69e75983-8ab1-4394-84a2-a1551d39d6f6",
+                    "label": "OR 2"
+                  },
+                  {
+                    "concept": "8bf6f940-4297-40d3-828f-8a4a1d6a6b1d",
+                    "label": "OR 3"
+                  },
+                  {
+                    "concept": "fe9ba6d5-01a5-4540-8764-a818ea0424e0",
+                    "label": "OR 4"
+                  },
+                  {
+                    "concept": "2e318fc0-7f35-470b-b019-d268347c32c1",
+                    "label": "OR 5"
+                  },
+                  {
+                    "concept": "d4298f2b-ce8f-4aa7-b3dc-4498177930fb",
+                    "label": "OR 6"
+                  },
+                  {
+                    "concept": "72a845f8-305e-4e1e-b953-99837074bd15",
+                    "label": "OP"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Surgery Start Time",
+              "type": "obs",
+              "id": "surgeryStartTime",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "0e3d88f8-0e4f-46a2-a08e-c449d4dc5451"
+              },
+              "required": "true"
+            },
+            {
+              "label": "Surgery End Time",
+              "type": "obs",
+              "id": "surgeryEndTime",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "5a509a66-37b1-4f92-ba7c-96d29ca81ea9"
+              },
+              "required": "true",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(surgeryStartTime) && !isEmpty(myValue) && myValue <= surgeryStartTime",
+                  "message": "End time must be later than the start time"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Pre-operative Checklist",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Operative Nursing Diagnosis",
+              "type": "obs",
+              "id": "nursingDiagnosis",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a877cff7-4010-4750-91ce-8b0b9f7a50c0",
+                "rows": "3"
+              },
+              "required": "true"
+            },
+            {
+              "label": "Patient Identification Band Verified",
+              "type": "obs",
+              "id": "idBandVerified",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d67d9e0e-d7dc-41cf-845a-c21b312202de",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Surgical Time-Out Completed",
+              "type": "obs",
+              "id": "timeOutCompleted",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "dd21045c-432b-44a2-a876-9469210fe9eb",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Allergies",
+              "type": "obs",
+              "id": "allergies",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "bf853d92-9cf2-4258-bfa1-24995a0afe50",
+                "rows": "3"
+              }
+            },
+            {
+              "label": "Informed Consent Signed",
+              "type": "obs",
+              "id": "consentSigned",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "01578bb0-2eff-46c0-87e6-0b1cfe6a129a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "IV Access Location",
+              "type": "obs",
+              "id": "ivAccessLocation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9cb53d94-b3a6-42f9-a07d-3d1f068fda8b"
+              }
+            },
+            {
+              "label": "Skin Integrity",
+              "type": "obs",
+              "id": "skinIntegrity",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ba3c1719-596b-4751-9bbf-0e0692f71d27",
+                "answers": [
+                  {
+                    "concept": "6b222dc3-9153-49a6-9a70-d9e7ea9ee19e",
+                    "label": "Intact"
+                  },
+                  {
+                    "concept": "3144d3e1-4445-43db-b3cd-a9b00e79d83b",
+                    "label": "Injured"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Skin Colour",
+              "type": "obs",
+              "id": "skinColour",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d46e24b1-6452-4f48-be67-41aba8ceafa6",
+                "answers": [
+                  {
+                    "concept": "6d8dd2f3-1eab-4a22-a9fe-0048214fa549",
+                    "label": "Unremarkable"
+                  },
+                  {
+                    "concept": "5ad2e850-0e15-4ecb-b896-4780529d5880",
+                    "label": "Pale"
+                  },
+                  {
+                    "concept": "8eb90f79-16cd-4aee-b213-4dd50afcd4a9",
+                    "label": "Cyanotic"
+                  },
+                  {
+                    "concept": "079737d0-daf0-46d5-89ea-8556a8deb4d5",
+                    "label": "Jaundiced"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Specify Skin Colour",
+              "type": "obs",
+              "id": "skinColourOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b5029212-fd94-4bc8-b4c8-2d2153fabc02"
+              },
+              "hide": {
+                "hideWhenExpression": "skinColour !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Level of Consciousness",
+              "type": "obs",
+              "id": "levelOfConsciousness",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3941ac1d-280c-4205-ad76-ecbc2479c7f9",
+                "answers": [
+                  {
+                    "concept": "854710fc-f534-4785-9641-afb2c958bc2d",
+                    "label": "Awake"
+                  },
+                  {
+                    "concept": "8f8f39df-93c8-4925-916f-6b537b077b84",
+                    "label": "Oriented"
+                  },
+                  {
+                    "concept": "b96f64c2-14bb-4ec7-8723-daa87ad9fc42",
+                    "label": "Cooperative"
+                  },
+                  {
+                    "concept": "ad447577-fe45-412f-94c5-3f87b675da0d",
+                    "label": "Lethargic"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Specify Level of Consciousness",
+              "type": "obs",
+              "id": "levelOfConsciousnessOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "39d29b04-3d12-4487-bf5a-42fc941b4e0d"
+              },
+              "hide": {
+                "hideWhenExpression": "levelOfConsciousness !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Emotional State",
+              "type": "obs",
+              "id": "emotionalState",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a404c404-5c21-4a4b-9c92-ae2524729816",
+                "answers": [
+                  {
+                    "concept": "311a99b4-3f62-4e4c-8359-460ba83b9e16",
+                    "label": "Calm"
+                  },
+                  {
+                    "concept": "de0df8e5-d933-4935-a831-fedfd993d687",
+                    "label": "Anxious"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Specify Emotional State",
+              "type": "obs",
+              "id": "emotionalStateOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "839525c4-b099-490e-8a2c-ebc215dd759e"
+              },
+              "hide": {
+                "hideWhenExpression": "emotionalState !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Pre-operative Diagnosis",
+              "type": "obs",
+              "id": "preOpDiagnosis",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "163034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              },
+              "required": "true"
+            },
+            {
+              "label": "Planned Procedure",
+              "type": "obs",
+              "id": "plannedProcedure",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "1651AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d490bf4-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "label": "Surgical Team",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Surgeon",
+              "type": "obs",
+              "id": "surgeon",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166688AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "required": "true"
+            },
+            {
+              "label": "Assistant Surgeon",
+              "type": "obs",
+              "id": "assistantSurgeon",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b33fd6a8-6bd1-415f-94f7-a3d02306be2a"
+              }
+            },
+            {
+              "label": "Anesthetist",
+              "type": "obs",
+              "id": "anaesthetist",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5b444b87-23ce-4935-af33-cb95906a494c"
+              },
+              "required": "true"
+            },
+            {
+              "label": "Circulating Nurse",
+              "type": "obs",
+              "id": "circulatingNurse",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166691AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "required": "true"
+            },
+            {
+              "label": "Scrub Nurse",
+              "type": "obs",
+              "id": "scrubNurse",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "abbe043e-6587-4790-83ab-dc7270f069e2"
+              },
+              "required": "true"
+            },
+            {
+              "label": "Staff Relief (Switched By)",
+              "type": "obs",
+              "id": "staffRelief",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ad37f674-180f-4fce-a907-b9f9129960fc"
+              }
+            },
+            {
+              "label": "Time of Staff Change",
+              "type": "obs",
+              "id": "staffChangeTime",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "e2513c88-3fde-4607-9d9a-c04bf616f6b5"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(staffRelief)"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Intra-operative Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient Position",
+              "type": "obs",
+              "id": "patientPosition",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d6393e05-d0ee-400a-9440-f9fdaadcf370",
+                "answers": [
+                  {
+                    "concept": "0c536d7e-8697-890a-123e-f01234567890",
+                    "label": "Supine"
+                  },
+                  {
+                    "concept": "31f79dca-021e-49cd-9784-150497976e62",
+                    "label": "Prone"
+                  },
+                  {
+                    "concept": "5e26b90a-884c-4b25-9bed-a90c2ce967ba",
+                    "label": "Lithotomy"
+                  },
+                  {
+                    "concept": "fb8b15f3-3b3b-4849-891a-894cd010e2c8",
+                    "label": "Right Lateral"
+                  },
+                  {
+                    "concept": "e61aa344-daf9-41bd-9924-d2ff00c45446",
+                    "label": "Left Lateral"
+                  },
+                  {
+                    "concept": "e818e7e3-7429-4e8e-b67c-0c31c05bf28f",
+                    "label": "Trendelenburg"
+                  },
+                  {
+                    "concept": "f208f167-86aa-4cd1-a952-321c212ae63e",
+                    "label": "Reverse Trendelenburg"
+                  },
+                  {
+                    "concept": "8a2191e2-5d0e-4be8-b5b3-42e1c74f8d21",
+                    "label": "Fowler's"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Safety Belt Applied",
+              "type": "obs",
+              "id": "safetyBelt",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "53ba4189-1b30-4711-812c-fb506d946495",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Prophylactic Antibiotic Given",
+              "type": "obs",
+              "id": "prophylacticAntibiotic",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "80eb261a-e9c3-46df-accb-204d55f9737e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Applicable"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Antibiotic Name",
+              "type": "obs",
+              "id": "antibioticName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9222fc98-6cb2-42c1-87e9-aa568873686d"
+              },
+              "hide": {
+                "hideWhenExpression": "prophylacticAntibiotic !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Route of Administration",
+              "type": "obs",
+              "id": "antibioticRoute",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "15b65a08-2f0a-4c1f-8b8a-384e5f446e6e",
+                "answers": [
+                  {
+                    "concept": "19a5bcb8-0e15-4c00-8924-c49607e4cce3",
+                    "label": "IV"
+                  },
+                  {
+                    "concept": "8797bc1a-fd83-415e-a074-c2efa6a6ca2b",
+                    "label": "IM"
+                  },
+                  {
+                    "concept": "fdd1d3b2-c51a-4f60-9911-86e4a32f4c36",
+                    "label": "Oral"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "prophylacticAntibiotic !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Skin Preparation Solution",
+              "type": "obs",
+              "id": "skinPrep",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f3115885-8056-42c3-95e6-0c9a0bfb63a1",
+                "answers": [
+                  {
+                    "concept": "da7108c2-5861-402a-8d2d-7502ced2ab68",
+                    "label": "Savlon"
+                  },
+                  {
+                    "concept": "0bb42eff-0dc1-4898-b709-80667bac992e",
+                    "label": "Iodine"
+                  },
+                  {
+                    "concept": "55ae7b17-69ef-4858-8191-e5cab6e7183b",
+                    "label": "Alcohol"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Specify Preparation Solution",
+              "type": "obs",
+              "id": "skinPrepOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "317f2a53-80dd-44fb-844f-a0c6d14d8dde"
+              },
+              "hide": {
+                "hideWhenExpression": "skinPrep !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Electrosurgical Unit Used",
+              "type": "obs",
+              "id": "electrosurgicalUnit",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b8222bf3-4292-4d17-a352-b64be193af72",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Grounding Pad Site",
+              "type": "obs",
+              "id": "groundingPadSite",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f3981ffa-1f21-48db-83ac-58406124a5c3"
+              },
+              "hide": {
+                "hideWhenExpression": "electrosurgicalUnit !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Cutting Power",
+              "type": "obs",
+              "id": "cuttingPower",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "643cd816-9478-4fa4-8791-a4fedc2e7536",
+                "min": "0",
+                "max": "300",
+                "step": "1",
+                "disallowDecimals": true
+              },
+              "hide": {
+                "hideWhenExpression": "electrosurgicalUnit !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Coagulation Power",
+              "type": "obs",
+              "id": "coagulationPower",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "9c72045f-b4ed-4ba1-85ce-85e1cb8e66fd",
+                "min": "0",
+                "max": "300",
+                "step": "1",
+                "disallowDecimals": true
+              },
+              "hide": {
+                "hideWhenExpression": "electrosurgicalUnit !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Urinary Catheter",
+              "type": "obs",
+              "id": "urinaryCatheter",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "faa62989-35e0-4c20-9375-d5e80cb25ddb",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Catheter Size",
+              "type": "obs",
+              "id": "catheterSize",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f9c05009-bb4e-46e2-a1ed-89d04ea3b465"
+              },
+              "hide": {
+                "hideWhenExpression": "urinaryCatheter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Catheter Type",
+              "type": "obs",
+              "id": "catheterType",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "14880944-8376-4ed7-9d84-b077d401e7f9"
+              },
+              "hide": {
+                "hideWhenExpression": "urinaryCatheter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Inserted By",
+              "type": "obs",
+              "id": "catheterInsertedBy",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "016029d5-64cc-485d-ae8a-a8888adcd56b"
+              },
+              "hide": {
+                "hideWhenExpression": "urinaryCatheter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Tourniquet Applied",
+              "type": "obs",
+              "id": "tourniquet",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "bf1e9a32-c5ca-49c3-9e85-747bc69bdc33",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Tourniquet Site",
+              "type": "obs",
+              "id": "tourniquetSite",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b9479c29-0f5a-4b8a-8289-083fb289957b"
+              },
+              "hide": {
+                "hideWhenExpression": "tourniquet !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Time Applied",
+              "type": "obs",
+              "id": "tourniquetApplied",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "c3af6e31-361b-4368-b2cd-382dde67aa1e"
+              },
+              "hide": {
+                "hideWhenExpression": "tourniquet !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Time Released",
+              "type": "obs",
+              "id": "tourniquetReleased",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "b23d3716-e732-4d89-97c4-5557208823a8"
+              },
+              "hide": {
+                "hideWhenExpression": "tourniquet !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Anaesthesia Type",
+              "type": "obs",
+              "id": "anaesthesiaType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d29c1ca0-6322-45e3-bc89-6f88d0704c3d",
+                "answers": [
+                  {
+                    "concept": "26cb993c-1488-4373-8c22-37682c5651dd",
+                    "label": "General"
+                  },
+                  {
+                    "concept": "d1e8b73b-48a6-47eb-96d9-3023fa5c9303",
+                    "label": "Regional"
+                  },
+                  {
+                    "concept": "f1f6e0a6-a1d9-4f0d-89dd-33c431bc8e16",
+                    "label": "Spinal"
+                  },
+                  {
+                    "concept": "4e7da033-a8fb-40ec-b3f4-e1542ae66e41",
+                    "label": "Epidural"
+                  },
+                  {
+                    "concept": "9978c7e0-d0f4-4cd1-8155-d7bf85f83147",
+                    "label": "Local"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Anaesthesia Concerns",
+              "type": "obs",
+              "id": "anaesthesiaConcerns",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "5ba2a628-74e7-4dea-bac3-74c29709c3df",
+                "rows": "3"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Operative Findings",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Post-operative Diagnosis",
+              "type": "obs",
+              "id": "postOpDiagnosis",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "163035AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              },
+              "required": "true"
+            },
+            {
+              "label": "Wound Classification",
+              "type": "obs",
+              "id": "woundClassification",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6059af35-6539-42a3-8d8a-d7d125d08a1f",
+                "answers": [
+                  {
+                    "concept": "7fa79e11-4001-42e8-afe0-109f66fdefb6",
+                    "label": "Clean"
+                  },
+                  {
+                    "concept": "3fb17de4-84f8-4230-9213-62272dc731ff",
+                    "label": "Clean-Contaminated"
+                  },
+                  {
+                    "concept": "4c0e2bb1-6e53-4b8e-a997-3d955e0f97bc",
+                    "label": "Contaminated"
+                  },
+                  {
+                    "concept": "a4a0727b-d21f-449b-a578-ca9601baf788",
+                    "label": "Dirty"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Dressing Applied",
+              "type": "obs",
+              "id": "dressingApplied",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "744cc75d-7720-4e12-b060-76c68df7bb4b",
+                "rows": "3"
+              }
+            },
+            {
+              "label": "Instrument, Needle and Sponge Count",
+              "type": "obs",
+              "id": "countStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0e67cd5c-3bea-4132-b56c-1b1435a9bdc2",
+                "answers": [
+                  {
+                    "concept": "2f03bad7-56a6-4581-bc7f-35bba9dfd5eb",
+                    "label": "Correct"
+                  },
+                  {
+                    "concept": "32d3bf52-fcf4-4fd0-9d29-774299340220",
+                    "label": "Unresolved"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Count Discrepancy Explanation",
+              "type": "obs",
+              "id": "countExplanation",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f9aefeea-16b8-4c25-af98-fab421cba2e2",
+                "rows": "3"
+              },
+              "hide": {
+                "hideWhenExpression": "countStatus !== '32d3bf52-fcf4-4fd0-9d29-774299340220'"
+              }
+            },
+            {
+              "label": "Specimen Collected",
+              "type": "obs",
+              "id": "specimenCollected",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "758a11cd-986e-4170-b8ea-7797aa5e5374",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Specimen Type",
+              "type": "obs",
+              "id": "specimenType",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "433a3560-9b23-4629-834f-10b7fdb8e245"
+              },
+              "hide": {
+                "hideWhenExpression": "specimenCollected !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Surgical Drain",
+              "type": "obs",
+              "id": "surgicalDrain",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e54de275-8a6a-47cc-9997-f38e69bb1ad4",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "935746e7-ba64-46bd-81d0-ecf8290d3870",
+                    "label": "Glove Drain"
+                  },
+                  {
+                    "concept": "aa50eb09-e4d8-402d-bb46-3d3cca6720e5",
+                    "label": "Tube Drain"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Drain Location",
+              "type": "obs",
+              "id": "drainLocation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d3c76bd9-51b2-4d6a-9872-8895d5ba24f5"
+              },
+              "hide": {
+                "hideWhenExpression": "surgicalDrain === '1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || isEmpty(surgicalDrain)"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Post-operative Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient Status",
+              "type": "obs",
+              "id": "patientStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b2ee867f-7a10-4d98-a37e-d3d35944d43d",
+                "answers": [
+                  {
+                    "concept": "ce449097-bb00-426d-b0ce-6d71337ce0b2",
+                    "label": "Stable"
+                  },
+                  {
+                    "concept": "01fb3c91-ffb0-463a-956b-3891aee71bd1",
+                    "label": "Unstable"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Estimated Blood Loss (mL)",
+              "type": "obs",
+              "id": "estimatedBloodLoss",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161928AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "10000",
+                "step": "1",
+                "disallowDecimals": true
+              }
+            },
+            {
+              "label": "Skin Condition",
+              "type": "obs",
+              "id": "skinCondition",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "af5864de-9bb6-4cc0-93ad-c164e156f4a1",
+                "answers": [
+                  {
+                    "concept": "6d8dd2f3-1eab-4a22-a9fe-0048214fa549",
+                    "label": "Unremarkable"
+                  },
+                  {
+                    "concept": "5ad2e850-0e15-4ecb-b896-4780529d5880",
+                    "label": "Pale"
+                  },
+                  {
+                    "concept": "8eb90f79-16cd-4aee-b213-4dd50afcd4a9",
+                    "label": "Cyanotic"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Specify Skin Condition",
+              "type": "obs",
+              "id": "skinConditionOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "89003f3a-519a-4d05-9906-3993576f835c"
+              },
+              "hide": {
+                "hideWhenExpression": "skinCondition !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Grounding Pad Site Assessment",
+              "type": "obs",
+              "id": "padAssessment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a7f44416-2e34-417c-b1f9-29290d93c89f",
+                "answers": [
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Applicable"
+                  },
+                  {
+                    "concept": "c53ed22d-472c-4c23-8b3e-f4da99ca7307",
+                    "label": "Clear"
+                  },
+                  {
+                    "concept": "592d87aa-4acf-4cbd-933d-fe808e93e78c",
+                    "label": "Injured"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Specify Finding",
+              "type": "obs",
+              "id": "padAssessmentOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4e9fa135-e5bf-4dde-9507-cf5a63d6080f"
+              },
+              "hide": {
+                "hideWhenExpression": "padAssessment !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Nursing Comments",
+              "type": "obs",
+              "id": "nursingComments",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ebeacc14-66b8-4597-9afd-91a2cc9a9d62",
+                "rows": "3"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Handover",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Report Handed Over To",
+              "type": "obs",
+              "id": "handedOverTo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6ca4941a-f78d-4e7f-9b03-47e0d971aa51"
+              },
+              "required": "true"
+            },
+            {
+              "label": "Receiving Unit",
+              "type": "obs",
+              "id": "receivingUnit",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e05e4527-cec2-4178-a458-2ce12ecdba26",
+                "answers": [
+                  {
+                    "concept": "9dc8f2cd-4985-4176-94ce-562bedaa6804",
+                    "label": "PACU"
+                  },
+                  {
+                    "concept": "6b3b870f-9366-46dc-acba-7837bcc40011",
+                    "label": "ICU"
+                  },
+                  {
+                    "concept": "ebb1900a-151e-43e5-b027-3f27316999d0",
+                    "label": "Ward"
+                  },
+                  {
+                    "concept": "4b74240e-6c8a-4981-aaa0-eae72b209e95",
+                    "label": "Emergency Department"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Specify Receiving Unit",
+              "type": "obs",
+              "id": "receivingUnitOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b7158034-a8ca-4ca3-9d9c-1aea5ef16842"
+              },
+              "hide": {
+                "hideWhenExpression": "receivingUnit !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

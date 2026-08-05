@@ -1,0 +1,1316 @@
+{
+  "name": "Physical Rehabilitation Triage Form",
+  "description": "Physiotherapy and prosthetic/orthotic new-client triage: referral, vital sign screening, safety check, functional status, device status, risk, living condition and routing",
+  "version": "1.0",
+  "published": true,
+  "retired": false,
+  "uuid": "9f4b2e60-1d73-4c8a-b25e-7a3f6c81d094",
+  "encounter": "Triage",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Physical Rehabilitation Triage",
+      "sections": [
+        {
+          "label": "Service Area",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Service Area",
+              "type": "obs",
+              "id": "serviceArea",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "d230bb4d-d1c5-4616-83e6-cb9fbcba0d52",
+                "answers": [
+                  {
+                    "concept": "287565ae-02ed-4a44-aa44-75739ac837fc",
+                    "label": "Physiotherapy"
+                  },
+                  {
+                    "concept": "39298c3f-3658-4c27-ad6d-e50ea2e11568",
+                    "label": "Prosthetic Service"
+                  },
+                  {
+                    "concept": "f0a43659-a6f7-4101-afbd-a1a8c1ac35f2",
+                    "label": "Orthotic Service"
+                  },
+                  {
+                    "concept": "90f49bc8-6c3c-4793-8d39-8130c9edafa2",
+                    "label": "Mobility Aid Unit"
+                  },
+                  {
+                    "concept": "23971405-3c43-4c2c-b441-aac152c104cb",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If other, specify",
+              "type": "obs",
+              "id": "serviceAreaOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "41968e23-7ecb-4487-852b-76f3327f7dd2"
+              },
+              "hide": {
+                "hideWhenExpression": "!(serviceArea && serviceArea.includes('23971405-3c43-4c2c-b441-aac152c104cb'))"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Referral",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Referral source",
+              "type": "obs",
+              "id": "referralSource",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6078fd8c-6445-4034-802c-fe7a90e3f0bd",
+                "answers": [
+                  {
+                    "concept": "978AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Self"
+                  },
+                  {
+                    "concept": "88c0edc4-e708-4d81-b6d5-21702fbf276a",
+                    "label": "External Facility"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Referring Facility",
+              "type": "obs",
+              "id": "referringFacility",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161550AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "referralSource !== '88c0edc4-e708-4d81-b6d5-21702fbf276a'"
+              }
+            },
+            {
+              "label": "Referral Diagnosis",
+              "type": "obs",
+              "id": "referralDiagnosis",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "5216795d-694c-4baf-933f-592fe6ad0d62",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Referral Reason",
+              "type": "obs",
+              "id": "referralReason",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "961273d3-371f-45d2-addf-927b171d4035"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Vital Sign Screening",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulse Rate (PR)",
+              "type": "obs",
+              "id": "pulseRatePr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Pulse - Non Palpable",
+              "type": "obs",
+              "id": "pulseNonPalpable",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "926d5ab3-9dff-436d-bfd0-0e2bfe072434",
+                "answers": [
+                  {
+                    "concept": "9f0f09c7-7e54-4b3e-8c9f-d1eed1c67480",
+                    "label": "Non palpable"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Pulse Strength",
+              "type": "obs",
+              "id": "pulseStrength",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2df0fb84-1367-4cc5-95ed-0991be7ffd99",
+                "answers": [
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  },
+                  {
+                    "concept": "750c7a46-03f0-4cba-aa58-f5dc0efca955",
+                    "label": "Weak"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Pulse Rhythm",
+              "type": "obs",
+              "id": "pulseRhythm",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d5f88633-71f9-48e2-9618-4c7dab53f73d",
+                "answers": [
+                  {
+                    "concept": "72e760d6-f370-4c9c-bf3b-e2ca284fc950",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "0319d9c9-acdf-495d-8147-45d0f2eded5a",
+                    "label": "Irregular"
+                  },
+                  {
+                    "concept": "2167bf41-8839-4ef7-ae8b-06b605d762ef",
+                    "label": "Regularly Irregular"
+                  },
+                  {
+                    "concept": "3f20305f-ef44-40ff-b7c0-9c6fa7a29b10",
+                    "label": "Irregularly Irregular"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Respiratory Rate (RR)",
+              "type": "obs",
+              "id": "respiratoryRateRr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Respiratory Depth",
+              "type": "obs",
+              "id": "respiratoryDepth",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "818757cc-9250-4325-b386-a9080b8a0cbd",
+                "answers": [
+                  {
+                    "concept": "164487AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Deep"
+                  },
+                  {
+                    "concept": "14e83323-26c1-49a7-b2da-7aa9de79d2b4",
+                    "label": "Shallow"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Respiratory Rhythm",
+              "type": "obs",
+              "id": "respiratoryRhythm",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "19811f54-57f6-4546-976e-6ebbb7e90cf4",
+                "answers": [
+                  {
+                    "concept": "72e760d6-f370-4c9c-bf3b-e2ca284fc950",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "0319d9c9-acdf-495d-8147-45d0f2eded5a",
+                    "label": "Irregular"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Oxygen Saturation (SPO2)",
+              "type": "obs",
+              "id": "oxygenSaturationSpo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "54385c49-43f8-41df-bd58-4f92c36a6735",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Oxygen Delivery Method",
+              "type": "obs",
+              "id": "oxygenDeliveryMethod",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2c9764d5-f646-4c1b-898e-b6f426c028b9",
+                "answers": [
+                  {
+                    "concept": "02ef98f2-06a0-4282-bb7b-f83765495696",
+                    "label": "At room air"
+                  },
+                  {
+                    "concept": "8ef9cb2d-96e6-45c6-9c4e-fd8df821c0ee",
+                    "label": "On Nasal Oxygen"
+                  },
+                  {
+                    "concept": "6616f57c-0dc8-441d-88e7-4197a2ced454",
+                    "label": "On Face Mask"
+                  },
+                  {
+                    "concept": "326e8ff2-cb5e-4cc5-beac-bb38e493fec1",
+                    "label": "On CPAP"
+                  },
+                  {
+                    "concept": "2caaf622-fb39-4a02-8d9f-35900d5605cf",
+                    "label": "On Mechanical Ventilation"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Oxygen Liter (Nasal Oxygen)",
+              "type": "obs",
+              "id": "oxygenLiterNasalOxygen",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6afa667e-f345-4f0b-afc3-aa5d42f6522d",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '8ef9cb2d-96e6-45c6-9c4e-fd8df821c0ee'"
+              }
+            },
+            {
+              "label": "Oxygen Liter (Face Mask)",
+              "type": "obs",
+              "id": "oxygenLiterFaceMask",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6afa667e-f345-4f0b-afc3-aa5d42f6522d",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '6616f57c-0dc8-441d-88e7-4197a2ced454'"
+              }
+            },
+            {
+              "label": "Fraction of Inspired Oxygen (FiO2) (CPAP)",
+              "type": "obs",
+              "id": "fractionOfInspiredOxygenFio2Cpap",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f759d9d0-d25e-4aa0-8fd8-d7160f7b3859",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '326e8ff2-cb5e-4cc5-beac-bb38e493fec1'"
+              }
+            },
+            {
+              "label": "Oxygen Flow Rate (CPAP)",
+              "type": "obs",
+              "id": "oxygenFlowRateCpap",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ac21a619-68c5-47e6-9b56-cc897dc964c1",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '326e8ff2-cb5e-4cc5-beac-bb38e493fec1'"
+              }
+            },
+            {
+              "label": "Oxygen Liter (CPAP)",
+              "type": "obs",
+              "id": "oxygenLiterCpap",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6afa667e-f345-4f0b-afc3-aa5d42f6522d",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '326e8ff2-cb5e-4cc5-beac-bb38e493fec1'"
+              }
+            },
+            {
+              "label": "Fraction of Inspired Oxygen (FiO2) (Mechanical Ventilation)",
+              "type": "obs",
+              "id": "fractionOfInspiredOxygenFio2MechanicalVe",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f759d9d0-d25e-4aa0-8fd8-d7160f7b3859",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '2caaf622-fb39-4a02-8d9f-35900d5605cf'"
+              }
+            },
+            {
+              "label": "Oxygen Flow Rate (Mechanical Ventilation)",
+              "type": "obs",
+              "id": "oxygenFlowRateMechanicalVentilation",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ac21a619-68c5-47e6-9b56-cc897dc964c1",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '2caaf622-fb39-4a02-8d9f-35900d5605cf'"
+              }
+            },
+            {
+              "label": "Oxygen Liter (Mechanical Ventilation)",
+              "type": "obs",
+              "id": "oxygenLiterMechanicalVentilation",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6afa667e-f345-4f0b-afc3-aa5d42f6522d",
+                "step": "any"
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== '2caaf622-fb39-4a02-8d9f-35900d5605cf'"
+              }
+            },
+            {
+              "label": "Temperature (T)",
+              "type": "obs",
+              "id": "temperatureT",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Temperature Route",
+              "type": "obs",
+              "id": "temperatureRoute",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c9528b14-d5ec-4c45-a7f6-619c6e7206e2",
+                "answers": [
+                  {
+                    "concept": "5112AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Axillary"
+                  },
+                  {
+                    "concept": "160240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Oral"
+                  },
+                  {
+                    "concept": "6f56af83-c15a-4b92-9a8e-848275ae8294",
+                    "label": "Rectal"
+                  },
+                  {
+                    "concept": "b8c21d04-6424-480a-8987-7ee7b6e884e4",
+                    "label": "Ear"
+                  },
+                  {
+                    "concept": "3591287e-f4c1-4325-976f-e19951718c70",
+                    "label": "Forehead (Gun Thermometer)"
+                  }
+                ]
+              },
+              "readonly": false,
+              "required": "true"
+            },
+            {
+              "label": "Systolic Blood Pressure (SBP)",
+              "type": "obs",
+              "id": "systolicBloodPressureSbp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "cbf5a376-e659-42f6-9345-be9e98cbdd17",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Diastolic Blood Pressure (DBP)",
+              "type": "obs",
+              "id": "diastolicBloodPressureDbp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            },
+            {
+              "label": "Weight (Wt)",
+              "type": "obs",
+              "id": "weightWt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d{1,2})?$/.test(''+myValue)",
+                  "message": "At most 2 decimal places allowed."
+                }
+              ]
+            },
+            {
+              "label": "Height (Ht)",
+              "type": "obs",
+              "id": "heightHt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Body Mass Index (BMI)",
+              "type": "obs",
+              "id": "bodyMassIndexBmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Pain Score (0–10)",
+              "type": "obs",
+              "id": "painScore010",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "bd8288fd-223b-4bbb-a1e5-16be65c75c74",
+                "min": "0",
+                "max": "10",
+                "step": "1"
+              },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Red Flag Screening",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Chest pain",
+              "type": "obs",
+              "id": "chestPain",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "977ae720-39da-4abd-8c16-eb31891c510a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Shortness of breath",
+              "type": "obs",
+              "id": "shortnessOfBreath",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "231365aa-8599-4292-8d90-2f48fd64f696",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Dizziness / fainting",
+              "type": "obs",
+              "id": "dizziness",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2374356c-3b33-4260-b277-1274497c937f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Fever / infection",
+              "type": "obs",
+              "id": "feverInfection",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "235b90ca-b75f-4ad5-9897-773576a080a7",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Severe uncontrolled pain",
+              "type": "obs",
+              "id": "severePain",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9af7aad8-8dac-408a-b4e6-395462785ac1",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Suspected DVT",
+              "type": "obs",
+              "id": "suspectedDvt",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "eec86580-46dd-466a-ac59-0dbd079cf1a5",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Clinical review flag",
+              "type": "obs",
+              "id": "clinicalReviewFlag",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5e983d7e-d1a9-4dd3-a1b3-f1c8e369253f",
+                "calculate": {
+                  "calculateExpression": "[chestPain,shortnessOfBreath,dizziness,feverInfection,severePain,suspectedDvt].some(v => v === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') ? 'FLAG FOR CLINICAL REVIEW' : null"
+                }
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue)",
+                  "message": "Red flag present - escalate for clinical review before routing."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Basic Functional Status (Quick Triage Level)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Bed mobility",
+              "type": "obs",
+              "id": "bedMobility",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0420e582-147b-4687-94b1-407ed2e71f29",
+                "answers": [
+                  {
+                    "concept": "ab938a86-d5a6-4e26-9751-86b10313f921",
+                    "label": "Independent"
+                  },
+                  {
+                    "concept": "969317ee-6f9f-404a-8da0-fac14bff8742",
+                    "label": "Assistance"
+                  },
+                  {
+                    "concept": "0b7cf0f6-fd21-4978-9f34-5b52dc6d0100",
+                    "label": "Dependent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Sitting",
+              "type": "obs",
+              "id": "sitting",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5eba2dce-7561-43ee-8b2c-5ca003dc33ad",
+                "answers": [
+                  {
+                    "concept": "ab938a86-d5a6-4e26-9751-86b10313f921",
+                    "label": "Independent"
+                  },
+                  {
+                    "concept": "969317ee-6f9f-404a-8da0-fac14bff8742",
+                    "label": "Assistance"
+                  },
+                  {
+                    "concept": "0b7cf0f6-fd21-4978-9f34-5b52dc6d0100",
+                    "label": "Dependent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Standing",
+              "type": "obs",
+              "id": "standing",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ff19da59-e99f-45e1-a129-6fc2b8bd0bd8",
+                "answers": [
+                  {
+                    "concept": "ab938a86-d5a6-4e26-9751-86b10313f921",
+                    "label": "Independent"
+                  },
+                  {
+                    "concept": "969317ee-6f9f-404a-8da0-fac14bff8742",
+                    "label": "Assistance"
+                  },
+                  {
+                    "concept": "0b7cf0f6-fd21-4978-9f34-5b52dc6d0100",
+                    "label": "Dependent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Walking",
+              "type": "obs",
+              "id": "walking",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "24f2a37a-4297-485a-b897-88c517514cc9",
+                "answers": [
+                  {
+                    "concept": "ab938a86-d5a6-4e26-9751-86b10313f921",
+                    "label": "Independent"
+                  },
+                  {
+                    "concept": "969317ee-6f9f-404a-8da0-fac14bff8742",
+                    "label": "Assistance"
+                  },
+                  {
+                    "concept": "0b7cf0f6-fd21-4978-9f34-5b52dc6d0100",
+                    "label": "Dependent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Transfers",
+              "type": "obs",
+              "id": "transfers",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f7c4a253-8385-4bee-9c58-de29fc814803",
+                "answers": [
+                  {
+                    "concept": "ab938a86-d5a6-4e26-9751-86b10313f921",
+                    "label": "Independent"
+                  },
+                  {
+                    "concept": "969317ee-6f9f-404a-8da0-fac14bff8742",
+                    "label": "Assistance"
+                  },
+                  {
+                    "concept": "0b7cf0f6-fd21-4978-9f34-5b52dc6d0100",
+                    "label": "Dependent"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Assistive Device Status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Currently using any assistive device",
+              "type": "obs",
+              "id": "usingAssistiveDevice",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8f7b91c0-f037-4c66-9ee5-b70408524fbb",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes, specify type(s)",
+              "type": "obs",
+              "id": "assistiveDeviceTypes",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "7300c519-063c-42e4-a78d-90e0e6c994fb",
+                "answers": [
+                  {
+                    "concept": "3bcfe3e4-0cd6-4730-b169-b05843494a2a",
+                    "label": "Prosthetic Device"
+                  },
+                  {
+                    "concept": "82267ce5-0165-4995-ad4f-93bafe113784",
+                    "label": "Orthotic Device"
+                  },
+                  {
+                    "concept": "70a48818-898e-42aa-91a6-7ff8fd596288",
+                    "label": "Mobility Aid (crutches, walker, wheelchair)"
+                  },
+                  {
+                    "concept": "7fb9a905-c2f9-4b25-821d-6b05d950dc28",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "usingAssistiveDevice !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "If other, specify",
+              "type": "obs",
+              "id": "assistiveDeviceOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a6728830-89b6-436e-b6ab-e5908b346bb1"
+              },
+              "hide": {
+                "hideWhenExpression": "!(assistiveDeviceTypes && assistiveDeviceTypes.includes('7fb9a905-c2f9-4b25-821d-6b05d950dc28'))"
+              }
+            },
+            {
+              "label": "Number of previous Prosthetic devices used (fits)",
+              "type": "obs",
+              "id": "prostheticFits",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ad28b899-d1d9-482c-927d-0785f9b69443",
+                "answers": [
+                  {
+                    "concept": "78fcac8d-8b89-4f87-8edc-57d5106172a4",
+                    "label": "0"
+                  },
+                  {
+                    "concept": "e8f9b12e-3eb0-4224-ab6d-ca5ef7250b11",
+                    "label": "1"
+                  },
+                  {
+                    "concept": "29a5944b-7ba3-4946-87b5-1290b364f3b4",
+                    "label": "2-3"
+                  },
+                  {
+                    "concept": "a74c23b6-3e56-432a-a797-e50040c60af8",
+                    "label": "4+"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Number of previous Orthotic devices used (fits)",
+              "type": "obs",
+              "id": "orthoticFits",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "dd32a539-8ada-466a-a936-611d31cac135",
+                "answers": [
+                  {
+                    "concept": "78fcac8d-8b89-4f87-8edc-57d5106172a4",
+                    "label": "0"
+                  },
+                  {
+                    "concept": "e8f9b12e-3eb0-4224-ab6d-ca5ef7250b11",
+                    "label": "1"
+                  },
+                  {
+                    "concept": "29a5944b-7ba3-4946-87b5-1290b364f3b4",
+                    "label": "2-3"
+                  },
+                  {
+                    "concept": "a74c23b6-3e56-432a-a797-e50040c60af8",
+                    "label": "4+"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Risk Factors",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Fall risk",
+              "type": "obs",
+              "id": "fallRisk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3f3cb8d2-25f3-484a-bfac-5561e1d2a816",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pressure sore risk",
+              "type": "obs",
+              "id": "pressureSoreRisk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ae1dc36f-1911-41bf-8965-9c70537302ed",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Contracture risk",
+              "type": "obs",
+              "id": "contractureRisk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d00fb9c3-767a-4a07-b9f0-e70803415927",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Deformity progression",
+              "type": "obs",
+              "id": "deformityProgression",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "384ad02d-9698-477c-9d0b-1acbf5f3236e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Living Condition",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Lives alone",
+              "type": "obs",
+              "id": "livesAlone",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "937d3e3e-5f19-44cb-bc1c-85ad71eb815b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Caregiver available",
+              "type": "obs",
+              "id": "caregiverAvailable",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ef4359ad-c4a9-4311-bf31-67bd3c0555b3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Home accessibility issue",
+              "type": "obs",
+              "id": "homeAccessibility",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "357d5688-59ad-4d2d-9d37-4f705e700d59",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Occupation and Functional Goal",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Occupation",
+              "type": "obs",
+              "id": "occupation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4a6dfe8c-5529-46b6-87ce-e73d7169a4a3"
+              }
+            },
+            {
+              "label": "Work Demand",
+              "type": "obs",
+              "id": "workDemand",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "67d17eba-3e3a-48ff-8523-4a1f00728200",
+                "answers": [
+                  {
+                    "concept": "7f832fc0-e219-46e8-8fad-3d12157cc985",
+                    "label": "Sedentary"
+                  },
+                  {
+                    "concept": "6a9f04d8-89c6-4beb-a611-f9708844eb77",
+                    "label": "Light"
+                  },
+                  {
+                    "concept": "2b32762a-359d-434b-8108-8f2eccc9a28f",
+                    "label": "Heavy"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Main Functional Goal",
+              "type": "obs",
+              "id": "mainFunctionalGoal",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f6584ed8-015a-48fe-80b3-1c9833166cc7"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Priority Agreement",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Priority",
+              "type": "obs",
+              "id": "priorityAgreement",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "151264ec-24d0-4361-9d09-f90dd8054f1d",
+                "answers": [
+                  {
+                    "concept": "3ac2374d-61c2-482d-a325-31af1bd3d1a6",
+                    "label": "High - Same day service required"
+                  },
+                  {
+                    "concept": "8348eb3c-af95-4daf-8527-acd34781765d",
+                    "label": "Medium - Early scheduled appointment"
+                  },
+                  {
+                    "concept": "38888158-50b8-47c6-8728-be4e1b7dcf75",
+                    "label": "Low - Routine appointment"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Triage Outcome / Routing",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Triage Outcome",
+              "type": "obs",
+              "id": "triageOutcome",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "accc596a-10e5-4e5b-a833-7a0e3cf74cce",
+                "answers": [
+                  {
+                    "concept": "17740889-1a66-4d03-b6df-c9efc6b7319c",
+                    "label": "Prosthetic Assessment"
+                  },
+                  {
+                    "concept": "fb41ebb3-43d3-4a1e-9830-c5ff50ecead0",
+                    "label": "Orthotic Assessment"
+                  },
+                  {
+                    "concept": "a60bedeb-0acb-4f44-9c48-e27b25d1abe8",
+                    "label": "Post-fitting Rehabilitation"
+                  },
+                  {
+                    "concept": "3b8b1ff2-7411-4018-8d8f-22b44d88424f",
+                    "label": "To Mobility Aid Unit"
+                  },
+                  {
+                    "concept": "f6fc8085-882d-4c74-88cd-9f4027362298",
+                    "label": "To MDT"
+                  },
+                  {
+                    "concept": "946e5f88-ca39-4766-b057-13fdaa8dda16",
+                    "label": "Schedule Appointment"
+                  },
+                  {
+                    "concept": "6010f653-cfc0-4793-b382-f5113f2d9dcf",
+                    "label": "Refer to Medical Team"
+                  },
+                  {
+                    "concept": "e03cb8f6-2022-4f4c-8bf5-44dde983a185",
+                    "label": "Device Repair Unit"
+                  },
+                  {
+                    "concept": "3da52dc5-8e8c-40b6-8045-2635e60ddb4c",
+                    "label": "Home Program / Education"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Notes",
+              "type": "obs",
+              "id": "triageNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1e8a5647-92f9-4df4-81b9-8e480c7c778d",
+                "rows": "3"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

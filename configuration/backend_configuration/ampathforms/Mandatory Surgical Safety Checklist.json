@@ -1,0 +1,814 @@
+{
+  "name": "Mandatory Surgical Safety Checklist",
+  "description": "WHO surgical safety checklist across sign in, time out and sign out, with equipment problems and recovery concerns",
+  "version": "1.1",
+  "published": true,
+  "retired": false,
+  "uuid": "2a7e6b19-8c34-4f0d-95a1-6b3d8e47c250",
+  "encounter": "Procedure",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Surgical Safety Checklist",
+      "sections": [
+        {
+          "label": "Procedure Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Procedure",
+              "type": "obs",
+              "id": "procedureName",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "1651AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d490bf4-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              },
+              "questionInfo": "Search the procedure catalogue. Pre-filled from the OR theatre list where available."
+            },
+            {
+              "label": "Emergency vs Elective",
+              "type": "obs",
+              "id": "surgeryUrgency",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "eea7c5a9-8307-4f0c-917c-d88eef82330d",
+                "answers": [
+                  {
+                    "concept": "4e92bbd7-28d7-4662-bb06-135aa23af652",
+                    "label": "Emergency"
+                  },
+                  {
+                    "concept": "c283b0aa-584d-4aeb-a89d-8793ad73af05",
+                    "label": "Elective"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Site to be operated",
+              "type": "obs",
+              "id": "operativeSite",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d9d2b879-d766-44a8-86fa-23db327fb9d8"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Sign In - Before induction of anaesthesia",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Sign in time",
+              "type": "obs",
+              "id": "signInTime",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "36c51443-aa8e-479e-9e6b-7bff02d804b0"
+              }
+            },
+            {
+              "label": "Patient identity confirmed",
+              "type": "obs",
+              "id": "siIdentity",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "28f05c31-7f1a-4faa-b6c5-515fdab8c4ef",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "NPO (nil per os)",
+              "type": "obs",
+              "id": "siNpo",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8d841c64-205e-4b77-87c0-6f6f1664e306",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Patient personal belongings left at bedside",
+              "type": "obs",
+              "id": "siBelongings",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9091fd92-c64c-4215-94a4-3c71c2a1677b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Planned procedure confirmed",
+              "type": "obs",
+              "id": "siProcedure",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "05902fc5-00d7-4502-b48b-a6f32a99e41a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Informed consent secured",
+              "type": "obs",
+              "id": "siConsent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3c99ac8e-4fed-4110-a458-d83e0ed6243f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Site marked",
+              "type": "obs",
+              "id": "siSiteMarked",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d996793d-666d-4273-a9da-d1b8b70631ea",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Diagnostic results attached",
+              "type": "obs",
+              "id": "siResults",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "61c6b8a5-c8db-4db3-9156-9d01586779f2",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Anaesthesia equipment complete",
+              "type": "obs",
+              "id": "siAnaesthesiaEquipment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c82980d6-aade-4cbd-9c89-dd048da98874",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Anaesthesia safety check completed",
+              "type": "obs",
+              "id": "siAnaesthesiaSafety",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c1bf280a-d046-41a0-bb4f-d8b0e5ea9072",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Anaesthetic monitoring functional",
+              "type": "obs",
+              "id": "siMonitoring",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "43def664-d0d4-4ae1-b819-ee3a26899ff4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Known allergy?",
+              "type": "obs",
+              "id": "siAllergy",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8efb0023-a138-4998-af57-343cee424937",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pacemaker or other implants (if applicable)",
+              "type": "obs",
+              "id": "siPacemaker",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "11b3ffe3-eb29-414e-b02c-38abb69dcc7f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Difficult airway or aspiration risk anticipated",
+              "type": "obs",
+              "id": "siAirway",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b17d13bf-cfcc-4659-b6a0-6896065eb35f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Expected blood loss over 500 mL or 7 mL/kg (if applicable)",
+              "type": "obs",
+              "id": "siBloodLoss",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c54872ec-8702-49fe-b428-bdb4c69baf3c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Blood products prepared if needed",
+              "type": "obs",
+              "id": "siBloodProducts",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "412d1db6-ec3a-4960-82b1-de246be7b0b4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Adequate IV access and fluids secured",
+              "type": "obs",
+              "id": "siIvAccess",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c9ec6b42-86c8-41b5-9d38-b3f3f89db7a1",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pulse oximeter on patient and functioning",
+              "type": "obs",
+              "id": "siOximetry",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "81273bff-3b5a-4715-a58a-a28d7a93c024",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Time Out - Before skin incision",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Time out time",
+              "type": "obs",
+              "id": "timeOutTime",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "f1058bd3-9e71-41e8-af63-e5698aced0ba"
+              }
+            },
+            {
+              "label": "Introduction of team members by name and role",
+              "type": "obs",
+              "id": "toIntroduction",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9895ebae-ec86-492f-9280-81460800a11a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Proposed procedure and site confirmed (surgeon)",
+              "type": "obs",
+              "id": "toProcedureConfirmed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "25986cac-00b8-46bf-b544-27d8de6f3da8",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Procedure duration estimated (minutes)",
+              "type": "obs",
+              "id": "toDuration",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a62baecb-bcb1-417d-9de7-4f3f21c76e1f",
+                "min": "0",
+                "max": "1440",
+                "step": "1",
+                "disallowDecimals": true
+              }
+            },
+            {
+              "label": "Anticipated blood loss (mL)",
+              "type": "obs",
+              "id": "toAnticipatedBloodLoss",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161928AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "10000",
+                "step": "1",
+                "disallowDecimals": true
+              }
+            },
+            {
+              "label": "Patient / procedure specific concern (surgeon)",
+              "type": "obs",
+              "id": "toSurgeonConcern",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "952d6c13-697f-4f40-863c-4fe26fc11ad4",
+                "rows": "2"
+              }
+            },
+            {
+              "label": "Prophylactic antibiotics administered at least 30 minutes before incision",
+              "type": "obs",
+              "id": "toAntibiotics",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "161930AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Procedure / patient specific concern addressed (anaesthesia)",
+              "type": "obs",
+              "id": "toAnaesthesiaConcern",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0d942c05-8ab2-4df7-a132-1e61313f47a9",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Sterility confirmed (scrub nurse)",
+              "type": "obs",
+              "id": "toSterility",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0820a185-a845-4f61-8531-9c5548f208c4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Equipment concern addressed (scrub nurse)",
+              "type": "obs",
+              "id": "toEquipmentConcern",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e8374fef-0c9f-4e27-9233-220d5887f861",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Procedure / patient concern addressed (scrub nurse)",
+              "type": "obs",
+              "id": "toScrubConcern",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5a917325-d794-4adb-82c8-5584378142e0",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Sign Out - Before patient leaves OR",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Sign out time",
+              "type": "obs",
+              "id": "signOutTime",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "28882274-f8f3-4e65-aada-5fe75b77ffaa"
+              }
+            },
+            {
+              "label": "Confirmed procedure performed",
+              "type": "obs",
+              "id": "soProcedure",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3e801586-bd76-4818-bae1-0cb93db4639c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Confirmed instrument, sponge and needle count",
+              "type": "obs",
+              "id": "soCount",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c9f509da-46e6-40c9-b3d8-3f4d7cdb94d4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Confirmed correctness of specimen label",
+              "type": "obs",
+              "id": "soSpecimen",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0c1faad9-42bd-40c1-8b5c-7f2d83f991e8",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Equipment problem to be addressed (if any)",
+              "type": "obs",
+              "id": "soEquipmentProblem",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "fa8f23d0-80da-4185-b28c-85ed78c4bf25",
+                "answers": [
+                  {
+                    "concept": "e8ef6f35-2b84-4212-a59e-452f4b988362",
+                    "label": "Operating instrument"
+                  },
+                  {
+                    "concept": "6616f1e9-2e14-451e-92da-c8734f596c3f",
+                    "label": "Suction machine"
+                  },
+                  {
+                    "concept": "f307bccd-99fc-4e55-bd27-26d618f9000b",
+                    "label": "Cautery"
+                  },
+                  {
+                    "concept": "5a9e05ac-ddc1-4d78-833c-a8df81ea10ca",
+                    "label": "Stitches"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Note",
+              "type": "obs",
+              "id": "soEquipmentNote",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a559d1ba-4308-4324-9fe4-b5347e4d03e6",
+                "rows": "2"
+              },
+              "hide": {
+                "hideWhenExpression": "!(soEquipmentProblem && soEquipmentProblem.length > 0)"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Recovery and Postoperative Management Concerns",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Surgeon",
+              "type": "obs",
+              "id": "recoverySurgeon",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "989f611e-339d-4cd8-a9fa-d34bff1344d1",
+                "rows": "2"
+              }
+            },
+            {
+              "label": "Anaesthesia",
+              "type": "obs",
+              "id": "recoveryAnaesthesia",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "aef7554f-93a2-4917-8f91-b679a978653e",
+                "rows": "2"
+              }
+            },
+            {
+              "label": "Scrub nurse",
+              "type": "obs",
+              "id": "recoveryScrubNurse",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6fcfb4d9-699b-43f3-9486-9cdf784ea172",
+                "rows": "2"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Checklist Completion",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Surgical safety checklist performed",
+              "type": "obs",
+              "id": "checklistPerformed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d898ff91-4c91-4aab-9ea6-ef094039922a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

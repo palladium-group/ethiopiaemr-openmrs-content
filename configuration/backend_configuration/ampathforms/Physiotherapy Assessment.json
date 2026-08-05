@@ -1,0 +1,1929 @@
+{
+  "name": "Physiotherapy Assessment",
+  "description": "Physiotherapy assessment: pain, observation, palpation, range of motion, neurological assessment, orthopaedic special tests, goals and treatment plan",
+  "version": "1.0",
+  "published": true,
+  "retired": false,
+  "uuid": "4e91c7a5-2d68-4b03-9f47-8a5c1e60d3b2",
+  "encounter": "Consultation",
+  "processor": "EncounterFormProcessor",
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "id": "encProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "id": "encLocation",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Physiotherapy Assessment",
+      "sections": [
+        {
+          "label": "Patient Info",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Medical diagnosis",
+              "type": "obs",
+              "id": "medicalDiagnosis",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "4c8d4b3b-beab-4574-a17b-b4dc5ee96b9a",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Diagnosis note",
+              "type": "obs",
+              "id": "diagnosisNote",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0f2b0b07-75d7-4307-81e6-49deb08c49fe",
+                "rows": "3"
+              }
+            },
+            {
+              "label": "Functional level",
+              "type": "obs",
+              "id": "functionalLevel",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e8fa61ca-ba77-4545-9181-f65db90390c1",
+                "answers": [
+                  {
+                    "concept": "ab938a86-d5a6-4e26-9751-86b10313f921",
+                    "label": "Independent"
+                  },
+                  {
+                    "concept": "d00651eb-c95a-4021-934f-2a2d134b7d1d",
+                    "label": "Modified independence"
+                  },
+                  {
+                    "concept": "62d40468-3663-4e24-a7c9-eb409c30e753",
+                    "label": "Supervision"
+                  },
+                  {
+                    "concept": "92ef21dd-4d0c-4925-8e1b-df10652e719a",
+                    "label": "Minimal assistance"
+                  },
+                  {
+                    "concept": "e8903724-069d-4343-a662-2aac89c3870f",
+                    "label": "Moderate assistance"
+                  },
+                  {
+                    "concept": "be668ec0-f883-4a6b-8857-d485c327ec33",
+                    "label": "Maximal assistance"
+                  },
+                  {
+                    "concept": "0b7cf0f6-fd21-4978-9f34-5b52dc6d0100",
+                    "label": "Dependent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Occupation",
+              "type": "obs",
+              "id": "occupation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4ec83bb2-4212-4b81-ac3f-bbe336db530f"
+              }
+            },
+            {
+              "label": "Red flag symptoms present",
+              "type": "obs",
+              "id": "redFlags",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9f05b7c3-2e42-49b9-8ad1-93faa05eac28",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Prior surgery",
+              "type": "obs",
+              "id": "priorSurgery",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e662175d-76fc-47a7-af33-ae1de7ef6f06",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pain Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pain Score (0-10)",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "166082AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "10",
+                "step": "1",
+                "disallowDecimals": true
+              }
+            },
+            {
+              "label": "Pain severity",
+              "type": "obs",
+              "id": "painBand",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "17ed1f06-4565-48b1-bbf6-ade06054916a",
+                "answers": [
+                  {
+                    "concept": "5347d5ac-f587-4611-a572-d49fe9fe118e",
+                    "label": "0-3 (Mild)"
+                  },
+                  {
+                    "concept": "9623181f-86a6-4b47-a45e-51038f8b1bd9",
+                    "label": "4-6 (Moderate)"
+                  },
+                  {
+                    "concept": "11cb8610-de70-40a5-a750-dbe06f9d40df",
+                    "label": "7-10 (Severe)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pain character",
+              "type": "obs",
+              "id": "painCharacter",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "e589029b-9c3b-4867-8440-9f6196db839f",
+                "answers": [
+                  {
+                    "concept": "f30183c7-34ba-4037-ba13-a4afe964f662",
+                    "label": "Aching"
+                  },
+                  {
+                    "concept": "9da140d9-8471-45d9-ae4d-eae9c09b4338",
+                    "label": "Sharp"
+                  },
+                  {
+                    "concept": "146625AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Burning"
+                  },
+                  {
+                    "concept": "02b04531-669c-4205-80b2-d8392a1a45f0",
+                    "label": "Throbbing"
+                  },
+                  {
+                    "concept": "552c6008-485a-4986-aa55-48a18a20e517",
+                    "label": "Shooting"
+                  },
+                  {
+                    "concept": "90bae735-d7ac-4e90-b6ef-ffbce7fc56cb",
+                    "label": "Stiffness"
+                  },
+                  {
+                    "concept": "8f8b2f5e-29ea-4ec4-9d27-25e4c97bbc67",
+                    "label": "Dull"
+                  },
+                  {
+                    "concept": "0c3ffc46-5f88-4171-99ee-77970482348f",
+                    "label": "Electric"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pain pattern",
+              "type": "obs",
+              "id": "painPattern",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "b87a2690-b389-4abd-b8d4-ad186d58e073",
+                "answers": [
+                  {
+                    "concept": "23835cd9-8897-470d-8868-b1422f11a713",
+                    "label": "Constant"
+                  },
+                  {
+                    "concept": "ae368009-afc5-44a1-ad31-45d22a2fbae9",
+                    "label": "Intermittent"
+                  },
+                  {
+                    "concept": "af1f8723-c83a-4008-b194-6806369e4fd2",
+                    "label": "Activity-related"
+                  },
+                  {
+                    "concept": "7d56905f-089f-4db4-96bb-0cf0423706f7",
+                    "label": "Night pain (disturbs sleep)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Aggravating factors",
+              "type": "obs",
+              "id": "aggravating",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "db0af712-0b3a-4d80-b818-67cdd1d44989",
+                "answers": [
+                  {
+                    "concept": "8ce62c56-9e69-483c-885b-d0c36395cef1",
+                    "label": "Sitting"
+                  },
+                  {
+                    "concept": "d90a509a-79f7-4d1b-bf4c-3a0d7374afcf",
+                    "label": "Standing"
+                  },
+                  {
+                    "concept": "540c3ed2-247f-453d-9b06-b7e02de37399",
+                    "label": "Walking"
+                  },
+                  {
+                    "concept": "d738cfb3-cdd3-4234-8ceb-1d0446c81b42",
+                    "label": "Lifting"
+                  },
+                  {
+                    "concept": "4b1da170-351c-486d-b65f-29decc05a08e",
+                    "label": "Reaching"
+                  },
+                  {
+                    "concept": "7222c1d4-d572-4802-a45d-23fe5b9f750a",
+                    "label": "Bending"
+                  },
+                  {
+                    "concept": "7e21be41-7ab2-47fe-a20b-c2a5a6877adb",
+                    "label": "Lying down"
+                  },
+                  {
+                    "concept": "25d7e68b-6229-4bdd-baf5-ab933247d96f",
+                    "label": "Driving"
+                  },
+                  {
+                    "concept": "e1371c4b-2060-49f7-aab5-f80ddf810154",
+                    "label": "Coughing / sneezing"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Specify other aggravating factor",
+              "type": "obs",
+              "id": "aggravatingOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "24719cd3-fc22-4486-97ee-a6a560a68ce1"
+              },
+              "hide": {
+                "hideWhenExpression": "!(aggravating && aggravating.includes('5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+              }
+            },
+            {
+              "label": "Relieving factors",
+              "type": "obs",
+              "id": "relieving",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "e1eac430-8863-475e-b8c9-45a15e304e81",
+                "answers": [
+                  {
+                    "concept": "c4c8394e-b1e3-4762-9ebc-266ea5afb7b2",
+                    "label": "Lying down"
+                  },
+                  {
+                    "concept": "2257e6dd-7537-4966-8193-46d347bc4e6a",
+                    "label": "Sitting"
+                  },
+                  {
+                    "concept": "8b61503c-1204-43e7-ac0e-46466acd42da",
+                    "label": "Walking"
+                  },
+                  {
+                    "concept": "8d736f35-e2a2-4c22-a78e-1d7ff42e0712",
+                    "label": "Medication"
+                  },
+                  {
+                    "concept": "58594591-bc05-4ba3-aa21-bb512c08dbf8",
+                    "label": "Heat"
+                  },
+                  {
+                    "concept": "d196523a-5114-41be-a49f-4e1d7b5bd8d6",
+                    "label": "Ice"
+                  },
+                  {
+                    "concept": "6975dc7c-59d6-41a3-803d-3053d925f68d",
+                    "label": "Rest"
+                  },
+                  {
+                    "concept": "cf898f5e-e82c-4bd4-92b1-32eb36c3c5ef",
+                    "label": "Change in posture"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Specify other relieving factor",
+              "type": "obs",
+              "id": "relievingOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9dccab0b-8007-4938-84da-6846cda10623"
+              },
+              "hide": {
+                "hideWhenExpression": "!(relieving && relieving.includes('5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+              }
+            },
+            {
+              "label": "Previous treatment",
+              "type": "obs",
+              "id": "previousTreatment",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "611b4701-a891-4ee9-864d-a4dfdafe9fc9",
+                "answers": [
+                  {
+                    "concept": "b43c7983-ac26-4df5-9a9b-6dbabdc2176d",
+                    "label": "Physiotherapy"
+                  },
+                  {
+                    "concept": "61edbe37-9629-42cc-b231-da388722ec32",
+                    "label": "Chiropractic"
+                  },
+                  {
+                    "concept": "2b316ba8-279a-4af8-bc94-3d16c5933297",
+                    "label": "Massage therapy"
+                  },
+                  {
+                    "concept": "bb22611b-ddd0-4f1e-8f84-1d02d88acc5a",
+                    "label": "Acupuncture"
+                  },
+                  {
+                    "concept": "0443c6e5-b9ab-49e7-a2a2-0051320c3e1d",
+                    "label": "Surgery"
+                  },
+                  {
+                    "concept": "5d1a00e8-b183-4d86-a607-20415b106b15",
+                    "label": "Medications"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Medication list",
+              "type": "obs",
+              "id": "previousMedications",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "65af8b29-8fe8-484e-8c67-46d639ebede4",
+                "rows": "3"
+              },
+              "hide": {
+                "hideWhenExpression": "!(previousTreatment && previousTreatment.includes('5d1a00e8-b183-4d86-a607-20415b106b15'))"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Medical Detail",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Chief Complaint",
+              "type": "obs",
+              "id": "chiefComplaint",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "5219AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Onset",
+              "type": "obs",
+              "id": "onset",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "980288ac-5303-4508-9671-1ade0aa0b94f",
+                "answers": [
+                  {
+                    "concept": "912e8ab6-dad7-4a07-a9f0-ac73826ba5e3",
+                    "label": "Sudden"
+                  },
+                  {
+                    "concept": "2c180257-926f-4e0c-8b6f-95d18c110037",
+                    "label": "Gradual"
+                  },
+                  {
+                    "concept": "ea40d5fa-b788-4984-99b1-01aa59881f53",
+                    "label": "Post-operative"
+                  },
+                  {
+                    "concept": "f60dcbb7-b868-48f9-822f-818aa33a41ba",
+                    "label": "Recurrent Flareup"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Specify onset",
+              "type": "obs",
+              "id": "onsetOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7b6b6c25-9d66-4045-9733-122890c788ac"
+              },
+              "hide": {
+                "hideWhenExpression": "onset !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Duration",
+              "type": "obs",
+              "id": "duration",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "17ffcb1f-2978-4676-8012-4922e13bd86a",
+                "answers": [
+                  {
+                    "concept": "68c0c5ad-3a7c-48f0-9911-f21eb922f341",
+                    "label": "Acute"
+                  },
+                  {
+                    "concept": "d77e3a0d-e804-4bfd-9194-cc3cbba15d75",
+                    "label": "Subacute"
+                  },
+                  {
+                    "concept": "1615fa1a-6832-4005-888f-4a15417bbb95",
+                    "label": "Chronic"
+                  },
+                  {
+                    "concept": "101cc2ed-9247-4273-a300-81600ea75358",
+                    "label": "Recurrent"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Observation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Posture",
+              "type": "obs",
+              "id": "posture",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "e11356eb-df27-4dfd-8b6b-8c066bb2afd5",
+                "answers": [
+                  {
+                    "concept": "1a77e7be-a92f-4804-a4be-9f13ff4341df",
+                    "label": "Neutral"
+                  },
+                  {
+                    "concept": "4951a348-6a74-41d1-99ad-cec89b434cab",
+                    "label": "Forward head"
+                  },
+                  {
+                    "concept": "012ff48e-2389-435b-98bb-d3f2a8c23a4d",
+                    "label": "Rounded shoulders"
+                  },
+                  {
+                    "concept": "522bea15-1510-4123-806a-698b7cc3d8cc",
+                    "label": "Kyphosis"
+                  },
+                  {
+                    "concept": "d435df3f-6d4b-4ecf-873f-e96d54a5b84b",
+                    "label": "Lordosis"
+                  },
+                  {
+                    "concept": "f0eec706-a3f2-4d2c-a9de-886444da2cab",
+                    "label": "Scoliosis"
+                  },
+                  {
+                    "concept": "875e741b-b901-4fea-975a-3011b394b37a",
+                    "label": "Antalgic"
+                  },
+                  {
+                    "concept": "aa04a83f-ee10-4d24-90e8-bac4e2d34297",
+                    "label": "Pelvic tilt - Anterior"
+                  },
+                  {
+                    "concept": "b5cb6634-fafb-4af6-bf9a-472bb3dfd3d6",
+                    "label": "Pelvic tilt - Posterior"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Antalgic posture side",
+              "type": "obs",
+              "id": "postureSide",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4cb81de3-f1d8-40f5-bcd3-0f2eb442647b",
+                "answers": [
+                  {
+                    "concept": "5141AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Right"
+                  },
+                  {
+                    "concept": "5139AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Left"
+                  },
+                  {
+                    "concept": "160406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Both"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "!(posture && posture.includes('875e741b-b901-4fea-975a-3011b394b37a'))"
+              }
+            },
+            {
+              "label": "Gait",
+              "type": "obs",
+              "id": "gait",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "4a9b1302-923f-4667-a0e5-0ef6bab1aaa4",
+                "answers": [
+                  {
+                    "concept": "f75e5dd0-3056-40e3-8b7e-aabfd475dcff",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "3c649596-4726-40b5-b21a-cf51d4fa4be6",
+                    "label": "Antalgic"
+                  },
+                  {
+                    "concept": "04eba892-e097-411f-80c6-461b5e8bb599",
+                    "label": "Trendelenburg"
+                  },
+                  {
+                    "concept": "1676b784-4f1f-4f95-ae75-f229ba0181e5",
+                    "label": "Ataxic"
+                  },
+                  {
+                    "concept": "4943e959-e51c-4bd9-ab6e-4b825a611696",
+                    "label": "Circumduction"
+                  },
+                  {
+                    "concept": "c605a737-c539-48d5-a42c-242db0933ca3",
+                    "label": "Waddling"
+                  },
+                  {
+                    "concept": "29ed0e64-3b20-4aaf-bc82-c16753e5d55f",
+                    "label": "Reduced arm swing"
+                  },
+                  {
+                    "concept": "aa27ab2f-818f-4a29-bb76-e05d18512da1",
+                    "label": "Foot drop"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Reduced arm swing / foot drop side",
+              "type": "obs",
+              "id": "gaitSide",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "48c40a50-b8ed-46ea-a46f-a043318cea9e",
+                "answers": [
+                  {
+                    "concept": "5141AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Right"
+                  },
+                  {
+                    "concept": "5139AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Left"
+                  },
+                  {
+                    "concept": "160406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Both"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "!(gait && (gait.includes('29ed0e64-3b20-4aaf-bc82-c16753e5d55f') || gait.includes('aa27ab2f-818f-4a29-bb76-e05d18512da1')))"
+              }
+            },
+            {
+              "label": "Weight bearing",
+              "type": "obs",
+              "id": "weightBearing",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "da64a99f-4978-4e95-9c40-38ba46a44256",
+                "answers": [
+                  {
+                    "concept": "2bcabdfd-98e6-497e-a518-7065610277d0",
+                    "label": "Full"
+                  },
+                  {
+                    "concept": "c6da3e49-0b2f-4ba3-8a25-441244c388e5",
+                    "label": "Partial"
+                  },
+                  {
+                    "concept": "996dd8b2-4e58-4f54-9d88-53fa20b6cd61",
+                    "label": "Non-weight-bearing"
+                  },
+                  {
+                    "concept": "67cb30bb-d4bc-48c8-bc93-1d834089a6a5",
+                    "label": "Toe-touch"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "% Weight bearing",
+              "type": "obs",
+              "id": "weightBearingPercent",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "05ad91d9-57d5-4b50-bd39-7c92f13c6dd8",
+                "min": "0",
+                "max": "100",
+                "step": "1",
+                "disallowDecimals": true
+              },
+              "hide": {
+                "hideWhenExpression": "weightBearing !== 'c6da3e49-0b2f-4ba3-8a25-441244c388e5'"
+              }
+            },
+            {
+              "label": "Assistive device",
+              "type": "obs",
+              "id": "assistiveDevice",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9cc7e526-d7e1-46a6-b9a5-1e790611a659",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "156eff72-37c8-4e5f-88e1-8dd629b30743",
+                    "label": "Walker"
+                  },
+                  {
+                    "concept": "113c40f0-b2b7-47a7-af42-b5589f7d0ef4",
+                    "label": "Crutches"
+                  },
+                  {
+                    "concept": "5f8805fe-ef0a-4748-bf95-365508535b70",
+                    "label": "Wheelchair"
+                  },
+                  {
+                    "concept": "e3c6cd32-d13d-4812-801b-a44476a780c6",
+                    "label": "Cane"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Cane side",
+              "type": "obs",
+              "id": "assistiveDeviceSide",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "195d342c-9c2d-446f-a816-53700ed06278",
+                "answers": [
+                  {
+                    "concept": "5141AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Right"
+                  },
+                  {
+                    "concept": "5139AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Left"
+                  },
+                  {
+                    "concept": "160406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Both"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "assistiveDevice !== 'e3c6cd32-d13d-4812-801b-a44476a780c6'"
+              }
+            },
+            {
+              "label": "Skin inspection",
+              "type": "obs",
+              "id": "skinInspection",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "1a46e943-b15a-4ac0-bfbc-515e876f37a4",
+                "answers": [
+                  {
+                    "concept": "e9a6a398-8978-4506-8080-c19659346254",
+                    "label": "Intact"
+                  },
+                  {
+                    "concept": "6e4ef812-c72a-44ef-9fb0-a65566b08935",
+                    "label": "Scar"
+                  },
+                  {
+                    "concept": "55dbcd97-5bdd-404d-b3f0-d87890cf6d4e",
+                    "label": "Bruising"
+                  },
+                  {
+                    "concept": "03398b13-e253-4fbd-b6e0-7bf26e02fcba",
+                    "label": "Swelling"
+                  },
+                  {
+                    "concept": "01c973b9-5c86-4777-82bb-a0ad60470b9a",
+                    "label": "Erythema"
+                  },
+                  {
+                    "concept": "249dc5ae-ecaa-4433-a78b-382656e94e78",
+                    "label": "Surgical incision"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Symmetry",
+              "type": "obs",
+              "id": "symmetry",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "dc33397c-a360-441b-b200-d655b99f3cff",
+                "answers": [
+                  {
+                    "concept": "2e7842f0-8117-4527-8ec3-373e9e64c35c",
+                    "label": "Symmetrical"
+                  },
+                  {
+                    "concept": "665c32d7-0113-4dbf-bd14-bd564d66c0a0",
+                    "label": "Asymmetrical"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Describe asymmetry",
+              "type": "obs",
+              "id": "symmetryDescription",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "db087291-9154-4226-bab4-9e5fb2cf92d7"
+              },
+              "hide": {
+                "hideWhenExpression": "symmetry !== '665c32d7-0113-4dbf-bd14-bd564d66c0a0'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Palpation and Muscle Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Palpation - Right",
+              "type": "obs",
+              "id": "palpationRight",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "a15be3c7-908e-4616-9ecd-65f0936a9a8e",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "2ce14037-e177-4b96-8c45-6f4be8fc9626",
+                    "label": "Swelling"
+                  },
+                  {
+                    "concept": "7b1a88ff-c0c0-4f7e-8a36-4d0e49d78a21",
+                    "label": "Tenderness"
+                  },
+                  {
+                    "concept": "6cee68f3-920c-4654-a89b-f15fc987db4a",
+                    "label": "Spasm"
+                  },
+                  {
+                    "concept": "fa14fc0b-68ec-4c08-af92-0f6b2c5b2fa3",
+                    "label": "Fever"
+                  },
+                  {
+                    "concept": "1fa54cfd-eaf7-4929-973f-2498d2944cc3",
+                    "label": "Cold"
+                  },
+                  {
+                    "concept": "6406d806-1157-4d2d-a2aa-36db48697c49",
+                    "label": "Pain"
+                  },
+                  {
+                    "concept": "0ecf2e91-9611-43e5-a6c1-32066544b503",
+                    "label": "Edema"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Palpation - Left",
+              "type": "obs",
+              "id": "palpationLeft",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "9991d624-42a7-4d2b-90f7-7f802efaec9c",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "2ce14037-e177-4b96-8c45-6f4be8fc9626",
+                    "label": "Swelling"
+                  },
+                  {
+                    "concept": "7b1a88ff-c0c0-4f7e-8a36-4d0e49d78a21",
+                    "label": "Tenderness"
+                  },
+                  {
+                    "concept": "6cee68f3-920c-4654-a89b-f15fc987db4a",
+                    "label": "Spasm"
+                  },
+                  {
+                    "concept": "fa14fc0b-68ec-4c08-af92-0f6b2c5b2fa3",
+                    "label": "Fever"
+                  },
+                  {
+                    "concept": "1fa54cfd-eaf7-4929-973f-2498d2944cc3",
+                    "label": "Cold"
+                  },
+                  {
+                    "concept": "6406d806-1157-4d2d-a2aa-36db48697c49",
+                    "label": "Pain"
+                  },
+                  {
+                    "concept": "0ecf2e91-9611-43e5-a6c1-32066544b503",
+                    "label": "Edema"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Muscle bulk - Right",
+              "type": "obs",
+              "id": "muscleBulkRight",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6e2775ef-b707-45cd-b779-b9de279f6936",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "0fde79be-a31b-4890-9a10-582585b3ef6c",
+                    "label": "Atrophy"
+                  },
+                  {
+                    "concept": "eb78baf7-74b7-4c41-9459-24a23a949f00",
+                    "label": "Hypertrophy"
+                  },
+                  {
+                    "concept": "71011daf-a1f8-4d82-9966-89e48e082a0e",
+                    "label": "Contracture"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Measurement - Right (cm or degrees)",
+              "type": "obs",
+              "id": "muscleBulkMeasureRight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ea919145-39b1-4e46-b5ff-70e42b86fd4c",
+                "min": "0",
+                "max": "200",
+                "step": "0.1"
+              },
+              "hide": {
+                "hideWhenExpression": "muscleBulkRight === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || isEmpty(muscleBulkRight)"
+              }
+            },
+            {
+              "label": "Muscle bulk - Left",
+              "type": "obs",
+              "id": "muscleBulkLeft",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8f4a6c1f-0ba1-4564-929f-3fe118cbbe73",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "0fde79be-a31b-4890-9a10-582585b3ef6c",
+                    "label": "Atrophy"
+                  },
+                  {
+                    "concept": "eb78baf7-74b7-4c41-9459-24a23a949f00",
+                    "label": "Hypertrophy"
+                  },
+                  {
+                    "concept": "71011daf-a1f8-4d82-9966-89e48e082a0e",
+                    "label": "Contracture"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Measurement - Left (cm or degrees)",
+              "type": "obs",
+              "id": "muscleBulkMeasureLeft",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "803957fa-09af-442b-a788-917176cdd10f",
+                "min": "0",
+                "max": "200",
+                "step": "0.1"
+              },
+              "hide": {
+                "hideWhenExpression": "muscleBulkLeft === '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || isEmpty(muscleBulkLeft)"
+              }
+            },
+            {
+              "label": "Range of motion quality - Right",
+              "type": "obs",
+              "id": "romQualityRight",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "358b63b2-3fe3-4f56-82ad-7323dc1901ea",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "12273a85-187f-4d82-b9e3-bfbac70140c9",
+                    "label": "Limited due to weakness"
+                  },
+                  {
+                    "concept": "6e9a2016-869c-42da-82a3-a9c098adf7d4",
+                    "label": "Limited due to stiffness"
+                  },
+                  {
+                    "concept": "787a6797-a22a-4cd0-b59f-6edcfa983f5e",
+                    "label": "Limited due to pain"
+                  },
+                  {
+                    "concept": "bf3d98ef-5080-4bc1-8432-c363d810decf",
+                    "label": "Limited due to contracture"
+                  },
+                  {
+                    "concept": "90fc8e69-8248-46b2-ae2f-ffc1c00b1e30",
+                    "label": "Hypermobility"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Range of motion quality - Left",
+              "type": "obs",
+              "id": "romQualityLeft",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a0651c11-c1d1-45ca-92ae-c6ca6d6c7e5d",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "12273a85-187f-4d82-b9e3-bfbac70140c9",
+                    "label": "Limited due to weakness"
+                  },
+                  {
+                    "concept": "6e9a2016-869c-42da-82a3-a9c098adf7d4",
+                    "label": "Limited due to stiffness"
+                  },
+                  {
+                    "concept": "787a6797-a22a-4cd0-b59f-6edcfa983f5e",
+                    "label": "Limited due to pain"
+                  },
+                  {
+                    "concept": "bf3d98ef-5080-4bc1-8432-c363d810decf",
+                    "label": "Limited due to contracture"
+                  },
+                  {
+                    "concept": "90fc8e69-8248-46b2-ae2f-ffc1c00b1e30",
+                    "label": "Hypermobility"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Range of Motion Measurements",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Range of motion",
+              "type": "obsGroup",
+              "id": "romGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "053e2cc2-1459-4587-9587-10b01c7de6e2",
+                "repeatOptions": {
+                  "limit": "32",
+                  "addText": "Add another joint movement"
+                }
+              },
+              "questions": [
+                {
+                  "label": "Joint",
+                  "type": "obs",
+                  "id": "romJoint",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "c73aa568-5384-48b7-9078-3612a8e69f96",
+                    "answers": [
+                      {
+                        "concept": "791e522f-eb1f-40ae-a709-765c036a6d9c",
+                        "label": "Cervical spine (neck)"
+                      },
+                      {
+                        "concept": "ab258fd2-fa23-4163-8df9-941e8f43d524",
+                        "label": "Shoulder (glenohumeral)"
+                      },
+                      {
+                        "concept": "63a546cf-607c-4ad9-abf1-98646759dc8f",
+                        "label": "Elbow"
+                      },
+                      {
+                        "concept": "166241AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Forearm"
+                      },
+                      {
+                        "concept": "78202068-e95b-4682-9cfa-ac925094e98e",
+                        "label": "Wrist"
+                      },
+                      {
+                        "concept": "166246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Hip"
+                      },
+                      {
+                        "concept": "bc23a86b-6cad-4dbb-808d-a07337b8eb28",
+                        "label": "Knee"
+                      },
+                      {
+                        "concept": "61c42bf7-f41c-47b5-a126-8567f1d9925b",
+                        "label": "Ankle (talocrural)"
+                      },
+                      {
+                        "concept": "ae0bbd10-5f63-4c3c-95e6-aa759e1f1914",
+                        "label": "Subtalar (hindfoot)"
+                      },
+                      {
+                        "concept": "a92d3cf1-95d8-491f-80f9-0d7296e5b538",
+                        "label": "Foot (MTP joints)"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Movement",
+                  "type": "obs",
+                  "id": "romMotion",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "d2efc32f-338b-4265-a05e-446e82f72a3c",
+                    "answers": [
+                      {
+                        "concept": "4b7b3d46-3d69-45eb-a13e-23547657b220",
+                        "label": "Flexion"
+                      },
+                      {
+                        "concept": "23d56020-d32e-4ce4-84c1-5929de7f66b9",
+                        "label": "Extension"
+                      },
+                      {
+                        "concept": "7a174169-1fb4-4ae7-876e-96976a04d8c8",
+                        "label": "Lateral flexion"
+                      },
+                      {
+                        "concept": "e3008a9f-2ed2-410d-b380-cd2fff2d7108",
+                        "label": "Rotation"
+                      },
+                      {
+                        "concept": "dacaf2e2-f4d2-4309-83e7-a030f426054b",
+                        "label": "Abduction"
+                      },
+                      {
+                        "concept": "48ca60ec-7090-4a1d-bf65-6ccfcb5b8a53",
+                        "label": "Adduction"
+                      },
+                      {
+                        "concept": "64bff2e7-f5ba-467a-a65a-3628fb3ff8b3",
+                        "label": "Internal rotation"
+                      },
+                      {
+                        "concept": "e6d85d6f-0537-4b55-b6f1-a364fdbad4f6",
+                        "label": "External rotation"
+                      },
+                      {
+                        "concept": "a92a7fee-4c1e-4323-b206-527bb737e371",
+                        "label": "Pronation"
+                      },
+                      {
+                        "concept": "752a9e6a-d45a-4c96-b9c2-8304277454e4",
+                        "label": "Supination"
+                      },
+                      {
+                        "concept": "77c5d449-8343-4658-8aca-fe6d7b92b11e",
+                        "label": "Radial deviation"
+                      },
+                      {
+                        "concept": "7801d306-f5f7-4097-a02f-589589c130f0",
+                        "label": "Ulnar deviation"
+                      },
+                      {
+                        "concept": "c03cfdab-15cc-46ea-a2b2-0753efd12256",
+                        "label": "Dorsiflexion"
+                      },
+                      {
+                        "concept": "685a4bda-caa4-467e-b9b0-2c35631e6eb6",
+                        "label": "Plantarflexion"
+                      },
+                      {
+                        "concept": "35938a0a-3422-4166-9358-4a58bd4e1503",
+                        "label": "Inversion"
+                      },
+                      {
+                        "concept": "079586ca-c8a7-4bbe-bd35-f81e48ed8b07",
+                        "label": "Eversion"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Active ROM (degrees)",
+                  "type": "obs",
+                  "id": "romActive",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "8bcd9815-ec9a-44dd-a2cc-e10e6c2fb7f0",
+                    "min": "-20",
+                    "max": "200",
+                    "step": "1",
+                    "disallowDecimals": true
+                  }
+                },
+                {
+                  "label": "Passive ROM (degrees)",
+                  "type": "obs",
+                  "id": "romPassive",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "0c61467d-5143-47c9-bb4a-a2795bc468f3",
+                    "min": "-20",
+                    "max": "200",
+                    "step": "1",
+                    "disallowDecimals": true
+                  }
+                },
+                {
+                  "label": "End feel",
+                  "type": "obs",
+                  "id": "romEndFeel",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "bafcc7cf-ec82-4193-ad48-021f060fe7cd",
+                    "answers": [
+                      {
+                        "concept": "22ed1a91-6e4d-4666-8fac-2307f63ac2fb",
+                        "label": "Soft"
+                      },
+                      {
+                        "concept": "5733b6c6-f3b4-42af-be32-e0c96478b05a",
+                        "label": "Firm"
+                      },
+                      {
+                        "concept": "3f420a3a-85da-4807-b142-991c3ed928f6",
+                        "label": "Hard"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Neurological Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Muscle tone - Right",
+              "type": "obs",
+              "id": "toneRight",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f3c3527d-1ee2-4552-bbf4-cdf6ea986f56",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "453eb1b1-7a18-43fa-8657-8499d933acbc",
+                    "label": "Hypotonic"
+                  },
+                  {
+                    "concept": "f95e55f6-c416-4327-a9cd-43c4cea8478c",
+                    "label": "Hypertonic"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Muscle tone - Left",
+              "type": "obs",
+              "id": "toneLeft",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d4bd5c19-38c4-47da-a092-d97f95407c3a",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "453eb1b1-7a18-43fa-8657-8499d933acbc",
+                    "label": "Hypotonic"
+                  },
+                  {
+                    "concept": "f95e55f6-c416-4327-a9cd-43c4cea8478c",
+                    "label": "Hypertonic"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Light touch sensation",
+              "type": "obs",
+              "id": "sensationLight",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "78c38c4f-00e5-459f-928f-28bec64d261e",
+                "answers": [
+                  {
+                    "concept": "c82e8884-5be3-4298-8223-6e4d7fcfd6d9",
+                    "label": "Intact"
+                  },
+                  {
+                    "concept": "32f112a1-ba1d-4838-b128-68d8b83ed632",
+                    "label": "Impaired"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Proprioception",
+              "type": "obs",
+              "id": "sensationProprioception",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7d646ac4-52ab-4df6-916b-fc8bc077ad16",
+                "answers": [
+                  {
+                    "concept": "c82e8884-5be3-4298-8223-6e4d7fcfd6d9",
+                    "label": "Intact"
+                  },
+                  {
+                    "concept": "32f112a1-ba1d-4838-b128-68d8b83ed632",
+                    "label": "Impaired"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Muscle power - Upper extremity Right",
+              "type": "obs",
+              "id": "mmtUeRight",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6ac910e0-53b2-422a-9960-45436b15fba7",
+                "answers": [
+                  {
+                    "concept": "07af9758-bd4a-492d-ba46-3d014bdb23f1",
+                    "label": "0"
+                  },
+                  {
+                    "concept": "8adbeb2b-971f-4ba3-976c-0fb80e6f4459",
+                    "label": "1"
+                  },
+                  {
+                    "concept": "fcca5f8a-5cbc-4054-89db-b543ab47c431",
+                    "label": "2"
+                  },
+                  {
+                    "concept": "3422c589-4969-4b4a-aa70-dd46b7f6bd3d",
+                    "label": "3"
+                  },
+                  {
+                    "concept": "e6defab9-6a1d-4116-9f64-958211872ec2",
+                    "label": "4"
+                  },
+                  {
+                    "concept": "028a7882-d297-4a51-96e5-ba4385ea518b",
+                    "label": "5"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Muscle power - Lower extremity Right",
+              "type": "obs",
+              "id": "mmtLeRight",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "19fe5334-bfe2-4515-94d6-00a8177c3b23",
+                "answers": [
+                  {
+                    "concept": "07af9758-bd4a-492d-ba46-3d014bdb23f1",
+                    "label": "0"
+                  },
+                  {
+                    "concept": "8adbeb2b-971f-4ba3-976c-0fb80e6f4459",
+                    "label": "1"
+                  },
+                  {
+                    "concept": "fcca5f8a-5cbc-4054-89db-b543ab47c431",
+                    "label": "2"
+                  },
+                  {
+                    "concept": "3422c589-4969-4b4a-aa70-dd46b7f6bd3d",
+                    "label": "3"
+                  },
+                  {
+                    "concept": "e6defab9-6a1d-4116-9f64-958211872ec2",
+                    "label": "4"
+                  },
+                  {
+                    "concept": "028a7882-d297-4a51-96e5-ba4385ea518b",
+                    "label": "5"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Muscle power - Upper extremity Left",
+              "type": "obs",
+              "id": "mmtUeLeft",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "28e3bce9-fff7-4909-9ace-182b41726679",
+                "answers": [
+                  {
+                    "concept": "07af9758-bd4a-492d-ba46-3d014bdb23f1",
+                    "label": "0"
+                  },
+                  {
+                    "concept": "8adbeb2b-971f-4ba3-976c-0fb80e6f4459",
+                    "label": "1"
+                  },
+                  {
+                    "concept": "fcca5f8a-5cbc-4054-89db-b543ab47c431",
+                    "label": "2"
+                  },
+                  {
+                    "concept": "3422c589-4969-4b4a-aa70-dd46b7f6bd3d",
+                    "label": "3"
+                  },
+                  {
+                    "concept": "e6defab9-6a1d-4116-9f64-958211872ec2",
+                    "label": "4"
+                  },
+                  {
+                    "concept": "028a7882-d297-4a51-96e5-ba4385ea518b",
+                    "label": "5"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Muscle power - Lower extremity Left",
+              "type": "obs",
+              "id": "mmtLeLeft",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0b1d5e91-d33e-494d-8871-90c4a271d4bc",
+                "answers": [
+                  {
+                    "concept": "07af9758-bd4a-492d-ba46-3d014bdb23f1",
+                    "label": "0"
+                  },
+                  {
+                    "concept": "8adbeb2b-971f-4ba3-976c-0fb80e6f4459",
+                    "label": "1"
+                  },
+                  {
+                    "concept": "fcca5f8a-5cbc-4054-89db-b543ab47c431",
+                    "label": "2"
+                  },
+                  {
+                    "concept": "3422c589-4969-4b4a-aa70-dd46b7f6bd3d",
+                    "label": "3"
+                  },
+                  {
+                    "concept": "e6defab9-6a1d-4116-9f64-958211872ec2",
+                    "label": "4"
+                  },
+                  {
+                    "concept": "028a7882-d297-4a51-96e5-ba4385ea518b",
+                    "label": "5"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Deep tendon reflex - Right",
+              "type": "obs",
+              "id": "reflexRight",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5539faa3-d370-41d5-9fc2-3719f092fd7c",
+                "answers": [
+                  {
+                    "concept": "405489e3-445e-4c21-9329-e8209073555d",
+                    "label": "0: Absent"
+                  },
+                  {
+                    "concept": "df576c5e-b027-4724-9de1-76fb4c04ea9f",
+                    "label": "1: Diminished (hyporeflexia)"
+                  },
+                  {
+                    "concept": "ddd9b43b-17c2-4935-aba0-9fe4d3ca5db5",
+                    "label": "2: Normal"
+                  },
+                  {
+                    "concept": "79f8cabe-d7f2-4beb-82cc-8d20e35b8ca4",
+                    "label": "3: Hyperreflexia"
+                  },
+                  {
+                    "concept": "d47b29ad-4768-4e5e-a349-eae5e2d5aa82",
+                    "label": "4: Clonus"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Deep tendon reflex - Left",
+              "type": "obs",
+              "id": "reflexLeft",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f087e1ee-efd1-4546-878c-08dddfa40038",
+                "answers": [
+                  {
+                    "concept": "405489e3-445e-4c21-9329-e8209073555d",
+                    "label": "0: Absent"
+                  },
+                  {
+                    "concept": "df576c5e-b027-4724-9de1-76fb4c04ea9f",
+                    "label": "1: Diminished (hyporeflexia)"
+                  },
+                  {
+                    "concept": "ddd9b43b-17c2-4935-aba0-9fe4d3ca5db5",
+                    "label": "2: Normal"
+                  },
+                  {
+                    "concept": "79f8cabe-d7f2-4beb-82cc-8d20e35b8ca4",
+                    "label": "3: Hyperreflexia"
+                  },
+                  {
+                    "concept": "d47b29ad-4768-4e5e-a349-eae5e2d5aa82",
+                    "label": "4: Clonus"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Clonus",
+              "type": "obs",
+              "id": "clonus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5a24cb54-d951-49ee-85b7-dfdeb543420b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Clonus side",
+              "type": "obs",
+              "id": "clonusSide",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "73f06946-9e26-4649-93ea-c96b80fff9e7",
+                "answers": [
+                  {
+                    "concept": "5141AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Right"
+                  },
+                  {
+                    "concept": "5139AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Left"
+                  },
+                  {
+                    "concept": "160406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Both"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "clonus !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Special Tests",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Special test results",
+              "type": "obsGroup",
+              "id": "specialTestGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "28c49e6c-49b4-4fb3-953a-c6e98c6cbc39",
+                "repeatOptions": {
+                  "limit": "17",
+                  "addText": "Add another special test"
+                }
+              },
+              "questions": [
+                {
+                  "label": "Test",
+                  "type": "obs",
+                  "id": "testName",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "e231ddaa-9d12-488b-b8b2-afe545f7fb16",
+                    "answers": [
+                      {
+                        "concept": "566f87c4-9483-4400-bcec-9495cad9369c",
+                        "label": "Neer's - Shoulder impingement"
+                      },
+                      {
+                        "concept": "3acd2cda-4fcc-4ccd-80b5-55705652c811",
+                        "label": "Hawkins-Kennedy - Shoulder impingement"
+                      },
+                      {
+                        "concept": "88051160-2bfe-47ea-ba1f-87da8d455b06",
+                        "label": "Empty can - Supraspinatus tear"
+                      },
+                      {
+                        "concept": "4870a1ee-99f9-46e9-8ee5-4ea926a9ab95",
+                        "label": "Lachman's - ACL rupture"
+                      },
+                      {
+                        "concept": "75d0c599-9912-4769-b89b-a7e241b292de",
+                        "label": "Anterior drawer (knee) - ACL rupture"
+                      },
+                      {
+                        "concept": "8e0c3c2c-bac3-428a-9afd-371cdeead792",
+                        "label": "McMurray's - Meniscal tear"
+                      },
+                      {
+                        "concept": "11ac2f6b-486d-4bd3-8d28-f7f09ab321e5",
+                        "label": "Slump test - Neural tension"
+                      },
+                      {
+                        "concept": "67c5cd00-99ba-43cf-976c-8e67503101b5",
+                        "label": "Straight leg raise (SLR) - Lumbar radiculopathy"
+                      },
+                      {
+                        "concept": "3b830063-f8cd-4da4-af66-81df903bdab6",
+                        "label": "Crossed SLR - Discogenic"
+                      },
+                      {
+                        "concept": "01bacb5d-7979-4661-ab5a-b9e28a93cf18",
+                        "label": "Faber's (Patrick) - SI joint / hip"
+                      },
+                      {
+                        "concept": "72a23662-d532-4a91-9a56-7c9eafd31136",
+                        "label": "O'Brien's - SLAP tear / AC joint"
+                      },
+                      {
+                        "concept": "16d23ad5-5cce-4710-b3a0-df95c5ca9c3f",
+                        "label": "Thessaly - Meniscal tear"
+                      },
+                      {
+                        "concept": "5369d103-be05-44d5-8abf-0f7cc060b8ac",
+                        "label": "Spurling's - Cervical radiculopathy"
+                      },
+                      {
+                        "concept": "d8b540ac-2b09-44fd-9cfe-a58a3d3308fc",
+                        "label": "Distraction (cervical) - Radicular relief"
+                      },
+                      {
+                        "concept": "12756bad-3f1a-47d9-be85-1c5c2811f8d0",
+                        "label": "Compression (cervical) - Facet / radicular"
+                      },
+                      {
+                        "concept": "d5d7a7d1-264b-4ced-b288-703abcee119c",
+                        "label": "Phalen's - Carpal tunnel"
+                      },
+                      {
+                        "concept": "0a8e6b55-5a73-425c-b028-12be939e3514",
+                        "label": "Tinel's (median nerve) - Carpal tunnel"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Result",
+                  "type": "obs",
+                  "id": "testResult",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "be661a33-34f4-4fad-a0f1-5f20243e6e1b",
+                    "answers": [
+                      {
+                        "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Positive"
+                      },
+                      {
+                        "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Negative"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Side",
+                  "type": "obs",
+                  "id": "testSide",
+                  "questionOptions": {
+                    "rendering": "radio",
+                    "concept": "9ba6f778-70d0-4781-8f85-7ea139a3bcdd",
+                    "answers": [
+                      {
+                        "concept": "5141AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Right"
+                      },
+                      {
+                        "concept": "5139AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Left"
+                      },
+                      {
+                        "concept": "160406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Both"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Other tests",
+              "type": "obs",
+              "id": "otherTests",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0805b7bd-3641-489d-8229-e3a1bab6e161",
+                "rows": "3"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Goals",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Short-Term (1-2 Weeks)",
+              "type": "obs",
+              "id": "shortTermGoals",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "d24efa31-07f9-40b3-8eae-4c3498ac2718",
+                "answers": [
+                  {
+                    "concept": "d3a74bbc-4fac-4728-aca2-9fc66f1e555d",
+                    "label": "Reduce Pain (down 2/10 on NRS)"
+                  },
+                  {
+                    "concept": "22bb07e8-ecd8-4c37-9508-05f224da12cc",
+                    "label": "Improve ROM"
+                  },
+                  {
+                    "concept": "7c92fa59-b4b6-40cf-9f0c-10caa7dc9b9a",
+                    "label": "Independent in home exercise program"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Short-term note",
+              "type": "obs",
+              "id": "shortTermNote",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "e69aa00b-ae38-42e3-a735-1a6a5d4d1feb",
+                "rows": "3"
+              }
+            },
+            {
+              "label": "Long-Term (4-6 Weeks)",
+              "type": "obs",
+              "id": "longTermGoals",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "b8acf066-c06a-4f0a-b880-6072541c7784",
+                "answers": [
+                  {
+                    "concept": "208d35bc-93cd-42fa-ac26-e402b7e6c1a1",
+                    "label": "Return to Work/Sport"
+                  },
+                  {
+                    "concept": "6d510540-3241-4e63-89f5-d06011a72337",
+                    "label": "Restore Full Function"
+                  },
+                  {
+                    "concept": "676e9e38-5b41-4b22-beb7-e0dfff7ed1bd",
+                    "label": "Prevent Recurrence"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Long-term note",
+              "type": "obs",
+              "id": "longTermNote",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "7bed5c6a-5a34-4f50-917e-779f3a2c1b9d",
+                "rows": "3"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Treatment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Treatment",
+              "type": "obs",
+              "id": "treatment",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "db8f4600-7f59-47ff-8ea4-23aef3c73405",
+                "answers": [
+                  {
+                    "concept": "487c5129-b963-486f-8529-3fe3872692de",
+                    "label": "Manual therapy"
+                  },
+                  {
+                    "concept": "665f9cf9-b81b-44f1-b814-469bb330dba0",
+                    "label": "Joint mobilization"
+                  },
+                  {
+                    "concept": "95843d1d-e113-49b7-89de-57a3f89f0d49",
+                    "label": "Stretching exercise"
+                  },
+                  {
+                    "concept": "56201dbb-00ac-46c4-a680-2048be9acbb2",
+                    "label": "Strengthening exercise"
+                  },
+                  {
+                    "concept": "6838929b-901b-4b89-bb30-a6c41f762dd1",
+                    "label": "Pre-operative training"
+                  },
+                  {
+                    "concept": "01f5652d-60f9-4876-a165-448ff3a1840b",
+                    "label": "Post-operative training"
+                  },
+                  {
+                    "concept": "d52886fb-5b99-43f8-aa1e-828c8c99c4da",
+                    "label": "Prevention of disability training (POD)"
+                  },
+                  {
+                    "concept": "b6745109-078c-4de3-8eb6-0d4f43568bd1",
+                    "label": "Stroke exercise"
+                  },
+                  {
+                    "concept": "c1266f8f-cf9e-47e4-b03f-9b800f2cd10d",
+                    "label": "Vibration therapy"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
