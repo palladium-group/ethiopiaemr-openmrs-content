@@ -161,6 +161,10 @@
       "homepage-widgets-slot": {
         "remove": ["home-appointments"]
       }
+    },
+    "defaultDashboardPerRole": {
+      "ethiopiaemr: Adult Triage": "adult-triage",
+      "ethiopiaemr: Finance Officer": "accounting"
     }
   },
   "@openmrs/esm-appointments-app": {
@@ -223,6 +227,7 @@
     },
     "extensionSlots": {
       "patient-actions-slot": {
+        "add": ["admit-patient-button", "confirm-discharge-button"],
         "remove": [
           "delete-visit-button",
           "mortuary-mark-patient-deceased-button"
@@ -262,6 +267,11 @@
             "Display conditions": {
               "privileges": ["o3: Mark Patient As Alive/Dead"]
             }
+          },
+          "admit-patient-button": {
+            "Display conditions": {
+              "privileges": ["o3: View Ward Dashboard"]
+            }
           }
         }
       },
@@ -273,7 +283,35 @@
   "@openmrs/esm-patient-chart-app": {
     "extensionSlots": {
       "patient-chart": {
-        "remove": ["patient-chart-order-basket", "patient-chart-clinical-forms"]
+        "remove": ["patient-chart-order-basket", "patient-chart-clinical-forms"],
+        "order": [
+          "patient-chart-order-basket-shadow",
+          "patient-chart-clinical-forms-shadow",
+          "visit-note-shadow",
+          "patient-transfer"
+        ],
+        "configure": {
+          "patient-chart-order-basket-shadow": {
+            "Display conditions": {
+              "privileges": ["o3: View Patient Chart Orders Basket"]
+            }
+          },          
+          "patient-chart-clinical-forms-shadow": {
+            "Display conditions": {
+              "privileges": ["o3: View Patient Chart Forms Dashboard"]
+            }
+          },
+          "visit-note-shadow": {
+            "Display conditions": {
+              "privileges": ["o3: View Patient Chart Notes Dashboard"]
+            }
+          },
+          "patient-transfer": {
+            "Display conditions": {
+              "privileges": ["ethiopiaemr: Transfer Patient"]
+            }            
+          }
+        }        
       },
       "top-of-all-patient-dashboards-slot": {
         "configure": {
@@ -323,30 +361,6 @@
           "conditions-overview-widget": {
             "Display conditions": {
               "privileges": ["o3: View Patient Chart Conditions Dashboard"]
-            }
-          }
-        }
-      },
-      "action-menu-patient-chart-items-slot": {
-        "order": [
-          "order-basket-action-menu",
-          "clinical-form-action-menu",
-          "visit-note-nav-button"
-        ],
-        "configure": {
-          "clinical-form-action-menu": {
-            "Display conditions": {
-              "privileges": ["o3: View Patient Chart Forms Dashboard"]
-            }
-          },
-          "visit-note-nav-button": {
-            "Display conditions": {
-              "privileges": ["o3: View Patient Chart Notes Dashboard"]
-            }
-          },
-          "order-basket-action-menu": {
-            "Display conditions": {
-              "privileges": ["o3: View Patient Chart Orders Basket"]
             }
           }
         }
@@ -913,6 +927,21 @@
           "ewf-admissions-dashboard-link": {
             "Display conditions": {
               "privileges": ["o3: View Patient Chart Admissions"]
+            }
+          },
+          "legacy-summary-dashboard": {
+            "Display conditions": {
+              "privileges": ["ethiopiaemr: View Legacy Summary"]
+            }
+          },
+          "programs-summary-dashboard": {
+            "Display conditions": {
+              "privileges": ["o3: View Patient Chart Programs"]
+            }
+          },
+          "patient-consultation-dashboard-link": {
+            "Display conditions": {
+              "privileges": ["ethiopiaemr: Consultation: View Consultations"]
             }
           }
         }
