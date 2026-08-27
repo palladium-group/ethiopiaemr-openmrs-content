@@ -1,0 +1,487 @@
+{
+  "name": "Vital Signs (Adult & Pediatric)",
+  "description": "Combined Adult + generic Pediatric vital signs. Age-sensitive vitals appear as an adult and a pediatric copy of the SAME concept, mutually exclusive by patient age (cutoff 18y) so each shows age-appropriate range alerts without conflict. Concepts reused from the source vitals forms.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "4d4f4e54-947b-5dcd-bad8-6c9f2e2ab969",
+  "retired": false,
+  "encounter": "Vitals",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit Date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "readonly": false,
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Vital Adult Set",
+      "sections": [
+        {
+          "label": "Adult Vital",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulse",
+              "type": "obs",
+              "required": false,
+              "id": "idPulse",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range for adults: 60-100 bpm",
+              "alert": {
+                "alertWhenExpression": "myValue && (myValue >= 100.5 || myValue < 59.5)",
+                "message": "Pulse is out of range (Normal range 60-100)"
+              },
+              "hide": {
+                "hideWhenExpression": "age < 18"
+              }
+            },
+            {
+              "label": "Pulse",
+              "type": "obs",
+              "required": false,
+              "id": "idPulsePedi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range (pediatric ~6-12y): 70-110 bpm",
+              "alert": {
+                "alertWhenExpression": "myValue && (myValue >= 110.5 || myValue < 69.5)",
+                "message": "Value is outside the pediatric normal range."
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(age) || age >= 18"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Blood Pressure",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic",
+              "type": "obs",
+              "required": false,
+              "id": "aDultVitalSystolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range for adults: 90-120 mmHg",
+              "alert": {
+                "alertWhenExpression": "myValue && (myValue >= 120.5 || myValue < 89.5)",
+                "message": "Systolic is out of range (Normal range 90-120)"
+              },
+              "hide": {
+                "hideWhenExpression": "age < 18"
+              }
+            },
+            {
+              "label": "Systolic",
+              "type": "obs",
+              "required": false,
+              "id": "aDultVitalSystolicPedi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range (pediatric ~6-12y): 95-115 mmHg",
+              "alert": {
+                "alertWhenExpression": "myValue && (myValue >= 115.5 || myValue < 94.5)",
+                "message": "Value is outside the pediatric normal range."
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(age) || age >= 18"
+              }
+            },
+            {
+              "label": "Diastolic",
+              "type": "obs",
+              "required": false,
+              "id": "aDultVitalDiastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range for adults: 60-90 mmHg",
+              "validators": [],
+              "alert": {
+                "alertWhenExpression": "myValue && (myValue >= 90.5 || myValue < 59.5)",
+                "message": "Diastolic is out of range (Normal range 60-90)"
+              },
+              "hide": {
+                "hideWhenExpression": "age < 18"
+              }
+            },
+            {
+              "label": "Diastolic",
+              "type": "obs",
+              "required": false,
+              "id": "aDultVitalDiastolicPedi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range (pediatric ~6-12y): 55-75 mmHg",
+              "validators": [],
+              "alert": {
+                "alertWhenExpression": "myValue && (myValue >= 75.5 || myValue < 54.5)",
+                "message": "Value is outside the pediatric normal range."
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(age) || age >= 18"
+              }
+            },
+            {
+              "label": "Posture",
+              "type": "obs",
+              "required": false,
+              "id": "aDultVitalBloodPressurePosture",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "159633AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Sitting",
+                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Supine",
+                    "concept": "159629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Vital",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Temperature",
+              "type": "obs",
+              "required": false,
+              "id": "aDultVitalTemperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "max": "43",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5°C",
+              "validators": [],
+              "alert": {
+                "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
+                "message": "Temperature is out of range (Normal range 35-37.5°C)"
+              }
+            },
+            {
+              "label": "Respiratory Rate (RR)",
+              "type": "obs",
+              "required": false,
+              "id": "aDultVitalRR",
+              "questionOptions": {
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range for adults: 16-24 breaths/min",
+              "validators": [],
+              "alert": {
+                "alertWhenExpression": "myValue && (myValue >= 24.5 || myValue < 15.5)",
+                "message": "Respiratory Rate is out of range (Normal range 16-24)"
+              },
+              "hide": {
+                "hideWhenExpression": "age < 18"
+              }
+            },
+            {
+              "label": "Respiratory Rate (RR)",
+              "type": "obs",
+              "required": false,
+              "id": "aDultVitalRRPedi",
+              "questionOptions": {
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range (pediatric ~6-12y): 18-25 breaths/min",
+              "validators": [],
+              "alert": {
+                "alertWhenExpression": "myValue && (myValue >= 25.5 || myValue < 17.5)",
+                "message": "Value is outside the pediatric normal range."
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(age) || age >= 18"
+              }
+            },
+            {
+              "label": "Saturation (SPO2%)",
+              "type": "obs",
+              "required": false,
+              "id": "aDultVitalSPO2",
+              "questionOptions": {
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number",
+                "min": "0",
+                "max": "100",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal: ≥90%",
+              "validators": [],
+              "alert": {
+                "alertWhenExpression": "myValue && myValue < 89.5",
+                "message": "Oxygen Saturation is out of range (Normal range ≥90)"
+              }
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "required": false,
+              "id": "aDultVitalWeight",
+              "questionOptions": {
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number",
+                "min": "1",
+                "step": "0.01"
+              },
+              "questionInfo": "Adult weight measurement in kilograms",
+              "validators": []
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "required": false,
+              "id": "aDultVitalHeight",
+              "questionOptions": {
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number",
+                "min": "30",
+                "max": "250",
+                "step": "0.01"
+              },
+              "questionInfo": "Adult height measurement in centimeters",
+              "validators": []
+            }
+          ]
+        },
+        {
+          "label": "Pain Point",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pain Point Score",
+              "type": "obs",
+              "required": true,
+              "id": "aDultVitalPainPointScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "160287AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "10",
+                "step": "0.01"
+              },
+              "questionInfo": "Pain scale 0-10. 0=No pain, 10=Severe pain",
+              "validators": [],
+              "alert": {
+                "alertWhenExpression": "myValue && myValue > 10",
+                "message": "Pain score cannot exceed 10."
+              }
+            }
+          ],
+          "hide": {
+            "hideWhenExpression": "age < 18"
+          }
+        },
+        {
+          "label": "Growth (Pediatric)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "BMI (Kg/m2)",
+              "type": "obs",
+              "required": false,
+              "id": "pediBMI",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "calculate": {
+                  "calculateExpression": "calcBMI(aDultVitalHeight,aDultVitalWeight)"
+                },
+                "step": "0.01"
+              },
+              "questionInfo": "Body Mass Index. Auto-calculated from height and weight; not editable. Normal range varies by age and gender",
+              "hide": {
+                "hideWhenExpression": "isEmpty(age) || age >= 18"
+              }
+            },
+            {
+              "label": "Head Circumference",
+              "type": "obs",
+              "required": false,
+              "id": "pediHeadCircumference",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": "0.01"
+              },
+              "questionInfo": "Head circumference in centimeters (pediatric).",
+              "hide": {
+                "hideWhenExpression": "isEmpty(age) || age >= 18"
+              }
+            },
+            {
+              "label": "MUAC (cm)",
+              "type": "obs",
+              "required": false,
+              "id": "pediMUAC",
+              "questionOptions": {
+                "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "number",
+                "step": "0.01"
+              },
+              "questionInfo": "Mid-Upper Arm Circumference in centimeters. Measure at midpoint between shoulder and elbow",
+              "hide": {
+                "hideWhenExpression": "isEmpty(age) || age >= 18"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Growth Indicators (auto z-score)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Height/Length for Age (z-score)",
+              "type": "obs",
+              "required": false,
+              "id": "pediHFAZscore",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "b395d8b3-4ca3-526a-b422-c03118e19211",
+                "step": "0.01",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(aDultVitalHeight)) ? '' : ((calcHeightForAgeZscore(Number(aDultVitalHeight)) == null) ? '' : Number(calcHeightForAgeZscore(Number(aDultVitalHeight))))"
+                }
+              },
+              "questionInfo": "WHO height/length-for-age z-score, auto-calculated from height, age and sex (0-17y).",
+              "hide": {
+                "hideWhenExpression": "isEmpty(age) || age >= 18"
+              }
+            },
+            {
+              "label": "BMI for Age (z-score)",
+              "type": "obs",
+              "required": false,
+              "id": "pediBMIForAgeZscore",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c1d3da47-2013-5101-a3fc-8770b35ba32a",
+                "step": "0.01",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(aDultVitalHeight) || isEmpty(aDultVitalWeight)) ? '' : ((calcBMIForAgeZscore(Number(aDultVitalHeight),Number(aDultVitalWeight)) == null) ? '' : Number(calcBMIForAgeZscore(Number(aDultVitalHeight),Number(aDultVitalWeight))))"
+                }
+              },
+              "questionInfo": "WHO BMI-for-age z-score, auto-calculated from height, weight, age and sex (5-17y).",
+              "hide": {
+                "hideWhenExpression": "isEmpty(age) || age < 5 || age >= 18"
+              }
+            },
+            {
+              "label": "Weight for Height (z-score)",
+              "type": "obs",
+              "required": false,
+              "id": "pediWFHZscore",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "fe3dcf32-558a-51bc-a69f-e156ce6d5349",
+                "step": "0.01",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(aDultVitalHeight) || isEmpty(aDultVitalWeight)) ? '' : ((calcWeightForHeightZscore(Number(aDultVitalHeight),Number(aDultVitalWeight)) == null || calcWeightForHeightZscore(Number(aDultVitalHeight),Number(aDultVitalWeight)) == '-4') ? '' : Number(calcWeightForHeightZscore(Number(aDultVitalHeight),Number(aDultVitalWeight))))"
+                }
+              },
+              "questionInfo": "WHO weight-for-height z-score, auto-calculated (under-5 only; engine loads this reference for age <5).",
+              "hide": {
+                "hideWhenExpression": "isEmpty(age) || age >= 5"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}
