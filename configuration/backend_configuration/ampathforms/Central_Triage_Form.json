@@ -1,7 +1,7 @@
 {
   "name": "Central Triage Form",
   "description": "Central Triage Form for vital signs assessment — extended per team review.",
-  "version": "2.1",
+  "version": "2.2",
   "published": true,
   "uuid": "ff723d59-0650-4b84-858d-c1045b690683",
   "retired": false,
@@ -34,18 +34,27 @@
               "type": "encounterProvider",
               "required": "true",
               "questionOptions": {
-                "rendering": "ui-select-extended"
+                "rendering": "ui-select-extended",
+                "isSearchable": true
               },
-              "id": "encProvider"
+              "id": "encProvider",
+              "readonly": false
             },
             {
               "label": "Location:",
               "type": "encounterLocation",
               "required": "true",
               "questionOptions": {
-                "rendering": "ui-select-extended"
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
               },
-              "id": "encLocation"
+              "id": "encLocation",
+              "readonly": false
             }
           ]
         }
