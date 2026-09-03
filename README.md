@@ -21,6 +21,10 @@ EthiopiaEMR is an extended version of OpenMRS 3.x and the KenyaEMR flavour that 
   - Billing System
   - Reports Generation
 
+## Documentation
+
+- [Initializer and content package](docs/initializer.md) — how OpenMRS Initializer loads metadata, checksums, and how to reload roles and privileges locally.
+
 ## License
 
 This project is licensed under the Mozilla Public License Version 2.0 - see the [LICENSE](LICENSE) file for details.
