@@ -1,0 +1,199 @@
+{
+  "name": "Cytology Request Form",
+  "uuid": "a3b4c5d6-3333-4a2b-8c3d-0e1f2a3b4c5d",
+  "version": "1.1",
+  "description": "Special-order Cytology request (FNAC / Fluid cytology / Pap smear). Places Cytology examination order and clinical context for OpenELIS CYTO.",
+  "processor": "EncounterFormProcessor",
+  "encounter": "Lab Order",
+  "encounterType": "Lab Order",
+  "published": true,
+  "retired": false,
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Cytology request",
+      "sections": [
+        {
+          "label": "Encounter details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "encounterDatetime",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider",
+              "type": "encounterProvider",
+              "id": "encProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            }
+          ]
+        },
+        {
+          "label": "Test order",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Cytology test",
+              "id": "cytologyTest",
+              "type": "testOrder",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "repeating",
+                "orderSettingUuid": "6f0c9a92-6f24-11e3-af88-005056821db0",
+                "orderType": "testorder",
+                "selectableOrders": [
+                  {
+                    "concept": "b2a8f1c3-9e45-4f62-9b37-2d3e4f5a6b71",
+                    "label": "Cytology examination"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Request details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Sample type",
+              "type": "obs",
+              "id": "cytologySampleType",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c3000010-3333-4a2b-8c3d-0e1f2a3b4c10",
+                "answers": [
+                  {
+                    "concept": "c3000001-3333-4a2b-8c3d-0e1f2a3b4c01",
+                    "label": "FNAC"
+                  },
+                  {
+                    "concept": "c3000002-3333-4a2b-8c3d-0e1f2a3b4c02",
+                    "label": "Fluid cytology"
+                  },
+                  {
+                    "concept": "c3000003-3333-4a2b-8c3d-0e1f2a3b4c03",
+                    "label": "Pap smear"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Referring department",
+              "type": "obs",
+              "id": "referringDepartment",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c2000012-2222-4a2b-8c3d-0e1f2a3b4c12"
+              }
+            },
+            {
+              "label": "Scope of examination",
+              "type": "obs",
+              "id": "scopeOfExamination",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c3000011-3333-4a2b-8c3d-0e1f2a3b4c11"
+              }
+            },
+            {
+              "label": "Previous FNAC",
+              "type": "obs",
+              "id": "previousFnac",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c3000012-3333-4a2b-8c3d-0e1f2a3b4c12"
+              },
+              "hide": {
+                "hideWhenExpression": "cytologySampleType !== 'c3000001-3333-4a2b-8c3d-0e1f2a3b4c01'"
+              }
+            },
+            {
+              "label": "FNAC site(s)",
+              "type": "obs",
+              "id": "fnacSite",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c3000013-3333-4a2b-8c3d-0e1f2a3b4c13"
+              },
+              "hide": {
+                "hideWhenExpression": "cytologySampleType !== 'c3000001-3333-4a2b-8c3d-0e1f2a3b4c01'"
+              }
+            },
+            {
+              "label": "Fluid type and site",
+              "type": "obs",
+              "id": "fluidTypeAndSite",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c3000014-3333-4a2b-8c3d-0e1f2a3b4c14"
+              },
+              "hide": {
+                "hideWhenExpression": "cytologySampleType !== 'c3000002-3333-4a2b-8c3d-0e1f2a3b4c02'"
+              }
+            },
+            {
+              "label": "Pap smear site / source",
+              "type": "obs",
+              "id": "papSmearSite",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c3000015-3333-4a2b-8c3d-0e1f2a3b4c15"
+              },
+              "hide": {
+                "hideWhenExpression": "cytologySampleType !== 'c3000003-3333-4a2b-8c3d-0e1f2a3b4c03'"
+              }
+            },
+            {
+              "label": "Clinical data",
+              "type": "obs",
+              "id": "clinicalData",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c3000016-3333-4a2b-8c3d-0e1f2a3b4c16"
+              }
+            },
+            {
+              "label": "Technique",
+              "type": "obs",
+              "id": "technique",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c3000017-3333-4a2b-8c3d-0e1f2a3b4c17"
+              }
+            },
+            {
+              "label": "Provisional clinical diagnosis",
+              "type": "obs",
+              "id": "provisionalDiagnosis",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c3000018-3333-4a2b-8c3d-0e1f2a3b4c18"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
