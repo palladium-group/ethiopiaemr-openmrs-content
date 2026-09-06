@@ -1,0 +1,186 @@
+{
+  "name": "Pathology Request Form",
+  "uuid": "a2b3c4d5-2222-4a2b-8c3d-0e1f2a3b4c5d",
+  "version": "1.1",
+  "description": "Special-order Pathology request (Biopsy / Morphology). Places Histopathology examination order and clinical context for OpenELIS PATH.",
+  "processor": "EncounterFormProcessor",
+  "encounter": "Lab Order",
+  "encounterType": "Lab Order",
+  "published": true,
+  "retired": false,
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Pathology request",
+      "sections": [
+        {
+          "label": "Encounter details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "encounterDatetime",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider",
+              "type": "encounterProvider",
+              "id": "encProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            }
+          ]
+        },
+        {
+          "label": "Test order",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pathology test",
+              "id": "pathologyTest",
+              "type": "testOrder",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "repeating",
+                "orderSettingUuid": "6f0c9a92-6f24-11e3-af88-005056821db0",
+                "orderType": "testorder",
+                "selectableOrders": [
+                  {
+                    "concept": "b1a7f0c2-9d34-4e51-8a26-1c2d3e4f5a60",
+                    "label": "Histopathology examination"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Request details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Sample type",
+              "type": "obs",
+              "id": "pathologySampleType",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c2000010-2222-4a2b-8c3d-0e1f2a3b4c10",
+                "answers": [
+                  {
+                    "concept": "c2000001-2222-4a2b-8c3d-0e1f2a3b4c01",
+                    "label": "Biopsy"
+                  },
+                  {
+                    "concept": "c2000002-2222-4a2b-8c3d-0e1f2a3b4c02",
+                    "label": "Morphology"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Morphology subtype",
+              "type": "obs",
+              "id": "morphologySubtype",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c2000011-2222-4a2b-8c3d-0e1f2a3b4c11",
+                "answers": [
+                  {
+                    "concept": "c2000003-2222-4a2b-8c3d-0e1f2a3b4c03",
+                    "label": "Blood"
+                  },
+                  {
+                    "concept": "c2000004-2222-4a2b-8c3d-0e1f2a3b4c04",
+                    "label": "Bone marrow"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "pathologySampleType !== 'c2000002-2222-4a2b-8c3d-0e1f2a3b4c02'"
+              }
+            },
+            {
+              "label": "Referring department",
+              "type": "obs",
+              "id": "referringDepartment",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c2000012-2222-4a2b-8c3d-0e1f2a3b4c12"
+              }
+            },
+            {
+              "label": "Specimen site / source",
+              "type": "obs",
+              "id": "specimenSite",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c1000001-1111-4a2b-8c3d-0e1f2a3b4c01"
+              },
+              "hide": {
+                "hideWhenExpression": "pathologySampleType !== 'c2000001-2222-4a2b-8c3d-0e1f2a3b4c01'"
+              }
+            },
+            {
+              "label": "Clinical history",
+              "type": "obs",
+              "id": "clinicalHistory",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c1000002-1111-4a2b-8c3d-0e1f2a3b4c02"
+              }
+            },
+            {
+              "label": "Procedure (e.g. biopsy / excision)",
+              "type": "obs",
+              "id": "procedure",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c1000003-1111-4a2b-8c3d-0e1f2a3b4c03"
+              },
+              "hide": {
+                "hideWhenExpression": "pathologySampleType !== 'c2000001-2222-4a2b-8c3d-0e1f2a3b4c01'"
+              }
+            },
+            {
+              "label": "Operative / surgeon findings",
+              "type": "obs",
+              "id": "operativeFindings",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c1000004-1111-4a2b-8c3d-0e1f2a3b4c04"
+              },
+              "hide": {
+                "hideWhenExpression": "pathologySampleType !== 'c2000001-2222-4a2b-8c3d-0e1f2a3b4c01'"
+              }
+            },
+            {
+              "label": "Provisional clinical diagnosis",
+              "type": "obs",
+              "id": "provisionalDiagnosis",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c1000005-1111-4a2b-8c3d-0e1f2a3b4c05"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
