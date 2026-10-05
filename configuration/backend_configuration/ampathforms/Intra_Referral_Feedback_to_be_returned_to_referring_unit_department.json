@@ -1,0 +1,235 @@
+{
+  "name": "Intra Referral - Feedback to be returned to referring unit/department",
+  "description": "Intra Referral - Feedback to be returned to referring unit/department - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "55b72866-7c0c-5439-a97c-7f43da3164d7",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Intra Referral - Feedback to be returned to referring unit/department Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "To",
+              "type": "obs",
+              "id": "to",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f3a3cec8-32b8-420e-9888-796227168424"
+              }
+            },
+            {
+              "label": "From",
+              "type": "obs",
+              "id": "from",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "33614a1e-e95a-4e7b-9bcd-c8df5a03bfb5"
+              }
+            },
+            {
+              "label": "Unique ART No (if applicable)",
+              "type": "obs",
+              "id": "uniqueArtNoIfApplicable",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d7dc2aa3-10f4-4972-a1c7-f6fdea191cd5"
+              }
+            },
+            {
+              "label": "Counseled and tested result is",
+              "type": "obs",
+              "id": "counseledAndTestedResultIs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3f2b350a-3a06-41c4-ade1-61f92be2f8eb",
+                "answers": [
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reactive"
+                  },
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Non-Reactive"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Feedback",
+              "type": "obs",
+              "id": "feedback",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "150fd871-54d9-47fe-8df5-6591a63d308d",
+                "answers": [
+                  {
+                    "concept": "8e047d90-3895-4a37-8d5b-3dc493c88558",
+                    "label": "Enrolled to Pre-ART Care"
+                  },
+                  {
+                    "concept": "1e125804-c59f-40da-85cc-78cbb38a12bb",
+                    "label": "Enrolled to ART clinic"
+                  },
+                  {
+                    "concept": "57622e89-1bba-4375-ae07-7900da433db1",
+                    "label": "Received CTX Prophylaxis"
+                  },
+                  {
+                    "concept": "73b21825-9e30-4298-b62e-4bdf96b1665c",
+                    "label": "Treated for current symptoms"
+                  },
+                  {
+                    "concept": "77eafb3f-58d3-4397-a6dc-d2c06e9062f3",
+                    "label": "Admitted to Hospital"
+                  },
+                  {
+                    "concept": "3b35c4ca-d20a-44f1-ba0e-9f37172cdc7f",
+                    "label": "Infant enrolled in pediatric HIV/AIDS care or \"exposed clinic\""
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If other specify",
+              "type": "obs",
+              "id": "ifOtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(feedback) || feedback !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Clinical Outcome",
+              "type": "obs",
+              "id": "clinicalOutcome",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7fe6de24-9dff-4c96-8ba4-cacb1e74a510",
+                "answers": [
+                  {
+                    "concept": "165b4679-5c0d-4edb-bb3d-e661d45122e4",
+                    "label": "Improved"
+                  },
+                  {
+                    "concept": "164381AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Same"
+                  },
+                  {
+                    "concept": "162678AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Worse"
+                  },
+                  {
+                    "concept": "5241AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Death"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other Comments",
+              "type": "obs",
+              "id": "otherComments",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "bb843ddd-7722-5498-b604-6996af570acd"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Healthcare provider",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name",
+              "type": "obs",
+              "id": "name",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5bbbe370-d3ff-4526-a63b-df5c579ca30c"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

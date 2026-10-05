@@ -1,0 +1,281 @@
+{
+  "name": "Hyperemesis Follow-Up Chart",
+  "description": "Hyperemesis Follow-Up Chart - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "f4d7ed18-ea16-5400-afb1-28b96593db13",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Hyperemesis Follow-Up Chart Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic Blood Pressure (mmHg)",
+              "type": "obs",
+              "id": "systolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Systolic blood pressure is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic Blood Pressure (mmHg)",
+              "type": "obs",
+              "id": "diastolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Diastolic blood pressure is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse Rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory Rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Weigh (kg)",
+              "type": "obs",
+              "id": "weighKg",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Frequency of vomiting",
+              "type": "obs",
+              "id": "frequencyOfVomiting",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8b3cce1e-d470-4016-b356-84e07a3bd4b3"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Ketone",
+              "type": "obs",
+              "id": "ketone",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "36a5572c-eff1-4c6b-b28f-4253be5f358a"
+              }
+            },
+            {
+              "label": "RBS(mg/dl)",
+              "type": "obs",
+              "id": "rbsMgDl",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "887aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Pain Score",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "166082AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Anti pain given?",
+              "type": "obs",
+              "id": "antiPainGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "649de9d2-6718-5dec-9382-5c7f33cabcd4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Signature",
+              "type": "obs",
+              "id": "signature",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "28794bbc-ad22-4d8e-a8a3-8147bdfef6cd"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

@@ -1,0 +1,278 @@
+{
+  "name": "LGH Cardiac Patients Follow Up sheet for OPD case team",
+  "description": "LGH Cardiac Patients Follow Up sheet for OPD case team - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "663b8e13-5541-576d-aab4-329c96ed7fee",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "LGH Cardiac Patients Follow Up sheet for OPD case team Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name of Patient",
+              "type": "obs",
+              "id": "nameOfPatient",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b2c3d4e5-f601-4890-bcde-f01234567812"
+              }
+            },
+            {
+              "label": "Age",
+              "type": "obs",
+              "id": "age",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "15d60d87-49e3-4f9f-8474-801250d83b3b",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Sex",
+              "type": "obs",
+              "id": "sex",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3071a2b3-0415-2345-6789-012345abcd07",
+                "answers": [
+                  {
+                    "concept": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Male"
+                  },
+                  {
+                    "concept": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Woreda/S.Woreda",
+              "type": "obs",
+              "id": "woredaSWoreda",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "25677889-9001-7893-1237-9012345f0123"
+              }
+            },
+            {
+              "label": "Current Assesment",
+              "type": "obs",
+              "id": "currentAssesment",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5809a2b3-3ca3-b23e-8567-9ef012345678"
+              }
+            },
+            {
+              "label": "Date & Time",
+              "type": "obs",
+              "id": "dateTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Systolic BP (mmHg)",
+              "type": "obs",
+              "id": "systolicBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic BP (mmHg)",
+              "type": "obs",
+              "id": "diastolicBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse Rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Pulse rate is outside the normal range (60-100 beats/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Regularity",
+              "type": "obs",
+              "id": "regularity",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c9a73209-330e-45c8-b9e5-11f6f9546243",
+                "answers": [
+                  {
+                    "concept": "22e3978c-aace-418f-aa8d-5aa9c2cf0f24",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "5936f0b2-e4ca-42a9-84fd-fbeff22bfa96",
+                    "label": "Irregular"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Condition Of Cardiac Complaints",
+              "type": "obs",
+              "id": "conditionOfCardiacComplaints",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "459dc4b1-85e5-4153-a11f-59ef5a61a7f4"
+              }
+            },
+            {
+              "label": "Condition Of signs of congestion Heart Failure/complication",
+              "type": "obs",
+              "id": "conditionOfSignsOfCongestionHeartFailure",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "877277f4-df73-4bea-a58f-a9466620bbb1"
+              }
+            },
+            {
+              "label": "Current Medication",
+              "type": "obs",
+              "id": "currentMedication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2c3d4e5f-6e75-420f-8d9a-456789abcde6"
+              }
+            },
+            {
+              "label": "Overall Assesment",
+              "type": "obs",
+              "id": "overallAssesment",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "af6a42f4-1d31-4925-859b-b665459ccff0"
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              }
+            },
+            {
+              "label": "Next Visit",
+              "type": "obs",
+              "id": "nextVisit",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

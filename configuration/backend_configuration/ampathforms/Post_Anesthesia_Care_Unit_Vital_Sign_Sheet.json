@@ -1,0 +1,319 @@
+{
+  "name": "Post Anesthesia Care Unit Vital Sign Sheet",
+  "description": "Post Anesthesia Care Unit Vital Sign Sheet - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "a44228de-c3a9-5872-9354-4d2a4077de08",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Post Anesthesia Care Unit Vital Sign Sheet Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Type of Procedure",
+              "type": "obs",
+              "id": "typeOfProcedure",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b402ebd1-d6f7-542d-8bf5-63c5139ae47c"
+              }
+            },
+            {
+              "label": "Date & Time",
+              "type": "obs",
+              "id": "dateTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Pain Score",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "166082AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Anti pain given?",
+              "type": "obs",
+              "id": "antiPainGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "649de9d2-6718-5dec-9382-5c7f33cabcd4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Systolic BP (mmHg)",
+              "type": "obs",
+              "id": "systolicBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic BP (mmHg)",
+              "type": "obs",
+              "id": "diastolicBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory Rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SPO2",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "min": "0",
+                "step": "0.01"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "O2",
+              "type": "obs",
+              "id": "o2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2c9764d5-f646-4c1b-898e-b6f426c028b9",
+                "answers": [
+                  {
+                    "label": "Room air",
+                    "concept": "162735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Nasal oxygen",
+                    "concept": "4fa4c5fa-bfcf-42ca-b608-316eb7a988c6"
+                  },
+                  {
+                    "label": "Oxygen by face mask",
+                    "concept": "e9172fb7-3860-49de-ac30-678caf11f785"
+                  },
+                  {
+                    "label": "Continuous positive airway pressure",
+                    "concept": "91e99b02-2be8-446f-9af2-ac07d77c9c0c"
+                  },
+                  {
+                    "label": "Mechanical ventilation",
+                    "concept": "165998AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "At room air",
+                    "concept": "02ef98f2-06a0-4282-bb7b-f83765495696"
+                  },
+                  {
+                    "label": "On Mechanical Ventilation",
+                    "concept": "2caaf622-fb39-4a02-8d9f-35900d5605cf"
+                  },
+                  {
+                    "label": "On CPAP",
+                    "concept": "326e8ff2-cb5e-4cc5-beac-bb38e493fec1"
+                  },
+                  {
+                    "label": "On Face Mask",
+                    "concept": "6616f57c-0dc8-441d-88e7-4197a2ced454"
+                  },
+                  {
+                    "label": "On Nasal Oxygen",
+                    "concept": "8ef9cb2d-96e6-45c6-9c4e-fd8df821c0ee"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

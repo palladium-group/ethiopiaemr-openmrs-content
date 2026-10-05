@@ -1,0 +1,608 @@
+{
+  "name": "Cataract Surgery Follow-up Form",
+  "description": "Cataract Surgery Follow-up Form - built from physician Word-doc spec (Phase 1, batch-three).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "72e3fd14-ea1e-55b4-a150-5ca3236ca915",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Cataract Surgery Follow-up Form Assessment",
+      "sections": [
+        {
+          "label": "Surgical Team and Eye",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Surgeon",
+              "type": "obs",
+              "id": "surgeon",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166688AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Assistant",
+              "type": "obs",
+              "id": "assistant",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b33fd6a8-6bd1-415f-94f7-a3d02306be2a"
+              }
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Eye",
+              "type": "obs",
+              "id": "eye",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "160594AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "162389AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "OD"
+                  },
+                  {
+                    "concept": "162388AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "OS"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Anesthesia",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Type",
+              "type": "obs",
+              "id": "type",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7ea3d5d4-e4b9-4807-a7e6-e9a5c17706d6",
+                "answers": [
+                  {
+                    "concept": "f8691a2b-3b42-4ddc-5a67-123456789ab3",
+                    "label": "Lidocaine 2% with adrenaline"
+                  },
+                  {
+                    "concept": "091a2b3c-4c53-4eed-6b78-23456789abc4",
+                    "label": "Lidocaine 2% without adrenaline"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Route",
+              "type": "obs",
+              "id": "route",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0925e76f-84fa-48b7-8c98-8075038ab89a",
+                "answers": [
+                  {
+                    "concept": "7e09eb81-099f-4ce1-8125-14105d031c28",
+                    "label": "Topical"
+                  },
+                  {
+                    "concept": "8145dac0-b17b-5e7d-a368-860d3175d4fd",
+                    "label": "Subtenon"
+                  },
+                  {
+                    "concept": "bde5bd81-43fa-555b-ad65-c7e7c1b52fa5",
+                    "label": "Peribulbar"
+                  },
+                  {
+                    "concept": "6d8f3b52-1739-5fc8-8c9d-2be88b872db0",
+                    "label": "Retrobulbar"
+                  },
+                  {
+                    "concept": "8526f708-5960-7890-1234-567890abcd0b",
+                    "label": "GA"
+                  },
+                  {
+                    "concept": "8f9d3a51-7f76-40b0-9b52-54a84c5f9763",
+                    "label": "O'Brien / Van Lint"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pressure applied",
+              "type": "obs",
+              "id": "pressureApplied",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6e929485-f745-47b6-ae4d-bffb37d43dce",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Massage",
+              "type": "obs",
+              "id": "massage",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2e8c1e9f-bb40-58a1-9e5b-330b90b09c7e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Complication",
+              "type": "obs",
+              "id": "complication",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c3718f34-8430-59b9-bc34-40dbc11cd855",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Management",
+              "type": "obs",
+              "id": "management",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e3f5956b-fb90-4d3c-bf06-09d9633d240e",
+                "answers": [
+                  {
+                    "label": "Supplementary",
+                    "concept": "0505f3f6-2636-46cd-929c-4fea9d1eb5bb"
+                  },
+                  {
+                    "label": "Therapeutic",
+                    "concept": "4ece08f5-1261-4107-94cf-b637cb31987f"
+                  },
+                  {
+                    "label": "Advice given on",
+                    "concept": "afeadb08-aadd-46a5-83c6-0b878e286302"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Preparation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Eyelash Trimmed",
+              "type": "obs",
+              "id": "eyelashTrimmed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e65bc225-3f95-56ed-9402-1f807294954b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Skin / Conjunctival Preparation",
+              "type": "obs",
+              "id": "skinConjunctivalPreparation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a036ae0a-e8ce-4444-9894-fbe45a15adf1",
+                "answers": [
+                  {
+                    "concept": "82384AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Povidone"
+                  },
+                  {
+                    "concept": "6f708192-a314-4c43-c1ef-23456789012a",
+                    "label": "Alcohol"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Procedure",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Exposure / Stay suture",
+              "type": "obs",
+              "id": "exposureStaySuture",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c741e76f-e0e1-4797-a4d8-56385eaa3521",
+                "answers": [
+                  {
+                    "concept": "74cde847-4190-4cfc-a5d0-7d3b73675fc0",
+                    "label": "Superior rectus"
+                  },
+                  {
+                    "concept": "0def1390-7b44-4cec-b2ba-0aa2f6dd3c88",
+                    "label": "Corneal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Conjunctival flap",
+              "type": "obs",
+              "id": "conjunctivalFlap",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2d002390-f26d-5a43-9ac6-e74636a04b70",
+                "answers": [
+                  {
+                    "concept": "340c0eaf-28bc-45df-85cf-a9f65d6158a2",
+                    "label": "Fornix based"
+                  },
+                  {
+                    "concept": "b9db8405-2352-49ca-9b6b-d8c076982982",
+                    "label": "Limbal based"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Scleral flap shape and size",
+              "type": "obs",
+              "id": "scleralFlapShapeAndSize",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e73f426a-0715-585e-a38e-2a0910844dd6",
+                "answers": [
+                  {
+                    "concept": "d60a0a91-b755-4996-8070-75fb2e65eb09",
+                    "label": "Triangular"
+                  },
+                  {
+                    "concept": "cce9c869-c1e7-4bc4-97ce-260064b5f7af",
+                    "label": "Rectangular"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Size",
+              "type": "obs",
+              "id": "size",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3c951c2f-15f3-49f6-b2ee-6e226c9b91ac",
+                "answers": [
+                  {
+                    "label": "Equal to gestational age",
+                    "concept": "6363f13d-6e6f-40f8-8ab2-90ec216090ca"
+                  },
+                  {
+                    "label": "Small for gestational age (finding)",
+                    "concept": "89bad637-447c-4497-bc1e-e875b4d86a79"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Antimetabolite",
+              "type": "obs",
+              "id": "antimetabolite",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2eb70b1d-5e3b-417a-887d-ed8517c0942c",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "79988AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "MMC"
+                  },
+                  {
+                    "concept": "76550AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "5 FU"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Descemet punch / posterior sclerotomy size",
+              "type": "obs",
+              "id": "descemetPunchPosteriorSclerotomySize",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "b9f783e4-507d-4ef0-b89b-d22164fa4ab8"
+              }
+            },
+            {
+              "label": "EMS",
+              "type": "obs",
+              "id": "ems",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1d284fa6-b428-459d-93d2-ef7b7d57e383",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Peripheral iridotomy",
+              "type": "obs",
+              "id": "peripheralIridotomy",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ee476ccd-4d52-586f-af5f-7c6122ab06b9",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Closure: Scleral Flap",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Suture Type",
+              "type": "obs",
+              "id": "sutureType",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "08e456af-a249-5d28-9c47-f4a0a8e80891"
+              }
+            },
+            {
+              "label": "No. of sutures",
+              "type": "obs",
+              "id": "noOfSutures",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c0a4a51f-6c43-5091-ae9c-1248654fafbe",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Releasable",
+              "type": "obs",
+              "id": "releasable",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "aa43897a-5e6b-40f3-b277-c99af1535f14",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Closure: Conjunctiva",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Suture Type",
+              "type": "obs",
+              "id": "sutureType2",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "08e456af-a249-5d28-9c47-f4a0a8e80891"
+              }
+            },
+            {
+              "label": "No. of sutures",
+              "type": "obs",
+              "id": "noOfSutures2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c0a4a51f-6c43-5091-ae9c-1248654fafbe",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Continuous",
+              "type": "obs",
+              "id": "continuous",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "11a6be44-f72a-4c3b-8071-a95801e58031"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Complications and Management",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Subconjunctival medications",
+              "type": "obs",
+              "id": "medicationsSubconjunctival",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "39e36fd0-9e07-489d-9d15-b51b40f96699"
+              }
+            },
+            {
+              "label": "Topical medications",
+              "type": "obs",
+              "id": "medicationsTopical",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "50f2c925-6b44-41ca-959a-1f85b85c8a0e"
+              }
+            },
+            {
+              "label": "Eye Patch",
+              "type": "obs",
+              "id": "eyePatch",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e41a9316-d445-52e7-bf7f-381f1beacd57",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Accountability",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Signature",
+              "type": "obs",
+              "id": "signature",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "28794bbc-ad22-4d8e-a8a3-8147bdfef6cd"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

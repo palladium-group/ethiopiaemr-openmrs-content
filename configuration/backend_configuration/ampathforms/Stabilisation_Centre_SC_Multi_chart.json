@@ -1,0 +1,1208 @@
+{
+  "name": "Stabilisation Centre (SC) Multi-chart",
+  "description": "Stabilisation Centre (SC) Multi-chart - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "b458a33a-30bb-5678-b76f-f7744581f935",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Stabilisation Centre (SC) Multi-chart Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Registration number",
+              "type": "obs",
+              "id": "registrationNumber",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "cdfd87a5-7bf5-4051-ac60-8f0baf636651",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Referred from",
+              "type": "obs",
+              "id": "referredFrom",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ecbb5229-56ee-471a-8439-d1dcd2881f05"
+              }
+            },
+            {
+              "label": "Sheet number",
+              "type": "obs",
+              "id": "sheetNumber",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "72f188e6-9235-40d1-b110-9dc88ad518d6",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Breastfeeding?",
+              "type": "obs",
+              "id": "breastfeeding",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "25b8c8bd-d3c5-4d6a-bb16-4ddd4d887026",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Complementary feeding?",
+              "type": "obs",
+              "id": "complementaryFeeding",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b586875b-f364-46f7-8693-3e6681b06ea6",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Major Problems",
+              "type": "obs",
+              "id": "majorProblems",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4e1f5d3b-035f-4542-9765-0dfd509b1260"
+              }
+            },
+            {
+              "label": "Date and time of admission",
+              "type": "obs",
+              "id": "dateAndTimeOfAdmission",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "d170eb95-b657-46f3-a08a-464762f60006"
+              }
+            },
+            {
+              "label": "Re-admission?",
+              "type": "obs",
+              "id": "reAdmission",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9becc8a4-47df-54fe-b13a-a8907af46a18",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Type of re-admission",
+              "type": "obs",
+              "id": "typeOfReAdmission",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "feb1763b-1d8a-45fe-93d7-86b588b8ec83",
+                "answers": [
+                  {
+                    "concept": "160033AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Relapse"
+                  },
+                  {
+                    "concept": "6ac94165-9392-44bf-ae97-06e573d84bf6",
+                    "label": "Returned defaulter"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "From",
+              "type": "obs",
+              "id": "from",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "33614a1e-e95a-4e7b-9bcd-c8df5a03bfb5"
+              }
+            },
+            {
+              "label": "Old registration number",
+              "type": "obs",
+              "id": "oldRegistrationNumber",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "cdfd87a5-7bf5-4051-ac60-8f0baf636651",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Is the history and examination sheet filled in?",
+              "type": "obs",
+              "id": "isTheHistoryAndExaminationSheetFilledIn",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f3d33482-ba03-4ddf-b9b1-8e6a429b2c9c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Observation",
+              "type": "obs",
+              "id": "observation",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "bffe3da4-030e-4426-84e8-f3b7d0ca69b6"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Anthropometric Chart",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "WFH z-score",
+              "type": "obs",
+              "id": "wfhZScore",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2dabfcfe-1e70-4e88-837a-79531073b040"
+              }
+            },
+            {
+              "label": "MUAC",
+              "type": "obs",
+              "id": "muac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Bilateral pitting edema",
+              "type": "obs",
+              "id": "bilateralPittingEdema",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1f7ee031-c173-42be-b048-ab27024c818a",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "None",
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "1+ pitting edema",
+                    "concept": "165598AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "2+ pitting edema",
+                    "concept": "165599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "3+ pitting edema",
+                    "concept": "165600AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Weight Chart",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Low",
+              "type": "obs",
+              "id": "low",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ef2ea1da-d920-4e7f-88ed-b59d8fe6bbb9",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "High",
+              "type": "obs",
+              "id": "high",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "73e1710a-bc00-4cc1-9d12-d20415169d15",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Z-Score",
+              "type": "obs",
+              "id": "zScore",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6f76bbf3-9880-4571-a9b9-7efb3d345be0"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Therapeutic Diet",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date2",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Phase",
+              "type": "obs",
+              "id": "phase",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "eb4caf88-222c-444f-a079-aca04e6b411d"
+              }
+            },
+            {
+              "label": "Diet name",
+              "type": "obs",
+              "id": "dietName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "07a330b8-b2a5-445b-acee-faa84a81709f"
+              }
+            },
+            {
+              "label": "Ml/feed",
+              "type": "obs",
+              "id": "mlFeed",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "4cb1bc08-100c-58d3-9592-9c6353e31a5b",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Nub/feed/day",
+              "type": "obs",
+              "id": "nubFeedDay",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cc0c281f-eeb7-4332-941a-ce58b1b05b8b"
+              }
+            },
+            {
+              "label": "Ml/day",
+              "type": "obs",
+              "id": "mlDay",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "cee77467-2275-446d-8e06-7ac3cf8b560f",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Iron added in F-100",
+              "type": "obs",
+              "id": "ironAddedInF100",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d60da6fb-b4e9-4fba-b2e7-07f65305f951"
+              }
+            },
+            {
+              "label": "Amount taken",
+              "type": "obs",
+              "id": "amountTaken",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "3fb37cfd-fb18-4766-8ffe-6e7151307f06"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Mode",
+              "type": "obs",
+              "id": "mode",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "4ea306e1-f071-4c83-8097-2ab45172b016",
+                "answers": [
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  },
+                  {
+                    "concept": "122983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Vomit"
+                  },
+                  {
+                    "concept": "6f61ba35-b14c-43d7-b9e2-7b97d3e66d78",
+                    "label": "Refuse"
+                  },
+                  {
+                    "concept": "1766AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NG Tube"
+                  },
+                  {
+                    "concept": "fde37919-39b2-4817-8fd9-f41a477d1bc5",
+                    "label": "IV Fluid"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Porridge",
+              "type": "obs",
+              "id": "porridge",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c1989e05-168a-4211-a848-0606995e5bce"
+              }
+            },
+            {
+              "label": "Family meal",
+              "type": "obs",
+              "id": "familyMeal",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5766b971-ea6b-4187-8233-35d1d776afb4"
+              }
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e838df31-7eff-4aa3-be0d-dd0f39fbbce4"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Surveillance Chart",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diarrhea",
+              "type": "obs",
+              "id": "diarrhea",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a1b2c3d4-e5f6-7890-1234-56789abcdef0",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Vomiting",
+              "type": "obs",
+              "id": "vomiting",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "57ca8e97-5761-4b54-a3bb-3f0dd6471df8",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Dehydration",
+              "type": "obs",
+              "id": "dehydration",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Cough",
+              "type": "obs",
+              "id": "cough",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0dd2e3f4-8a5b-678c-012d-890123456789",
+                "answers": []
+              }
+            },
+            {
+              "label": "Septic shock",
+              "type": "obs",
+              "id": "septicShock",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "126707AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Respiratory rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Breaths per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pale conjunctiva",
+              "type": "obs",
+              "id": "paleConjunctiva",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b7c8d9e0-f1a2-4b3c-8d5e-6f7a8b9c0d1e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Temp. AM Axillary/Rectum (°C)",
+              "type": "obs",
+              "id": "tempAmAxillaryRectum",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Degrees Celsius, one decimal place.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Temp. PM Axillary/Rectum (°C)",
+              "type": "obs",
+              "id": "tempPmAxillaryRectum",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Degrees Celsius, one decimal place.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Dermatosis",
+              "type": "obs",
+              "id": "dermatosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "48dcd4cd-6b2e-464b-b5dc-29eaea52adb0"
+              }
+            },
+            {
+              "label": "Liver size",
+              "type": "obs",
+              "id": "liverSize",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5153AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Failure to respond",
+              "type": "obs",
+              "id": "failureToRespond",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "881b4230-4787-4206-9d9c-99d3104438c4"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Routine Medicine",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date3",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Malaria Treatment",
+              "type": "obs",
+              "id": "malariaTreatment",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "900112ab-3445-4234-9abc-345678901256",
+                "answers": [
+                  {
+                    "label": "ARTEMETHER-LUMEFANTRINE",
+                    "concept": "1447AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Artemether-lumefantrine with single low-dose primaquine",
+                    "concept": "012345cd-5667-4456-abcd-567890123478"
+                  },
+                  {
+                    "label": "Chloroquine",
+                    "concept": "73300AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Chloroquine with radical cure primaquine",
+                    "concept": "12345def-6778-4567-bcde-678901234589"
+                  },
+                  {
+                    "label": "ARTESUNATE",
+                    "concept": "71561AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Referred for treatment",
+                    "concept": "def01234-8990-4789-789a-890123456701"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Worm treatment in phase 2",
+              "type": "obs",
+              "id": "wormTreatmentInPhase2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "edc4e4f1-25e3-4ec9-9a49-5c9d9336f6b4"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Antibiotics 1",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Drug Name",
+              "type": "obs",
+              "id": "drugName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c3082af8-f935-40c5-aa5b-74c684e81aea"
+              }
+            },
+            {
+              "label": "Time 1",
+              "type": "obs",
+              "id": "time1",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
+              }
+            },
+            {
+              "label": "Time 1 Provider",
+              "type": "obs",
+              "id": "time1Provider",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "Time 2",
+              "type": "obs",
+              "id": "time2",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
+              }
+            },
+            {
+              "label": "Time 2 Provider",
+              "type": "obs",
+              "id": "time2Provider",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "Time 3",
+              "type": "obs",
+              "id": "time3",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
+              }
+            },
+            {
+              "label": "Time 3 Provider",
+              "type": "obs",
+              "id": "time3Provider",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "Time 4",
+              "type": "obs",
+              "id": "time4",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
+              }
+            },
+            {
+              "label": "Time 4 Provider",
+              "type": "obs",
+              "id": "time4Provider",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Test Results",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date4",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Hb/PCV",
+              "type": "obs",
+              "id": "hbPcv",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8cd54844-c0d7-4ff9-a62c-6d92fa0c5eba"
+              }
+            },
+            {
+              "label": "Glucose test",
+              "type": "obs",
+              "id": "glucoseTest",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "48bfcb86-aec3-483d-bee1-935506971557"
+              }
+            },
+            {
+              "label": "Malaria Test",
+              "type": "obs",
+              "id": "malariaTest",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "fbf4bb91-6557-45f5-9830-4b0dd6e2f0c3"
+              }
+            },
+            {
+              "label": "TB Test",
+              "type": "obs",
+              "id": "tbTest",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ff387337-616b-47da-8247-0a331aaea8bf"
+              }
+            },
+            {
+              "label": "HIV Test",
+              "type": "obs",
+              "id": "hivTest",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1356AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Reactive",
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Non-reactive",
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Inconclusive",
+                    "concept": "c69067da-51bf-429c-8f6a-c3c41202bdf5"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Special Medicine",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "ReSoMal",
+              "type": "obs",
+              "id": "resomal",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3ae06f5c-e48b-42d1-a1d5-e7bcf92bb07c",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "IV Fluids",
+              "type": "obs",
+              "id": "ivFluids",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6c3eaf06-bade-5ddc-ba99-a0276d3b7c33",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Blood",
+              "type": "obs",
+              "id": "blood",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4d2043ca-33ef-4d34-9508-dfb428bac6ed"
+              }
+            },
+            {
+              "label": "NG Tube",
+              "type": "obs",
+              "id": "ngTube",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1766AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Antibiotics 2",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Drug Name",
+              "type": "obs",
+              "id": "drugName2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c3082af8-f935-40c5-aa5b-74c684e81aea"
+              }
+            },
+            {
+              "label": "Time 1",
+              "type": "obs",
+              "id": "time12",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
+              }
+            },
+            {
+              "label": "Time 1 Provider",
+              "type": "obs",
+              "id": "time1Provider2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "Time 2",
+              "type": "obs",
+              "id": "time22",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
+              }
+            },
+            {
+              "label": "Time 2 Provider",
+              "type": "obs",
+              "id": "time2Provider2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "Time 3",
+              "type": "obs",
+              "id": "time32",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
+              }
+            },
+            {
+              "label": "Time 3 Provider",
+              "type": "obs",
+              "id": "time3Provider2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "Time 4",
+              "type": "obs",
+              "id": "time42",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
+              }
+            },
+            {
+              "label": "Time 4 Provider",
+              "type": "obs",
+              "id": "time4Provider2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Antibiotics 3",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Drug Name",
+              "type": "obs",
+              "id": "name",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c3082af8-f935-40c5-aa5b-74c684e81aea"
+              }
+            },
+            {
+              "label": "Time 1",
+              "type": "obs",
+              "id": "time13",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
+              }
+            },
+            {
+              "label": "Time 1 Provider",
+              "type": "obs",
+              "id": "time1Provider3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "Time 2",
+              "type": "obs",
+              "id": "time23",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
+              }
+            },
+            {
+              "label": "Time 2 Provider",
+              "type": "obs",
+              "id": "time2Provider3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "Time 3",
+              "type": "obs",
+              "id": "time33",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
+              }
+            },
+            {
+              "label": "Time 3 Provider",
+              "type": "obs",
+              "id": "time3Provider3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "Time 4",
+              "type": "obs",
+              "id": "time43",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
+              }
+            },
+            {
+              "label": "Time 4 Provider",
+              "type": "obs",
+              "id": "time4Provider3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

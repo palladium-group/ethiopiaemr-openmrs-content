@@ -1,0 +1,194 @@
+{
+  "name": "4p's",
+  "description": "4p's - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "315c19be-89ca-5d22-b349-54114b7da584",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "4p's Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pain",
+              "type": "obs",
+              "id": "pain",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "45e4f3ee-af33-4723-bb45-5a28951300f0",
+                "answers": [
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild (1-3/10)"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate (4-6/10)"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe (7-10/10)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Potty",
+              "type": "obs",
+              "id": "potty",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f5d74183-bf30-4004-a3ad-886d2fc074f2",
+                "answers": [
+                  {
+                    "concept": "54e72b51-f6d8-4683-9d5b-3b14a0fb2475",
+                    "label": "Catheter in place"
+                  },
+                  {
+                    "concept": "f44d3601-9d9f-4ddd-996d-b548f6ca3be9",
+                    "label": "Bedpan/commode offered"
+                  },
+                  {
+                    "concept": "7a6cb04c-9253-49ef-bc55-28455b7bd319",
+                    "label": "Bowel movement positive"
+                  },
+                  {
+                    "concept": "e901bdd9-c45e-48c3-8f95-cd040d73d8fa",
+                    "label": "Incontinence care provided"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Position",
+              "type": "obs",
+              "id": "position",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6db955d4-1317-4751-bfac-a18c5648049c",
+                "answers": [
+                  {
+                    "concept": "92709344-75b1-4093-a1b8-6d0bd998df7e",
+                    "label": "Supine"
+                  },
+                  {
+                    "concept": "e61aa344-daf9-41bd-9924-d2ff00c45446",
+                    "label": "Left lateral"
+                  },
+                  {
+                    "concept": "fb8b15f3-3b3b-4849-891a-894cd010e2c8",
+                    "label": "Right lateral"
+                  },
+                  {
+                    "concept": "31f79dca-021e-49cd-9784-150497976e62",
+                    "label": "Prone"
+                  },
+                  {
+                    "concept": "0443d17a-be65-4c3b-83b2-a17f18f2c455",
+                    "label": "Fowler's (Low 15°-30°)"
+                  },
+                  {
+                    "concept": "27a4629c-668b-499d-9f30-db96f0ba67ea",
+                    "label": "Fowler's (Semi 30°-45°)"
+                  },
+                  {
+                    "concept": "94d9fe4d-4b3c-4a64-8ab2-26b816714892",
+                    "label": "Fowler's (full/standard 45°-60°)"
+                  },
+                  {
+                    "concept": "955abfab-508c-4239-b145-d740c2f81cc7",
+                    "label": "Fowler's (High 60°-90°)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Possession",
+              "type": "obs",
+              "id": "possession",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "074538a1-acad-4969-a0d7-3269179e5a28",
+                "answers": [
+                  {
+                    "concept": "e81117bb-b259-4959-892b-bc5af85f8588",
+                    "label": "Personal items within reach(phone, glass, water )"
+                  },
+                  {
+                    "concept": "e1cf4be1-bffa-449c-a2f0-c53d4565379c",
+                    "label": "Valuables secured"
+                  },
+                  {
+                    "concept": "9c3a8a90-fd50-4bc7-9f90-b5f76c5d5ce2",
+                    "label": "Bedside organized"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

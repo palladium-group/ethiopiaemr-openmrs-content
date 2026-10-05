@@ -1,0 +1,269 @@
+{
+  "name": "ORR Operation Register",
+  "description": "ORR Operation Register - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "146fc5fe-79b4-5439-9f74-4d99e27627e9",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "ORR Operation Register Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pre-Operative Diagnosis",
+              "type": "obs",
+              "id": "preOperativeDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "df4da67a-5cbb-5052-9cda-c3dc932ebe1a"
+              }
+            },
+            {
+              "label": "Type of Anesthesia",
+              "type": "obs",
+              "id": "typeOfAnasthesia",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "164254AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "2c83ca41-d323-40e6-833c-eda94b609ddc",
+                    "label": "General"
+                  },
+                  {
+                    "concept": "c76cd646-2bb8-4dc0-822f-f67773c433b2",
+                    "label": "Regional"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Operation Outcome",
+              "type": "obs",
+              "id": "operationOutcome",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8726d68b-541d-40a4-9f26-4d9c6af499b9",
+                "answers": [
+                  {
+                    "concept": "06398754-8865-4004-805e-926636d6d6c2",
+                    "label": "Stable"
+                  },
+                  {
+                    "concept": "8d956de6-e36f-468c-8485-50858340331c",
+                    "label": "Critical"
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Remark",
+              "type": "obs",
+              "id": "remark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+              }
+            }
+          ]
+        },
+        {
+          "label": "ORR Personal Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Ward",
+              "type": "obs",
+              "id": "ward",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ee7ce4a6-1bc2-401c-b2cd-6e51c5de3370"
+              }
+            }
+          ]
+        },
+        {
+          "label": "ORR Operation Procedure",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Operation Performed",
+              "type": "obs",
+              "id": "operationPerformed",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "58fac185-f4d4-4076-8b97-a8cd49738252"
+              }
+            },
+            {
+              "label": "OR Type",
+              "type": "obs",
+              "id": "orType",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ebc3d0b1-93ff-4ae4-841a-2c2640db70d2",
+                "answers": [
+                  {
+                    "concept": "4385832a-306b-4ede-a780-6892475b144a",
+                    "label": "Elective (L)"
+                  },
+                  {
+                    "concept": "037446f4-adfc-40b3-928c-a39a4826b1bf",
+                    "label": "Emergency (E)"
+                  },
+                  {
+                    "concept": "743188a1-229e-4749-a8f1-96055b60a21c",
+                    "label": "Procedure"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Post Operative Dx",
+              "type": "obs",
+              "id": "postOperativeDx",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3f9a0119-f572-4e7a-b2da-7a0675fb2cea"
+              }
+            }
+          ]
+        },
+        {
+          "label": "ORR Operation /Scrub Team",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name of Surgeon",
+              "type": "obs",
+              "id": "nameOfSurgeon",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166688AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Name of 1st Assistant",
+              "type": "obs",
+              "id": "nameOf1stAssistant",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "dd4c669d-0dc9-415f-8a11-a4b9c5c51b83"
+              }
+            },
+            {
+              "label": "Name of 2nd Assistant",
+              "type": "obs",
+              "id": "nameOf2ndAssistant",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "564a32ed-0435-4b84-b32b-0a885541b9fa"
+              }
+            },
+            {
+              "label": "Name of Anesthetist",
+              "type": "obs",
+              "id": "nameOfAnesthetist",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b6bac0fe-f3f8-47df-b1e2-a10c3c2f4749"
+              }
+            },
+            {
+              "label": "Name of Scrub Nurse",
+              "type": "obs",
+              "id": "nameOfScrubNurse",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166690AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Name of Runner",
+              "type": "obs",
+              "id": "nameOfRunner",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "612dd70e-6220-43c0-9274-5aca5ee2020a"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

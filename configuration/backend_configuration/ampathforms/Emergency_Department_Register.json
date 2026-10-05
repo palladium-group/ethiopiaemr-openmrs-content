@@ -1,0 +1,514 @@
+{
+  "name": "Emergency Department Register",
+  "description": "Emergency Department Register - built from physician Word-doc spec (Phase 1, batch-three).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "ee7769f8-5544-5780-b4aa-04895fefb1c8",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Emergency Department Register Assessment",
+      "sections": [
+        {
+          "label": "Arrival",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Date and Time of Arrival",
+              "type": "obs",
+              "id": "dateAndTimeOfArrival",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "5ee5013c-d755-5832-ba0b-a709fd8d1b51"
+              }
+            },
+            {
+              "label": "Date and Time seen by triage",
+              "type": "obs",
+              "id": "dateAndTimeSeenByTriage",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "a0ad9449-51ae-4b09-9868-c8b9544c4b93"
+              }
+            },
+            {
+              "label": "Arrival Status",
+              "type": "obs",
+              "id": "arrivalStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f5cabd19-9f7c-42a3-bb0e-ac160a5937ab",
+                "answers": [
+                  {
+                    "concept": "160429AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Alive"
+                  },
+                  {
+                    "concept": "160432AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Dead"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Mode of Arrival",
+              "type": "obs",
+              "id": "modeOfArrival",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "529a4b5c-6d7e-4567-890b-cdef01234567",
+                "answers": [
+                  {
+                    "label": "Ambulance",
+                    "concept": "1377AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Triage Arrived walking",
+                    "concept": "4f694879-6290-411b-8140-b6562715854e"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Carried",
+                    "concept": "6745ba51-c881-403c-a294-a6fa014f3a8a"
+                  },
+                  {
+                    "label": "Triage Ambulance arrival",
+                    "concept": "6e74d8e2-dd0e-4747-a973-ae0dd2e820ca"
+                  },
+                  {
+                    "label": "Taxi",
+                    "concept": "74bc6d7e-8f90-6789-012d-ef0123456789"
+                  },
+                  {
+                    "label": "Private Car",
+                    "concept": "85cd7e8f-9001-789a-123e-f01234567890"
+                  },
+                  {
+                    "label": "Public Car",
+                    "concept": "96de8f90-0112-890b-234f-012345678901"
+                  },
+                  {
+                    "label": "Public Taxi",
+                    "concept": "b8f00112-2334-012d-4560-234567890123"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Referral Source",
+              "type": "obs",
+              "id": "referralSource",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "69011223-3445-1237-5671-345f01234567",
+                "answers": [
+                  {
+                    "concept": "978AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Self"
+                  },
+                  {
+                    "concept": "ad455667-7889-5671-9015-012345678a01",
+                    "label": "HC"
+                  },
+                  {
+                    "concept": "1589AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hospital"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Triage Category",
+              "type": "obs",
+              "id": "triageCategory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e008b256-e68e-579c-b453-462dfff14694",
+                "answers": [
+                  {
+                    "concept": "65a8c74c-544d-4517-8dc9-485efd819ff6",
+                    "label": "Red"
+                  },
+                  {
+                    "concept": "6a8fb2cd-79ff-4679-9327-15444b0a4c17",
+                    "label": "Orange"
+                  },
+                  {
+                    "concept": "054d01ec-5fd2-407d-8e09-934d4c442b43",
+                    "label": "Yellow"
+                  },
+                  {
+                    "concept": "c7f3a22d-84a2-4858-87f9-4edf687e4e0d",
+                    "label": "Green"
+                  },
+                  {
+                    "concept": "4d081c9c-0935-4f13-9fa8-265b5dba06cb",
+                    "label": "Blue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Clinical",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              },
+              "required": "true"
+            },
+            {
+              "label": "Diagnosis notes",
+              "type": "obs",
+              "id": "diagnosisNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "159395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Visit",
+              "type": "obs",
+              "id": "visit",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "998396fa-6a7b-4645-a4a4-d734056a99f4",
+                "answers": [
+                  {
+                    "concept": "e3ee2c42-0876-4e38-a2ce-e4bc8ed77057",
+                    "label": "New"
+                  },
+                  {
+                    "concept": "162081AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Repeat"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Road Traffic Accident",
+              "type": "obs",
+              "id": "roadTrafficAccident",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "01f8de41-399a-539f-b2e6-613c28dbc5eb",
+                "answers": [
+                  {
+                    "concept": "06c3410f-7f60-4ee4-abfe-1d4fb5506882",
+                    "label": "Pedestrian"
+                  },
+                  {
+                    "concept": "e9021922-1e21-4dd9-9adb-f691db50f9cf",
+                    "label": "Motorcyclist"
+                  },
+                  {
+                    "concept": "b0085783-8322-4bb6-a00e-336881fc4374",
+                    "label": "Vehicle Occupant"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Disposition after triage",
+              "type": "obs",
+              "id": "dispositionAfterTriage",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "82553c4e-fbc4-4415-a31a-2f2e6e1c1272",
+                "answers": [
+                  {
+                    "concept": "cf2e9d04-709d-49d1-a04f-6787326dbe95",
+                    "label": "Resuscitation"
+                  },
+                  {
+                    "concept": "40bc5d0f-04d4-4e6b-a860-fcf9a27e25f6",
+                    "label": "Procedure / OR"
+                  },
+                  {
+                    "concept": "48e4e4df-6869-4754-938a-00c2c4b9eab0",
+                    "label": "Examination Room"
+                  },
+                  {
+                    "concept": "490d5e30-b378-4fdc-bb69-a54afc9dc242",
+                    "label": "Waiting area"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "HIV Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HIV Test",
+              "type": "obs",
+              "id": "hivTest",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1356AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "fdd6fb9e-a2a0-48ac-a9b7-e9272fcd3fad",
+                    "label": "Offered"
+                  },
+                  {
+                    "concept": "3ff577c5-8bdc-432a-9779-fe4fd16d2898",
+                    "label": "Performed"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Targeted Population Category",
+              "type": "obs",
+              "id": "targetedPopulationCategory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4f8a2b1c-3d5e-4567-8901-234567890abc",
+                "answers": [
+                  {
+                    "concept": "89828287-b96f-449c-b3ae-d518d55703e1",
+                    "label": "FSW"
+                  },
+                  {
+                    "concept": "162198AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Long Distance Drivers"
+                  },
+                  {
+                    "concept": "7e9f1a2b-4c6d-5678-9012-345678901de0",
+                    "label": "Mobile Workers"
+                  },
+                  {
+                    "concept": "bba607ad-f6cb-49f5-91af-2e310f182090",
+                    "label": "Pregnant Mothers"
+                  },
+                  {
+                    "concept": "164100AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Refugee"
+                  },
+                  {
+                    "concept": "83d41e79-e09f-4785-9905-545b6fd7ebe6",
+                    "label": "Prisoner"
+                  },
+                  {
+                    "concept": "e373fdee-df05-4195-834b-6a3cd5c06dde",
+                    "label": "Military"
+                  },
+                  {
+                    "concept": "c6b8c785-8533-4bf6-8bad-b4e2bc44a891",
+                    "label": "Vulnerable Adolescents"
+                  },
+                  {
+                    "concept": "e1526374-5869-7890-1234-567890456789",
+                    "label": "Others (Specify)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HIV test result",
+              "type": "obs",
+              "id": "hivTestResult",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a90ebc9e-53b4-4a31-bf19-c5e474efe62d",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Discharge",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diagnosis at Discharge",
+              "type": "obs",
+              "id": "diagnosisAtDischarge",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              },
+              "required": "true"
+            },
+            {
+              "label": "Diagnosis at Discharge notes",
+              "type": "obs",
+              "id": "diagnosisatdischargeNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "159395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Date and Time of Discharge",
+              "type": "obs",
+              "id": "dateAndTimeOfDischarge",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "aa9533b7-8ab5-4f96-bb85-356aa364554b"
+              }
+            },
+            {
+              "label": "Length of stay in hours",
+              "type": "obs",
+              "id": "lengthOfStayInHours",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f6115464-77b5-4c47-8fd6-fbaf398b942b",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Patient Outcome",
+              "type": "obs",
+              "id": "patientOutcome",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ce479e41-d163-43e8-8dea-e8b834ee8419",
+                "answers": [
+                  {
+                    "concept": "fa19d295-73cc-4aa5-beb7-f317aa08ce2b",
+                    "label": "Referred"
+                  },
+                  {
+                    "concept": "b9220388-bed0-4641-8f5f-7e30e4c6736a",
+                    "label": "Stabilized and Discharged"
+                  },
+                  {
+                    "concept": "9c8af357-f541-46c5-b9eb-074cd7ad462e",
+                    "label": "Admitted"
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Remark",
+              "type": "obs",
+              "id": "remark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

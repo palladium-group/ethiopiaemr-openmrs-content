@@ -1,0 +1,240 @@
+{
+  "name": "Discharge Planning Form",
+  "description": "Discharge Planning Form - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "4a204f61-6b53-57d7-baee-4c1ec4e8b216",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Discharge Planning Form Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Admission date",
+              "type": "obs",
+              "id": "admissionDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "421719a0-eef5-4181-b55d-fff16d845314"
+              }
+            },
+            {
+              "label": "Name of discharge planner",
+              "type": "obs",
+              "id": "nameOfDischargePlanner",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Estimated Date of Discharge.",
+              "type": "obs",
+              "id": "estimatedDateOfDischarge",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "179523e2-af73-5467-9603-46cd69392677"
+              }
+            },
+            {
+              "label": "Stairs required for entry?",
+              "type": "obs",
+              "id": "stairsRequiredForEntry",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "17723774-f793-418d-b2ff-1e9b561d23b7",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes , How many stairs?",
+              "type": "obs",
+              "id": "ifYesHowManyStairs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7e2da70a-3344-4157-b23c-4fba24ed1d41"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(stairsRequiredForEntry) || stairsRequiredForEntry !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Discharge Destination",
+              "type": "obs",
+              "id": "dischargeDestination",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "14e0631a-f99c-4dc5-8ab0-e94243604251",
+                "answers": [
+                  {
+                    "concept": "ca9fc693-9788-41d7-9dee-ca1a549155f1",
+                    "label": "Home alone"
+                  },
+                  {
+                    "concept": "8e09a436-1595-4b1e-99c7-62ec4e0562f2",
+                    "label": "Home with Family/Friends"
+                  },
+                  {
+                    "concept": "684c2f2e-6f0c-4717-85cc-ba6f3747734c",
+                    "label": "Assisted living facility"
+                  },
+                  {
+                    "concept": "0e84cc93-c9f6-4e8b-8f86-89d819e0739f",
+                    "label": "Custodial nursing home"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If other specify",
+              "type": "obs",
+              "id": "ifOtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              }
+            },
+            {
+              "label": "Comments",
+              "type": "obs",
+              "id": "comments",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9143ad25-4416-40c2-a13f-22c79013c28e"
+              }
+            },
+            {
+              "label": "Skilled needs upon discharge",
+              "type": "obs",
+              "id": "skilledNeedsUponDischarge",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "625c53f7-7dfc-4a65-9adb-724adf7d4c7c",
+                "answers": [
+                  {
+                    "concept": "408729d2-5863-5e20-b0f5-f57da0b0a025",
+                    "label": "Skilled Nurse"
+                  },
+                  {
+                    "concept": "2a030791-14b4-4996-95ad-39c54b25f2b6",
+                    "label": "Physical therapy"
+                  },
+                  {
+                    "concept": "442f2fb0-4b64-419c-8ea8-712a21f66d87",
+                    "label": "Speech therapy"
+                  },
+                  {
+                    "concept": "167062AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Social Worker"
+                  },
+                  {
+                    "concept": "a1602508-5449-4777-9470-ff555f20221c",
+                    "label": "Home Health aid"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Medication review and reconciliation completed?",
+              "type": "obs",
+              "id": "medicationReviewAndReconcilationComplete",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9e17d667-44d0-44aa-9305-e9a2751e24b0",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Actual Date of Discharge",
+              "type": "obs",
+              "id": "actualDateOfDischarge",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "1641AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

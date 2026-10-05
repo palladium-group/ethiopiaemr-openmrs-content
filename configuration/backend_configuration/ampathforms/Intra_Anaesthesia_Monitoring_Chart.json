@@ -1,0 +1,591 @@
+{
+  "name": "Intra Anaesthesia Monitoring Chart",
+  "description": "Intra Anaesthesia Monitoring Chart - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "b7fd71e3-a490-5289-9cb8-593f054ceddd",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Intra Anaesthesia Monitoring Chart Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weight (Kg)",
+              "type": "obs",
+              "id": "weightKg",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Temp (°C)",
+              "type": "obs",
+              "id": "temp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse (beats/min)",
+              "type": "obs",
+              "id": "pulse",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "HCT (%)",
+              "type": "obs",
+              "id": "hct",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1015AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Hgb (mg/dl)",
+              "type": "obs",
+              "id": "hgbMgDl",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "21AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Platelet",
+              "type": "obs",
+              "id": "platelet",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Special",
+              "type": "obs",
+              "id": "special",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7b700e8e-b19e-4154-b3a7-09631a704931"
+              }
+            },
+            {
+              "label": "Allergy",
+              "type": "obs",
+              "id": "allergy",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "aeeeaa2c-f243-42be-bd6f-ba01be6b4216"
+              }
+            },
+            {
+              "label": "Type of surgery",
+              "type": "obs",
+              "id": "typeOfSurgery",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "66750d5f-3903-49d5-ad82-914c8c150f99",
+                "answers": [
+                  {
+                    "concept": "163294AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Elective"
+                  },
+                  {
+                    "concept": "037446f4-adfc-40b3-928c-a39a4826b1bf",
+                    "label": "Emergency"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Physical status (ASA)",
+              "type": "obs",
+              "id": "physicalStatusAsa",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d31f31ea-34f5-40e1-94ca-d364fbb8e90d",
+                "answers": [
+                  {
+                    "concept": "3495231e-abc6-4750-8218-6f7f8541b176",
+                    "label": "Asa I"
+                  },
+                  {
+                    "concept": "a640fafc-5724-453e-9092-449325e2e570",
+                    "label": "Asa Ii"
+                  },
+                  {
+                    "concept": "4e9af104-8319-4063-be1c-4aeec5cbfb34",
+                    "label": "Asa Iii"
+                  },
+                  {
+                    "concept": "0c5a8eb6-2f8d-444f-a6fc-c497fbabd6d3",
+                    "label": "Asa Iv"
+                  },
+                  {
+                    "concept": "1d005485-b22d-44fc-8bad-f29a47a14fe5",
+                    "label": "Asa V"
+                  },
+                  {
+                    "concept": "d19f6182-3d41-4227-9fe7-9382962c0474",
+                    "label": "Asa Vi"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Risk of aspiration",
+              "type": "obs",
+              "id": "riskOfAspiration",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c5cdf022-b62b-498a-ba1b-874918e54488",
+                "answers": [
+                  {
+                    "concept": "166674AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "High Risk"
+                  },
+                  {
+                    "concept": "166675AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Low Risk"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Type of Anaesthesia",
+              "type": "obs",
+              "id": "typeOfAnaesthesia",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "164254AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "2c83ca41-d323-40e6-833c-eda94b609ddc",
+                    "label": "General"
+                  },
+                  {
+                    "concept": "e6c407d7-faff-41f7-9c1e-7e4ec0c62504",
+                    "label": "Spinal"
+                  },
+                  {
+                    "concept": "161912AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Epidural"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Breathing System",
+              "type": "obs",
+              "id": "breathingSystem",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "eb149861-59b3-4438-bff2-45e671da298d",
+                "answers": [
+                  {
+                    "concept": "0bfb4bf0-db8c-41f7-add4-1b840113e22d",
+                    "label": "Spontaneous Breathing"
+                  },
+                  {
+                    "concept": "166425AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Assisted"
+                  },
+                  {
+                    "concept": "b96405d6-6b0d-4bf3-83e2-3c36aa8542d3",
+                    "label": "Controlled Event"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Delivered Gas",
+              "type": "obs",
+              "id": "deliveredGas",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "def8dd1a-9431-4ae1-9c5a-9beeab5bf293",
+                "answers": [
+                  {
+                    "concept": "70373AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Air"
+                  },
+                  {
+                    "concept": "81341AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "O2"
+                  },
+                  {
+                    "concept": "80719AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "N2O"
+                  },
+                  {
+                    "concept": "975a41c1-caf5-4204-a3fd-c32df35b5f69",
+                    "label": "Ether"
+                  },
+                  {
+                    "concept": "ff64cfac-735b-4411-ac0a-b922a5390086",
+                    "label": "Halothane"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Induction method",
+              "type": "obs",
+              "id": "inductionMethod",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "627cd310-4440-4200-bb58-7934ce622b41",
+                "answers": [
+                  {
+                    "concept": "2052f1c6-9ee9-4b18-857f-5cdce1879b70",
+                    "label": "IM"
+                  },
+                  {
+                    "concept": "0041f9d1-20e5-43f8-a9ee-43a0aa297d5c",
+                    "label": "IV"
+                  },
+                  {
+                    "concept": "f0d500b9-cf24-4728-b688-373a6297b09a",
+                    "label": "Inhalation Induction"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Induction time",
+              "type": "obs",
+              "id": "inductionTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "b8468f6c-1fe4-4757-ace5-70d09f1b489d"
+              }
+            },
+            {
+              "label": "Incision time",
+              "type": "obs",
+              "id": "incisionTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "f2fc1b9f-3b67-433b-be87-16fe8f4cf320"
+              }
+            },
+            {
+              "label": "Pre medication",
+              "type": "obs",
+              "id": "preMedication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f86b58ad-4f77-40ce-837c-a4ce60a53ef5"
+              }
+            },
+            {
+              "label": "Ordered By",
+              "type": "obs",
+              "id": "orderedBy",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "17ed1619-739d-4e25-b8b0-6d87bd66141e"
+              }
+            },
+            {
+              "label": "OR Additional medications",
+              "type": "obs",
+              "id": "orAdditionalMedications",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "979c88af-1c68-41d3-bdc8-2c3503721caf"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Blood Pressure new",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic (mmHg)",
+              "type": "obs",
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic (mmHg)",
+              "type": "obs",
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Blood group and RH",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Blood Type",
+              "type": "obs",
+              "id": "bloodType",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1429aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "answers": [
+                  {
+                    "concept": "83748596-7081-9012-3456-789012678901",
+                    "label": "A"
+                  },
+                  {
+                    "concept": "94859607-8192-0123-4567-890123789012",
+                    "label": "B"
+                  },
+                  {
+                    "concept": "62d85dd0-f9ce-47d5-8a6f-4f1ba99543d9",
+                    "label": "AB"
+                  },
+                  {
+                    "concept": "702AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "O"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "New, RH",
+              "type": "obs",
+              "id": "newRh",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1429aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "answers": [
+                  {
+                    "concept": "adcca038-ad62-5c9f-b5a1-fd325d9dfe0f",
+                    "label": "Rh+"
+                  },
+                  {
+                    "concept": "2c58f9ec-cdf2-4b90-9bf3-5e8340d811d1",
+                    "label": "Rh"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Intubation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Intubation Type",
+              "type": "obs",
+              "id": "intubationType",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "20b6d454-b309-4e6b-bd69-98684b5d9b29",
+                "answers": [
+                  {
+                    "concept": "a72ef221-cd84-4dfd-9c62-d71f9ecbcf0b",
+                    "label": "Mask"
+                  },
+                  {
+                    "concept": "e8bf0e40-3f47-4e28-a947-7784abd286a5",
+                    "label": "Oral"
+                  },
+                  {
+                    "concept": "c4ee92c2-dfc7-4118-8f9a-b454b8b8f29e",
+                    "label": "Nasal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Tube",
+              "type": "obs",
+              "id": "tube",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f86e7aca-c8d4-46ac-bfbc-89711cc4b01c"
+              }
+            },
+            {
+              "label": "Number",
+              "type": "obs",
+              "id": "number",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "191e281b-ebff-48d0-b209-7ed7cce0c71c",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Anaesthesia Chart",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Graph",
+              "type": "obs",
+              "id": "graph",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "023b9a7e-cca7-403d-bc4c-2e9fc63d068c"
+              }
+            },
+            {
+              "label": "O2 (L/min)",
+              "type": "obs",
+              "id": "o2LMin",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "165986AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

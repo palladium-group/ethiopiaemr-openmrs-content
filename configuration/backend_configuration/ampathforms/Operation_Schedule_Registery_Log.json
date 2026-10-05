@@ -1,0 +1,163 @@
+{
+  "name": "Operation Schedule Registry Log",
+  "description": "Operation Schedule Registry Log - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "ff7bad08-a834-5d8d-90bc-3f01a32d85fc",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Operation Schedule Registry Log Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name of Patient",
+              "type": "obs",
+              "id": "nameOfPatient",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b2c3d4e5-f601-4890-bcde-f01234567812"
+              }
+            },
+            {
+              "label": "Age",
+              "type": "obs",
+              "id": "age",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "15d60d87-49e3-4f9f-8474-801250d83b3b",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Sex",
+              "type": "obs",
+              "id": "sex",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3071a2b3-0415-2345-6789-012345abcd07",
+                "answers": [
+                  {
+                    "concept": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Male"
+                  },
+                  {
+                    "concept": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Operation planned",
+              "type": "obs",
+              "id": "operationPlanned",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d43ac6f4-356f-4559-a41b-82546735b4ff"
+              }
+            },
+            {
+              "label": "Surgeon",
+              "type": "obs",
+              "id": "surgeon",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166688AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Date & Time",
+              "type": "obs",
+              "id": "dateTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Reason for cancellation",
+              "type": "obs",
+              "id": "reasonForCancellation",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0219fbb5-8d5b-56ed-a340-987ff0b0b28f"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

@@ -1,0 +1,1022 @@
+{
+  "name": "Neonatal Admission and PE",
+  "description": "Neonatal Admission and PE - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "649111ba-cad2-5ef0-b560-0aad0581b915",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Neonatal Admission and PE Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Birth weight in gram",
+              "type": "obs",
+              "id": "birthWeightInGram",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "30415263-4758-6789-0123-456789345678",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Gestational Age",
+              "type": "obs",
+              "id": "gestationalAge",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8526f708-5960-7890-1234-567890abcd0b",
+                "answers": [
+                  {
+                    "concept": "8536475f-6970-8901-5678-234567890123",
+                    "label": "Extremely Preterm GA < 28 wks"
+                  },
+                  {
+                    "concept": "bd150567-807b-5a12-a054-df46394e1d31",
+                    "label": "Very Preterm GA <32 weeks"
+                  },
+                  {
+                    "concept": "0758697b-8192-0123-7890-456789012345",
+                    "label": "Early Preterm GA 32 - 34 weeks"
+                  },
+                  {
+                    "concept": "1869708c-9203-1234-8901-567890123456",
+                    "label": "Late Preterm GA 34 -36 wk"
+                  },
+                  {
+                    "concept": "48fe3fc7-fcd1-400f-93e0-a82926e8b52e",
+                    "label": "Term GA = 37 weeks"
+                  },
+                  {
+                    "concept": "441b88ad-1d3b-4c63-b1ca-331eaa1a4146",
+                    "label": "Post Term GA >41+7 wk"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Infant born on",
+              "type": "obs",
+              "id": "infantBornOn",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "1a9d86aa-ebbe-4352-bd42-873673f8dc5e"
+              }
+            },
+            {
+              "label": "Place of Delivery",
+              "type": "obs",
+              "id": "placeOfDelivery",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "95c1a421-bf82-5ecf-89cb-9b1bd9f46fa0",
+                "answers": [
+                  {
+                    "concept": "1589AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hospital"
+                  },
+                  {
+                    "concept": "ad455667-7889-5671-9015-012345678a01",
+                    "label": "Health Center"
+                  },
+                  {
+                    "concept": "1588AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Health Post"
+                  },
+                  {
+                    "concept": "5063AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Clinic"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Hospital name",
+              "type": "obs",
+              "id": "hospitalName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161550AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Health Center Name",
+              "type": "obs",
+              "id": "healthCenterName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161550AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Admission date",
+              "type": "obs",
+              "id": "admissionDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "421719a0-eef5-4181-b55d-fff16d845314"
+              }
+            },
+            {
+              "label": "Reason for admission",
+              "type": "obs",
+              "id": "reasonForAdmission",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1655AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Admitted for procedure",
+                    "concept": "1654AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Admitted for delivery",
+                    "concept": "1653AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Maternal History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Mother age",
+              "type": "obs",
+              "id": "motherAge",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "164168AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Gravida",
+              "type": "obs",
+              "id": "gravida",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5624AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Para",
+              "type": "obs",
+              "id": "para",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ce38ecf3-10ca-4227-bb48-5db53e9588cd",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Blood Group",
+              "type": "obs",
+              "id": "bloodGroup",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "163126AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Blood group AB",
+                    "concept": "163117AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Blood group O",
+                    "concept": "163118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Blood group B",
+                    "concept": "163116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Blood group A",
+                    "concept": "163115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "NICU Admission Tests",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "RPR/VDRL result",
+              "type": "obs",
+              "id": "rprVdrlResult",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "4c1c938f-c7f3-52e8-b5f6-b0b5e85b07d8",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. Negative"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If positive medication",
+              "type": "obs",
+              "id": "ifPositiveMedication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2c3305c4-19ea-4c97-a0fc-47cb635dabe9"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(rprVdrlResult) || rprVdrlResult !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "HIV test Result",
+              "type": "obs",
+              "id": "hivTestResult",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a90ebc9e-53b4-4a31-bf19-c5e474efe62d",
+                "answers": [
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NR"
+                  },
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "R"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If positive medication",
+              "type": "obs",
+              "id": "ifPositiveMedication2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2c3305c4-19ea-4c97-a0fc-47cb635dabe9"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(rprVdrlResult) || rprVdrlResult !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "HBsAg",
+              "type": "obs",
+              "id": "hbsag",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2273174b-6081-7902-2456-789123abcd32",
+                "answers": [
+                  {
+                    "label": "Positive",
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Negative",
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If positive medication",
+              "type": "obs",
+              "id": "ifPositiveMedication3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2c3305c4-19ea-4c97-a0fc-47cb635dabe9"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(hbsag) || hbsag !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Antenatal Care",
+              "type": "obs",
+              "id": "antenatalCare",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "72b87a3f-eac8-5b91-ac97-f2df883b50a6",
+                "answers": [
+                  {
+                    "concept": "22e3978c-aace-418f-aa8d-5aa9c2cf0f24",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "163339AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Incomplete"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Significant events during this pregnancy",
+              "type": "obs",
+              "id": "significantEventsDuringThisPregnancy",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "090065fd-426a-4615-980c-9182414fccb4"
+              }
+            },
+            {
+              "label": "Significant events during previous pregnancy",
+              "type": "obs",
+              "id": "significantEventsDuringPreviousPregnancy",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f0afab49-0b2d-4647-83e5-a05ae8482020"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Neonatal admission, Labor History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Labor",
+              "type": "obs",
+              "id": "labor",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5146a24c-1c41-4607-a0dd-48fbd6d60a2d",
+                "answers": [
+                  {
+                    "concept": "69fe57fe-126d-4bb5-8876-981958efddc2",
+                    "label": "Spontaneous"
+                  },
+                  {
+                    "concept": "8839730b-2647-3568-8012-345789abcd38",
+                    "label": "Induced"
+                  },
+                  {
+                    "concept": "974808b2-7182-9012-3456-789012abcd23",
+                    "label": "Augmented"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Duration",
+              "type": "obs",
+              "id": "duration",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "efa82d2d-c82b-464c-b8d4-00e1a17a92ca",
+                "answers": [
+                  {
+                    "label": "6-24 hrs stay",
+                    "concept": "3042b395-0a73-4416-8a1f-89eab4792a18"
+                  },
+                  {
+                    "label": "48-72 Hrs",
+                    "concept": "7861bdbc-419c-4c5c-805f-90978d5dc83a"
+                  },
+                  {
+                    "label": "42days",
+                    "concept": "d7bc6662-f095-4e5b-991b-48ef9aeda92d"
+                  },
+                  {
+                    "label": "7-14 days",
+                    "concept": "da3ded3e-b0ad-43da-9fa6-ae0553bff0ae"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Membrane rupture",
+              "type": "obs",
+              "id": "membraneRupture",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7d5b0018-9be7-4a59-8254-9714361537bb",
+                "answers": [
+                  {
+                    "concept": "69fe57fe-126d-4bb5-8876-981958efddc2",
+                    "label": "Spontaneous"
+                  },
+                  {
+                    "concept": "a35e535f-4b07-48bb-b88d-95bf6712b4b9",
+                    "label": "Artificially"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Hours prior to delivery",
+              "type": "obs",
+              "id": "hoursPriorToDelivery",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a85909c3-8293-0123-4567-890123abcd24",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Amniotic fluid",
+              "type": "obs",
+              "id": "amnioticFluid",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "76059a7b-cf2a-4b4c-847c-0f96648cba5a",
+                "answers": [
+                  {
+                    "concept": "159484AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Clear"
+                  },
+                  {
+                    "concept": "134488AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Meconium Stained"
+                  },
+                  {
+                    "concept": "12e04b11-7ace-4062-bc7a-d45ca188cf82",
+                    "label": "Foul smelling discharge"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Delivery History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Delivery Type",
+              "type": "obs",
+              "id": "deliveryType",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "b6071829-0314-2345-6789-012345901234",
+                "answers": [
+                  {
+                    "concept": "1170AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Spontaneous Vaginal Delivery"
+                  },
+                  {
+                    "concept": "f0415263-4758-6789-0123-456789345678",
+                    "label": "Cesarean Section Delivery"
+                  },
+                  {
+                    "concept": "5577AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Episiotomy"
+                  },
+                  {
+                    "concept": "159901AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Forceps Delivery"
+                  },
+                  {
+                    "concept": "d8293041-2536-4567-8901-234567123456",
+                    "label": "Vacuum Delivery"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If C/S indication",
+              "type": "obs",
+              "id": "ifCSIndication",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "60a0aa1a-b5df-4713-9d6a-8d001e493bea"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(deliveryType) || deliveryType !== 'f0415263-4758-6789-0123-456789345678'"
+              }
+            },
+            {
+              "label": "Presentation",
+              "type": "obs",
+              "id": "presentation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2960314b-9304-1234-5678-901234abcd19"
+              }
+            },
+            {
+              "label": "APGAR score at 1 minute",
+              "type": "obs",
+              "id": "apgarScoreAt1Minute",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "159603AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "APGAR score at 5 minutes",
+              "type": "obs",
+              "id": "apgarScoreAt5Minutes",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "159604AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "10 Min",
+              "type": "obs",
+              "id": "10Min",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1504AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Resuscitation",
+              "type": "obs",
+              "id": "resuscitation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d182c2f6-1526-3456-7890-123456abcd27"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Neonatal Physical Examination",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "General Appearance",
+              "type": "obs",
+              "id": "generalAppearance",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5f21ab79-6e09-486f-83a4-0034bce2233c",
+                "answers": [
+                  {
+                    "label": "Chronically Sick Looking",
+                    "concept": "29ac819a-da31-4b6a-bb7c-d8b06be52911"
+                  },
+                  {
+                    "label": "Acutely Sick Looking",
+                    "concept": "5994a840-8ab2-4460-9cdd-b1f5c515b0fd"
+                  },
+                  {
+                    "label": "Well looking",
+                    "concept": "159438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Sick looking",
+                    "concept": "8c3d994c-2117-43b3-b204-c1f2007d9403"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HEENT",
+              "type": "obs",
+              "id": "heent",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "54bd868a-a9a5-49ba-9aa7-830ecd46a00c",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Respiratory System (RS)",
+              "type": "obs",
+              "id": "respiratorySystemRs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "732be35c-8d82-4e8c-826b-f150729bb038"
+              }
+            },
+            {
+              "label": "Cardiovascular System (CVS)",
+              "type": "obs",
+              "id": "cardiovascularSystemCvs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "98283469-823b-439a-b553-6451edcd6186"
+              }
+            },
+            {
+              "label": "The Abdomen and Pelvis",
+              "type": "obs",
+              "id": "theAbdomenAndPelvis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b4c5d647-f869-789a-4123-567abcdef012"
+              }
+            },
+            {
+              "label": "Genitourinary System (GUS)",
+              "type": "obs",
+              "id": "genitourinarySystemGus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6f3542ac-9b52-43d9-9181-e44eb4d470fc",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Musculoskeletal System (MSS)",
+              "type": "obs",
+              "id": "musculoskeletalSystemMss",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f6b6c6d1-3320-498c-818f-b4a8c7005f94",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Integumentary System (IS)",
+              "type": "obs",
+              "id": "integumentarySystemIs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2f70147f-7961-4937-acab-204676444dff"
+              }
+            },
+            {
+              "label": "Nervous System (NS)",
+              "type": "obs",
+              "id": "nervousSystemNs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "163109AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Vital Sign for Neonates",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulse Rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Beats per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Systolic (mmHg)",
+              "type": "obs",
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Millimetres of mercury.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic (mmHg)",
+              "type": "obs",
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Millimetres of mercury.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Degrees Celsius, one decimal place.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory Rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Breaths per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SPO2",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "min": "0",
+                "step": "0.01"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Length",
+              "type": "obs",
+              "id": "length",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "97d878cf-4807-480a-a236-8f8f416f7be1",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "MUAC",
+              "type": "obs",
+              "id": "muac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Newborn Reflexes",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Moro",
+              "type": "obs",
+              "id": "moro2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "35425667-7586-7893-0127-890123456789",
+                "answers": [
+                  {
+                    "concept": "36536778-8697-890a-1238-901234567890",
+                    "label": "Exaggerated"
+                  },
+                  {
+                    "concept": "12ba0ee0-23cd-4e79-baef-a10c8bc5ea69",
+                    "label": "Complete"
+                  },
+                  {
+                    "concept": "581415ca-92aa-4e61-a4db-7f31c49d5787",
+                    "label": "Partial complete"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Grasp",
+              "type": "obs",
+              "id": "grasp2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "40970112-2031-234e-5672-345678901234",
+                "answers": [
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  },
+                  {
+                    "concept": "750c7a46-03f0-4cba-aa58-f5dc0efca955",
+                    "label": "Weak"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Suckling",
+              "type": "obs",
+              "id": "suckling2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "44314556-6475-6782-9016-789012345678",
+                "answers": [
+                  {
+                    "concept": "c41b15a2-dc67-4a06-a536-1e9ddefce795",
+                    "label": "Sustained"
+                  },
+                  {
+                    "concept": "46536778-8697-890a-1238-901234567890",
+                    "label": "Unsustained"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

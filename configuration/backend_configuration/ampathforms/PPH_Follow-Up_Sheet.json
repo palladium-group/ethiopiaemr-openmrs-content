@@ -1,0 +1,300 @@
+{
+  "name": "PPH Follow-Up Sheet",
+  "description": "PPH Follow-Up Sheet - built from St-Petros (Bahmni) export. Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "936e6c53-7044-5043-a023-73475ad7004c",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "PPH Follow-Up",
+      "sections": [
+        {
+          "label": "Obstetric History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Gravida",
+              "type": "obs",
+              "id": "gravida",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5624AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Para",
+              "type": "obs",
+              "id": "para",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ce38ecf3-10ca-4227-bb48-5db53e9588cd"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Vital Signs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date and Time",
+              "type": "obs",
+              "id": "dateAndTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "BP",
+              "type": "obs",
+              "id": "bp",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "935e6ba6-c666-5296-8374-0360954d7834",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Respiratory rate (breaths/min)",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse rate (bpm)",
+              "type": "obs",
+              "id": "pr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 bpm",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Pulse rate is outside the normal range (60-100 beats/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "t",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
+                }
+              ],
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Uterine tone",
+              "type": "obs",
+              "id": "uxContraction",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7fa183b6-3484-4976-9af7-818f4d417c98",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Abdominal Tenderness",
+              "type": "obs",
+              "id": "abdominalTenderness",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a2b38c14-f8cd-41ad-be6e-3e506a1b7abf"
+              }
+            },
+            {
+              "label": "Vaginal Bleeding",
+              "type": "obs",
+              "id": "vaginalBleeding",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "147232AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Laboratory",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "CBC",
+              "type": "obs",
+              "id": "cbc",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2076676a-495e-5032-9c7c-169202075d23",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Bedside clotting test",
+              "type": "obs",
+              "id": "bedsideClotingTest",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "efd23d6f-312d-4299-ba02-bcf9c7820ca7"
+              }
+            },
+            {
+              "label": "Fibrinogen",
+              "type": "obs",
+              "id": "fibrinogen",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3d8bf222-80c0-488c-b042-bc17a821dd43"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Monitoring",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "UOP",
+              "type": "obs",
+              "id": "uop",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "91749be5-01f4-426e-b77a-09e6ccaac030"
+              }
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e838df31-7eff-4aa3-be0d-dd0f39fbbce4"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

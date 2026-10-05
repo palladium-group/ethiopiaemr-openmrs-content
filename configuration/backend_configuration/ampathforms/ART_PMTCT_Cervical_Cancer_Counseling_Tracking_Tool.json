@@ -1,0 +1,212 @@
+{
+  "name": "ART/PMTCT Cervical Cancer Counseling Tracking Tool",
+  "description": "ART/PMTCT Cervical Cancer Counseling Tracking Tool - built from St-Petros (Bahmni) export. Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "146be276-0d05-5c01-95aa-6b128de42214",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Counseling & Linkage",
+      "sections": [
+        {
+          "label": "Visit",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of visit",
+              "type": "obs",
+              "id": "dateOfVisit",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Counseling & Linkage",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "CxCa Counseling offered?",
+              "type": "obs",
+              "id": "cxcaCouncelingOffered",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a3cec9b3-e3f8-453e-9fe0-33ac30db1f64",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "CxCa Counseling accepted?",
+              "type": "obs",
+              "id": "cxcaCouncelingAccepted",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7309a626-c190-480b-96db-a7e9446740f7",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Eligibility for Screening on this visit",
+              "type": "obs",
+              "id": "elligibilityForScreeningOnThisVisit",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6b60ef13-4a47-42c8-9554-8615095ba04b",
+                "answers": [
+                  {
+                    "concept": "34bd7ab2-b613-4bc7-81c3-e72c5986a4e0",
+                    "label": "Never Screened"
+                  },
+                  {
+                    "concept": "eec4b3c9-577d-4ca3-9551-d96340f7d58b",
+                    "label": "Screened -ve before 2 yrs"
+                  },
+                  {
+                    "concept": "d93694d8-175e-4883-966a-4ab6e6b34d61",
+                    "label": "Screened +ve and treated with Cry/TA or LEEP before 1 year"
+                  },
+                  {
+                    "concept": "f722338f-0c42-45f1-afca-c605e794e01f",
+                    "label": "Other Reasons for Eligibility"
+                  },
+                  {
+                    "concept": "166518AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Eligible for Screening"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Eligible , Is CxCa Screening accepted",
+              "type": "obs",
+              "id": "ifEligibleIsCxcaScreeningAccepted",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "65b5db5a-1639-4131-ab68-2b43cf247733",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(elligibilityForScreeningOnThisVisit) || (elligibilityForScreeningOnThisVisit !== '34bd7ab2-b613-4bc7-81c3-e72c5986a4e0' && elligibilityForScreeningOnThisVisit !== 'eec4b3c9-577d-4ca3-9551-d96340f7d58b' && elligibilityForScreeningOnThisVisit !== 'd93694d8-175e-4883-966a-4ab6e6b34d61' && elligibilityForScreeningOnThisVisit !== 'f722338f-0c42-45f1-afca-c605e794e01f')"
+              }
+            },
+            {
+              "label": "Client Linked to CxCa Screening unit",
+              "type": "obs",
+              "id": "clientLinkedToCxcaSceeringUnit",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0284991b-9e9a-4317-a23d-67ded32a7d01",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Remark",
+              "type": "obs",
+              "id": "remark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

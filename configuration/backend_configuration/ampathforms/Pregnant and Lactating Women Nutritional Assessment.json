@@ -1,7 +1,7 @@
 {
   "name": "Pregnant and Lactating Women (PLW) Nutritional Assessment",
   "description": "Pregnant and Lactating Women (PLW) Nutritional Assessment migrated from Bahmni",
-  "version": "1.1",
+  "version": "2.0",
   "published": true,
   "uuid": "17370869-6294-4e4a-926f-a24beccb4829",
   "retired": false,
@@ -28,7 +28,7 @@
                   "allowFutureDates": "false"
                 }
               ],
-              "readonly": false
+              "readonly": true
             },
             {
               "label": "Provider:",
@@ -55,7 +55,7 @@
                   }
                 }
               },
-              "readonly": false
+              "readonly": true
             }
           ]
         }
@@ -101,7 +101,7 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "textarea",
-                "concept": "f6071829-0314-2345-6789-012345abcd16"
+                "concept": "42fa59ea-9457-4f04-a469-5cd49f59d98f"
               },
               "id": "bedNo"
             },
@@ -124,22 +124,26 @@
               "id": "anthropometricMeasurementGroup",
               "questions": [
                 {
-                  "label": "WEIGHT",
+                  "label": "WEIGHT (kg)",
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
                     "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
-                  "id": "weight"
+                  "id": "weight",
+                  "questionInfo": "Kilograms.",
+                  "hideSteppers": true
                 },
                 {
-                  "label": "HEIGHT",
+                  "label": "HEIGHT (cm)",
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "number",
                     "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
-                  "id": "height"
+                  "id": "height",
+                  "questionInfo": "Centimetres.",
+                  "hideSteppers": true
                 },
                 {
                   "label": "MUAC",
@@ -148,7 +152,8 @@
                     "rendering": "number",
                     "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0"
                   },
-                  "id": "muac"
+                  "id": "muac",
+                  "hideSteppers": true
                 },
                 {
                   "label": "Malnourished",
@@ -259,7 +264,10 @@
                 "rendering": "textarea",
                 "concept": "d91283a4-2536-47ef-1234-456789012348"
               },
-              "id": "ifOtherSpecify"
+              "id": "ifOtherSpecify",
+              "hide": {
+                "hideWhenExpression": "isEmpty(nutritionalAction) || !arrayContains(nutritionalAction, '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              }
             },
             {
               "label": "Follow up/M&E",
@@ -318,6 +326,102 @@
                   ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "label": "Anthropometric Measurement",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "MUAC",
+              "type": "obs",
+              "id": "muac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Malnourished",
+              "type": "obs",
+              "id": "malnourished",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a8f97095-1324-45cd-ef12-345678901236",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Nutritionist",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name",
+              "type": "obs",
+              "id": "name",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "bd40c021-7492-4fd9-a2f7-5a0f4c10334e"
+              }
+            },
+            {
+              "label": "Signature",
+              "type": "obs",
+              "id": "signature",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "dfcc86d8-50df-4415-abef-c0b559ee4453"
+              }
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5bbbe370-d3ff-4526-a63b-df5c579ca30c"
+              }
             }
           ]
         }

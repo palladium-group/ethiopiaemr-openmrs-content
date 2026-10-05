@@ -1,0 +1,298 @@
+{
+  "name": "Abortion care procedure note",
+  "description": "Abortion care procedure note - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "9902eb08-9748-553e-bc05-85b7385d09f0",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Abortion care procedure note Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Gravida",
+              "type": "obs",
+              "id": "gravida",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5624AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Para",
+              "type": "obs",
+              "id": "para",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ce38ecf3-10ca-4227-bb48-5db53e9588cd",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Gestational Age (Wks.)",
+              "type": "obs",
+              "id": "gestationalAgeWks",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "163166AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Type of Abortion",
+              "type": "obs",
+              "id": "typeOfAbortion",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "160850AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "69fe57fe-126d-4bb5-8876-981958efddc2",
+                    "label": "Spontaneous"
+                  },
+                  {
+                    "concept": "7d0c44ce-1f50-47c6-8c3a-5c827542c5aa",
+                    "label": "Inevitable"
+                  },
+                  {
+                    "concept": "a39473d2-6097-46d5-b305-5e0abbfb1f17",
+                    "label": "Unsafe"
+                  },
+                  {
+                    "concept": "163339AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Incomplete"
+                  },
+                  {
+                    "concept": "55146024-766d-42dd-bcc6-985a50faedd0",
+                    "label": "Safe Abortion"
+                  },
+                  {
+                    "concept": "12ba0ee0-23cd-4e79-baef-a10c8bc5ea69",
+                    "label": "Complete"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Analgesia",
+              "type": "obs",
+              "id": "analgesia",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "da8cdcf2-5a9e-4e2e-a6b6-a4257d206996",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Procedure performed",
+              "type": "obs",
+              "id": "procedurePerformed",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1651AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "159728AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "MVA"
+                  },
+                  {
+                    "concept": "45ec0150-7329-4fa8-be20-e6005cea0608",
+                    "label": "E&C"
+                  },
+                  {
+                    "concept": "e03a6b8d-c209-4570-a663-7398243fb646",
+                    "label": "Medical Abortion"
+                  },
+                  {
+                    "concept": "226d38ff-87ed-4284-857a-2b5cb6e9cdf8",
+                    "label": "D & C"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Place of procedure",
+              "type": "obs",
+              "id": "placeOfProcedure",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "79e2a076-baea-4f83-bf4c-1803a48bcea6"
+              }
+            },
+            {
+              "label": "Complication of abortion",
+              "type": "obs",
+              "id": "complicationOfAbortion",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a5e4c8d9-7034-4926-86a6-f3f06bc07f96",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes specify",
+              "type": "obs",
+              "id": "ifYesSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161011aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(complicationOfAbortion) || complicationOfAbortion !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Post abortion contraceptive counseling",
+              "type": "obs",
+              "id": "postAbortionContraceptiveCounseling",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7bc166a9-8806-4305-9e9b-e4c55f235d0d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Post abortion contraceptive given",
+              "type": "obs",
+              "id": "postAbortionContraceptiveGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e8d23117-cd63-4acc-a045-7af4f1461da3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Specify method provided",
+              "type": "obs",
+              "id": "specifyMethodProvided",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3c59ed2f-e55b-4e9c-bf84-de48e7922adb"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(postAbortionContraceptiveGiven) || postAbortionContraceptiveGiven !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

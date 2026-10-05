@@ -1,0 +1,462 @@
+{
+  "name": "Ward Round Sheet",
+  "description": "Ward Round Sheet - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "0793d413-39bf-5294-b91a-55916598b162",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Ward Round Sheet Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Classification of SSI",
+              "type": "obs",
+              "id": "classificationOfSsi",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "aed9b669-c88d-45b1-a11e-105404c6c329",
+                "answers": [
+                  {
+                    "concept": "292c3d97-cb8d-4b70-96f1-58d4eb149174",
+                    "label": "Superficial incisional SSI"
+                  },
+                  {
+                    "concept": "164219AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Deep incisional SSI"
+                  },
+                  {
+                    "concept": "d9b409c3-97cd-4b39-8ede-eb602c53b8a9",
+                    "label": "Organ/Space SSI"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Surgical ward Surgical Ward Progress: Signs and Symptoms of SSI and symptoms of SSI",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Purulent drainage (pus) from superficial incision, deep incision and sterile organ or space (from an inserted drain)",
+              "type": "obs",
+              "id": "purulentDrainagePusFromSuperficialIncisi",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "55ac934b-15ff-4d25-9ea6-8e2e13ecd1dd",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Organism identified (if culture done) from deliberately re-opened wound or Deep incision dehiscence or fluid/ tissue from organ/ space",
+              "type": "obs",
+              "id": "organismIdentifiedIfCultureDoneFromDelib",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e7d0cc82-e3b4-48b1-805f-a21900d520f3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Infection symptoms (pain or tenderness; localized swelling; erythema; heat or fever (>38 ºC)",
+              "type": "obs",
+              "id": "infectionSymptomsPainOrTendernessLocaliz",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7ad097f4-d5de-4290-a683-74ccaec54fd7",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Surgeon/ attending physician diagnosis",
+              "type": "obs",
+              "id": "surgeonAttendingPhysicianDiagnosis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c0329bf7-4c96-4bed-b3a8-fe4fa2885007",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Deep or Organ or space infection/abscess found on imaging/examination",
+              "type": "obs",
+              "id": "deepOrOrganOrSpaceInfectionAbscessFoundO",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "957018fe-0098-4917-a915-3125a5a1d52b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Ward Progress And Round Sheet",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "List of diagnosis",
+              "type": "obs",
+              "id": "listOfDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e96652c2-ad34-5fb3-832a-74c3595e941a"
+              }
+            },
+            {
+              "label": "Current medication",
+              "type": "obs",
+              "id": "currentMediction",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c92b24c6-bf40-4e74-bb38-16954b1fd676"
+              }
+            },
+            {
+              "label": "Subjective complaints (progress round sheet)",
+              "type": "obs",
+              "id": "subjectiveComplaintsProgressRoundSheet",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "682e8d3c-d952-5f67-866d-97ff6c599269"
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Round done by",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Senior",
+              "type": "obs",
+              "id": "senior",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "R4",
+              "type": "obs",
+              "id": "r4",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "R3",
+              "type": "obs",
+              "id": "r3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "R2",
+              "type": "obs",
+              "id": "r2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "R1",
+              "type": "obs",
+              "id": "r1",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "GP",
+              "type": "obs",
+              "id": "gp",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c0a8efd1-187c-4438-a04e-74ab0de43fcb"
+              }
+            },
+            {
+              "label": "Intern",
+              "type": "obs",
+              "id": "intern",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Clinical pharmacy",
+              "type": "obs",
+              "id": "clinicalPharmacy",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "51e5c2bb-efd5-5c34-9a08-2ab0dbeb9b29"
+              }
+            },
+            {
+              "label": "Nurse",
+              "type": "obs",
+              "id": "nurse",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a86d5c05-d443-4587-bd15-66d59b6430a7"
+              }
+            },
+            {
+              "label": "Nutritionist",
+              "type": "obs",
+              "id": "nutritionist",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "bd40c021-7492-4fd9-a2f7-5a0f4c10334e"
+              }
+            },
+            {
+              "label": "Lab",
+              "type": "obs",
+              "id": "lab",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1f7cb5a9-58ec-48eb-a65b-c8088b79cf5e"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Objective finding (progress round sheet)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "BP",
+              "type": "obs",
+              "id": "bp",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "935e6ba6-c666-5296-8374-0360954d7834",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "PR (beats/min)",
+              "type": "obs",
+              "id": "pr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Pulse rate is outside the normal range (60-100 beats/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "T (°C)",
+              "type": "obs",
+              "id": "t",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "RR (breaths/min)",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SPO2",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "min": "0",
+                "step": "0.01"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "If on O2, litter of oxygen",
+              "type": "obs",
+              "id": "ifOnO2LitterOfOxygen",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ac21a619-68c5-47e6-9b56-cc897dc964c1",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

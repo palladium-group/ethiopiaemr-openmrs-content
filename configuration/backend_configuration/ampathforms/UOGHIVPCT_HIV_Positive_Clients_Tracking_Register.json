@@ -1,0 +1,241 @@
+{
+  "name": "UOGHIVPCT HIV Positive Clients' Tracking Register",
+  "description": "UOGHIVPCT HIV Positive Clients' Tracking Register - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "5233f68d-f7a8-5902-ae4e-ec22b1110c8a",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "UOGHIVPCT HIV Positive Clients' Tracking Register Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date HIV tested (DD/MM/YY)",
+              "type": "obs",
+              "id": "dateHivTestedDdMmYy",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "1736ded7-aec6-4467-900f-e7142afdb30d"
+              }
+            },
+            {
+              "label": "Entry points (write code)",
+              "type": "obs",
+              "id": "entryPointsWriteCode",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b39041da-aad5-4aec-8b6e-58b67727e0d2"
+              }
+            },
+            {
+              "label": "Date Linked & treatment",
+              "type": "obs",
+              "id": "dateLinkedTreatment",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "6808652c-0e75-4653-8b61-07077d535187"
+              }
+            },
+            {
+              "label": "Date started ART",
+              "type": "obs",
+              "id": "dateStartedArt",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "If Not initiated ART same day, reasons (write code)",
+              "type": "obs",
+              "id": "ifNotInitiatedArtSameDayReasonsWriteCode",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "16d60ac5-4606-482c-9fcc-ed73ddaea752",
+                "answers": [
+                  {
+                    "concept": "0e7576f9-6ee3-4ceb-893e-2ba8bc03cef0",
+                    "label": "Referred TX Not Initiated"
+                  },
+                  {
+                    "concept": "47a7b9e1-9917-470d-9647-f82a29860845",
+                    "label": "Declined"
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died"
+                  },
+                  {
+                    "concept": "6cefe5df-71f7-4200-b40e-8da439d70048",
+                    "label": "Known+ on ART"
+                  },
+                  {
+                    "concept": "9ca66bd0-088a-4df5-98dc-2d979978a133",
+                    "label": "On Adherence Preparation"
+                  },
+                  {
+                    "concept": "24cadd3e-9147-4a1e-88f0-7fd79b143ff1",
+                    "label": "On OI Management"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Specify",
+              "type": "obs",
+              "id": "specify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(ifNotInitiatedArtSameDayReasonsWriteCode) || ifNotInitiatedArtSameDayReasonsWriteCode !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "For referred cases to other HIV specify facility name",
+              "type": "obs",
+              "id": "forReferredCasesToOtherHivSpecifyFacilit",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161562AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Plan for next steps",
+              "type": "obs",
+              "id": "planForNextSteps",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ca85a550-c97e-4d9a-b360-39b836cc2c5c",
+                "answers": [
+                  {
+                    "concept": "791e650f-d6ff-4175-89ba-217791fe860b",
+                    "label": "Linked to case case managers for further counseling and tracking"
+                  },
+                  {
+                    "concept": "529f2a55-7cdb-4dd2-9a85-b67328c0b533",
+                    "label": "Address adherence barriers"
+                  },
+                  {
+                    "concept": "e46cf133-bb74-430f-8c38-01e48bad5ec0",
+                    "label": "Initiate ART when the patient is ready after OI management"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Final outcome After the intervention (write code)",
+              "type": "obs",
+              "id": "finalOutcomeAfterTheInterventionWriteCod",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d28192b2-ba73-42ad-a6c3-a2bed8ab6e01",
+                "answers": [
+                  {
+                    "concept": "79dc85d8-0f70-55ce-a5b4-1a5529ff7562",
+                    "label": "Started ART"
+                  },
+                  {
+                    "concept": "47a7b9e1-9917-470d-9647-f82a29860845",
+                    "label": "Declined"
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died"
+                  },
+                  {
+                    "concept": "f6be6329-9359-4d75-a8be-faf8d1595faa",
+                    "label": "Confirmed referral & started ART in other facility"
+                  },
+                  {
+                    "concept": "5240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Lost follow up"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Remark",
+              "type": "obs",
+              "id": "remark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

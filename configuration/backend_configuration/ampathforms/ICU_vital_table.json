@@ -1,0 +1,549 @@
+{
+  "name": "ICU Vital Sign Table",
+  "description": "ICU vital table - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "483a7fea-3c84-52c1-ba99-36cf699ca10f",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "ICU Vital Sign Table Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic BP (mmHg)",
+              "type": "obs",
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic BP (mmHg)",
+              "type": "obs",
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "HR",
+              "type": "obs",
+              "id": "hr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "02187b0e-a4e4-49aa-8043-fdca00c3bc65",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse Rhythm",
+              "type": "obs",
+              "id": "pulseRythm",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d5f88633-71f9-48e2-9618-4c7dab53f73d",
+                "answers": [
+                  {
+                    "concept": "22e3978c-aace-418f-aa8d-5aa9c2cf0f24",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "1febdf09-d7d9-4c40-80e0-5b57de967738",
+                    "label": "Regularly-Irregular"
+                  },
+                  {
+                    "concept": "66e60dad-b89b-45ed-948f-66dec904cfd9",
+                    "label": "Irregularly-Irregular"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Respiratory rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pain Scale",
+              "type": "obs",
+              "id": "painScale",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "bd8288fd-223b-4bbb-a1e5-16be65c75c74",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "AC",
+              "type": "obs",
+              "id": "ac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f325998a-bd01-5a5e-b65f-e9dfefb3e092"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "VCV",
+              "type": "obs",
+              "id": "vcv",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8c163014-d7a7-5e69-968f-18643998d7ad",
+                "answers": [
+                  {
+                    "concept": "82215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "PCV"
+                  },
+                  {
+                    "concept": "da226a17-711c-5db9-a69f-746964364ab5",
+                    "label": "SIMV"
+                  },
+                  {
+                    "concept": "19a86e31-08d9-48bf-843a-4f76bf25a147",
+                    "label": "CPAP with"
+                  },
+                  {
+                    "concept": "fb5d64b0-878d-456c-aed5-4e0da473fb03",
+                    "label": "PSV"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "TV",
+              "type": "obs",
+              "id": "tv",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5bcf0841-80da-576d-b1be-f76bff1fe99c"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Peep",
+              "type": "obs",
+              "id": "peep",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0f1451d5-c089-5fe1-b5b3-95ec1fb2249c",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "P Pressure",
+              "type": "obs",
+              "id": "pPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c26cdae9-4bd6-443d-8721-85efdf5b0bd3",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "FiO2",
+              "type": "obs",
+              "id": "fio2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f759d9d0-d25e-4aa0-8fd8-d7160f7b3859"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "SpO2 (%)",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal: >90%",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "RASS Score",
+              "type": "obs",
+              "id": "rassScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "56680caf-1356-53cd-9fbb-259d48946938",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "RBS",
+              "type": "obs",
+              "id": "rbs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "887aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Position",
+              "type": "obs",
+              "id": "position",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6db955d4-1317-4751-bfac-a18c5648049c",
+                "answers": [
+                  {
+                    "label": "Fowler's (Low 15°-30°)",
+                    "concept": "0443d17a-be65-4c3b-83b2-a17f18f2c455"
+                  },
+                  {
+                    "label": "sitting",
+                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Fowler's (Semi 30°-45°)",
+                    "concept": "27a4629c-668b-499d-9f30-db96f0ba67ea"
+                  },
+                  {
+                    "label": "Prone position",
+                    "concept": "31f79dca-021e-49cd-9784-150497976e62"
+                  },
+                  {
+                    "label": "Supine",
+                    "concept": "92709344-75b1-4093-a1b8-6d0bd998df7e"
+                  },
+                  {
+                    "label": "Fowler's (full/standard 45°-60°)",
+                    "concept": "94d9fe4d-4b3c-4a64-8ab2-26b816714892"
+                  },
+                  {
+                    "label": "Fowler's (High 60°-90°)",
+                    "concept": "955abfab-508c-4239-b145-d740c2f81cc7"
+                  },
+                  {
+                    "label": "Left lateral position",
+                    "concept": "e61aa344-daf9-41bd-9924-d2ff00c45446"
+                  },
+                  {
+                    "label": "Right lateral position",
+                    "concept": "fb8b15f3-3b3b-4849-891a-894cd010e2c8"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Iv Fluids",
+              "type": "obs",
+              "id": "ivFluids",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6c3eaf06-bade-5ddc-ba99-a0276d3b7c33",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "1. Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "IV medication",
+              "type": "obs",
+              "id": "ivMedication",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3a26d6ec-82c6-5d6a-b55a-d53c16c8fa0f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Iv fluid amount",
+              "type": "obs",
+              "id": "ivFluidAmount",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "61a26390-40f2-49c6-ac55-228118303e8b",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Adrenalin",
+              "type": "obs",
+              "id": "adrenalin",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5cc020fb-8667-463c-84f6-100cd9da8fe8",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Noradrenalin",
+              "type": "obs",
+              "id": "noradrenalin",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "4e01579c-2f4c-4f6f-b913-f5b849b08bfe",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Feeding type",
+              "type": "obs",
+              "id": "feedingType",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d31b70f1-9878-4fb8-8be4-3eae868ad516",
+                "answers": [
+                  {
+                    "concept": "160240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "PO"
+                  },
+                  {
+                    "concept": "a5c7f899-4ee9-5aa9-8394-3aceea98f8e1",
+                    "label": "NGT"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Feeding amount",
+              "type": "obs",
+              "id": "feedingAmount",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "162578AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Total output (mL)",
+              "type": "obs",
+              "id": "totalOutputMl",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "3fd93e8c-1370-4ba1-9bc7-a7e3a9749aab",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Total input (mL)",
+              "type": "obs",
+              "id": "totalInputMl",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8b4817b1-4c04-4f4c-a5ea-a15d33832213",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Other output (mL)",
+              "type": "obs",
+              "id": "otherOutputMl",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Urine output (mL)",
+              "type": "obs",
+              "id": "urineOutputMl",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161929AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Stool Pass",
+              "type": "obs",
+              "id": "stoolPass",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "45d80eb1-a0ca-5399-b8e0-747bc7fed821",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

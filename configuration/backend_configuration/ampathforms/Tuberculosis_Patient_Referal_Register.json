@@ -1,0 +1,216 @@
+{
+  "name": "Tuberculosis Patient Referral Register",
+  "description": "Tuberculosis Patient Referral Register - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "3e72b98f-2229-5f8f-9bdd-4fa6f52fbbbf",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Tuberculosis Patient Referral Register Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Woreda/S.Woreda",
+              "type": "obs",
+              "id": "woredaSWoreda",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "25677889-9001-7893-1237-9012345f0123"
+              }
+            },
+            {
+              "label": "Kebele",
+              "type": "obs",
+              "id": "kebele",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1e5f6071-8293-0123-4567-890123abcde4"
+              }
+            },
+            {
+              "label": "Phone No.",
+              "type": "obs",
+              "id": "phoneNo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "160642aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              }
+            },
+            {
+              "label": "Name of Contact Person",
+              "type": "obs",
+              "id": "nameOfContactPerson",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "163258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "House Number",
+              "type": "obs",
+              "id": "houseNumber",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3071a2b3-0415-2345-6789-012345abcde6",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Referred to",
+              "type": "obs",
+              "id": "referedTo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3e3a4be2-4ddf-42ab-bfd2-1a080de8bd43"
+              }
+            },
+            {
+              "label": "Date of Referral",
+              "type": "obs",
+              "id": "dateOfReferral",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "74895bd6-06a3-42da-afcf-d9448621194d"
+              }
+            },
+            {
+              "label": "Tracing of referred TB patient done",
+              "type": "obs",
+              "id": "tracingOfReferredTbPatientDone",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f1120280-b6e1-4f6c-8879-a8edfca33db6",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date of tracing",
+              "type": "obs",
+              "id": "dateOfTracing",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "da5f4c00-2dd4-4611-bada-b56a1c12ded9"
+              }
+            },
+            {
+              "label": "Remark",
+              "type": "obs",
+              "id": "remark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+              }
+            }
+          ]
+        },
+        {
+          "label": "For traced TB patient",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Treatment Started",
+              "type": "obs",
+              "id": "treatmentStarted",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "bfc3581d-626f-5315-9d41-614d1747d695",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Unit TB Number",
+              "type": "obs",
+              "id": "unitTbNumber",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ec2dcd71-6422-4f29-bbb1-06bddf31e04a",
+                "min": "0",
+                "step": "0.01"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

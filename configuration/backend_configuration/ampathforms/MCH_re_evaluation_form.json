@@ -1,0 +1,383 @@
+{
+  "name": "MCH re-evaluation form",
+  "description": "MCH re-evaluation form - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "e3ff8bcb-32fa-53f2-8d94-fe9a6e720f8c",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "MCH re-evaluation form Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date & Time",
+              "type": "obs",
+              "id": "dateTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Problems",
+              "type": "obs",
+              "id": "problems",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "df3f7dee-9e86-44c6-9b74-d4cfe151a6ba"
+              }
+            },
+            {
+              "label": "Subjective",
+              "type": "obs",
+              "id": "subjective",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d38cfc50-62e1-47d4-896e-090cc8d1e68c"
+              }
+            },
+            {
+              "label": "Systolic Blood Pressure (mmHg)",
+              "type": "obs",
+              "id": "systolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Systolic blood pressure is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic Blood Pressure (mmHg)",
+              "type": "obs",
+              "id": "diastolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Diastolic blood pressure is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse Rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory Rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Uterine size(wks)",
+              "type": "obs",
+              "id": "uterineSizeWks",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f7a8b9c0-d1e2-4f3a-4b56-c7d8e9f0a1b2",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Scar",
+              "type": "obs",
+              "id": "scar",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "671cd740-7b19-5d09-b091-4d34d9242eb3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Fetal presentation",
+              "type": "obs",
+              "id": "fetalPresentation",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "160090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Vertex presentation",
+                    "concept": "160091AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Occiput Anterior Position",
+                    "concept": "164148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Brow Presentation",
+                    "concept": "164149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Face Presentation",
+                    "concept": "164150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Fetal lie text",
+              "type": "obs",
+              "id": "fetalLieText",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "972e5815-4251-4209-8281-f1f666e1b98f"
+              }
+            },
+            {
+              "label": "FHB",
+              "type": "obs",
+              "id": "fhb",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3071425c-0415-2345-6789-012345abcd1a",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Ux contraction",
+              "type": "obs",
+              "id": "uxContraction",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7fa183b6-3484-4976-9af7-818f4d417c98",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Cervical status text",
+              "type": "obs",
+              "id": "cervicalStatusText",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d641ab68-c557-40eb-81f4-e641ce40ab8f"
+              }
+            },
+            {
+              "label": "Membrane status text",
+              "type": "obs",
+              "id": "membraneStatusText",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7415869c-4859-6789-0123-456789abcd14",
+                "answers": [
+                  {
+                    "label": "AROM",
+                    "concept": "0748192f-7182-9012-3456-789012abcd17"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Artificial Rupture of Membrane (ARM)",
+                    "concept": "15d529e0-2f29-48b5-bc41-5ade28396910"
+                  },
+                  {
+                    "label": "Intact membranes",
+                    "concept": "8526970d-5960-7890-1234-567890abcd15"
+                  },
+                  {
+                    "label": "PROM",
+                    "concept": "9637081e-6071-8901-2345-678901abcd16"
+                  },
+                  {
+                    "label": "Ruptured (Clear)",
+                    "concept": "a4568e24-5da3-51a6-9476-cb450145370f"
+                  },
+                  {
+                    "label": "Intact",
+                    "concept": "a6d00512-9786-45d6-8886-be160acfd5d4"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Vaginal bleeding?",
+              "type": "obs",
+              "id": "vaginalBleeding",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "147232AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Assessment",
+              "type": "obs",
+              "id": "assessment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "13f82aece2cd4e3bbb950140e6cbffce"
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

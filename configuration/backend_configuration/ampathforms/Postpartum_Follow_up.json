@@ -1,0 +1,534 @@
+{
+  "name": "Postpartum Follow up",
+  "description": "Postpartum Follow up - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "21df9795-f903-58eb-9fe4-16902eb751c1",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Postpartum Follow up Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of visit",
+              "type": "obs",
+              "id": "dateOfVisit",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
+              }
+            },
+            {
+              "label": "Visit number",
+              "type": "obs",
+              "id": "visitNumber",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "700f77d9-45d3-426b-868c-84ea071665a7",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Uterus Contracted/Look for PPH",
+              "type": "obs",
+              "id": "uterusContractedLookForPph",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b90739fa-719c-5cc6-87d4-9e2e67ebd425",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Anemia",
+              "type": "obs",
+              "id": "anemia",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "58c3ba3a-4449-4228-8b71-d27ce8b45a35",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Dribbling / Leaking Urine",
+              "type": "obs",
+              "id": "dribblingLeakingUrine",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9fe9cc80-9872-42d5-973b-309dd57dbb8e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Vaginal discharge after 4 weeks of delivery",
+              "type": "obs",
+              "id": "vaginalDischargeAfter4WeeksOfDelivery",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "215cd871-b994-46fc-8295-0afb3288a30e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pelvic Exam (only if vaginal discharge)",
+              "type": "obs",
+              "id": "pelvicExamOnlyIfVaginalDischarge",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "206bd2a1-17e1-5d4e-8728-1c47e8fe9889"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(vaginalDischargeAfter4WeeksOfDelivery) || vaginalDischargeAfter4WeeksOfDelivery !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Breast",
+              "type": "obs",
+              "id": "breast",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162825AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Counseling danger signs, EPI use of ITN given",
+              "type": "obs",
+              "id": "counselingDangerSignsEpiUseOfItnGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c1d46c7c-0f60-4331-9815-bdc33850018a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Baby breathing",
+              "type": "obs",
+              "id": "babyBreathing",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8f1ec318-a0a8-43d8-a4fb-f2f4d07c131c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Baby breast Feeding",
+              "type": "obs",
+              "id": "babyBreastFeeding",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0f808470-cf41-55e8-9439-573386fbab39",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Baby weight in gram",
+              "type": "obs",
+              "id": "babyWeightInGram",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "30415263-4758-6789-0123-456789345678",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Immunization Status",
+              "type": "obs",
+              "id": "immunizationStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "164464AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "f93298a1-a10e-4f0e-a6c8-0ef216175252",
+                    "label": "Up- to-date"
+                  },
+                  {
+                    "concept": "164463AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Started"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HIV tested",
+              "type": "obs",
+              "id": "hivTested",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1356AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HIV test Result",
+              "type": "obs",
+              "id": "hivTestResult",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a90ebc9e-53b4-4a31-bf19-c5e474efe62d",
+                "answers": [
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NR"
+                  },
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "R"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "ARV Rx for Mothers",
+              "type": "obs",
+              "id": "arvRxForMothers",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "80b0573a-163b-5f86-962f-9085d4c5a2cc"
+              }
+            },
+            {
+              "label": "ARV Rx for Newborns",
+              "type": "obs",
+              "id": "arvRxForNewborns",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "18f991b4-e1df-43c9-9c08-2e54fcfa8654"
+              }
+            },
+            {
+              "label": "Feeding options",
+              "type": "obs",
+              "id": "feedingOptions",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "aee211d3-2d47-548d-8ad3-4cbdf75cbea8",
+                "answers": [
+                  {
+                    "concept": "a550e6fa-1f72-5a40-b853-837425e4ad0d",
+                    "label": "EBF"
+                  },
+                  {
+                    "concept": "1595AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "RF"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Mother referred to sup",
+              "type": "obs",
+              "id": "motherReferredToSup",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c1fc9071-89f4-4f76-b2b1-3df3ba69d32a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Newborn referred to chronic HIV Infant Care",
+              "type": "obs",
+              "id": "newbornReferredToChronicHivInfantCare",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "314e6ba5-8bee-4015-bd5f-413c903f0c71",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "FP Counselled and Provided",
+              "type": "obs",
+              "id": "fpCounselledAndProvided",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ca07347a-58c6-46d2-a040-22ad4df7b6f5",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Action Taken",
+              "type": "obs",
+              "id": "actionTaken",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "164378AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Blood Pressure",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic (mmHg)",
+              "type": "obs",
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic (mmHg)",
+              "type": "obs",
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Posture",
+              "type": "obs",
+              "id": "posture",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e11356eb-df27-4dfd-8b6b-8c066bb2afd5",
+                "answers": [
+                  {
+                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sitting"
+                  },
+                  {
+                    "concept": "92709344-75b1-4093-a1b8-6d0bd998df7e",
+                    "label": "Supine"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

@@ -1,0 +1,123 @@
+{
+  "name": "Summary of subjective and objective",
+  "description": "Summary of subjective and objective - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "a7afe5dd-182c-5969-8abf-aca47d8dd9e6",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Summary of subjective and objective Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date & Time",
+              "type": "obs",
+              "id": "dateTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Summary Subjective",
+              "type": "obs",
+              "id": "summarySubjective",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "8aa90b3c-4f10-43e5-91c4-6a6d38c5fd75"
+              }
+            },
+            {
+              "label": "Summary Objective",
+              "type": "obs",
+              "id": "summaryObjective",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "7f2cb679-2458-48f2-9f8b-804d7428059d"
+              }
+            },
+            {
+              "label": "Current Assesment",
+              "type": "obs",
+              "id": "currentAssesment",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5809a2b3-3ca3-b23e-8567-9ef012345678"
+              }
+            },
+            {
+              "label": "Name of admitting Physician/Nurse",
+              "type": "obs",
+              "id": "nameOfAdmittingPhysicianNurse",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

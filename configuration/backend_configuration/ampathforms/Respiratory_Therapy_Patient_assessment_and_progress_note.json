@@ -1,0 +1,1114 @@
+{
+  "name": "Respiratory Therapy Patient assessment and progress note",
+  "description": "Respiratory Therapy Patient assessment and progress note - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "c03de33a-db75-5e97-976f-92113e85387e",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Respiratory Therapy Patient assessment and progress note Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of intubation",
+              "type": "obs",
+              "id": "dateOfIntubation",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "d66b92ee-0673-42f5-90ce-7fe5b110af74"
+              }
+            },
+            {
+              "label": "Patient position",
+              "type": "obs",
+              "id": "patientPosition",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d6393e05-d0ee-400a-9440-f9fdaadcf370",
+                "answers": [
+                  {
+                    "concept": "92709344-75b1-4093-a1b8-6d0bd998df7e",
+                    "label": "Supine"
+                  },
+                  {
+                    "concept": "167260a3-cc11-48ff-932a-2344731136bb",
+                    "label": "Supine 30/45"
+                  },
+                  {
+                    "concept": "31f79dca-021e-49cd-9784-150497976e62",
+                    "label": "Prone"
+                  },
+                  {
+                    "concept": "e61aa344-daf9-41bd-9924-d2ff00c45446",
+                    "label": "Left lateral"
+                  },
+                  {
+                    "concept": "fb8b15f3-3b3b-4849-891a-894cd010e2c8",
+                    "label": "Right lateral"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Type of ventilation",
+              "type": "obs",
+              "id": "typeOfVentilation",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e4dd09c8-d827-4e88-b7c0-0fd98a2c424a",
+                "answers": [
+                  {
+                    "concept": "e2f50c67-98a4-4364-b99e-2accd8d36626",
+                    "label": "Oro-Nasal mask"
+                  },
+                  {
+                    "concept": "e91009eb-08f8-45ee-a715-1542665672c7",
+                    "label": "Total face mask"
+                  },
+                  {
+                    "concept": "3e68f2fb-4e3f-44ea-b419-0ac2d161f7a4",
+                    "label": "Oral mask"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e838df31-7eff-4aa3-be0d-dd0f39fbbce4"
+              }
+            },
+            {
+              "label": "Medication",
+              "type": "obs",
+              "id": "medication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a7d8fdf9-d81d-43ab-a41a-ea2ca8dbd7ee"
+              }
+            },
+            {
+              "label": "Patient investigation and finding date",
+              "type": "obs",
+              "id": "patientInvestigationAndFindingDate",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b0731274-524d-4a2d-a395-48c0308d3a63"
+              }
+            },
+            {
+              "label": "Assessment",
+              "type": "obs",
+              "id": "assessment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "13f82aece2cd4e3bbb950140e6cbffce"
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              }
+            }
+          ]
+        },
+        {
+          "label": "NIPPV/IPPV",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "ETT size",
+              "type": "obs",
+              "id": "ettSize",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6e2ccda8-4adc-4637-85c4-3cf6c010e4e2"
+              }
+            },
+            {
+              "label": "ETT Depth",
+              "type": "obs",
+              "id": "ettDepth",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8b7c3e39-1055-4514-9457-9b88ec7a0790",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Position",
+              "type": "obs",
+              "id": "position",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6db955d4-1317-4751-bfac-a18c5648049c",
+                "answers": [
+                  {
+                    "label": "Fowler's (Low 15°-30°)",
+                    "concept": "0443d17a-be65-4c3b-83b2-a17f18f2c455"
+                  },
+                  {
+                    "label": "sitting",
+                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Fowler's (Semi 30°-45°)",
+                    "concept": "27a4629c-668b-499d-9f30-db96f0ba67ea"
+                  },
+                  {
+                    "label": "Prone position",
+                    "concept": "31f79dca-021e-49cd-9784-150497976e62"
+                  },
+                  {
+                    "label": "Supine",
+                    "concept": "92709344-75b1-4093-a1b8-6d0bd998df7e"
+                  },
+                  {
+                    "label": "Fowler's (full/standard 45°-60°)",
+                    "concept": "94d9fe4d-4b3c-4a64-8ab2-26b816714892"
+                  },
+                  {
+                    "label": "Fowler's (High 60°-90°)",
+                    "concept": "955abfab-508c-4239-b145-d740c2f81cc7"
+                  },
+                  {
+                    "label": "Left lateral position",
+                    "concept": "e61aa344-daf9-41bd-9924-d2ff00c45446"
+                  },
+                  {
+                    "label": "Right lateral position",
+                    "concept": "fb8b15f3-3b3b-4849-891a-894cd010e2c8"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Tracheostomy size",
+              "type": "obs",
+              "id": "tracheostomySize",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "31f30421-f08d-4b3b-ad61-7423488c39a2"
+              }
+            },
+            {
+              "label": "Tracheostomy type",
+              "type": "obs",
+              "id": "tracheostomyType",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d178b113-a8c4-5fb0-8ced-0cf7e21be37a"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Ventilator settings",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Vent type",
+              "type": "obs",
+              "id": "ventType",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e94b624e-6587-4eba-899e-b81aeba8c6a7"
+              }
+            },
+            {
+              "label": "Mode",
+              "type": "obs",
+              "id": "mode",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "4ea306e1-f071-4c83-8097-2ab45172b016",
+                "answers": [
+                  {
+                    "label": "Vomiting",
+                    "concept": "122983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Absent",
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Nasogastric tube placement",
+                    "concept": "1766AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Refuse",
+                    "concept": "6f61ba35-b14c-43d7-b9e2-7b97d3e66d78"
+                  },
+                  {
+                    "label": "IV Fluid",
+                    "concept": "fde37919-39b2-4817-8fd9-f41a477d1bc5"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Rate",
+              "type": "obs",
+              "id": "rate",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "50ac2475-4bcf-4b53-b1f5-6aee95391d4a",
+                "answers": [
+                  {
+                    "label": "Litter per minute",
+                    "concept": "fba11668-bfb9-4e72-9e31-49e13fa898ca"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Cross check",
+              "type": "obs",
+              "id": "crossCheck",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1a8192ba-59a8-4061-ad7e-7f6d06e903f4",
+                "answers": [
+                  {
+                    "concept": "b3bd878b-6932-4aa6-9c33-8da4ad66843a",
+                    "label": "Pinsp/Vti"
+                  },
+                  {
+                    "concept": "f759d9d0-d25e-4aa0-8fd8-d7160f7b3859",
+                    "label": "FiO2"
+                  },
+                  {
+                    "concept": "0f1451d5-c089-5fe1-b5b3-95ec1fb2249c",
+                    "label": "Peep."
+                  },
+                  {
+                    "concept": "3e397d6a-ee09-435a-8aec-27ce4b7ab0aa",
+                    "label": "PS"
+                  },
+                  {
+                    "concept": "87aee544-341f-56fe-8ec4-e0ebd3be32a2",
+                    "label": "PIP."
+                  },
+                  {
+                    "concept": "c88967a0-927a-4174-87f8-b2d3ae0d3f97",
+                    "label": "I:E"
+                  },
+                  {
+                    "concept": "a3092af6-13f6-4049-a490-323ff31af8a1",
+                    "label": "Ti"
+                  },
+                  {
+                    "concept": "9edc5386-b815-4233-9b3a-a8c6bc02f194",
+                    "label": "Trigger"
+                  },
+                  {
+                    "concept": "b7fa3c4e-ebbb-4f0f-8d58-4f54d927f1ab",
+                    "label": "P-plat"
+                  },
+                  {
+                    "concept": "387116ac-532b-4e0b-b82e-ef522a1d2b69",
+                    "label": "VE"
+                  },
+                  {
+                    "concept": "163187AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "MAP."
+                  },
+                  {
+                    "concept": "5bcf0841-80da-576d-b1be-f76bff1fe99c",
+                    "label": "Vt (tidal volume)"
+                  },
+                  {
+                    "concept": "d4d0f651-2c26-49e8-8c80-896c40ec2af6",
+                    "label": "Audible Alarms"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Synchrony status",
+              "type": "obs",
+              "id": "synchronyStatus",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c4a156e8-d8b5-4573-a9e3-f350268dfd25"
+              }
+            },
+            {
+              "label": "Loop finding",
+              "type": "obs",
+              "id": "loopFinding",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f8daca36-b484-4647-8163-76cd3d49114b"
+              }
+            }
+          ]
+        },
+        {
+          "label": "ABG.",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Time",
+              "type": "obs",
+              "id": "time",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "c030e2ed-7657-4b95-9c92-f27ed9ac5e42",
+                "answers": [
+                  {
+                    "concept": "1072AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Day(s)"
+                  },
+                  {
+                    "concept": "1073AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Week(s)"
+                  },
+                  {
+                    "concept": "1074AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Month(s)"
+                  },
+                  {
+                    "concept": "1734AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Year(s)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "FiO2",
+              "type": "obs",
+              "id": "fio2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f759d9d0-d25e-4aa0-8fd8-d7160f7b3859"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Peep",
+              "type": "obs",
+              "id": "peep",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0f1451d5-c089-5fe1-b5b3-95ec1fb2249c",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "So2 (%)",
+              "type": "obs",
+              "id": "so2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 95-100 %",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 95 || myValue > 100)",
+                  "message": "Oxygen saturation is outside the normal range (95-100 %)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "PH",
+              "type": "obs",
+              "id": "ph",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ed75ba06-9659-4f91-8222-3c50025fc540"
+              }
+            },
+            {
+              "label": "PaCO2",
+              "type": "obs",
+              "id": "paco2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d51701c3-aeab-40fa-b8e8-263a00be28bc"
+              }
+            },
+            {
+              "label": "Pao2",
+              "type": "obs",
+              "id": "pao2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b3ad5ce6-5786-4c16-9147-40ab7eddca14"
+              }
+            },
+            {
+              "label": "HCO3",
+              "type": "obs",
+              "id": "hco3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6a8257bd-82ee-496f-834d-f41ece343167"
+              }
+            },
+            {
+              "label": "BE",
+              "type": "obs",
+              "id": "be",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "163599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "A-a Gradient",
+              "type": "obs",
+              "id": "aAGradient",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "959f0aaa-950a-4d8a-b1f1-c28238d2280a"
+              }
+            },
+            {
+              "label": "Anion Gap",
+              "type": "obs",
+              "id": "anionGap",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a38696c9-8e91-4588-a51f-e35f35fec1b9"
+              }
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e838df31-7eff-4aa3-be0d-dd0f39fbbce4"
+              }
+            },
+            {
+              "label": "Interpretation",
+              "type": "obs",
+              "id": "interpretation",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c8a9d9ac-291d-4ac0-af2c-b0c747f691a6"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Vital sign.",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Heart Rate",
+              "type": "obs",
+              "id": "heartRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "02187b0e-a4e4-49aa-8043-fdca00c3bc65",
+                "min": "0",
+                "step": "0.01"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Oxygen Saturation (%)",
+              "type": "obs",
+              "id": "oxygenSaturation",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 95-100 %",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 95 || myValue > 100)",
+                  "message": "Oxygen saturation is outside the normal range (95-100 %)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "GCS",
+              "type": "obs",
+              "id": "gcs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "160347AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "ACIF SAE VS BP lda",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic (mmHg)",
+              "type": "obs",
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic (mmHg)",
+              "type": "obs",
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "RR",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Respiratory Rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Temperature",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "General appearance.",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Breathing pattern",
+              "type": "obs",
+              "id": "breathingPattern",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "93a4b5c6-d5ec-4976-f401-bcdef012345d",
+                "answers": [
+                  {
+                    "concept": "47f51c89-1303-4154-9a1c-63402c1ecc07",
+                    "label": "Eupnoea"
+                  },
+                  {
+                    "concept": "f4a4ded7-6875-4631-a931-6055171be868",
+                    "label": "Tachypnoea"
+                  },
+                  {
+                    "concept": "126356AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Bradypnoea"
+                  },
+                  {
+                    "concept": "138219AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hyperpnea"
+                  },
+                  {
+                    "concept": "145706AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cheyne-stokes"
+                  },
+                  {
+                    "concept": "4fc83875-2b97-44ad-959f-594d1336a990",
+                    "label": "Biot's"
+                  },
+                  {
+                    "concept": "122691AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Kussmaul's"
+                  },
+                  {
+                    "concept": "aaac477d-1446-425f-8a27-6876e2396f9f",
+                    "label": "Apneustic"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Chest movement",
+              "type": "obs",
+              "id": "chestMovement",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c232c341-51fd-5091-973b-95aa39aab06c",
+                "answers": [
+                  {
+                    "concept": "c373c0b7-91c0-4141-bc65-f18230445723",
+                    "label": "Equal/bilateral"
+                  },
+                  {
+                    "concept": "665c32d7-0113-4dbf-bd14-bd564d66c0a0",
+                    "label": "Asymmetrical"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e838df31-7eff-4aa3-be0d-dd0f39fbbce4"
+              }
+            },
+            {
+              "label": "Cough",
+              "type": "obs",
+              "id": "cough",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0dd2e3f4-8a5b-678c-012d-890123456789"
+              }
+            },
+            {
+              "label": "Breath sound",
+              "type": "obs",
+              "id": "breathSound",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "4e2a1907-a16c-4e80-bce0-1622ec638a8b",
+                "answers": [
+                  {
+                    "concept": "159484AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Clear"
+                  },
+                  {
+                    "concept": "8a33702d-741b-4883-82ec-f4cf647e3a1c",
+                    "label": "Diminished"
+                  },
+                  {
+                    "concept": "75045ebd-b288-458d-9488-628e53f5c54e",
+                    "label": "Insp/exp wheezes"
+                  },
+                  {
+                    "concept": "8f75cda1-0b6e-4795-8a17-f05c0a26e3a1",
+                    "label": "Rales"
+                  },
+                  {
+                    "concept": "1d89bcd7-b493-4c2c-b70b-f655d15ab372",
+                    "label": "Coarse crepitation"
+                  },
+                  {
+                    "concept": "539AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Rhonchi"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Location",
+              "type": "encounterLocation",
+              "id": "location",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              },
+              "readonly": true
+            },
+            {
+              "label": "Secretion",
+              "type": "obs",
+              "id": "secretion",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "85b92ceb-9377-4098-8d81-9389da819bdc"
+              }
+            },
+            {
+              "label": "Color",
+              "type": "obs",
+              "id": "color",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5a97ebf3-bc50-4c99-84d2-eae99be03ab5",
+                "answers": [
+                  {
+                    "label": "Brown/yellow (Normal)",
+                    "concept": "09a03d5e-8a37-4c2e-83ca-3d8cf078019b"
+                  },
+                  {
+                    "label": "Black color",
+                    "concept": "162065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Petechial",
+                    "concept": "1845e575-a4bc-4891-91e2-b903bf8c4a0e"
+                  },
+                  {
+                    "label": "Pallor",
+                    "concept": "5245AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Clay",
+                    "concept": "56f0f0e2-0a5a-4b44-9cbd-0cee4c01c2f7"
+                  },
+                  {
+                    "label": "Cyanosis",
+                    "concept": "589AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Red emergency color",
+                    "concept": "65a8c74c-544d-4517-8dc9-485efd819ff6"
+                  },
+                  {
+                    "label": "Erythema",
+                    "concept": "947AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Pink",
+                    "concept": "e38c3137-63fa-4041-96d9-f8bea8a09af3"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Chest tube.",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Chest tube",
+              "type": "obs",
+              "id": "chestTube",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1674d86d-af94-40dd-a709-d2382a9ce212",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Type",
+              "type": "obs",
+              "id": "type",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7ea3d5d4-e4b9-4807-a7e6-e9a5c17706d6",
+                "answers": [
+                  {
+                    "label": "Lidocaine 2% without adrenaline",
+                    "concept": "091a2b3c-4c53-4eed-6b78-23456789abc4"
+                  },
+                  {
+                    "label": "Beating",
+                    "concept": "0ac4ac6f-40ae-4600-a179-e0be8f0e45a7"
+                  },
+                  {
+                    "label": "Tobacco (substance of use)",
+                    "concept": "380069fd-def8-4bcf-93a8-b3a745088442"
+                  },
+                  {
+                    "label": "Biting",
+                    "concept": "5163ef81-caba-4788-ab86-1e44fb7df051"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Marijuana (substance of use)",
+                    "concept": "56de197f-3fc1-4815-8ea8-bebfde220929"
+                  },
+                  {
+                    "label": "Group (session format)",
+                    "concept": "5be887dd-97c5-47ef-9919-f0f212b1fdf4"
+                  },
+                  {
+                    "label": "Individual (session format)",
+                    "concept": "a0190e22-e0dd-454e-a05e-27fe7627819a"
+                  },
+                  {
+                    "label": "Heat and moisture exchanger (HME)",
+                    "concept": "c122ca04-3bdb-4199-ba08-f181e1ab5c51"
+                  },
+                  {
+                    "label": "Khat (substance of use)",
+                    "concept": "cd15152c-33c8-4aa9-9b25-10e284ad785c"
+                  },
+                  {
+                    "label": "Pulling hair",
+                    "concept": "e5e36d28-3ff6-4075-97aa-ad02a8ab6c95"
+                  },
+                  {
+                    "label": "Lidocaine 2% with adrenaline",
+                    "concept": "f8691a2b-3b42-4ddc-5a67-123456789ab3"
+                  },
+                  {
+                    "label": "Alcohol (substance of use)",
+                    "concept": "f9744e3e-b394-4f56-85b2-08be1447a8b9"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Oscillation",
+              "type": "obs",
+              "id": "oscillation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c9d689c3-f2ca-4593-9482-0570a64b37a1"
+              }
+            },
+            {
+              "label": "Drainage",
+              "type": "obs",
+              "id": "drainage",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d442511e-8ecc-44fd-bc99-16d4a8851699"
+              }
+            },
+            {
+              "label": "Leakage",
+              "type": "obs",
+              "id": "leakage",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4e269870-fc36-407c-a776-57426cd78e89"
+              }
+            },
+            {
+              "label": "Emphysema",
+              "type": "obs",
+              "id": "emphysema",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d970e936-af7c-45c7-906c-8c7b99199b28"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Heater humidifier.",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Heater humidifier",
+              "type": "obs",
+              "id": "heaterHumidifier",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e3635a53-3442-4ede-ac0d-1c63cf6e7b1e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Type",
+              "type": "obs",
+              "id": "type2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7ea3d5d4-e4b9-4807-a7e6-e9a5c17706d6",
+                "answers": [
+                  {
+                    "concept": "c122ca04-3bdb-4199-ba08-f181e1ab5c51",
+                    "label": "HME"
+                  },
+                  {
+                    "concept": "101d39aa-2f43-4dab-8a43-2052e5e67550",
+                    "label": "HH"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Other Specify",
+              "type": "obs",
+              "id": "ifOtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(type2) || type2 !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

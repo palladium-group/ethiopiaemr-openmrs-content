@@ -1,0 +1,592 @@
+{
+  "name": "Anesthesia MRI Recording Form",
+  "description": "Anesthesia MRI Recording form - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "8775979a-aa69-5733-91a8-de756aaeb5a6",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Anesthesia MRI Recording Form Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Medical History",
+              "type": "obs",
+              "id": "medicalHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0948f769-a5c7-4fba-a3e6-9676dcbf2f48"
+              }
+            },
+            {
+              "label": "MRI procedure",
+              "type": "obs",
+              "id": "mriProcedure",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "b64b35ad-f9b8-5c8d-a06c-57c637a30ef0",
+                "answers": [
+                  {
+                    "concept": "163294AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Elective"
+                  },
+                  {
+                    "concept": "037446f4-adfc-40b3-928c-a39a4826b1bf",
+                    "label": "Emergency"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "ASA Classification",
+              "type": "obs",
+              "id": "asaClassification",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ce349b9d-d574-5b5d-bdc9-308ac3a33566",
+                "answers": [
+                  {
+                    "label": "1",
+                    "concept": "2192bceb-2c89-45a7-88d4-e379e9014acd"
+                  },
+                  {
+                    "label": "2",
+                    "concept": "2f3f0dbe-6266-4162-b319-13a70851b52e"
+                  },
+                  {
+                    "label": "3",
+                    "concept": "112cb702-94e3-48f8-bea7-bb69728fa339"
+                  },
+                  {
+                    "label": "4",
+                    "concept": "b55c244e-84e0-40d4-af61-f882213ac321"
+                  },
+                  {
+                    "label": "5",
+                    "concept": "7f8c744d-0c49-4ba7-9077-b2d14a53e743"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Concern",
+              "type": "obs",
+              "id": "concern",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3cd8d0c9-c71e-498a-acdc-5e745ff2e73a"
+              }
+            },
+            {
+              "label": "Anaesthetist",
+              "type": "obs",
+              "id": "anaesthetist",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5b444b87-23ce-4935-af33-cb95906a494c"
+              }
+            },
+            {
+              "label": "MRT specialist",
+              "type": "obs",
+              "id": "mrtSpecialist",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e821692c-eaf8-4a69-9b4a-96a8e69d3c4c"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Time",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Sedation start",
+              "type": "obs",
+              "id": "sedationStart",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "52ca7221-1ad4-4cf4-a1eb-47899b17e312",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "End",
+              "type": "obs",
+              "id": "end",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "b3626896-6a72-47d7-9a49-49425d7094a5",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Sedatives",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Sedatives",
+              "type": "obsGroup",
+              "id": "sedativesGroup",
+              "questionOptions": {
+                "concept": "1114AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Time point (min)",
+                  "type": "obs",
+                  "id": "sedativesTimePoint",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "566127f7-f12e-495e-9fa2-c9868718b4f4",
+                    "min": "0",
+                    "step": "1"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Sedative dose",
+                  "type": "obs",
+                  "id": "sedativesValue",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "74f1398b-d9ab-4138-80ee-61883de48657",
+                    "min": "0",
+                    "step": "0.01"
+                  },
+                  "hideSteppers": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Oxygen (li)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Oxygen (li)",
+              "type": "obsGroup",
+              "id": "oxygenLiGroup",
+              "questionOptions": {
+                "concept": "1114AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Time point (min)",
+                  "type": "obs",
+                  "id": "oxygenLiTimePoint",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "566127f7-f12e-495e-9fa2-c9868718b4f4",
+                    "min": "0",
+                    "step": "1"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Oxygen (litres)",
+                  "type": "obs",
+                  "id": "oxygenLiValue",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "990f6136-24e6-4300-ac88-a6e4abebd04f",
+                    "min": "0",
+                    "step": "0.01"
+                  },
+                  "hideSteppers": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Spo2",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Spo2",
+              "type": "obsGroup",
+              "id": "spo2Group",
+              "questionOptions": {
+                "concept": "1114AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Time point (min)",
+                  "type": "obs",
+                  "id": "spo2TimePoint",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "566127f7-f12e-495e-9fa2-c9868718b4f4",
+                    "min": "0",
+                    "step": "1"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "label": "SpO2 (%)",
+                  "type": "obs",
+                  "id": "spo2Value",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "step": "0.01"
+                  },
+                  "questionInfo": "Normal range: 95-100 %",
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "warnsWhenExpression": "myValue && (myValue < 95 || myValue > 100)",
+                      "message": "Oxygen saturation is outside the normal range (95-100 %)."
+                    }
+                  ],
+                  "hideSteppers": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Pulse",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulse",
+              "type": "obsGroup",
+              "id": "pulseGroup",
+              "questionOptions": {
+                "concept": "1114AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Time point (min)",
+                  "type": "obs",
+                  "id": "pulseTimePoint",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "566127f7-f12e-495e-9fa2-c9868718b4f4",
+                    "min": "0",
+                    "step": "1"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Pulse (beats/min)",
+                  "type": "obs",
+                  "id": "pulseValue",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "step": "0.01"
+                  },
+                  "questionInfo": "Normal range: 60-100 beats/min",
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                      "message": "Pulse rate is outside the normal range (60-100 beats/min)."
+                    }
+                  ],
+                  "hideSteppers": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Ketamine",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Ketamine",
+              "type": "obsGroup",
+              "id": "ketamineGroup",
+              "questionOptions": {
+                "concept": "1114AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Time point (min)",
+                  "type": "obs",
+                  "id": "ketamineTimePoint",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "566127f7-f12e-495e-9fa2-c9868718b4f4",
+                    "min": "0",
+                    "step": "1"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Ketamine dose",
+                  "type": "obs",
+                  "id": "ketamineValue",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "9473c140-90ad-47fb-9b12-13b2743af8a4",
+                    "min": "0",
+                    "step": "0.01"
+                  },
+                  "hideSteppers": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Propofol",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Propofol",
+              "type": "obsGroup",
+              "id": "propofolGroup",
+              "questionOptions": {
+                "concept": "1114AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Time point (min)",
+                  "type": "obs",
+                  "id": "propofolTimePoint",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "566127f7-f12e-495e-9fa2-c9868718b4f4",
+                    "min": "0",
+                    "step": "1"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Propofol dose",
+                  "type": "obs",
+                  "id": "propofolValue",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "6e833b68-233b-4a63-836a-8bce02d24968",
+                    "min": "0",
+                    "step": "0.01"
+                  },
+                  "hideSteppers": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Atropine",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Atropine",
+              "type": "obsGroup",
+              "id": "atropineGroup",
+              "questionOptions": {
+                "concept": "1114AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Time point (min)",
+                  "type": "obs",
+                  "id": "atropineTimePoint",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "566127f7-f12e-495e-9fa2-c9868718b4f4",
+                    "min": "0",
+                    "step": "1"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Atropine dose",
+                  "type": "obs",
+                  "id": "atropineValue",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "937765e2-7f14-4a1f-b6dd-425a92149a50",
+                    "min": "0",
+                    "step": "0.01"
+                  },
+                  "hideSteppers": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Dexamethasone",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Dexamethasone",
+              "type": "obsGroup",
+              "id": "dexamethasoneGroup",
+              "questionOptions": {
+                "concept": "1114AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Time point (min)",
+                  "type": "obs",
+                  "id": "dexamethasoneTimePoint",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "566127f7-f12e-495e-9fa2-c9868718b4f4",
+                    "min": "0",
+                    "step": "1"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Dexamethasone dose",
+                  "type": "obs",
+                  "id": "dexamethasoneValue",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "b6c2def8-4ffc-4a89-885e-fa109542427f",
+                    "min": "0",
+                    "step": "0.01"
+                  },
+                  "hideSteppers": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Adrenaline",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Adrenaline",
+              "type": "obsGroup",
+              "id": "adrenalineGroup",
+              "questionOptions": {
+                "concept": "1114AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "Time point (min)",
+                  "type": "obs",
+                  "id": "adrenalineTimePoint",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "566127f7-f12e-495e-9fa2-c9868718b4f4",
+                    "min": "0",
+                    "step": "1"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Adrenaline (Epinephrine) dose",
+                  "type": "obs",
+                  "id": "adrenalineValue",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "34fbe75b-1666-413b-8064-21c45e3b85ab",
+                    "min": "0",
+                    "step": "0.01"
+                  },
+                  "hideSteppers": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

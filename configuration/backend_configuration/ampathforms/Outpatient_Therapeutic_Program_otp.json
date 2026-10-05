@@ -1,0 +1,530 @@
+{
+  "name": "Outpatient Therapeutic Program (OTP)",
+  "description": "Outpatient Therapeutic Program (otp) - built from physician Word-doc spec (Phase 1, batch-three).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "853c2da1-4b91-5586-976b-780ceb254112",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Outpatient Therapeutic Program (OTP) Assessment",
+      "sections": [
+        {
+          "label": "Registration",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Registration Number",
+              "type": "obs",
+              "id": "registrationNumber",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "cdfd87a5-7bf5-4051-ac60-8f0baf636651"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Target Weight",
+              "type": "obs",
+              "id": "targetWeight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "163102AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Visit",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Week",
+              "type": "obs",
+              "id": "week",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "dd814290-4950-47e1-bc85-633d61bbaa66"
+              }
+            },
+            {
+              "label": "Date of visit",
+              "type": "obs",
+              "id": "dateOfVisit",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Anthropometry",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "required": "true",
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight Loss",
+              "type": "obs",
+              "id": "weightLoss",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "144b47d3-778c-526d-ac1f-897b15581528",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "WHM (Weight-for-Height %/z)",
+              "type": "obs",
+              "id": "whmWeightForHeightZ",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8ee9b2fe-2bac-415c-8312-3dfaef26843e",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "MUAC",
+              "type": "obs",
+              "id": "muac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diarrhea",
+              "type": "obs",
+              "id": "diarrhea",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "20fa9f6b-903b-43e9-8a98-6526a7f9f2a1",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Vomiting",
+              "type": "obs",
+              "id": "vomiting",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "16748580-1978-48ae-97a0-d290b11f94b5",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fever",
+              "type": "obs",
+              "id": "fever",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "7c696655-0111-4d36-a190-e6bdfc143eb6",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Cough",
+              "type": "obs",
+              "id": "cough",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "90a0f7b4-8bdf-48df-9c49-fe23ffa59105",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Anorexia",
+              "type": "obs",
+              "id": "anorexia",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fb1aea17-cccd-46d0-b536-b7196b7a75a5",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Physical Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Degrees Celsius, one decimal place.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (36.5-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "RR (breaths/min)",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Breaths per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 20)",
+                  "message": "Value is outside the normal range (16-20 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Convulsion",
+              "type": "obs",
+              "id": "convulsion",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c01d301c-25ad-4ee6-b957-60d5db91c66d",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Unconscious",
+              "type": "obs",
+              "id": "unconscious",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "123818AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Dehydrated",
+              "type": "obs",
+              "id": "dehydrated",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b5cb743d-3b4d-43cb-b732-3296dcde6763",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Anemia",
+              "type": "obs",
+              "id": "anemia",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "58c3ba3a-4449-4228-8b71-d27ce8b45a35",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Skin Infection",
+              "type": "obs",
+              "id": "skinInfection",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "526bd057-a238-5211-b945-50bae3e23a4c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "RUTF Test",
+              "type": "obs",
+              "id": "rutfTest",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b761a5d4-c548-46bf-b07f-d8cb8b8a2204",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  },
+                  {
+                    "concept": "6f61ba35-b14c-43d7-b9e2-7b97d3e66d78",
+                    "label": "Refuse"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Action Needed",
+              "type": "obs",
+              "id": "actionNeeded",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "84fbb1a1-5b7b-44a9-a6a5-3721ba2e86da",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Medication",
+              "type": "obs",
+              "id": "medication",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a7d8fdf9-d81d-43ab-a41a-ea2ca8dbd7ee"
+              }
+            },
+            {
+              "label": "RUTF (# Sachets)",
+              "type": "obs",
+              "id": "rutfSachets",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "05bd0a0f-8f85-4287-9866-04e65fc239f8",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Outcome",
+              "type": "obs",
+              "id": "outcome",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "07de3907-ad71-46d9-a6e2-18d1682faca6",
+                "answers": [
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  },
+                  {
+                    "concept": "f5639045-4819-4471-8eba-4ca651e7245a",
+                    "label": "Defaulter"
+                  },
+                  {
+                    "concept": "9497283b-41e4-41bc-843f-0b9a3c899bab",
+                    "label": "Transfer to Inpatient care"
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died"
+                  },
+                  {
+                    "concept": "a150826c-a9d4-4325-b230-a2e6cc0f127c",
+                    "label": "Discharged Cured"
+                  },
+                  {
+                    "concept": "930d2deb-eab4-4d2c-a1c9-28a209f1aebb",
+                    "label": "Refused Transfer"
+                  },
+                  {
+                    "concept": "9e238e8e-86ad-4020-ac98-4af50c1359a6",
+                    "label": "Home Visit"
+                  },
+                  {
+                    "concept": "1ee8b0fe-2ee2-4b68-ab52-8d0c5511ffec",
+                    "label": "Discharged Non-cured"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Name of examiner",
+              "type": "obs",
+              "id": "nameOfExaminer",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

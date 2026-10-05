@@ -1,0 +1,105 @@
+{
+  "name": "Sick Leave",
+  "description": "Sick Leave - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "516dc7fc-a99a-593c-9c5d-0791341d5165",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Sick Leave Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date seen",
+              "type": "obs",
+              "id": "dateSeen",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "0a21bba8-7117-4fda-ae48-4ad9d6ec1399"
+              }
+            },
+            {
+              "label": "Number of sick leaves given",
+              "type": "obs",
+              "id": "numberOfSickLeavesGiven",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5ff387f6-3bc4-4516-af81-4d8eee4bc802"
+              }
+            },
+            {
+              "label": "Physician's recommendation",
+              "type": "obs",
+              "id": "physicianSRecommendation",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "652dd477-5303-4ad5-be8d-aa453d865caf"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

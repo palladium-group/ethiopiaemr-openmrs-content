@@ -1,0 +1,1379 @@
+{
+  "name": "Physical System Assessment",
+  "description": "Physical system Assessment - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "990e4525-ff5e-5ea4-9018-4500cf8e111e",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Physical System Assessment Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name of Patient",
+              "type": "obs",
+              "id": "nameOfPatient",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b2c3d4e5-f601-4890-bcde-f01234567812"
+              }
+            },
+            {
+              "label": "Age",
+              "type": "obs",
+              "id": "age",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "15d60d87-49e3-4f9f-8474-801250d83b3b",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Sex",
+              "type": "obs",
+              "id": "sex",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3071a2b3-0415-2345-6789-012345abcd07",
+                "answers": [
+                  {
+                    "concept": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Male"
+                  },
+                  {
+                    "concept": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "MRN",
+              "type": "obs",
+              "id": "mrn",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5a9aa304-a80d-4315-909a-70875754e74e",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Physiotherapy",
+              "type": "obs",
+              "id": "physiotherapy",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "078e82f4-c534-4b44-9dc2-7ce653767e10"
+              }
+            },
+            {
+              "label": "Side Rails UP",
+              "type": "obs",
+              "id": "sideRailsUp",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f674a6f3-e683-515c-b725-4a10c7a78092",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Family Teaching",
+              "type": "obs",
+              "id": "familyTeaching",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "19ad131a-2a4a-5e34-b34f-e725baea0f87",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Patient Ambulated",
+              "type": "obs",
+              "id": "patientAmbulated",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "64392a67-6598-5576-b28b-09f59a26f5af",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Neuro",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pupil reaction",
+              "type": "obs",
+              "id": "pupilReaction",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b1428213-db59-506b-a0c7-5a24a5d6c2ed",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Follows Commands",
+              "type": "obs",
+              "id": "followsCommands",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "47e5371a-75f0-5649-92d7-5a5dd4d143c8"
+              }
+            },
+            {
+              "label": "All extremities' equal in Strength",
+              "type": "obs",
+              "id": "allExtremitiesEqualInStrength",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8ea8c336-52b6-5b59-94cb-3a522558e25d"
+              }
+            },
+            {
+              "label": "HOB up",
+              "type": "obs",
+              "id": "hobUp",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6f8f305c-aaee-4284-a90b-6ba0144e5f46"
+              }
+            },
+            {
+              "label": "Degrees",
+              "type": "obs",
+              "id": "degrees",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9cc9d880-dcbb-49a7-a1c8-76379e364a3a",
+                "answers": [
+                  {
+                    "concept": "160282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Awake"
+                  },
+                  {
+                    "concept": "9694701e-109a-41d3-8adb-8f07670fbcb5",
+                    "label": "Alert"
+                  },
+                  {
+                    "concept": "a988a003-d6de-5a32-8a73-a4d22bda8d5f",
+                    "label": "Oriented"
+                  },
+                  {
+                    "concept": "1c7417e0-5bae-48c9-9c98-b2cf58147855",
+                    "label": "Disoriented"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Speaks Clearly",
+              "type": "obs",
+              "id": "speaksClearly",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7ede7484-c3e4-5a3a-93f2-4727a3a93c8e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Gag reflex intact",
+              "type": "obs",
+              "id": "gagReflexIntact",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3d660e76-a166-586e-b627-a39f5ca4f7bc",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Cough reflex",
+              "type": "obs",
+              "id": "coughReflex",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a67cbf4b-f9dd-5317-a435-8cb5ea136784",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "CVS.",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Skin warm",
+              "type": "obs",
+              "id": "skinWarm",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "81485321-757a-56c1-a35f-7e6ecf43dca9",
+                "answers": [
+                  {
+                    "concept": "a1d8073f-9231-4b25-92c6-3514b76c4ae7",
+                    "label": "Dry"
+                  },
+                  {
+                    "concept": "f48fa065-207a-4e3f-9ac7-9b29cc66d9ca",
+                    "label": "Moist"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Brisk capillary refill(<5 sec)",
+              "type": "obs",
+              "id": "briskCapillaryRefill5Sec",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1d6e974a-5c97-43e7-bcb3-ff4ee4bbcf07",
+                "answers": [
+                  {
+                    "label": "Delayed >2 Sec",
+                    "concept": "6a95e040-c5a7-4017-9aac-2754757ce53f"
+                  },
+                  {
+                    "label": "<2s",
+                    "concept": "8871e3f8-b960-45c4-8199-9743ed857691"
+                  },
+                  {
+                    "label": "< 2 secs",
+                    "concept": "9be4cbeb-e958-4269-832c-e66889d628ce"
+                  },
+                  {
+                    "label": "Normal capillary refill (<2 sec)",
+                    "concept": "fd9ef368-a9cc-5689-a766-47d256725cbc"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Peripheral edema",
+              "type": "obs",
+              "id": "peripheralEdema",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "130428AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "130166AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pitting"
+                  },
+                  {
+                    "concept": "9c3aa3d7-e8fa-56cf-9163-419b1dc28e67",
+                    "label": "Non pitting"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "S1 and S2 Well Heard",
+              "type": "obs",
+              "id": "s1AndS2WellHeard",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1d4aab32-3c2e-549c-a6f1-5c74756975c7",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Respiratory.",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "EET",
+              "type": "obs",
+              "id": "eet",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "d348e93e-43a6-4e2d-ad0c-e5ad236654c1",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Size intact",
+              "type": "obs",
+              "id": "sizeIntact",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "4763905c-135b-4d63-9c8e-ed6cc029708d",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Intact Size",
+              "type": "obs",
+              "id": "intactSize",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "193df10e-85d6-4a20-a254-805ea9d22553",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Breathing Sound Bilateral",
+              "type": "obs",
+              "id": "breathingSoundBilateral",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "20a391c3-158e-5b86-b753-e35f253f6ddb"
+              }
+            },
+            {
+              "label": "Breath sound clear after Suctioned",
+              "type": "obs",
+              "id": "breathSoundClearAfterSuctioned",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ea041d65-87db-5c0a-b498-86873b6e3e10",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Wheeze",
+              "type": "obs",
+              "id": "wheeze",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "56f7f4f3-177f-4437-9307-957afc73a265",
+                "answers": [
+                  {
+                    "concept": "30bfe5d2-7e3d-5830-8d97-9331521b097f",
+                    "label": "Wheezing During Inspiration"
+                  },
+                  {
+                    "concept": "dac16ca8-a766-5ef7-b2b3-8096676ef82c",
+                    "label": "Wheezing During Expiration sound do not clear with Tracheal Care"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "GI",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Abdomen condition",
+              "type": "obs",
+              "id": "abdomenCondition",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0630bc27-209c-52d8-9385-525a966d207e",
+                "answers": [
+                  {
+                    "concept": "6afec5b7-2764-4b59-8b91-9e16470122db",
+                    "label": "Soft"
+                  },
+                  {
+                    "concept": "69119059-7880-5ac4-aa05-d4b235f3c88a",
+                    "label": "Non tender"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Condom Catheter",
+              "type": "obs",
+              "id": "condomCatheter",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5ec9753b-b70d-5a5e-bde9-7a63e0199392",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Abdominal Distended",
+              "type": "obs",
+              "id": "abdominalDistended",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "17dc402d-00d0-43c8-a042-a62ef0c73df1",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "NG tube ,Suction ,Foley insertion Date",
+              "type": "obs",
+              "id": "ngTubeSuctionFoleyInsertionDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "8cecdab1-0d12-5006-b6f0-64d13f72a920"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Repositioned",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input5",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output5",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance5",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input6",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output6",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance6",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input7",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output7",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance7",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input8",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output8",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance8",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Oral/tooth care",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input9",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output9",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance9",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input10",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output10",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance10",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input11",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output11",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance11",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input12",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output12",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance12",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            }
+          ]
+        },
+        {
+          "label": "HOB>30",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input13",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output13",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance13",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input14",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output14",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance14",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input15",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output15",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance15",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input16",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output16",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance16",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Sedation Vacation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input17",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output17",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance17",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input18",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output18",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance18",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input19",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output19",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance19",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input20",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output20",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance20",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Vent. Weaning",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input21",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output21",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance21",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input22",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output22",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance22",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input23",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output23",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance23",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input24",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output24",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance24",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Nursing Progress done",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date & Time",
+              "type": "obs",
+              "id": "dateTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Day Time",
+              "type": "obs",
+              "id": "dayTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Night Time",
+              "type": "obs",
+              "id": "nightTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "0cd45876-d925-4ed2-851e-2c6a8787545e"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Time.",
+      "sections": [
+        {
+          "label": "1st 8 hours",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            }
+          ]
+        },
+        {
+          "label": "2nd 8 hours",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            }
+          ]
+        },
+        {
+          "label": "3rd 8 hours",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input3",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output3",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            }
+          ]
+        },
+        {
+          "label": "24 hours.",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input4",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output",
+              "type": "obs",
+              "id": "output4",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance4",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

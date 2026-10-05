@@ -1,0 +1,808 @@
+{
+  "name": "Neurovascular Foot Examination",
+  "description": "Neurovascular Foot Examination - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "0d4c3aae-9549-58c0-8961-9ce8fb3e4b8b",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Neurovascular Foot Examination Assessment",
+      "sections": [
+        {
+          "label": "A. General Inspection",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Skin condition",
+              "type": "obs",
+              "id": "skinCondition",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "af5864de-9bb6-4cc0-93ad-c164e156f4a1",
+                "answers": [
+                  {
+                    "concept": "3fbc69dd-e733-4ee7-bb85-4b70495ca5b4",
+                    "label": "Dryness"
+                  },
+                  {
+                    "concept": "826a66f0-bafd-4af3-8ffd-1a72803d1434",
+                    "label": "Cracks"
+                  },
+                  {
+                    "concept": "f57db3c5-fcb7-4bc4-bfad-a2ad52e83f64",
+                    "label": "Fissures"
+                  },
+                  {
+                    "concept": "120943AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Callus"
+                  },
+                  {
+                    "concept": "143369AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Corn"
+                  },
+                  {
+                    "concept": "117448AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hyperkeratosis"
+                  },
+                  {
+                    "concept": "593AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ulcers"
+                  },
+                  {
+                    "concept": "159328AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Wound"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Colour changes",
+              "type": "obs",
+              "id": "colourChanges",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c76b4c29-92d0-4afe-bcc2-bef65a228c9f",
+                "answers": [
+                  {
+                    "concept": "5245AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pallor"
+                  },
+                  {
+                    "concept": "01f49395-bb1e-4f9f-896d-a922d08d7a2d",
+                    "label": "Rubor"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Hair Loss",
+              "type": "obs",
+              "id": "hairLoss",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b73e45ce-63c2-4beb-b461-82ecafeeeccd",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Edema",
+              "type": "obs",
+              "id": "edema",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "475f2b41-c3fa-4266-9612-18f8b72fc8c4",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Yes, Grading",
+              "type": "obs",
+              "id": "ifYesGrading",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "164494AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "166987AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "I"
+                  },
+                  {
+                    "concept": "166988AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "II"
+                  },
+                  {
+                    "concept": "166989AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "III"
+                  },
+                  {
+                    "concept": "0041f9d1-20e5-43f8-a9ee-43a0aa297d5c",
+                    "label": "IV"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(edema) || edema !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Foot Deformity",
+              "type": "obs",
+              "id": "footDeformity",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "02a3d67c-16c5-525b-9b3a-ad1aaf0e3712",
+                "answers": [
+                  {
+                    "concept": "163748AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Present"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Footwear appropriate",
+              "type": "obs",
+              "id": "footwearAppropriate",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b7062f22-827c-47b1-9156-85a2a0e60619",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "B. Vascular Assessment",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulses",
+              "type": "obs",
+              "id": "pulses",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a1a62db6-83ca-5677-a60b-e897afbe765f",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "6378eac0-e8e2-4d7c-86a4-2fcbdc0f8eec",
+                    "label": "Weak & feeble"
+                  },
+                  {
+                    "concept": "e61e9cb0-95d8-5015-a43b-e19a6e4f0bff",
+                    "label": "Bradycardic"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Temperature Gradient",
+              "type": "obs",
+              "id": "temperatureGradient",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "da7c121d-2eed-466d-b5d3-f8fa93b014b4",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "ec8a57f4-cb03-4736-84c2-cc5a506ffc0a",
+                    "label": "Cool distal"
+                  },
+                  {
+                    "concept": "be0f0161-5e1d-4160-bfb5-239c7f16e153",
+                    "label": "Warm"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Vascular status",
+              "type": "obs",
+              "id": "vascularStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "4be9c5d7-a22d-4691-9908-7719efcdb22d",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "9a9606f1-3580-4ccc-b527-089322db5b45",
+                    "label": "PAD suspected"
+                  },
+                  {
+                    "concept": "d38c9855-1384-42f9-ad0b-8dcb4e8d3c4b",
+                    "label": "PAD confirmed"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Capillary Refill",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Right",
+              "type": "obs",
+              "id": "right",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "608fce06-2d26-4ec7-87cc-95b4d69c49ff",
+                "min": "0",
+                "step": "0.01",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Left",
+              "type": "obs",
+              "id": "left",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "608fce06-2d26-4ec7-87cc-95b4d69c49ff",
+                "min": "0",
+                "step": "0.01",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "PAD Indicators",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Claudication",
+              "type": "obs",
+              "id": "claudication",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "145074AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Rest pain",
+              "type": "obs",
+              "id": "restPain",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "96b06df3-736d-4f93-bee4-d247ef959efd",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Dependent rubor",
+              "type": "obs",
+              "id": "dependentRubor",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "73225117-17fd-4618-bfe5-0ead3ca52e16",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Elevation pallor",
+              "type": "obs",
+              "id": "elevationPallor",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e1e292df-1b77-42f0-8033-225d2bc286e1",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "C. Neurological Assessment",
+      "sections": [
+        {
+          "label": "Protective Sensation (10 g Monofilament)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Right",
+              "type": "obs",
+              "id": "right2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "608fce06-2d26-4ec7-87cc-95b4d69c49ff",
+                "answers": [
+                  {
+                    "concept": "a6d00512-9786-45d6-8886-be160acfd5d4",
+                    "label": "Intact"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  },
+                  {
+                    "concept": "162648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reduced"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Left",
+              "type": "obs",
+              "id": "left2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "608fce06-2d26-4ec7-87cc-95b4d69c49ff",
+                "answers": [
+                  {
+                    "concept": "a6d00512-9786-45d6-8886-be160acfd5d4",
+                    "label": "Intact"
+                  },
+                  {
+                    "concept": "162648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reduced"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "LOPS Present",
+              "type": "obs",
+              "id": "lopsPresent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e984997c-1e95-4b35-8e8f-8087d82987f5",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes specify",
+              "type": "obs",
+              "id": "ifYesSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161011aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(lopsPresent) || lopsPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "NDS Scoring",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Vibration",
+              "type": "obs",
+              "id": "vibration",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a43de150-1d34-5ee1-b651-3a4b45345e74",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "162648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reduced"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Temperature Sensation",
+              "type": "obs",
+              "id": "temperatureSensation",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "34914c8d-63fa-4d2d-bc2d-77a483af0fcf",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "162648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reduced"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pinprick Sensation",
+              "type": "obs",
+              "id": "pinprickSensation",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ce927a2b-b882-4e65-91b7-287c36673d3c",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "162648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reduced"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Achilles Reflex (reinforcement allowed)",
+              "type": "obs",
+              "id": "achillesReflexReinforcementAllowed",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0de34517-1384-4771-801b-4557ce0ca59b",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "162648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reduced"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Total Nds Score",
+              "type": "obs",
+              "id": "totalNdsScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "90592203-cb42-4e0d-bd73-e35a38ca39c5",
+                "calculate": {
+                  "calculateExpression": "(vibration === '162648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || vibration === '163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 0) + (temperatureSensation === '162648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || temperatureSensation === '163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 0) + (pinprickSensation === '162648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || pinprickSensation === '163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 0) + (achillesReflexReinforcementAllowed === '162648AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : achillesReflexReinforcementAllowed === '163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 2 : 0)"
+                }
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Notes",
+              "type": "obs",
+              "id": "notes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        },
+        {
+          "label": "D. IWGDF Risk Classification",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Loss of protective sensation (LOPS)",
+              "type": "obs",
+              "id": "lossOfProtectiveSensationLops",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "797ab89b-7484-41fd-bc69-9772022d7c51",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "PAD",
+              "type": "obs",
+              "id": "pad",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "83f1aa6c-e83f-49ae-9643-fe33d08c5449",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Foot deformity",
+              "type": "obs",
+              "id": "footDeformity2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "02a3d67c-16c5-525b-9b3a-ad1aaf0e3712",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Previous ulcer",
+              "type": "obs",
+              "id": "previousUlcer",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "500b43b0-fcaa-4ccb-8bde-06d61b86a532",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Previous amputation",
+              "type": "obs",
+              "id": "previousAmputation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7e217d69-7313-4f85-8dd3-75424a93138e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Charcot neuroarthropathy",
+              "type": "obs",
+              "id": "charcotNeuroarthropathy",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "46c0712c-a9a0-4c72-baba-64dc67d9ba2d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "IWGDF Score",
+              "type": "obs",
+              "id": "iwgdfScore",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8fc2f8e1-13d0-4ab0-b56b-86c023bdbe5b",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(lossOfProtectiveSensationLops) && isEmpty(pad)) ? '' : (((lossOfProtectiveSensationLops === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || (pad === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) && (previousUlcer === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || previousAmputation === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) ? 'Category 3, high risk' : (((lossOfProtectiveSensationLops === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') && (pad === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || ((lossOfProtectiveSensationLops === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') && (footDeformity2 === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || ((pad === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') && (footDeformity2 === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))) ? 'Category 2, moderate risk' : ((lossOfProtectiveSensationLops === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || (pad === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) ? 'Category 1, low risk' : 'Category 0, very low risk'"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

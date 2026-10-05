@@ -1,11 +1,11 @@
 {
-  "name": "Vital Sign For Toddlers (1–3 Yrs)",
-  "description": "Vital signs assessment form for toddlers aged 1-3 years",
-  "version": "1.1",
+  "name": "Vital Sign for Toddlers (1-3 Years)",
+  "description": "Vital Sign for Toddlers (1-3yrs) - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
   "published": true,
   "uuid": "52ce52e1-a716-4687-989b-964d04148879",
   "retired": false,
-  "encounter": "Vitals",
+  "encounter": "Consultation",
   "pages": [
     {
       "label": "Visit Details",
@@ -15,11 +15,10 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
-              "readonly": false,
               "questionOptions": {
                 "rendering": "date"
               },
@@ -28,7 +27,8 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "readonly": true
             },
             {
               "label": "Provider:",
@@ -55,308 +55,228 @@
                 }
               },
               "id": "encLocation",
-              "readonly": false
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Vital Sign For Toddlers (1-3 Yrs)",
+      "label": "Vital Sign for Toddlers (1-3 Years) Assessment",
       "sections": [
         {
-          "label": "Vitals",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse Rate",
+              "label": "Pulse Rate (beats/min)",
               "type": "obs",
-              "required": false,
-              "id": "toddlerPulseRate",
+              "id": "pulseRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range for toddlers: 90-150 bpm",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 150.5 || myValue < 89.5)",
-                "message": "Pulse is out of range (Normal range 90-150)"
-              }
+              "questionInfo": "Beats per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Temperature",
+              "label": "Temperature (°C)",
               "type": "obs",
-              "required": false,
-              "id": "toddlerTemperature",
+              "id": "temperature",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "25",
-                "max": "43",
+                "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range: 36.5-37.5°C",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
-                "message": "Temperature is out of range (Normal range 35-37.5°C)"
-              }
+              "questionInfo": "Degrees Celsius, one decimal place.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Respiratory Rate",
+              "label": "Respiratory Rate (breaths/min)",
               "type": "obs",
-              "required": false,
-              "id": "toddlerRespiratoryRate",
+              "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range for toddlers: 20-30 breaths/min",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 30.5 || myValue < 19.5)",
-                "message": "Respiratory Rate is out of range (Normal range 20-30)"
-              }
+              "questionInfo": "Breaths per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Saturation (SPO2%)",
+              "label": "SPO2",
               "type": "obs",
-              "required": false,
-              "id": "toddlerSPO2",
+              "id": "spo2",
               "questionOptions": {
-                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
+                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                 "min": "0",
-                "max": "100",
                 "step": "0.01"
               },
-              "questionInfo": "Normal: ≥90%",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && myValue < 89.5",
-                "message": "Oxygen Saturation is out of range (Normal range ≥90)"
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
               "label": "Weight (kg)",
               "type": "obs",
-              "required": false,
-              "id": "toddlerWeight",
+              "id": "weight",
               "questionOptions": {
+                "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "rendering": "number",
+                "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Toddler weight measurement in kilograms"
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
             },
             {
-              "label": "Length (cm)",
+              "label": "Length",
               "type": "obs",
-              "required": false,
-              "id": "toddlerLength",
+              "id": "length",
               "questionOptions": {
-                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
+                "concept": "97d878cf-4807-480a-a236-8f8f416f7be1",
+                "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Toddler length measurement in centimeters (crown to heel)"
+              "hideSteppers": true
             },
             {
-              "label": "MUAC (cm)",
+              "label": "Weight for Length",
               "type": "obs",
-              "required": false,
-              "id": "toddlerMUAC",
+              "id": "weightForLength",
               "questionOptions": {
-                "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
+                "concept": "31f2383e-2d35-5cbc-8e43-966e714ee934",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(length) || isEmpty(weight)) ? '' : ((calcWeightForHeightZscore(Number(length),Number(weight)) == null) ? '' : Number(calcWeightForHeightZscore(Number(length),Number(weight))))"
+                }
+              },
+              "readonly": true,
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight for age(Z-score)",
+              "type": "obs",
+              "id": "weightForAgeZScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "162584aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Length for age",
+              "type": "obs",
+              "id": "lengthForAge",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0670ae82-9fca-5883-9c22-38a067859bee",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(length)) ? '' : ((calcHeightForAgeZscore(Number(length)) == null) ? '' : Number(calcHeightForAgeZscore(Number(length))))"
+                }
+              },
+              "readonly": true,
+              "hideSteppers": true
+            },
+            {
+              "label": "MUAC",
+              "type": "obs",
+              "id": "muac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Mid-Upper Arm Circumference in centimeters. Measure at midpoint between shoulder and elbow"
+              "hideSteppers": true
+            },
+            {
+              "label": "RBS",
+              "type": "obs",
+              "id": "rbs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "887aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              },
+              "hideSteppers": true
             }
           ]
         },
         {
-          "label": "Blood Pressure",
+          "label": "Vital Toddler BP",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Systolic B.p",
+              "label": "Systolic (mmHg)",
               "type": "obs",
-              "required": false,
-              "id": "toddlerSystolic",
+              "id": "systolic",
               "questionOptions": {
+                "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "rendering": "number",
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range for toddlers: 80-110 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 110.5 || myValue < 79.5)",
-                "message": "Systolic is out of range (Normal range 80-110)"
-              }
+              "questionInfo": "Millimetres of mercury.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Diastolic B.p",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
-              "required": false,
-              "id": "toddlerDiastolic",
+              "id": "diastolicBp",
               "questionOptions": {
+                "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "rendering": "number",
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range for toddlers: 50-70 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 70.5 || myValue < 49.5)",
-                "message": "Diastolic is out of range (Normal range 50-70)"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Nutritional Health",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Weight for Height",
-              "type": "obs",
-              "required": false,
-              "id": "toddlerWeightForHeight",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "17647889-9708-901b-2349-012345678901",
-                "answers": [
-                  {
-                    "concept": "18758990-0819-012c-3450-123456789012",
-                    "label": "Below -3"
-                  },
-                  {
-                    "concept": "19869001-1920-123d-4561-234567890123",
-                    "label": "Between -3 and -2"
-                  },
-                  {
-                    "concept": "20970112-2031-234e-5672-345678901234",
-                    "label": "Between -2 and -1"
-                  },
-                  {
-                    "concept": "21081223-3142-345f-6783-456789012345",
-                    "label": "Between -1 and 0"
-                  },
-                  {
-                    "concept": "22192334-4253-4560-7894-567890123456",
-                    "label": "Between 0 and 1"
-                  },
-                  {
-                    "concept": "23203445-5364-5671-8905-678901234567",
-                    "label": "Between 1 and 2"
-                  },
-                  {
-                    "concept": "24314556-6475-6782-9016-789012345678",
-                    "label": "Between 2 and 3"
-                  },
-                  {
-                    "concept": "25425667-7586-7893-0127-890123456789",
-                    "label": "Above 3"
-                  }
-                ]
-              },
-              "validators": []
-            },
-            {
-              "label": "Length for Age",
-              "type": "obs",
-              "required": false,
-              "id": "toddlerLengthForAge",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "26536778-8697-890a-1238-901234567890",
-                "answers": [
-                  {
-                    "concept": "27647889-9708-901b-2349-012345678901",
-                    "label": "Below -3"
-                  },
-                  {
-                    "concept": "28758990-0819-012c-3450-123456789012",
-                    "label": "Between -3 and -2"
-                  },
-                  {
-                    "concept": "29869001-1920-123d-4561-234567890123",
-                    "label": "Between -2 and -1"
-                  },
-                  {
-                    "concept": "30970112-2031-234e-5672-345678901234",
-                    "label": "Between -1 and 0"
-                  },
-                  {
-                    "concept": "31081223-3142-345f-6783-456789012345",
-                    "label": "Between 0 and 1"
-                  },
-                  {
-                    "concept": "32192334-4253-4560-7894-567890123456",
-                    "label": "Between 1 and 2"
-                  },
-                  {
-                    "concept": "33203445-5364-5671-8905-678901234567",
-                    "label": "Between 2 and 3"
-                  },
-                  {
-                    "concept": "34314556-6475-6782-9016-789012345678",
-                    "label": "Above 3"
-                  }
-                ]
-              },
-              "validators": []
-            },
-            {
-              "label": "Weight for Age",
-              "type": "obs",
-              "required": false,
-              "id": "toddlerWeightForAge",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "0e758f90-0819-012c-3450-123456789012",
-                "answers": [
-                  {
-                    "concept": "0f869001-1920-123d-4561-234567890123",
-                    "label": "Below -3"
-                  },
-                  {
-                    "concept": "10970112-2031-234e-5672-345678901234",
-                    "label": "Between -3 and -2"
-                  },
-                  {
-                    "concept": "11081223-3142-345f-6783-456789012345",
-                    "label": "Between -2 and -1"
-                  },
-                  {
-                    "concept": "12192334-4253-4560-7894-567890123456",
-                    "label": "Between -1 and 0"
-                  },
-                  {
-                    "concept": "13203445-5364-5671-8905-678901234567",
-                    "label": "Between 0 and 1"
-                  },
-                  {
-                    "concept": "14314556-6475-6782-9016-789012345678",
-                    "label": "Between 1 and 2"
-                  },
-                  {
-                    "concept": "15425667-7586-7893-0127-890123456789",
-                    "label": "Between 2 and 3"
-                  },
-                  {
-                    "concept": "16536778-8697-890a-1238-901234567890",
-                    "label": "Above 3"
-                  }
-                ]
-              },
-              "validators": []
+              "questionInfo": "Millimetres of mercury.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
             }
           ]
         }

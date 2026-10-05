@@ -1,0 +1,1923 @@
+{
+  "name": "WHO Emergency Forms",
+  "description": "WHO Emergency Forms - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "fcec0992-7e08-5acc-92e8-abf334b759f5",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "WHO Emergency Forms Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient type",
+              "type": "obs",
+              "id": "patientType",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e5106af6-91e5-44b6-8f60-32aa3f00c46e",
+                "answers": [
+                  {
+                    "concept": "afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4",
+                    "label": "Trauma"
+                  },
+                  {
+                    "concept": "2c83ca41-d323-40e6-833c-eda94b609ddc",
+                    "label": "General"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "WHO Emergency Unit Form: Trauma",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Mode of arrival",
+              "type": "obs",
+              "id": "modeOfArrival",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "529a4b5c-6d7e-4567-890b-cdef01234567",
+                "answers": [
+                  {
+                    "concept": "1377AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ambulance"
+                  },
+                  {
+                    "concept": "74bc6d7e-8f90-6789-012d-ef0123456789",
+                    "label": "Taxi"
+                  },
+                  {
+                    "concept": "85cd7e8f-9001-789a-123e-f01234567890",
+                    "label": "Private Car"
+                  },
+                  {
+                    "concept": "4f694879-6290-411b-8140-b6562715854e",
+                    "label": "Walking"
+                  },
+                  {
+                    "concept": "b8f00112-2334-012d-4560-234567890123",
+                    "label": "Public Taxi"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Number of prior Facilities",
+              "type": "obs",
+              "id": "numberOfPriorFacilities",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a860e302-4786-52c1-9c6f-7d948068d098"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Name Of Institution",
+              "type": "obs",
+              "id": "nameOfInstitution",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "38e50167-1fb5-4d3e-997e-3a67535e91cf"
+              }
+            },
+            {
+              "label": "Patient Condition",
+              "type": "obs",
+              "id": "patientCondition",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7fc2a8d1-4e3b-4c9f-8a2d-6b1e9f3c5d70",
+                "answers": [
+                  {
+                    "concept": "160026AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ambulatory"
+                  },
+                  {
+                    "concept": "cc3d4e5f-6071-8901-2345-6789abcdef01",
+                    "label": "Non- Ambulatory"
+                  },
+                  {
+                    "concept": "394be007-6670-457a-a4cf-857cfcaf9658",
+                    "label": "Acute"
+                  },
+                  {
+                    "concept": "a296b630-0f98-4eb8-9e2e-316502967da0",
+                    "label": "Chronic"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Chief Complaint",
+              "type": "obs",
+              "id": "chiefCompliant",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160531AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Treating Provider Assessment",
+              "type": "obs",
+              "id": "treatingProviderAssessment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6218aa28-c5b8-49a1-9fca-c6e133ee19e1"
+              }
+            },
+            {
+              "label": "Medical History",
+              "type": "obs",
+              "id": "medicalHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0948f769-a5c7-4fba-a3e6-9676dcbf2f48"
+              }
+            },
+            {
+              "label": "History obtained from",
+              "type": "obs",
+              "id": "historyObtainedFrom",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ce6f6eb7-949b-48f7-ad1d-00bdbc89a695"
+              }
+            },
+            {
+              "label": "Medications",
+              "type": "obs",
+              "id": "medications",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "159369AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "ec465882-73be-475b-a983-3b783e508710",
+                    "label": "Anticoagulant"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If anticoagulant or others",
+              "type": "obs",
+              "id": "ifAnticoagulantOrOthers",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "70256d25-f526-41c7-ad3e-1682fae51320"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(medications) || (medications !== 'ec465882-73be-475b-a983-3b783e508710' && medications !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              }
+            },
+            {
+              "label": "Allergies",
+              "type": "obs",
+              "id": "allergies",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6b011223-3445-1237-5671-fa012345678a",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Food allergy",
+                    "concept": "139994AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Drug allergy",
+                    "concept": "141760AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Environment",
+                    "concept": "cef9c84c-0872-4877-ad78-f66603d20772"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Past Medical",
+              "type": "obs",
+              "id": "pastMedical",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c2ff114d-e7a8-4234-84be-8141ab775d3d",
+                "answers": [
+                  {
+                    "concept": "117399AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "HTN"
+                  },
+                  {
+                    "concept": "119481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "DM"
+                  },
+                  {
+                    "concept": "1295AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "COPD"
+                  },
+                  {
+                    "concept": "447869c1-f71c-45df-818e-386b15b518dc",
+                    "label": "Psych"
+                  },
+                  {
+                    "concept": "6033AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Renal Disease"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Others",
+              "type": "obs",
+              "id": "others",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cc177191-2c36-4f22-89a0-9cfba86ad2fb"
+              }
+            },
+            {
+              "label": "Past Surgeries(type & date)",
+              "type": "obs",
+              "id": "pastSurgeriesTypeDate",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "29eacfc4-7281-479e-980d-a71667d95327"
+              }
+            },
+            {
+              "label": "Last Menstrual Cycle",
+              "type": "obs",
+              "id": "lastMenstrualCycle",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "d1b8a5b1-753c-49f8-8c2c-0e4ffe7865e2"
+              }
+            },
+            {
+              "label": "G",
+              "type": "obs",
+              "id": "g",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b8cffa95-a55d-4303-baab-7ef6f9a10f79"
+              }
+            },
+            {
+              "label": "P",
+              "type": "obs",
+              "id": "p",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0599979a-f9dc-45ef-91a8-62f02b09076a"
+              }
+            },
+            {
+              "label": "Pregnant",
+              "type": "obs",
+              "id": "pregnant",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d3b42c5e-6f70-4189-bacd-ef0123456702",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pregnancy If yes",
+              "type": "obs",
+              "id": "pregnancyIfYes",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6d00459e-e291-4b21-a960-7a6909ae8de6",
+                "answers": [
+                  {
+                    "concept": "a15ae558-ae60-43b6-81b9-100ec63884a9",
+                    "label": "Reported"
+                  },
+                  {
+                    "concept": "b9e82d6a-4430-4a12-b712-57f464ecbc58",
+                    "label": "Testing done"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(pregnant) || pregnant !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Last Tetanus",
+              "type": "obs",
+              "id": "lastTetanus",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "863577fa-b6e9-434e-9de4-1494caf3376d"
+              }
+            },
+            {
+              "label": "Substance Use",
+              "type": "obs",
+              "id": "substanceUse",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "160246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "159084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tobacco"
+                  },
+                  {
+                    "concept": "619a94ea-b219-5b3d-a889-6f56b9417178",
+                    "label": "Alcohol intake"
+                  },
+                  {
+                    "concept": "3ffbf040-b30a-5ccd-8af1-f20c9188de39",
+                    "label": "History of Drugs"
+                  },
+                  {
+                    "concept": "105AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "IV Drugs"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Safe at home",
+              "type": "obs",
+              "id": "safeAtHome",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7daa1528-5f9e-4bb6-83be-c9253cf4314f"
+              }
+            },
+            {
+              "label": "History Of Present Illness",
+              "type": "obs",
+              "id": "historyOfPresentIllness",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160531aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Contact Person",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name",
+              "type": "obs",
+              "id": "name",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "163258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Phone No.",
+              "type": "obs",
+              "id": "phoneNo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "160642aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              }
+            },
+            {
+              "label": "Relation",
+              "type": "obs",
+              "id": "relation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a663836b-914d-4585-aee5-85722eebde67"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Primary Survey (see Reference Card for normal findings, only mark NML if all key elements are normal)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Airway",
+              "type": "obs",
+              "id": "airway",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "10d2039e-52b7-4cd6-a99a-3467c19e2563",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NML"
+                  },
+                  {
+                    "concept": "148787AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Angioedema"
+                  },
+                  {
+                    "concept": "17e8596b-1b8c-901d-345f-123456789012",
+                    "label": "Stridor"
+                  },
+                  {
+                    "concept": "96a0df60-fdc0-58c4-8728-db161bb2d3b8",
+                    "label": "Voice changes"
+                  },
+                  {
+                    "concept": "cab34487-65c7-5260-a257-071dc09815ee",
+                    "label": "Oral/Airway burns"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Airway",
+              "type": "obs",
+              "id": "airway2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "10d2039e-52b7-4cd6-a99a-3467c19e2563",
+                "answers": [
+                  {
+                    "concept": "978320fa-1f79-5869-b8d7-f34d1c7e2703",
+                    "label": "Repositioning"
+                  },
+                  {
+                    "concept": "e4a71855-21dd-4a0f-85f9-d29e002c872d",
+                    "label": "Suction"
+                  },
+                  {
+                    "concept": "589ac977-cb90-5c54-994a-57fdd6501492",
+                    "label": "OPA"
+                  },
+                  {
+                    "concept": "52442567-8a8b-5f26-8285-2fccd5913ed4",
+                    "label": "NPA"
+                  },
+                  {
+                    "concept": "7d5dbd61-2fd8-536b-9a85-4ba37e62e3f8",
+                    "label": "LMA"
+                  },
+                  {
+                    "concept": "167383AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "BVM"
+                  },
+                  {
+                    "concept": "0b58a5bf-f466-442f-8264-d13dd1977067",
+                    "label": "ETT"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Obstructed by",
+              "type": "obs",
+              "id": "obstructedBy",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "38c83f3b-e76c-5352-b577-7a05fa51042e",
+                "answers": [
+                  {
+                    "concept": "5fab1d51-c842-4c34-b26b-a0361a3fb013",
+                    "label": "Tongue"
+                  },
+                  {
+                    "concept": "4d2043ca-33ef-4d34-9508-dfb428bac6ed",
+                    "label": "Blood"
+                  },
+                  {
+                    "concept": "85b92ceb-9377-4098-8d81-9389da819bdc",
+                    "label": "Secretion"
+                  },
+                  {
+                    "concept": "122983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Vomit"
+                  },
+                  {
+                    "concept": "163AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Foreign body"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Spine stabilized",
+              "type": "obs",
+              "id": "spineStabilized",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "34b36653-dec5-432e-ab20-f130c6e0e7c5",
+                "answers": [
+                  {
+                    "concept": "164260AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not needed"
+                  },
+                  {
+                    "concept": "ee165c2e-4552-46f5-8e1d-0ae4b730bca0",
+                    "label": "Done before arrival"
+                  },
+                  {
+                    "concept": "4e409980-bb0a-4d3c-ac98-c3410c5a5789",
+                    "label": "Done in EU"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Breathing",
+              "type": "obs",
+              "id": "breathing",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a5726786-bd9c-517d-aa9c-69497e1594b8",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NML"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Spontaneous Respiratory Rate (breaths/min)",
+              "type": "obs",
+              "id": "spontaneousRespiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Breaths per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Chest Rise",
+              "type": "obs",
+              "id": "chestRise",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0a94cb81-94e6-53f5-bc62-b399cef4888b",
+                "answers": [
+                  {
+                    "concept": "14e83323-26c1-49a7-b2da-7aa9de79d2b4",
+                    "label": "Shallow"
+                  },
+                  {
+                    "concept": "71ee01e7-3d0b-47fa-a75e-25a32d5d9981",
+                    "label": "Retractions"
+                  },
+                  {
+                    "concept": "790af542-abb6-48b4-a732-746348fa3357",
+                    "label": "Paradoxical"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Trachea",
+              "type": "obs",
+              "id": "trachea",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8c57e55c-2ae0-4931-83e0-596b739bc837",
+                "answers": [
+                  {
+                    "concept": "657a0af2-ad1c-4a16-aff1-a2a22f4ed8a9",
+                    "label": "Midline"
+                  },
+                  {
+                    "concept": "2e9d3d46-ecd6-4dbf-b0f0-9ce4ecbfcddd",
+                    "label": "Deviated"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Right",
+              "type": "obs",
+              "id": "right",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "18fd64ea-667f-4980-99af-09f91b1cd808"
+              }
+            },
+            {
+              "label": "Left",
+              "type": "obs",
+              "id": "left",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "18aee68b-03bf-445a-8448-76c010bb65dd"
+              }
+            },
+            {
+              "label": "O2 in L",
+              "type": "obs",
+              "id": "o2InL",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "d269a661-f1bf-4a11-8b82-1207de30a4da"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Oxygen",
+              "type": "obs",
+              "id": "oxygen",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2c9764d5-f646-4c1b-898e-b6f426c028b9",
+                "answers": [
+                  {
+                    "concept": "7944948c-0a13-474c-a5c6-8b302a90f686",
+                    "label": "NC"
+                  },
+                  {
+                    "concept": "a72ef221-cd84-4dfd-9c62-d71f9ecbcf0b",
+                    "label": "Mask"
+                  },
+                  {
+                    "concept": "ee7c9974-cc05-5c40-a04d-ee1bd2b9b94e",
+                    "label": "NRB"
+                  },
+                  {
+                    "concept": "167383AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "BVM"
+                  },
+                  {
+                    "concept": "a50a6893-d3b2-45cc-b8a5-c4166d866125",
+                    "label": "Cpap/bipap"
+                  },
+                  {
+                    "concept": "adb723bd-d565-5ace-975d-a5058f2465cd",
+                    "label": "Ventilator"
+                  },
+                  {
+                    "concept": "1a4c5812-e053-4a86-861f-f3e4191bbcfa",
+                    "label": "Bronchodilator"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Chest Needle or Tube",
+              "type": "obs",
+              "id": "chestNeedleOrTube",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "47631071-4135-5e66-9a17-87865c032c64",
+                "answers": [
+                  {
+                    "concept": "d7ebff61-1cb4-42f4-9029-69efb5d03b2f",
+                    "label": "Right Side"
+                  },
+                  {
+                    "concept": "4a45327f-9f64-4aba-b380-a63569b57b65",
+                    "label": "Left Side"
+                  },
+                  {
+                    "concept": "ee72fece-3c6b-49dc-89d6-69467e51904b",
+                    "label": "3 Sided Dressing"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Skin",
+              "type": "obs",
+              "id": "skin",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "99e2fe71-5dd6-4bba-a00c-3e23995684cb",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Capillary refill",
+              "type": "obs",
+              "id": "capillaryRefill",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1d6e974a-5c97-43e7-bcb3-ff4ee4bbcf07",
+                "answers": [
+                  {
+                    "concept": "6a95e040-c5a7-4017-9aac-2754757ce53f",
+                    "label": "Delayed >2 Sec"
+                  },
+                  {
+                    "concept": "fd9ef368-a9cc-5689-a766-47d256725cbc",
+                    "label": "Normal <2 Sec"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pulse (beats/min)",
+              "type": "obs",
+              "id": "pulse",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Beats per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "JVD",
+              "type": "obs",
+              "id": "jvd",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f4ee1fd7-5335-57f5-beed-3e7e8d98ab9e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Access",
+              "type": "obs",
+              "id": "access",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "78f3b4c8-ed8d-4e44-b4ba-3e8b989a27ad",
+                "answers": [
+                  {
+                    "concept": "469c0dd7-89bf-5469-920d-68d4424cb5f3",
+                    "label": "IV Line"
+                  },
+                  {
+                    "concept": "b0901961-653f-45be-a8af-847ca9bc1b27",
+                    "label": "CVL"
+                  },
+                  {
+                    "concept": "162824AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "IO"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "IVF",
+              "type": "obs",
+              "id": "ivf",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "34dcfb55-038f-4d1d-86ed-df81251c6e56"
+              }
+            },
+            {
+              "label": "Fluid in L",
+              "type": "obs",
+              "id": "fluidInL",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f8d7181d-a152-503d-9c5d-cbe27cc8885d"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Disability 2",
+              "type": "obs",
+              "id": "disability2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "162558AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NML"
+                  },
+                  {
+                    "concept": "160282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Alert (A)"
+                  },
+                  {
+                    "concept": "162645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Responds to voice (V)"
+                  },
+                  {
+                    "concept": "162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Responds to pain (P)"
+                  },
+                  {
+                    "concept": "159508AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unresponsive (U)"
+                  },
+                  {
+                    "concept": "8afd64b6-26ab-5332-bf7a-5dda50257b12",
+                    "label": "Moves all extremities"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Deficit",
+              "type": "obs",
+              "id": "deficit",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d3b95d66-7183-49f7-b39c-72a17d19326a"
+              }
+            },
+            {
+              "label": "Lt",
+              "type": "obs",
+              "id": "lt",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "78175a3f-f7db-4f7b-a420-64b82f14d75f"
+              }
+            },
+            {
+              "label": "Rt",
+              "type": "obs",
+              "id": "rt",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0966d8dc-825b-40b8-b929-c7fbc90cc839"
+              }
+            },
+            {
+              "label": "Blood Glucose",
+              "type": "obs",
+              "id": "bloodGlucose",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b6945d42-a9bc-5f81-bfd8-6a1ffb50771c"
+              }
+            },
+            {
+              "label": "Given",
+              "type": "obs",
+              "id": "given",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "842cf386-80dc-42b1-a8c9-e7ccd616f91d",
+                "answers": [
+                  {
+                    "concept": "77054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Glucose"
+                  },
+                  {
+                    "concept": "2157ee62-b83f-47ef-883b-76c5f21255f6",
+                    "label": "Antiepileptic"
+                  },
+                  {
+                    "concept": "80367AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Naloxone"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Exposure",
+              "type": "obs",
+              "id": "exposure",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "88a9157c-36e5-4353-bcd7-52066fbcbfd1",
+                "answers": [
+                  {
+                    "concept": "752bfc9e-7980-424a-8cda-643e74f60d01",
+                    "label": "Exposed completely"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Fast",
+              "type": "obs",
+              "id": "fast",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2bd3d02f-0c32-43e0-a34f-263ef05d0245",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NML"
+                  },
+                  {
+                    "concept": "cb178bf9-8b49-4263-a63a-d3f1570975da",
+                    "label": "Not Indicated"
+                  },
+                  {
+                    "concept": "1f181513-2a20-40ed-bd35-5e2ef8872789",
+                    "label": "Not Available"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Peritoneum",
+              "type": "obs",
+              "id": "peritoneum",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ed15c6c9-f215-459b-bd9d-a8e31996f4b5",
+                "answers": [
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative."
+                  },
+                  {
+                    "concept": "1138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Indeterminate"
+                  },
+                  {
+                    "concept": "52e43475-0287-485f-bc74-7d87374e3774",
+                    "label": "Free Fluid"
+                  },
+                  {
+                    "concept": "1349AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Chest"
+                  },
+                  {
+                    "concept": "122657AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pneumothorax (R/L)"
+                  },
+                  {
+                    "concept": "163349AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pleural fluid (R/L)"
+                  },
+                  {
+                    "concept": "130562AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pericardial effusion"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "WHO Emergency Unit Form: General",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Mode of arrival",
+              "type": "obs",
+              "id": "modeOfArrival2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "529a4b5c-6d7e-4567-890b-cdef01234567",
+                "answers": [
+                  {
+                    "concept": "1377AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ambulance"
+                  },
+                  {
+                    "concept": "74bc6d7e-8f90-6789-012d-ef0123456789",
+                    "label": "Taxi"
+                  },
+                  {
+                    "concept": "85cd7e8f-9001-789a-123e-f01234567890",
+                    "label": "Private Car"
+                  },
+                  {
+                    "concept": "4f694879-6290-411b-8140-b6562715854e",
+                    "label": "Walking"
+                  },
+                  {
+                    "concept": "b8f00112-2334-012d-4560-234567890123",
+                    "label": "Public Taxi"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Number of prior Facilities",
+              "type": "obs",
+              "id": "numberOfPriorFacilities2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a860e302-4786-52c1-9c6f-7d948068d098"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Name Of Institution",
+              "type": "obs",
+              "id": "nameOfInstitution2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "38e50167-1fb5-4d3e-997e-3a67535e91cf"
+              }
+            },
+            {
+              "label": "Patient Condition",
+              "type": "obs",
+              "id": "patientCondition2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7fc2a8d1-4e3b-4c9f-8a2d-6b1e9f3c5d70",
+                "answers": [
+                  {
+                    "concept": "160026AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ambulatory"
+                  },
+                  {
+                    "concept": "cc3d4e5f-6071-8901-2345-6789abcdef01",
+                    "label": "Non- Ambulatory"
+                  },
+                  {
+                    "concept": "394be007-6670-457a-a4cf-857cfcaf9658",
+                    "label": "Acute"
+                  },
+                  {
+                    "concept": "a296b630-0f98-4eb8-9e2e-316502967da0",
+                    "label": "Chronic"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Chief Complaint",
+              "type": "obs",
+              "id": "chiefComplaint",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160531AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "High Risk Signs",
+              "type": "obs",
+              "id": "highRiskSigns",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "e120f46c-cb58-48bd-bbaa-f1c90e71d36d"
+              }
+            },
+            {
+              "label": "History of Present Illness (HPI)",
+              "type": "obs",
+              "id": "historyOfPresentIllnessHpi",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160531aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              }
+            },
+            {
+              "label": "Past medical history",
+              "type": "obs",
+              "id": "pastMedicalHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c0a51001-0000-4000-8000-000000000003"
+              }
+            },
+            {
+              "label": "Additional interventions",
+              "type": "obs",
+              "id": "additionalInterventions",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "af954a5d-5e8b-4c38-8a4a-2f844d331b69"
+              }
+            },
+            {
+              "label": "Assessment",
+              "type": "obs",
+              "id": "assessment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "13f82aece2cd4e3bbb950140e6cbffce"
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Contact Person",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name",
+              "type": "obs",
+              "id": "name2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "163258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Phone No.",
+              "type": "obs",
+              "id": "phoneNo2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "160642aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              }
+            },
+            {
+              "label": "Relation",
+              "type": "obs",
+              "id": "relation2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a663836b-914d-4585-aee5-85722eebde67"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Primary Survey (Emergency)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Airway",
+              "type": "obs",
+              "id": "airway3",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "10d2039e-52b7-4cd6-a99a-3467c19e2563",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NML"
+                  },
+                  {
+                    "concept": "148787AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Angioedema"
+                  },
+                  {
+                    "concept": "17e8596b-1b8c-901d-345f-123456789012",
+                    "label": "Stridor"
+                  },
+                  {
+                    "concept": "96a0df60-fdc0-58c4-8728-db161bb2d3b8",
+                    "label": "Voice changes"
+                  },
+                  {
+                    "concept": "cab34487-65c7-5260-a257-071dc09815ee",
+                    "label": "Oral/Airway burns"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Obstructed by",
+              "type": "obs",
+              "id": "obstructedBy2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "38c83f3b-e76c-5352-b577-7a05fa51042e",
+                "answers": [
+                  {
+                    "concept": "5fab1d51-c842-4c34-b26b-a0361a3fb013",
+                    "label": "Tongue"
+                  },
+                  {
+                    "concept": "4d2043ca-33ef-4d34-9508-dfb428bac6ed",
+                    "label": "Blood"
+                  },
+                  {
+                    "concept": "85b92ceb-9377-4098-8d81-9389da819bdc",
+                    "label": "Secretion"
+                  },
+                  {
+                    "concept": "122983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Vomit"
+                  },
+                  {
+                    "concept": "163AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Foreign body"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Airway",
+              "type": "obs",
+              "id": "airway4",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "10d2039e-52b7-4cd6-a99a-3467c19e2563",
+                "answers": [
+                  {
+                    "concept": "978320fa-1f79-5869-b8d7-f34d1c7e2703",
+                    "label": "Repositioning"
+                  },
+                  {
+                    "concept": "e4a71855-21dd-4a0f-85f9-d29e002c872d",
+                    "label": "Suction"
+                  },
+                  {
+                    "concept": "589ac977-cb90-5c54-994a-57fdd6501492",
+                    "label": "OPA"
+                  },
+                  {
+                    "concept": "52442567-8a8b-5f26-8285-2fccd5913ed4",
+                    "label": "NPA"
+                  },
+                  {
+                    "concept": "7d5dbd61-2fd8-536b-9a85-4ba37e62e3f8",
+                    "label": "LMA"
+                  },
+                  {
+                    "concept": "167383AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "BVM"
+                  },
+                  {
+                    "concept": "0b58a5bf-f466-442f-8264-d13dd1977067",
+                    "label": "ETT"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Breathing",
+              "type": "obs",
+              "id": "breathing2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a5726786-bd9c-517d-aa9c-69497e1594b8",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NML"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Spontaneous Respiratory Rate (breaths/min)",
+              "type": "obs",
+              "id": "spontaneousRespiratoryRate2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Breaths per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Chest Rise",
+              "type": "obs",
+              "id": "chestRise2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0a94cb81-94e6-53f5-bc62-b399cef4888b",
+                "answers": [
+                  {
+                    "concept": "14e83323-26c1-49a7-b2da-7aa9de79d2b4",
+                    "label": "Shallow"
+                  },
+                  {
+                    "concept": "71ee01e7-3d0b-47fa-a75e-25a32d5d9981",
+                    "label": "Retractions"
+                  },
+                  {
+                    "concept": "790af542-abb6-48b4-a732-746348fa3357",
+                    "label": "Paradoxical"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Trachea",
+              "type": "obs",
+              "id": "trachea2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8c57e55c-2ae0-4931-83e0-596b739bc837",
+                "answers": [
+                  {
+                    "concept": "657a0af2-ad1c-4a16-aff1-a2a22f4ed8a9",
+                    "label": "Midline"
+                  },
+                  {
+                    "concept": "2e9d3d46-ecd6-4dbf-b0f0-9ce4ecbfcddd",
+                    "label": "Deviated"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Right",
+              "type": "obs",
+              "id": "right2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "18fd64ea-667f-4980-99af-09f91b1cd808"
+              }
+            },
+            {
+              "label": "Left",
+              "type": "obs",
+              "id": "left2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "18aee68b-03bf-445a-8448-76c010bb65dd"
+              }
+            },
+            {
+              "label": "O2 in L",
+              "type": "obs",
+              "id": "o2InL2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "d269a661-f1bf-4a11-8b82-1207de30a4da"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Oxygen",
+              "type": "obs",
+              "id": "oxygen2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2c9764d5-f646-4c1b-898e-b6f426c028b9",
+                "answers": [
+                  {
+                    "concept": "7944948c-0a13-474c-a5c6-8b302a90f686",
+                    "label": "NC"
+                  },
+                  {
+                    "concept": "a72ef221-cd84-4dfd-9c62-d71f9ecbcf0b",
+                    "label": "Mask"
+                  },
+                  {
+                    "concept": "ee7c9974-cc05-5c40-a04d-ee1bd2b9b94e",
+                    "label": "NRB"
+                  },
+                  {
+                    "concept": "167383AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "BVM"
+                  },
+                  {
+                    "concept": "a50a6893-d3b2-45cc-b8a5-c4166d866125",
+                    "label": "Cpap/bipap"
+                  },
+                  {
+                    "concept": "adb723bd-d565-5ace-975d-a5058f2465cd",
+                    "label": "Ventilator"
+                  },
+                  {
+                    "concept": "1a4c5812-e053-4a86-861f-f3e4191bbcfa",
+                    "label": "Bronchodilator"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Chest Needle or Tube",
+              "type": "obs",
+              "id": "chestNeedleOrTube2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "47631071-4135-5e66-9a17-87865c032c64",
+                "answers": [
+                  {
+                    "concept": "d7ebff61-1cb4-42f4-9029-69efb5d03b2f",
+                    "label": "Right Side"
+                  },
+                  {
+                    "concept": "4a45327f-9f64-4aba-b380-a63569b57b65",
+                    "label": "Left Side"
+                  },
+                  {
+                    "concept": "ee72fece-3c6b-49dc-89d6-69467e51904b",
+                    "label": "3 Sided Dressing"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Skin",
+              "type": "obs",
+              "id": "skin2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "99e2fe71-5dd6-4bba-a00c-3e23995684cb",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Capillary refill",
+              "type": "obs",
+              "id": "capillaryRefill2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1d6e974a-5c97-43e7-bcb3-ff4ee4bbcf07",
+                "answers": [
+                  {
+                    "concept": "6a95e040-c5a7-4017-9aac-2754757ce53f",
+                    "label": "Delayed >2 Sec"
+                  },
+                  {
+                    "concept": "fd9ef368-a9cc-5689-a766-47d256725cbc",
+                    "label": "Normal <2 Sec"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pulse (beats/min)",
+              "type": "obs",
+              "id": "pulse2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Beats per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Beats per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "JVD",
+              "type": "obs",
+              "id": "jvd2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f4ee1fd7-5335-57f5-beed-3e7e8d98ab9e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Access",
+              "type": "obs",
+              "id": "access2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "78f3b4c8-ed8d-4e44-b4ba-3e8b989a27ad",
+                "answers": [
+                  {
+                    "concept": "469c0dd7-89bf-5469-920d-68d4424cb5f3",
+                    "label": "IV Line"
+                  },
+                  {
+                    "concept": "b0901961-653f-45be-a8af-847ca9bc1b27",
+                    "label": "CVL"
+                  },
+                  {
+                    "concept": "162824AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "IO"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "IVF",
+              "type": "obs",
+              "id": "ivf2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "34dcfb55-038f-4d1d-86ed-df81251c6e56"
+              }
+            },
+            {
+              "label": "Fluid in L",
+              "type": "obs",
+              "id": "fluidInL2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f8d7181d-a152-503d-9c5d-cbe27cc8885d"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Disability 2",
+              "type": "obs",
+              "id": "disability22",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "162558AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NML"
+                  },
+                  {
+                    "concept": "160282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Alert (A)"
+                  },
+                  {
+                    "concept": "162645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Responds to voice (V)"
+                  },
+                  {
+                    "concept": "162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Responds to pain (P)"
+                  },
+                  {
+                    "concept": "159508AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unresponsive (U)"
+                  },
+                  {
+                    "concept": "8afd64b6-26ab-5332-bf7a-5dda50257b12",
+                    "label": "Moves all extremities"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Deficit",
+              "type": "obs",
+              "id": "deficit2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d3b95d66-7183-49f7-b39c-72a17d19326a"
+              }
+            },
+            {
+              "label": "Lt",
+              "type": "obs",
+              "id": "lt2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "78175a3f-f7db-4f7b-a420-64b82f14d75f"
+              }
+            },
+            {
+              "label": "Rt",
+              "type": "obs",
+              "id": "rt2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0966d8dc-825b-40b8-b929-c7fbc90cc839"
+              }
+            },
+            {
+              "label": "Blood Glucose",
+              "type": "obs",
+              "id": "bloodGlucose2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b6945d42-a9bc-5f81-bfd8-6a1ffb50771c"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Physical Exam: (See Reference Card for normal findings. Do NOT mark NML unless all key elements are normal.)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HEENT",
+              "type": "obs",
+              "id": "heent",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "54bd868a-a9a5-49ba-9aa7-830ecd46a00c",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Lymphoglandular System (LGS)",
+              "type": "obs",
+              "id": "lymphoGlandularSystemLgs",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8a6f2874-5826-43c0-a9bb-d1af9829656e",
+                "answers": [
+                  {
+                    "label": "Scrofula",
+                    "concept": "1929249f-e3ba-472b-b261-19e3cbfd9431"
+                  },
+                  {
+                    "label": "Not Palpable",
+                    "concept": "8c1dc514-5de3-4add-b407-e0edf7890125"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Respiratory System",
+              "type": "obs",
+              "id": "respiratorySystem",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "732be35c-8d82-4e8c-826b-f150729bb038"
+              }
+            },
+            {
+              "label": "Cardio-Vascular System (CVS)",
+              "type": "obs",
+              "id": "cardioVascularSystemCvs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "98283469-823b-439a-b553-6451edcd6186"
+              }
+            },
+            {
+              "label": "Abdominal Examination",
+              "type": "obs",
+              "id": "abdominalExamination",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "160947AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Genito-Urinary System (GUS)",
+              "type": "obs",
+              "id": "genitoUrinarySystemGus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6f3542ac-9b52-43d9-9181-e44eb4d470fc",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Musculo-Skeletal System (MSS)",
+              "type": "obs",
+              "id": "musculoSkeletalSystemMss",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f6b6c6d1-3320-498c-818f-b4a8c7005f94",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Integumentary System",
+              "type": "obs",
+              "id": "integumentarySystem",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2f70147f-7961-4937-acab-204676444dff"
+              }
+            },
+            {
+              "label": "Central Nervous System (CNS)",
+              "type": "obs",
+              "id": "centralNervousSystemCns",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "925306bd-9ce1-407f-8924-2063ec76b3b3",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Neck Stiffness",
+                    "concept": "323bb88e-58aa-42a2-8b28-dcf616b493e8"
+                  },
+                  {
+                    "label": "Brudzinski's Sign",
+                    "concept": "4b438210-4f2b-4718-958e-1ec1f57e0c4d"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No findings",
+                    "concept": "6f99b4d7-b6e7-5349-bc81-0511bc943d1a"
+                  },
+                  {
+                    "label": "Kernig Sign",
+                    "concept": "8d6a89a5-5b9f-49c8-9879-0edf5b2dffb9"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

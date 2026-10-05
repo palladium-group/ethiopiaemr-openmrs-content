@@ -1,0 +1,389 @@
+{
+  "name": "Vital Sign for 0-5 months",
+  "description": "Vital Sign for 0-5 months - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "17b0b0dd-a1a4-5694-a8f3-a97b5e7c8432",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Vital Sign for 0-5 months Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulse Rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Beats per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Degrees Celsius, one decimal place.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory Rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Breaths per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SPO2",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "min": "0",
+                "step": "0.01"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Head Circumference (cm)",
+              "type": "obs",
+              "id": "headCircumference",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "MUAC",
+              "type": "obs",
+              "id": "muac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Morrow",
+              "type": "obs",
+              "id": "morrow",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "35425667-7586-7893-0127-890123456789",
+                "answers": [
+                  {
+                    "concept": "160035AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Treatment completed"
+                  },
+                  {
+                    "concept": "163339AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Incomplete"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Grasp",
+              "type": "obs",
+              "id": "grasp",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "40970112-2031-234e-5672-345678901234",
+                "answers": [
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  },
+                  {
+                    "concept": "750c7a46-03f0-4cba-aa58-f5dc0efca955",
+                    "label": "Weak"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Suckling",
+              "type": "obs",
+              "id": "suckiling",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d1f6c750-fdb2-4424-bb47-91f7a9606394",
+                "answers": [
+                  {
+                    "concept": "c41b15a2-dc67-4a06-a536-1e9ddefce795",
+                    "label": "Sustained"
+                  },
+                  {
+                    "concept": "46536778-8697-890a-1238-901234567890",
+                    "label": "Unsustained"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Length",
+              "type": "obs",
+              "id": "length",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "97d878cf-4807-480a-a236-8f8f416f7be1",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight for Length",
+              "type": "obs",
+              "id": "weightForLength",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "31f2383e-2d35-5cbc-8e43-966e714ee934",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(length) || isEmpty(weight)) ? '' : ((calcWeightForHeightZscore(Number(length),Number(weight)) == null) ? '' : Number(calcWeightForHeightZscore(Number(length),Number(weight))))"
+                }
+              },
+              "readonly": true,
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight for age",
+              "type": "obs",
+              "id": "weightForAge",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0e758f90-0819-012c-3450-123456789012",
+                "answers": [
+                  {
+                    "label": "Below minus 3 standard deviation",
+                    "concept": "0f869001-1920-123d-4561-234567890123"
+                  },
+                  {
+                    "label": "Between minus 3 and minus 2 standard deviation",
+                    "concept": "10970112-2031-234e-5672-345678901234"
+                  },
+                  {
+                    "label": "Between minus 2 and minus 1 standard deviation",
+                    "concept": "11081223-3142-345f-6783-456789012345"
+                  },
+                  {
+                    "label": "Between minus 1 and 0 standard deviation",
+                    "concept": "12192334-4253-4560-7894-567890123456"
+                  },
+                  {
+                    "label": "Between 0 and 1 standard deviation",
+                    "concept": "13203445-5364-5671-8905-678901234567"
+                  },
+                  {
+                    "label": "Between 1 and 2 standard deviation",
+                    "concept": "14314556-6475-6782-9016-789012345678"
+                  },
+                  {
+                    "label": "Between 2 and 3 standard deviation",
+                    "concept": "15425667-7586-7893-0127-890123456789"
+                  },
+                  {
+                    "label": "Above 3 standard deviation",
+                    "concept": "16536778-8697-890a-1238-901234567890"
+                  },
+                  {
+                    "label": "2 to -1",
+                    "concept": "a1dde77f-e049-4712-8097-fcd78660dfc6"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Length for age",
+              "type": "obs",
+              "id": "lengthForAge",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0670ae82-9fca-5883-9c22-38a067859bee",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(length)) ? '' : ((calcHeightForAgeZscore(Number(length)) == null) ? '' : Number(calcHeightForAgeZscore(Number(length))))"
+                }
+              },
+              "readonly": true,
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "5m Blood Pressure",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic (mmHg)",
+              "type": "obs",
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Millimetres of mercury.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic (mmHg)",
+              "type": "obs",
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Millimetres of mercury.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

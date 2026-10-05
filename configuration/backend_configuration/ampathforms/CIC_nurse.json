@@ -1,0 +1,543 @@
+{
+  "name": "CIC nurse",
+  "description": "CIC nurse - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "48c4f25e-8f64-524f-ac94-9f501bf24b25",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "CIC nurse Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Was the baby on CIC previously?",
+              "type": "obs",
+              "id": "wasTheBabyOnCicPreviously",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c8f2c2f6-aec0-4d74-b68f-4826e54bf857",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "If the answer for above Q is NO",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Are they ready to be thought today?",
+              "type": "obs",
+              "id": "areTheyReadyToBeThoughtToday",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "13831d33-9568-45fa-8cb4-ef5b30af294f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Did they get trained?",
+              "type": "obs",
+              "id": "didTheyGetTrained",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "68cff0d5-aa98-4757-8879-3e84c5be8913",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Did they tried by themselves?",
+              "type": "obs",
+              "id": "didTheyTriedByThemselves",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d9196197-5d83-42f0-ba09-ec6d5224e0f6",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Are they capable of doing it at home?",
+              "type": "obs",
+              "id": "areTheyCapableOfDoingItAtHome",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "79ac7e15-073f-40a3-a6b3-3fcf8586bdd3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If not additional training option provided",
+              "type": "obs",
+              "id": "ifNotAdditionalTrainingOptionProvided",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1900d6af-3297-4170-ac82-25e8b59d0fff"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(areTheyCapableOfDoingItAtHome) || areTheyCapableOfDoingItAtHome !== '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "If the answer for the above Q is yes, then assess the following",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Currently doing CIC",
+              "type": "obs",
+              "id": "currentlyDoingCic",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1220c9d3-be5f-4f4d-836e-71ff50c7aab5",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If \"no\", provide reason(s)",
+              "type": "obs",
+              "id": "ifNoProvideReasonS",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "64b32182-f7de-48cc-9727-dcd7639aa72c",
+                "answers": [
+                  {
+                    "concept": "e67801e7-abf8-4fd9-9154-7472eb3bf699",
+                    "label": "Run out of catheters"
+                  },
+                  {
+                    "concept": "c3b5e9de-cbbd-4f19-937c-ddf75206813d",
+                    "label": "Child sick"
+                  },
+                  {
+                    "concept": "867c15b2-67d1-50df-a998-6975bd8d9a86",
+                    "label": "Parent believes too young"
+                  },
+                  {
+                    "concept": "b30a9f71-b47c-5202-85a0-e33597d38797",
+                    "label": "Parent believes it's not necessary"
+                  },
+                  {
+                    "concept": "70cbf3e0-d796-43d3-bd8b-4f6e3dd0e32b",
+                    "label": "Lack of family support"
+                  },
+                  {
+                    "concept": "36dc1000-57b8-4039-b00b-bd58552c1406",
+                    "label": "Language barrier"
+                  },
+                  {
+                    "concept": "68721504-82a9-406b-ba4c-6d4dcbb40b93",
+                    "label": "Technically unable to cath"
+                  },
+                  {
+                    "concept": "18bfa69a-65be-4cf7-bb37-c5c200967211",
+                    "label": "Does not meet criteria (select all that apply)"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "If other, please explain"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(currentlyDoingCic) || currentlyDoingCic !== '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Who is performing CIC?",
+              "type": "obs",
+              "id": "whoIsPerformingCic",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "808a08c3-7bd1-433e-8890-48e0e6f7845f",
+                "answers": [
+                  {
+                    "concept": "3d1b3db5-f8a1-4f64-ab12-b987fc5da892",
+                    "label": "Patient himself"
+                  },
+                  {
+                    "concept": "8390855a-6263-4ff5-9db8-c14007c31ab9",
+                    "label": "Care giver"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other, specify",
+              "type": "obs",
+              "id": "otherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(whoIsPerformingCic) || whoIsPerformingCic !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Peer parent involved?",
+              "type": "obs",
+              "id": "peerParentInvolved",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a5405f2c-8988-5469-ad35-119a7543d4c2",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Catheter Size (F)",
+              "type": "obs",
+              "id": "catheterSizeF",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a7898bc3-ee3e-40e3-8feb-aaa4f6a2c60b"
+              }
+            },
+            {
+              "label": "Catheterization Interval",
+              "type": "obs",
+              "id": "catheterizationInterval",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f914406c-00a6-4e7c-94ea-b8cd185a731c"
+              }
+            },
+            {
+              "label": "Average estimated Volume per each catheterization (mL)",
+              "type": "obs",
+              "id": "averageEstimatedVolumePerEachCatheteriza",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "80ff5403-d857-4472-9d48-cebf5fd9a0ab"
+              }
+            },
+            {
+              "label": "Using oxybutynin?",
+              "type": "obs",
+              "id": "usingOxybutynin",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a94ba0da-4d5c-4d38-80e7-3ffa95226c9b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Urinary tract infection since last review",
+              "type": "obs",
+              "id": "urinaryTractInfectionSinceLastReview",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6e6e4b9b-ab69-44e5-94bd-0eecaf003073",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Urinary Continence",
+              "type": "obs",
+              "id": "urinaryContinence",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "163272AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "6d29d7f0-676e-43dd-88d6-b2e8348a9fbb",
+                    "label": "Always dry"
+                  },
+                  {
+                    "concept": "00181fa1-af64-4b7a-a681-4fe2d49f1968",
+                    "label": "Mostly dry"
+                  },
+                  {
+                    "concept": "f4019d3b-658f-4ec1-8222-88331bc020d3",
+                    "label": "Mostly wet"
+                  },
+                  {
+                    "concept": "abc47af4-d0b2-4905-897c-c53c5e609a99",
+                    "label": "Always wet"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Bowel Management",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Does the patient need Bowel wash?",
+              "type": "obs",
+              "id": "doesThePatientNeedBowelWash",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1c32045d-d012-411f-9027-f81f39976268",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Bowel washouts taught? (If No teach them)",
+              "type": "obs",
+              "id": "bowelWashoutsTaughtIfNoTeachThem",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "dfb05779-0ba2-4b63-a06a-022430f2594f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(doesThePatientNeedBowelWash) || doesThePatientNeedBowelWash !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Peer parent involved?",
+              "type": "obs",
+              "id": "peerParentInvolved2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a5405f2c-8988-5469-ad35-119a7543d4c2",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Currently doing bowel washouts",
+              "type": "obs",
+              "id": "currentlyDoingBowelWashouts",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ea6acecf-8264-4389-b438-68fbfc70139e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If \"no\", provide reason",
+              "type": "obs",
+              "id": "ifNoProvideReason",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "233cbb27-c114-4f56-9713-a614d8e193a6",
+                "answers": [
+                  {
+                    "concept": "a1aca5e4-6d08-49db-a6a8-23cd7885a9ad",
+                    "label": "Run out of cones"
+                  },
+                  {
+                    "concept": "c90cfeda-eb1d-47f4-88bc-c4ae8b822d12",
+                    "label": "Chair or bucket broken"
+                  },
+                  {
+                    "concept": "c3b5e9de-cbbd-4f19-937c-ddf75206813d",
+                    "label": "Child sick"
+                  },
+                  {
+                    "concept": "867c15b2-67d1-50df-a998-6975bd8d9a86",
+                    "label": "Parent believes too young"
+                  },
+                  {
+                    "concept": "b30a9f71-b47c-5202-85a0-e33597d38797",
+                    "label": "Parent believes it's not necessary"
+                  },
+                  {
+                    "concept": "70cbf3e0-d796-43d3-bd8b-4f6e3dd0e32b",
+                    "label": "Lack of family support"
+                  },
+                  {
+                    "concept": "350dc3ac-1d36-4204-9abb-8a617666bc75",
+                    "label": "Abdomen distended"
+                  },
+                  {
+                    "concept": "49b58fa4-217c-442a-8854-77f619cdd865",
+                    "label": "Baby crying Other"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(currentlyDoingBowelWashouts) || currentlyDoingBowelWashouts !== '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

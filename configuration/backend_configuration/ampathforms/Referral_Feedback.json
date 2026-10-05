@@ -1,0 +1,309 @@
+{
+  "name": "Referral Feedback",
+  "description": "Referral Feedback - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "9ee202ac-b4ee-5769-bd46-4f9474b56ef4",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Referral Feedback Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Was the patient referred",
+              "type": "obs",
+              "id": "wasThePatientReferred",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "58900112-2334-0126-4560-2345f0123456",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "If yes",
+              "type": "obs",
+              "id": "ifYes",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "38c7439b-e3d9-458d-a0ba-aa8d3fa18a23",
+                "answers": [
+                  {
+                    "concept": "0c8a3bf0-e80b-484e-adb4-e9aaed156c41",
+                    "label": "Addis Ababa Government Hospital"
+                  },
+                  {
+                    "concept": "b7e2d82b-a1af-4f78-beb7-c7b4afa29861",
+                    "label": "Addis Ababa Private Hospital"
+                  },
+                  {
+                    "concept": "9c344556-6778-4560-8904-f012345678a0",
+                    "label": "Regional Hospital"
+                  },
+                  {
+                    "concept": "ad455667-7889-5671-9015-012345678a01",
+                    "label": "Health Center"
+                  },
+                  {
+                    "concept": "be566778-8990-6782-0126-12345678a012",
+                    "label": "Police/Prison"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(wasThePatientReferred) || wasThePatientReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "If other specify",
+              "type": "obs",
+              "id": "ifOtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              }
+            },
+            {
+              "label": "Name Of Institution",
+              "type": "obs",
+              "id": "nameOfInstitution",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "38e50167-1fb5-4d3e-997e-3a67535e91cf"
+              }
+            },
+            {
+              "label": "Communication",
+              "type": "obs",
+              "id": "communication",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "24dad750-58a5-4736-9fad-2732a79dce49",
+                "answers": [
+                  {
+                    "concept": "adcbafa1-d682-4f11-a93a-9fd0916d3e65",
+                    "label": "With Communication"
+                  },
+                  {
+                    "concept": "a847e05f-0326-4a46-a42c-2e5ed6725cb8",
+                    "label": "With Out Communication"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Was pre-hospital care/First aid given",
+              "type": "obs",
+              "id": "wasPreHospitalCareFirstAidGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f2900112-2334-0126-4560-5678a0123456",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes, specify",
+              "type": "obs",
+              "id": "ifYesSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161011aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(wasPreHospitalCareFirstAidGiven) || wasPreHospitalCareFirstAidGiven !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Origin/Home",
+              "type": "obs",
+              "id": "originHome",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "76ffd66d-6dd8-4652-9cca-b9e6cb30be95",
+                "answers": [
+                  {
+                    "concept": "b2e1297d-036c-4167-9634-cebfea113366",
+                    "label": "Addis Ababa"
+                  },
+                  {
+                    "concept": "622bcdd2-15df-46cd-862f-03af3fd8a546",
+                    "label": "Outside Addis Ababa"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Sub-city",
+              "type": "obs",
+              "id": "subcity",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "14566778-8990-6782-0126-89012345f012"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(originHome) || originHome !== 'b2e1297d-036c-4167-9634-cebfea113366'"
+              }
+            },
+            {
+              "label": "Woreda",
+              "type": "obs",
+              "id": "woreda",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "25677889-9001-7893-1237-9012345f0123"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(originHome) || originHome !== 'b2e1297d-036c-4167-9634-cebfea113366'"
+              }
+            },
+            {
+              "label": "Region",
+              "type": "obs",
+              "id": "region",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "36788990-0112-8904-2348-012345f01234"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(originHome) || originHome !== '622bcdd2-15df-46cd-862f-03af3fd8a546'"
+              }
+            },
+            {
+              "label": "Zone",
+              "type": "obs",
+              "id": "zone",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "47899001-1223-9015-3459-12345f012345",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(originHome) || originHome !== '622bcdd2-15df-46cd-862f-03af3fd8a546'"
+              }
+            },
+            {
+              "label": "Current Assesment",
+              "type": "obs",
+              "id": "currentAssesment",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5809a2b3-3ca3-b23e-8567-9ef012345678"
+              }
+            },
+            {
+              "label": "Department Notes",
+              "type": "obs",
+              "id": "departmentNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "bd88863f-dfdf-4122-a732-0025e4c1ae18"
+              }
+            },
+            {
+              "label": "Impressions/ Plan",
+              "type": "obs",
+              "id": "impressionsPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ba198693-3597-5fbc-88b4-385cb156d17b"
+              }
+            },
+            {
+              "label": "Doctors Name",
+              "type": "obs",
+              "id": "doctorsName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4550525b-47c2-41c3-8442-ac87c81ba73d"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

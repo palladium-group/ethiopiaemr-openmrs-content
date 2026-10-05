@@ -1,0 +1,240 @@
+{
+  "name": "Inpatient Clearance Sheet",
+  "description": "Inpatient Clearance Sheet - built from physician Word-doc spec (Phase 1, batch-three).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "2b5b6635-14d0-5593-8d13-fe5f9cf69970",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Inpatient Clearance Sheet Assessment",
+      "sections": [
+        {
+          "label": "Admission",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Ward",
+              "type": "obs",
+              "id": "ward",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ee7ce4a6-1bc2-401c-b2cd-6e51c5de3370"
+              }
+            },
+            {
+              "label": "Date of Admission",
+              "type": "obs",
+              "id": "dateOfAdmission",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "421719a0-eef5-4181-b55d-fff16d845314"
+              }
+            },
+            {
+              "label": "Date of Discharge",
+              "type": "obs",
+              "id": "dateOfDischarge",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "04d62489-de34-40e4-9196-c35fa98edbad"
+              }
+            },
+            {
+              "label": "Free of Property",
+              "type": "obs",
+              "id": "freeOfProperty",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d793194c-251a-4dc5-8d05-37c839852093"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Billing",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient Category",
+              "type": "obs",
+              "id": "patientCategory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "37fd000c-d185-4ab3-bd49-9005ce9868c7",
+                "answers": [
+                  {
+                    "concept": "2b8b242d-d0bb-4813-b045-6bd48977a427",
+                    "label": "Free"
+                  },
+                  {
+                    "concept": "0f9ef2f6-0a4c-4955-ac93-4cde0c4a3a64",
+                    "label": "Credit"
+                  },
+                  {
+                    "concept": "e22906c3-57b8-4887-a4e8-b236b60cf868",
+                    "label": "Exempted Service"
+                  },
+                  {
+                    "concept": "08f864f8-430a-4252-b5c3-18de3a7f54b1",
+                    "label": "Should Pay"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pre Paid Birr",
+              "type": "obs",
+              "id": "prePaidBirr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "4642aa54-9911-4273-9fbb-5d73a1f86d42",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Pre-Paid Receipt number",
+              "type": "obs",
+              "id": "prePaidReceiptNumber",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "51c556d7-bd1d-49d1-92a3-9e1c4d12e3b0"
+              }
+            },
+            {
+              "label": "For Bed",
+              "type": "obs",
+              "id": "forBed",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "bc6c0cf6-6ee8-4e8d-aa95-77a2bdce51af",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "For Operation Procedure",
+              "type": "obs",
+              "id": "forOperationProcedure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1a82c288-397c-4125-97c7-088d36ba20b1",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Service Payment",
+              "type": "obs",
+              "id": "servicePayment",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "95150cff-cd31-4e7a-9ed3-14eb6e2f4773",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Total Payment",
+              "type": "obs",
+              "id": "totalPayment",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "4dfc9bc3-f18b-4fba-81e4-cd94fc3c0003",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Additional Payment",
+              "type": "obs",
+              "id": "additionalPayment",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0c70870d-ba5f-4b0a-a830-bcacf09a2de5",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Return Payment",
+              "type": "obs",
+              "id": "returnPayment",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0e5fee9b-3942-4330-916c-e5e510072f8d",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

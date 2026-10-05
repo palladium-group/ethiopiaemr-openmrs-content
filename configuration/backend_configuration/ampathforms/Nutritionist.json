@@ -1,0 +1,152 @@
+{
+  "name": "Nutritionist",
+  "description": "Nutritionist - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "ec826761-3460-5c96-aa90-11425892a4c3",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Nutritionist Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Nutritional related risk/ Diagnosis?",
+              "type": "obs",
+              "id": "nutritionalRelatedRiskDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "73c78b89-9abb-42a0-8fbd-331f8856e047"
+              }
+            },
+            {
+              "label": "Nutritional Treatment and Advise",
+              "type": "obs",
+              "id": "nutritionalTreatmentAndAdvise",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3f8d89b3-906e-400e-bf72-c9f58b3aa9a4"
+              }
+            },
+            {
+              "label": "Is the mother having an indication to take Folic acid?",
+              "type": "obs",
+              "id": "isTheMotherHavingAnIndicationToTakeFolic",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "54f08a72-7206-4f41-a5a1-112a74a80524",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Is she taking folic acid if she has indication to take? (4.If not Provide her with 5mg folic acid to be taken daily for three month)",
+              "type": "obs",
+              "id": "isSheTakingFolicAcidIfSheHasIndicationTo",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3b2275b5-f54e-4ee1-9a7e-19e3dec0ce66",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "List of the foods given as a source of Folic acid",
+              "type": "obs",
+              "id": "listOfTheFoodsGivenAsASourceOfFolicAcid",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9ca0385e-06c9-40c7-a314-6e1a4abd6c83"
+              }
+            },
+            {
+              "label": "Advice to have a planned pregnancy and pre Advice to have a planned pregnancy and preconception care care",
+              "type": "obs",
+              "id": "adviceToHaveAPlannedPregnancyAndPreConec",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9d543ed3-3ee2-41f2-a85b-8939e2559625"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

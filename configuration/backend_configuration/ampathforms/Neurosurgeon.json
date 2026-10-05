@@ -1,0 +1,456 @@
+{
+  "name": "Neurosurgeon",
+  "description": "Neurosurgeon - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "deced11b-076f-5cef-a835-74a254121376",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Neurosurgeon Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Problem list",
+              "type": "obs",
+              "id": "problemList",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Any compliant",
+              "type": "obs",
+              "id": "anyCompliant",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ff816580-fb4f-41d5-a55f-8a6f1d0379a5"
+              }
+            },
+            {
+              "label": "Fontanel",
+              "type": "obs",
+              "id": "fontanel",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a4960b39-cd76-5ade-85e4-e0161052f48b",
+                "answers": [
+                  {
+                    "concept": "163347AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Above the bone (including full or tense)"
+                  },
+                  {
+                    "concept": "9f5aa35c-ee0d-428a-90a8-0713f8843b7c",
+                    "label": "At or below the bone (including soft, flat, or sunken)"
+                  },
+                  {
+                    "concept": "0d19590b-ec2d-4c4d-9838-9d77dd87cc2d",
+                    "label": "Suture closed or not applicable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HC (cm)",
+              "type": "obs",
+              "id": "hc",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "HC/Age(Z-score)",
+              "type": "obs",
+              "id": "hcAgeZScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "9810c264-16e5-4b0f-8c9f-60dbd2193e4c"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Gross shunt Evaluation/ Shunt Function Assessment (for hydrocephalus with shunt ONLY)",
+              "type": "obs",
+              "id": "grossShuntEvaluationShuntFunctionAssessm",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "25049b8b-0302-4917-aa08-9814cdfc3193",
+                "answers": [
+                  {
+                    "concept": "18522620-cb73-4fe4-ab57-26695dfd9e8c",
+                    "label": "Normal and Functional"
+                  },
+                  {
+                    "concept": "e16378b0-ec5e-489a-a667-ef19224a443b",
+                    "label": "Partial Dysfunction"
+                  },
+                  {
+                    "concept": "e42adcc3-33b9-4a12-8a6f-feff6beeefb4",
+                    "label": "Complete Dysfunction"
+                  },
+                  {
+                    "concept": "b801568e-bc08-424d-960a-ddae59515529",
+                    "label": "Over drainage"
+                  },
+                  {
+                    "concept": "e0ab591b-53d8-4b81-b06e-e794a138041d",
+                    "label": "Unknown: Unsure about the shunt function"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Applicable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Surgical Wound",
+              "type": "obs",
+              "id": "surgicalWound",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2a8a1be9-dea2-40c3-8bbe-51f3b4de91b3",
+                "answers": [
+                  {
+                    "concept": "335573fe-9dab-4492-8cb5-02588cace35e",
+                    "label": "Healed"
+                  },
+                  {
+                    "concept": "cb44d9ba-11b5-4766-9851-b22f025d9683",
+                    "label": "Healing Well"
+                  },
+                  {
+                    "concept": "1218fe9a-2e46-4a24-aa35-f869994b7687",
+                    "label": "Mild Redness or Swelling"
+                  },
+                  {
+                    "concept": "1a50a478-c3c6-47b0-95f7-2f2992d2d832",
+                    "label": "Moderate Redness, Swelling, or Drainage"
+                  },
+                  {
+                    "concept": "bd7ba6b9-9c03-4c88-86bc-a7b33ae793e5",
+                    "label": "Severe Redness, Swelling, or Drainage"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Applicable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "GCS",
+              "type": "obs",
+              "id": "gcs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "160347AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Bladder",
+              "type": "obs",
+              "id": "bladder",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "b08a7f9e-e748-4336-97fa-820ad6e820f8",
+                "answers": [
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Urinary retention (finding)",
+                    "concept": "c536d3b2-42b3-4d3e-9e12-87c548ae1f24"
+                  },
+                  {
+                    "label": "Catheterized",
+                    "concept": "35e2997d-f5e2-4fea-a7e5-4848139b4c9b"
+                  },
+                  {
+                    "label": "Empty",
+                    "concept": "3c461e91-4ac9-45c8-9932-476ae0fc8eaf"
+                  },
+                  {
+                    "label": "Full",
+                    "concept": "490dca17-a568-49e8-9da4-b5982d36a3ce"
+                  },
+                  {
+                    "label": "Distended",
+                    "concept": "e058b288-a3bf-4447-81f2-c27daf308fb4"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Bowel",
+              "type": "obs",
+              "id": "bowel",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4ae3b28a-f4c4-48bf-a034-7b307917dd7f"
+              }
+            },
+            {
+              "label": "Additional Physical examination finding",
+              "type": "obs",
+              "id": "additionalPhysicalExaminationFinding",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f7439191-f29e-44d5-b95e-02d7e37be2cf"
+              }
+            },
+            {
+              "label": "Assessment",
+              "type": "obs",
+              "id": "assessment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "13f82aece2cd4e3bbb950140e6cbffce"
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              }
+            },
+            {
+              "label": "Next Appointment",
+              "type": "obs",
+              "id": "nextAppointment",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "25db5489-c63c-48f8-a0ba-4f484884a061"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Strength",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "RUE",
+              "type": "obs",
+              "id": "rue",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "4e4df57f-75c0-4d9c-822d-54abc065cea3",
+                "answers": [
+                  {
+                    "label": "Mild",
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Moderate",
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Strong",
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "LUE",
+              "type": "obs",
+              "id": "lue",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "667e3583-d131-49f5-b949-7e05ac378b32"
+              }
+            },
+            {
+              "label": "RLE",
+              "type": "obs",
+              "id": "rle",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "4e4df57f-75c0-4d9c-822d-54abc065cea3",
+                "answers": [
+                  {
+                    "label": "Mild",
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Moderate",
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Strong",
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "LLE",
+              "type": "obs",
+              "id": "lle",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5258fd19-888f-447c-86c4-43e7659b7d95"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Sensory",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "RUE",
+              "type": "obs",
+              "id": "rue2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b8bd3aff-dedb-4e16-9b6d-a75ba5695696"
+              }
+            },
+            {
+              "label": "LUE",
+              "type": "obs",
+              "id": "lue2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "105bff18-0616-4082-949e-8ac747cee756"
+              }
+            },
+            {
+              "label": "RLE",
+              "type": "obs",
+              "id": "rle2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b8bd3aff-dedb-4e16-9b6d-a75ba5695696"
+              }
+            },
+            {
+              "label": "LLE",
+              "type": "obs",
+              "id": "lle2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3a4edcef-757c-4274-91de-6539508758a9"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Tone",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "RUE",
+              "type": "obs",
+              "id": "rue3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "63e8ac16-bcf7-42c4-b082-08940d29b40e"
+              }
+            },
+            {
+              "label": "LUE",
+              "type": "obs",
+              "id": "lue3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c6f050f8-6bc2-4542-9f47-202d29e49c83"
+              }
+            },
+            {
+              "label": "RLE",
+              "type": "obs",
+              "id": "rle3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "285877b2-0aa6-4bdf-bd7b-97a1511d7d66"
+              }
+            },
+            {
+              "label": "LLE",
+              "type": "obs",
+              "id": "lle3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "71c970a1-3d9d-4233-a591-9b527afca1ab"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

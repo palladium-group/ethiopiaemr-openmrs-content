@@ -1,0 +1,674 @@
+{
+  "name": "St Peter Specialized Hospital Mortality Review Tool",
+  "description": "St Peter Specialized Hospital Mortality Review Tool - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "e3d52ff0-ff51-53f8-bd4c-aa41ed7b529e",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "St Peter Specialized Hospital Mortality Review Tool Assessment",
+      "sections": [
+        {
+          "label": "Administrative Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Ward/Department",
+              "type": "encounterLocation",
+              "id": "wardDepartment",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              },
+              "readonly": true
+            },
+            {
+              "label": "Date of Review",
+              "type": "obs",
+              "id": "dateOfReview",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "cb97cd3d-c0d4-438f-bf12-7555ef62d63e"
+              }
+            },
+            {
+              "label": "Reviewed by",
+              "type": "obs",
+              "id": "reviewedBy",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Patient Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date & Time of Death",
+              "type": "obs",
+              "id": "dateTimeOfDeath",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "293a415b-3647-5678-9012-345678abcd09"
+              }
+            },
+            {
+              "label": "Place of Death",
+              "type": "obs",
+              "id": "placeOfDeath",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "be5ceb9f-0de5-483c-8e22-1d98b792c3ce",
+                "answers": [
+                  {
+                    "label": "Home",
+                    "concept": "1536AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "ON ARRIVAL",
+                    "concept": "159626AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Emergency department",
+                    "concept": "160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Operating room",
+                    "concept": "164834AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "ICU (n/a)",
+                    "concept": "42c16460-5230-43a7-9465-3fe91e2e75a2"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Recovery room",
+                    "concept": "bbcaba10-693d-464d-aa88-9c21ab34082e"
+                  },
+                  {
+                    "label": "ICU",
+                    "concept": "d8176d1b-1234-11ee-be56-0242ac120013"
+                  },
+                  {
+                    "label": "Ward",
+                    "concept": "ee7ce4a6-1bc2-401c-b2cd-6e51c5de3370"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Length of Stay",
+              "type": "obs",
+              "id": "lengthOfStay",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "162196AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Was the patient preoperative",
+              "type": "obs",
+              "id": "wasThePatientPreoperative",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f9443154-3eab-42dc-9291-2ba0d504783e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Clinical Summary",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Admission diagnosis",
+              "type": "obs",
+              "id": "admissionDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2adb346d-45cb-4f27-9b72-a6c0b7f20cc8"
+              }
+            },
+            {
+              "label": "Final Diagnosis",
+              "type": "obs",
+              "id": "finalDiagnosis",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "answers": []
+              }
+            },
+            {
+              "label": "Immediate Cause of Death",
+              "type": "obs",
+              "id": "immediateCauseOfDeath",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3a4b526c-4758-6789-0123-456789abcd0a"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Modifiable Factors Identified",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient-related Identified Gap",
+              "type": "obs",
+              "id": "patientRelatedIdentifiedGap",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1511231e-9cd8-4e40-96a3-bbc27893c642"
+              }
+            },
+            {
+              "label": "Provider-related Identified Gap",
+              "type": "obs",
+              "id": "providerRelatedIdentifiedGap",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "bfe0d135-dacc-49ce-916b-e627b98e18bc"
+              }
+            },
+            {
+              "label": "System-related Identified Gap",
+              "type": "obs",
+              "id": "systemRelatedIdentifiedGap",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ee2792ef-8a17-4340-b831-3710c9b86655"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Criterion & Key Sub-criteria (use these to judge Met(2) / Partially Met(1) / Not Met(0))",
+      "sections": [
+        {
+          "label": "Patient history",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Admitted to a health facility with in the past 3 months. had a poor prognostic/ terminal illness",
+              "type": "obs",
+              "id": "admittedToAHealthFacilityWithInThePast3M",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0170ef57-4fec-4251-93be-1107a5e82250",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Initial Assessment & Triage",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Completed within 10 min of arrival/admission - ABCs + vital signs + primary survey done - Triage category / urgency correctly assigned - Initial stabilization measures documented as appropriate",
+              "type": "obs",
+              "id": "completedWithin10MinOfArrivalAdmissionAb",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "314edfa4-defd-4334-b6f0-e56520f32c1f",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Monitoring & Reassessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Vital signs and clinical parameters monitored at ordered frequency - Intake/output charted when indicated - Pain, GCS, or other relevant scores monitored -Daily physician progress note and appropriate order note review",
+              "type": "obs",
+              "id": "vitalSignsAndClinicalParametersMonitored",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "9c34440c-b8da-4ee1-b7ed-b2406a329cdb",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Recognition of Deterioration",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Abnormal findings (vitals, labs, clinical signs) clearly identified - Early warning signs/triggers recognized - Time from first deterioration sign to action documented",
+              "type": "obs",
+              "id": "abnormalFindingsVitalsLabsClinicalSignsC",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "542203a2-9c88-4687-a0eb-bf310820fe18",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Timeliness of Intervention & Escalation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Appropriate action taken within reasonable time (<1 hour for critical changes) - Responsible physician/senior consulted promptly for critical deterioration - Escalation to ICU/HDU recognized and acted on timely",
+              "type": "obs",
+              "id": "appropriateActionTakenWithinReasonableTi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5745a50a-550f-4c1c-a515-0a6eea35296c",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Appropriateness of Management",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Management consistent with national/KPH guidelines - Investigations ordered were targeted and results reviewed timely - Treatment (medications, fluids, procedures) appropriate for diagnosis",
+              "type": "obs",
+              "id": "managementConsistentWithNationalKphGuide",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a9704963-cbe3-4ef2-86d2-307f7c3946eb",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Senior Review & Interdepartmental Coordination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Senior review done when indicated - Appropriate interdepartmental consultations requested and responded to timely - Recommendations implemented or reasons for deviation documented",
+              "type": "obs",
+              "id": "seniorReviewDoneWhenIndicatedAppropriate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "9572aeb3-7c6b-431f-846c-b0e111e62559",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Nursing Care & Monitoring",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Nursing assessments, interventions, and progress notes done daily - Medication administration accurate and timely - Negative changes communicated promptly to doctor",
+              "type": "obs",
+              "id": "nursingAssessmentsInterventionsAndProgre",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "bcef152f-2d51-44a9-a294-6649b5257c23",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Supportive Care (Nutrition, Education, Family)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Nutritional status assessed (when admission >48 hrs and service available) - Health education/counselling to patient or attendant documented - Family updated regularly during deterioration",
+              "type": "obs",
+              "id": "nutritionalStatusAssessedWhenAdmission48",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f72f9b64-c151-49bf-a6d4-651f83853142",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Medication Safety & Resource Availability",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Essential medications available at time of need(if documented) - High-risk medications reviewed (if pharmacist available) - No stock-out or administration error contributed to outcome",
+              "type": "obs",
+              "id": "essentialMedicationsAvailableAtTimeOfNee",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "3307406f-607c-44ad-9fd2-810eb8ddd0cc",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Documentation & Communication",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Key decisions, times, and rationale clearly documented - Handovers between shifts/teams adequate - Resuscitation / End-of-life care properly documented (including family communication)",
+              "type": "obs",
+              "id": "keyDecisionsTimesAndRationaleClearlyDocu",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e1453f96-3c79-44a5-a9f1-4ce9f1e380db",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Reviewer Comments",
+      "sections": [
+        {
+          "label": "System Issues Identified (for QSMT)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Delay in Patient Care",
+              "type": "obs",
+              "id": "delayInPatientCare",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7c263ff1-2c3e-4eac-9cac-c130de7fce02",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Delay in laboratory service",
+              "type": "obs",
+              "id": "delayInLaboratoryService",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "51fa5114-4aa4-4a2a-b0b0-a74d93f1cd8c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Delay in imaging service",
+              "type": "obs",
+              "id": "delayInImagingService",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3ea9705e-c32f-4069-82b2-13318b77e995",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Medication/supply shortage",
+              "type": "obs",
+              "id": "medicationSupplyShortage",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5d575809-071d-4ed8-9ed8-5798971b9954",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Equipment failure/unavailability",
+              "type": "obs",
+              "id": "equipmentFailureUnavailability",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ef75ef2d-b990-4677-a129-c8bc167580db",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "ICU/HDU bed unavailable",
+              "type": "obs",
+              "id": "icuHduBedUnavailable",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e692ec57-f26e-4cf6-9f3c-8dadbf7becb1",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Delay in consultation/ response",
+              "type": "obs",
+              "id": "delayInConsultationResponse",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "136fec7d-9227-4d78-bbf3-90eaaf06e6f4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Referral/transport delay",
+              "type": "obs",
+              "id": "referralTransportDelay",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "daffd455-3d45-44d1-96be-8ef267a57574",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Final Review Outcome",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Was this death potentially preventable?",
+              "type": "obs",
+              "id": "wasThisDeathPotentiallyPreventable",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8be334da-e3c5-41db-a5fd-a643e6ed880f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Reviewer Name",
+              "type": "obs",
+              "id": "reviewerName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

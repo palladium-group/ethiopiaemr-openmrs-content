@@ -1,0 +1,572 @@
+{
+  "name": "Pediatric Discharge Summary",
+  "description": "Pediatric Discharge Sum - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "2f7c9250-bea5-5d7f-9a07-82b7440aad84",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Pediatric Discharge Summary Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Kept date",
+              "type": "obs",
+              "id": "keptDate",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "996bd1fb-f6fd-4e42-9792-b2b6be088e4c"
+              }
+            },
+            {
+              "label": "Kept Diagnosis",
+              "type": "obs",
+              "id": "keptDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f7fdc0a2-8d03-4f9d-8e6e-5c5f0eef6bf1"
+              }
+            },
+            {
+              "label": "Treatments given",
+              "type": "obs",
+              "id": "treatmentsGiven",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "166665AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Assesment on Discharge",
+              "type": "obs",
+              "id": "assesmentOnDischarge",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "147dfb53-c9d4-4e7a-b693-30e9b73739da",
+                "answers": [
+                  {
+                    "concept": "163053AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Improved"
+                  },
+                  {
+                    "concept": "164381AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Same"
+                  },
+                  {
+                    "concept": "b6d89254-f3a6-43b6-b9cf-97d9354044f3",
+                    "label": "Worsened"
+                  },
+                  {
+                    "concept": "97aebec3-6c98-44d3-921a-a12b6f35ce9b",
+                    "label": "Absconded"
+                  },
+                  {
+                    "concept": "160432AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Dead"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Medications given at Discharge",
+              "type": "obs",
+              "id": "medicationsGivenAtDischarge",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f95d387c-78bb-4b38-9bd9-b899c4c75a4b"
+              }
+            },
+            {
+              "label": "Discharged at",
+              "type": "obs",
+              "id": "dischargedAt",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "29a6a433-b46a-5df3-975f-edfd98ef32b6"
+              }
+            },
+            {
+              "label": "Name of Discharged physician",
+              "type": "obs",
+              "id": "nameOfDischargedPhysician",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Advice Given",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Breast Feeding",
+              "type": "obs",
+              "id": "breastFeeding",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "933b4fc7-a04a-4be1-9307-405ff8da4e5c",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Vaccination",
+              "type": "obs",
+              "id": "vaccination",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c2090c64-1379-4157-a63a-4db29fd4e6c4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "label": "N/A"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Sunlight exposure",
+              "type": "obs",
+              "id": "sunlightExposure",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "798893cd-2054-518f-9910-c35e18959cee",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "label": "N/A"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Danger Signs advised?",
+              "type": "obs",
+              "id": "dangerSignsAdvised",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "effc60fa-8496-5f6d-b43f-d4d2d71863de",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other advice given",
+              "type": "obs",
+              "id": "otherAdviceGiven",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Appoint",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Appointment given?",
+              "type": "obs",
+              "id": "appointmentGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7bfe041e-e921-4798-b9fd-a8f222a56be2",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Monday",
+              "type": "obs",
+              "id": "monday",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "996bd1fb-f6fd-4e42-9792-b2b6be088e4c",
+                "answers": [
+                  {
+                    "concept": "09a5bffd-1230-41a7-8dbc-d7c80f4fb21e",
+                    "label": "Neurosurgery(MDT) Clinic"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Tuesday",
+              "type": "obs",
+              "id": "tuesday",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "996bd1fb-f6fd-4e42-9792-b2b6be088e4c",
+                "answers": [
+                  {
+                    "concept": "d8176d1b-1234-11ee-be56-0242ac120009",
+                    "label": "Neurology Clinic"
+                  },
+                  {
+                    "concept": "e2803577-1840-4f7e-ae4a-81b58459ef99",
+                    "label": "Cardiac Clinic"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Wednesday",
+              "type": "obs",
+              "id": "wednesday",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "996bd1fb-f6fd-4e42-9792-b2b6be088e4c",
+                "answers": [
+                  {
+                    "concept": "1635b111-3f69-4d2e-9213-b7b5a52dd741",
+                    "label": "Chest clinic"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Thursday",
+              "type": "obs",
+              "id": "thursday",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "996bd1fb-f6fd-4e42-9792-b2b6be088e4c",
+                "answers": [
+                  {
+                    "concept": "aad2e84a-6291-4364-b382-dfa1beb4849d",
+                    "label": "Surgical Referral Clinic"
+                  },
+                  {
+                    "concept": "a17b196c-d473-4801-911f-322d179e99b0",
+                    "label": "Miscellaneous Clinic"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Friday",
+              "type": "obs",
+              "id": "friday",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "996bd1fb-f6fd-4e42-9792-b2b6be088e4c",
+                "answers": [
+                  {
+                    "concept": "6aa6198a-393d-41d7-af5e-005b8cab01d7",
+                    "label": "High risk neonates/Infants"
+                  },
+                  {
+                    "concept": "46ebda3e-a0fd-4410-a80e-08b6acdb8313",
+                    "label": "Neurosurgery(non-MDT) Clinic"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Others",
+              "type": "obs",
+              "id": "others",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cc177191-2c36-4f22-89a0-9cfba86ad2fb"
+              }
+            },
+            {
+              "label": "Appointment date",
+              "type": "obs",
+              "id": "appointmentDate",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "996bd1fb-f6fd-4e42-9792-b2b6be088e4c"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Vital signs at Discharge",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Respiratory Rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Breaths per minute.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Degrees Celsius, one decimal place.",
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Blood Pressure",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic Blood Pressure (mmHg)",
+              "type": "obs",
+              "id": "systolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Millimetres of mercury.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic Blood Pressure (mmHg)",
+              "type": "obs",
+              "id": "diastolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Millimetres of mercury.",
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Pul",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulse Rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Beats per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse-Volume",
+              "type": "obs",
+              "id": "pulseVolume",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "bc45acaa-11c5-4e0e-8060-2e28cf11e6fc",
+                "answers": [
+                  {
+                    "concept": "9f0f09c7-7e54-4b3e-8c9f-d1eed1c67480",
+                    "label": "Non-palpable"
+                  },
+                  {
+                    "concept": "a6607d63-12b0-420c-bca3-92ba9598be82",
+                    "label": "Feeble/Weak"
+                  },
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pulse Rhythm",
+              "type": "obs",
+              "id": "pulseRythm",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d5f88633-71f9-48e2-9618-4c7dab53f73d",
+                "answers": [
+                  {
+                    "concept": "22e3978c-aace-418f-aa8d-5aa9c2cf0f24",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "1febdf09-d7d9-4c40-80e0-5b57de967738",
+                    "label": "Regularly-Irregular"
+                  },
+                  {
+                    "concept": "66e60dad-b89b-45ed-948f-66dec904cfd9",
+                    "label": "Irregularly-Irregular"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "SPO2",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "SPO2",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "min": "0",
+                "step": "0.01"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

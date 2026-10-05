@@ -1,0 +1,347 @@
+{
+  "name": "HIV Risk Screening Tool for Children Under 15 Years of Age",
+  "description": "HIV Risk Screening Tool for Children Under 15 Years of Age - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "173ec27c-e422-5433-9f5d-777948bbca35",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "HIV Risk Screening Tool for Children Under 15 Years of Age Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "If \"Yes\" to one of the criteria listed",
+              "type": "obs",
+              "id": "ifYesToOneOfTheCriteriaListed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "71448e8e-6b70-4d08-bcef-040de80b076f",
+                "answers": [
+                  {
+                    "concept": "ccf759b9-bdd4-4265-a71a-67a894d89dec",
+                    "label": "1. Eligible"
+                  },
+                  {
+                    "concept": "165078AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. Not Eligible"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Test Result",
+              "type": "obs",
+              "id": "testResult",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "be661a33-34f4-4fad-a0f1-5f20243e6e1b",
+                "answers": [
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. Negative"
+                  },
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "b5688b15-7f59-5a84-8e22-5e2ba36e1f14",
+                    "label": "Refused to test"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Child age < 18 Months",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "A. Mother's HIV Status Known",
+              "type": "obs",
+              "id": "aMotherSHivStatusKnown",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative."
+                  },
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive."
+                  }
+                ]
+              }
+            },
+            {
+              "label": "B. Mother's HIV Status Unknown",
+              "type": "obs",
+              "id": "bMotherSHivStatusUnknown",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "176b461f-c6af-4d4f-8860-930e2cc46c60",
+                    "label": "1. Test Mother and Decide According to the above options Under \"A\""
+                  }
+                ]
+              }
+            },
+            {
+              "label": "C. Child is Orphan",
+              "type": "obs",
+              "id": "cChildIsOrphan",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "fe2dd1a0-c39c-5d6e-b526-382d2cd87088",
+                "answers": [
+                  {
+                    "concept": "091872e9-518b-44be-bda7-525ae9df7983",
+                    "label": "1. Test Child"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "D. Child having HIV Clinical S&S (refer step2 No. 3)",
+              "type": "obs",
+              "id": "dChildHavingHivClinicalSSReferStep2No3",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "4ca3522e-7633-5a0b-b3a6-e1db3d41bb4a",
+                "answers": [
+                  {
+                    "concept": "091872e9-518b-44be-bda7-525ae9df7983",
+                    "label": "1. Test Child"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Child age > 18 months",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Step 1:- Assess for HIV Status..",
+              "type": "obs",
+              "id": "step1AssessForHivStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "02f86cce-223d-4dad-b37d-8bf2a24a0afa",
+                "answers": [
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  },
+                  {
+                    "concept": "956af2cd-07a0-502f-99f8-8d0d2299badf",
+                    "label": "Known positive and on ART"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "1. All Biological children of Parents with HIV/AIDS",
+              "type": "obs",
+              "id": "1AllBiologicalChildrenOfParentsWithHivAi",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "59e32a00-300e-5cd9-a0ac-74c1aaa97edc",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "1. Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "2. Orphan/ vulnerable children with unknown parental HIV status",
+              "type": "obs",
+              "id": "2OrphanVulnerableChildrenWithUnknownPare",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "17437282-ea8c-5c42-a7b9-117ee982a7ae",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "1. Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "3. Diagnosed to have ANY ONE of the following If yes, please write the code of the listed signs /symptoms provided on below",
+              "type": "obs",
+              "id": "3DiagnosedToHaveAnyOneOfTheFollowingIfYe",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "126459f7-a37b-45ac-8702-aac782ae2683",
+                "answers": [
+                  {
+                    "concept": "798a5b57-2060-4a0e-bfd6-91a43fbe94e3",
+                    "label": "1. Confirmed or suspected TB"
+                  },
+                  {
+                    "concept": "9dbe21ae-7154-4215-9067-6519a072fea2",
+                    "label": "2. Recurrent lower respiratory infections ( pneumonia)of > 2 in the past 6 months"
+                  },
+                  {
+                    "concept": "a643d8ed-571c-4698-ad72-bbef706805c3",
+                    "label": "3. Prolonged fever (> 2 weeks)"
+                  },
+                  {
+                    "concept": "4e55d944-2e79-4bae-8d7d-07ad0ce2fee9",
+                    "label": "4. Chronic ear discharge"
+                  },
+                  {
+                    "concept": "cd7ffd79-b579-47f7-9679-e9a913905928",
+                    "label": "5. Chronic or recurrent diarrhea"
+                  },
+                  {
+                    "concept": "70ebbb25-5ffc-42f9-96e7-37cffa5df1a5",
+                    "label": "6. Recurrent or extensive skin lesion"
+                  },
+                  {
+                    "concept": "e918b5ab-510c-402e-99e3-4919fe6b647a",
+                    "label": "7. Severe malnutrition or failure to thrive"
+                  },
+                  {
+                    "concept": "48081307-3bbb-4eb9-9d42-bd19cfed385c",
+                    "label": "8. Developmental delay /regression"
+                  },
+                  {
+                    "concept": "999c7df3-4870-4739-b779-225e62787e5b",
+                    "label": "9. Unexplained poor-health in the last 3 months"
+                  },
+                  {
+                    "concept": "31be1a88-b84d-4a02-98b4-bfb0e327f1f6",
+                    "label": "10. HX of repeated admission to hospital"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "4. Is the child having anyone of the following(for the child is older than 10 years) If yes, please write the code of the listed signs /symptoms provided on below",
+              "type": "obs",
+              "id": "4IsTheChildHavingAnyoneOfTheFollowingFor",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5ace2735-cb3a-4c2b-bdeb-d7e010e7f284",
+                "answers": [
+                  {
+                    "concept": "729c44e9-8e57-4240-baa6-28b5a0db67c6",
+                    "label": "1. Is the child sexually active or sexually exploited?"
+                  },
+                  {
+                    "concept": "9af43fe1-d0d9-456a-a5b4-41721fde2500",
+                    "label": "2. Is the child living on street?"
+                  },
+                  {
+                    "concept": "a8726f87-e4ce-4990-bb6b-9503cc2f46bb",
+                    "label": "3. Is the child leading a family?"
+                  },
+                  {
+                    "concept": "4a6580ba-e11c-463c-ab88-2df3da96c424",
+                    "label": "4. Does the child use substance or alcohol?"
+                  },
+                  {
+                    "concept": "4b2ef30d-ec5d-46a8-ad59-6474fa564b17",
+                    "label": "5. Is the child out of school or missed school repeatedly?"
+                  },
+                  {
+                    "concept": "ca80967c-fc70-452d-80a5-5ffa057a74bf",
+                    "label": "6. Does the child of history of STI?"
+                  },
+                  {
+                    "concept": "ca514d90-0f20-4175-9c01-f20fb3bd7b84",
+                    "label": "7. HIV clinical S &S"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

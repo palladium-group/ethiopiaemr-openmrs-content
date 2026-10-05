@@ -1,0 +1,251 @@
+{
+  "name": "Assessment, Care Plan and Pharmaceutical Care Progress",
+  "description": "Assessment ,care plan and pharmaceutical care progress - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "f44f5fb2-91fc-560d-a5db-0545acab37fe",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Assessment, Care Plan and Pharmaceutical Care Progress Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Indication",
+              "type": "obs",
+              "id": "indication",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c40b7105-5f72-56c9-a039-cfb3f5c9d425"
+              }
+            },
+            {
+              "label": "Date & Time",
+              "type": "obs",
+              "id": "dateTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Current Status",
+              "type": "obs",
+              "id": "currentStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9add3766-cbbc-5893-bd77-96fbc1ecc8fa",
+                "answers": [
+                  {
+                    "concept": "160037AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "On Treatment"
+                  },
+                  {
+                    "concept": "38293041-2536-4567-8901-234567123456",
+                    "label": "Stopped Treatment"
+                  },
+                  {
+                    "concept": "159492AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Transferred Out"
+                  },
+                  {
+                    "concept": "50415263-4758-6789-0123-456789345678",
+                    "label": "Missing"
+                  },
+                  {
+                    "concept": "5240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Lost to Follow-up"
+                  },
+                  {
+                    "concept": "5241AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Death"
+                  },
+                  {
+                    "concept": "8a15fb2c-c229-41c5-92db-6822c71c6c9f",
+                    "label": "Restarted"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Assesment",
+              "type": "obs",
+              "id": "assesment",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "13f82aece2cd4e3bbb950140e6cbffce"
+              }
+            },
+            {
+              "label": "Interventions made",
+              "type": "obs",
+              "id": "interventionsMade",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "10628b26-c102-46c5-8773-082ed4672961",
+                "answers": [
+                  {
+                    "concept": "44ce3b81-2d6a-4ac1-ad5c-c86f08dcc736",
+                    "label": "Discontinued unnecessary drug"
+                  },
+                  {
+                    "concept": "8874841d-0448-4f96-ac47-bf2406e076e1",
+                    "label": "Initiated additional drug therapy"
+                  },
+                  {
+                    "concept": "b9cebe0a-4d60-4ddf-8675-1ae136f2b46f",
+                    "label": "Changed ineffective drug"
+                  },
+                  {
+                    "concept": "f4df0945-138e-445d-a8f3-c0b4106225bd",
+                    "label": "Increase dosage"
+                  },
+                  {
+                    "concept": "6bdde0b4-8371-4f5f-b2bb-4d7798c715c5",
+                    "label": "Adverse drug reactions managed"
+                  },
+                  {
+                    "concept": "c5b29208-62dd-4fbb-8799-5bc7453570fa",
+                    "label": "Decreased dosage"
+                  },
+                  {
+                    "concept": "56b7f3a7-8b62-4d6f-906e-3940b7c9920c",
+                    "label": "Improved compliance"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Acceptance",
+              "type": "obs",
+              "id": "acceptance",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "98837b05-74b6-45b5-86b3-3aa52a1d56a2",
+                "answers": [
+                  {
+                    "concept": "f8a1f807-5539-4994-8939-d01ea7737dbf",
+                    "label": "Fully accepted"
+                  },
+                  {
+                    "concept": "854e6254-93a1-4783-892e-fb11a2e9b0a1",
+                    "label": "Partially accepted"
+                  },
+                  {
+                    "concept": "a3854d64-d9a5-4d2d-98c2-cb0036661505",
+                    "label": "Not accepted"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Care plan",
+              "type": "obs",
+              "id": "carePlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "166021AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Outcome of the intervention",
+              "type": "obs",
+              "id": "outcomeOfTheIntervention",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4c7c798f-1552-4a63-8898-b33cb9e5aca7"
+              }
+            },
+            {
+              "label": "Discharged at",
+              "type": "obs",
+              "id": "dischargedAt",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "29a6a433-b46a-5df3-975f-edfd98ef32b6"
+              }
+            },
+            {
+              "label": "Discharge medication and plan",
+              "type": "obs",
+              "id": "dischargeMedicationAndPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a7dafbea-0d1e-47c4-8ea4-524ce5859872"
+              }
+            },
+            {
+              "label": "Discharge counseling",
+              "type": "obs",
+              "id": "dischargeCounseling",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "38520371-63f1-4008-88bf-997ba984a1e8"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

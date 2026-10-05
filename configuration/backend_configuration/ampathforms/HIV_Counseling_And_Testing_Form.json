@@ -1,0 +1,361 @@
+{
+  "name": "HIV Counseling And Testing Form",
+  "description": "HIV Counseling And Testing Form - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "d5eefa5f-c591-5e47-8837-45b6f65eb5cb",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "HIV Counseling And Testing Form Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Number of spousal partner and Name",
+              "type": "obs",
+              "id": "numberOfSpousalPartnerAndName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "33fb0edd-1c37-4502-acf5-aefb05dc569e"
+              }
+            },
+            {
+              "label": "Number of non-spousal partner and Name",
+              "type": "obs",
+              "id": "numberOfNonSpousalPartnerAndName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "228ff8ea-1c72-4092-b40e-673711bb7de0"
+              }
+            },
+            {
+              "label": "Number of children under 19 years and Name",
+              "type": "obs",
+              "id": "numberOfChildrenUnder19YearsAndName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4b45adfa-858e-4087-be2c-07cbdf3eab16"
+              }
+            },
+            {
+              "label": "Is the patient willing to be tested",
+              "type": "obs",
+              "id": "isThePatientWillingToBeTested",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ac618c2e-3c29-44c6-b993-7cf4bac618ab",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If No ,Write reason",
+              "type": "obs",
+              "id": "ifNoWriteReason",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "159803AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "311c5330-2d0d-4aed-8b02-ff770d1ee50f",
+                    "label": "Last testing period is <3 months"
+                  },
+                  {
+                    "concept": "03c2265d-4e83-47cd-bead-1f2b79c9deee",
+                    "label": "Refused to test"
+                  },
+                  {
+                    "concept": "2bc42874-d722-43e4-9b57-cc5117533e4e",
+                    "label": "Known HIV +ve"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "If other specify"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(isThePatientWillingToBeTested) || isThePatientWillingToBeTested !== '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "If tested,HIV result",
+              "type": "obs",
+              "id": "ifTestedHivResult",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e16fa844-c5bf-4a85-9e01-d9a2b1b7528d",
+                "answers": [
+                  {
+                    "concept": "138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "HIV positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "HIV negative"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(isThePatientWillingToBeTested) || isThePatientWillingToBeTested !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "If any of the above test not done, which test and why?",
+              "type": "obs",
+              "id": "ifAnyOfTheAboveTestNotDoneWhichTestAndWh",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2f4f4d80-40c2-445d-a847-4b66274fa3c7"
+              }
+            },
+            {
+              "label": "Test done by",
+              "type": "obs",
+              "id": "testDoneBy",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "Testing unit/department",
+              "type": "obs",
+              "id": "testingUnitDepartment",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a92dc88f-2c4f-44eb-abfc-5e6ee30f3a0d"
+              }
+            }
+          ]
+        },
+        {
+          "label": "HIV Test Result",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Test 1 result",
+              "type": "obs",
+              "id": "test1Result",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "17df02dc-6676-4e1c-829c-4c9289b082d2",
+                "answers": [
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reactive"
+                  },
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Non Reactive"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Test 1 Conclusion",
+              "type": "obs",
+              "id": "test1Conclusion",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d62932e5-2b3b-43c4-b3ef-eb2d741905d8",
+                "answers": [
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "HIV negative"
+                  },
+                  {
+                    "concept": "8425eda6-c053-4c98-bc8c-29441335d0fd",
+                    "label": "Perform test 2"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Test 2 Result",
+              "type": "obs",
+              "id": "test2Result",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8757dd19-cf1c-4e7b-be11-54ef3a268fe7",
+                "answers": [
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reactive"
+                  },
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Non Reactive"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Test 2 Conclusion",
+              "type": "obs",
+              "id": "test2Conclusion",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e77348fc-849b-49c2-b74c-9ed2e1d233ba",
+                "answers": [
+                  {
+                    "concept": "309132ae-d707-433a-b4cc-1449eb545746",
+                    "label": "Perform test 3"
+                  },
+                  {
+                    "concept": "2325a3dc-bc20-432d-8d06-094ec8e797bf",
+                    "label": "Repeat test 1"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Test 3 Result",
+              "type": "obs",
+              "id": "test3Result",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6b16f65a-bb5d-40f9-8eaf-6bc0a1c5e2b9",
+                "answers": [
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reactive"
+                  },
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Non Reactive"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Test 3 Conclusion",
+              "type": "obs",
+              "id": "test3Conclusion",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9cc92a01-6a56-40e2-90e5-c9a59aaed868",
+                "answers": [
+                  {
+                    "concept": "138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "HIV positive"
+                  },
+                  {
+                    "concept": "58dcec4d-8374-5b83-bbd9-28d43ec46c8e",
+                    "label": "HIV Inconclusive (appoint after 14 days)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Repeat Test 1 Result",
+              "type": "obs",
+              "id": "repeatTest1Result",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "49bd993f-d3ea-4377-a575-3c154486661d",
+                "answers": [
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reactive"
+                  },
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Non Reactive"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Repeat Test 1 Conclusion",
+              "type": "obs",
+              "id": "repeatTest1Conclusion",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "188870de-909d-479d-b0f0-9fe812a5e760",
+                "answers": [
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "HIV negative"
+                  },
+                  {
+                    "concept": "58dcec4d-8374-5b83-bbd9-28d43ec46c8e",
+                    "label": "HIV Inconclusive (appoint after 14 days)"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

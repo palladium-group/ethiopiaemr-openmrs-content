@@ -1,0 +1,295 @@
+{
+  "name": "NICU critical room follow up sheet",
+  "description": "NICU critical room follow up sheet - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "e497ee04-dc59-5917-8bfa-3ead43c7bec2",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "NICU critical room follow up sheet Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Pulse rate (bpm)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Beats per minute.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory rate (breaths/min)",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Breaths per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Degrees Celsius, one decimal place.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SpO2 (%)",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "min": "0",
+                "step": "0.01"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Maintenance fluid(ml/kg/day)",
+              "type": "obs",
+              "id": "maintenanceFluidMlKgDay",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c60ba033-e397-499a-8963-c06ca6fff303",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Urine Output",
+              "type": "obs",
+              "id": "urineOutput",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161929AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Stool consistency",
+              "type": "obs",
+              "id": "stoolCosistency",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c37463d6-a9a7-4da0-81a2-0d2e1c3ab7f8"
+              }
+            },
+            {
+              "label": "Vomiting",
+              "type": "obs",
+              "id": "vomiting",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3fe9c73a-8e6d-4f02-bd9f-21d655a63c74"
+              }
+            },
+            {
+              "label": "Respiratory System (RS)",
+              "type": "obs",
+              "id": "respiratorySystemRs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "732be35c-8d82-4e8c-826b-f150729bb038"
+              }
+            },
+            {
+              "label": "Cardiovascular System (CVS)",
+              "type": "obs",
+              "id": "cardiovascularSystemCvs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "98283469-823b-439a-b553-6451edcd6186"
+              }
+            },
+            {
+              "label": "The Abdomen and Pelvis",
+              "type": "obs",
+              "id": "theAbdomenAndPelvis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b4c5d647-f869-789a-4123-567abcdef012"
+              }
+            },
+            {
+              "label": "Nervous System (NS)",
+              "type": "obs",
+              "id": "nervousSystemNs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "163109AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Other systems",
+              "type": "obs",
+              "id": "otherSystems",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "80a762fd-d7e5-4fea-b294-205a0d2a1548"
+              }
+            },
+            {
+              "label": "Trophic feeding amount(KCL/KG/day)",
+              "type": "obs",
+              "id": "trophicFeedingAmountKclKgDay",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6dbcad77-82b0-4675-9741-d21f9a4d4d25"
+              }
+            },
+            {
+              "label": "Lab Investigation Notes",
+              "type": "obs",
+              "id": "labInvestigationNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "8e0a7fe9-737d-444d-b2d1-1f6ae8f59634"
+              }
+            },
+            {
+              "label": "Assessment Notes",
+              "type": "obs",
+              "id": "assessmentNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "254fa001-263b-47c3-b2bc-b8385b29a96c"
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

@@ -1,0 +1,874 @@
+{
+  "name": "St. Peter's Specialized Hospital Nutritional Assessment",
+  "description": "St. Peter's Specialized Hospital Nutritional Assessment.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "4855310d-c482-5994-8495-3e96e790f735",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "St. Peter's Specialized Hospital Nutritional Assessment",
+      "sections": [
+        {
+          "label": "Background Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient Visit Type",
+              "type": "obs",
+              "id": "patientVisitType",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "164181AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "45f5d535-a2a9-57fb-a67d-4a48b116472c",
+                    "label": "New Patients"
+                  },
+                  {
+                    "concept": "37d779ed-b51f-51bd-a368-52ce83bcf61e",
+                    "label": "Revisit"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Patient Category",
+              "type": "obs",
+              "id": "patientCategory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "37fd000c-d185-4ab3-bd49-9005ce9868c7",
+                "answers": [
+                  {
+                    "concept": "166044AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Adult"
+                  },
+                  {
+                    "concept": "d3b42c5e-6f70-4189-bacd-ef0123456702",
+                    "label": "Pregnant"
+                  },
+                  {
+                    "concept": "a3748596-7081-9012-3456-789012678901",
+                    "label": "Postnatal"
+                  },
+                  {
+                    "concept": "ecbbb69d-43a8-4684-989e-4b4f83628925",
+                    "label": "Pediatrics (0-14 years)"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Nutritional Assessments and Diagnosis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Edema",
+              "type": "obs",
+              "id": "edema",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "475f2b41-c3fa-4266-9612-18f8b72fc8c4",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Weight (Kg)",
+              "type": "obs",
+              "id": "weightKg",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Height (m)",
+              "type": "obs",
+              "id": "heightM",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "818cc127-6aea-5cca-a427-25cf7adf1c43",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "WFL/H (Z-score)",
+              "type": "obs",
+              "id": "wflHZScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8c210363-d331-4199-a8df-3ab7e3b59c63",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(heightM) || isEmpty(weightKg)) ? '' : ((calcWeightForHeightZscore(Number(heightM)*100,Number(weightKg)) == null) ? '' : Number(calcWeightForHeightZscore(Number(heightM)*100,Number(weightKg))))"
+                }
+              },
+              "readonly": true,
+              "hideSteppers": true
+            },
+            {
+              "label": "WFA (z-score)",
+              "type": "obs",
+              "id": "wfaZscore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "162584aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "HFA/LFA (z score)",
+              "type": "obs",
+              "id": "hfaLfaZScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "4966afa5-781a-4347-aae5-926831cdc63b",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(heightM)) ? '' : ((calcHeightForAgeZscore(Number(heightM)*100) == null) ? '' : Number(calcHeightForAgeZscore(Number(heightM)*100)))"
+                }
+              },
+              "readonly": true,
+              "hideSteppers": true
+            },
+            {
+              "label": "BMI/Age(>5-19)(Z-score)",
+              "type": "obs",
+              "id": "bmiAge519ZScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6f337537-792b-576f-82e6-d11a5ac4a45d",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(heightM) || isEmpty(weightKg)) ? '' : ((calcBMIForAgeZscore(Number(heightM)*100,Number(weightKg)) == null) ? '' : Number(calcBMIForAgeZscore(Number(heightM)*100,Number(weightKg))))"
+                }
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "BMI (≥18 yrs.)",
+              "type": "obs",
+              "id": "bmi18Yrs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(heightM) || isEmpty(weightKg)) ? '' : calcBMI(Number(heightM)*100,Number(weightKg))"
+                }
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Waist Circumference (WC)",
+              "type": "obs",
+              "id": "waistCircumferenceWc",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "163080AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Head Circumference (HC)",
+              "type": "obs",
+              "id": "headCircumferenceHc",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "MUAC (Mid-upper arm circumference)",
+              "type": "obs",
+              "id": "muacMidUpperArmCircumference",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Mid-upper arm circumference in centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Other Anthropometric Measures",
+              "type": "obs",
+              "id": "otherAnthropometricMeasures",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1aed6ae6-43c9-5125-a67e-48542f32a83e"
+              }
+            },
+            {
+              "label": "Medical Diagnosis",
+              "type": "obs",
+              "id": "medicalDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Loss of Appetite",
+              "type": "obs",
+              "id": "lossOfAppetite",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "de88f7ea-c7b3-4229-942a-9636a57c901c",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Smoking/Alcohol Use",
+              "type": "obs",
+              "id": "smokingAlcoholUse",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b5b04677-2af2-4e9d-9994-bd31a3cedf4d"
+              }
+            },
+            {
+              "label": "General Food Intake Status",
+              "type": "obs",
+              "id": "generalFoodIntakeStatus",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "80762a9c-88cb-477f-b89c-c9488ee9f15c"
+              }
+            },
+            {
+              "label": "24-Hour Food Intake",
+              "type": "obs",
+              "id": "24HourFoodIntake",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "617bd0cd-41df-4fe1-9eb8-5ceee59805fb"
+              }
+            },
+            {
+              "label": "Nutritional Status",
+              "type": "obs",
+              "id": "nutritionalStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "167392AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "f1a2b3c4-d5e6-47f8-89a0-b1c2d3e4f504",
+                    "label": "SAM"
+                  },
+                  {
+                    "concept": "f1a2b3c4-d5e6-47f8-89a0-b1c2d3e4f503",
+                    "label": "MAM"
+                  },
+                  {
+                    "concept": "123814AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Underweight"
+                  },
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "114413AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Overweight"
+                  },
+                  {
+                    "concept": "9f2f66bf-dc75-47ac-b201-c891a9d5bbd6",
+                    "label": "Obese"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "For SAM/MAM patients",
+              "type": "obs",
+              "id": "forSamMamPatients",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9abca483-04ac-4646-9ac8-4eb65c9d839d",
+                "answers": [
+                  {
+                    "concept": "39ed466b-6580-4886-a344-430061a22de5",
+                    "label": "First-time diagnosis"
+                  },
+                  {
+                    "concept": "160033AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Relapse"
+                  },
+                  {
+                    "concept": "9becc8a4-47df-54fe-b13a-a8907af46a18",
+                    "label": "Readmission"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HIV Status",
+              "type": "obs",
+              "id": "hivStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "159576AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "c52c1c12-6480-538f-9edc-bde8ed3edb14",
+                    "label": "Unknown Status & alive"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "On ARVs",
+              "type": "obs",
+              "id": "onArvs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7e59a997-0b49-4151-809a-ee968f4155d9",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "CD4 count",
+              "type": "obs",
+              "id": "cd4Count",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Co-existing Conditions",
+              "type": "obs",
+              "id": "coExistingConditions",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f31cb29e-aade-408d-b3b4-20b7f64f2572",
+                "answers": [
+                  {
+                    "concept": "56f25c40-fdd7-46bf-8c35-9b47129144bf",
+                    "label": "Tuberculosis (TB)"
+                  },
+                  {
+                    "concept": "5983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Diarrhea"
+                  },
+                  {
+                    "concept": "0d5e6f70-8192-0123-def0-456789012345",
+                    "label": "Oral Thrush"
+                  },
+                  {
+                    "concept": "6eb983bd-1e95-4793-9543-ac00e03fd07a",
+                    "label": "Other Opportunistic Infections (OIs)"
+                  },
+                  {
+                    "concept": "f8d16a36-3f78-4c91-bd84-0aa40551daff",
+                    "label": "Nausea/Vomiting/Anorexia"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Micronutrient Imbalance",
+              "type": "obs",
+              "id": "micronutrientImbalance",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "fef1b84c-9143-4439-acb1-1a8f24f7a4cd",
+                "answers": [
+                  {
+                    "concept": "148847AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Deficiency"
+                  },
+                  {
+                    "concept": "7d9b9a0c-0f76-450f-bb13-5c546614c358",
+                    "label": "Excess"
+                  },
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Done"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Anemia Magnitude",
+              "type": "obs",
+              "id": "anemiaMagnitude",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "979f93af-dc0e-45de-9ac0-dcae7eaede20",
+                "answers": [
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  },
+                  {
+                    "concept": "d0cef738-9845-5684-bcdf-4d5c206d5e94",
+                    "label": "Moderate RD"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Done"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Diet Order Sheet",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Type of Diet (Specific) and Amount",
+              "type": "obs",
+              "id": "typeOfDietSpecificAndAmount",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "dd287d4b-43c0-4ade-b070-d4a9b4d68f4e"
+              }
+            },
+            {
+              "label": "Energy (Kcal/day)",
+              "type": "obs",
+              "id": "energyKcalDay",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5c1c03cb-f11e-472c-afa3-7b6cc34234e7",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Protein (g/day)",
+              "type": "obs",
+              "id": "proteinGDay",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f2ed53d9-16d3-4834-843d-19b049c2364c",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Requirement (per day)",
+              "type": "obs",
+              "id": "fluidRequirementPerDay",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "d17cd8b2-174f-4361-b052-4bfdc96d48d1"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Meal Frequency (per 24 hours)",
+              "type": "obs",
+              "id": "mealFrequencyPer24Hours",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c707b010-9dbb-5016-9480-5874746c3bfc"
+              },
+              "hideSteppers": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Nutritional Intervention",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Dietary Recommendations",
+              "type": "obs",
+              "id": "dietaryRecommendations",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b5220bde-0907-4bef-a853-6a21b1370561"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Nutrition assessment Nutrition Counseling",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Maternal Nutrition",
+              "type": "obs",
+              "id": "maternalNutrition",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a290866d-d0b0-4621-8e33-fc0c1a1e5506",
+                "answers": [
+                  {
+                    "concept": "fbc86a11-a588-4dca-a9b6-329b310864cc",
+                    "label": "Pre-natal"
+                  },
+                  {
+                    "concept": "a3748596-7081-9012-3456-789012678901",
+                    "label": "Postnatal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Critical Nutrition Practices",
+              "type": "obs",
+              "id": "criticalNutritionPractices",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1efa565b-ce2a-4045-8607-1be359a804b9",
+                "answers": [
+                  {
+                    "concept": "60c28da1-e460-4e6d-9e99-7a11edf950dd",
+                    "label": "Dietary/Energy Needs"
+                  },
+                  {
+                    "concept": "e2d17110-29ad-49f7-87a0-696ca7f0c50d",
+                    "label": "Sanitation"
+                  },
+                  {
+                    "concept": "284b4f90-0c6a-4d8a-9984-d58ada83217b",
+                    "label": "Positive Living Behavior"
+                  },
+                  {
+                    "concept": "159364AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Exercise"
+                  },
+                  {
+                    "concept": "e4ba675c-c048-47d9-891b-cac14e6b1b25",
+                    "label": "Safe Drinking Water"
+                  },
+                  {
+                    "concept": "ca20fcbd-e8c3-40ec-8866-05e4ffd1f96f",
+                    "label": "Prompt Treatment for OIs"
+                  },
+                  {
+                    "concept": "c01c81f6-b7f5-4332-a30a-05fa4e0cfbd1",
+                    "label": "Drug-Food Interaction Side Effects"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Prescribed Nutritional Support",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Therapeutic Foods",
+              "type": "obs",
+              "id": "therapeuticFoods",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "17a4666b-8762-4b10-a20d-0b48570a775f",
+                "answers": [
+                  {
+                    "concept": "72d80279-d745-5c1f-9066-805e4ff8c3c5",
+                    "label": "Rutf"
+                  },
+                  {
+                    "concept": "3d9e6823-adc8-4da1-9f0f-1737e04bd299",
+                    "label": "F75"
+                  },
+                  {
+                    "concept": "fe2e6f32-e653-4216-96d4-fa2aa2d4ffeb",
+                    "label": "F100"
+                  },
+                  {
+                    "concept": "2b5911a6-5df0-4a7c-8265-b5f522197435",
+                    "label": "F-100 Diluted"
+                  },
+                  {
+                    "concept": "af220bec-c0b6-484b-8752-ee3e137ee285",
+                    "label": "ReSomol"
+                  },
+                  {
+                    "concept": "5ec51542-6a40-4f25-8654-6af7628002a9",
+                    "label": "Others"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other, specify",
+              "type": "obs",
+              "id": "otherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(therapeuticFoods) || therapeuticFoods !== '5ec51542-6a40-4f25-8654-6af7628002a9'"
+              }
+            },
+            {
+              "label": "Supplemental Foods",
+              "type": "obs",
+              "id": "supplementalFoods",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9d1457f7-6a79-4a65-af99-ca1ff6bdd83f",
+                "answers": [
+                  {
+                    "concept": "35cd5dad-9fcf-4324-9093-15e6cd3e3dec",
+                    "label": "FBF"
+                  },
+                  {
+                    "concept": "daaa13f8-be28-4f82-bfdc-335ed809d0c8",
+                    "label": "CSB"
+                  },
+                  {
+                    "concept": "0be376a9-96aa-4b38-a0a3-35535d0bf631",
+                    "label": "Rusf"
+                  },
+                  {
+                    "concept": "8a3781c5-b737-42c7-abbb-833abee7d5d0",
+                    "label": "Liquid Nutrition Supplements"
+                  },
+                  {
+                    "concept": "5ec51542-6a40-4f25-8654-6af7628002a9",
+                    "label": "Others"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other, specify",
+              "type": "obs",
+              "id": "otherSpecify2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(supplementalFoods) || supplementalFoods !== '5ec51542-6a40-4f25-8654-6af7628002a9'"
+              }
+            },
+            {
+              "label": "Micronutrients",
+              "type": "obs",
+              "id": "micronutrients",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a301fea4-74c0-433e-bd5e-e5e2833c7ffa",
+                "answers": [
+                  {
+                    "concept": "1859203a-8293-0123-4567-890123abcdf8",
+                    "label": "Vitamin A"
+                  },
+                  {
+                    "concept": "86343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Vitamin B6"
+                  },
+                  {
+                    "concept": "76613AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Folic Acid."
+                  },
+                  {
+                    "concept": "461AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Multivitamins"
+                  },
+                  {
+                    "concept": "78218AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Iron."
+                  },
+                  {
+                    "concept": "11ce7b2f-c8f2-4f47-8506-d2cc4c20e4de",
+                    "label": "Iron-Folate"
+                  },
+                  {
+                    "concept": "86672AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Zinc."
+                  },
+                  {
+                    "concept": "e111d0ad-0080-4b99-973c-1f5a5cac0e23",
+                    "label": "Multiple Micronutrients"
+                  },
+                  {
+                    "concept": "5ec51542-6a40-4f25-8654-6af7628002a9",
+                    "label": "Others"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other, specify",
+              "type": "obs",
+              "id": "otherSpecify3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(micronutrients) || micronutrients !== '5ec51542-6a40-4f25-8654-6af7628002a9'"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

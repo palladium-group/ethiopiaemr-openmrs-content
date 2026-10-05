@@ -1,0 +1,280 @@
+{
+  "name": "Psychiatry Progress Note (PSOAP)",
+  "description": "Psychiatry Progress Note (PSOAP) - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "967f6d3e-152a-5030-9263-54e9cbbcbc87",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Psychiatry Progress Note (PSOAP) Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Problem",
+              "type": "obs",
+              "id": "problem",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9b7db72e-b14a-4a0b-aa39-1e2547db8c5e"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Subjectively",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Change in sign and symptoms from previous visit",
+              "type": "obs",
+              "id": "changeInSignAndSymptomsFromPreviousVisit",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a0eb92a0-6911-4041-b014-efb57d5c3de1"
+              }
+            },
+            {
+              "label": "Emergence of new symptoms",
+              "type": "obs",
+              "id": "emergenceOfNewSymptoms",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4f08cd58-dcbd-4ced-a919-5ca6607f0d0a"
+              }
+            },
+            {
+              "label": "Medication adherence",
+              "type": "obs",
+              "id": "medicationAdherence",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6b6a3970-32d5-4f43-bf6e-fc506efdd969",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1f181513-2a20-40ed-bd35-5e2ef8872789",
+                    "label": "Not available"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Change in level of function",
+              "type": "obs",
+              "id": "changeInLevelOfFunction",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2d84cf46-21a9-4e3c-937b-2b4d19c17028"
+              }
+            },
+            {
+              "label": "Medication adverse effect",
+              "type": "obs",
+              "id": "medicationAdverseEffect",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5ae5fc21-857f-41d8-b400-d0562537b2fe",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1f181513-2a20-40ed-bd35-5e2ef8872789",
+                    "label": "Not available"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Objectively",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pertinent Mse",
+              "type": "obs",
+              "id": "pertinantMse",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b4a1ff66-1587-4000-b5c4-2b4223b8a741"
+              }
+            },
+            {
+              "label": "Pertinent Physical Examination",
+              "type": "obs",
+              "id": "pertinantPhysicalExamination",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c4227901-a129-4509-8192-ce11b3d33b76"
+              }
+            },
+            {
+              "label": "Change in Risk of suicide and homicide",
+              "type": "obs",
+              "id": "changeInRiskOfSuicideAndHomicide",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "355dbcb2-079c-4d66-9dd2-cbc3977021b7",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1f181513-2a20-40ed-bd35-5e2ef8872789",
+                    "label": "Not available"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Is Symptom control achieved?",
+              "type": "obs",
+              "id": "isSymptomControlAchieved",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a637e050-4c9d-4794-8886-38104ec1d431",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Assesment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Disorder progress (remission, relapse, etc.)",
+              "type": "obs",
+              "id": "disorderProgressRemissionRelapse",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "fbb08483-9294-4aba-bcc9-dc97dd067a28"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Management Plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Relevant investigations",
+              "type": "obs",
+              "id": "relevantInvestigations",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "145602f0-e021-45df-8081-df33aacd280b"
+              }
+            },
+            {
+              "label": "Psychoeducation (lifestyle modification, addictive substances)",
+              "type": "obs",
+              "id": "psychoeducationLifestyleModificationAddi",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8746b2d6-2fb8-45dc-871e-396762c6d5c4"
+              }
+            },
+            {
+              "label": "Justify (dose changes, switching, combinations,)",
+              "type": "obs",
+              "id": "justifyDoseChangesSwitchingCombinations",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0b111c01-c431-4f5b-93ed-42e890f5b952"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

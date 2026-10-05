@@ -1,0 +1,2581 @@
+{
+  "name": "Cardiac History Sheet",
+  "description": "Cardiac History Sheet - built from physician Word-doc spec (Phase 1, batch-three).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "63c23947-4e3b-5ed6-ad83-bb09f2d0990a",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Cardiac History Sheet Assessment",
+      "sections": [
+        {
+          "label": "Presenting Complaint",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Follow-up site",
+              "type": "obs",
+              "id": "followUpSite",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d1cb9e9c-e9ea-4313-87bb-2db8e4826950"
+              }
+            },
+            {
+              "label": "Initial presenting complaint / symptom and duration",
+              "type": "obs",
+              "id": "initialPresentingComplaintSymptomAndDura",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "bce42719-2898-4ddb-bde3-52f38916f754"
+              }
+            },
+            {
+              "label": "Associated symptoms",
+              "type": "obs",
+              "id": "associatedSymptoms",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a41e465c-6dd0-43d0-9c57-e0af37b3548d"
+              }
+            },
+            {
+              "label": "Comorbidity/ies",
+              "type": "obs",
+              "id": "comorbidityIes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "e3ef2b12-a0b4-406f-961b-825a2bee3eb0"
+              }
+            },
+            {
+              "label": "Duration (per min)",
+              "type": "obs",
+              "id": "durationPerMin",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "482e588d-0da9-4ac5-845b-a3614a0ba6c9",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Past Medical History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Rheumatic fever",
+              "type": "obs",
+              "id": "rheumaticFever",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "127447AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Thyroid",
+              "type": "obs",
+              "id": "thyroid",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "163741AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Neoplastic disorders",
+              "type": "obs",
+              "id": "neoplasticDisorders",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8a563d8f-a8cc-4222-bbfe-bb6bc3ee2d3b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Smoker",
+              "type": "obs",
+              "id": "smoker",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "152722AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "TIA",
+              "type": "obs",
+              "id": "tia",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "33a668ef-0b2c-5fbd-88bf-c7936d6bf8f1",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "PAD",
+              "type": "obs",
+              "id": "pad",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "83f1aa6c-e83f-49ae-9643-fe33d08c5449",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Identified Cardiovascular Risk Factors",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Hypertension",
+              "type": "obs",
+              "id": "hypertension",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f0063e54-fbca-47fc-8fae-2f0452d627cc",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Hypercholesterolaemia",
+              "type": "obs",
+              "id": "hypercholesterolaemia",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1606a70c-2a60-577c-a5b6-84dc84f7bc8f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Diabetes",
+              "type": "obs",
+              "id": "diabetes",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d38fcd7e-39ac-4340-8e19-7a91fc038847",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Smoking History",
+              "type": "obs",
+              "id": "smokingHistory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e3f4a5b6-7c8d-9e0f-1a2b-3c4d5e6f7a8b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes, how many years",
+              "type": "obs",
+              "id": "ifYesHowManyYears",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "b945dbcb-9963-41d9-a5f4-97dd0dfea574"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(smokingHistory) || smokingHistory !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Alcohol use",
+              "type": "obs",
+              "id": "alcoholUse",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "619a94ea-b219-5b3d-a889-6f56b9417178",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes, unit consumed and duration",
+              "type": "obs",
+              "id": "ifYesUnitConsumedAndDuration",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "5e0b172b-908f-4a84-8a93-5834d545fb31"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(alcoholUse) || alcoholUse !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Treatment History for the Current Complaint and Its Outcome: Drug Use",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Beta-blocker / Agonists",
+              "type": "obs",
+              "id": "betaBlockerAgonists",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "79b04ea3-ba26-4767-b678-3839bfd86663",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Calcium channel blocker",
+              "type": "obs",
+              "id": "calciumChannelBlocker",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "835643b0-2b74-5aa1-85f2-ee3682a92620",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "TCA",
+              "type": "obs",
+              "id": "tca",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8375da6a-630e-4bb6-baf4-ad75d36033c9",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Neoplastic drugs",
+              "type": "obs",
+              "id": "neoplasticDrugs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "70323adb-57c6-4c49-9581-9a5def57b150",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Recreational drugs or substance use (Type, amount and duration)",
+              "type": "obs",
+              "id": "recreationalDrugsOrSubstanceUseTypeAmoun",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0622f944-1d0a-4d53-b4af-1d54f7fa2f46"
+              }
+            },
+            {
+              "label": "Adherence to medication",
+              "type": "obs",
+              "id": "adherenceToMedication",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "80d9b4ed-e680-4084-bdf3-14dbbe8276af"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Other History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Hospitalization history",
+              "type": "obs",
+              "id": "hospitalizationHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0f1c2174-297d-490a-8ce9-cc733f1f47e3"
+              }
+            },
+            {
+              "label": "Family history of cardiovascular disease and SCD",
+              "type": "obs",
+              "id": "familyHistoryOfCardiovascularDiseaseAndS",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "825464a2-d89f-44ab-a2a7-f959cedb4202"
+              }
+            },
+            {
+              "label": "Adherence to dietary advice",
+              "type": "obs",
+              "id": "adherenceToDietaryAdvice",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "7f1791b6-4878-4f10-83ba-d1785bb4ddc5"
+              }
+            },
+            {
+              "label": "Adherence to life style change",
+              "type": "obs",
+              "id": "adherenceToLifeStyleChange",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1febb109-ae6f-40b2-9f86-aa7dc2c89273"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Physical Examination: General Appearance and Vital Signs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (36.5-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Alert",
+              "type": "obs",
+              "id": "alert",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9694701e-109a-41d3-8adb-8f07670fbcb5",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Jaundice",
+              "type": "obs",
+              "id": "jaundice",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "136443AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pallor",
+              "type": "obs",
+              "id": "pallor",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b7c8d9e0-f1a2-4b3c-8d5e-6f7a8b9c0d1e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Central Cyanosis",
+              "type": "obs",
+              "id": "centralCyanosis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "96a12f0c-ba52-455b-bbb4-db12f7e9ee5e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Peripheral Cyanosis",
+              "type": "obs",
+              "id": "peripheralCyanosis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "108cdf04-7814-462b-9ac8-4622e956b563",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Bruises-cuts-abrasions",
+              "type": "obs",
+              "id": "bruisesCutsAbrasions",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "19b88584-cfe4-4c72-94a6-78d31828d626",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Birth injuries noticed",
+              "type": "obs",
+              "id": "birthInjuriesNoticed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8d52dffc-fcd3-4be1-a578-d3568aaccb48",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Muscle tone",
+              "type": "obs",
+              "id": "muscleTone",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "160388AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "35d766cd-a5b2-4719-895c-e7fc46a85a5a",
+                    "label": "Moves back and forth freely"
+                  },
+                  {
+                    "concept": "164470AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Decreased"
+                  },
+                  {
+                    "concept": "164471AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Increased"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Vital Sign",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic Blood Pressure (mmHg)",
+              "type": "obs",
+              "id": "systolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 80 || myValue > 120)",
+                  "message": "Value is outside the normal range (80-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic Blood Pressure (mmHg)",
+              "type": "obs",
+              "id": "diastolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 80)",
+                  "message": "Value is outside the normal range (60-80 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse Rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory Rate (breath/min)",
+              "type": "obs",
+              "id": "respiratoryRateBreathMin",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weightKg",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "heightCm",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "BMI (kg/m²)",
+              "type": "obs",
+              "id": "bmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01",
+                "calculate": {
+                  "calculateExpression": "calcBMI(heightCm,weightKg)"
+                }
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "MUAC (cm)",
+              "type": "obs",
+              "id": "muacCm",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
+              },
+              "hideSteppers": true,
+              "questionInfo": "Mid-upper arm circumference in centimetres."
+            }
+          ]
+        },
+        {
+          "label": "Radial Pulse(s)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Site",
+              "type": "obs",
+              "id": "site",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9ce112d5-e4ed-4050-8409-ba3b35a22615",
+                "answers": [
+                  {
+                    "label": "left hand",
+                    "concept": "1440a839-b8a9-403c-8e68-74e046329c8f"
+                  },
+                  {
+                    "label": "Pulmonary",
+                    "concept": "1d9a3653-9b0f-462c-9927-3ae62e08a36a"
+                  },
+                  {
+                    "label": "Right Hand",
+                    "concept": "b7ff7a6b-6dd0-411e-a160-68ece7ddd895"
+                  },
+                  {
+                    "label": "Extrapulmonary",
+                    "concept": "d28c1846-bcc5-4820-aa88-c347555904b5"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "For symmetry",
+              "type": "obs",
+              "id": "forSymmetry",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6e4afd4d-8115-4eb2-afeb-d22b01f90091"
+              }
+            },
+            {
+              "label": "Rate/min",
+              "type": "obs",
+              "id": "rateMin",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2c10f013-0930-448d-af94-0a120520ead0"
+              }
+            },
+            {
+              "label": "Rhythm",
+              "type": "obs",
+              "id": "rhythm",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "e6b1cd3a-2ca2-4b44-9645-013debaa4af9"
+              }
+            },
+            {
+              "label": "Character (collapsing?)",
+              "type": "obs",
+              "id": "characterCollapsing",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "3784e794-283e-554a-8689-be120f95d535"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Blood Pressure (BP) in mmHg",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Measured site",
+              "type": "obs",
+              "id": "measuredSite",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "fd3178c8-ecb9-450c-85ac-340c31145fab"
+              }
+            },
+            {
+              "label": "Position",
+              "type": "obs",
+              "id": "position",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6db955d4-1317-4751-bfac-a18c5648049c",
+                "answers": [
+                  {
+                    "concept": "92709344-75b1-4093-a1b8-6d0bd998df7e",
+                    "label": "Supine"
+                  },
+                  {
+                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sitting"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Oxygen Saturation (%)",
+              "type": "obs",
+              "id": "oxygenSaturation",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 95-100 %",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 95 || myValue > 100)",
+                  "message": "Oxygen saturation is outside the normal range (95-100 %)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Waist circumference (cm)",
+              "type": "obs",
+              "id": "waistCircumferenceCm",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "163080AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Hip Circumference (cm)",
+              "type": "obs",
+              "id": "hipCircumferenceCm",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "163081AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Cardiovascular (CVS)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Carotid pulse",
+              "type": "obs",
+              "id": "carotidPulse",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "72baf0c3-8982-4052-85f8-df6f991e78c4"
+              }
+            },
+            {
+              "label": "Character (collapsing?)",
+              "type": "obs",
+              "id": "characterCollapsing2",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "3784e794-283e-554a-8689-be120f95d535"
+              }
+            },
+            {
+              "label": "Pulse Volume",
+              "type": "obs",
+              "id": "pulseVolume",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "bc45acaa-11c5-4e0e-8060-2e28cf11e6fc",
+                "answers": [
+                  {
+                    "concept": "9f0f09c7-7e54-4b3e-8c9f-d1eed1c67480",
+                    "label": "Non-palpable"
+                  },
+                  {
+                    "concept": "a6607d63-12b0-420c-bca3-92ba9598be82",
+                    "label": "Feeble-Weak"
+                  },
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "JVP height and waveform at 45° inclination",
+              "type": "obs",
+              "id": "jvpHeightAndWaveformOfTheJvpAt45OfInclin",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0851a11f-874c-41b7-999b-37251b5f1941"
+              }
+            },
+            {
+              "label": "Chest inspection (scars, deformity, pulsations)",
+              "type": "obs",
+              "id": "jvpInspectTheChestForScarsDeformityAndPu",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "909f128e-bb8c-4234-ae0a-d34ef164c9bb"
+              }
+            },
+            {
+              "label": "Apex beat position and character",
+              "type": "obs",
+              "id": "jvpPositionAndCharacterOfTheApexBeat",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "dbaf31d7-4661-4f0a-b184-1638e189fed2"
+              }
+            },
+            {
+              "label": "Heaves and thrills",
+              "type": "obs",
+              "id": "jvpHeavesAndThrills",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a12f7a2e-17b3-4011-8642-bcc9b82a144a"
+              }
+            },
+            {
+              "label": "Heart auscultation",
+              "type": "obs",
+              "id": "jvpAuscultateTheHeart",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "718e8774-b4f6-483f-978a-f0cd797729bf"
+              }
+            },
+            {
+              "label": "Chest",
+              "type": "obs",
+              "id": "chest",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1123AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "MSK",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Hands for clubbing",
+              "type": "obs",
+              "id": "handsForClubbing",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5f132f18-8aaa-4453-9b75-c8bb039e0c4e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Hands for splinter haemorrhages",
+              "type": "obs",
+              "id": "handsForSplinterHaemorrhages",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "30969824-2923-406e-924f-1e0b4912b776",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Hands for nicotine staining",
+              "type": "obs",
+              "id": "handsForNicotineStaining",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a4bde687-4ce7-431e-a72c-49c70c266028",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Examine the ankles and sacrum for edema",
+              "type": "obs",
+              "id": "examineTheAnklesAndSacrumForEdema",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "26664807-a1c8-4fcb-83d2-5e3e020ed521"
+              }
+            },
+            {
+              "label": "Examine the peripheral pulses",
+              "type": "obs",
+              "id": "examineThePeripheralPulses",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "41120958-8bec-46ee-9cc8-37ba3f9201dc"
+              }
+            }
+          ]
+        },
+        {
+          "label": "CNS",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Mental Status / Orientation",
+              "type": "obs",
+              "id": "mentalStatusOrientation",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "923552eb-011c-4052-9a0d-b545fb11b589"
+              }
+            },
+            {
+              "label": "Cranial Nerves",
+              "type": "obs",
+              "id": "cranialNerves",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160993AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Fasciculations",
+              "type": "obs",
+              "id": "motorExamFasciculation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "324034f3-8dd1-48d1-9a98-939f548a132e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Muscle bulk",
+              "type": "obs",
+              "id": "motorExamMuscleBulkness",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9a9a058f-eb45-441d-9b95-1b4674a855bb",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "3d1b0f1d-5289-4d5a-9801-e93b7cd4b949",
+                    "label": "Hypertrophy"
+                  },
+                  {
+                    "concept": "071ad94c-d72b-51c1-906d-a4879139000a",
+                    "label": "Wasting"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Muscle tone",
+              "type": "obs",
+              "id": "motorExamTone",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0713cc98-a447-49d7-b4bb-493106b8a4b3",
+                "answers": [
+                  {
+                    "concept": "dbf0ec92-5c73-517f-86c7-7105716d1298",
+                    "label": "Normotonic"
+                  },
+                  {
+                    "concept": "453eb1b1-7a18-43fa-8657-8499d933acbc",
+                    "label": "Hypotonic"
+                  },
+                  {
+                    "concept": "f95e55f6-c416-4327-a9cd-43c4cea8478c",
+                    "label": "Hypertonic"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Muscle power: right upper extremity (RUE)",
+              "type": "obs",
+              "id": "musclePowerStrengthRue",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "132515b1-325e-4a31-9c7e-10b6361a2c9e"
+              }
+            },
+            {
+              "label": "Muscle power: right lower extremity (RLE)",
+              "type": "obs",
+              "id": "musclePowerStrengthRle",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7fc3a8d6-01cb-4b17-8af2-481871f18719"
+              }
+            },
+            {
+              "label": "Muscle power: left upper extremity (LUE)",
+              "type": "obs",
+              "id": "musclePowerStrengthLue",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8c8ef29c-240e-4b42-a8cf-40b0e5c60794"
+              }
+            },
+            {
+              "label": "Muscle power: left lower extremity (LLE)",
+              "type": "obs",
+              "id": "musclePowerStrengthLle",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c5ec30a2-6be7-40e1-b1e9-8a69ec1501af"
+              }
+            },
+            {
+              "label": "Biceps/brachioradialis reflex",
+              "type": "obs",
+              "id": "deepTendonReflexesBicepsBrachioradialis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e28defdd-c1cf-4065-b176-3112b41de91e"
+              }
+            },
+            {
+              "label": "Triceps reflex",
+              "type": "obs",
+              "id": "deepTendonReflexesTriceps",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a23eb275-eb48-41ad-bf18-7e3d9160adc1"
+              }
+            },
+            {
+              "label": "Patellar reflex",
+              "type": "obs",
+              "id": "deepTendonReflexesPatellar",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3d3c2170-c61d-402b-b98c-7d77549f844a"
+              }
+            },
+            {
+              "label": "Ankle reflex",
+              "type": "obs",
+              "id": "deepTendonReflexesAnkle",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9b69d3bc-455d-40f0-b663-8ac991fa7569"
+              }
+            },
+            {
+              "label": "Plantar response (Babinski sign)",
+              "type": "obs",
+              "id": "deepTendonReflexesPlantarBabinskiSign",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a7870043-f25a-4567-95ce-c8026e1f6c8c",
+                "answers": [
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "1300AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Equivocal"
+                  },
+                  {
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Absent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Sensory",
+              "type": "obs",
+              "id": "sensory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f1d52f83-d6dc-5bc1-b0af-c7a2bf539b25",
+                "answers": [
+                  {
+                    "concept": "a6d00512-9786-45d6-8886-be160acfd5d4",
+                    "label": "Intact"
+                  },
+                  {
+                    "concept": "0b6d0cd1-5ad9-4f57-8ade-b090abd03b99",
+                    "label": "Affected"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other special Neurologic Tests",
+              "type": "obs",
+              "id": "otherSpecialNeurologicTests",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "317eb067-37bc-56c4-ae58-242ff7040822"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Investigation Summary: CBC",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "WBC",
+              "type": "obs",
+              "id": "wbc",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "678AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Neutrophil",
+              "type": "obs",
+              "id": "neutrophil",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "179d00c1-a909-40b4-a1e8-049dc5b268f7"
+              }
+            },
+            {
+              "label": "Lymphocyte",
+              "type": "obs",
+              "id": "lymphocyte",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1021AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Hgb/Hct Result Notes",
+              "type": "obs",
+              "id": "hgbHctResultNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1194fec8-4093-4479-bee5-f791012f544b"
+              }
+            },
+            {
+              "label": "MCV",
+              "type": "obs",
+              "id": "mcv",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "851AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "MCH",
+              "type": "obs",
+              "id": "mch",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Platelet",
+              "type": "obs",
+              "id": "platelet",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "ANC/TLC",
+              "type": "obs",
+              "id": "ancTlc",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1cc35c00-a614-4522-b492-15d937bf69d7"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Chemistry and Serology",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "ESR",
+              "type": "obs",
+              "id": "esr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "BUN",
+              "type": "obs",
+              "id": "bun",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "83f0f09a-219a-592f-805e-e54258aa28c1"
+              }
+            },
+            {
+              "label": "Creatinine",
+              "type": "obs",
+              "id": "creatinine",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "124c9470-5277-5965-a231-137986d48ab7"
+              }
+            },
+            {
+              "label": "AST/SGOT",
+              "type": "obs",
+              "id": "astSgot",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "653AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "ALT/SGPT",
+              "type": "obs",
+              "id": "altSgpt",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9d07b066-4598-47bd-885f-cd2a3346ca96"
+              }
+            },
+            {
+              "label": "Total Bilirubin",
+              "type": "obs",
+              "id": "totalBilirubin",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "655AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Direct Bilirubin",
+              "type": "obs",
+              "id": "directBilirubin",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1297AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Albumin",
+              "type": "obs",
+              "id": "albumin",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ac15335c-932e-45ce-b678-7731a4b95d60"
+              }
+            },
+            {
+              "label": "PTT",
+              "type": "obs",
+              "id": "ptt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161153AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "PT",
+              "type": "obs",
+              "id": "pt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "INR",
+              "type": "obs",
+              "id": "inr",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "38f4c1c0-e1a7-537e-8ff4-efe83a1a9d8e"
+              }
+            },
+            {
+              "label": "Na+",
+              "type": "obs",
+              "id": "na",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "21330d79-4826-4022-882e-17105b4f148c"
+              }
+            },
+            {
+              "label": "K",
+              "type": "obs",
+              "id": "k",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1133AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Ca",
+              "type": "obs",
+              "id": "ca",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "159497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Magnesium",
+              "type": "obs",
+              "id": "magnesium",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "204eab71-30a2-4348-94c4-7d36ab1ba189"
+              }
+            },
+            {
+              "label": "Uric Acid",
+              "type": "obs",
+              "id": "uricAcid",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "159825AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "LDH",
+              "type": "obs",
+              "id": "ldh",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1014AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Urinalysis: Protein",
+              "type": "obs",
+              "id": "urinalysisProtein",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a24ed908-7dd2-464b-b69b-6e8a3f061cfb"
+              }
+            },
+            {
+              "label": "Urinalysis: Microscopy",
+              "type": "obs",
+              "id": "urinalysisMicroscopy",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ac70f88c-0574-47bf-bb0e-153a580b3743"
+              }
+            },
+            {
+              "label": "Stool Exam",
+              "type": "obs",
+              "id": "stoolExam",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160965AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "HIV test Result",
+              "type": "obs",
+              "id": "hivTestResult",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a90ebc9e-53b4-4a31-bf19-c5e474efe62d",
+                "answers": [
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NR"
+                  },
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "R"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HBsAg",
+              "type": "obs",
+              "id": "hbsag",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2273174b-6081-7902-2456-789123abcd32",
+                "answers": [
+                  {
+                    "label": "Positive",
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Negative",
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HCV Ab",
+              "type": "obs",
+              "id": "hcvab",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1325AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Positive",
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Negative",
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Poor sample quality",
+                    "concept": "1304AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Indeterminate",
+                    "concept": "1138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "RPR/VDRL result",
+              "type": "obs",
+              "id": "rprVdrlResult",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4c1c938f-c7f3-52e8-b5f6-b0b5e85b07d8",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Total Cholesterol / LDL",
+              "type": "obs",
+              "id": "totalCholesterolLdl",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "7f5091a1-3933-5e9e-bbaf-f14c1ff195f2"
+              }
+            },
+            {
+              "label": "HDL",
+              "type": "obs",
+              "id": "hdl",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1007AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "LDL",
+              "type": "obs",
+              "id": "ldl",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1008AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Triglyceride",
+              "type": "obs",
+              "id": "triglyceride",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1009AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "FBS",
+              "type": "obs",
+              "id": "fbs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4f227fa2-1f8a-4030-9fe2-24fe6e19c429"
+              }
+            },
+            {
+              "label": "HbA1c",
+              "type": "obs",
+              "id": "hba1c",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "159644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "TSH",
+              "type": "obs",
+              "id": "tsh",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6fcd41c3-3c65-4dda-880e-7871c5bf41a9"
+              }
+            },
+            {
+              "label": "FT3",
+              "type": "obs",
+              "id": "ft3",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6b0ffd6c-9e28-41a3-aac4-1f087a830f11"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "FT4",
+              "type": "obs",
+              "id": "ft4",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "2a332a94-b337-49e9-bc34-4b78ace16049"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Body Fluid Microbiology",
+              "type": "obs",
+              "id": "bodyFluidMicrobiology",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a8c713ab-1bad-4b3b-9316-adebbc91c5cd"
+              }
+            },
+            {
+              "label": "Imaging",
+              "type": "obs",
+              "id": "imaging",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f5061499-934b-4d85-88b4-128cd3140970",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Multiple Choices (see notes)",
+                    "concept": "1cc4dbcd-a43a-487a-bea6-a5bb6b874b79"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "CXR",
+                    "concept": "645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Sonography",
+                    "concept": "d3ab60f2-101d-41b7-9a00-ad29d9caf01d"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "e838df31-7eff-4aa3-be0d-dd0f39fbbce4"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Biomarkers",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "CTnI/T",
+              "type": "obs",
+              "id": "ctniT",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2dd0915d-f419-4bc6-bd48-642ce3c3781d"
+              }
+            },
+            {
+              "label": "CK-MB",
+              "type": "obs",
+              "id": "ckMb",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "be9b0f14-b6ea-487a-aa2f-4a0817a544f4"
+              }
+            },
+            {
+              "label": "CRP",
+              "type": "obs",
+              "id": "crp",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "7e01cc88-4f36-4f5f-86f0-783b899746d0"
+              }
+            },
+            {
+              "label": "BNP",
+              "type": "obs",
+              "id": "bnp",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2e378b57-9b22-4745-b509-5073db45062f"
+              }
+            },
+            {
+              "label": "NT-Pro BNP",
+              "type": "obs",
+              "id": "ntProBnp",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f1a390d0-a582-45c3-a06f-70cab1264e4c"
+              }
+            },
+            {
+              "label": "D-dimer (%)",
+              "type": "obs",
+              "id": "dDimer",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "166018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Imaging",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "12 lead ECG",
+              "type": "obs",
+              "id": "12LeadEcg",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9ef25160-21e1-43a6-85ed-8583ec9dc908"
+              }
+            },
+            {
+              "label": "CXR details",
+              "type": "obs",
+              "id": "cxrDetails",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "543a7566-077d-40f3-9d40-2caeb770030d"
+              }
+            },
+            {
+              "label": "ECHO",
+              "type": "obs",
+              "id": "echo",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "fa4ccc10-a96d-4f66-986f-90e8ad454f9b"
+              }
+            },
+            {
+              "label": "A/P Ultrasound",
+              "type": "obs",
+              "id": "aPUltrasound",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "779d9d76-51cc-58d8-b5da-33fe49ec766c"
+              }
+            },
+            {
+              "label": "Stress test",
+              "type": "obs",
+              "id": "stressTest",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "e8ff0800-9243-4dd0-86d9-d1d8790aecb3"
+              }
+            },
+            {
+              "label": "CAG",
+              "type": "obs",
+              "id": "cag",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "74c213aa-d33c-4320-bcd2-294d42a4b014"
+              }
+            },
+            {
+              "label": "Coronary CT angiography",
+              "type": "obs",
+              "id": "coronaryCtAngiography",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "836b9d61-ccbd-44e7-ab03-ac93bac02ee8"
+              }
+            },
+            {
+              "label": "Cardiac MRI",
+              "type": "obs",
+              "id": "cardiacMri",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c46de269-ed68-469c-b8c9-e2b3a5db52f0"
+              }
+            },
+            {
+              "label": "EPS",
+              "type": "obs",
+              "id": "eps",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d0de542f-998c-48c3-a7a8-a358ef763ebe"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Clinical Diagnosis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Stage",
+              "type": "obs",
+              "id": "stage",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "860f417d-8b8c-4fb1-8cec-5f57b963eba2"
+              }
+            },
+            {
+              "label": "Class",
+              "type": "obs",
+              "id": "class",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "197cec22-8fa4-485e-bc56-e3c36a0f7094"
+              }
+            },
+            {
+              "label": "EF",
+              "type": "obs",
+              "id": "ef",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "15cdf488-70a4-4875-9266-36aa9f2072db",
+                "answers": [
+                  {
+                    "concept": "9e70ae4f-cfcc-4674-938e-aefefcebe014",
+                    "label": ">50"
+                  },
+                  {
+                    "concept": "159569AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "40-50%"
+                  },
+                  {
+                    "concept": "be5ca886-fa57-4bbf-8597-f7309b1635dd",
+                    "label": "<40%"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Underlying cause (if applicable)",
+              "type": "obs",
+              "id": "underlyingCauseIfApplicable",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f75a23c8-91e9-4a2f-aeba-a7a6a745d582"
+              }
+            },
+            {
+              "label": "Precipitant (if applicable)",
+              "type": "obs",
+              "id": "precipitantIfApplicable",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "38fe22e6-6169-47ce-b1fc-e6341a75a10a"
+              }
+            },
+            {
+              "label": "Risk factor/s",
+              "type": "obs",
+              "id": "riskFactorS",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "99b901a3-f2e7-4522-b522-495c1dd982e9"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Management and Treatment: Medical Management",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Initial management according to disease and guideline",
+              "type": "obs",
+              "id": "initialManagementAccordingToDiseaseAndGu",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ee2b7e96-b717-4d06-9435-be7bb7903fc6"
+              }
+            },
+            {
+              "label": "Added management with reason",
+              "type": "obs",
+              "id": "addedManagementWithReason",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ea7e8f2a-5886-426a-b088-2880c7e16d0b"
+              }
+            },
+            {
+              "label": "Discontinued management with reason",
+              "type": "obs",
+              "id": "discontinuedManagementWithReason",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ebb72e8a-0d85-4f1e-b635-5bc81786367f"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Non-medical Management",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "PCI (Date done and outcome)",
+              "type": "obs",
+              "id": "pciDateDoneAndOutcome",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "bc810a8a-1ff8-4d2d-ab87-6fc47d99a9ba"
+              }
+            },
+            {
+              "label": "PTMC (Date done and outcome)",
+              "type": "obs",
+              "id": "ptmcDateDoneAndOutcome",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "804e88c4-b288-4470-84e4-c3e59410b400"
+              }
+            },
+            {
+              "label": "PPI (Date done and outcome)",
+              "type": "obs",
+              "id": "ppiDateDoneAndOutcome",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "5734991e-80bd-470d-af28-c9ed58dff4c9"
+              }
+            },
+            {
+              "label": "EPS and RFA (Date done and outcome)",
+              "type": "obs",
+              "id": "epsAndRfaDateDoneAndOutcome",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "7f1ee89a-1043-43ac-a839-75ad2101fa39"
+              }
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other2",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "e838df31-7eff-4aa3-be0d-dd0f39fbbce4"
+              }
+            },
+            {
+              "label": "Appointment schedule",
+              "type": "obs",
+              "id": "appointmentSchedule",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "b0970bcc-530d-4ef6-8b56-22b9d1e319c2"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Care Provider (Accountability)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name",
+              "type": "obs",
+              "id": "name",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "Signature",
+              "type": "obs",
+              "id": "signature",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "28794bbc-ad22-4d8e-a8a3-8147bdfef6cd"
+              }
+            },
+            {
+              "label": "Scope",
+              "type": "obs",
+              "id": "scope",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "94167ac5-ab94-4c2f-b20f-1dc37727ceb6",
+                "answers": [
+                  {
+                    "concept": "f7069116-624b-45fe-96c6-0d1cf94a497a",
+                    "label": "Senior"
+                  },
+                  {
+                    "concept": "13d4fe75-618e-4e2e-a500-18a726374be7",
+                    "label": "Resident"
+                  },
+                  {
+                    "concept": "c0a8efd1-187c-4438-a04e-74ab0de43fcb",
+                    "label": "GP"
+                  },
+                  {
+                    "concept": "9d297c4b-1ceb-4164-960a-936694387e92",
+                    "label": "Intern"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Counselling Provided (Documented Verbally)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "About the illness, prognosis and treatment",
+              "type": "obs",
+              "id": "aboutTheIllnessPrognosisAndTreatment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a61cc06d-44a8-4707-b336-09af36b35672",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "About adherence to medication and avoidance of over-the-counter drugs",
+              "type": "obs",
+              "id": "aboutAdherenceToMedicationAndAvoidanceOf",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "eb1ce1ed-c118-44cd-8d2d-73a6d81cff25",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Potential adverse effect of prescribed drugs",
+              "type": "obs",
+              "id": "potentialAdverseEffectOfPrescribedDrugs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "292bd3d8-1915-4005-884b-d6a362b441ea",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Lifestyle counselling: smoking cessation",
+              "type": "obs",
+              "id": "aboutLifeStyleCessationOfSmoking",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "65b27345-b5ab-4724-8641-87b9480a6b30",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Lifestyle counselling: avoidance of substance use",
+              "type": "obs",
+              "id": "aboutLifeStyleAvoidanceOfSubstanceUse",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fc56978e-2dc6-49da-9fc2-7d264cdab01d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Lifestyle counselling: stress reduction",
+              "type": "obs",
+              "id": "aboutLifeStyleStressReduction",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e55982f3-3e71-4326-8299-97402b44be14",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Lifestyle counselling: vegetable and fruit intake",
+              "type": "obs",
+              "id": "aboutLifeStyleVegetableAndFruitUse",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8d721f5f-3756-4959-af58-9b2f25b97beb",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Lifestyle counselling: regular aerobic and resistance exercise (150 min/week)",
+              "type": "obs",
+              "id": "aboutLifeStyleRegularExercise150MinWeekA",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f19a4574-453a-4a24-b218-6bd07ae7f835",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Lifestyle counselling: weight reduction",
+              "type": "obs",
+              "id": "aboutLifeStyleWeightReduction",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8f65653b-d0a0-43fa-b02b-2a32115523a7",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "About adherence to medication and follow-up",
+              "type": "obs",
+              "id": "aboutAdherenceToMedicationAndFollowUp",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b4102306-eb59-4b64-9c33-aafd6deb37f7",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Last Status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "On follow-up",
+              "type": "obs",
+              "id": "onFollowUp",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6941d14e-c3ff-5878-9c18-4718d79d5164",
+                "answers": [
+                  {
+                    "concept": "165b4679-5c0d-4edb-bb3d-e661d45122e4",
+                    "label": "Improved"
+                  },
+                  {
+                    "concept": "164381AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Same"
+                  },
+                  {
+                    "concept": "8bc2e752-a1a7-4426-929d-43f228c2f74d",
+                    "label": "Deteriorated"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "On discharge",
+              "type": "obs",
+              "id": "onDischarge",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fdb0af79-6ab6-5665-a4ab-e232ffc4ad63",
+                "answers": [
+                  {
+                    "concept": "165b4679-5c0d-4edb-bb3d-e661d45122e4",
+                    "label": "Improved"
+                  },
+                  {
+                    "concept": "164381AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Same"
+                  },
+                  {
+                    "concept": "8bc2e752-a1a7-4426-929d-43f228c2f74d",
+                    "label": "Deteriorated"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "On referral",
+              "type": "obs",
+              "id": "onReferral",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d6b86536-930d-58c7-bdf8-6a7c2c6db860",
+                "answers": [
+                  {
+                    "concept": "165b4679-5c0d-4edb-bb3d-e661d45122e4",
+                    "label": "Improved"
+                  },
+                  {
+                    "concept": "164381AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Same"
+                  },
+                  {
+                    "concept": "8bc2e752-a1a7-4426-929d-43f228c2f74d",
+                    "label": "Deteriorated"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Hospital admission during follow-up period",
+              "type": "obs",
+              "id": "hospitalAdmissionDuringFollowUpPeriod",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9fe7fb09-7a1f-4f97-9778-c7c24a42d363"
+              }
+            },
+            {
+              "label": "Number of admissions since linkage to cardiac department",
+              "type": "obs",
+              "id": "numberOfAdmissionsSinceLinkageToCardiacD",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c575a802-075c-4780-baa3-14d4927bc326"
+              }
+            },
+            {
+              "label": "Frequency / Year",
+              "type": "obs",
+              "id": "frequencyYear",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c12b9cb9-6892-4100-9316-cb7125bfb2a0",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

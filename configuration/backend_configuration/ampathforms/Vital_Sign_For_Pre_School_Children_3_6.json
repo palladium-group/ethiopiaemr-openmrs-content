@@ -1,11 +1,11 @@
 {
-  "name": "Vital Sign For Pre-School Children (3-6)",
-  "description": "Vital signs assessment form for pre-school children aged 3-6 years",
-  "version": "1.1",
+  "name": "Vital Sign for Pre-School Children (3-6)",
+  "description": "Vital Sign for Pre School children (3-6) - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
   "published": true,
   "uuid": "4e1ee846-41cc-4ad5-8849-f4663cec5bab",
   "retired": false,
-  "encounter": "Vitals",
+  "encounter": "Consultation",
   "pages": [
     {
       "label": "Visit Details",
@@ -15,11 +15,10 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
-              "readonly": false,
               "questionOptions": {
                 "rendering": "date"
               },
@@ -28,7 +27,8 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "readonly": true
             },
             {
               "label": "Provider:",
@@ -55,329 +55,271 @@
                 }
               },
               "id": "encLocation",
-              "readonly": false
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Vital Sign For Pre-School Children (3-6 Yrs)",
+      "label": "Vital Sign for Pre-School Children (3-6) Assessment",
       "sections": [
         {
-          "label": "Pulse Rate",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
-              "required": false,
-              "id": "preschoolPulse",
+              "id": "pulseRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range for pre-school children: 80-120 bpm",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 120.5 || myValue < 79.5)",
-                "message": "Pulse is out of range (Normal range 80-120)"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Blood Pressure",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Systolic",
-              "type": "obs",
-              "required": false,
-              "id": "preschoolSystolic",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal range for pre-school children: 85-110 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 110.5 || myValue < 84.5)",
-                "message": "Systolic is out of range (Normal range 85-110)"
-              }
+              "questionInfo": "Beats per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Diastolic",
+              "label": "Temperature (°C)",
               "type": "obs",
-              "required": false,
-              "id": "preschoolDiastolic",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal range for pre-school children: 50-70 mmHg",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 70.5 || myValue < 49.5)",
-                "message": "Diastolic is out of range (Normal range 50-70)"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Vitals",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Temperature",
-              "type": "obs",
-              "required": false,
-              "id": "preschoolTemperature",
+              "id": "temperature",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "25",
-                "max": "43",
+                "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range: 36.5-37.5°C",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
-                "message": "Temperature is out of range (Normal range 35-37.5°C)"
-              }
+              "questionInfo": "Degrees Celsius, one decimal place.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Respiratory Rate",
+              "label": "Respiratory Rate (breaths/min)",
               "type": "obs",
-              "required": false,
-              "id": "preschoolRespiratoryRate",
+              "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range for pre-school children: 20-30 breaths/min",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 30.5 || myValue < 19.5)",
-                "message": "Respiratory Rate is out of range (Normal range 20-30)"
-              }
+              "questionInfo": "Breaths per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Saturation (SPO2%)",
+              "label": "SPO2",
               "type": "obs",
-              "required": false,
-              "id": "preschoolSPO2",
+              "id": "spo2",
               "questionOptions": {
-                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
+                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                 "min": "0",
-                "max": "100",
                 "step": "0.01"
               },
-              "questionInfo": "Normal: ≥90%",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && myValue < 89.5",
-                "message": "Oxygen Saturation is out of range (Normal range ≥90)"
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Head Circumference",
+              "label": "Head Circumference (cm)",
               "type": "obs",
-              "required": false,
-              "id": "preschoolHeadCircumference",
+              "id": "headCircumferenceCm",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
                 "step": "0.01"
               },
-              "validators": []
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
             },
             {
               "label": "Weight (kg)",
               "type": "obs",
-              "required": false,
-              "id": "preschoolWeight",
+              "id": "weight",
               "questionOptions": {
-                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Preschool child weight measurement in kilograms",
-              "validators": []
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
             },
             {
               "label": "Height (cm)",
               "type": "obs",
-              "required": false,
-              "id": "preschoolHeight",
+              "id": "height",
               "questionOptions": {
-                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Preschool child height measurement in centimeters",
-              "validators": []
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
             },
             {
-              "label": "MUAC (cm)",
+              "label": "Weight for age(Z-score)",
               "type": "obs",
-              "required": false,
-              "id": "preschoolMUAC",
+              "id": "weightForAgeZScore",
               "questionOptions": {
-                "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
-                "step": "0.01"
+                "concept": "162584aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
               },
-              "questionInfo": "Mid-Upper Arm Circumference in centimeters. Measure at midpoint between shoulder and elbow"
-            }
-          ]
-        },
-        {
-          "label": "Nutritional Health",
-          "isExpanded": "true",
-          "questions": [
+              "hideSteppers": true
+            },
             {
               "label": "Weight for Height",
               "type": "obs",
-              "required": false,
-              "id": "preschoolWeightForHeight",
+              "id": "weightForHeight",
               "questionOptions": {
                 "rendering": "select",
                 "concept": "17647889-9708-901b-2349-012345678901",
                 "answers": [
                   {
-                    "concept": "18758990-0819-012c-3450-123456789012",
-                    "label": "Below -3"
+                    "label": "Weight for height below minus 3",
+                    "concept": "18758990-0819-012c-3450-123456789012"
                   },
                   {
-                    "concept": "19869001-1920-123d-4561-234567890123",
-                    "label": "Between -3 and -2"
+                    "label": "Weight for height between minus 3 and minus 2",
+                    "concept": "19869001-1920-123d-4561-234567890123"
                   },
                   {
-                    "concept": "20970112-2031-234e-5672-345678901234",
-                    "label": "Between -2 and -1"
+                    "label": "Weight for height between minus 2 and minus 1",
+                    "concept": "20970112-2031-234e-5672-345678901234"
                   },
                   {
-                    "concept": "21081223-3142-345f-6783-456789012345",
-                    "label": "Between -1 and 0"
+                    "label": "Weight for height between minus 1 and 0",
+                    "concept": "21081223-3142-345f-6783-456789012345"
                   },
                   {
-                    "concept": "22192334-4253-4560-7894-567890123456",
-                    "label": "Between 0 and 1"
+                    "label": "Weight for height between 0 and 1",
+                    "concept": "22192334-4253-4560-7894-567890123456"
                   },
                   {
-                    "concept": "23203445-5364-5671-8905-678901234567",
-                    "label": "Between 1 and 2"
+                    "label": "Weight for height between 1 and 2",
+                    "concept": "23203445-5364-5671-8905-678901234567"
                   },
                   {
-                    "concept": "24314556-6475-6782-9016-789012345678",
-                    "label": "Between 2 and 3"
+                    "label": "Weight for height between 2 and 3",
+                    "concept": "24314556-6475-6782-9016-789012345678"
                   },
                   {
-                    "concept": "25425667-7586-7893-0127-890123456789",
-                    "label": "Above 3"
+                    "label": "Weight for height above 3",
+                    "concept": "25425667-7586-7893-0127-890123456789"
                   }
                 ]
-              },
-              "validators": []
+              }
             },
             {
-              "label": "Height for Age",
+              "label": "Height for age(Z-score)",
               "type": "obs",
-              "required": false,
-              "id": "preschoolHeightForAge",
+              "id": "heightForAgeZScore",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "26536778-8697-890a-1238-901234567890",
-                "answers": [
-                  {
-                    "concept": "27647889-9708-901b-2349-012345678901",
-                    "label": "Below -3"
-                  },
-                  {
-                    "concept": "28758990-0819-012c-3450-123456789012",
-                    "label": "Between -3 and -2"
-                  },
-                  {
-                    "concept": "29869001-1920-123d-4561-234567890123",
-                    "label": "Between -2 and -1"
-                  },
-                  {
-                    "concept": "30970112-2031-234e-5672-345678901234",
-                    "label": "Between -1 and 0"
-                  },
-                  {
-                    "concept": "31081223-3142-345f-6783-456789012345",
-                    "label": "Between 0 and 1"
-                  },
-                  {
-                    "concept": "32192334-4253-4560-7894-567890123456",
-                    "label": "Between 1 and 2"
-                  },
-                  {
-                    "concept": "33203445-5364-5671-8905-678901234567",
-                    "label": "Between 2 and 3"
-                  },
-                  {
-                    "concept": "34314556-6475-6782-9016-789012345678",
-                    "label": "Above 3"
-                  }
-                ]
+                "rendering": "number",
+                "concept": "cf0fdfe7-18eb-51ab-846c-96ccb767d9b9",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height)) ? '' : ((calcHeightForAgeZscore(Number(height)) == null) ? '' : Number(calcHeightForAgeZscore(Number(height))))"
+                },
+                "readonly": true
               },
-              "validators": []
+              "hideSteppers": true
             },
             {
-              "label": "Weight for Age",
+              "label": "MUAC",
               "type": "obs",
-              "required": false,
-              "id": "preschoolWeightForAge",
+              "id": "muac",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "0e758f90-0819-012c-3450-123456789012",
-                "answers": [
-                  {
-                    "concept": "0f869001-1920-123d-4561-234567890123",
-                    "label": "Below -3"
-                  },
-                  {
-                    "concept": "10970112-2031-234e-5672-345678901234",
-                    "label": "Between -3 and -2"
-                  },
-                  {
-                    "concept": "11081223-3142-345f-6783-456789012345",
-                    "label": "Between -2 and -1"
-                  },
-                  {
-                    "concept": "12192334-4253-4560-7894-567890123456",
-                    "label": "Between -1 and 0"
-                  },
-                  {
-                    "concept": "13203445-5364-5671-8905-678901234567",
-                    "label": "Between 0 and 1"
-                  },
-                  {
-                    "concept": "14314556-6475-6782-9016-789012345678",
-                    "label": "Between 1 and 2"
-                  },
-                  {
-                    "concept": "15425667-7586-7893-0127-890123456789",
-                    "label": "Between 2 and 3"
-                  },
-                  {
-                    "concept": "16536778-8697-890a-1238-901234567890",
-                    "label": "Above 3"
-                  }
-                ]
+                "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
+                "step": "0.01"
               },
-              "validators": []
+              "hideSteppers": true
+            },
+            {
+              "label": "RBS",
+              "type": "obs",
+              "id": "rbs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "887aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Preschool Blood Pressure",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic (mmHg)",
+              "type": "obs",
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Millimetres of mercury.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic (mmHg)",
+              "type": "obs",
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Millimetres of mercury.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
             }
           ]
         }
