@@ -1,0 +1,917 @@
+{
+  "name": "Outpatient Therapeutic Program (OTP) Admission",
+  "description": "Out Patient Therapy - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "2a9fb100-9447-5288-83ee-31c022bac814",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Outpatient Therapeutic Program (OTP) Admission Assessment",
+      "sections": [
+        {
+          "label": "OTP Personal Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name of Caregiver",
+              "type": "obs",
+              "id": "nameOfCaregiver",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d4bfea7a-80c6-456a-a9d5-22770bf3d8a2"
+              }
+            },
+            {
+              "label": "Registration Number",
+              "type": "obs",
+              "id": "registrationNumber",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "cdfd87a5-7bf5-4051-ac60-8f0baf636651"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "PC3 No.",
+              "type": "obs",
+              "id": "pc3No",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1d9ad93f-4caa-400d-acf4-0c76da875e0f"
+              }
+            },
+            {
+              "label": "Admission date",
+              "type": "obs",
+              "id": "admissionDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "421719a0-eef5-4181-b55d-fff16d845314"
+              }
+            },
+            {
+              "label": "Admission",
+              "type": "obs",
+              "id": "admission",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "b2f0b918-f65b-4bc3-8a4a-6f97e79b694d",
+                "answers": [
+                  {
+                    "concept": "9c41809d-41fa-4b5e-9dd7-25d83971a76b",
+                    "label": "Direct From Community"
+                  },
+                  {
+                    "concept": "c546ea6c-6395-42c0-a11f-6afe214f11ca",
+                    "label": "From Inpatient Care"
+                  },
+                  {
+                    "concept": "6bc49275-f4e6-47a6-9c92-627394a90ffc",
+                    "label": "From Hospital ART"
+                  },
+                  {
+                    "concept": "3d3c7fd6-fa74-4bc3-9db4-a3b013035551",
+                    "label": "From Hospital OPD"
+                  },
+                  {
+                    "concept": "1dfbf8b0-a2e6-469e-adfe-75be906291e3",
+                    "label": "Readmission (Relapse)"
+                  },
+                  {
+                    "concept": "7267433b-8f07-439f-8b6e-176ef486e1fb",
+                    "label": "Inpatient Refusal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "RVI",
+              "type": "obs",
+              "id": "rvi",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e63c3415-62a0-4340-b416-0c190b8c7407",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "ART Status",
+              "type": "obs",
+              "id": "artStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "78506f76-efe1-4854-8340-8d50234617b7",
+                "answers": [
+                  {
+                    "concept": "d8176d1b-1234-11ee-be56-0242ac120004",
+                    "label": "ART"
+                  },
+                  {
+                    "concept": "997adff7-bbbd-4813-9ce5-ff188c690b19",
+                    "label": "Pre ART"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HIV Exposed",
+              "type": "obs",
+              "id": "hivExposed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3055b85a-c7a7-4cea-96a3-12e8ad75b872",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "OTP Admission Anthropometry",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "WHM %",
+              "type": "obs",
+              "id": "whm",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8ee9b2fe-2bac-415c-8312-3dfaef26843e",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "MUAC",
+              "type": "obs",
+              "id": "muac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Admission Criteria",
+              "type": "obs",
+              "id": "admissionCriteria",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1debe0ac-1283-436d-8edc-c7083be21799",
+                "answers": [
+                  {
+                    "concept": "96a5930d-e6eb-4003-9d80-7dc113aa8558",
+                    "label": "MUAC <110mm"
+                  },
+                  {
+                    "concept": "59815232-2504-4f2e-9208-87cefba1e3ea",
+                    "label": "MUAC <120mm"
+                  },
+                  {
+                    "concept": "c1328108-c1e6-4f12-80d1-1290fb72eaf8",
+                    "label": "WHM <80%"
+                  },
+                  {
+                    "concept": "543b707d-c393-4127-af6e-958261156aa8",
+                    "label": "WHM<70%"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e838df31-7eff-4aa3-be0d-dd0f39fbbce4"
+              }
+            }
+          ]
+        },
+        {
+          "label": "OTP History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diarrhea",
+              "type": "obs",
+              "id": "diarrhea",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a1b2c3d4-e5f6-7890-1234-56789abcdef0",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Vomiting",
+              "type": "obs",
+              "id": "vomiting",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "57ca8e97-5761-4b54-a3bb-3f0dd6471df8",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Cough",
+              "type": "obs",
+              "id": "cough",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0dd2e3f4-8a5b-678c-012d-890123456789",
+                "answers": []
+              }
+            },
+            {
+              "label": "Appetite",
+              "type": "obs",
+              "id": "appetite",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "b38282a6-da07-42d2-bc6e-179abadbaed9",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Related Problem",
+              "type": "obs",
+              "id": "relatedProblem",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0aa80db7-4d9c-491e-bbbc-5c170171038e"
+              }
+            },
+            {
+              "label": "Stools/ Day",
+              "type": "obs",
+              "id": "stoolsDay",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ebd89fa1-e187-4a8c-b1dc-1b4268012545",
+                "answers": [
+                  {
+                    "concept": "364c90bd-75a0-4d5b-9744-7d104b4c953f",
+                    "label": "1 to 3"
+                  },
+                  {
+                    "concept": "7d9430d2-dbe6-40ef-b743-497b145dcc52",
+                    "label": "4 to 5"
+                  },
+                  {
+                    "concept": "7f8c744d-0c49-4ba7-9077-b2d14a53e743",
+                    "label": ">5"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Passing Urine",
+              "type": "obs",
+              "id": "passingUrine",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d8f0ab0a-741b-46a1-84c0-957ad6f53e1f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Oedema, How long swollen?",
+              "type": "obs",
+              "id": "ifOedemaHowLongSwollen",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8bd73b64-8084-421e-bb0d-185470e9bdc8"
+              }
+            },
+            {
+              "label": "Breast Feeding",
+              "type": "obs",
+              "id": "breastFeeding",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "933b4fc7-a04a-4be1-9307-405ff8da4e5c",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Orphan",
+              "type": "obs",
+              "id": "orphan",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1174AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "OTP Physical Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Respiratory Rate (/min)",
+              "type": "obs",
+              "id": "respiratoryRateMin",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Eyes",
+              "type": "obs",
+              "id": "eyes",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "163309AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1dd1f2a3-7b4c-567d-901e-789012345678",
+                    "label": "Sunken"
+                  },
+                  {
+                    "concept": "0437291f-333b-4d6e-983b-a1ae9f1c2868",
+                    "label": "Discharge"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Ear",
+              "type": "obs",
+              "id": "ear",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0f607182-9304-1234-5678-9abcdef01234",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "0437291f-333b-4d6e-983b-a1ae9f1c2868",
+                    "label": "Discharge"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Lymph Nodes",
+              "type": "obs",
+              "id": "lymphNodes",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c82e80e2-4d0d-49a5-9357-1dd0555ec548",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "166327AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Neck"
+                  },
+                  {
+                    "concept": "567AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Axilla"
+                  },
+                  {
+                    "concept": "34844fa8-1a98-4ae6-ba57-b22826ca7ce7",
+                    "label": "Groin"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Skin Changes",
+              "type": "obs",
+              "id": "skinChanges",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "35a938fc-814c-483b-ba5b-491ab8688723",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "140AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Scabies"
+                  },
+                  {
+                    "concept": "c9264ac8-b296-4faf-8956-97d13f6f8ee9",
+                    "label": "Peeling"
+                  },
+                  {
+                    "concept": "c642b839-607f-573a-ba0f-204c8ce4759e",
+                    "label": "Ulcers/ abscess"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Chest retractions",
+              "type": "obs",
+              "id": "chestRetractions",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "01885e58-c0bf-4a43-9222-7ab590067326",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Conjunctiva",
+              "type": "obs",
+              "id": "conjunctiva",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a040c538-7f11-5735-ac98-6fed002655df",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Dehydration",
+              "type": "obs",
+              "id": "dehydration",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "4f86ff92-415f-425f-8a2a-810109bdae86",
+                    "label": "Sever"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Mouth",
+              "type": "obs",
+              "id": "mouth",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "163308AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "33fb65eb-e683-4b41-ba60-fa518d754119",
+                    "label": "Sores"
+                  },
+                  {
+                    "concept": "808bc4d8-7799-4b57-bade-fddb00847763",
+                    "label": "Candida"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Ulcers/ abscess",
+              "type": "obs",
+              "id": "ulcersAbscess",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c642b839-607f-573a-ba0f-204c8ce4759e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Extremities",
+              "type": "obs",
+              "id": "extremities",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c24419ee-743b-4db0-b601-136c892baf54",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "894ee228-e961-4580-8b73-c3a8ac01658d",
+                    "label": "Cold"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "OTP Summary of Inpatient Care",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Summary of inpatient care",
+              "type": "obs",
+              "id": "notes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1976f18f-e3e0-4f26-b226-b964e8b3b82f"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "OTP Routine Admission Medication",
+      "sections": [
+        {
+          "label": "OTP AR At Admission",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Medication name",
+              "type": "obs",
+              "id": "medicationName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c3082af8-f935-40c5-aa5b-74c684e81aea"
+              }
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Dose",
+              "type": "obs",
+              "id": "dose",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cd9f19fd-f82b-4777-93e4-a081b9e1f80f",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Medication name",
+              "type": "obs",
+              "id": "medicationName2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c3082af8-f935-40c5-aa5b-74c684e81aea"
+              }
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date2",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Dose",
+              "type": "obs",
+              "id": "dose2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cd9f19fd-f82b-4777-93e4-a081b9e1f80f",
+                "min": "0",
+                "step": "0.01"
+              }
+            }
+          ]
+        },
+        {
+          "label": "OTP AR 2nd Visit",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Medication name",
+              "type": "obs",
+              "id": "medicationName3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c3082af8-f935-40c5-aa5b-74c684e81aea"
+              }
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date3",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Dose",
+              "type": "obs",
+              "id": "dose3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cd9f19fd-f82b-4777-93e4-a081b9e1f80f",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Medication name",
+              "type": "obs",
+              "id": "medicationName4",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c3082af8-f935-40c5-aa5b-74c684e81aea"
+              }
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date4",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Dose",
+              "type": "obs",
+              "id": "dose4",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cd9f19fd-f82b-4777-93e4-a081b9e1f80f",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Medication name",
+              "type": "obs",
+              "id": "medicationName5",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c3082af8-f935-40c5-aa5b-74c684e81aea"
+              }
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date5",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Dose",
+              "type": "obs",
+              "id": "dose5",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cd9f19fd-f82b-4777-93e4-a081b9e1f80f",
+                "min": "0",
+                "step": "0.01"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

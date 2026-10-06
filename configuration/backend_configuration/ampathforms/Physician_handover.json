@@ -1,0 +1,138 @@
+{
+  "name": "Physician handover",
+  "description": "Physician handover - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "73cf8519-324f-512d-bc45-8be16cbb8da7",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Physician handover Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Current physician",
+              "type": "obs",
+              "id": "currentPhysician",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "54f78f02-b1a3-4d64-b3f8-65f886d47439"
+              }
+            },
+            {
+              "label": "Next shift physician",
+              "type": "obs",
+              "id": "nextShiftPhysician",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Situation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Current condition",
+              "type": "obs",
+              "id": "currentCondition",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "34da9e4c-d53c-4482-861f-26eb11bc705e"
+              }
+            },
+            {
+              "label": "Medication information",
+              "type": "obs",
+              "id": "medicationInformation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "89a04b05-68a1-4555-8c2d-efbfed9d0e69"
+              }
+            },
+            {
+              "label": "Recent actions",
+              "type": "obs",
+              "id": "recentActions",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f6914da0-a8fc-4548-8551-8808bfb974f2"
+              }
+            },
+            {
+              "label": "Special Note",
+              "type": "obs",
+              "id": "specialNote",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6aa0f37b-cafe-412d-adf7-59745045e351"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

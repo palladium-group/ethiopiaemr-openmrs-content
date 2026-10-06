@@ -1,0 +1,744 @@
+{
+  "name": "Toxicology Triage Form",
+  "description": "Toxicology Triage Form - built from the St-Petros (Bahmni) form. Abnormal toggles replaced by soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "a02cd82a-ff10-599e-be10-f598c8c0f124",
+  "retired": false,
+  "encounter": "Triage",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Toxicology Triage Assessment",
+      "sections": [
+        {
+          "label": "Exposure Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "DATE OF EXPOSURE",
+              "type": "obs",
+              "id": "dateOfExposure",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "125ab063-1916-4912-8569-c1cf2256cfcf"
+              }
+            },
+            {
+              "label": "Time of arrival",
+              "type": "obs",
+              "id": "timeOfArrival",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0d4e5f60-7182-9012-3456-789abcdef012",
+                "answers": [
+                  {
+                    "label": "Night",
+                    "concept": "161018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Triage Day arrival",
+                    "concept": "1e5f6071-8293-0123-4567-89abcdef0123"
+                  },
+                  {
+                    "label": "Triage Night arrival",
+                    "concept": "2f6071a2-9304-1234-5678-9abcdef01234"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "TIME ELAPSED SINCE EXPOSURE",
+              "type": "obs",
+              "id": "timeElapsedSinceExposure",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "df60c0ce-6b79-4a5b-a8c3-9aeb4d91b71b"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Referral & Communication",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Communication With TOX. Center",
+              "type": "obs",
+              "id": "communicationWithToxCenter",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4e5bb283-ac5f-4a99-8446-4c823bfaaec3",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Referral",
+              "type": "obs",
+              "id": "referral",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ba49c378-aa2e-449f-81c4-75409e1ec20a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If YES from where",
+              "type": "obs",
+              "id": "ifYesFromWhere",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "12d3d785-affd-48d5-8d80-773404390817",
+                "answers": [
+                  {
+                    "concept": "1016a54e-b31f-4102-9d9f-f8c97fc467c7",
+                    "label": "Private Hospital"
+                  },
+                  {
+                    "concept": "9a51f39c-3057-53b6-aeb2-4bc1c42f0798",
+                    "label": "Public Hospital"
+                  },
+                  {
+                    "concept": "ad455667-7889-5671-9015-012345678a01",
+                    "label": "Health Centers"
+                  },
+                  {
+                    "concept": "253b40ec-54da-4e92-9ab1-2d99075b19e8",
+                    "label": "Police"
+                  },
+                  {
+                    "concept": "978AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Self"
+                  },
+                  {
+                    "concept": "5256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(referral) || referral !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Mode of arrival",
+              "type": "obs",
+              "id": "modeOfArrival",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "529a4b5c-6d7e-4567-890b-cdef01234567",
+                "answers": [
+                  {
+                    "concept": "1377AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ambulance"
+                  },
+                  {
+                    "concept": "74bc6d7e-8f90-6789-012d-ef0123456789",
+                    "label": "Taxi"
+                  },
+                  {
+                    "concept": "85cd7e8f-9001-789a-123e-f01234567890",
+                    "label": "Private Car"
+                  },
+                  {
+                    "concept": "4f694879-6290-411b-8140-b6562715854e",
+                    "label": "Walking"
+                  },
+                  {
+                    "concept": "b8f00112-2334-012d-4560-234567890123",
+                    "label": "Public Taxi"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Poisoning & Chief Complaint",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Chief Complaint",
+              "type": "obs",
+              "id": "chiefComplaint",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160531AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Circumstance",
+              "type": "obs",
+              "id": "circumstance",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "fbff0de7-981c-4dff-a8d0-4343142b8574",
+                "answers": [
+                  {
+                    "concept": "1551AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Intentional"
+                  },
+                  {
+                    "concept": "1550AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Accidental"
+                  },
+                  {
+                    "concept": "162976AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Occupational"
+                  },
+                  {
+                    "concept": "639173e6-7d13-4bb9-b6a3-4d3840566f82",
+                    "label": "Uncertain"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  },
+                  {
+                    "concept": "5256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Route",
+              "type": "obs",
+              "id": "route",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0925e76f-84fa-48b7-8c98-8075038ab89a",
+                "answers": [
+                  {
+                    "concept": "e8bf0e40-3f47-4e28-a947-7784abd286a5",
+                    "label": "Oral"
+                  },
+                  {
+                    "concept": "8f65324a-9391-4bfc-9857-d2119695cfea",
+                    "label": "Dermal"
+                  },
+                  {
+                    "concept": "98eb62c3-8e5d-42a2-886c-1b936bbc4d52",
+                    "label": "Respiratory"
+                  },
+                  {
+                    "concept": "c702813c-fc69-4f04-83dd-fe3f8b05e803",
+                    "label": "Ocular"
+                  },
+                  {
+                    "concept": "5d5d685c-f411-4df9-b503-f65d76be136b",
+                    "label": "Parenteral (PN)"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  },
+                  {
+                    "concept": "5256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Product (Name and actual use)",
+              "type": "obs",
+              "id": "productNameAndActualUse",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b07e03cf-e032-4208-8782-2205622af5fd"
+              }
+            },
+            {
+              "label": "Animal identity form",
+              "type": "obs",
+              "id": "animalIdentityForm",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "af331a5f-1c7b-4305-b78f-9c74bdd2ae7d",
+                "answers": [
+                  {
+                    "concept": "162419AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Gas"
+                  },
+                  {
+                    "concept": "162657AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Liquid"
+                  },
+                  {
+                    "concept": "166767AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Solid"
+                  },
+                  {
+                    "concept": "04378a67-44f9-4856-92de-4f75336f76f1",
+                    "label": "Bite"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  },
+                  {
+                    "concept": "5256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Adult Triage: Modified TEWS Score",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Response",
+              "type": "obs",
+              "id": "response",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5704f76a-c13f-4d7c-af72-225f505c0c82",
+                "answers": [
+                  {
+                    "concept": "9694701e-109a-41d3-8adb-8f07670fbcb5",
+                    "label": "Alert"
+                  },
+                  {
+                    "concept": "162645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "To voice"
+                  },
+                  {
+                    "concept": "162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "To pain"
+                  },
+                  {
+                    "concept": "60c7864e-4a90-468f-81bf-94a6dea9c898",
+                    "label": "Unresponsive"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Airway",
+              "type": "obs",
+              "id": "airway",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "10d2039e-52b7-4cd6-a99a-3467c19e2563",
+                "answers": [
+                  {
+                    "concept": "159484AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Clear"
+                  },
+                  {
+                    "concept": "c767a73e-e532-4354-b50d-01b779cba3b2",
+                    "label": "Blocked"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Breathing",
+              "type": "obs",
+              "id": "breathing",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a5726786-bd9c-517d-aa9c-69497e1594b8",
+                "answers": [
+                  {
+                    "concept": "162976AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "SPO2>90"
+                  },
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "RR",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1cedffd4-d703-454a-8b7e-08e61b84242a",
+                "answers": [
+                  {
+                    "concept": "162976AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "<5"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Heart rate",
+              "type": "obs",
+              "id": "heartRate",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2039a9c1-e5ea-4bab-a9a1-e404a1f2dd2c",
+                "answers": [
+                  {
+                    "concept": "162976AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "<39"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "SBP (mmHg)",
+              "type": "obs",
+              "id": "sbp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "questionInfo": "Millimetres of mercury.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Temp",
+              "type": "obs",
+              "id": "temp",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a49c571a-ab24-5881-be5d-c83fee9cbcf0",
+                "answers": [
+                  {
+                    "concept": "162976AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "<30"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pain",
+              "type": "obs",
+              "id": "pain",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "45e4f3ee-af33-4723-bb45-5a28951300f0",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Trauma",
+              "type": "obs",
+              "id": "trauma",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "SCORE",
+              "type": "obs",
+              "id": "score",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f5f9467a-ead9-470f-89c6-9a772be211ae"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Pediatric Emergency Signs (ABCDO)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Airway and breathing",
+              "type": "obs",
+              "id": "airwayAndBreathing",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "aa3dac1e-646b-4c4d-9ffa-cabe98d0203e",
+                "answers": [
+                  {
+                    "concept": "5203142a-3647-5678-2345-901234567890",
+                    "label": "Not breathing"
+                  },
+                  {
+                    "concept": "cf233445-5667-3459-7893-389a12345678",
+                    "label": "Airway obstruction"
+                  },
+                  {
+                    "concept": "589AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "cyanosis"
+                  },
+                  {
+                    "concept": "7dcd7908-2118-43d3-b469-c90fb042836c",
+                    "label": "Severe respiratory distress"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Circulation",
+              "type": "obs",
+              "id": "circulation",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "56924562-cd68-48a0-be38-c4f1fbcffd2e",
+                "answers": [
+                  {
+                    "concept": "605abbdb-fac0-427b-b4af-96fc8d6fc9da",
+                    "label": "No pulse"
+                  },
+                  {
+                    "concept": "a9a8149e-ed50-4e78-a9f4-bef8af0037ca",
+                    "label": "Cold hands"
+                  },
+                  {
+                    "concept": "162512AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Capillary refill > 3 sec"
+                  },
+                  {
+                    "concept": "ef376108-0270-4f68-9a61-3ee11adc1e1b",
+                    "label": "Weak and fast pulse"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Coma",
+              "type": "obs",
+              "id": "coma",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "162643AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Respond to pain"
+                  },
+                  {
+                    "concept": "60c7864e-4a90-468f-81bf-94a6dea9c898",
+                    "label": "Unresponsive"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Convulsion",
+              "type": "obs",
+              "id": "convulsion",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c01d301c-25ad-4ee6-b957-60d5db91c66d",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Dehydration",
+              "type": "obs",
+              "id": "dehydration",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "116334AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Lethargy"
+                  },
+                  {
+                    "concept": "164457AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sunken eyes"
+                  },
+                  {
+                    "concept": "162976AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Slow skin pinch"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "other,",
+              "type": "obs",
+              "id": "other",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "RR (breaths/min)",
+              "type": "obs",
+              "id": "rr2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Breaths per minute.",
+              "hideSteppers": true
+            },
+            {
+              "label": "PR (beats/min)",
+              "type": "obs",
+              "id": "pr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Beats per minute.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temeperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": "0.01"
+              },
+              "questionInfo": "Degrees Celsius, one decimal place.",
+              "hideSteppers": true
+            },
+            {
+              "label": "TRIAGE DECISION",
+              "type": "obs",
+              "id": "triageDecision",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "081a617a-8805-44b2-8e7d-d41b79ba6f77",
+                "answers": [
+                  {
+                    "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef",
+                    "label": "Remarks"
+                  },
+                  {
+                    "concept": "90457239-cbe0-4b20-9ab0-e262df08f06f",
+                    "label": "YELLOW/GREEN  (RECOVERY)"
+                  },
+                  {
+                    "concept": "8c596071-8293-4c82-cd93-041526374859",
+                    "label": "BLUE (DIED)"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

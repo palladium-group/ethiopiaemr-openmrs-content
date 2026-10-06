@@ -1,11 +1,11 @@
 {
-  "name": "Vital Sign for School Age (6-12)",
-  "description": "Vital signs assessment form for school-age children aged 6-12 years",
-  "version": "1.1",
+  "name": "Vital Sign for School Age Children (6-12)",
+  "description": "Vital Sign for School-age (6-12) - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
   "published": true,
   "uuid": "ddf3b70d-7ebd-4615-965a-4340e9c1a692",
   "retired": false,
-  "encounter": "Vitals",
+  "encounter": "Consultation",
   "pages": [
     {
       "label": "Visit Details",
@@ -15,11 +15,10 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
-              "readonly": false,
               "questionOptions": {
                 "rendering": "date"
               },
@@ -28,7 +27,8 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "readonly": true
             },
             {
               "label": "Provider:",
@@ -55,198 +55,194 @@
                 }
               },
               "id": "encLocation",
-              "readonly": false
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Vital Sign For School-Age (6-12)",
+      "label": "Vital Sign for School Age Children (6-12) Assessment",
       "sections": [
         {
-          "label": "Pulse Rate",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
-              "required": false,
-              "id": "schoolAgePulse",
+              "id": "pulseRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range for school-age children: 70-110 bpm",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 110.5 || myValue < 69.5)",
-                "message": "Pulse is out of range (Normal range 70-110)"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Blood Pressure",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Systolic",
-              "type": "obs",
-              "required": false,
-              "id": "schoolAgeSystolic",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal range for school-age children: 95-115 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 115.5 || myValue < 94.5)",
-                "message": "Systolic is out of range (Normal range 95-115)"
-              }
+              "questionInfo": "Beats per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Diastolic",
+              "label": "Temperature (°C)",
               "type": "obs",
-              "required": false,
-              "id": "schoolAgeDiastolic",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal range for school-age children: 55-75 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 75.5 || myValue < 54.5)",
-                "message": "Diastolic is out of range (Normal range 55-75)"
-              }
-            },
-            {
-              "label": "Posture",
-              "type": "obs",
-              "required": false,
-              "id": "schoolAgePosture",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "159633AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "answers": [
-                  {
-                    "label": "Sitting",
-                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Supine",
-                    "concept": "159629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "label": "Vitals",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Temperature",
-              "type": "obs",
-              "required": false,
-              "id": "schoolAgeTemperature",
+              "id": "temperature",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "max": "43",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range: 36.5-37.5°C",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
-                "message": "Temperature is out of range (Normal range 35-37.5°C)"
-              }
+              "questionInfo": "Degrees Celsius, one decimal place.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Respiratory Rate",
+              "label": "Respiratory Rate (breaths/min)",
               "type": "obs",
-              "required": false,
-              "id": "schoolAgeRespiratoryRate",
+              "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range for school-age children: 18-25 breaths/min",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 25.5 || myValue < 17.5)",
-                "message": "Respiratory Rate is out of range (Normal range 18-25)"
-              }
+              "questionInfo": "Breaths per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Saturation (SPO2%)",
+              "label": "SPO2",
               "type": "obs",
-              "required": false,
-              "id": "schoolAgeSPO2",
+              "id": "spo2",
               "questionOptions": {
-                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
+                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                 "min": "0",
-                "max": "100",
                 "step": "0.01"
               },
-              "questionInfo": "Normal: ≥90%",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && myValue < 89.5",
-                "message": "Oxygen Saturation is out of range (Normal range ≥90)"
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
               "label": "Weight (kg)",
               "type": "obs",
-              "required": false,
-              "id": "schoolAgeWeight",
+              "id": "weight",
               "questionOptions": {
-                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "School-age child weight measurement in kilograms",
-              "validators": []
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
             },
             {
               "label": "Height (cm)",
               "type": "obs",
-              "required": false,
-              "id": "schoolAgeHeight",
+              "id": "height",
               "questionOptions": {
-                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
                 "step": "0.01"
               },
-              "questionInfo": "School-age child height measurement in centimeters",
-              "validators": []
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
             },
             {
-              "label": "BMI (Kg/m2)",
+              "label": "BMI",
               "type": "obs",
-              "required": false,
-              "id": "schoolAgeBMI",
+              "id": "bmi",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "8dbc97c1-cc29-4823-b10e-58f03773588d",
+                "min": "0",
+                "step": "0.01",
                 "calculate": {
-                  "calculateExpression": "calcBMI(schoolAgeHeight,schoolAgeWeight)"
-                },
+                  "calculateExpression": "calcBMI(height,weight)"
+                }
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "RBS",
+              "type": "obs",
+              "id": "rbs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "887aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "School age Blood Pressure",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic (mmHg)",
+              "type": "obs",
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Body Mass Index. Normal range varies by age and gender"
+              "questionInfo": "Millimetres of mercury.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic BP (mmHg)",
+              "type": "obs",
+              "id": "diastolicBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Millimetres of mercury.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
             }
           ]
         }

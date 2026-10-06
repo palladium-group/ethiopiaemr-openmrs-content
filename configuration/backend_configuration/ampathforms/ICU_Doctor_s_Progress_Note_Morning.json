@@ -1,0 +1,743 @@
+{
+  "name": "ICU Doctor's Progress Note (Morning)",
+  "description": "ICU Doctor's Progress Note (Morning) - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "5c2afbe8-be40-52ef-a95c-e06d25e9b8f0",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "ICU Doctor's Progress Note (Morning) Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5bbbe370-d3ff-4526-a63b-df5c579ca30c"
+              }
+            },
+            {
+              "label": "ICU rounds; Dr",
+              "type": "encounterProvider",
+              "id": "icuRoundsDr",
+              "questionOptions": {
+                "rendering": "ui-select-extended"
+              }
+            },
+            {
+              "label": "Day of ICU stay",
+              "type": "obs",
+              "id": "dayOfIcuStay",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "163204AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Comorbidities and Inactive Conditions",
+              "type": "obs",
+              "id": "comorbiditiesAndInactiveConditions",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f0c22f5f-f0d6-5c37-b198-0dcc5317010c"
+              }
+            },
+            {
+              "label": "Working Diagnosis/ Present Conditions",
+              "type": "obs",
+              "id": "workingDiagnosisPresentConditions",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "eed689d6-b1a3-4b19-af8d-bb6adc73f2cb"
+              }
+            },
+            {
+              "label": "Tubes and Lines",
+              "type": "obs",
+              "id": "tubesAndLines",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "99cf51d7-3a25-4248-99e3-a65d09d27b2f"
+              }
+            },
+            {
+              "label": "Skin/Wounds/Drains",
+              "type": "obs",
+              "id": "skinWoundsDrains",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "cd80e3c5-1a03-4e12-aaad-227f5d9fbbdd"
+              }
+            },
+            {
+              "label": "Assessment Notes",
+              "type": "obs",
+              "id": "assessmentNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "254fa001-263b-47c3-b2bc-b8385b29a96c"
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              }
+            },
+            {
+              "label": "Signature",
+              "type": "obs",
+              "id": "signature",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "28794bbc-ad22-4d8e-a8a3-8147bdfef6cd"
+              }
+            }
+          ]
+        },
+        {
+          "label": "ICU Doctor Notes CNS",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Glasgow coma scale",
+              "type": "obs",
+              "id": "glasgowComaScale",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "160347AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Lt",
+              "type": "obs",
+              "id": "lt",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e5dd64de-375d-41a2-8b3d-31ce2a73b70d"
+              }
+            },
+            {
+              "label": "Rt",
+              "type": "obs",
+              "id": "rt",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "fd42f432-f3f0-47e6-b648-590cb0d718fb"
+              }
+            },
+            {
+              "label": "Sedation Score",
+              "type": "obs",
+              "id": "sedationScore",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0f4d73b9-8e99-4c15-9808-d1e7d997acc9"
+              }
+            },
+            {
+              "label": "Power",
+              "type": "obs",
+              "id": "power",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c9a51f95-08b0-5b04-99aa-7b13198d2b31"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Reflexes",
+              "type": "obs",
+              "id": "reflexes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "5c5278bd-2742-48a6-8c6b-7ec5467bb40d"
+              }
+            },
+            {
+              "label": "Plantar Assessment",
+              "type": "obs",
+              "id": "plantarAssessment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0b2fcc2d-bef5-4c4f-ae44-58237828124c"
+              }
+            },
+            {
+              "label": "Impressions",
+              "type": "obs",
+              "id": "impressions",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "132ae140-a677-448d-8158-d34aa52c8e09"
+              }
+            }
+          ]
+        },
+        {
+          "label": "ICU Doctor Notes CVS",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "MAP",
+              "type": "obs",
+              "id": "map",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "163187AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Rhythm",
+              "type": "obs",
+              "id": "rhythm",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e6b1cd3a-2ca2-4b44-9645-013debaa4af9"
+              }
+            },
+            {
+              "label": "Inotropes",
+              "type": "obs",
+              "id": "inotropes",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b759d498-d58c-4009-9ea6-b5e5c7efbf6e"
+              }
+            },
+            {
+              "label": "CVP",
+              "type": "obs",
+              "id": "cvp",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ebd7acec-3d3e-4e45-a603-976e7c6c5b30"
+              }
+            },
+            {
+              "label": "Volume Status",
+              "type": "obs",
+              "id": "volumeStatus",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "585d9c64-24bd-4881-a270-5a4fe5d3ab67"
+              }
+            },
+            {
+              "label": "Perfusion",
+              "type": "obs",
+              "id": "prefusion",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b6397af0-d763-4234-8fb0-907635954fd2"
+              }
+            },
+            {
+              "label": "Cardiovascular System (CVS)",
+              "type": "obs",
+              "id": "cardiovascularSystemCvs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "98283469-823b-439a-b553-6451edcd6186"
+              }
+            },
+            {
+              "label": "Impressions/Plan",
+              "type": "obs",
+              "id": "impressionsPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ba198693-3597-5fbc-88b4-385cb156d17b"
+              }
+            }
+          ]
+        },
+        {
+          "label": "ICU Doctor Notes Respiratory System",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Ventilation Status",
+              "type": "obs",
+              "id": "ventilationStatus",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "192e01e8-e081-4824-8ae2-0dcd84c14dda"
+              }
+            },
+            {
+              "label": "Mode",
+              "type": "obs",
+              "id": "mode",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "4ea306e1-f071-4c83-8097-2ab45172b016",
+                "answers": [
+                  {
+                    "label": "Vomiting",
+                    "concept": "122983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Absent",
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Nasogastric tube placement",
+                    "concept": "1766AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Refuse",
+                    "concept": "6f61ba35-b14c-43d7-b9e2-7b97d3e66d78"
+                  },
+                  {
+                    "label": "IV Fluid",
+                    "concept": "fde37919-39b2-4817-8fd9-f41a477d1bc5"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "FiO2",
+              "type": "obs",
+              "id": "fio2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f759d9d0-d25e-4aa0-8fd8-d7160f7b3859"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Peep",
+              "type": "obs",
+              "id": "peep",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0f1451d5-c089-5fe1-b5b3-95ec1fb2249c",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Tidal Volume",
+              "type": "obs",
+              "id": "tidalVolume",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5bcf0841-80da-576d-b1be-f76bff1fe99c",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "PSV",
+              "type": "obs",
+              "id": "psv",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "fb5d64b0-878d-456c-aed5-4e0da473fb03",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "ABG",
+              "type": "obs",
+              "id": "abg",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "fe230015-30ce-454e-8fa5-e773913ffdfe"
+              }
+            },
+            {
+              "label": "Set RR",
+              "type": "obs",
+              "id": "setRr",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "92870f05-e670-406c-9aaf-a7f021ef8eb3"
+              }
+            },
+            {
+              "label": "Respiratory Rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SPO2",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "min": "0",
+                "step": "0.01"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Cough/Secretions",
+              "type": "obs",
+              "id": "coughSecretions",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "144ddf52-02f7-4930-b46e-19118ede540a"
+              }
+            },
+            {
+              "label": "Respiratory System (RS)",
+              "type": "obs",
+              "id": "respiratorySystemRs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "732be35c-8d82-4e8c-826b-f150729bb038"
+              }
+            },
+            {
+              "label": "Plan for Weaning",
+              "type": "obs",
+              "id": "planForWeaning",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a3ecf2df-d482-4686-9821-e4792a9f3999"
+              }
+            },
+            {
+              "label": "Impressions/ Plan",
+              "type": "obs",
+              "id": "impressionsPlan2",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ba198693-3597-5fbc-88b4-385cb156d17b"
+              }
+            }
+          ]
+        },
+        {
+          "label": "ICU Doctor Notes Abdomen",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Feeding",
+              "type": "obs",
+              "id": "feeding",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ddeaf4fb-e863-4b2b-8a12-4704f2c46e20"
+              }
+            },
+            {
+              "label": "Bowel Action",
+              "type": "obs",
+              "id": "bowelAction",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "5223e85d-3995-40d4-85cd-4fa23977b12e"
+              }
+            },
+            {
+              "label": "Albumin",
+              "type": "obs",
+              "id": "albumin",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ac15335c-932e-45ce-b678-7731a4b95d60"
+              }
+            },
+            {
+              "label": "Abdominal Examination Notes",
+              "type": "obs",
+              "id": "abdominalExaminationNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160947AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        },
+        {
+          "label": "ICU Doctor Notes Renal",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Creatinine",
+              "type": "obs",
+              "id": "creatinine",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "124c9470-5277-5965-a231-137986d48ab7"
+              }
+            },
+            {
+              "label": "BUN",
+              "type": "obs",
+              "id": "bun",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "83f0f09a-219a-592f-805e-e54258aa28c1"
+              }
+            },
+            {
+              "label": "Urine Output",
+              "type": "obs",
+              "id": "urineOutput",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161929AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "Dialysis plan",
+              "type": "obs",
+              "id": "dialysisPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "748dcab3-bb5c-491f-9a5c-0e435637b603"
+              }
+            },
+            {
+              "label": "Impressions/ Plan",
+              "type": "obs",
+              "id": "impressionsPlan3",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ba198693-3597-5fbc-88b4-385cb156d17b"
+              }
+            }
+          ]
+        },
+        {
+          "label": "ICU Doctor Notes Hematology",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Hgb/ Hct Result Notes",
+              "type": "obs",
+              "id": "hgbHctResultNotes",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1194fec8-4093-4479-bee5-f791012f544b"
+              }
+            },
+            {
+              "label": "Platelet",
+              "type": "obs",
+              "id": "platelet",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "INR",
+              "type": "obs",
+              "id": "inr",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "38f4c1c0-e1a7-537e-8ff4-efe83a1a9d8e"
+              }
+            },
+            {
+              "label": "DVT Prophylaxis",
+              "type": "obs",
+              "id": "dvtProphylaxis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a3777493-e0a3-4c29-8207-09bd445417f7"
+              }
+            },
+            {
+              "label": "Impressions/ Plan",
+              "type": "obs",
+              "id": "impressionsPlan4",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ba198693-3597-5fbc-88b4-385cb156d17b"
+              }
+            }
+          ]
+        },
+        {
+          "label": "ICU Doctor Notes Endocrine",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "BGL Control",
+              "type": "obs",
+              "id": "bglControl",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5f8a7eea-095d-4cf8-86ce-adbf34ec3c97"
+              }
+            },
+            {
+              "label": "Thyroid",
+              "type": "obs",
+              "id": "thyroid",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "163741AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Not done",
+                    "concept": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Cortisol",
+              "type": "obs",
+              "id": "cortisol",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c19583f2-4bac-42e2-bbfe-8b65a9f2ad9f"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "ICU Doctor Notes Microbiology",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Cultures",
+              "type": "obs",
+              "id": "cultures",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "09c93d19-71e5-483f-abec-2eb18932e471"
+              }
+            },
+            {
+              "label": "Antibiotics & rationale",
+              "type": "obs",
+              "id": "antibioticsRationale",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d48e879f-7c83-4d80-8eee-260eec15cf56"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

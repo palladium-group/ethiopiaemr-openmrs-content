@@ -1,0 +1,312 @@
+{
+  "name": "Pediatrician",
+  "description": "Pediatrician - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "e95c2632-6382-51a8-9bf8-c9d0394aa233",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Pediatrician Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Problem list",
+              "type": "obs",
+              "id": "problemList",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "History (any medical compliant)",
+              "type": "obs",
+              "id": "historyAnyMedicalCompliant",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "01f278ef-ec13-4409-82f3-abe7d799993e"
+              }
+            },
+            {
+              "label": "Feeding",
+              "type": "obs",
+              "id": "feeding",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ddeaf4fb-e863-4b2b-8a12-4704f2c46e20"
+              }
+            },
+            {
+              "label": "Sunlight exposure",
+              "type": "obs",
+              "id": "sunlightExposure",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "798893cd-2054-518f-9910-c35e18959cee",
+                "answers": [
+                  {
+                    "concept": "166909AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Adequate"
+                  },
+                  {
+                    "concept": "163794AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Inadequate"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Applicable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Vaccination",
+              "type": "obs",
+              "id": "vaccination",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c2090c64-1379-4157-a63a-4db29fd4e6c4",
+                "answers": [
+                  {
+                    "concept": "a250e8e6-f44f-52bf-8bab-824ff0b3f3f3",
+                    "label": "Fully vaccinated for his/her age"
+                  },
+                  {
+                    "concept": "53b1d767-e3a4-4bf2-ba4d-6fd19b393ec8",
+                    "label": "Partially vaccinated for his/her age"
+                  },
+                  {
+                    "concept": "697425cd-2e48-4775-8ebe-57315439db4b",
+                    "label": "Not vaccinated for his/her age"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Growth and development",
+              "type": "obs",
+              "id": "growthAndDevelopment",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "def8fd43-c933-4a40-9a70-6459f029745a"
+              }
+            },
+            {
+              "label": "Anthropometry",
+              "type": "obs",
+              "id": "anthropometry",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "26209501-73cb-4cc4-a889-aa63981d29ce"
+              }
+            },
+            {
+              "label": "Bladder",
+              "type": "obs",
+              "id": "bladder",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "b08a7f9e-e748-4336-97fa-820ad6e820f8",
+                "answers": [
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Urinary retention (finding)",
+                    "concept": "c536d3b2-42b3-4d3e-9e12-87c548ae1f24"
+                  },
+                  {
+                    "label": "Catheterized",
+                    "concept": "35e2997d-f5e2-4fea-a7e5-4848139b4c9b"
+                  },
+                  {
+                    "label": "Empty",
+                    "concept": "3c461e91-4ac9-45c8-9932-476ae0fc8eaf"
+                  },
+                  {
+                    "label": "Full",
+                    "concept": "490dca17-a568-49e8-9da4-b5982d36a3ce"
+                  },
+                  {
+                    "label": "Distended",
+                    "concept": "e058b288-a3bf-4447-81f2-c27daf308fb4"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Bowel",
+              "type": "obs",
+              "id": "bowel",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4ae3b28a-f4c4-48bf-a034-7b307917dd7f"
+              }
+            },
+            {
+              "label": "Mobility",
+              "type": "obs",
+              "id": "mobility",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "162753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Able to walk without assistance",
+                    "concept": "162750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Able to walk with assistance",
+                    "concept": "162751AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Bedridden",
+                    "concept": "162752AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Physically able to work",
+                    "concept": "159468AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Patient ambulatory",
+                    "concept": "160026AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Insensate skin(Skin assessment for wound/ break/ or risk for that due to sensation loss",
+              "type": "obs",
+              "id": "insensateSkinSkinAssessmentForWoundBreak",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "55fd1d98-77af-48a3-8b75-b716803a6687"
+              }
+            },
+            {
+              "label": "Additional Physical examination findings",
+              "type": "obs",
+              "id": "additionalPhysicalExaminationFindings",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f7439191-f29e-44d5-b95e-02d7e37be2cf"
+              }
+            },
+            {
+              "label": "Lab and Imaging findings",
+              "type": "obs",
+              "id": "labAndImagingFindings",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2b2194f7-ef6d-4bcb-a6d5-a85bc1c03220"
+              }
+            },
+            {
+              "label": "Overall Assessment",
+              "type": "obs",
+              "id": "overallAssessment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "98e32ddf-d48a-4424-b966-9815f24f9389"
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              }
+            },
+            {
+              "label": "Appointment",
+              "type": "obs",
+              "id": "appointment",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3071425e-0415-2345-6789-012345abcd17",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

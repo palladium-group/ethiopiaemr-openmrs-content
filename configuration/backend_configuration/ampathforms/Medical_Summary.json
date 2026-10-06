@@ -1,0 +1,187 @@
+{
+  "name": "Medical Summary",
+  "description": "Medical Summary - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "938dccd1-e381-53b7-b21a-9d2a1b2cd6eb",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Medical Summary Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "First VisitDate",
+              "type": "obs",
+              "id": "firstVisitdate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "42c08aff-5456-48b9-bc78-dc3424a79f8d"
+              }
+            },
+            {
+              "label": "Pertinent past medical hx and diagnosis",
+              "type": "obs",
+              "id": "pertinentPastMedicalHxAndDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b9466477-8ce7-4963-accf-88f60238c281"
+              }
+            },
+            {
+              "label": "Past no of admission and summary",
+              "type": "obs",
+              "id": "pastNoOfAdmissionAndSummary",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "83b13386-8b3c-4591-89e9-a3fd74bc44b3"
+              }
+            },
+            {
+              "label": "Past surgical procedures summary",
+              "type": "obs",
+              "id": "pastSurgicalProceduresSummary",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d3bf4a75-6485-40bf-9d6f-44da3b2e326a"
+              }
+            },
+            {
+              "label": "Comorbid medical illnesses",
+              "type": "obs",
+              "id": "comorbidMedicalIllnesses",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6cccf8da-2577-411b-ae26-7d5ba1af00c4"
+              }
+            },
+            {
+              "label": "Hx of drugs taken",
+              "type": "obs",
+              "id": "hxOfDrugsTaken",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4f0527da-a823-5f52-a838-8e572728ec71"
+              }
+            },
+            {
+              "label": "Investigations and imaging summary",
+              "type": "obs",
+              "id": "investigationsAndImagingSummary",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4d200bd6-5e57-4288-a667-15e2cf86f01a"
+              }
+            },
+            {
+              "label": "Medication allergy hx",
+              "type": "obs",
+              "id": "medicationAllergyHx",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6d3f17cc-c775-475c-bf23-e6d4147b0c91",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Last VisitDate",
+              "type": "obs",
+              "id": "lastVisitdate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "12d9b04e-17bf-4c20-a940-83eedb4f3037"
+              }
+            },
+            {
+              "label": "Last diagnosis",
+              "type": "obs",
+              "id": "lastDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "54db959c-e256-555e-995a-9ab4add1fd09"
+              }
+            },
+            {
+              "label": "Current Medication",
+              "type": "obs",
+              "id": "currentMedication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2c3d4e5f-6e75-420f-8d9a-456789abcde6"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

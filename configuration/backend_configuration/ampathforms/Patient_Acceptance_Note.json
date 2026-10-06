@@ -1,0 +1,114 @@
+{
+  "name": "Patient Acceptance Note",
+  "description": "Patient Acceptance Note - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "e93a2b52-8d89-5911-a6b8-b6df435542b9",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Patient Acceptance Note Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Ward",
+              "type": "obs",
+              "id": "ward",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ee7ce4a6-1bc2-401c-b2cd-6e51c5de3370"
+              }
+            },
+            {
+              "label": "Bed No.",
+              "type": "obs",
+              "id": "bedNo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "42fa59ea-9457-4f04-a469-5cd49f59d98f"
+              }
+            },
+            {
+              "label": "Acceptance Note",
+              "type": "obs",
+              "id": "acceptanceNote",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "255db045-8037-4dc8-8f4c-5ad07b272408"
+              }
+            },
+            {
+              "label": "Estimated Date of Discharge.",
+              "type": "obs",
+              "id": "estimatedDateOfDischarge",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "179523e2-af73-5467-9603-46cd69392677"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

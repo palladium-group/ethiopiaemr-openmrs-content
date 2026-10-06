@@ -1,0 +1,259 @@
+{
+  "name": "Anatomical Scanning Report",
+  "description": "Anatomical Scanning Report - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "1ac8a16f-92b7-561b-8daa-8c7eb674b73e",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Anatomical Scanning Report Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Diagnosis notes",
+              "type": "obs",
+              "id": "diagnosisNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "159395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Fetal Status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Fetal Number",
+              "type": "obs",
+              "id": "fetalNumber",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5cc54d6c-5cec-54b0-a5cc-49fbc0b41b79"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "FHB",
+              "type": "obs",
+              "id": "fhb",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3071425c-0415-2345-6789-012345abcd1a"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Placental and amniotic fluid",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Placental",
+              "type": "obs",
+              "id": "placental",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "55744efc-346e-4866-9b08-a760c54eb872"
+              }
+            },
+            {
+              "label": "Amniotic fluid",
+              "type": "obs",
+              "id": "amnioticFluid",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "76059a7b-cf2a-4b4c-847c-0f96648cba5a",
+                "answers": [
+                  {
+                    "label": "Foul smelling discharge",
+                    "concept": "12e04b11-7ace-4062-bc7a-d45ca188cf82"
+                  },
+                  {
+                    "label": "Meconium staining (sandbox backfill)",
+                    "concept": "2d59ba94-ec38-410a-8549-4787399a2916"
+                  },
+                  {
+                    "label": "Clear",
+                    "concept": "159484AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Fetal Biometry",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "BPD",
+              "type": "obs",
+              "id": "bpd",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2cf4b72d-26fd-47ba-9503-a8d0a1c61989"
+              }
+            },
+            {
+              "label": "HC (cm)",
+              "type": "obs",
+              "id": "hc",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "AC",
+              "type": "obs",
+              "id": "ac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f325998a-bd01-5a5e-b65f-e9dfefb3e092"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "FL",
+              "type": "obs",
+              "id": "fl",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "30dd17fd-d22e-4abf-afab-c36488633d4c"
+              }
+            },
+            {
+              "label": "AGA",
+              "type": "obs",
+              "id": "aga",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c4b96143-eff7-49ca-9de9-81fd8841efa3"
+              }
+            },
+            {
+              "label": "EFW",
+              "type": "obs",
+              "id": "efw",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "fdc12823-bdeb-5b3e-a7a7-3e58dde9fed0"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Anatomical Survey",
+              "type": "obs",
+              "id": "anatomicalSurvey",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "877b2f4a-0c12-49e7-9dce-c98bad9c425a"
+              }
+            },
+            {
+              "label": "Impression",
+              "type": "obs",
+              "id": "impression",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d8e9f54d-05b1-4243-8305-b2fa4d6e6af1"
+              }
+            },
+            {
+              "label": "Recommendation/ Plan",
+              "type": "obs",
+              "id": "recommendationPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "e1810770-e03f-4ac5-b3b6-f4b6a6ef13ff"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

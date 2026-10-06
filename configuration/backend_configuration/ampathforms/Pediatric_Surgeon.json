@@ -1,0 +1,260 @@
+{
+  "name": "Pediatric Surgeon",
+  "description": "Pediatric Surgeon - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "a57ef617-8728-5379-8df2-8fafa1f0ce54",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Pediatric Surgeon Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Problem list",
+              "type": "obs",
+              "id": "problemList",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Urinary Continence",
+              "type": "obs",
+              "id": "urinaryContinence",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "163272AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "6d29d7f0-676e-43dd-88d6-b2e8348a9fbb",
+                    "label": "Always dry"
+                  },
+                  {
+                    "concept": "00181fa1-af64-4b7a-a681-4fe2d49f1968",
+                    "label": "Mostly dry"
+                  },
+                  {
+                    "concept": "f4019d3b-658f-4ec1-8222-88331bc020d3",
+                    "label": "Mostly wet"
+                  },
+                  {
+                    "concept": "abc47af4-d0b2-4905-897c-c53c5e609a99",
+                    "label": "Always wet"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "UTI feature present (clinical vs Laboratory)",
+              "type": "obs",
+              "id": "utiFeaturePresentClinicalVsLaboratory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5809b03a-86ec-45fa-ae3d-821907bac43b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Does the patient have features of neurogenic bladder (U/S findings, recurrent UTI, high suspicion, etc.)?",
+              "type": "obs",
+              "id": "doesThePatientHasFeaturesOfNeurogenicBla",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a04a5cea-36f9-482c-9a1c-597e7250e452",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "label": "NA"
+                  },
+                  {
+                    "concept": "3ad8ec71-2e7c-4f38-a14a-c9b2f989ef4e",
+                    "label": "Unknown/ Difficult to assess"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Does the patient have any indication for CIC (MMC, MMC with any neurologic deficit, suggestive U/S, recurrent UTI, etc.)?",
+              "type": "obs",
+              "id": "doesThePatientHasAnyIndicationOfCicMmcMm",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1c21d4c6-dcc6-4ce0-888d-9b70cd98bf08",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "label": "NA"
+                  },
+                  {
+                    "concept": "3ad8ec71-2e7c-4f38-a14a-c9b2f989ef4e",
+                    "label": "Unknown/ Difficult to assess"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Does the patient have features of neurogenic Bowel",
+              "type": "obs",
+              "id": "doesThePatientHasFeaturesOfNeurogenicBow",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e852892c-f4fb-4407-8258-aefeb1609c0f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "label": "NA"
+                  },
+                  {
+                    "concept": "3ad8ec71-2e7c-4f38-a14a-c9b2f989ef4e",
+                    "label": "Unknown/ Difficult to assess"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Additional Physical examination finding and Investigation findings",
+              "type": "obs",
+              "id": "additionalPhysicalExaminationFindingAndI",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2c3fba8d-5e65-4d38-8604-b1b00419e3e9"
+              }
+            },
+            {
+              "label": "Assessment",
+              "type": "obs",
+              "id": "assessment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "13f82aece2cd4e3bbb950140e6cbffce"
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              }
+            },
+            {
+              "label": "Appointment",
+              "type": "obs",
+              "id": "appointment",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3071425e-0415-2345-6789-012345abcd17",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

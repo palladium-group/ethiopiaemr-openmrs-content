@@ -1,7 +1,7 @@
 {
   "name": "Pediatric OPD Triage Form",
   "description": "Pediatric OPD triage: vital signs and anthropometry, basic information, and referral information.",
-  "version": "1.2",
+  "version": "1.3",
   "published": true,
   "uuid": "ecad013b-37e0-42ac-9c08-ec0ed4c4075a",
   "retired": false,
@@ -19,7 +19,7 @@
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
-              "readonly": false,
+              "readonly": true,
               "questionOptions": {
                 "rendering": "date"
               },
@@ -46,7 +46,7 @@
               "type": "encounterLocation",
               "required": "true",
               "id": "encLocation",
-              "readonly": false,
+              "readonly": true,
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "datasource": {
@@ -98,7 +98,7 @@
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": "1",
                 "min": "0",
-                "max": "300"
+                "max": "230"
               },
               "readonly": false,
               "validators": [
@@ -111,7 +111,8 @@
               "questionInfo": "Beats per minute. Whole numbers only.",
               "hide": {
                 "hideWhenExpression": "pulseNotPalpable === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
+              },
+              "hideSteppers": true
             },
             {
               "label": "Pulse strength",
@@ -194,7 +195,7 @@
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": "1",
                 "min": "0",
-                "max": "120"
+                "max": "99"
               },
               "readonly": false,
               "validators": [
@@ -204,7 +205,8 @@
                   "message": "Whole numbers only (no decimals)."
                 }
               ],
-              "questionInfo": "Breaths per minute. Whole numbers only."
+              "questionInfo": "Breaths per minute. Whole numbers only.",
+              "hideSteppers": true
             },
             {
               "label": "Respiratory depth",
@@ -267,7 +269,8 @@
                   "message": "Whole numbers only (no decimals)."
                 }
               ],
-              "questionInfo": "Percent. Whole numbers only."
+              "questionInfo": "Percent. Whole numbers only.",
+              "hideSteppers": true
             },
             {
               "label": "Oxygen delivery",
@@ -315,7 +318,8 @@
               "readonly": false,
               "hide": {
                 "hideWhenExpression": "!oxygenDelivery || oxygenDelivery === '162735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
+              },
+              "hideSteppers": true
             },
             {
               "label": "Fraction of Inspired Oxygen (FiO2) (%)",
@@ -337,8 +341,9 @@
                 }
               ],
               "hide": {
-                "hideWhenExpression": "oxygenDelivery !== '91e99b02-2be8-446f-9af2-ac07d77c9c0c' && oxygenDelivery !== 'df8c16e2-838a-48ea-9bf1-cb7178c68eef'"
-              }
+                "hideWhenExpression": "oxygenDelivery !== '91e99b02-2be8-446f-9af2-ac07d77c9c0c' && oxygenDelivery !== '165998AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "hideSteppers": true
             },
             {
               "label": "Oxygen Flow Rate (L/min)",
@@ -352,8 +357,9 @@
               },
               "readonly": false,
               "hide": {
-                "hideWhenExpression": "oxygenDelivery !== '91e99b02-2be8-446f-9af2-ac07d77c9c0c' && oxygenDelivery !== 'df8c16e2-838a-48ea-9bf1-cb7178c68eef'"
-              }
+                "hideWhenExpression": "oxygenDelivery !== '91e99b02-2be8-446f-9af2-ac07d77c9c0c' && oxygenDelivery !== '165998AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "hideSteppers": true
             },
             {
               "label": "Temperature (°C)",
@@ -364,7 +370,7 @@
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": "0.1",
                 "min": "25",
-                "max": "45"
+                "max": "43"
               },
               "readonly": false,
               "validators": [
@@ -374,7 +380,8 @@
                   "message": "At most 1 decimal place allowed."
                 }
               ],
-              "questionInfo": "Degrees Centigrade. 1 decimal place."
+              "questionInfo": "Degrees Centigrade. 1 decimal place.",
+              "hideSteppers": true
             },
             {
               "label": "Temperature route",
@@ -418,7 +425,7 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": "1",
                 "min": "0",
-                "max": "300"
+                "max": "250"
               },
               "readonly": false,
               "validators": [
@@ -428,7 +435,8 @@
                   "message": "Whole numbers only (no decimals)."
                 }
               ],
-              "questionInfo": "Whole numbers only."
+              "questionInfo": "Whole numbers only.",
+              "hideSteppers": true
             },
             {
               "label": "Diastolic Blood Pressure (DBP) (mmHg)",
@@ -439,7 +447,7 @@
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": "1",
                 "min": "0",
-                "max": "200"
+                "max": "150"
               },
               "readonly": false,
               "validators": [
@@ -449,7 +457,27 @@
                   "message": "Whole numbers only (no decimals)."
                 }
               ],
-              "questionInfo": "Whole numbers only."
+              "questionInfo": "Whole numbers only.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Posture",
+              "type": "obs",
+              "id": "posture",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e11356eb-df27-4dfd-8b6b-8c066bb2afd5",
+                "answers": [
+                  {
+                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sitting"
+                  },
+                  {
+                    "concept": "92709344-75b1-4093-a1b8-6d0bd998df7e",
+                    "label": "Supine"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -476,7 +504,8 @@
                   "message": "At most 2 decimal places allowed."
                 }
               ],
-              "questionInfo": "Use kilograms for age ≥ 30 days (2 decimals allowed)."
+              "questionInfo": "Use kilograms for age ≥ 30 days (2 decimals allowed).",
+              "hideSteppers": true
             },
             {
               "label": "Weight (g) - infants under 30 days",
@@ -497,7 +526,8 @@
                   "message": "Whole numbers only (no decimals)."
                 }
               ],
-              "questionInfo": "Use grams for infants under 30 days (no decimals)."
+              "questionInfo": "Use grams for infants under 30 days (no decimals).",
+              "hideSteppers": true
             },
             {
               "label": "Height / Length (cm)",
@@ -507,7 +537,7 @@
                 "rendering": "number",
                 "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": "0.1",
-                "min": "0",
+                "min": "10",
                 "max": "220"
               },
               "readonly": false,
@@ -517,7 +547,9 @@
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
                   "message": "At most 1 decimal place allowed."
                 }
-              ]
+              ],
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
             },
             {
               "label": "Mid Upper Arm Circumference (MUAC) (cm)",
@@ -537,7 +569,9 @@
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
                   "message": "At most 1 decimal place allowed."
                 }
-              ]
+              ],
+              "questionInfo": "Mid-upper arm circumference in centimetres.",
+              "hideSteppers": true
             },
             {
               "label": "Head Circumference (HC) (cm)",
@@ -557,7 +591,9 @@
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
                   "message": "At most 1 decimal place allowed."
                 }
-              ]
+              ],
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
             },
             {
               "label": "Weight for Height/Length (WFH/L) z-score",
@@ -568,10 +604,15 @@
                 "concept": "98b6233c-7cf8-4218-b516-d2142dad9a0a",
                 "step": "0.1",
                 "min": "-5",
-                "max": "5"
+                "max": "5",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weightKg)) ? '' : ((calcWeightForHeightZscore(Number(height),Number(weightKg)) == null) ? '' : Number(calcWeightForHeightZscore(Number(height),Number(weightKg))))"
+                },
+                "readonly": true
               },
               "readonly": false,
-              "questionInfo": "Typical range -3 to 3 (extended -5 to 5 under discussion)."
+              "questionInfo": "Typical range -3 to 3 (extended -5 to 5 under discussion).",
+              "hideSteppers": true
             },
             {
               "label": "Weight for Age (WFA) z-score",
@@ -585,7 +626,8 @@
                 "max": "5"
               },
               "readonly": false,
-              "questionInfo": "Typical range -3 to 3."
+              "questionInfo": "Typical range -3 to 3.",
+              "hideSteppers": true
             },
             {
               "label": "Height/Length for Age (H/LFA) z-score",
@@ -596,10 +638,15 @@
                 "concept": "d2ecb899-60de-48ad-bfe8-5b14e2b5c1ce",
                 "step": "0.1",
                 "min": "-5",
-                "max": "5"
+                "max": "5",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height)) ? '' : ((calcHeightForAgeZscore(Number(height)) == null) ? '' : Number(calcHeightForAgeZscore(Number(height))))"
+                },
+                "readonly": true
               },
               "readonly": false,
-              "questionInfo": "Typical range -3 to 3."
+              "questionInfo": "Typical range -3 to 3.",
+              "hideSteppers": true
             },
             {
               "label": "Head Circumference for Age (HCFA) z-score",
@@ -613,7 +660,8 @@
                 "max": "5"
               },
               "readonly": false,
-              "questionInfo": "Typical range -3 to 3."
+              "questionInfo": "Typical range -3 to 3.",
+              "hideSteppers": true
             },
             {
               "label": "Body Mass Index (BMI) (kg/m²)",
@@ -624,11 +672,11 @@
                 "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": "0.1",
                 "calculate": {
-                  "calculateExpression": "(!isEmpty(weightKg) && !isEmpty(height) && Number(height) > 0) ? (Number(weightKg) / Math.pow(Number(height)/100, 2)).toFixed(1) : ''"
+                  "calculateExpression": "calcBMI(height,weightKg)"
                 }
               },
-              "readonly": true,
-              "questionInfo": "Auto-calculated from Weight (kg) and Height (rounded to 1 decimal). Note: unit is kg/m²."
+              "questionInfo": "Auto-calculated from Weight (kg) and Height (rounded to 1 decimal). Note: unit is kg/m².",
+              "hideSteppers": true
             },
             {
               "label": "Weight for Height/Length (WHO z-score category)",
@@ -768,6 +816,202 @@
           ]
         },
         {
+          "label": "Clinical Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Underlying disease",
+              "type": "obs",
+              "id": "underlyingDisease",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8cebdfa2-7251-4ada-8cb1-0079317d71cb",
+                "answers": [
+                  {
+                    "concept": "e5c23320-f757-46b0-988d-fffa549fba33",
+                    "label": "Heart Disease"
+                  },
+                  {
+                    "concept": "6033AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Renal Disease"
+                  },
+                  {
+                    "concept": "a66a20d9-aca4-473f-b5f1-935da7946c10",
+                    "label": "Lung Disease"
+                  },
+                  {
+                    "concept": "3596837f-d31d-40ee-82c1-ce0eeb15521f",
+                    "label": "Malignancy"
+                  },
+                  {
+                    "concept": "e63c3415-62a0-4340-b416-0c190b8c7407",
+                    "label": "Retroviral Infection"
+                  },
+                  {
+                    "concept": "f25a277d-34b8-4258-9e5f-41b08bb36a90",
+                    "label": "Epilepsy"
+                  },
+                  {
+                    "concept": "c8c3d3cb-30e5-4e6b-980c-b78bfa289e1f",
+                    "label": "Malnutrition"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "General Assessment",
+              "type": "obs",
+              "id": "generalAssessment",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "aca756e9-3483-4a53-95c4-9d79a0a819cb",
+                "answers": [
+                  {
+                    "concept": "9694701e-109a-41d3-8adb-8f07670fbcb5",
+                    "label": "Alert"
+                  },
+                  {
+                    "concept": "7ccfb2a1-7fe8-4eb9-bd53-de250a2bc122",
+                    "label": "Irritable/Confused"
+                  },
+                  {
+                    "concept": "1a4c003c-3ed4-4776-8457-72c6bc50cb6c",
+                    "label": "lethargic/Unconscious/Coma"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Respiratory Disease",
+              "type": "obs",
+              "id": "respiratoryDisease",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "55a15784-e60c-42c9-9a9b-6cddbe391cf9",
+                "answers": [
+                  {
+                    "concept": "c6728b6b-defe-4a20-a8c1-1137b381af71",
+                    "label": "None/Mild"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Dehydration Status",
+              "type": "obs",
+              "id": "dehydrationStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "22a39ff0-ed01-494b-a46e-64974ef0d5fa",
+                    "label": "No Dehydration"
+                  },
+                  {
+                    "concept": "6ed0d1fb-35e1-4019-9f4d-0e38d306beb8",
+                    "label": "Some Dehydration"
+                  },
+                  {
+                    "concept": "aec6f3c3-7c26-437f-a548-310bc05b7730",
+                    "label": "Severe Dehydration"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pain",
+              "type": "obs",
+              "id": "pain",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "45e4f3ee-af33-4723-bb45-5a28951300f0",
+                "answers": [
+                  {
+                    "concept": "c6728b6b-defe-4a20-a8c1-1137b381af71",
+                    "label": "None/Mild"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Poor Perfusion",
+              "type": "obs",
+              "id": "poorPerfusion",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f3cafc79-9cab-413a-8abf-96a4c0129412",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "True"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "False"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Signs of Convulsion",
+              "type": "obs",
+              "id": "signsOfConvulsion",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1897377e-e00b-469e-b98d-5cc7ad9e0f87",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Triage Level",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Triage level",
+              "type": "obs",
+              "id": "triageLevel",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "159637AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "668a4165-5515-405d-9fd1-d2aaedd1dbbd",
+                    "label": "Non-Urgent (green)"
+                  },
+                  {
+                    "concept": "f05aee3c-ba96-4a43-b0b4-2894db7999d0",
+                    "label": "Urgent (yellow) 1or 2 yellow"
+                  },
+                  {
+                    "concept": "ecee70d1-8ec1-42c4-9cc6-7ac6addf2517",
+                    "label": "Emergent (red)"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
           "label": "Basic Information",
           "isExpanded": "true",
           "questions": [
@@ -839,7 +1083,7 @@
                   "id": "chiefComplaintNotes",
                   "questionOptions": {
                     "rendering": "textarea",
-                    "concept": "1a2b3c4d-5e6f-7890-abcd-ef1234567890"
+                    "concept": "8d2ca425-68ff-441c-971f-915df6d61fb6"
                   },
                   "readonly": false
                 }
@@ -902,7 +1146,7 @@
               "id": "address",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "1d5ec27c-c250-40ef-8416-fa6034a7faf6"
+                "concept": "d616d6d4-2548-4b68-99e7-f3c85fa96328"
               },
               "readonly": true,
               "questionInfo": "Auto-populated from the patient's demographics."
@@ -1125,7 +1369,7 @@
               "id": "referralAttachment",
               "questionOptions": {
                 "rendering": "file",
-                "concept": "0939ac62-6494-45f6-a1a7-2efc373924bb"
+                "concept": "7cac8397-53cd-4f00-a6fe-028e8d743f8e"
               },
               "readonly": false,
               "questionInfo": "Upload referral document(s)."

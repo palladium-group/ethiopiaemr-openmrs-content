@@ -1,0 +1,441 @@
+{
+  "name": "Nutrition Progress Sheet",
+  "description": "Nutrition Progress Sheet - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "582ef336-ec90-5328-b54d-8a68ab04e779",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Nutrition Progress Sheet Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient's weight/MUAC change since admission",
+              "type": "obs",
+              "id": "patientSWeightMuacChangeSinceAdmission",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "89851e1d-b5ed-4e9e-aa60-c049bd7561b7",
+                "answers": [
+                  {
+                    "concept": "164470AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Decreased"
+                  },
+                  {
+                    "concept": "b7fd8d2d-a625-4b80-9b31-e36ffb0e741d",
+                    "label": "The Same"
+                  },
+                  {
+                    "concept": "164471AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Increased"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Feeding route of the patient",
+              "type": "obs",
+              "id": "feedingRouteOfThePatient",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "460b45d8-0a78-403f-9652-ff017d4acc67",
+                "answers": [
+                  {
+                    "concept": "e8bf0e40-3f47-4e28-a947-7784abd286a5",
+                    "label": "Oral"
+                  },
+                  {
+                    "concept": "165950AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Enteral (EN)"
+                  },
+                  {
+                    "concept": "5d5d685c-f411-4df9-b503-f65d76be136b",
+                    "label": "Parenteral (PN)"
+                  },
+                  {
+                    "concept": "566b3685-226a-4136-bf26-83d08575a8bd",
+                    "label": "NPO"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Appetite of the patient",
+              "type": "obs",
+              "id": "appetiteOfThePatient",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5a10d365-4b9e-4cd3-a6f5-adc637edfae5",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Feeding status of the patient",
+              "type": "obs",
+              "id": "feedingStatusOfThePatient",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5fb2e238-5c23-4893-9273-f5baf038a01d",
+                "answers": [
+                  {
+                    "concept": "166909AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Adequate"
+                  },
+                  {
+                    "concept": "163794AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Inadequate"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Current nutritional prognosis",
+              "type": "obs",
+              "id": "currentNutritionalPrognosis",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "995ca3e7-a8dd-4178-b23d-238a39ab9312",
+                "answers": [
+                  {
+                    "concept": "163053AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Improving"
+                  },
+                  {
+                    "concept": "06398754-8865-4004-805e-926636d6d6c2",
+                    "label": "Stable"
+                  },
+                  {
+                    "concept": "d6a53784-2dba-4618-be26-1fa26e675fc8",
+                    "label": "Deteriorating"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Type of diet the patient taking",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Regular diet",
+              "type": "obs",
+              "id": "regularDiet",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "159596AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Salt free diet",
+              "type": "obs",
+              "id": "saltFreeDiet",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a32a3da8-543f-43d7-a4c3-321ac830ef52",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Sugar free diet",
+              "type": "obs",
+              "id": "sugarFreeDiet",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4d70a945-72cb-46de-afbb-34afb1478713",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "High protein diet",
+              "type": "obs",
+              "id": "highProteinDiet",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c5cb8025-5d64-41d4-8eda-dd6e685aeab4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e838df31-7eff-4aa3-be0d-dd0f39fbbce4"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Type of nutritional support giving for the patient",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Rutf.",
+              "type": "obs",
+              "id": "rutf",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "72d80279-d745-5c1f-9066-805e4ff8c3c5",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "F-75",
+              "type": "obs",
+              "id": "f75",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3d9e6823-adc8-4da1-9f0f-1737e04bd299",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "F-100",
+              "type": "obs",
+              "id": "f100",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fe2e6f32-e653-4216-96d4-fa2aa2d4ffeb",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Bombe",
+              "type": "obs",
+              "id": "bombe",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "62dab65b-dd12-428a-acb6-86b0d95bf5ef",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Atmit with milk",
+              "type": "obs",
+              "id": "atmitWithMilk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "eda0b8c4-6d95-4d73-b1bb-227755077ff5",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Atmit only",
+              "type": "obs",
+              "id": "atmitOnly",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "eb39855c-ac29-4712-b6f5-03c44e8c925e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "None",
+              "type": "obs",
+              "id": "none",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4e0a7c45-3053-42de-8588-ed0bd47cc5cb",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e838df31-7eff-4aa3-be0d-dd0f39fbbce4"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

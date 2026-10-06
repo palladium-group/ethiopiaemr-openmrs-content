@@ -1,0 +1,467 @@
+{
+  "name": "Client With High Viral Load Follow-up Form",
+  "description": "Client With High Viral Load Follow-up Form - built from physician Word-doc spec (Phase 1, batch-three).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "c5721323-9d15-52f0-861e-bd9d5344b833",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Client With High Viral Load Follow-up Form Assessment",
+      "sections": [
+        {
+          "label": "Identification (from patient/health ID where possible)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Health Facility",
+              "type": "obs",
+              "id": "healthFacility",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "162724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "UAN (Unique ART Number)",
+              "type": "obs",
+              "id": "uanUniqueArtNumber",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "31ee8c4c-1ae1-5641-beea-6701100da6c3"
+              }
+            }
+          ]
+        },
+        {
+          "label": "ARV Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "ARV Regimen",
+              "type": "obs",
+              "id": "arvRegimen",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c5960718-9203-1234-5678-901234890123",
+                "answers": [
+                  {
+                    "label": "AZT 3TC NVP",
+                    "concept": "d6071829-0314-2345-6789-012345901234"
+                  },
+                  {
+                    "label": "AZT 3TC LPV r",
+                    "concept": "e7182930-1425-3456-7890-123456012345"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "AZT 3TC NVP Paediatric",
+                    "concept": "f8293041-2536-4567-8901-234567123456"
+                  },
+                  {
+                    "label": "AZT 3TC EFV",
+                    "concept": "09304152-3647-5678-9012-345678234567"
+                  },
+                  {
+                    "label": "AZT 3TC EFV Paediatric",
+                    "concept": "10415263-4758-6789-0123-456789345678"
+                  },
+                  {
+                    "label": "TDF 3TC NVP",
+                    "concept": "21526374-5869-7890-1234-567890456789"
+                  },
+                  {
+                    "label": "TDF 3TC NVP Paediatric",
+                    "concept": "32637485-6970-8901-2345-678901567890"
+                  },
+                  {
+                    "label": "TDF 3TC EFV",
+                    "concept": "43748596-7081-9012-3456-789012678901"
+                  },
+                  {
+                    "label": "TDF 3TC EFV Paediatric",
+                    "concept": "54859607-8192-0123-4567-890123789012"
+                  },
+                  {
+                    "label": "TDF 3TC LPV r",
+                    "concept": "65960718-9203-1234-5678-901234890123"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date of Initiation",
+              "type": "obs",
+              "id": "dateOfInitiation",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "df818d92-d449-490d-803b-210d7eddeb25"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Viral Load Results",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Viral Load Results",
+              "type": "obsGroup",
+              "id": "viralLoadResultsGroup",
+              "questionOptions": {
+                "concept": "1114AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rendering": "repeating"
+              },
+              "questions": [
+                {
+                  "label": "VL Result (copies/ml)",
+                  "type": "obs",
+                  "id": "viralLoadResultsValue",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "min": "0",
+                    "step": "0.01"
+                  },
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Date of VL",
+                  "type": "obs",
+                  "id": "viralLoadResultsDate",
+                  "questionOptions": {
+                    "rendering": "date",
+                    "concept": "163281AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "Assess Adherence During Monthly Visit",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "How many ARV doses do you take / day",
+              "type": "obs",
+              "id": "howManyArvDosesDoYouTakeDay",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "fd011bcb-9058-4fe0-b8ca-3d1178d76d38",
+                "answers": [
+                  {
+                    "concept": "051720eb-0034-430d-b619-e93f1df90901",
+                    "label": "Once"
+                  },
+                  {
+                    "concept": "5f82effd-22e2-4410-8356-04e86da6b949",
+                    "label": "Twice"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Did you miss ARV doses in the past one month?",
+              "type": "obs",
+              "id": "didYouMissArvDosesInThePastOneMonth",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e70f0a5b-e7b6-49e6-981a-81be8e537898",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Adherence rate",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "If patient takes Once Daily regimen",
+              "type": "obs",
+              "id": "ifPatientTakesOnceDailyRegimen",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0555579e-6764-43ab-84e5-37beb60b91e1",
+                "answers": [
+                  {
+                    "concept": "6f3fd3d8-e5a4-467d-ba61-5c8eb1587194",
+                    "label": "Good (<2 doses missed)"
+                  },
+                  {
+                    "concept": "5aaaafe6-460a-49ad-870a-13b291000465",
+                    "label": "Fair (2-4 doses missed)"
+                  },
+                  {
+                    "concept": "99c239cb-3810-4765-94e2-505eb6ac27a3",
+                    "label": "Poor (≥5 doses missed)"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(howManyArvDosesDoYouTakeDay) || howManyArvDosesDoYouTakeDay !== '051720eb-0034-430d-b619-e93f1df90901'"
+              }
+            },
+            {
+              "label": "If patient takes Twice Daily regimen",
+              "type": "obs",
+              "id": "ifPatientTakesTwiceDailyRegimen",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c3cfeff1-94ee-4990-a7b8-10ce71987b1a",
+                "answers": [
+                  {
+                    "concept": "f7d4fbb7-4a14-4830-b857-56e18fec5e40",
+                    "label": "Good (≤3 doses missed)"
+                  },
+                  {
+                    "concept": "b63253ce-3a68-470c-84ec-292bc4645526",
+                    "label": "Fair (4-8 doses missed)"
+                  },
+                  {
+                    "concept": "cd6cff9a-0f7d-4f7e-be60-beb3640e079d",
+                    "label": "Poor (>9 doses missed)"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(howManyArvDosesDoYouTakeDay) || howManyArvDosesDoYouTakeDay !== '5f82effd-22e2-4410-8356-04e86da6b949'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Client's Adherence Rate at EAC Session",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "EAC 1",
+              "type": "obs",
+              "id": "eac1",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e3644627-ec02-4374-9df9-34a829f1dfc7"
+              }
+            },
+            {
+              "label": "EAC 2",
+              "type": "obs",
+              "id": "eac2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1028e0dc-ce8d-4fdc-8e42-763a031a87ec"
+              }
+            },
+            {
+              "label": "EAC 3",
+              "type": "obs",
+              "id": "eac3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3c1b036e-1513-46b1-ad5c-22124973734c"
+              }
+            },
+            {
+              "label": "EAC 4",
+              "type": "obs",
+              "id": "eac4",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "30c3d030-6efe-44e9-b2e6-3a117f8b640d"
+              }
+            },
+            {
+              "label": "EAC 5",
+              "type": "obs",
+              "id": "eac5",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c7c47b26-5ca8-4374-8b99-ca321c67c575"
+              }
+            },
+            {
+              "label": "EAC 6",
+              "type": "obs",
+              "id": "eac6",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2ade0c57-c154-43e8-9816-8bf5d8429c0d"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Adherence Barriers and Interventions",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Have you ever missed ARV dose in the past since you started ART?",
+              "type": "obs",
+              "id": "haveYouEverMissedArvDoseInThePastSinceYo",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "833c3d91-e2a7-4734-9c8c-6c7597ab6c5c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Have you ever discontinued / interrupted care follow-up / medication refill since start of ART?",
+              "type": "obs",
+              "id": "haveYouEverDiscontinuedInterruptedCareFo",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "87de5bab-f6df-4019-bd85-a8512c44c1d9",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Did you forget taking ARV doses at a scheduled time/day?",
+              "type": "obs",
+              "id": "didYouForgetTakingArvDosesAtAScheduledTi",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "af2011b0-5c3c-4665-b0fc-630b41a9b5fc",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Did you forget to give your child the prescribed dose/s of ARVs at scheduled time/day?",
+              "type": "obs",
+              "id": "didYouForgetToGiveYourChildThePrescribed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e1bfea0a-dc57-4fb3-9737-e38189006a98",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Did you directly observe your child when he/she takes ARV doses at a scheduled time/day?",
+              "type": "obs",
+              "id": "didYouDirectlyObserveYourChildWhenHeSheT",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "952d7479-1f74-41b4-b386-038a091d4422",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

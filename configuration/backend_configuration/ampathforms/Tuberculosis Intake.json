@@ -1,7 +1,7 @@
 {
-  "name": "Tuberculosis Intake",
-  "description": "Tuberculosis - Intake form migrated from Bahmni",
-  "version": "1.2",
+  "name": "Tuberculosis Intake Template",
+  "description": "Tuberculosis Intake Template - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
   "published": true,
   "uuid": "e95b2fd4-8956-474e-8e0e-630932f6ecee",
   "retired": false,
@@ -15,11 +15,10 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
-              "readonly": false,
               "questionOptions": {
                 "rendering": "date"
               },
@@ -28,7 +27,8 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "readonly": true
             },
             {
               "label": "Provider:",
@@ -55,193 +55,137 @@
                 }
               },
               "id": "encLocation",
-              "readonly": false
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Tuberculosis - Intake",
+      "label": "Tuberculosis Intake Template Assessment",
       "sections": [
         {
-          "label": "Symptoms & Duration",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Tuberculosis, Symptoms",
+              "label": "Symptoms",
               "type": "obs",
-              "required": "false",
-              "id": "tbSymptoms",
+              "id": "symptoms",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "7224fbf9-de14-466d-b330-e24864feaa26",
+                "concept": "d049325e-b495-449d-ae9f-88c8d8e40bab",
                 "answers": [
                   {
-                    "concept": "140238AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "5945AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Fever"
                   },
                   {
-                    "concept": "5006AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a",
+                    "label": "Other (Specify)"
+                  },
+                  {
+                    "concept": "ced03968-a601-48f0-a0b2-71c4671afb35",
                     "label": "No fresh complaint"
                   },
                   {
                     "concept": "832AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "WEIGHT LOSS"
+                    "label": "Weight Loss"
                   },
                   {
-                    "concept": "5957AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "868AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Anorexia"
+                  },
+                  {
+                    "concept": "603da3e3-e6cd-4179-a91d-3db3d286b9c7",
                     "label": "Cough with expectoration"
                   },
                   {
-                    "concept": "150915AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "abdominal distention"
-                  },
-                  {
-                    "concept": "7b390a5a-320a-4c48-81eb-a400d1d28f08",
+                    "concept": "4e623cef-c8d6-404a-b1c3-632fbaf19ee5",
                     "label": "Cough without expectoration"
                   },
                   {
-                    "concept": "88492f77-c6d1-48e9-850a-1f87ebe7b3b8",
+                    "concept": "81acb830-cdd7-4502-b4bd-8e23caae8559",
                     "label": "Breathlessness"
                   },
                   {
-                    "concept": "133027AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "NIGHT SWEATS"
+                    "concept": "6029AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Night Sweats"
                   },
                   {
-                    "concept": "cc2d3e4f-5061-4723-9b01-c2345678bb02",
-                    "label": "lymph nodes enlarged"
+                    "concept": "135488AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Lymph Node Enlarged"
                   },
                   {
-                    "concept": "120749AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "chest pain"
-                  },
-                  {
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Other (Specify)"
+                    "concept": "136AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Chest Pain"
                   }
                 ]
               }
             },
             {
-              "label": "Other symptom (specify)",
+              "label": "Duration",
               "type": "obs",
-              "required": "false",
-              "id": "tbSymptomsOtherSpecify",
+              "id": "duration",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "hide": {
-                "hideWhenExpression": "isEmpty(tbSymptoms) || tbSymptoms !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "rendering": "select",
+                "concept": "5127814f-9ec7-40a5-b52e-5d112a4c2f77",
+                "min": "0",
+                "step": "0.01",
+                "answers": [
+                  {
+                    "label": "6-24 hrs stay",
+                    "concept": "3042b395-0a73-4416-8a1f-89eab4792a18"
+                  },
+                  {
+                    "label": "48-72 Hrs",
+                    "concept": "7861bdbc-419c-4c5c-805f-90978d5dc83a"
+                  },
+                  {
+                    "label": "42days",
+                    "concept": "d7bc6662-f095-4e5b-991b-48ef9aeda92d"
+                  },
+                  {
+                    "label": "7-14 days",
+                    "concept": "da3ded3e-b0ad-43da-9fa6-ae0553bff0ae"
+                  }
+                ]
               }
             },
             {
               "label": "Duration (in days)",
               "type": "obs",
-              "required": "false",
-              "id": "tbSymptomsDuration",
+              "id": "durationInDays",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1b2c3d4e-5f60-4712-9b01-c2d3e4f5ff02"
-              }
-            },
-            {
-              "label": "Additional details for symptoms duration",
-              "type": "obs",
-              "required": "false",
-              "id": "tbSymptomsDurationText",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "1300bf1d-bcef-4c01-927c-5f74fc200ab6"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Comorbidity",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Tuberculosis, Comorbidity",
-              "type": "obs",
-              "required": "false",
-              "id": "tbComorbidity",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "5a1c2d3e-4f50-4612-8a90-b12345670b01",
-                "answers": [
-                  {
-                    "concept": "119481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Diabetes"
-                  },
-                  {
-                    "concept": "6b2d3e4f-5061-4723-9b01-c23456780b02",
-                    "label": "Liver Disease"
-                  },
-                  {
-                    "concept": "138405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "HIV"
-                  },
-                  {
-                    "concept": "7c3e4f50-6172-4834-ac12-d34567890b03",
-                    "label": "Renal Disease"
-                  },
-                  {
-                    "concept": "8d4f5061-7283-4945-bd23-e45678900b04",
-                    "label": "RHD"
-                  },
-                  {
-                    "concept": "121375AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Asthma"
-                  },
-                  {
-                    "concept": "9e506172-8394-4a56-ce34-f56789010b05",
-                    "label": "Severe Undernutrition"
-                  },
-                  {
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Other (Specify)"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Other comorbidity (specify)",
-              "type": "obs",
-              "required": "false",
-              "id": "tbComorbidityOtherSpecify",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "84e6b1be-a32a-5175-826a-033a08ed8588"
               },
-              "hide": {
-                "hideWhenExpression": "isEmpty(tbComorbidity) || tbComorbidity !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              "hideSteppers": true
+            },
+            {
+              "label": "Comorbidity",
+              "type": "obs",
+              "id": "comorbidity",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166104AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
-            }
-          ]
-        },
-        {
-          "label": "Treatment Plan",
-          "isExpanded": "true",
-          "questions": [
+            },
             {
               "label": "Treatment Plan",
               "type": "obs",
-              "required": "false",
-              "id": "tbTreatmentPlan",
+              "id": "treatmentPlan",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "aa48cdc1-bacb-530d-a1f7-efca709e1657",
+                "concept": "db8f4600-7f59-47ff-8ea4-23aef3c73405",
                 "answers": [
                   {
                     "concept": "b2617283-8495-4c78-e056-178901230b07",
-                    "label": "2HRZE + 4HR"
+                    "label": "2hrze + 4hr"
                   },
                   {
                     "concept": "c3728394-95a6-4d89-f167-289012340b08",
-                    "label": "3HRZE + 6HRE"
+                    "label": "3hrze + 6hre"
                   },
                   {
                     "concept": "d48394a5-a6b7-5e9a-0178-390123450b09",
@@ -252,64 +196,178 @@
                     "label": "12RZFqE"
                   },
                   {
-                    "concept": "f6a5b6c7-c8d9-60bc-239a-5b1234670b11",
+                    "concept": "d9d753d4-d998-4bc7-a354-f86e4b4dfd1c",
                     "label": "MDR Treatment"
                   },
                   {
-                    "concept": "07b6c7d8-d9ea-71cd-34ab-6c2345780b12",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Other"
                   }
                 ]
               }
             },
             {
-              "label": "Other treatment plan (specify)",
-              "type": "obs",
-              "required": "false",
-              "id": "tbTreatmentPlanOtherSpecify",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "hide": {
-                "hideWhenExpression": "isEmpty(tbTreatmentPlan) || tbTreatmentPlan !== '07b6c7d8-d9ea-71cd-34ab-6c2345780b12'"
-              }
-            },
-            {
               "label": "Next Followup Visit",
               "type": "obs",
-              "required": "false",
-              "id": "tbNextFollowupVisit",
+              "id": "nextFollowupVisit",
               "questionOptions": {
-                "rendering": "date",
-                "concept": "18c7d8e9-eafb-82de-45bc-7d3456890b13"
+                "rendering": "datetime",
+                "concept": "b1b4ac7b-27cc-4d11-be1e-e4e6308e1e79"
               }
             },
             {
               "label": "Plan for next visit",
               "type": "obs",
-              "required": "false",
-              "id": "tbPlanForNextVisit",
+              "id": "planForNextVisit",
               "questionOptions": {
                 "rendering": "textarea",
-                "concept": "29d8e9fa-fb0c-93ef-56cd-8e4567900b14",
-                "rows": "3"
+                "concept": "678eac53-2975-45e7-a12e-9cd5391fd0a2"
+              }
+            },
+            {
+              "label": "History of Contact",
+              "type": "obs",
+              "id": "historyOfContact",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3bf3701c-1f8e-46da-9d02-bdb00a4c2e96",
+                "answers": [
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. Negative"
+                  },
+                  {
+                    "concept": "8f93a0fb-ae17-4bf9-acd3-d3bc68f8c665",
+                    "label": "Positive Family History"
+                  },
+                  {
+                    "concept": "0180170b-8c49-47fb-a11b-e8620007c503",
+                    "label": "Positive outside family"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Any Tuberculosis death in family",
+              "type": "obs",
+              "id": "anyTuberculosisDeathInFamily",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "10cf2530-435f-4425-8827-8f671bf8e00d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Type of Tuberculosis",
+              "type": "obs",
+              "id": "typeOfTuberculosis",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "160040AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1d9a3653-9b0f-462c-9927-3ae62e08a36a",
+                    "label": "Pulmonary"
+                  },
+                  {
+                    "concept": "d28c1846-bcc5-4820-aa88-c347555904b5",
+                    "label": "Extra Pulmonary"
+                  },
+                  {
+                    "concept": "6e2217ca-a35f-427c-a3bd-efdbb953ba3e",
+                    "label": "Pulmonary + Extrapulmonary"
+                  },
+                  {
+                    "concept": "00a09951-b4aa-422d-9c05-1c798c22318f",
+                    "label": "Disseminated"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Patient Category",
+              "type": "obs",
+              "id": "patientCategory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "37fd000c-d185-4ab3-bd49-9005ce9868c7",
+                "answers": [
+                  {
+                    "concept": "45f5d535-a2a9-57fb-a67d-4a48b116472c",
+                    "label": "New Patient"
+                  },
+                  {
+                    "concept": "35b35879-2972-47e5-af17-e966fe9f6f55",
+                    "label": "Default Case"
+                  },
+                  {
+                    "concept": "1529a5e2-9f9f-4e16-8c66-e10bd81701ab",
+                    "label": "Relapse after successful ATT"
+                  },
+                  {
+                    "concept": "2b1a4ea2-e6b5-46fb-ac09-a14b820551df",
+                    "label": "Failure of ATT"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Basis of Diagnosis",
+              "type": "obs",
+              "id": "basisOfDiagnosis",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "690addaf-09ad-4d5a-a1ad-5ed6522ce47f",
+                "answers": [
+                  {
+                    "concept": "a2afc8ef-c3dd-4dbb-8e8e-b26370f28602",
+                    "label": "Sputum Microscopy"
+                  },
+                  {
+                    "concept": "a0249a69-c3fa-4299-8a84-242dd181b97e",
+                    "label": "Clinical Exam"
+                  },
+                  {
+                    "concept": "769ddd9b-95c2-46e2-94a4-9ba9c17d356d",
+                    "label": "X-Ray Findings"
+                  },
+                  {
+                    "concept": "4258b93d-f4b2-4a95-9c56-0b412d26e405",
+                    "label": "Sputum Culture"
+                  },
+                  {
+                    "concept": "161198AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Histopathology"
+                  },
+                  {
+                    "concept": "167e369c-f3d2-4c9f-94fc-b405f6decdea",
+                    "label": "Cytochemistry"
+                  }
+                ]
               }
             }
           ]
         },
         {
-          "label": "Admission",
+          "label": "Tuberculosis, Admission",
           "isExpanded": "true",
           "questions": [
             {
               "label": "Need of Admission",
               "type": "obs",
-              "required": "false",
-              "id": "tbNeedOfAdmission",
+              "id": "needOfAdmission",
               "questionOptions": {
                 "rendering": "radio",
-                "concept": "3ae9fa0b-0c1d-a410-67de-9f5678010b15",
+                "concept": "1df77794-8c03-4ec8-980b-78f1d7d04ca9",
                 "answers": [
                   {
                     "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -325,123 +383,56 @@
             {
               "label": "Indications",
               "type": "obs",
-              "required": "false",
-              "id": "tbAdmissionIndications",
+              "id": "indications",
               "questionOptions": {
-                "rendering": "textarea",
-                "concept": "4e5f6071-8293-4a45-ce34-f5a6b7c8ff05",
-                "rows": "3"
-              }
-            },
-            {
-              "label": "History of Contact",
-              "type": "obs",
-              "required": "false",
-              "id": "tbHistoryOfContact",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "5c0b1c2d-2e3f-c632-8900-bf7890230b17",
-                "answers": [
-                  {
-                    "concept": "6d1c2d3e-3f40-d743-9a11-c08913450b18",
-                    "label": "Negative"
-                  },
-                  {
-                    "concept": "7e2d3e4f-4051-e854-ab22-d19a24560b19",
-                    "label": "Positive Family History"
-                  },
-                  {
-                    "concept": "8f3e4f50-5162-f965-bc33-e2ab35670b20",
-                    "label": "Positive outside family"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Any Tuberculosis death in family",
-              "type": "obs",
-              "required": "false",
-              "id": "tbDeathInFamily",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "db50afa8-1350-5a01-a225-200a953782eb",
-                "answers": [
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
-                  },
-                  {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
-                  },
-                  {
-                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Unknown"
-                  }
-                ]
+                "rendering": "text",
+                "concept": "e81cee4a-d971-4659-8e60-f8c2856f33e1"
               }
             }
           ]
         },
         {
-          "label": "Past Treatment History",
+          "label": "Tuberculosis, Past Treatment History",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "If past history of Tuberculosis",
-              "type": "obs",
-              "required": "false",
-              "id": "tbPastHistory",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "1c3ca4ac-e571-43fc-857c-fab67a7cb8ad",
-                "answers": [
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
-                  },
-                  {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
-                  }
-                ]
-              }
-            },
-            {
               "label": "Duration since last treatment",
               "type": "obs",
-              "required": "false",
-              "id": "tbDurationSinceLastTreatment",
+              "id": "durationSinceLastTreatment",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "a1506172-7384-1b87-de55-04cd57890b22"
-              }
+                "rendering": "number",
+                "concept": "db5aa6dd-4294-48c8-91aa-75c215bedd25",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
             },
             {
               "label": "Duration of last treatment",
               "type": "obs",
-              "required": "false",
-              "id": "tbDurationOfLastTreatment",
+              "id": "durationOfLastTreatment",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "b2617283-8495-2c98-ef66-15de68900b23"
-              }
+                "rendering": "number",
+                "concept": "86b25a43-b1ab-4f20-9b49-9937baf9e10d",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
             },
             {
               "label": "Past Treatment Facility",
               "type": "obs",
-              "required": "false",
-              "id": "tbPastTreatmentFacility",
+              "id": "pastTreatmentFacility",
               "questionOptions": {
-                "rendering": "radio",
-                "concept": "c3728394-95a6-3da9-f077-26ef79a10b24",
+                "rendering": "select",
+                "concept": "37d31b5e-160b-4f76-bfa0-a2afd19ae245",
                 "answers": [
                   {
-                    "concept": "d48394a5-a6b7-4ebb-0188-370f8ab20b25",
+                    "concept": "07504b56-383b-4a1b-bc03-43c6958a0bb3",
                     "label": "Private"
                   },
                   {
-                    "concept": "e594a5b6-b7c8-5fcc-1299-48109bc30b26",
+                    "concept": "acd9f082-fa52-497b-883f-67b49b97e731",
                     "label": "Government"
                   }
                 ]
@@ -450,243 +441,32 @@
             {
               "label": "Past Treatment Details",
               "type": "obs",
-              "required": "false",
-              "id": "tbPastTreatmentDetails",
+              "id": "pastTreatmentDetails",
               "questionOptions": {
                 "rendering": "textarea",
-                "concept": "f6a5b6c7-c8d9-60dd-23aa-5921acd40b27",
-                "rows": "3"
+                "concept": "05b4034c-df09-4d75-adb3-034d191707f8"
               }
             }
           ]
         },
         {
-          "label": "Tuberculosis Classification",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Type of Tuberculosis",
-              "type": "obs",
-              "required": "false",
-              "id": "tbType",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "07b6c7d8-d9ea-71ee-34bb-6a32bde50b28",
-                "answers": [
-                  {
-                    "concept": "18c7d8e9-eafb-82ff-45cc-7b43cef60b29",
-                    "label": "Pulmonary"
-                  },
-                  {
-                    "concept": "29d8e9fa-fb0c-9300-56dd-8c54df070b30",
-                    "label": "Extra Pulmonary"
-                  },
-                  {
-                    "concept": "3ae9fa0b-0c1d-a411-67ee-9d65e0180b31",
-                    "label": "Pulmonary + Extrapulmonary"
-                  },
-                  {
-                    "concept": "4bfa0b1c-1d2e-b522-78ff-ae76f1290b32",
-                    "label": "Disseminated"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Category of tuberculosis patient",
-              "type": "obs",
-              "required": "false",
-              "id": "tbPatientCategory",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "afb1d753-7b0c-4612-8e23-f8ef26271a26",
-                "answers": [
-                  {
-                    "concept": "160567AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "New diagnosis of Tuberculosis"
-                  },
-                  {
-                    "concept": "159872AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Transfer in, tuberculosis patient"
-                  },
-                  {
-                    "concept": "164097AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Returned after loss to follow-up"
-                  },
-                  {
-                    "concept": "9d607182-9304-4d93-dea4-152637485960",
-                    "label": "Tuberculosis treatment failure"
-                  },
-                  {
-                    "concept": "160033AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Relapse"
-                  },
-                  {
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Other"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Other patient category (specify)",
-              "type": "obs",
-              "required": "false",
-              "id": "tbPatientCategoryOtherSpecify",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "hide": {
-                "hideWhenExpression": "isEmpty(tbPatientCategory) || tbPatientCategory !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Extrapulmonary TB",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "EP Site",
-              "type": "obs",
-              "required": "false",
-              "id": "tbEpSite",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "5c0b1c2d-2e3f-c633-8910-bf87f23a0b33",
-                "answers": [
-                  {
-                    "concept": "6d1c2d3e-3f40-d744-9a21-c098034b0b34",
-                    "label": "Pleural"
-                  },
-                  {
-                    "concept": "7e2d3e4f-4051-e855-ab32-d1a914cc0b35",
-                    "label": "Cutaneous"
-                  },
-                  {
-                    "concept": "8f3e4f50-5162-f966-bc43-e2ba25dd0b36",
-                    "label": "Pericardial"
-                  },
-                  {
-                    "concept": "904f5061-6273-0a77-cd54-f3cb36ee0b37",
-                    "label": "Other (Specify)"
-                  },
-                  {
-                    "concept": "a1506172-7384-1b88-de65-04dc47ff0b38",
-                    "label": "Lymph Node"
-                  },
-                  {
-                    "concept": "b2617283-8495-2c99-ef76-15ed58000b39",
-                    "label": "Intestinal"
-                  },
-                  {
-                    "concept": "c3728394-95a6-3daa-f087-26fe69110b40",
-                    "label": "Peritoneal"
-                  },
-                  {
-                    "concept": "d48394a5-a6b7-4ebb-1198-370f7a220b41",
-                    "label": "Skeletal"
-                  },
-                  {
-                    "concept": "e594a5b6-b7c8-5fcc-22a9-48108b330b42",
-                    "label": "Articular"
-                  },
-                  {
-                    "concept": "f6a5b6c7-c8d9-60dd-33ba-59219c440b43",
-                    "label": "Meningeal"
-                  },
-                  {
-                    "concept": "07b6c7d8-d9ea-71ee-44cb-6a328d550b44",
-                    "label": "Renal"
-                  },
-                  {
-                    "concept": "18c7d8e9-eafb-82ff-55dc-7b439e660b45",
-                    "label": "Genital"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Other extrapulmonary site (specify)",
-              "type": "obs",
-              "required": "false",
-              "id": "tbEpSiteOtherSpecify",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "b2a7a658-9f01-4b23-e567-8901234ef012"
-              },
-              "hide": {
-                "hideWhenExpression": "isEmpty(tbEpSite) || tbEpSite !== '904f5061-6273-0a77-cd54-f3cb36ee0b37'"
-              }
-            },
-            {
-              "label": "Lymph Node Size",
-              "type": "obs",
-              "required": "false",
-              "id": "tbLymphNodeSize",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "29d8e9fa-fb0c-9300-66ed-8c54af770b46"
-              }
-            },
-            {
-              "label": "Pain",
-              "type": "obs",
-              "required": "false",
-              "id": "tbLymphNodePain",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "3ae9fa0b-0c1d-a411-77fe-9d65b0880b47"
-              }
-            },
-            {
-              "label": "Discharge, Sinus, Ulcer",
-              "type": "obs",
-              "required": "false",
-              "id": "tbLymphNodeDischargeSinusUlcer",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "4bfa0b1c-1d2e-b522-880f-ae76c1990b48"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Pleural TB",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Respiratory Rate",
-              "type": "obs",
-              "required": "false",
-              "id": "tbPleuralRespiratoryRate",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5c0b1c2d-2e3f-c633-9920-bf87d1aa0b49"
-              }
-            }
-          ]
-        },
-        {
-          "label": "X-Ray Findings",
+          "label": "Tuberculosis, X-Ray Findings",
           "isExpanded": "true",
           "questions": [
             {
               "label": "Extent",
               "type": "obs",
-              "required": "false",
-              "id": "tbXrayExtent",
+              "id": "extent",
               "questionOptions": {
-                "rendering": "radio",
+                "rendering": "select",
                 "concept": "6d1c2d3e-3f40-d744-aa31-c098e1bb0b50",
                 "answers": [
                   {
-                    "concept": "7e2d3e4f-4051-e855-bb42-d1a9f2cc0b51",
+                    "concept": "164488AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Extensive"
                   },
                   {
-                    "concept": "8f3e4f50-5162-f966-cc53-e2ba03dd0b52",
+                    "concept": "8d82393f-2ca0-43e1-99b7-1cc73cac19ee",
                     "label": "Limited"
                   }
                 ]
@@ -695,58 +475,160 @@
             {
               "label": "Cavity",
               "type": "obs",
-              "required": "false",
-              "id": "tbXrayCavity",
+              "id": "cavity",
               "questionOptions": {
-                "rendering": "radio",
-                "concept": "904f5061-6273-0a77-dd64-f3cb14ee0b53",
+                "rendering": "select",
+                "concept": "acd70628-076c-4395-a4e8-9020a1ec8548",
                 "answers": [
                   {
-                    "concept": "a1506172-7384-1b88-ee75-04dc25ff0b54",
+                    "concept": "3620fed4-fada-47cc-8250-fa2f47002eac",
                     "label": "Non-cavitary"
                   },
                   {
-                    "concept": "b2617283-8495-2c99-ff86-15ed03a00b55",
+                    "concept": "bd7e84f2-3d91-4352-ada4-b20b7fa1771d",
                     "label": "Cavitary"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Tuberculosis, Extrapulmonary TB",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "EP Site",
+              "type": "obs",
+              "id": "epSite",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3fdb95fb-c2f2-433a-8b7f-99e9c9479547",
+                "answers": [
+                  {
+                    "concept": "eab1cfa7-c0c8-4b72-8f9a-108b427ca745",
+                    "label": "Pleural"
+                  },
+                  {
+                    "concept": "55695626-267c-41cd-a8bb-e3da48b3061b",
+                    "label": "Cutaneous"
+                  },
+                  {
+                    "concept": "47df5022-74d2-4377-99e5-0dd73e4bf6a8",
+                    "label": "Pericardial"
+                  },
+                  {
+                    "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a",
+                    "label": "Other (Specify)"
+                  },
+                  {
+                    "concept": "24a2892d-0386-5a2c-9126-542656a50f24",
+                    "label": "Lymph Node"
+                  },
+                  {
+                    "concept": "8e689d36-f935-49de-9430-a7815a26e256",
+                    "label": "Intestinal"
+                  },
+                  {
+                    "concept": "2bffe885-c6da-477c-81e3-0a11fb8fc277",
+                    "label": "Peritoneal"
+                  },
+                  {
+                    "concept": "98e20000-1a5e-4145-a372-12a6a6ff9ad7",
+                    "label": "Skeletal"
+                  },
+                  {
+                    "concept": "ead5acda-3bc0-40ed-a5b7-327adf61aee8",
+                    "label": "Articular"
+                  },
+                  {
+                    "concept": "9d52d27d-f944-4604-ae4a-c10316ad4897",
+                    "label": "Meningeal"
+                  },
+                  {
+                    "concept": "9f80d743-fa1e-4a1b-af8d-1489654cf8ae",
+                    "label": "Renal"
+                  },
+                  {
+                    "concept": "c3ff2de3-1873-5d72-9d49-f33519c3e573",
+                    "label": "Genital"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Tuberculosis, Lymph Node",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Lymph Node Size",
+              "type": "obs",
+              "id": "lymphNodeSize",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "74506d70-e134-536a-8cad-5d11e522a196"
+              }
+            },
+            {
+              "label": "Pain",
+              "type": "obs",
+              "id": "pain",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "45e4f3ee-af33-4723-bb45-5a28951300f0",
+                "answers": [
+                  {
+                    "label": "None or mild",
+                    "concept": "c6728b6b-defe-4a20-a8c1-1137b381af71"
+                  },
+                  {
+                    "label": "Pediatric Moderate severity",
+                    "concept": "ae48da34-3e5b-4c24-922c-aea87d92a373"
                   }
                 ]
               }
             },
             {
-              "label": "Basis of Diagnosis",
+              "label": "Discharge, Sinus, Ulcer",
               "type": "obs",
-              "required": "false",
-              "id": "tbBasisOfDiagnosis",
+              "id": "dischargeSinusUlcer",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "c3728394-95a6-3daa-0097-26fef4b10b56",
-                "answers": [
-                  {
-                    "concept": "d48394a5-a6b7-4ebb-11a8-370f60c20b57",
-                    "label": "Sputum Microscopy"
-                  },
-                  {
-                    "concept": "e594a5b6-b7c8-5fcc-22b9-481071d30b58",
-                    "label": "Clinical Exam"
-                  },
-                  {
-                    "concept": "f6a5b6c7-c8d9-60dd-33ca-592182e40b59",
-                    "label": "X-Ray Findings"
-                  },
-                  {
-                    "concept": "07b6c7d8-d9ea-71ee-44db-6a32a3f50b60",
-                    "label": "Sputum Culture"
-                  },
-                  {
-                    "concept": "18c7d8e9-eafb-82ff-55ec-7b4359060b61",
-                    "label": "Histopathology"
-                  },
-                  {
-                    "concept": "29d8e9fa-fb0c-9300-66fd-8c540a170b62",
-                    "label": "Cytochemistry"
-                  }
-                ]
+                "rendering": "text",
+                "concept": "0ce5af54-835d-4404-94bc-fe72da9868e8"
               }
+            }
+          ]
+        },
+        {
+          "label": "Tuberculosis, Pleural TB",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Respiratory Rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
             }
           ]
         }

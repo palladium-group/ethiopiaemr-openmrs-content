@@ -1,0 +1,862 @@
+{
+  "name": "Drug Resistant TB Follow-up Register",
+  "description": "Drug Resistant TB Follow-up Register - built from physician Word-doc spec (Phase 1, batch-three).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "ed5ac270-ba46-539c-8927-cfe84d4fba38",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Drug Resistant TB Follow-up Register Assessment",
+      "sections": [
+        {
+          "label": "Registration",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "MDR TB registration number",
+              "type": "obs",
+              "id": "mdrTbRegistrationNumber",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "92b2eabc-2b04-4879-8c79-bc2d4259af23"
+              }
+            },
+            {
+              "label": "Transferring / Referring Health Facility",
+              "type": "obs",
+              "id": "transferringReferringHealthFacility",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4dc7fb55-e74c-594d-a6be-5634f190002c"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Treatment Supporter",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name",
+              "type": "obs",
+              "id": "name",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160638AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Address",
+              "type": "obs",
+              "id": "address",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d616d6d4-2548-4b68-99e7-f3c85fa96328"
+              }
+            },
+            {
+              "label": "Telephone Number",
+              "type": "obs",
+              "id": "telephoneNumber",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "160642AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Relationship",
+              "type": "obs",
+              "id": "relationship",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3a24f60a-d0f2-468e-9264-6ec551f75671"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Classification",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Eligibility",
+              "type": "obs",
+              "id": "eligibility",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "07ec3716-419f-5470-84c7-1dd3f3045507",
+                "answers": [
+                  {
+                    "concept": "0eea46e3-5562-409c-97bf-27878aad5bb6",
+                    "label": "Short term regimen"
+                  },
+                  {
+                    "concept": "ada9bcea-085d-465e-a692-029162bbe9dd",
+                    "label": "Long-term regimen with new drugs"
+                  },
+                  {
+                    "concept": "534ac583-97dd-4edf-959d-017b712ba3c0",
+                    "label": "Long-term regimen without new drugs"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Registration group",
+              "type": "obs",
+              "id": "registrationGroup",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3b92c35f-4502-4fed-b8df-82d395fb1418",
+                "answers": [
+                  {
+                    "concept": "e3ee2c42-0876-4e38-a2ce-e4bc8ed77057",
+                    "label": "New"
+                  },
+                  {
+                    "concept": "160033AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Relapse"
+                  },
+                  {
+                    "concept": "0f3ce504-0e93-4447-87bb-3f74cfbab87e",
+                    "label": "After Lost to Follow Up"
+                  },
+                  {
+                    "concept": "ae203525-15c7-40e4-a6b7-f7990a448ed0",
+                    "label": "After failure of first treatment"
+                  },
+                  {
+                    "concept": "7f7c449e-6f9c-4dc5-916b-8e7b5219ff36",
+                    "label": "After failure of re-treatment"
+                  },
+                  {
+                    "concept": "160563AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Transfer In"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If other specify",
+              "type": "obs",
+              "id": "ifOtherSpecify",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              }
+            },
+            {
+              "label": "Site",
+              "type": "obs",
+              "id": "site",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9ce112d5-e4ed-4050-8409-ba3b35a22615",
+                "answers": [
+                  {
+                    "concept": "1d9a3653-9b0f-462c-9927-3ae62e08a36a",
+                    "label": "Pulmonary"
+                  },
+                  {
+                    "concept": "d28c1846-bcc5-4820-aa88-c347555904b5",
+                    "label": "Extra Pulmonary"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Resistance Type",
+              "type": "obs",
+              "id": "resistanceType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1091b649-9eff-4284-a119-26b6a79a0642",
+                "answers": [
+                  {
+                    "concept": "1cedffd4-d703-454a-8b7e-08e61b84242a",
+                    "label": "RR"
+                  },
+                  {
+                    "concept": "e3de3f5d-bd2b-42de-8d07-8b15056d96f6",
+                    "label": "MDR-TB"
+                  },
+                  {
+                    "concept": "6ed306d8-c0c7-4573-9366-df111f8f56cd",
+                    "label": "Pre-XDR"
+                  },
+                  {
+                    "concept": "dd690053-0020-47b2-9d67-37f1071fa465",
+                    "label": "XDR-TB"
+                  },
+                  {
+                    "concept": "3f531657-07e0-491d-b0a9-6a679667d3f9",
+                    "label": "Poly resistant"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Intensive Phase",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "required": "true",
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "MUAC",
+              "type": "obs",
+              "id": "muac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Medication",
+              "type": "obs",
+              "id": "medication",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a7d8fdf9-d81d-43ab-a41a-ea2ca8dbd7ee"
+              }
+            },
+            {
+              "label": "Dose",
+              "type": "obs",
+              "id": "dose",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "cd9f19fd-f82b-4777-93e4-a081b9e1f80f"
+              }
+            },
+            {
+              "label": "Date Started",
+              "type": "obs",
+              "id": "dateStarted",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "d773d729-74dd-4515-886b-47befdc5b5a9"
+              }
+            },
+            {
+              "label": "Smear result",
+              "type": "obs",
+              "id": "smearResult",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0d7ba306-d3d9-4089-8691-2fbac8b3be21",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Culture result",
+              "type": "obs",
+              "id": "cultureResult",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "976a4888-1084-5fa0-8218-5602525be8e2",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Monitoring",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Month",
+              "type": "obs",
+              "id": "month",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "4978edd0-75ab-40a9-9c07-d4bbeb43fed5"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Days intensive phase treatment Monitoring Chart",
+              "type": "obs",
+              "id": "daysIntensivePhaseTreatmentMonitoringCha",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "7675c24c-3da8-43a9-8aa7-551d8601fe7a"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Continuation Phase",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Medication",
+              "type": "obs",
+              "id": "medication2",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a7d8fdf9-d81d-43ab-a41a-ea2ca8dbd7ee"
+              }
+            },
+            {
+              "label": "Dose",
+              "type": "obs",
+              "id": "dose2",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "cd9f19fd-f82b-4777-93e4-a081b9e1f80f"
+              }
+            },
+            {
+              "label": "Smear result",
+              "type": "obs",
+              "id": "smearResult2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0d7ba306-d3d9-4089-8691-2fbac8b3be21",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Culture result",
+              "type": "obs",
+              "id": "cultureResult2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "976a4888-1084-5fa0-8218-5602525be8e2",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "TB/HIV Activities",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HIV Testing done",
+              "type": "obs",
+              "id": "hivTestingDone",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date of Test",
+              "type": "obs",
+              "id": "dateOfTest",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "510fce75-2bbb-56f5-8930-0fe850c67d91"
+              }
+            },
+            {
+              "label": "HIV test Result",
+              "type": "obs",
+              "id": "hivTestResult",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a90ebc9e-53b4-4a31-bf19-c5e474efe62d",
+                "answers": [
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NR"
+                  },
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "R"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Target population category",
+              "type": "obs",
+              "id": "targetPopulationCategory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "4f8a2b1c-3d5e-4567-8901-234567890abc",
+                "answers": [
+                  {
+                    "label": "FP General Population",
+                    "concept": "0b2c4d5e-7f9a-8901-2345-678901234a0b"
+                  },
+                  {
+                    "label": "orphan",
+                    "concept": "1174AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "HIV orphan",
+                    "concept": "1393AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Sex worker",
+                    "concept": "160579AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Long distance truck driver",
+                    "concept": "162198AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "In prison",
+                    "concept": "162277AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Refugee",
+                    "concept": "164100AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "FP Mobile Workers Daily Laborers",
+                    "concept": "7e9f1a2b-4c6d-5678-9012-345678901de0"
+                  },
+                  {
+                    "label": "Prisoner",
+                    "concept": "83d41e79-e09f-4785-9905-545b6fd7ebe6"
+                  },
+                  {
+                    "label": "FP Partner of PLHIV",
+                    "concept": "8f0a2b3c-5d7e-6789-0123-456789012e0a"
+                  },
+                  {
+                    "label": "FP Other MARPS",
+                    "concept": "9a1b3c4d-6e8f-7890-1234-567890123f0a"
+                  },
+                  {
+                    "label": "Pregnant Mothers",
+                    "concept": "bba607ad-f6cb-49f5-91af-2e310f182090"
+                  },
+                  {
+                    "label": "Vulnerable Adolescents",
+                    "concept": "c6b8c785-8533-4bf6-8bad-b4e2bc44a891"
+                  },
+                  {
+                    "label": "Female sex worker",
+                    "concept": "89828287-b96f-449c-b3ae-d518d55703e1"
+                  },
+                  {
+                    "label": "Others Specify",
+                    "concept": "e1526374-5869-7890-1234-567890456789"
+                  },
+                  {
+                    "label": "Military",
+                    "concept": "e373fdee-df05-4195-834b-6a3cd5c06dde"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "CPT",
+              "type": "obs",
+              "id": "cpt",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "160434AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date Started on CPT",
+              "type": "obs",
+              "id": "dateStartedOnCpt",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "164361AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "ART",
+              "type": "obs",
+              "id": "art",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d8176d1b-1234-11ee-be56-0242ac120004",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date Started on ART",
+              "type": "obs",
+              "id": "dateStartedOnArt",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Adverse Effect",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Adverse Effect",
+              "type": "obs",
+              "id": "adverseEffect",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "982f8b21-5ee2-4d74-8c3d-ae2b3c400962"
+              }
+            },
+            {
+              "label": "Medication",
+              "type": "obs",
+              "id": "medication3",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a7d8fdf9-d81d-43ab-a41a-ea2ca8dbd7ee"
+              }
+            },
+            {
+              "label": "Action Taken",
+              "type": "obs",
+              "id": "actionTaken",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "164378AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Nutritional Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Status",
+              "type": "obs",
+              "id": "status",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "dfcee475-cd14-4d35-bb17-86493ac18922",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "f1a2b3c4-d5e6-47f8-89a0-b1c2d3e4f503",
+                    "label": "MAM"
+                  },
+                  {
+                    "concept": "f1a2b3c4-d5e6-47f8-89a0-b1c2d3e4f504",
+                    "label": "SAM"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Management",
+              "type": "obs",
+              "id": "management",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e3f5956b-fb90-4d3c-bf06-09d9633d240e",
+                "answers": [
+                  {
+                    "concept": "afeadb08-aadd-46a5-83c6-0b878e286302",
+                    "label": "Advice given on"
+                  },
+                  {
+                    "concept": "0505f3f6-2636-46cd-929c-4fea9d1eb5bb",
+                    "label": "Supplementary"
+                  },
+                  {
+                    "concept": "4ece08f5-1261-4107-94cf-b637cb31987f",
+                    "label": "Therapeutic"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Treatment Outcome",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Outcome",
+              "type": "obs",
+              "id": "outcome",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "07de3907-ad71-46d9-a6e2-18d1682faca6",
+                "answers": [
+                  {
+                    "concept": "5f263748-5960-495f-fa60-718293041526",
+                    "label": "Cured"
+                  },
+                  {
+                    "concept": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Completed"
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died"
+                  },
+                  {
+                    "concept": "558c7e1a-e702-46fc-be5c-73bb162b5be9",
+                    "label": "Failed"
+                  },
+                  {
+                    "concept": "5240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Lost to Follow-up"
+                  },
+                  {
+                    "concept": "3703ec30-cc17-403c-8535-55e6ca0121a2",
+                    "label": "Not evaluated"
+                  },
+                  {
+                    "concept": "b7bb43ce-aef0-4e12-b74c-0fdf063f0ba4",
+                    "label": "Moved to Pre/XDR TB Rx"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Treatment outcome (free text)",
+              "type": "obs",
+              "id": "treatmentOutcomeFreeText",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "b53fb2a6-a3d2-54e0-b979-0bee34a875a5",
+                "answers": [
+                  {
+                    "label": "Uncontrolled disease status",
+                    "concept": "0389a0f2-3517-5b16-957e-6011f53b02b2"
+                  },
+                  {
+                    "label": "Completed",
+                    "concept": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Died",
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Failure",
+                    "concept": "4baf4a30-d60b-4942-b0ab-9f48bfc7a314"
+                  },
+                  {
+                    "label": "Lost to followup",
+                    "concept": "5240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Others",
+                    "concept": "5ec51542-6a40-4f25-8654-6af7628002a9"
+                  },
+                  {
+                    "label": "Treatment outcome cured",
+                    "concept": "5f263748-5960-495f-fa60-718293041526"
+                  },
+                  {
+                    "label": "Uncle",
+                    "concept": "974AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Controlled disease status",
+                    "concept": "bcc9ae1d-724f-5488-bfaa-97ea60de59f8"
+                  },
+                  {
+                    "label": "Moved to second line treatment register",
+                    "concept": "f355cf33-f07c-40c1-8fb2-c41219e8cbc5"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Remark",
+              "type": "obs",
+              "id": "remark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

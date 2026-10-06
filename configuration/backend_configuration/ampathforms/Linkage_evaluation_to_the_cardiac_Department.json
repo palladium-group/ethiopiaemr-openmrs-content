@@ -1,0 +1,346 @@
+{
+  "name": "Linkage evaluation to the cardiac Department",
+  "description": "Linkage evaluation to the cardiac Department - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "6bec0064-447b-5131-b292-06d712827b86",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Linkage evaluation to the cardiac Department Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Link date and time",
+              "type": "obs",
+              "id": "linkDateAndTime",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "feba1cfe-8791-4909-8280-5aa1c341cf04"
+              }
+            },
+            {
+              "label": "Linked patient identification",
+              "type": "obs",
+              "id": "linkedPatientIdentification",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "94e29f7f-6b46-4527-8628-c6ed0c552bcf"
+              }
+            },
+            {
+              "label": "Linked to",
+              "type": "obs",
+              "id": "linkedTo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "02d7d13c-9962-4587-abe1-3b199b054f63"
+              }
+            },
+            {
+              "label": "Patient History",
+              "type": "obs",
+              "id": "patientHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a3f07293-b635-5b51-b70f-9742290aa09e"
+              }
+            },
+            {
+              "label": "Pertinent physical Finding",
+              "type": "obs",
+              "id": "pertinentPhysicalFinding",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "268ac73c-6b55-4da3-abe5-0aaa3185ace7"
+              }
+            },
+            {
+              "label": "Preliminary diagnosis",
+              "type": "obs",
+              "id": "preliminaryDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ae9dd2ea-f2ab-5713-8be9-1fd0cda60bab"
+              }
+            },
+            {
+              "label": "BP",
+              "type": "obs",
+              "id": "bp",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "935e6ba6-c666-5296-8374-0360954d7834",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "RR (breaths/min)",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Scope of reception evaluator",
+              "type": "obs",
+              "id": "scopeOfReceptionEvaluator",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37d04a78-400a-43f3-8711-dbd948ee637b"
+              }
+            },
+            {
+              "label": "Triaged to",
+              "type": "obs",
+              "id": "triagedTo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d7a67f5b-8a66-459c-9863-56041fb416a1"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Patient history",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Presenting compliant",
+              "type": "obs",
+              "id": "presentingCompliant",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4ea8488d-2fc8-5e75-981e-951699402177"
+              }
+            },
+            {
+              "label": "Pertinent summary of history",
+              "type": "obs",
+              "id": "pertinentSummaryOfHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "57734274-dbe8-4812-a4c8-f891d9b14fb3"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pertinent Investigations",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Baseline summary",
+              "type": "obs",
+              "id": "baselineSummary",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c2819582-0207-42ba-b502-a89ac37bed09"
+              }
+            },
+            {
+              "label": "ECG",
+              "type": "obs",
+              "id": "ecg",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ccfea680-1702-49b3-8913-f859add98183",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Not done",
+                    "concept": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Echo",
+              "type": "obs",
+              "id": "echo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "fa4ccc10-a96d-4f66-986f-90e8ad454f9b"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Cardiac reception evaluation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date and time of cardiac reception evaluation",
+              "type": "obs",
+              "id": "dateAndTimeOfCardiacReceptionEvaluation",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "aa9cd77e-d49e-4c74-9ada-3e42bd328b6a"
+              }
+            },
+            {
+              "label": "Presenting compliant",
+              "type": "obs",
+              "id": "presentingCompliant2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4ea8488d-2fc8-5e75-981e-951699402177"
+              }
+            },
+            {
+              "label": "Vital sign taken",
+              "type": "obs",
+              "id": "vitalSignTaken",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5bcd056f-80ac-46a2-8a29-a6c3d464b45b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Linking",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Site",
+              "type": "obs",
+              "id": "site",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9ce112d5-e4ed-4050-8409-ba3b35a22615",
+                "answers": [
+                  {
+                    "label": "left hand",
+                    "concept": "1440a839-b8a9-403c-8e68-74e046329c8f"
+                  },
+                  {
+                    "label": "Pulmonary",
+                    "concept": "1d9a3653-9b0f-462c-9927-3ae62e08a36a"
+                  },
+                  {
+                    "label": "Right Hand",
+                    "concept": "b7ff7a6b-6dd0-411e-a160-68ece7ddd895"
+                  },
+                  {
+                    "label": "Extrapulmonary",
+                    "concept": "d28c1846-bcc5-4820-aa88-c347555904b5"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Reason for linkage",
+              "type": "obs",
+              "id": "reasonForLinkage",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2a28f677-e629-4109-ad2b-d4395e952a8b"
+              }
+            },
+            {
+              "label": "Scope of linking staff",
+              "type": "obs",
+              "id": "scopeOfLinkingStaff",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a46f6a9b-cf3f-4a60-b166-3ff3929dfcd9"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

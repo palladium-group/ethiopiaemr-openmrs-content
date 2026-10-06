@@ -1,0 +1,466 @@
+{
+  "name": "DSD Model of HIV Care: Client Assessment and Classification Tool",
+  "description": "DSD Model of HIV Care: Client Assessment and Classification Tool.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "6e7c1723-f152-5135-ada5-9e4c9eeed62a",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "DSD Model of HIV Care: Client Assessment and Classification",
+      "sections": [
+        {
+          "label": "Client's Current Data (Initial Assessment)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Client resides within the catchment area",
+              "type": "obs",
+              "id": "clientResidesWithinTheCatchmentArea",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3679399c-c442-4c4a-ab9e-e6d2423683e3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date ART Started",
+              "type": "obs",
+              "id": "dateArtStarted",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Months on ART",
+              "type": "obs",
+              "id": "monthsOnArt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c83d1e06-cc10-5e3d-8ad4-ccbcf3c416db",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Current ART Regimen",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "First Line Regimen",
+              "type": "obs",
+              "id": "firstLineRegimen",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9a0fd1b6-9fcf-45da-9cd3-b050a1fd3a2f"
+              }
+            },
+            {
+              "label": "Date Started (First Line)",
+              "type": "obs",
+              "id": "dateStarted",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "82e33242-baf0-4337-ae92-0dd09159dc67"
+              }
+            },
+            {
+              "label": "Second Line Regimen",
+              "type": "obs",
+              "id": "secondLineRegimen",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "32294749-3b48-4520-9c60-ba743fd28682"
+              }
+            },
+            {
+              "label": "Date Started (Second Line)",
+              "type": "obs",
+              "id": "dateStarted2",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "789a9af3-3f91-42a7-8410-876dc8d703cc"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pregnancy, CD4 & Viral Load Status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Is the client pregnant?",
+              "type": "obs",
+              "id": "isTheClientPregnant",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5272AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Is the client breast feeding?",
+              "type": "obs",
+              "id": "isTheClientBreastFeeding",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7ea01ff2-4a0b-4e9c-b172-b3bc067529f3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "CD4 (mm3 or percent)",
+              "type": "obs",
+              "id": "cd4Mm3OrPercent",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a8c6a8a9-af39-4a43-adb8-e9d0348b6c00"
+              }
+            },
+            {
+              "label": "Date of Test",
+              "type": "obs",
+              "id": "dateOfTest",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "510fce75-2bbb-56f5-8930-0fe850c67d91"
+              }
+            },
+            {
+              "label": "If VL test done, most recent (<1 year) count (copies/ml)",
+              "type": "obs",
+              "id": "ifVlTestDoneMostRecent1YearCountCopiesMl",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "07e5a274-6ac8-4283-afea-b69198376825"
+              }
+            },
+            {
+              "label": "WHO Stage (1-4 or T1-T4)",
+              "type": "obs",
+              "id": "whoStage14OrT1T4",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5356AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "WHO stage 1 adult",
+                    "concept": "1204AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "WHO stage 2 adult",
+                    "concept": "1205AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "WHO stage 3 adult",
+                    "concept": "1206AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "WHO stage 4 adult",
+                    "concept": "1207AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "WHO STAGE 1 PEDS",
+                    "concept": "1220AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "WHO STAGE 2 PEDS",
+                    "concept": "1221AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "WHO STAGE 3 PEDS",
+                    "concept": "1222AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "WHO STAGE 4 PEDS",
+                    "concept": "1223AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Classification Based on Current Data and Care Needs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Category",
+              "type": "obs",
+              "id": "category",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a2042031-bb41-518c-b856-139b42aaf783",
+                "answers": [
+                  {
+                    "concept": "4755ca37-f4ba-444d-83b8-85aeb218e18b",
+                    "label": "Category 1a"
+                  },
+                  {
+                    "concept": "a37bc14f-77ef-45e8-8728-0beee1cb7d21",
+                    "label": "Category 1b"
+                  },
+                  {
+                    "concept": "be38e115-cf96-4581-832b-bb4ed2b0d8e9",
+                    "label": "Category 2"
+                  },
+                  {
+                    "concept": "6d2dd345-c712-410c-a124-1906f2e786b0",
+                    "label": "Category 3"
+                  },
+                  {
+                    "concept": "a188fa22-e60c-4bb7-a3af-4ac32545a0ac",
+                    "label": "Category 4"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Assessed Client",
+              "type": "obs",
+              "id": "assessedClient",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f192fab1-22f4-4b6d-80dc-540b39108f9f",
+                "answers": [
+                  {
+                    "concept": "06398754-8865-4004-805e-926636d6d6c2",
+                    "label": "Stable"
+                  },
+                  {
+                    "concept": "70d68ce3-d932-4f97-a186-efb4c3608efc",
+                    "label": "Unstable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Gave Consent",
+              "type": "obs",
+              "id": "gaveConsent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3d3ade5a-b11d-4ae7-83cf-637cccdebcc9",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Enrollment to DSD Models",
+              "type": "obs",
+              "id": "enrollmentToDsdModels",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4ca280f5-c53c-4016-b51c-1c7dcc104a49",
+                "answers": [
+                  {
+                    "concept": "9ec404be-903c-4e26-9986-2e160ecaaa31",
+                    "label": "ASM"
+                  },
+                  {
+                    "concept": "926ee283-4523-4469-b596-c8d2126f75b4",
+                    "label": "FTAR"
+                  },
+                  {
+                    "concept": "d68589e3-fd8f-43c5-b2fe-2b0caaebdc95",
+                    "label": "HEP-CAG"
+                  },
+                  {
+                    "concept": "68b2d466-81b7-4efc-bdb4-7bbe008c3a10",
+                    "label": "PCAD"
+                  },
+                  {
+                    "concept": "5ea16273-f26d-408b-88b5-b98cbce5e83c",
+                    "label": "AHID (Advanced HIV Diseases)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other Models, Specify",
+              "type": "obs",
+              "id": "otherModelsSpecify",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a75223d5-c6fe-43bd-a0c1-35fc4f3e418d"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Client Reassessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of Assessment",
+              "type": "obs",
+              "id": "dateOfAssessment",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "3d6fb531-7de4-49a4-beff-4f3bfe6c663b"
+              }
+            },
+            {
+              "label": "Current Category",
+              "type": "obs",
+              "id": "currentCategory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ad9db060-474b-48c5-a4db-803bd73fd089"
+              }
+            },
+            {
+              "label": "Enrollment status",
+              "type": "obs",
+              "id": "enrollmentStatus",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c5125410-63f6-409e-98fb-ed1aadd7bd44"
+              }
+            },
+            {
+              "label": "Category Change",
+              "type": "obs",
+              "id": "categoryChange",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1324c4ad-0716-4f01-b8b1-8a0d1ead84b1"
+              }
+            },
+            {
+              "label": "Change of status",
+              "type": "obs",
+              "id": "changeOfStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "97b9a363-2e57-4de1-a39d-30251ce88cbd",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Reason for status change",
+              "type": "obs",
+              "id": "reasonForStatusChange",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "83954273-eb2b-4084-b6db-d24610e97fe1"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(changeOfStatus) || changeOfStatus !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

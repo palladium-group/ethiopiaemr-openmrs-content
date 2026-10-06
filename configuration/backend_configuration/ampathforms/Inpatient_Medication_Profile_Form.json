@@ -1,0 +1,324 @@
+{
+  "name": "Inpatient Medication Profile Form",
+  "description": "Inpatient Medication Profile Form - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "31f22845-4fb5-54fe-9dd0-8bc7fdac58f7",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Inpatient Medication Profile Form Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weightKg",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Diagnosis notes",
+              "type": "obs",
+              "id": "diagnosisNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "159395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Past medical history",
+              "type": "obs",
+              "id": "pastMedicalHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c0a51001-0000-4000-8000-000000000003"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Admission Medication History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Past medication History(Name, dose, frequency, duration)",
+              "type": "obs",
+              "id": "pastMedicationHistoryNameDoseFrequencyDu",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "edcbcda8-d324-40f3-aa10-34a43b1f9978"
+              }
+            },
+            {
+              "label": "Allergies",
+              "type": "obs",
+              "id": "allergies",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3c4d5e6f-7081-9012-cdef-345678901234",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Food allergy",
+                    "concept": "139994AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Drug allergy",
+                    "concept": "141760AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Environment",
+                    "concept": "cef9c84c-0872-4877-ad78-f66603d20772"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pregnancy/Lactation status",
+              "type": "obs",
+              "id": "pregnancyLactationStatus",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5a899084-8309-4f57-b569-3cf58c556a51"
+              }
+            },
+            {
+              "label": "Any substance use",
+              "type": "obs",
+              "id": "anySubstanceUse",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "160246AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Any adherence problem",
+              "type": "obs",
+              "id": "anyAdherenceProblem",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1baade42-cf4e-4a3f-b551-dea568c01e8c"
+              }
+            },
+            {
+              "label": "Immunization status (pediatric patients)",
+              "type": "obs",
+              "id": "immunizationStatusForPedi",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "99c2c3d3-c93f-466b-9359-91cdcf5f8459"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Current Medications",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Indication",
+              "type": "obs",
+              "id": "indication",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c40b7105-5f72-56c9-a039-cfb3f5c9d425"
+              }
+            },
+            {
+              "label": "Drug",
+              "type": "obs",
+              "id": "drug",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "dcdf68c0-d1ff-4b5c-9b2c-da0d09139dac"
+              }
+            },
+            {
+              "label": "Start date and time",
+              "type": "obs",
+              "id": "startDateAndTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "eebbdb56-cc3a-4ceb-b85d-4d91a2decc16"
+              }
+            },
+            {
+              "label": "Stop date and time",
+              "type": "obs",
+              "id": "stopDateAndTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "aed64274-3b7a-4060-b265-65c0e481bad9"
+              }
+            },
+            {
+              "label": "Effectiveness",
+              "type": "obs",
+              "id": "effectiveness",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "dbdb04d1-62ec-4bee-8f39-ac53ba5c84ac",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "True"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "False"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Safety",
+              "type": "obs",
+              "id": "safety",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "69029bb4-ac91-4f25-ae12-756bf76b2ec1",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "True"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "False"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

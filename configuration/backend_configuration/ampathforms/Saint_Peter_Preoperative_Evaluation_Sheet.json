@@ -1,0 +1,1315 @@
+{
+  "name": "Saint Peter Preoperative Evaluation Sheet",
+  "description": "Saint Peter Preoperative Evaluation Sheet - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "9a1cd23a-6b42-517c-849f-8813c8fec888",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Saint Peter Preoperative Evaluation Sheet Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of surgery",
+              "type": "obs",
+              "id": "dateOfSurgery",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "589ab151-ae0a-4180-9da0-8fbd3a338876"
+              }
+            },
+            {
+              "label": "Procedure urgency",
+              "type": "obs",
+              "id": "procedureUrgency",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "80f4e2e4-e8e5-41f9-9658-06e0a66b775d"
+              }
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10"
+              },
+              "hideSteppers": true,
+              "questionInfo": "Centimetres."
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
+              },
+              "hideSteppers": true,
+              "questionInfo": "Kilograms."
+            },
+            {
+              "label": "BMI",
+              "type": "obs",
+              "id": "bmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8dbc97c1-cc29-4823-b10e-58f03773588d",
+                "min": "0",
+                "step": "0.01",
+                "calculate": {
+                  "calculateExpression": "calcBMI(height,weight)"
+                }
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Surgeon",
+              "type": "obs",
+              "id": "surgeon",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166688AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Anaesthetist",
+              "type": "obs",
+              "id": "anaesthetist",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5b444b87-23ce-4935-af33-cb95906a494c"
+              }
+            },
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Planned surgical procedure",
+              "type": "obs",
+              "id": "plannedSurgicalProcedure",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "b72301b5-c3c7-48ca-870a-f20cfa84cae7"
+              }
+            },
+            {
+              "label": "ASA status",
+              "type": "obs",
+              "id": "asaStatus",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "eb134f93-22a4-4e19-96b5-8fd206d9c632"
+              }
+            },
+            {
+              "label": "Anaesthetic technique with risk and benefit have been discussed with the patient and/or legal guardian",
+              "type": "obs",
+              "id": "anaestheticTechniqueWithRiskAndBenefitHa",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2cb605b2-7284-4153-b793-6d5d4bd0d06a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Anaesthesia apparatus checked, airway equipment's checked, medications assembled prepared for anaesthetic care",
+              "type": "obs",
+              "id": "anaesthesiaApparatusCheckedAirwayEquipme",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "12c16ef2-8d07-4110-8f46-1159f563e85a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Post OP analgesia",
+              "type": "obs",
+              "id": "postOpAnalgesia",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "be8fa23d-5060-4123-965a-00289c9fb293"
+              }
+            },
+            {
+              "label": "Status for Anesthesia",
+              "type": "obs",
+              "id": "statusForAnesthesia",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "12fd960f-294a-5ff3-b299-cfd3dc33d97c",
+                "answers": [
+                  {
+                    "concept": "057616c7-61bb-5d49-841d-505b5441b7a7",
+                    "label": "Fit for anesthesia"
+                  },
+                  {
+                    "concept": "82072f7e-5dbb-5076-a5e8-a9c90d552c95",
+                    "label": "Unfit for Anesthesia"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pre-ope vital sign",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic (mmHg)",
+              "type": "obs",
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic (mmHg)",
+              "type": "obs",
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "HR",
+              "type": "obs",
+              "id": "hr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "02187b0e-a4e4-49aa-8043-fdca00c3bc65",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "RR (breaths/min)",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temp (°C)",
+              "type": "obs",
+              "id": "temp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
+                }
+              ],
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Physical Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Denture",
+              "type": "obs",
+              "id": "denture",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "273461b4-a6a8-4aae-920c-b84bb320e212",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "SMD",
+              "type": "obs",
+              "id": "smd",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "50e15bf0-b4e8-446e-bb31-a19f2884b316"
+              }
+            },
+            {
+              "label": "TMD",
+              "type": "obs",
+              "id": "tmd",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1028a2d3-d325-40be-aacc-b4d51e348ce8"
+              }
+            },
+            {
+              "label": "Cervical spine mobility",
+              "type": "obs",
+              "id": "cervicalSpineMobility",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c8e39b38-a2d8-4e14-aefc-8862116a8246"
+              }
+            },
+            {
+              "label": "Jaw slide",
+              "type": "obs",
+              "id": "jawSlide",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6aab75f9-b8c4-42e4-bd75-d526e835c9be"
+              }
+            },
+            {
+              "label": "Mandibular movement",
+              "type": "obs",
+              "id": "mandibularMovement",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6041860a-8744-4411-86f4-1e17df777030"
+              }
+            },
+            {
+              "label": "OPV",
+              "type": "obs",
+              "id": "opv",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1199ae99-5ba9-43de-b07f-6cc01649cb90"
+              }
+            },
+            {
+              "label": "HEENT",
+              "type": "obs",
+              "id": "heent",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1122AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Respiratory system",
+              "type": "obs",
+              "id": "respiratorySystem",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "732be35c-8d82-4e8c-826b-f150729bb038"
+              }
+            },
+            {
+              "label": "Cardiovascular system",
+              "type": "obs",
+              "id": "cardiovascularSystem",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "98283469-823b-439a-b553-6451edcd6186"
+              }
+            },
+            {
+              "label": "Abdominal",
+              "type": "obs",
+              "id": "abdominal",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "160947AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Genitourinary system",
+              "type": "obs",
+              "id": "genitourinarySystem",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6f3542ac-9b52-43d9-9181-e44eb4d470fc",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Musculoskeletal system",
+              "type": "obs",
+              "id": "musculoskeletalSystem",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f6b6c6d1-3320-498c-818f-b4a8c7005f94",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Integumentary system",
+              "type": "obs",
+              "id": "integumentarySystem",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2f70147f-7961-4937-acab-204676444dff"
+              }
+            },
+            {
+              "label": "Central Nervous System",
+              "type": "obs",
+              "id": "centralNervousSystem",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "925306bd-9ce1-407f-8924-2063ec76b3b3",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Neck Stiffness",
+                    "concept": "323bb88e-58aa-42a2-8b28-dcf616b493e8"
+                  },
+                  {
+                    "label": "Brudzinski's Sign",
+                    "concept": "4b438210-4f2b-4718-958e-1ec1f57e0c4d"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No findings",
+                    "concept": "6f99b4d7-b6e7-5349-bc81-0511bc943d1a"
+                  },
+                  {
+                    "label": "Kernig Sign",
+                    "concept": "8d6a89a5-5b9f-49c8-9879-0edf5b2dffb9"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "The last oral intake",
+              "type": "obs",
+              "id": "theLastOralIntake",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7eff6f73-e2e3-47d8-9c2a-f2ad121349a8"
+              }
+            },
+            {
+              "label": "Anaesthetic diagnosis",
+              "type": "obs",
+              "id": "anaestheticDiagnosis",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "cb2d909e-7974-4700-905b-236da91bf919"
+              }
+            },
+            {
+              "label": "Anaesthesia plan",
+              "type": "obs",
+              "id": "anaesthesiaPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9a6a533a-7207-4b16-bb3c-cf7a2fbe4163"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Anesthetic Evaluation",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Obstetric and gynaecological Hx",
+              "type": "obs",
+              "id": "obstetricAndGynaecologicalHx",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d953b478-c577-48f9-ae0b-37f5db4735d4"
+              }
+            },
+            {
+              "label": "Habits",
+              "type": "obs",
+              "id": "habits",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "46ae5371-59ba-4b07-98f3-d66f3899b30b"
+              }
+            },
+            {
+              "label": "Current medication",
+              "type": "obs",
+              "id": "currentMedication",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2c3d4e5f-6e75-420f-8d9a-456789abcde6"
+              }
+            },
+            {
+              "label": "Previous anesthesia and surgical problems (if any)",
+              "type": "obs",
+              "id": "previousAnesthesiaAndSurgicalProblemsIfA",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "647e7602-e4ab-4ec5-9826-31ecc642e8ef"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Cardiovascular",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Chest pain",
+              "type": "obs",
+              "id": "chestPain",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2c8307b9-c5d2-4a6b-8769-799219c075af",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Hypertension",
+              "type": "obs",
+              "id": "hypertension",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f0063e54-fbca-47fc-8fae-2f0452d627cc",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Rheumatic fever",
+              "type": "obs",
+              "id": "rheumaticFever",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "34ab9ca4-e719-5cde-ab88-4381ec1d7631",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Heart murmur",
+              "type": "obs",
+              "id": "heartMurmur",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a7097999-bdab-4657-8057-4d24b923fe91",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Coronary artery disease",
+              "type": "obs",
+              "id": "coronaryArteryDisease",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1a9c44b9-de30-5e2a-9743-e8ee07c788a8",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Congestive heart failure",
+              "type": "obs",
+              "id": "congestiveHeartFailure",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "97e686af-ac25-5ef0-b7ef-ca13e17937ee",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Valvular disease",
+              "type": "obs",
+              "id": "valvularDisease",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "da6f15c0-8665-4d5b-a913-f7259bcf068c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e838df31-7eff-4aa3-be0d-dd0f39fbbce4"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Respiratory",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Air entry",
+              "type": "obs",
+              "id": "airEntry",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9168fd9b-2455-4cc1-9459-4c974eb6f547",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Absent",
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Decreased",
+                    "concept": "164470AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Good bilaterally",
+                    "concept": "1f4305ec-2a5b-42e8-a56d-c12311d6927e"
+                  },
+                  {
+                    "label": "Mildly decreased",
+                    "concept": "3f2f74ff-6061-40a0-bf04-401f55365285"
+                  },
+                  {
+                    "label": "Markedly decreased",
+                    "concept": "8769edca-b37a-4f6d-bbe0-fd712eab70c6"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Lung sounds",
+              "type": "obs",
+              "id": "lungSounds",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "928f0f0a-29cc-48cb-84d9-e8526d41ee41"
+              }
+            },
+            {
+              "label": "Asthma",
+              "type": "obs",
+              "id": "asthma",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8a9ca333-d21b-46a9-870c-cd967e19c90f",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "COPD",
+              "type": "obs",
+              "id": "copd",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b0aae1dd-0480-432a-bd30-888ba26aa371",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pneumonia",
+              "type": "obs",
+              "id": "pneumonia",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8757ba7c-69fe-43be-8c3c-2ddb808da9ad",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Recurrent Tuberculosis",
+              "type": "obs",
+              "id": "recurrentTuberculosis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "34d5f976-9e18-4933-8c7c-55967394a26d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Bronchitis",
+              "type": "obs",
+              "id": "bronchitis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8a09d649-1bca-512a-afc2-24f9d83db792",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Shortness of breath",
+              "type": "obs",
+              "id": "shortnessOfBreath",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cc00247f-4afb-4649-aa56-044f8e202e6d",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Productive cough",
+              "type": "obs",
+              "id": "productiveCough",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "03d551be-3202-4fdd-b9bc-9ec8b5faab32",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other",
+              "type": "obs",
+              "id": "other2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e838df31-7eff-4aa3-be0d-dd0f39fbbce4"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Endocrine",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diabetes mellitus",
+              "type": "obs",
+              "id": "diabetesMellitus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d38fcd7e-39ac-4340-8e19-7a91fc038847",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Thyroid disease",
+              "type": "obs",
+              "id": "thyroidDisease",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ba4ff2a8-f8a1-43d0-9bf8-459d5bb445da",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Others endocrine",
+              "type": "obs",
+              "id": "othersEndocrine",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ba3f8874-ec72-4dcf-914c-18f79afa490d"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Renal",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Renal failure",
+              "type": "obs",
+              "id": "renalFailure",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "826409de-ba0a-59ce-a874-351f1946b759",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Urinary tract infection",
+              "type": "obs",
+              "id": "urinaryTractInfection",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8a04cf17-2922-54dd-81b1-f5fe2908874b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Others",
+              "type": "obs",
+              "id": "others",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cc177191-2c36-4f22-89a0-9cfba86ad2fb"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Gastrointestinal",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diarrhoea",
+              "type": "obs",
+              "id": "diarrhoea",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a1b2c3d4-e5f6-7890-1234-56789abcdef0",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Reflex disease",
+              "type": "obs",
+              "id": "reflexDisease",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3cff2618-8b96-4b6e-879f-c011c3a87041",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Bowel obstruction",
+              "type": "obs",
+              "id": "bowelObstruction",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d9f0183a-d449-406c-8e9c-76e4c91002d1",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Nausea/ vomiting",
+              "type": "obs",
+              "id": "nauseaVomiting",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7f05962f-b23a-4069-9c71-735552162678",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Hepatitis cirrhosis",
+              "type": "obs",
+              "id": "hepatitisCirrhosis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "618ab93b-5819-5b59-aebc-ecfe10b58557",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Others",
+              "type": "obs",
+              "id": "others2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cc177191-2c36-4f22-89a0-9cfba86ad2fb"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Neurological",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Syncope/ fainting",
+              "type": "obs",
+              "id": "syncopeFainting",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "24e76858-bb28-4f0d-aaff-aa7ce3f062d0",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Stroke",
+              "type": "obs",
+              "id": "stroke",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7eec51f5-4899-5720-9940-49c918da3ded",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Seizure",
+              "type": "obs",
+              "id": "seizure",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7f0246b5-1d1d-4d59-b567-88eae46701ef",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Neuromuscular disease",
+              "type": "obs",
+              "id": "neuromuscularDisease",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d358bfb1-0676-469b-8461-5a706118444a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Muscle weakness",
+              "type": "obs",
+              "id": "muscleWeakness",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "47dc9de7-02e2-4af5-b97b-0668d7ed1cfe",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Others",
+              "type": "obs",
+              "id": "others3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cc177191-2c36-4f22-89a0-9cfba86ad2fb"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

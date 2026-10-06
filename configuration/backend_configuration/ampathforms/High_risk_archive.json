@@ -1,0 +1,576 @@
+{
+  "name": "High Risk Archive",
+  "description": "High risk archive - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "699afe95-e112-57f1-8dfb-a936929d3aca",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "High Risk Archive Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5bbbe370-d3ff-4526-a63b-df5c579ca30c"
+              }
+            },
+            {
+              "label": "Gravida",
+              "type": "obs",
+              "id": "gravida",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5624AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Para",
+              "type": "obs",
+              "id": "para",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ce38ecf3-10ca-4227-bb48-5db53e9588cd"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Abortion",
+              "type": "obs",
+              "id": "abortion",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "775f3a78-1c78-40af-84cd-4ca7f4a7d7aa"
+              }
+            },
+            {
+              "label": "LNMP",
+              "type": "obs",
+              "id": "lnmp",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "af229755-0bee-4bb8-975a-7bacd689e388"
+              }
+            },
+            {
+              "label": "EDD",
+              "type": "obs",
+              "id": "edd",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "2b592c8a-f68c-47a1-a5ab-3087bd13ace5"
+              }
+            },
+            {
+              "label": "Gestational age",
+              "type": "obs",
+              "id": "gestationalAge",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7425364e-5869-7890-4567-123456789012",
+                "answers": [
+                  {
+                    "label": "Early Preterm GA 32-34 weeks",
+                    "concept": "0758697b-8192-0123-7890-456789012345"
+                  },
+                  {
+                    "label": "Late Preterm GA 34-36 weeks",
+                    "concept": "1869708c-9203-1234-8901-567890123456"
+                  },
+                  {
+                    "label": "Post Term GA >41+7 wk",
+                    "concept": "441b88ad-1d3b-4c63-b1ca-331eaa1a4146"
+                  },
+                  {
+                    "label": "Term GA = 37 weeks",
+                    "concept": "48fe3fc7-fcd1-400f-93e0-a82926e8b52e"
+                  },
+                  {
+                    "label": "Extremely Preterm GA less than 28 weeks",
+                    "concept": "8536475f-6970-8901-5678-234567890123"
+                  },
+                  {
+                    "label": "Very Preterm GA <32 weeks",
+                    "concept": "bd150567-807b-5a12-a054-df46394e1d31"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Bad obs history",
+              "type": "obs",
+              "id": "badObsHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4459a73b-3959-4a33-ac8b-c6fd13c181ab"
+              }
+            },
+            {
+              "label": "Mode of delivery",
+              "type": "obs",
+              "id": "modeOfDelivery",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2392bb08-2801-4f3e-a59b-f9589d2e7422",
+                "answers": [
+                  {
+                    "label": "Spontaneous vaginal delivery",
+                    "concept": "1170AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Cesarean section",
+                    "concept": "1171AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Operative Vaginal",
+                    "concept": "8757065d-f074-48bc-b10a-8ab26ec21892"
+                  },
+                  {
+                    "label": "Caesarean section",
+                    "concept": "9ac3d994-fc0a-5541-90ca-ac537f98e976"
+                  },
+                  {
+                    "label": "Vacuum",
+                    "concept": "b7b07c42-7251-4dc3-b10b-82e9fb17e5bd"
+                  },
+                  {
+                    "label": "Spontaneous Vaginal",
+                    "concept": "dcf88ce9-74e9-4c6c-a2ff-d189136699d6"
+                  },
+                  {
+                    "label": "Forceps",
+                    "concept": "dd55a56d-315f-47d4-aba4-e430533cccb8"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Past or present medical or surgical illness",
+              "type": "obs",
+              "id": "pastOrPresentMedicalOrSurgicalIllness",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a9024585-a9c3-4ff9-bffa-cdba9c634e3b"
+              }
+            },
+            {
+              "label": "Hx of drugs taken",
+              "type": "obs",
+              "id": "hxOfDrugsTaken",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4f0527da-a823-5f52-a838-8e572728ec71"
+              }
+            },
+            {
+              "label": "Last diagnosis notes",
+              "type": "obs",
+              "id": "lastdiagnosisNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "159395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Vitals",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date and Time",
+              "type": "obs",
+              "id": "dateAndTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Systolic (mmHg)",
+              "type": "obs",
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic (mmHg)",
+              "type": "obs",
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Posture",
+              "type": "obs",
+              "id": "posture",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e11356eb-df27-4dfd-8b6b-8c066bb2afd5",
+                "answers": [
+                  {
+                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sitting"
+                  },
+                  {
+                    "concept": "92709344-75b1-4093-a1b8-6d0bd998df7e",
+                    "label": "Supine"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pulse rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory Rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SPO2",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "min": "0",
+                "step": "0.01"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pain Score",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2597367c-e4c8-4327-9fcf-08fcada95ad1",
+                "answers": [
+                  {
+                    "concept": "34c1bdbf-f678-4522-98c0-eddb360ad32f",
+                    "label": "No Pain(0)"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild (1-3)"
+                  },
+                  {
+                    "concept": "162822AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate to Sever (4-6)"
+                  },
+                  {
+                    "concept": "159409AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Very Sever (7-9)"
+                  },
+                  {
+                    "concept": "07d1ccf4-afcd-4e4b-b329-e68b900968eb",
+                    "label": "Worst possible pain (10)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Anti pain given?",
+              "type": "obs",
+              "id": "antiPainGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "649de9d2-6718-5dec-9382-5c7f33cabcd4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "RBS(mg/dl)",
+              "type": "obs",
+              "id": "rbsMgDl",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "887aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Vital Abnormality",
+              "type": "obs",
+              "id": "vitalAbnormality",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "866e8afd-e4fa-5700-bd78-75af8080e980",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Risk factor if identified",
+              "type": "obs",
+              "id": "riskFactorIfIdentified",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4a82e10b-b119-4d1e-9572-7f9e9b27b48d"
+              }
+            },
+            {
+              "label": "Iron/FA",
+              "type": "obs",
+              "id": "ironFa",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a5cfae19-0a6c-4dc8-863d-e2780b3d1a03"
+              }
+            },
+            {
+              "label": "Td vaccination",
+              "type": "obs",
+              "id": "tdVaccination",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f6a7b8c9-d0e1-4f2a-3b45-c6d7e8f9a0b1",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Baseline routine investigation",
+              "type": "obs",
+              "id": "baselineRoutineInvestigation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f972995e-59ab-4942-80b9-64684e378e82"
+              }
+            },
+            {
+              "label": "Last VisitDate",
+              "type": "obs",
+              "id": "lastVisitdate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "12d9b04e-17bf-4c20-a940-83eedb4f3037"
+              }
+            },
+            {
+              "label": "Last diagnosis",
+              "type": "obs",
+              "id": "lastDiagnosis",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Current Medication",
+              "type": "obs",
+              "id": "currentMedication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2c3d4e5f-6e75-420f-8d9a-456789abcde6"
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

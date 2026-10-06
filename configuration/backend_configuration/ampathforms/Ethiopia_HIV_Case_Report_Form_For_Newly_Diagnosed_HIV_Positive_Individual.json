@@ -1,0 +1,533 @@
+{
+  "name": "Ethiopia HIV Case Report Form For Newly Diagnosed HIV Positive Individual",
+  "description": "Ethiopia HIV Case Report Form For Newly Diagnosed HIV Positive Individual - built from physician Word-doc spec (Phase 1, batch-three).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "e15769c5-c716-59de-bfbf-462ef378aba8",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Ethiopia HIV Case Report Form For Newly Diagnosed HIV Positive Individual Assessment",
+      "sections": [
+        {
+          "label": "Facility Information (from facility/health ID where possible)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Facility name",
+              "type": "obs",
+              "id": "facilityName",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "162724AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Facility Code",
+              "type": "obs",
+              "id": "facilityCode",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a600daec-625d-4c23-8b70-9d450af70719"
+              }
+            },
+            {
+              "label": "Point of HIV testing service where the case was diagnosed",
+              "type": "obs",
+              "id": "pointOfHivTestingServiceWhereTheCaseWasD",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c77f2cf7-781b-4110-b0b5-b9e88402e371",
+                "answers": [
+                  {
+                    "concept": "160539AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "VCT"
+                  },
+                  {
+                    "concept": "d8176d1b-1234-11ee-be56-0242ac120004",
+                    "label": "ART"
+                  },
+                  {
+                    "concept": "d8176d1b-1234-11ee-be56-0242ac120005",
+                    "label": "ANC"
+                  },
+                  {
+                    "concept": "ee46cca8-e4f5-42d8-8658-a5efa79e1ac5",
+                    "label": "L&D"
+                  },
+                  {
+                    "concept": "cc5b609b-5b85-5a15-8f41-91524e615cde",
+                    "label": "TB Clinic"
+                  },
+                  {
+                    "concept": "011261ba-c0b5-481e-a2ce-b77bce672204",
+                    "label": "VMMC"
+                  },
+                  {
+                    "concept": "32d9bb0d-ce32-4ac3-b65e-85832fe905bb",
+                    "label": "OPD"
+                  },
+                  {
+                    "concept": "c3bc207b-519f-4024-944a-1bc716a6664b",
+                    "label": "Under-five OPD"
+                  },
+                  {
+                    "concept": "167050AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "IPD"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If other specify",
+              "type": "obs",
+              "id": "ifOtherSpecify",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(pointOfHivTestingServiceWhereTheCaseWasD) || pointOfHivTestingServiceWhereTheCaseWasD !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Other HTS only HF",
+              "type": "obs",
+              "id": "otherHtsOnlyHf",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4f44f165-be08-4bce-9f9c-4780448e10c4",
+                "answers": [
+                  {
+                    "concept": "c0214740-997f-4444-b1ab-09bd7c17f1bc",
+                    "label": "Public"
+                  },
+                  {
+                    "concept": "07504b56-383b-4a1b-bc03-43c6958a0bb3",
+                    "label": "Private"
+                  },
+                  {
+                    "concept": "37a1112a-eb5d-44f2-9896-1ee88d1619af",
+                    "label": "Community DIC"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Index Testing",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Is this client a contact of a known HIV positive person (index case)?",
+              "type": "obs",
+              "id": "isThisClientAContactOfAKnownHivPositiveP",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "bebb7a6d-9a73-46c9-b0da-2a8efc195eba",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Not available (if client aged <5 years & identified through PMTCT, Unique ART # of biological mother should be used)",
+              "type": "obs",
+              "id": "notAvailableIfClientAged5YearsIdentified",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d6fadb70-9bd2-49d5-8052-fb2a89021145",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Current Residence",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Region / City Administration",
+              "type": "obs",
+              "id": "regionCityAdministration",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "36788990-0112-8904-2348-012345f01234"
+              }
+            },
+            {
+              "label": "Zone",
+              "type": "obs",
+              "id": "zone",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "47899001-1223-9015-3459-12345f012345"
+              }
+            },
+            {
+              "label": "Woreda / S.Woreda",
+              "type": "obs",
+              "id": "woredaSWoreda",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "25677889-9001-7893-1237-9012345f0123"
+              }
+            },
+            {
+              "label": "Town / Sub City",
+              "type": "obs",
+              "id": "townSubCity",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "031071ac-24ff-582e-862e-ad4ddbd83e8c"
+              }
+            },
+            {
+              "label": "Kebele",
+              "type": "obs",
+              "id": "kebele",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1e5f6071-8293-0123-4567-890123abcde4"
+              }
+            },
+            {
+              "label": "If other specify",
+              "type": "obs",
+              "id": "ifOtherSpecify2",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Permanent Residence (if different from current)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Region / City Administration",
+              "type": "obs",
+              "id": "permRegionCityAdministration",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "36788990-0112-8904-2348-012345f01234"
+              }
+            },
+            {
+              "label": "Zone",
+              "type": "obs",
+              "id": "permZone",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "47899001-1223-9015-3459-12345f012345"
+              }
+            },
+            {
+              "label": "Woreda / S.Woreda",
+              "type": "obs",
+              "id": "permWoredaSWoreda",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "25677889-9001-7893-1237-9012345f0123"
+              }
+            },
+            {
+              "label": "Town / Sub City",
+              "type": "obs",
+              "id": "permTownSubCity",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "031071ac-24ff-582e-862e-ad4ddbd83e8c"
+              }
+            },
+            {
+              "label": "Kebele",
+              "type": "obs",
+              "id": "permKebele",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "1e5f6071-8293-0123-4567-890123abcde4"
+              }
+            },
+            {
+              "label": "If other specify",
+              "type": "obs",
+              "id": "permIfOtherSpecify",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Social",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Residence",
+              "type": "obs",
+              "id": "residence",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cc7dc22b-ec08-4aed-bbc2-7547237addb0",
+                "answers": [
+                  {
+                    "concept": "981402d5-a96d-4bc1-a336-012451b79b9b",
+                    "label": "Rural"
+                  },
+                  {
+                    "concept": "b9630673-92cc-4a80-9804-0678aa2b6e75",
+                    "label": "Urban"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Type of current residence",
+              "type": "obs",
+              "id": "typeOfCurrentResidence",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1933ab3e-f9bd-47b1-97df-01af33adcc2f",
+                "answers": [
+                  {
+                    "concept": "ecf455e9-b4f8-4cf7-8fab-5307a46a4cc4",
+                    "label": "House / apartment / flat"
+                  },
+                  {
+                    "concept": "162277AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Prison"
+                  },
+                  {
+                    "concept": "163468AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Homeless"
+                  },
+                  {
+                    "concept": "bab65ef2-f6ac-4bca-9480-3cbbffeddfd9",
+                    "label": "Shelter"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Occupation",
+              "type": "obs",
+              "id": "occupation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b37c797c-8b51-4a61-9ab7-cf40792d0bdf"
+              }
+            },
+            {
+              "label": "If other specify",
+              "type": "obs",
+              "id": "ifOtherSpecify3",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(typeOfCurrentResidence) || typeOfCurrentResidence !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Marital Status",
+              "type": "obs",
+              "id": "maritalStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1054aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "answers": [
+                  {
+                    "concept": "1057AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Never Married"
+                  },
+                  {
+                    "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Married"
+                  },
+                  {
+                    "concept": "6f4e7a3f-55ef-4da0-b07d-bdead49528b8",
+                    "label": "Living together"
+                  },
+                  {
+                    "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Widowed"
+                  },
+                  {
+                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Divorced"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Education",
+              "type": "obs",
+              "id": "education",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cc27a91e-c4a8-44ad-b2ed-25219216dfbb",
+                "answers": [
+                  {
+                    "concept": "160294AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No formal education"
+                  },
+                  {
+                    "concept": "159943AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Primary"
+                  },
+                  {
+                    "concept": "159944AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Secondary"
+                  },
+                  {
+                    "concept": "117e1fc7-06ba-4512-a6b2-4ec52fc6db64",
+                    "label": "Higher"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Assessment for Potential Risk of Acquiring HIV",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "In the last 12 months, have you had sex?",
+              "type": "obs",
+              "id": "inTheLast12MonthsHaveYouHadSex",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "099d11aa-ddee-48ff-9038-fe5e9161c7a0",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "6f61ba35-b14c-43d7-b9e2-7b97d3e66d78",
+                    "label": "Refuse"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "In the last 12 months, was selling sex ever your main weekly or monthly source of income?",
+              "type": "obs",
+              "id": "inTheLast12MonthsWasSellingSexEverYourMa",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "11fa2562-69a1-47c3-b379-6bceca1f18ef",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "6f61ba35-b14c-43d7-b9e2-7b97d3e66d78",
+                    "label": "Refuse"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

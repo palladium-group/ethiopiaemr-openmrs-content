@@ -1,0 +1,240 @@
+{
+  "name": "St. Peter Specialized Hospital Operation Note",
+  "description": "St. Peter Specialized Hospital Operation Note - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "ae7729bb-6b6a-50ef-b3f3-0e7df4ef37d7",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "St. Peter Specialized Hospital Operation Note Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Where was the procedure performed",
+              "type": "obs",
+              "id": "whereWasTheProcedurePerformed",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e8520c8c-df43-48fa-8de0-b41d847cb71c",
+                "answers": [
+                  {
+                    "concept": "3a86dff4-1211-4ad5-9083-dcaff4735de9",
+                    "label": "Major OR"
+                  },
+                  {
+                    "concept": "d8176d1b-1234-11ee-be56-0242ac120017",
+                    "label": "Minor OR"
+                  },
+                  {
+                    "concept": "c730040b-2059-4c67-8d7a-ebc092613824",
+                    "label": "MCH Or"
+                  },
+                  {
+                    "concept": "33a66c15-412d-47ed-b173-d1dce299fcd0",
+                    "label": "Emergency OR"
+                  },
+                  {
+                    "concept": "df6fe669-2cd6-40fc-9117-f7701274a172",
+                    "label": "Dental minor OR"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Procedure urgency OR",
+              "type": "obs",
+              "id": "procedureUrgencyOr",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "cd509a7d-fd4f-4d6d-9f9d-94963cc76dcc",
+                "answers": [
+                  {
+                    "concept": "c244377a-0292-45dd-9f8b-1efdee595396",
+                    "label": "Emergency procedure"
+                  },
+                  {
+                    "concept": "3ddd94d3-adea-49ce-9b4f-1e30f797ed83",
+                    "label": "Elective Procedure"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Surgeon Name",
+              "type": "obs",
+              "id": "surgeonName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166688AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Assistant",
+              "type": "obs",
+              "id": "assistant",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b33fd6a8-6bd1-415f-94f7-a3d02306be2a"
+              }
+            },
+            {
+              "label": "Anesthetist",
+              "type": "obs",
+              "id": "anesthetist",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4ee56c04-eaa8-425a-8a08-d61feef5dc6c"
+              }
+            },
+            {
+              "label": "Type of anesthesia",
+              "type": "obs",
+              "id": "typeOfAnsthesia",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "164254AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "161914AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Local Anesthesia"
+                  },
+                  {
+                    "concept": "161909AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "General Anesthesia"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Scrub",
+              "type": "obs",
+              "id": "scrub",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "abbe043e-6587-4790-83ab-dc7270f069e2"
+              }
+            },
+            {
+              "label": "Runner/Circulating nurse",
+              "type": "obs",
+              "id": "runnerCirculatingNurse",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166691AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Post op diagnosis",
+              "type": "obs",
+              "id": "postOpDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3f9a0119-f572-4e7a-b2da-7a0675fb2cea"
+              }
+            },
+            {
+              "label": "Estimated blood loss",
+              "type": "obs",
+              "id": "estimatedBloodLoss",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161928AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Type of procedure",
+              "type": "obs",
+              "id": "typeOfProcedure",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b402ebd1-d6f7-542d-8bf5-63c5139ae47c"
+              }
+            },
+            {
+              "label": "Description of procedure",
+              "type": "obs",
+              "id": "descriptionOfProcedure",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f85821bb-f00c-48c8-87fa-9d4974e488a4"
+              }
+            },
+            {
+              "label": "Type of skin incision",
+              "type": "obs",
+              "id": "typeOfSkinIncision",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1d00544f-e5ae-4015-a5ee-548b6ba32534"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

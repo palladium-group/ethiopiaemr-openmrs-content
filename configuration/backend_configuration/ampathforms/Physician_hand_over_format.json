@@ -1,0 +1,236 @@
+{
+  "name": "Physician Handover Format",
+  "description": "Physician hand over format - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "ee834b8d-29e3-5ee1-9521-4d6a67d3a7a2",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Physician Handover Format Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date and Time",
+              "type": "obs",
+              "id": "dateAndTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Problem",
+              "type": "obs",
+              "id": "problem",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9b7db72e-b14a-4a0b-aa39-1e2547db8c5e"
+              }
+            },
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Diagnosis notes",
+              "type": "obs",
+              "id": "diagnosisNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "159395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Patient Condition",
+              "type": "obs",
+              "id": "patientCondition",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7fc2a8d1-4e3b-4c9f-8a2d-6b1e9f3c5d70",
+                "answers": [
+                  {
+                    "label": "Patient ambulatory",
+                    "concept": "160026AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Stable post-procedure",
+                    "concept": "8a3b9e2c-5f4a-4d8e-9b3c-7c2f0ae4d681"
+                  },
+                  {
+                    "label": "Extubated operative condition",
+                    "concept": "9b4caf3d-6a5b-4e9f-ac4d-8d3a1bf5e792"
+                  },
+                  {
+                    "label": "Acute (finding)",
+                    "concept": "394be007-6670-457a-a4cf-857cfcaf9658"
+                  },
+                  {
+                    "label": "Transferred to recovery room",
+                    "concept": "ac5db14e-7b6c-4faf-bd5e-9e4b2c06f813"
+                  },
+                  {
+                    "label": "Chronic (finding)",
+                    "concept": "a296b630-0f98-4eb8-9e2e-316502967da0"
+                  },
+                  {
+                    "label": "Ambulatory",
+                    "concept": "bb2c3d4e-5f60-7890-1234-56789abcdef0"
+                  },
+                  {
+                    "label": "Death on operating table",
+                    "concept": "bd6ec25f-8c7d-50b0-ce6f-af5c3d17a924"
+                  },
+                  {
+                    "label": "Patient Non-Ambulatory",
+                    "concept": "cc3d4e5f-6071-8901-2345-6789abcdef01"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Investigation plan",
+              "type": "obs",
+              "id": "investgationPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4182536d-1526-3456-7890-123456abcd1b"
+              }
+            },
+            {
+              "label": "Management plan",
+              "type": "obs",
+              "id": "managementPlan",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "df305b1a-cc5a-4db9-9a43-215355259350",
+                "answers": [
+                  {
+                    "label": "Counseling",
+                    "concept": "7a8169e4-9060-4a1d-aa33-116629ddd4c8"
+                  },
+                  {
+                    "label": "Treat Comorbid Conditions",
+                    "concept": "82cb6878-c557-43c8-90c5-4801b57b7e1b"
+                  },
+                  {
+                    "label": "Continue Follow-up",
+                    "concept": "ade6426d-68e8-45c7-9ff8-f9b1d38c3c30"
+                  },
+                  {
+                    "label": "Referral",
+                    "concept": "ba49c378-aa2e-449f-81c4-75409e1ec20a"
+                  },
+                  {
+                    "label": "Linkage",
+                    "concept": "bb5469e7-bff0-4b0f-a147-ac6652d93d22"
+                  },
+                  {
+                    "label": "Medication Adjustment",
+                    "concept": "c73f265f-bff4-4363-a074-3f8c1a654ce3"
+                  },
+                  {
+                    "label": "Admit (Admission Required)",
+                    "concept": "f23f2168-503f-4ae7-8eb0-061a3a5e4294"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Transfer from",
+              "type": "obs",
+              "id": "transferFrom",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "62c46a3f-12df-487a-9b3d-8e07c464e4f5"
+              }
+            },
+            {
+              "label": "Transferred to",
+              "type": "obs",
+              "id": "transferredTo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "159495AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

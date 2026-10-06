@@ -1,0 +1,196 @@
+{
+  "name": "Immediate PPFP",
+  "description": "Immediate PPFP - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "e4597606-b471-5004-bef7-2ad185205e99",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Immediate PPFP Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Method's Method chosen",
+              "type": "obs",
+              "id": "methodSChoosed",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "0869cdc6-ca91-4abf-b345-62d8d578d494",
+                    "label": "Implanol"
+                  },
+                  {
+                    "concept": "1873AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Jadelle"
+                  },
+                  {
+                    "concept": "5275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Iucd"
+                  },
+                  {
+                    "concept": "4971f072-f402-4431-a790-14571dc687cd",
+                    "label": "POP"
+                  },
+                  {
+                    "concept": "301b1b09-d886-4857-a695-a1ae0b811188",
+                    "label": "Depo-Provera"
+                  },
+                  {
+                    "concept": "a050b5a9-aece-49f7-9b4a-583cf85641d0",
+                    "label": "Tube ligation"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Acceptor",
+              "type": "obs",
+              "id": "acceptor",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a6d8753d-c721-4b9d-bf13-eb9a00d9aec4",
+                "answers": [
+                  {
+                    "concept": "e3ee2c42-0876-4e38-a2ce-e4bc8ed77057",
+                    "label": "New"
+                  },
+                  {
+                    "concept": "162081AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Repeat"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date of insertion",
+              "type": "obs",
+              "id": "dateOfInsertion",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "16e4f22a-3e7c-4ca0-a566-2d5cc064a33c"
+              }
+            },
+            {
+              "label": "Date of removal",
+              "type": "obs",
+              "id": "dateOfRemoval",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "150ed745-790c-4351-8768-4d1bdb5e1012"
+              }
+            },
+            {
+              "label": "Site",
+              "type": "obs",
+              "id": "site",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9ce112d5-e4ed-4050-8409-ba3b35a22615",
+                "answers": [
+                  {
+                    "concept": "b7ff7a6b-6dd0-411e-a160-68ece7ddd895",
+                    "label": "Right"
+                  },
+                  {
+                    "concept": "1440a839-b8a9-403c-8e68-74e046329c8f",
+                    "label": "Left"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Batch number",
+              "type": "obs",
+              "id": "batchNumber",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2de2861b-7a8b-4139-82a2-8dc8db4d6abd"
+              }
+            },
+            {
+              "label": "Expired date",
+              "type": "obs",
+              "id": "expiredDate",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8045889d-9564-4c7a-8afd-54ebfbc21c4f"
+              }
+            },
+            {
+              "label": "New appointment",
+              "type": "obs",
+              "id": "newAppointment",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "25db5489-c63c-48f8-a0ba-4f484884a061"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

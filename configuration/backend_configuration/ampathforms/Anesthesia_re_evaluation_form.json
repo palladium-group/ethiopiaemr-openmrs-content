@@ -1,0 +1,329 @@
+{
+  "name": "Anesthesia Re-evaluation Form",
+  "description": "Anesthesia re-evaluation form - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "b794c21f-d080-5e1f-8cd1-39edec8851ec",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Anesthesia Re-evaluation Form Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Procedure Note",
+              "type": "obs",
+              "id": "procedureNote",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "aaf6dcbf-83c8-5cb7-9dd1-f7c8aa6749b2"
+              }
+            },
+            {
+              "label": "New Pertinent Finding On History",
+              "type": "obs",
+              "id": "newPertinentFindingOnHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "fa2efd18-f5b0-4917-aef6-4594496ffcb3"
+              }
+            },
+            {
+              "label": "Asa Classification",
+              "type": "obs",
+              "id": "asaClassification",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ce349b9d-d574-5b5d-bdc9-308ac3a33566",
+                "answers": [
+                  {
+                    "concept": "2192bceb-2c89-45a7-88d4-e379e9014acd",
+                    "label": "1"
+                  },
+                  {
+                    "concept": "2f3f0dbe-6266-4162-b319-13a70851b52e",
+                    "label": "2"
+                  },
+                  {
+                    "concept": "112cb702-94e3-48f8-bea7-bb69728fa339",
+                    "label": "3"
+                  },
+                  {
+                    "concept": "b55c244e-84e0-40d4-af61-f882213ac321",
+                    "label": "4"
+                  },
+                  {
+                    "concept": "7f8c744d-0c49-4ba7-9077-b2d14a53e743",
+                    "label": "5"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Status for Anesthesia",
+              "type": "obs",
+              "id": "statusForAnesthesia",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "12fd960f-294a-5ff3-b299-cfd3dc33d97c",
+                "answers": [
+                  {
+                    "concept": "057616c7-61bb-5d49-841d-505b5441b7a7",
+                    "label": "Fit for anesthesia"
+                  },
+                  {
+                    "concept": "82072f7e-5dbb-5076-a5e8-a9c90d552c95",
+                    "label": "Unfit for Anesthesia"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Anesthesia Plan",
+              "type": "obs",
+              "id": "anesthesiaPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ec50fcc5-2397-45fb-8a02-d31200b0379a"
+              }
+            },
+            {
+              "label": "Preoperative Order",
+              "type": "obs",
+              "id": "preoperativeOrder",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b11e4861-6e8a-40bf-946f-8f27ee4749e7"
+              }
+            },
+            {
+              "label": "Perioperative Concern",
+              "type": "obs",
+              "id": "perioperativeConcern",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "10971f8d-0e39-4735-8582-faddbd332170"
+              }
+            }
+          ]
+        },
+        {
+          "label": "V/S..",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic BP (mmHg)",
+              "type": "obs",
+              "id": "systolicBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic BP (mmHg)",
+              "type": "obs",
+              "id": "diastolicBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "RR (breaths/min)",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Physical Examination ..",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HEENT",
+              "type": "obs",
+              "id": "heent",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1122AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Respiratory system",
+              "type": "obs",
+              "id": "respiratorySystem",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "732be35c-8d82-4e8c-826b-f150729bb038"
+              }
+            },
+            {
+              "label": "Cardiovascular system",
+              "type": "obs",
+              "id": "cardiovascularSystem",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "98283469-823b-439a-b553-6451edcd6186"
+              }
+            },
+            {
+              "label": "New Laboratory Results",
+              "type": "obs",
+              "id": "newLaboratoryResults",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f2933ba7-db68-5578-ba22-dd974c64e3e8"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

@@ -1,0 +1,595 @@
+{
+  "name": "DM and HTN Followup Form",
+  "description": "DM and HTN Followup Form - built from the St-Petros (Bahmni) form. Abnormal toggles replaced by soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "ca924f1a-2ac3-55cf-8de0-b2d2ef812037",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "DM & HTN Followup",
+      "sections": [
+        {
+          "label": "Diagnoses & Comorbidities",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Type of DM",
+              "type": "obs",
+              "id": "typeOfDm",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "aae47033-ccf2-4f77-990b-3a36a41e186f",
+                "answers": [
+                  {
+                    "concept": "a64e480c-6dfe-4156-b21d-869e24b6fda9",
+                    "label": "Type 1"
+                  },
+                  {
+                    "concept": "07d39669-21d9-4576-b7cc-b874000623a7",
+                    "label": "Type 2"
+                  },
+                  {
+                    "concept": "640e3de9-f1c2-4555-9137-63ed880e76d9",
+                    "label": "Gestational(GDM)"
+                  },
+                  {
+                    "concept": "a97609b3-05f1-428c-901a-11a1c25992d2",
+                    "label": "MODY/Other Secondaries"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "DM Complications",
+              "type": "obs",
+              "id": "dmComplications",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "fef4e6a0-9d6d-4429-957c-b76f6f2a2422",
+                "answers": [
+                  {
+                    "concept": "142429AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Diabetic Retinopathy"
+                  },
+                  {
+                    "concept": "73870006-2955-4535-a0da-e0c3ece1c211",
+                    "label": "Diabetic Neuropathy"
+                  },
+                  {
+                    "concept": "17e9247b-e0e3-5382-b607-00d3022ff126",
+                    "label": "Diabetic Nephropathy"
+                  },
+                  {
+                    "concept": "c123fb6e-74ec-435d-8a2b-23e8cf250be5",
+                    "label": "Macrovascular"
+                  },
+                  {
+                    "concept": "142451AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Diabetic Foot Ulcer"
+                  },
+                  {
+                    "concept": "119441AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "DKA (Diabetic Ketoacidosis) Ketoacidosis)"
+                  },
+                  {
+                    "concept": "7e810365-fd87-455e-aa1d-98f1a4364656",
+                    "label": "HHS (Hyperosmolar Hyperglycemic State)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Comorbidity",
+              "type": "obs",
+              "id": "comorbidity",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166104AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Type of HTN",
+              "type": "obs",
+              "id": "typeOfHtn",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "eb9a7a43-87fe-4cc0-9f8b-fc6e503c11aa",
+                "answers": [
+                  {
+                    "concept": "fa5d6103-384b-433f-8080-dbfc48117844",
+                    "label": "Essential(Primary)"
+                  },
+                  {
+                    "concept": "159944AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Secondary"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Grade",
+              "type": "obs",
+              "id": "grade",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3107d488-b179-4d6d-844a-1a52082ac64e",
+                "answers": [
+                  {
+                    "concept": "97108371-817e-407b-9b4e-c8d34fdeba84",
+                    "label": "Grade 1-1"
+                  },
+                  {
+                    "concept": "166988AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Grade-2"
+                  },
+                  {
+                    "concept": "166989AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Grade-3"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HTN Complication",
+              "type": "obs",
+              "id": "htnComplication",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "b18979b2-a57a-4051-b491-a14a8bd658b8",
+                "answers": [
+                  {
+                    "concept": "145438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "CKD(Chronic Kidney Disease)"
+                  },
+                  {
+                    "concept": "28e5b250-ed09-4fbb-850c-98d8974af86e",
+                    "label": "TIA/Stroke"
+                  },
+                  {
+                    "concept": "bfd59727-e349-447e-988e-fbdd3e7a44a7",
+                    "label": "HHD"
+                  },
+                  {
+                    "concept": "162369AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "PAD"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other Chronic illness",
+              "type": "obs",
+              "id": "otherChronicIllness",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7234d633-24b7-4772-91ff-f415c0e096ad"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Medication Adherence",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Did you miss any dose of your medication in the past?",
+              "type": "obs",
+              "id": "didYouMissAnyDoseOfYourMedicationInThePa",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "29d2baac-41a7-463b-a0f6-fce3dfef979f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Do you take your medication at the same time every day as prescribed?",
+              "type": "obs",
+              "id": "doYouTakeYourMedicationAtTheSameTimeEver",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0b44fcb6-9f4d-40a8-bd6f-86a73114169e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Do you sometimes stop taking your medication when you feel better or worse?",
+              "type": "obs",
+              "id": "doYouSometimesStopTakingYourMedicationWh",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "45ef36bb-4b9e-4500-8c24-3350068d21cb",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Medication Adherence",
+              "type": "obs",
+              "id": "medicationAdherence",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6b6a3970-32d5-4f43-bf6e-fc506efdd969",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Current Status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Current Symptoms",
+              "type": "obs",
+              "id": "currentSymptoms",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "59b5391d-344e-4200-87b1-183146c0b53a"
+              }
+            },
+            {
+              "label": "Recent Risk Factors",
+              "type": "obs",
+              "id": "recentRiskFactors",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "be2f1cfa-ea7a-4e5d-95d6-87a3ff86d61c",
+                "answers": [
+                  {
+                    "concept": "ccb7ba8d-9770-5288-9702-a443c16c7a1a",
+                    "label": "Tobacco Use"
+                  },
+                  {
+                    "concept": "be718345-cadc-5879-86f4-f1479c34973e",
+                    "label": "Physical Inactivity"
+                  },
+                  {
+                    "concept": "df7a4dbc-e6e8-436e-b00b-1a5af68edba3",
+                    "label": "Excessive Alcohol Consumption"
+                  },
+                  {
+                    "concept": "48689848-45fc-4ae7-b76f-1dffb0342f88",
+                    "label": "Poor Dietary Adherence"
+                  },
+                  {
+                    "concept": "cf8f750f-9797-42d8-898c-ae2af22f8140",
+                    "label": "Khat Chewing"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Are You Pregnant?",
+              "type": "obs",
+              "id": "areYouPregnant",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f3bbc062-adaf-4404-96c2-d67576e6136f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Are you planning to conceive recently?",
+              "type": "obs",
+              "id": "areYouPlanningToConceiveRecently",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "278894fc-8440-4556-a980-e0e39c1b069d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Vital Signs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic Blood Pressure (mmHg)",
+              "type": "obs",
+              "id": "systolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Systolic blood pressure is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic Blood Pressure (mmHg)",
+              "type": "obs",
+              "id": "diastolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Diastolic blood pressure is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse Rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse-Volume",
+              "type": "obs",
+              "id": "pulseVolume",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "bc45acaa-11c5-4e0e-8060-2e28cf11e6fc",
+                "answers": [
+                  {
+                    "concept": "9f0f09c7-7e54-4b3e-8c9f-d1eed1c67480",
+                    "label": "Non-palpable"
+                  },
+                  {
+                    "concept": "a6607d63-12b0-420c-bca3-92ba9598be82",
+                    "label": "Feeble/Weak"
+                  },
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pulse Rhythm",
+              "type": "obs",
+              "id": "pulseRythm",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d5f88633-71f9-48e2-9618-4c7dab53f73d",
+                "answers": [
+                  {
+                    "concept": "22e3978c-aace-418f-aa8d-5aa9c2cf0f24",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "1febdf09-d7d9-4c40-80e0-5b57de967738",
+                    "label": "Regularly-Irregular"
+                  },
+                  {
+                    "concept": "66e60dad-b89b-45ed-948f-66dec904cfd9",
+                    "label": "Irregularly-Irregular"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Anthropometry",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "BMI Z-Score",
+              "type": "obs",
+              "id": "bmiZScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c1d3da47-2013-5101-a3fc-8770b35ba32a",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight)) ? '' : ((calcBMIForAgeZscore(Number(height),Number(weight)) == null) ? '' : Number(calcBMIForAgeZscore(Number(height),Number(weight))))"
+                }
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Waist circumference(cm)",
+              "type": "obs",
+              "id": "waistCircumferenceCm",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "163080AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Oral/Dental",
+              "type": "obs",
+              "id": "oralDental",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "42c2e20a-d235-42cb-b3cf-5eca1ac65946",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

@@ -1,0 +1,264 @@
+{
+  "name": "Peri Operative Mortality (to be filled if death occurs within 30 days of operation)",
+  "description": "Peri Operative Mortality (to be filled if death occurs within 30 days of operation) - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "93e4a15c-7b62-582a-9ff7-7e7099db80f5",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Peri Operative Mortality (to be filled if death occurs within 30 days of operation) Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name",
+              "type": "obs",
+              "id": "name",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Age",
+              "type": "obs",
+              "id": "age",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "15d60d87-49e3-4f9f-8474-801250d83b3b",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Sex",
+              "type": "obs",
+              "id": "sex",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3071a2b3-0415-2345-6789-012345abcd07",
+                "answers": [
+                  {
+                    "concept": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Male"
+                  },
+                  {
+                    "concept": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pre-operative status (set)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Co Morbidity",
+              "type": "obs",
+              "id": "coMorbidity",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "33c6a00d-0f72-4fb6-89c1-e062d1a9313b",
+                "answers": [
+                  {
+                    "concept": "119481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "DM"
+                  },
+                  {
+                    "concept": "117399AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hypertension"
+                  },
+                  {
+                    "concept": "3596837f-d31d-40ee-82c1-ce0eeb15521f",
+                    "label": "Malignancy"
+                  },
+                  {
+                    "concept": "139069AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Heart Failure"
+                  },
+                  {
+                    "concept": "37c59dc5-2b24-44e7-9700-fa0050e20564",
+                    "label": "Uncontrolled Asthma"
+                  },
+                  {
+                    "concept": "7f9a995a-afea-4234-9a83-19dd39e2b0e2",
+                    "label": "Chronic lung disease"
+                  },
+                  {
+                    "concept": "145438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Chronic kidney disease"
+                  },
+                  {
+                    "label": "Other",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other comorbidity, specify",
+              "type": "obs",
+              "id": "otherComorbiditySpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(coMorbidity) || coMorbidity !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Risk factor",
+              "type": "obs",
+              "id": "riskFactor",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "88979f30-3abe-4269-a9e7-a897f6ce4d7a",
+                "answers": [
+                  {
+                    "concept": "9877103b-2974-4ae8-afb8-375c16140027",
+                    "label": "Smoking"
+                  },
+                  {
+                    "concept": "115115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Obesity"
+                  },
+                  {
+                    "concept": "5547AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Congenital Abnormality"
+                  },
+                  {
+                    "concept": "120148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cardiac Arrhythmia"
+                  },
+                  {
+                    "concept": "142630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Dehydration"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date of surgical procedure",
+              "type": "obs",
+              "id": "dateOfSurgicalProcedure",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "b858d81f-433c-455d-a576-68add865109e"
+              }
+            },
+            {
+              "label": "Operation procedure",
+              "type": "obs",
+              "id": "operationProcedure",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "7b143de0-d342-48f1-a8fc-c77a40aa7788"
+              }
+            },
+            {
+              "label": "Place of death",
+              "type": "obs",
+              "id": "placeOfDeath",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "be5ceb9f-0de5-483c-8e22-1d98b792c3ce",
+                "answers": [
+                  {
+                    "concept": "ee7ce4a6-1bc2-401c-b2cd-6e51c5de3370",
+                    "label": "Ward"
+                  },
+                  {
+                    "concept": "d8176d1b-1234-11ee-be56-0242ac120013",
+                    "label": "ICU"
+                  },
+                  {
+                    "concept": "bbcaba10-693d-464d-aa88-9c21ab34082e",
+                    "label": "Recovery room"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Cause of death",
+              "type": "obs",
+              "id": "causeOfDeath",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162580AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

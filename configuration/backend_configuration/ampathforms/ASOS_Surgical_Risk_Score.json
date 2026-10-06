@@ -1,0 +1,245 @@
+{
+  "name": "ASOS Surgical Risk Score",
+  "description": "ASOS Surgical Risk Score - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "6d073219-0fd5-5560-848b-6628405ef49b",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "ASOS Surgical Risk Score Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Age",
+              "type": "obs",
+              "id": "age",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "322b3852-441f-495e-a7d4-b5fc5d605334",
+                "answers": [
+                  {
+                    "concept": "cac260cf-25b8-41f2-bd6a-67f233e7c73d",
+                    "label": "18-29"
+                  },
+                  {
+                    "concept": "ca6cdf3b-e370-4394-afbc-e618361742d1",
+                    "label": "30-69"
+                  },
+                  {
+                    "concept": "77fb1804-f0f6-4d31-b805-3580ef44b253",
+                    "label": "≥70"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "ASA",
+              "type": "obs",
+              "id": "asa",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "910a2d7c-ff49-4276-bd8a-0e9beea5e739",
+                "answers": [
+                  {
+                    "concept": "7dbd9cd7-3aa7-497a-afa3-151d605d4601",
+                    "label": "ASA 1"
+                  },
+                  {
+                    "concept": "930a7db4-2b33-4c94-921d-bba9230d4472",
+                    "label": "ASA 2"
+                  },
+                  {
+                    "concept": "a45b3604-4ac4-4047-a60d-7d07cf20c238",
+                    "label": "ASA 3"
+                  },
+                  {
+                    "concept": "8c2660b1-e23e-4233-9a08-74acc03f7ac9",
+                    "label": "ASA 4 and More"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Surgery timing",
+              "type": "obs",
+              "id": "surgeryTiming",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a37239f8-e0b5-4795-b36f-a1b39d26651f",
+                "answers": [
+                  {
+                    "concept": "3eaeb82b-b7c7-4959-90e2-0806875dd03e",
+                    "label": "Elective surgery"
+                  },
+                  {
+                    "concept": "f909eca2-5610-4b29-888c-daacec40ef38",
+                    "label": "Urgent surgery"
+                  },
+                  {
+                    "concept": "f243ceb7-b0ed-4b6c-abc5-dc2c1ba8b060",
+                    "label": "Emergent surgery"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Surgery severity",
+              "type": "obs",
+              "id": "surgerySeverity",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "36246822-d561-4a51-9df5-5432e5c66754",
+                "answers": [
+                  {
+                    "concept": "9e5e916f-80a7-4b75-b727-f0c2f5991a36",
+                    "label": "Minor"
+                  },
+                  {
+                    "concept": "fa510000-0000-4000-8000-000000000002",
+                    "label": "Intermediate"
+                  },
+                  {
+                    "concept": "6bc780ff-2255-4139-8a5d-03f09b74a74e",
+                    "label": "Major"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Indication for surgery",
+              "type": "obs",
+              "id": "indicationForSurgery",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ef7beb91-a0df-4456-a3d9-f0fe0fc8f545",
+                "answers": [
+                  {
+                    "concept": "a8085b61-45c0-41f0-b3f6-8a2d21715840",
+                    "label": "Non-communicable disease"
+                  },
+                  {
+                    "concept": "1171AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Caesarean section"
+                  },
+                  {
+                    "concept": "afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4",
+                    "label": "Trauma"
+                  },
+                  {
+                    "concept": "fd5769b8-1443-471a-963d-8fa5fe8aa759",
+                    "label": "Infection"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Surgery type",
+              "type": "obs",
+              "id": "surgeryType",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "eca28636-c023-4383-a5e7-e5c5ecdf9fd0",
+                "answers": [
+                  {
+                    "concept": "79afc37a-4851-4751-a5fd-f867292c5ca2",
+                    "label": "Gynecology/ Obstetrics"
+                  },
+                  {
+                    "concept": "f21567fe-1fca-40a4-b775-28215ea1a0c6",
+                    "label": "Plastics and breast"
+                  },
+                  {
+                    "concept": "e0b76976-eede-428c-942e-8dde54367320",
+                    "label": "Urology"
+                  },
+                  {
+                    "concept": "d232a244-c367-4e31-89bd-1a586fb746dc",
+                    "label": "Ear, nose and throat, gastro-intestine, hepato-biliary, cardiothoracic, vascular"
+                  },
+                  {
+                    "concept": "c139fa79-58bd-49b7-80cc-d0c6105ca975",
+                    "label": "Neurosurgery"
+                  },
+                  {
+                    "concept": "fb800957-b32a-4222-8f47-61b111686b8d",
+                    "label": "All other type of surgery"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "ASOS Score",
+              "type": "obs",
+              "id": "asosScore",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a43dc037-dc98-4033-9906-3603f9b6d3a3"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

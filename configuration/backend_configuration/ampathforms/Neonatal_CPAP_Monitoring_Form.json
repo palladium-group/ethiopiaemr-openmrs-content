@@ -1,0 +1,359 @@
+{
+  "name": "Neonatal CPAP Monitoring Form",
+  "description": "Neonatal CPAP Monitoring Form - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "24fd3f53-d633-538e-98fe-2ed1e61e21d7",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Neonatal CPAP Monitoring Form Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name",
+              "type": "obs",
+              "id": "name",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "MRN",
+              "type": "obs",
+              "id": "mrn",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5a9aa304-a80d-4315-909a-70875754e74e",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Date of birth",
+              "type": "obs",
+              "id": "dateOfBirth",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "166575AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Gestational Age(GA)",
+              "type": "obs",
+              "id": "gestationalAgeGa",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7425364e-5869-7890-4567-123456789012",
+                "answers": [
+                  {
+                    "label": "Early Preterm GA 32-34 weeks",
+                    "concept": "0758697b-8192-0123-7890-456789012345"
+                  },
+                  {
+                    "label": "Late Preterm GA 34-36 weeks",
+                    "concept": "1869708c-9203-1234-8901-567890123456"
+                  },
+                  {
+                    "label": "Post Term GA >41+7 wk",
+                    "concept": "441b88ad-1d3b-4c63-b1ca-331eaa1a4146"
+                  },
+                  {
+                    "label": "Term GA = 37 weeks",
+                    "concept": "48fe3fc7-fcd1-400f-93e0-a82926e8b52e"
+                  },
+                  {
+                    "label": "Extremely Preterm GA less than 28 weeks",
+                    "concept": "8536475f-6970-8901-5678-234567890123"
+                  },
+                  {
+                    "label": "Very Preterm GA <32 weeks",
+                    "concept": "bd150567-807b-5a12-a054-df46394e1d31"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Birth Weight",
+              "type": "obs",
+              "id": "birthWeight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "30415263-4758-6789-0123-456789345678",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Indication for CPAP",
+              "type": "obs",
+              "id": "indicationForCpap",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9ee696f5-a927-5592-a6a6-36c4a2fd4dd5"
+              }
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "HR",
+              "type": "obs",
+              "id": "hr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "02187b0e-a4e4-49aa-8043-fdca00c3bc65",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "RR (breaths/min)",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Breaths per minute.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Temp. AM Axillary/Rectum (°C)",
+              "type": "obs",
+              "id": "tempAmAxillaryRectum",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": "0.01"
+              },
+              "questionInfo": "Degrees Celsius, one decimal place.",
+              "hideSteppers": true
+            },
+            {
+              "label": "CPAP depth of",
+              "type": "obs",
+              "id": "cpapDepthOf",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e51ba4a6-6f90-50e7-afbd-eec7e0efc01d",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Work of Breathing (normal Mild/severe)",
+              "type": "obs",
+              "id": "workOfBreathingNormalMildSevere",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ec2bb353-d1ce-4f88-8dbb-89be22f1df7f"
+              }
+            },
+            {
+              "label": "CPAP Tolerance",
+              "type": "obs",
+              "id": "cpapTolerance",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6817a3a7-98e3-47fd-bdcd-b90b93062895",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "d0cef738-9845-5684-bcdf-4d5c206d5e94",
+                    "label": "Moderate RD"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Nasal Trauma",
+              "type": "obs",
+              "id": "nasalTrauma",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9b8c38be-5325-4246-8c35-1193cfa69b6f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Abdominal distention",
+              "type": "obs",
+              "id": "abdominalDistention",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "17dc402d-00d0-43c8-a042-a62ef0c73df1",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Feeding Route",
+              "type": "obs",
+              "id": "feedingRoute",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "460b45d8-0a78-403f-9652-ff017d4acc67",
+                "answers": [
+                  {
+                    "concept": "566b3685-226a-4136-bf26-83d08575a8bd",
+                    "label": "NPO"
+                  },
+                  {
+                    "concept": "3aa85ca0-421e-4e65-8675-8b7407102e05",
+                    "label": "NG"
+                  },
+                  {
+                    "concept": "e8bf0e40-3f47-4e28-a947-7784abd286a5",
+                    "label": "Oral"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Mf(ml)",
+              "type": "obs",
+              "id": "mfMl",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ac8fe479-c263-42fa-b289-390ad4bd2955",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Interventions.",
+              "type": "obs",
+              "id": "interventions",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "10628b26-c102-46c5-8773-082ed4672961",
+                "answers": [
+                  {
+                    "concept": "8a741d24-55d3-4b94-8628-343e720c80ca",
+                    "label": "Suctioning"
+                  },
+                  {
+                    "concept": "d728f207-a584-48af-bf0e-4744a7fb223b",
+                    "label": "Positioning."
+                  },
+                  {
+                    "concept": "3c7bc83c-8291-4daf-9609-0f905798662a",
+                    "label": "CPAP adjustment"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Remark",
+              "type": "obs",
+              "id": "remark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

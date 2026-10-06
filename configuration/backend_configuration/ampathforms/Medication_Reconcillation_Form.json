@@ -1,0 +1,233 @@
+{
+  "name": "Medication Reconciliation Form",
+  "description": "Medication Reconciliation Form - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "8d57c2d2-9366-545d-b8d3-dc4303cfd496",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Medication Reconciliation Form Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Source(s) of medication list",
+              "type": "obs",
+              "id": "sourceSOfMedicationList",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "94f289fc-d52a-4ad7-bbe6-22693a1f597c"
+              }
+            },
+            {
+              "label": "Allergic to",
+              "type": "obs",
+              "id": "allergicTo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "35c32429-0ffd-4cd4-81ae-70b0a41eecf2"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Medication Information Source",
+      "sections": [
+        {
+          "label": "Pre-admission Medication",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Regimen (Drug name, Dose, Frequency, Duration)",
+              "type": "obs",
+              "id": "regimenDrugNameDoseFrequencyDuration",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a8b3c0fa-92bf-5645-a337-9f9e39ad92c0"
+              }
+            },
+            {
+              "label": "Plan on admission",
+              "type": "obs",
+              "id": "planOnAdmission",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1a6d0a30-6412-47b4-a8cf-848344a0d2ad",
+                "answers": [
+                  {
+                    "concept": "159835AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Continue ( C)"
+                  },
+                  {
+                    "concept": "159836AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Discontinue (DC)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Adjustments/ Changes made",
+              "type": "obs",
+              "id": "adjustmentsChangesMade",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6a290820-0522-5832-a311-c80f99503e3a"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Medication up on discharge/transfer",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Regimen (Drug name, Dose, Frequency, Duration)",
+              "type": "obs",
+              "id": "regimenDrugNameDoseFrequencyDuration2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a8b3c0fa-92bf-5645-a337-9f9e39ad92c0"
+              }
+            },
+            {
+              "label": "Plan on transfer",
+              "type": "obs",
+              "id": "planOnTransfer",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5542460e-ef1a-4962-abde-7d3b644a1ac4",
+                "answers": [
+                  {
+                    "concept": "159835AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Continue ( C)"
+                  },
+                  {
+                    "concept": "159836AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Discontinue (DC)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Plan on Discharge",
+              "type": "obs",
+              "id": "planOnDischarge",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "293bc8a8-4ac4-4131-871f-ba87299a82ac",
+                "answers": [
+                  {
+                    "concept": "159835AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Continue ( C)"
+                  },
+                  {
+                    "concept": "159836AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Discontinue (DC)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Adjustments/ Changes made",
+              "type": "obs",
+              "id": "adjustmentsChangesMade2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6a290820-0522-5832-a311-c80f99503e3a"
+              }
+            },
+            {
+              "label": "Medications Reconciled at Admission",
+              "type": "obs",
+              "id": "medicationsReconciledAtAdmission",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "1d90c611-b535-4611-8c8d-520c14238224"
+              }
+            },
+            {
+              "label": "Medications Reconciled at Transfer",
+              "type": "obs",
+              "id": "medicationsReconciledAtTransfer",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5bc388d8-565c-4df8-8233-5a6e4d9bbc56"
+              }
+            },
+            {
+              "label": "Medications Reconciled at Discharge",
+              "type": "obs",
+              "id": "medicationsReconciledAtDischarge",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "d007338a-3cf7-4700-9801-246602cf25d3"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

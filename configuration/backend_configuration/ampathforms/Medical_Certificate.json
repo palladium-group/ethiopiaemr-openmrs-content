@@ -1,0 +1,428 @@
+{
+  "name": "Medical Certificate",
+  "description": "Medical Certificate - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "b9ecb262-5169-544a-89bf-82f22aa4e122",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Medical Certificate Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Known Medical Illness And Admissions",
+              "type": "obs",
+              "id": "knownMedicalIllneessAndAdmissions",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5673b8a8-4d46-4a4f-9fb2-cde2445d7639"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Mc Physical Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "General Status",
+              "type": "obs",
+              "id": "generalStatus",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9daaf349-784a-4666-8940-1eb1635f8a54"
+              }
+            },
+            {
+              "label": "Blood Pressure",
+              "type": "obs",
+              "id": "bloodPressure",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "935e6ba6-c666-5296-8374-0360954d7834"
+              }
+            },
+            {
+              "label": "Pulse rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Breathing Rate (breaths/min)",
+              "type": "obs",
+              "id": "breathingRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Hearing Ability",
+              "type": "obs",
+              "id": "hearingAbility",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e1227ea4-6fe2-49f9-8122-c5f40d692b61"
+              }
+            },
+            {
+              "label": "Vision (see Ophthalmology Evaluation Note If Needed)",
+              "type": "obs",
+              "id": "visionSeeOphthalmologyEvaluationNoteIfNe",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "bca7dd8e-6c17-41b2-8f34-500060e324a0"
+              }
+            },
+            {
+              "label": "Heart Condition",
+              "type": "obs",
+              "id": "heartCondition",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9de81b02-d262-5f6a-8f30-0f085dbf9734"
+              }
+            },
+            {
+              "label": "Lungs Condition",
+              "type": "obs",
+              "id": "lungsCondition",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "364d1dbc-2ac0-4390-bd84-9ed075491cf2"
+              }
+            },
+            {
+              "label": "Muscles And Bone Evaluation",
+              "type": "obs",
+              "id": "musclesAndBoneEvaluation",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "63a4b2b2-f694-47d5-b68a-1aeeeb46173a"
+              }
+            },
+            {
+              "label": "Neurologic Condition",
+              "type": "obs",
+              "id": "neurologicCondition",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2d6ef41f-a4c3-4435-a2f9-3be4122382ca",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other Pertinent Finding",
+              "type": "obs",
+              "id": "otherPertinentFinding",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e83d08b8-3638-4a19-b9f7-3ab0341d6c3a"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Laboratory And Imaging Investigations",
+      "sections": [
+        {
+          "label": "CBC",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "WBC",
+              "type": "obs",
+              "id": "wbc",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "678AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "HCT",
+              "type": "obs",
+              "id": "hct",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1015AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "PLT",
+              "type": "obs",
+              "id": "plt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Stool Examination",
+              "type": "obs",
+              "id": "stoolExamination",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "160965AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Urine Analysis",
+              "type": "obs",
+              "id": "urineAnalysis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "16a2f159-1e21-4984-b9f0-3e68acf5eeda"
+              }
+            },
+            {
+              "label": "Blood Glucose (rbs/fbs)",
+              "type": "obs",
+              "id": "bloodGlucoseRbsFbs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b6945d42-a9bc-5f81-bfd8-6a1ffb50771c"
+              }
+            },
+            {
+              "label": "HBsAg",
+              "type": "obs",
+              "id": "hbsag",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2273174b-6081-7902-2456-789123abcd32",
+                "answers": [
+                  {
+                    "label": "Positive",
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Negative",
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HCV",
+              "type": "obs",
+              "id": "hcv",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "104863d4-936d-4a1a-aa84-f4b63ff4910f"
+              }
+            },
+            {
+              "label": "X-ray",
+              "type": "obs",
+              "id": "xRay",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ec37e508-a5a6-424e-b4e3-1edb91f3ee46"
+              }
+            },
+            {
+              "label": "Other Investigations",
+              "type": "obs",
+              "id": "otherInverstigations",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "613973f3-817e-4b51-b79d-b04430e51df1"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Liver Function Tests",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "GOT",
+              "type": "obs",
+              "id": "got",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "26cc5746-7e5f-462e-aa53-83a3fbd260b5"
+              }
+            },
+            {
+              "label": "GPT",
+              "type": "obs",
+              "id": "gpt",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e72eea3a-0e77-4662-8dee-c33b0fd17ec5"
+              }
+            },
+            {
+              "label": "ALP",
+              "type": "obs",
+              "id": "alp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "785AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Renal Function Tests",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "BUN",
+              "type": "obs",
+              "id": "bun",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "83f0f09a-219a-592f-805e-e54258aa28c1"
+              }
+            },
+            {
+              "label": "CR",
+              "type": "obs",
+              "id": "cr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "790AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Final Statement Of The Doctor",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "The Patient Has Been Medically Examined With The Above Investigations And Examinations And I Found The Patient Is Medically",
+              "type": "obs",
+              "id": "thePatientHasBeenMedicallyExaminedWithTh",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f3cc9963-e26e-4e48-902d-1a226d756545",
+                "answers": [
+                  {
+                    "concept": "99466c4a-2ffc-449a-b0fb-4a0513ea43d3",
+                    "label": "FIT"
+                  },
+                  {
+                    "concept": "3743565b-c134-4cfc-8485-fc8c9e3e0c1d",
+                    "label": "Unfit"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

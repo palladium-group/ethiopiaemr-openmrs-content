@@ -1,0 +1,297 @@
+{
+  "name": "Pressure Ulcer Risk Assessment Tool (Braden Scale)",
+  "description": "Pressure Ulcer Risk Assessment Tools (braden Scale) - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "47d11a0e-fcfc-577c-a05e-a5bfe0c4550c",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Pressure Ulcer Risk Assessment Tools (braden Scale) Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Sensory Perception",
+              "type": "obs",
+              "id": "sensoryPerception",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e76ad018-a6cd-40c7-b179-1ee668b4bbbf",
+                "answers": [
+                  {
+                    "concept": "2d30ebf9-523c-4a98-a3a1-40ac03ab8e4e",
+                    "label": "1. completely limited"
+                  },
+                  {
+                    "concept": "264cf029-ab9a-447a-9e21-5354dfd712f5",
+                    "label": "2. very limited"
+                  },
+                  {
+                    "concept": "68fc18bf-5eae-4b99-824b-921e3698ea84",
+                    "label": "3. slightly limited"
+                  },
+                  {
+                    "concept": "76efc284-0c07-4ebc-97ea-478bb7e51b1e",
+                    "label": "4. no impairment"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Moisture",
+              "type": "obs",
+              "id": "moisture",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "17e46c00-41d5-46dc-9060-aca6903bfe96",
+                "answers": [
+                  {
+                    "concept": "b703f50a-6189-415b-afc1-11fd92a90aea",
+                    "label": "1. constantly moist"
+                  },
+                  {
+                    "concept": "04090a76-635c-4579-8576-a6bbfa2123a4",
+                    "label": "2. very moist"
+                  },
+                  {
+                    "concept": "3624daa1-5f55-4c23-bb0b-0b50558d9d38",
+                    "label": "3. occasional moist"
+                  },
+                  {
+                    "concept": "cee6aefa-a47a-475b-bedf-d1df784b8490",
+                    "label": "4. rarely moist"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Activity",
+              "type": "obs",
+              "id": "activity",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8848902f-f8b9-5a02-b6eb-dedf78d309a6",
+                "answers": [
+                  {
+                    "concept": "8a0d63a8-528a-4d9b-b399-24c1f8a66806",
+                    "label": "1. bedfast"
+                  },
+                  {
+                    "concept": "f9202993-4f28-45ba-816b-a8946616bd82",
+                    "label": "2. chair fast"
+                  },
+                  {
+                    "concept": "ed34385c-f1a9-49d1-90b3-72bbe7744600",
+                    "label": "3. walks occasionally"
+                  },
+                  {
+                    "concept": "4fe5fe0b-416a-4a20-876f-bcb60e76182f",
+                    "label": "4. walks frequently"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Mobility",
+              "type": "obs",
+              "id": "mobility",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "162753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "7e47a54d-41fa-44e8-ba3c-5c0437a96c06",
+                    "label": "1. completely immobile"
+                  },
+                  {
+                    "concept": "68fc18bf-5eae-4b99-824b-921e3698ea84",
+                    "label": "3. slightly limited"
+                  },
+                  {
+                    "concept": "8d48dfc3-52f4-4a1e-9bab-c7249af92085",
+                    "label": "4. No limitation"
+                  },
+                  {
+                    "concept": "264cf029-ab9a-447a-9e21-5354dfd712f5",
+                    "label": "2. very limited"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Nutrition",
+              "type": "obs",
+              "id": "nutrition",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "b190aede-795c-49e6-af43-add1911adb42",
+                "answers": [
+                  {
+                    "concept": "69f1df9b-d82b-4f94-9b3a-8f57228d95ee",
+                    "label": "1. very poor"
+                  },
+                  {
+                    "concept": "ae63c849-02a5-4993-8d75-219e68654051",
+                    "label": "2. probably inadequate"
+                  },
+                  {
+                    "concept": "166909AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "3. adequate"
+                  },
+                  {
+                    "concept": "164076AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "4.excellent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Friction and Shear",
+              "type": "obs",
+              "id": "frictionAndShear",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "bfd5aa2d-5188-4e2f-b12d-e117592eac12",
+                "answers": [
+                  {
+                    "concept": "128461AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "1. Problem"
+                  },
+                  {
+                    "concept": "2f849ee9-9a80-4372-a06e-61495e7527a1",
+                    "label": "2. Potential problem"
+                  },
+                  {
+                    "concept": "bbdcc610-12c5-4678-a2a1-f1fb68fadb81",
+                    "label": "3. No apparent problem"
+                  },
+                  {
+                    "concept": "5e490935-11a9-4481-b6a2-61a4f764a88a",
+                    "label": "4. No friction"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Risk assessment score",
+              "type": "obs",
+              "id": "riskAssessmentScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "10442de5-14f4-48ac-89ab-76f1a957c12e",
+                "min": "0",
+                "step": "0.01",
+                "calculate": {
+                  "calculateExpression": "(sensoryPerception === '2d30ebf9-523c-4a98-a3a1-40ac03ab8e4e' ? 1 : sensoryPerception === '264cf029-ab9a-447a-9e21-5354dfd712f5' ? 2 : sensoryPerception === '68fc18bf-5eae-4b99-824b-921e3698ea84' ? 3 : sensoryPerception === '76efc284-0c07-4ebc-97ea-478bb7e51b1e' ? 4 : 0) + (moisture === 'b703f50a-6189-415b-afc1-11fd92a90aea' ? 1 : moisture === '04090a76-635c-4579-8576-a6bbfa2123a4' ? 2 : moisture === '3624daa1-5f55-4c23-bb0b-0b50558d9d38' ? 3 : moisture === 'cee6aefa-a47a-475b-bedf-d1df784b8490' ? 4 : 0) + (activity === '8a0d63a8-528a-4d9b-b399-24c1f8a66806' ? 1 : activity === 'f9202993-4f28-45ba-816b-a8946616bd82' ? 2 : activity === 'ed34385c-f1a9-49d1-90b3-72bbe7744600' ? 3 : activity === '4fe5fe0b-416a-4a20-876f-bcb60e76182f' ? 4 : 0) + (mobility === '7e47a54d-41fa-44e8-ba3c-5c0437a96c06' ? 1 : mobility === '68fc18bf-5eae-4b99-824b-921e3698ea84' ? 3 : mobility === '8d48dfc3-52f4-4a1e-9bab-c7249af92085' ? 4 : mobility === '264cf029-ab9a-447a-9e21-5354dfd712f5' ? 2 : 0) + (nutrition === '69f1df9b-d82b-4f94-9b3a-8f57228d95ee' ? 1 : nutrition === 'ae63c849-02a5-4993-8d75-219e68654051' ? 2 : nutrition === '166909AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 3 : nutrition === '164076AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 4 : 0) + (frictionAndShear === '128461AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : frictionAndShear === '2f849ee9-9a80-4372-a06e-61495e7527a1' ? 2 : frictionAndShear === 'bbdcc610-12c5-4678-a2a1-f1fb68fadb81' ? 3 : frictionAndShear === '5e490935-11a9-4481-b6a2-61a4f764a88a' ? 4 : 0)"
+                }
+              },
+              "questionInfo": "Braden total 6-23 (lower = higher risk)",
+              "hideSteppers": true
+            },
+            {
+              "label": "Risk Interpretation",
+              "type": "obs",
+              "id": "riskInterpretation",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5226e534-d6b2-4fa4-a06b-52626b85d11a",
+                "answers": [
+                  {
+                    "concept": "f01b4546-27b4-4966-9ff9-edeea151109f",
+                    "label": "No Risk"
+                  },
+                  {
+                    "concept": "e942322a-cce9-42fc-afb0-49c4d4e4c8b4",
+                    "label": "Mild Risk"
+                  },
+                  {
+                    "concept": "4b33f972-07b1-5000-8dac-a0d840e7f3d3",
+                    "label": "Moderate Risk"
+                  },
+                  {
+                    "concept": "166674AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "High Risk"
+                  },
+                  {
+                    "concept": "3c368b40-407d-4d25-a707-0804272544a5",
+                    "label": "Very High Risk"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Plan /intervention",
+              "type": "obs",
+              "id": "planIntervention",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "5a61b8ad-84cd-49c1-844c-da73baf7a614"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

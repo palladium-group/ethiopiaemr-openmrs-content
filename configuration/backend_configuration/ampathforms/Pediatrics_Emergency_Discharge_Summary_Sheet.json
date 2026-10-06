@@ -1,0 +1,304 @@
+{
+  "name": "Pediatrics Emergency Discharge Summary Sheet",
+  "description": "Pediatrics Emergency Discharge Summary Sheet - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "8eb83b34-364c-5587-bd04-aead233d3a25",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Pediatrics Emergency Discharge Summary Sheet Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date and Time of Admission to Pedi-ER",
+              "type": "obs",
+              "id": "dateAndTimeOfAdmissionToPediEr",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "51a23069-45a3-4dfd-b404-20adb2a678a1"
+              }
+            },
+            {
+              "label": "Initial Diagnosis",
+              "type": "obs",
+              "id": "initialDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6052ff5f-19e3-561f-94dc-4cc1e78e78c2"
+              }
+            },
+            {
+              "label": "Treatment Given at Pedi-ER",
+              "type": "obs",
+              "id": "treatmentGivenAtPediEr",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "32138306-f451-47cf-90f5-4169f60563f2"
+              }
+            },
+            {
+              "label": "Discharge Diagnosis",
+              "type": "obs",
+              "id": "dischargeDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "aeeeb4f6-f2ae-42ae-b96c-03831859a9e1"
+              }
+            },
+            {
+              "label": "Name of Physician ( GP/Senior)",
+              "type": "obs",
+              "id": "nameOfPhysicianGpSenior",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Vital Sign on Discharge",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "BP",
+              "type": "obs",
+              "id": "bp",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "935e6ba6-c666-5296-8374-0360954d7834",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "PR (beats/min)",
+              "type": "obs",
+              "id": "pr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Beats per minute.",
+              "hideSteppers": true
+            },
+            {
+              "label": "RR (breaths/min)",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Breaths per minute.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Temp (°C)",
+              "type": "obs",
+              "id": "temp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": "0.01"
+              },
+              "questionInfo": "Degrees Celsius, one decimal place.",
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Medication on Discharge",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Drug, Dose, Frequency and Duration",
+              "type": "obs",
+              "id": "drugDoseFrequencyAndDuration",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8f1a3c7b-b55a-4920-9236-cd167c6399a4"
+              }
+            },
+            {
+              "label": "Discharged at",
+              "type": "obs",
+              "id": "dischargedAt",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "29a6a433-b46a-5df3-975f-edfd98ef32b6"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Advise Given on Discharge",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Breast Feeding",
+              "type": "obs",
+              "id": "breastFeeding",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "933b4fc7-a04a-4be1-9307-405ff8da4e5c",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Immunization",
+              "type": "obs",
+              "id": "immunization",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "164464AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Sunlight",
+              "type": "obs",
+              "id": "sunlight",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "798893cd-2054-518f-9910-c35e18959cee",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Danger Signs advised?",
+              "type": "obs",
+              "id": "dangerSignsAdvised",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "effc60fa-8496-5f6d-b43f-d4d2d71863de",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Avoiding identified risk factors",
+              "type": "obs",
+              "id": "avoidingIdentifiedRiskFactors",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9845ec12-86e9-4d7b-b919-75a117e114ad",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

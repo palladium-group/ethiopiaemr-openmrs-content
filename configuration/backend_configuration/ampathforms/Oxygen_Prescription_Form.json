@@ -1,0 +1,324 @@
+{
+  "name": "Oxygen Prescription Form",
+  "description": "Oxygen Prescription Form - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "5e139e7e-58da-5b3b-ab3c-2ff96ad824e7",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Oxygen Prescription Form Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Diagnosis notes",
+              "type": "obs",
+              "id": "diagnosisNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "159395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Target SO2",
+              "type": "obs",
+              "id": "targetSo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "2c47dbb9-0e8d-4617-9f3f-262ba818e6c4",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Method of O2 delivery",
+              "type": "obs",
+              "id": "methodOfO2Delivery",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "39ba7fca-8b2c-5d4c-a703-04b10205e943",
+                "answers": [
+                  {
+                    "concept": "7944948c-0a13-474c-a5c6-8b302a90f686",
+                    "label": "Nasal Cannula"
+                  },
+                  {
+                    "concept": "ddb91cbd-fd9b-41db-bff2-258479172013",
+                    "label": "Simple Face Mask"
+                  },
+                  {
+                    "concept": "03d88da9-ec99-4c58-91ae-27cf1e881086",
+                    "label": "Partial Rebreather Mask"
+                  },
+                  {
+                    "concept": "ee7c9974-cc05-5c40-a04d-ee1bd2b9b94e",
+                    "label": "Non-Rebreather Mask"
+                  },
+                  {
+                    "concept": "0dbf4d7a-b463-4e79-8c01-478ada9e28b8",
+                    "label": "Venturi Mask"
+                  },
+                  {
+                    "concept": "8782c6b6-938b-4470-8e12-6450598c726c",
+                    "label": "High-Flow Nasal Cannula (HFNC)"
+                  },
+                  {
+                    "concept": "964ba44d-1c4a-46f1-b4e8-5cefc17b688b",
+                    "label": "Oxygen Hood"
+                  },
+                  {
+                    "concept": "438d2e65-eedf-4267-bfb4-8961feb12acb",
+                    "label": "Oxygen Tent"
+                  },
+                  {
+                    "concept": "ddc02502-8a81-4799-9a72-74e8db4b25c2",
+                    "label": "Tracheostomy Collar"
+                  },
+                  {
+                    "concept": "dae5db8a-0a66-458c-95f6-3e25dd114950",
+                    "label": "T-Piece"
+                  },
+                  {
+                    "concept": "91e99b02-2be8-446f-9af2-ac07d77c9c0c",
+                    "label": "CPAP (Continuous Positive Airway Pressure)"
+                  },
+                  {
+                    "concept": "47be70c2-2498-4ba9-9da2-53261e63796d",
+                    "label": "BiPAP (Bilevel Positive Airway Pressure)"
+                  },
+                  {
+                    "concept": "9e3f8b0e-0d1e-40f8-8f5b-957599c8834a",
+                    "label": "NIV Helmet"
+                  },
+                  {
+                    "concept": "165935AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Endotracheal Intubation"
+                  },
+                  {
+                    "concept": "161719AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tracheostomy"
+                  },
+                  {
+                    "concept": "165998AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mechanical Ventilation"
+                  },
+                  {
+                    "concept": "089773bf-4080-4ecf-ae02-ce11dfa444cc",
+                    "label": "Bag-Valve-Mask (BVM)"
+                  },
+                  {
+                    "concept": "07caabab-5f34-4a54-bb39-c6d4af8df192",
+                    "label": "Transtracheal Catheter"
+                  },
+                  {
+                    "concept": "196a012f-89b7-4b04-9951-30c57fd96455",
+                    "label": "Incubator / Isolette"
+                  },
+                  {
+                    "concept": "a0a644fa-d1e3-42e5-b746-751990011552",
+                    "label": "Hyperbaric Oxygen Therapy (HBOT)"
+                  },
+                  {
+                    "concept": "601bb30e-4b92-4715-b5cf-998205e7aa6b",
+                    "label": "ECMO (Extracorporeal Membrane Oxygenation)"
+                  },
+                  {
+                    "concept": "7d5dbd61-2fd8-536b-9a85-4ba37e62e3f8",
+                    "label": "Laryngeal Mask Airway (LMA)"
+                  },
+                  {
+                    "concept": "e6734839-dc98-479f-b2be-69a37bd2102a",
+                    "label": "Aerosol Mask"
+                  },
+                  {
+                    "concept": "9824aa10-94f1-40b1-bcea-3fbbb1d808ef",
+                    "label": "Oxygen Reservoir Cannula (Oxymizer)"
+                  },
+                  {
+                    "concept": "5ac7782e-c754-4c6a-bde5-b8911d09f1c1",
+                    "label": "Demand-Flow Oxygen Delivery System (DODS)"
+                  },
+                  {
+                    "concept": "9e56fd66-a455-4f6f-bcde-60a8891269e0",
+                    "label": "OxyArm"
+                  },
+                  {
+                    "concept": "bbf3cc86-97e4-4a07-acda-86bd5d11d61a",
+                    "label": "Blow-by Oxygen"
+                  },
+                  {
+                    "concept": "ca2a48e3-0c55-4c60-9cdc-9e504a567ce9",
+                    "label": "Combitube / King LT (Supraglottic airways)"
+                  },
+                  {
+                    "concept": "644dae32-e72b-468f-8fcb-971a882cb517",
+                    "label": "Face Tent"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "O2 flow rate (litter per minute)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "O2 flow rate (litres/min)",
+              "type": "obs",
+              "id": "litter",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "300b7096-ceb8-4ae0-9c4f-82b2eb4eebbb",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Duration (per hour)",
+              "type": "obs",
+              "id": "durationPerHour",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "dfe26604-6660-4371-aabe-ba9fbf69f2b1",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Review time (every how many hours)",
+              "type": "obs",
+              "id": "reviewTimeEveryHowManyHours",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f23a1ae1-dfbc-4efc-9047-b73e6300a686",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Humidification",
+              "type": "obs",
+              "id": "humidification",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5a8ee9bc-0da1-4666-bcc0-8876c0902d3f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Allergy (COPD/CO2 retention risk)",
+              "type": "obs",
+              "id": "allergyCopdCo2RetentionRisk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2b49f85c-8e71-4c18-bc14-0adfd3c64608",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

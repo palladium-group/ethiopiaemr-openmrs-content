@@ -1,7 +1,7 @@
 {
   "name": "Central Triage Form",
-  "description": "Central Triage Form for vital signs assessment — extended per team review.",
-  "version": "2.2",
+  "description": "Central Triage Form: vital signs combined with the St. Peter triage content (history, TB/DM/HIV/cancer screening, pregnancy, referral), with soft range-warning alerts for abnormal vitals.",
+  "version": "3.0",
   "published": true,
   "uuid": "ff723d59-0650-4b84-858d-c1045b690683",
   "retired": false,
@@ -27,7 +27,8 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "readonly": true
             },
             {
               "label": "Provider:",
@@ -54,7 +55,7 @@
                 }
               },
               "id": "encLocation",
-              "readonly": false
+              "readonly": true
             }
           ]
         }
@@ -77,11 +78,15 @@
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range: 90–120 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
-                "message": "Systolic BP is outside the normal range (90–120 mmHg)."
-              }
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Systolic BP is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
               "label": "Diastolic (mmHg)",
@@ -93,11 +98,15 @@
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range: 60–90 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
-                "message": "Diastolic BP is outside the normal range (60–90 mmHg)."
-              }
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Diastolic BP is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
               "label": "Posture",
@@ -128,11 +137,15 @@
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range: 60–100 bpm",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
-                "message": "Heart rate is outside the normal range (60–100 bpm)."
-              }
+              "questionInfo": "Normal range: 60-100 bpm",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Heart rate is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
               "label": "Respiratory Rate (breaths/min)",
@@ -144,11 +157,15 @@
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range: 16–24 breaths/min",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
-                "message": "Respiratory rate is outside the normal range (16–24 breaths/min)."
-              }
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
               "label": "Temperature (°C)",
@@ -161,11 +178,15 @@
                 "max": "43",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range: 36.5–37.5 °C",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
-                "message": "Temperature is out of range (normal 35–37.5 °C)."
-              }
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
+                  "message": "Temperature is outside the normal range (35-37.5 °C)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
               "label": "SPO2 (%)",
@@ -179,13 +200,17 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal: >90%",
-              "alert": {
-                "alertWhenExpression": "myValue && myValue <= 90",
-                "message": "SPO2 is below the normal range (>90%)."
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Pain Score (0–10)",
+              "label": "Pain Score (0-10)",
               "type": "obs",
               "id": "painScore",
               "questionOptions": {
@@ -194,8 +219,15 @@
                 "min": "0",
                 "max": "10",
                 "step": "1"
-              }
-            },
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Anthropometry",
+          "isExpanded": "true",
+          "questions": [
             {
               "label": "Height (cm)",
               "type": "obs",
@@ -203,10 +235,11 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
+                "min": "10",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range: 30–300 cm"
+              "questionInfo": "Allowed range: 30-300 cm",
+              "hideSteppers": true
             },
             {
               "label": "Weight (kg)",
@@ -217,21 +250,23 @@
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": "0.01"
-              }
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
             },
             {
               "label": "BMI (kg/m²)",
               "type": "obs",
               "id": "bmi",
-              "readonly": true,
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "calculate": {
-                  "calculateExpression": "(isEmpty(height) || isEmpty(weight)) ? null : calcBMI(height,weight)"
+                  "calculateExpression": "calcBMI(height,weight)"
                 },
                 "step": "0.01"
-              }
+              },
+              "hideSteppers": true
             },
             {
               "label": "BMI Category",
@@ -259,7 +294,7 @@
                   }
                 ]
               },
-              "questionInfo": "Auto-classified from BMI: <18.5 Underweight, 18.5–24.9 Healthy Weight, 25.0–29.9 Overweight, ≥30.0 Obese."
+              "questionInfo": "Auto-classified from BMI: <18.5 Underweight, 18.5-24.9 Healthy Weight, 25.0-29.9 Overweight, ≥30.0 Obese."
             },
             {
               "label": "Body Surface Area (m²)",
@@ -275,7 +310,827 @@
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Body surface area (BSA). Auto-calculated from height (cm) and weight (kg) using the Mosteller formula. Used to assist drug dosing calculations."
+              "questionInfo": "Body surface area (BSA). Auto-calculated from height (cm) and weight (kg) using the Mosteller formula. Used to assist drug dosing calculations.",
+              "hideSteppers": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "History & Screening",
+      "sections": [
+        {
+          "label": "Chief Complaint & History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Chief Complaint",
+              "type": "obs",
+              "id": "chiefComplaint",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160531AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Is the patient a known hypertensive?",
+              "type": "obs",
+              "id": "knownHypertensive",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c371c980-1bca-409b-a2e6-63dea754765e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Does the patient have past medical/surgical history?",
+              "type": "obs",
+              "id": "pastMedicalHistory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c5d35310-f402-45aa-a071-a387cb467260",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Does the patient have a history of allergy?",
+              "type": "obs",
+              "id": "allergyHistory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8efb0023-a138-4998-af57-343cee424937",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Is Emergency Ruled Out?",
+              "type": "obs",
+              "id": "emergencyRuledOut",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e9b4a759-ff74-4b9f-81ae-5e9c7f85be40",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "TB Screening",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Does the patient have cough of > two weeks?",
+              "type": "obs",
+              "id": "tbCough",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "08ae3ce6-6e69-476d-be3b-13e362ba6863",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Does the patient have fever?",
+              "type": "obs",
+              "id": "tbFever",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cd47dece-33b8-4afc-b0d3-8c350b5873bc",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Does the patient have night sweats?",
+              "type": "obs",
+              "id": "tbNightSweats",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a146e62d-62ad-4502-b7bb-23b4d1ecd974",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "DM Screening",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Eligible for DM screening?",
+              "type": "obs",
+              "id": "dmEligible",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9cc79344-33af-5936-a99e-c742e7bd995b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "RBS",
+              "type": "obs",
+              "id": "rbs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "887aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "HIV Screening",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Occupational risks?",
+              "type": "obs",
+              "id": "occupationalRisks",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b6ac3a1a-f198-44c3-a10c-349b2699faba",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes, occupational risk type",
+              "type": "obs",
+              "id": "occupationalRiskTypes",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3f588ed4-a1fe-4edb-b0ba-f70a29865c29",
+                "answers": [
+                  {
+                    "concept": "162198AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Long-distance truck driver"
+                  },
+                  {
+                    "concept": "6d963e5a-7250-4d4d-8d34-7fd3fbe05729",
+                    "label": "Workers at developmental schemes/projects"
+                  },
+                  {
+                    "concept": "8ab70559-dcb0-4820-870c-a868dd8edbe8",
+                    "label": "Daily and mobile works"
+                  },
+                  {
+                    "concept": "112a0262-97a2-4a9e-afcd-77538f309a74",
+                    "label": "Prisoners/Refugees"
+                  },
+                  {
+                    "concept": "166513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female Sex worker"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(occupationalRisks) || occupationalRisks !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Marital Status / Sexual risks for HIV?",
+              "type": "obs",
+              "id": "maritalSexualRisks",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "bf17e463-97bb-4529-81ce-97e659a1b4cc",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes, sexual risk type",
+              "type": "obs",
+              "id": "sexualRiskTypes",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "cdea17a8-602b-406a-976e-f0814c306244",
+                "answers": [
+                  {
+                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Divorced"
+                  },
+                  {
+                    "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Widow/Widower"
+                  },
+                  {
+                    "concept": "5e0f2dd1-c9f9-4c1d-94ed-4f1cae55da5d",
+                    "label": "Remarried"
+                  },
+                  {
+                    "concept": "5256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(maritalSexualRisks) || maritalSexualRisks !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Clinical sign of HIV/AIDS or diagnosis?",
+              "type": "obs",
+              "id": "hivClinicalSign",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3453907c-3ceb-4ae6-b315-7ab1aa1fd63a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes, clinical sign of HIV/AIDS (refer job aid) or diagnosis",
+              "type": "obs",
+              "id": "hivClinicalSignType",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "acbb3a53-7d35-48d8-9d60-b6a56767fa43",
+                "answers": [
+                  {
+                    "concept": "164809AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "STI"
+                  },
+                  {
+                    "concept": "5964AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "TB"
+                  },
+                  {
+                    "concept": "1a61fd2c-cb35-4f0f-a556-01e1ae07c5c6",
+                    "label": "Sexual risk factors"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(hivClinicalSign) || hivClinicalSign !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Is the patient eligible for testing?",
+              "type": "obs",
+              "id": "hivTestingEligible",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1d66254c-9e11-4f19-808b-15c5d0661a92",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Client is Eligible for Testing"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Client is not Eligible for Testing"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Cancer Screening",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Eligible for pre-cancer screening?",
+              "type": "obs",
+              "id": "precancerEligible",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4ccb9477-8cab-44ec-8b5c-735051a07f7c",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pregnancy",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Is the patient pregnant?",
+              "type": "obs",
+              "id": "isPregnant",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5272AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "EDD",
+              "type": "obs",
+              "id": "edd",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "2b592c8a-f68c-47a1-a5ab-3087bd13ace5"
+              }
+            },
+            {
+              "label": "LNMP",
+              "type": "obs",
+              "id": "lnmp",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "af229755-0bee-4bb8-975a-7bacd689e388"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Gestational Age (GA)",
+              "type": "obs",
+              "id": "gestationalAge",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7425364e-5869-7890-4567-123456789012",
+                "answers": [
+                  {
+                    "label": "Early Preterm GA 32-34 weeks",
+                    "concept": "0758697b-8192-0123-7890-456789012345"
+                  },
+                  {
+                    "label": "Late Preterm GA 34-36 weeks",
+                    "concept": "1869708c-9203-1234-8901-567890123456"
+                  },
+                  {
+                    "label": "Post Term GA >41+7 wk",
+                    "concept": "441b88ad-1d3b-4c63-b1ca-331eaa1a4146"
+                  },
+                  {
+                    "label": "Term GA = 37 weeks",
+                    "concept": "48fe3fc7-fcd1-400f-93e0-a82926e8b52e"
+                  },
+                  {
+                    "label": "Extremely Preterm GA less than 28 weeks",
+                    "concept": "8536475f-6970-8901-5678-234567890123"
+                  },
+                  {
+                    "label": "Very Preterm GA <32 weeks",
+                    "concept": "bd150567-807b-5a12-a054-df46394e1d31"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Referral Information",
+      "sections": [
+        {
+          "label": "Referral Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Was the patient referred?",
+              "type": "obs",
+              "id": "wasReferred",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "58900112-2334-0126-4560-2345f0123456",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Patient diagnosis",
+              "type": "obs",
+              "id": "referralDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Referral from",
+              "type": "obs",
+              "id": "referralFrom",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6151848d-94a1-4b7c-9d81-90ea62c1c48d",
+                "answers": [
+                  {
+                    "concept": "0c8a3bf0-e80b-484e-adb4-e9aaed156c41",
+                    "label": "Addis Ababa Government Hospital"
+                  },
+                  {
+                    "concept": "b7e2d82b-a1af-4f78-beb7-c7b4afa29861",
+                    "label": "Addis Ababa Private Hospital"
+                  },
+                  {
+                    "concept": "9c344556-6778-4560-8904-f012345678a0",
+                    "label": "Regional Hospital"
+                  },
+                  {
+                    "concept": "ad455667-7889-5671-9015-012345678a01",
+                    "label": "Health Center"
+                  },
+                  {
+                    "concept": "be566778-8990-6782-0126-12345678a012",
+                    "label": "Police/Prison"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If other, specify",
+              "type": "obs",
+              "id": "referralFromOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(referralFrom) || referralFrom !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Referral reason",
+              "type": "obs",
+              "id": "referralReason",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "961273d3-371f-45d2-addf-927b171d4035"
+              }
+            },
+            {
+              "label": "Communication",
+              "type": "obs",
+              "id": "referralCommunication",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "24dad750-58a5-4736-9fad-2732a79dce49",
+                "answers": [
+                  {
+                    "concept": "adcbafa1-d682-4f11-a93a-9fd0916d3e65",
+                    "label": "With Communication"
+                  },
+                  {
+                    "concept": "a847e05f-0326-4a46-a42c-2e5ed6725cb8",
+                    "label": "Without Communication"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Time of communication",
+              "type": "obs",
+              "id": "timeOfCommunication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cae1832a-c324-4b75-9d71-d9e17f074224"
+              }
+            },
+            {
+              "label": "Time of Arrival",
+              "type": "obs",
+              "id": "timeOfArrival",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0d4e5f60-7182-9012-3456-789abcdef012",
+                "answers": [
+                  {
+                    "concept": "1e5f6071-8293-0123-4567-89abcdef0123",
+                    "label": "Day"
+                  },
+                  {
+                    "concept": "161018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Night"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Referring Professional scope",
+              "type": "obs",
+              "id": "referringProfessionalScope",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ffea445c-c3cc-4722-8e62-cb847a748f39",
+                "answers": [
+                  {
+                    "concept": "95b3b4ed-1853-50b6-acbc-da1bc7a2b08d",
+                    "label": "Nurse/midwife"
+                  },
+                  {
+                    "concept": "99160c83-13c9-4e30-8ac5-784a1eababd3",
+                    "label": "HO"
+                  },
+                  {
+                    "concept": "c0a8efd1-187c-4438-a04e-74ab0de43fcb",
+                    "label": "GP"
+                  },
+                  {
+                    "concept": "13d4fe75-618e-4e2e-a500-18a726374be7",
+                    "label": "Resident"
+                  },
+                  {
+                    "concept": "f7069116-624b-45fe-96c6-0d1cf94a497a",
+                    "label": "Senior"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Name of Physician who referred the patient",
+              "type": "obs",
+              "id": "referringPhysicianName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Mode of arrival",
+              "type": "obs",
+              "id": "modeOfArrival",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "529a4b5c-6d7e-4567-890b-cdef01234567",
+                "answers": [
+                  {
+                    "concept": "1377AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ambulance"
+                  },
+                  {
+                    "concept": "74bc6d7e-8f90-6789-012d-ef0123456789",
+                    "label": "Taxi"
+                  },
+                  {
+                    "concept": "85cd7e8f-9001-789a-123e-f01234567890",
+                    "label": "Private Car"
+                  },
+                  {
+                    "concept": "4f694879-6290-411b-8140-b6562715854e",
+                    "label": "Walking"
+                  },
+                  {
+                    "concept": "b8f00112-2334-012d-4560-234567890123",
+                    "label": "Public Taxi"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Name of referring facility",
+              "type": "obs",
+              "id": "referringFacilityName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161550AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Liaison office telephone of referring facility",
+              "type": "obs",
+              "id": "referringFacilityPhone",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8ffe4c88-0f5c-4810-a94f-fb9cc5b0bbb9"
+              }
+            },
+            {
+              "label": "Is the diagnosis the same as the referring facility's, or different?",
+              "type": "obs",
+              "id": "diagnosisSameOrDifferent",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7d14d990-5c44-49b0-82f1-e580eca53d64"
+              }
+            },
+            {
+              "label": "Condition of patient on arrival",
+              "type": "obs",
+              "id": "conditionOnArrival",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "dd4e5f60-7182-9012-3456-789abcdef012",
+                "answers": [
+                  {
+                    "concept": "8d956de6-e36f-468c-8485-50858340331c",
+                    "label": "Critical"
+                  },
+                  {
+                    "concept": "037446f4-adfc-40b3-928c-a39a4826b1bf",
+                    "label": "Emergency"
+                  },
+                  {
+                    "concept": "06398754-8865-4004-805e-926636d6d6c2",
+                    "label": "Stable"
+                  },
+                  {
+                    "concept": "160432AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Death (no any sign of life)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Was the referral necessary or unnecessary?",
+              "type": "obs",
+              "id": "referralNecessary",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d9e30c35-cab1-419f-bb9d-97b0b8a25af9",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Was the referral complete?",
+              "type": "obs",
+              "id": "referralComplete",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0e91e62b-4f70-47c2-abf6-ac8034eae018",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Referring Health Professional name and phone number",
+              "type": "obs",
+              "id": "referringHpNamePhone",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "543cb805-f873-4419-a432-ed37d0f79b2e"
+              }
+            },
+            {
+              "label": "Receiving liaison officer name and phone number",
+              "type": "obs",
+              "id": "receivingLiaisonNamePhone",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "083e33bc-4581-4c2c-b2c9-eb4ac84408d9"
+              }
+            },
+            {
+              "label": "Commenting Health Professional name and phone number",
+              "type": "obs",
+              "id": "commentingHpNamePhone",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "616e0654-95c5-4621-9e9b-b69b1e370cbc"
+              }
             }
           ]
         }

@@ -1,0 +1,155 @@
+{
+  "name": "Pressure Ulcer Incidence Registration Form",
+  "description": "Pressure Ulcer Incidence Registration Form - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "578ada29-d8c7-564a-a96c-731d495dfcc5",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Pressure Ulcer Incidence Registration Form Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Source of Admission",
+              "type": "obs",
+              "id": "sourceOfAdmission",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8b55e638-eabf-4bfe-afdf-51a077764467"
+              }
+            },
+            {
+              "label": "Admission Date",
+              "type": "obs",
+              "id": "admissionDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "421719a0-eef5-4181-b55d-fff16d845314"
+              }
+            },
+            {
+              "label": "Length of stay",
+              "type": "obs",
+              "id": "lengthOfStay",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "162196AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Pressure ulcer Grade",
+              "type": "obs",
+              "id": "pressureUlcerGrade",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "96b91794-7251-4a63-9a4e-cd2ef2c569c6"
+              }
+            },
+            {
+              "label": "Source of pressure ulcer",
+              "type": "obs",
+              "id": "sourceOfPressureUlcer",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "17da7550-dac9-4823-8af5-61ab9006d3d0"
+              }
+            },
+            {
+              "label": "Pt outcome",
+              "type": "obs",
+              "id": "ptOutcome",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ce479e41-d163-43e8-8dea-e8b834ee8419",
+                "answers": [
+                  {
+                    "concept": "160037AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "On treatment"
+                  },
+                  {
+                    "concept": "ca574255-0a09-4c9a-8139-43e48df73847",
+                    "label": "Transfer"
+                  },
+                  {
+                    "concept": "0437291f-333b-4d6e-983b-a1ae9f1c2868",
+                    "label": "Discharge"
+                  },
+                  {
+                    "concept": "5241AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Death"
+                  },
+                  {
+                    "concept": "e4e4c574-6b4d-45c8-8aa1-e9c2215dfa23",
+                    "label": "Referral"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

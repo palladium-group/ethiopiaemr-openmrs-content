@@ -1,0 +1,688 @@
+{
+  "name": "SPSH Referral Clinic ANC Follow-up Chart",
+  "description": "SPSH Referral Clinic ANC Follow Up Chart - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "3919c67d-cc24-54e4-881f-2054937308ee",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "SPSH Referral Clinic ANC Follow Up Chart Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Follow up Date",
+              "type": "obs",
+              "id": "followUpDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "a837e308-d883-4952-b48d-402a72e74cd2"
+              }
+            },
+            {
+              "label": "Risk factor",
+              "type": "obs",
+              "id": "riskFactor",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "88979f30-3abe-4269-a9e7-a897f6ce4d7a",
+                "answers": [
+                  {
+                    "label": "Obesity",
+                    "concept": "115115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "cardiac dysrhythmia (sandbox backfill)",
+                    "concept": "120148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Dehydration",
+                    "concept": "142630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Congenital abnormality",
+                    "concept": "5547AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Smoking",
+                    "concept": "9877103b-2974-4ae8-afb8-375c16140027"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Present Pregnancy History (Complaints)",
+              "type": "obs",
+              "id": "presentPregnancyHistoryCompliants",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "cdc048d4-8b5f-5d0e-a852-d86b57b32248"
+              },
+              "required": "true"
+            },
+            {
+              "label": "Current Medication",
+              "type": "obs",
+              "id": "currentMedication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2c3d4e5f-6e75-420f-8d9a-456789abcde6"
+              }
+            },
+            {
+              "label": "Family planning",
+              "type": "obs",
+              "id": "familyPlanning",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "bccf270f-f616-4607-b7f5-1cb68204a40c",
+                "answers": [
+                  {
+                    "concept": "c2b51986-86b4-4767-b94f-749f406137b2",
+                    "label": "Accepted"
+                  },
+                  {
+                    "concept": "47a7b9e1-9917-470d-9647-f82a29860845",
+                    "label": "Declined"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Family planing method choice",
+              "type": "obs",
+              "id": "familyPlaningMethodChoice",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8dd99064-90c8-4650-9d29-7e75f124c4f6"
+              },
+              "required": "true"
+            }
+          ]
+        },
+        {
+          "label": "Clinical Pelvimetry",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Sacral promontory",
+              "type": "obs",
+              "id": "sacralPromontory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "bfa68af7-bc9a-503b-84fc-e5aca33b1c0a",
+                "answers": [
+                  {
+                    "concept": "e4180c85-38a5-4a27-9276-96bf169c6214",
+                    "label": "Reachable"
+                  },
+                  {
+                    "concept": "dd19f65c-64cd-5327-a8ca-662459c73e48",
+                    "label": "Not reachable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Ischial spine",
+              "type": "obs",
+              "id": "ischialSpine",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "b1827266-8428-57ed-9c4b-64d3dbee5f73",
+                "answers": [
+                  {
+                    "concept": "c0a07e1e-deca-4674-8211-88115552e6a3",
+                    "label": "Blunt"
+                  },
+                  {
+                    "concept": "4d874b52-7756-4679-819f-2073a4731646",
+                    "label": "Prominent"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pubic angel",
+              "type": "obs",
+              "id": "pubicAngel",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7f69e1cb-06f5-5c6c-9cfc-f2571269b988",
+                "answers": [
+                  {
+                    "concept": "de82f148-b30c-4f07-a8ea-a114a1c4a700",
+                    "label": "< 90 Degree"
+                  },
+                  {
+                    "concept": "e3a019ee-1aad-4fd5-a05a-43f6287a8964",
+                    "label": "90 Degree"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pubic arc",
+              "type": "obs",
+              "id": "pubicArc",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "559eaa93-09b6-5fd3-991c-a14cbdc9c4bd"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "SPSH Antenatal Visits and Findings",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "SPSH Antenatal Visits and Findings BP",
+              "type": "obs",
+              "id": "spshAntenatalVisitsAndFindingsBp",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "29b451c3-e213-4245-9b2f-9a9f732581af"
+              }
+            },
+            {
+              "label": "R/R",
+              "type": "obs",
+              "id": "rR",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1cedffd4-d703-454a-8b7e-08e61b84242a",
+                "answers": [
+                  {
+                    "label": "162976AA",
+                    "concept": "162976AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Temp",
+              "type": "obs",
+              "id": "temp",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a49c571a-ab24-5881-be5d-c83fee9cbcf0",
+                "answers": [
+                  {
+                    "label": "Cool",
+                    "concept": "11b483a9-5d45-4e4f-8a05-daec14ef54d4"
+                  },
+                  {
+                    "label": "Extremely Cool",
+                    "concept": "415ed25d-245c-4f90-b403-a5725fbbe4a0"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Extremely Warm",
+                    "concept": "b6bdd6a0-54c7-4346-b337-eef217a9a655"
+                  },
+                  {
+                    "label": "Warm",
+                    "concept": "be0f0161-5e1d-4160-bfb5-239c7f16e153"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pulse (beats/min)",
+              "type": "obs",
+              "id": "pulse",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Pulse rate is outside the normal range (60-100 beats/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "GA(wks)",
+              "type": "obs",
+              "id": "gaWks",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c360399a-44a4-4188-957e-e2ce9033651e"
+              },
+              "required": "true"
+            },
+            {
+              "label": "Fundal Height",
+              "type": "obs",
+              "id": "fundalHeight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1439AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Presentation",
+              "type": "obs",
+              "id": "presentation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2960314b-9304-1234-5678-901234abcd19"
+              }
+            },
+            {
+              "label": "Engagement",
+              "type": "obs",
+              "id": "engagement",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "4e354c77-5851-4b7c-bd24-6b06b6791af4",
+                "answers": [
+                  {
+                    "label": "Good",
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Fair",
+                    "concept": "159406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Poor",
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Partial",
+                    "concept": "46969e18-a3c4-4fcc-ba87-907917ac0986"
+                  },
+                  {
+                    "label": "Full",
+                    "concept": "490dca17-a568-49e8-9da4-b5982d36a3ce"
+                  },
+                  {
+                    "label": "Requires prompting",
+                    "concept": "657dd4f6-45b7-41cb-9c08-fa5f90727c3b"
+                  },
+                  {
+                    "label": "Distracted",
+                    "concept": "888c1cad-c890-47a8-90ef-e17827184801"
+                  },
+                  {
+                    "label": "Limited",
+                    "concept": "8d82393f-2ca0-43e1-99b7-1cc73cac19ee"
+                  },
+                  {
+                    "label": "Focused",
+                    "concept": "a7fdde71-d503-428f-abd2-7d7e3631790d"
+                  },
+                  {
+                    "label": "Withdrawn",
+                    "concept": "d3b1e013-27ab-4b8c-a4f4-be2e7650ac77"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "FHB",
+              "type": "obs",
+              "id": "fhb",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3071425c-0415-2345-6789-012345abcd1a"
+              }
+            },
+            {
+              "label": "Edema",
+              "type": "obs",
+              "id": "edema",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6251a60e-5663-4c76-bc56-a849fcebe834"
+              }
+            },
+            {
+              "label": "Clinical Pelvimetry",
+              "type": "obs",
+              "id": "clinicalPelvimetry",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b1c7d1f6-fc91-43a1-ab45-bab60893d838"
+              }
+            }
+          ]
+        },
+        {
+          "label": "SPSH Supplement",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "FA",
+              "type": "obs",
+              "id": "fa",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "475bd2cc-989c-449e-8618-2f997dfd1bfa",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Iron",
+              "type": "obs",
+              "id": "iron",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e4f5a6b7-c8d9-4e0f-1a23-b4c5d6e7f8a9",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "SPSH TT Vaccine",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "TD1",
+              "type": "obs",
+              "id": "td1",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "74b9d086-61a3-430c-a1a2-3611ce0ae87c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "TD2",
+              "type": "obs",
+              "id": "td2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f41f9d73-d0f4-4d66-9a7f-799e6f048645",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "SPSH Obstetrics US Form",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Fetal Number",
+              "type": "obs",
+              "id": "fetalNumber",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5cc54d6c-5cec-54b0-a5cc-49fbc0b41b79"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "FHB( +Ve/-ve)",
+              "type": "obs",
+              "id": "fhbVeVe",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3071425c-0415-2345-6789-012345abcd1a"
+              }
+            },
+            {
+              "label": "AGA",
+              "type": "obs",
+              "id": "aga",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c4b96143-eff7-49ca-9de9-81fd8841efa3"
+              }
+            },
+            {
+              "label": "EFW",
+              "type": "obs",
+              "id": "efw",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "fdc12823-bdeb-5b3e-a7a7-3e58dde9fed0"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fetal presentation",
+              "type": "obs",
+              "id": "fetalPresentation",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "160090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Vertex presentation",
+                    "concept": "160091AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Occiput Anterior Position",
+                    "concept": "164148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Brow Presentation",
+                    "concept": "164149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Face Presentation",
+                    "concept": "164150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Placenta location",
+              "type": "obs",
+              "id": "placentaLocation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d988dab1-8b92-5996-8e2c-1c072c859242"
+              }
+            },
+            {
+              "label": "Amniotic fluid volume",
+              "type": "obs",
+              "id": "amnioticFluidVolume",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e75ca7e0-b6cd-567d-8ce3-f48c72b1457b"
+              }
+            },
+            {
+              "label": "BPP",
+              "type": "obs",
+              "id": "bpp",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cec6f692-2833-5603-98a3-c204d3580577"
+              }
+            },
+            {
+              "label": "US remark",
+              "type": "obs",
+              "id": "usRemark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "28bc76ee-0cf3-5dd6-8e1c-620d388990ef"
+              }
+            },
+            {
+              "label": "Assessment",
+              "type": "obs",
+              "id": "assessment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "13f82aece2cd4e3bbb950140e6cbffce"
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              },
+              "required": "true"
+            },
+            {
+              "label": "Medication",
+              "type": "obs",
+              "id": "medication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a7d8fdf9-d81d-43ab-a41a-ea2ca8dbd7ee"
+              }
+            },
+            {
+              "label": "Appointment",
+              "type": "obs",
+              "id": "appointment",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3071425e-0415-2345-6789-012345abcd17",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

@@ -1,0 +1,1458 @@
+{
+  "name": "HIV Care / ART Follow-up Form",
+  "description": "HIV Care / ART Follow-up Form - built from physician Word-doc spec (Phase 1, batch-three).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "582d8464-690c-5489-902a-de7a007ce334",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "HIV Care / ART Follow-up Form Assessment",
+      "sections": [
+        {
+          "label": "HIV Diagnosis and Eligibility",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date Confirmed HIV +ve",
+              "type": "obs",
+              "id": "dateConfirmedHivVe",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "85977739-2e98-5ac2-9a69-64b64c8a5e2d"
+              }
+            },
+            {
+              "label": "Type of HIV Test",
+              "type": "obs",
+              "id": "typeOfHivTest",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "67fb251f-d6a3-4ace-b752-23d85ac2eee8",
+                "answers": [
+                  {
+                    "concept": "f33d7103-a940-4713-bc4c-754c88ec1121",
+                    "label": "Rapid HIV Test"
+                  },
+                  {
+                    "concept": "156802a6-5a95-45e6-8129-5c4ba7974099",
+                    "label": "DNA/PCR"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Eligible (date)",
+              "type": "obs",
+              "id": "eligibleDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "97b91091-013d-41f5-8719-dbd8f9e22b40"
+              }
+            },
+            {
+              "label": "Why Eligible (code)",
+              "type": "obs",
+              "id": "whyEligibleCode",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "3b932ad9-17c2-4e17-8ce7-bd35c87fac54"
+              }
+            },
+            {
+              "label": "Eligible & Ready (date)",
+              "type": "obs",
+              "id": "eligibleReadyDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "c63c1dee-0c82-45ee-a21b-156f3cca5813"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Visit and Anthropometry",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Schedule",
+              "type": "obs",
+              "id": "schedule",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e461db7c-23d5-4de3-9052-66bac1e9432d",
+                "answers": [
+                  {
+                    "concept": "24f32207-5b30-4f25-ac47-64cc2f4ab3a3",
+                    "label": "Scheduled"
+                  },
+                  {
+                    "concept": "d31b99bb-7e48-48d1-89c5-63207309c687",
+                    "label": "Unscheduled"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Months on ART",
+              "type": "obs",
+              "id": "monthsOnArt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c83d1e06-cc10-5e3d-8ad4-ccbcf3c416db",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "required": "true",
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "BMI",
+              "type": "obs",
+              "id": "bmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8dbc97c1-cc29-4823-b10e-58f03773588d",
+                "min": "0",
+                "step": "0.01",
+                "calculate": {
+                  "calculateExpression": "calcBMI(height,weight)"
+                }
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "MUAC",
+              "type": "obs",
+              "id": "muac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "If child: Length / Height / Head circumference for age <3 yrs",
+              "type": "obs",
+              "id": "ifChildLengthHeightHeadCircumferenceForA",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f1fc167a-d1c4-4e4c-9fa9-0db036e262d5"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Reproductive Health",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pregnancy status / FP method",
+              "type": "obs",
+              "id": "pregnancyStatusFpMethod",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "bb1d4eb9-92d2-4ee7-8910-3cac128be1af",
+                "answers": [
+                  {
+                    "concept": "d3b42c5e-6f70-4189-bacd-ef0123456702",
+                    "label": "Pregnant"
+                  },
+                  {
+                    "concept": "5196c977-aca4-4aa6-96a6-bde84545d6f5",
+                    "label": "Pregnant: referred to PMTCT (indicate EDD)"
+                  },
+                  {
+                    "concept": "50891b89-2d3d-4234-bb32-bfa13f381d70",
+                    "label": "Want to become pregnant"
+                  },
+                  {
+                    "concept": "5059e018-bde9-4955-96cf-1314f31fee02",
+                    "label": "Not pregnant and not using any family planning method"
+                  },
+                  {
+                    "concept": "5271AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "On Family Planning"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If on FP, Specify",
+              "type": "obs",
+              "id": "ifOnFpSpecify",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "190AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Condoms"
+                  },
+                  {
+                    "concept": "159783AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Oral Contraceptive Pills"
+                  },
+                  {
+                    "concept": "1f74f995-4cec-4890-a58a-b2645f859a5e",
+                    "label": "Injectables / Implantable Hormones"
+                  },
+                  {
+                    "concept": "21453573-f6f6-4492-852a-6c4f106d7aa2",
+                    "label": "Diaphragm / Cervical Cap"
+                  },
+                  {
+                    "concept": "5275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Intrauterine device"
+                  },
+                  {
+                    "concept": "5de59e81-38c0-47cf-a336-af9be2f563b3",
+                    "label": "Vasectomy / Tube ligation"
+                  },
+                  {
+                    "concept": "ebfc7a9f-e867-4120-b5de-6dc9a4201746",
+                    "label": "Abstinence (no sex)"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(pregnancyStatusFpMethod) || pregnancyStatusFpMethod !== '5271AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Clinical Status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Functional Status",
+              "type": "obs",
+              "id": "functionalStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7475d56f-9568-4c76-a0f3-31eefa254d38",
+                "answers": [
+                  {
+                    "concept": "01151197-bce0-4c4d-9e5c-211d13dd8c10",
+                    "label": "Working"
+                  },
+                  {
+                    "concept": "160026AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ambulatory"
+                  },
+                  {
+                    "concept": "162752AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Bed Ridden"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "WHO Stage (1-4 or T1-T4)",
+              "type": "obs",
+              "id": "whoStage14OrT1T4",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5356AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "WHO stage 1 adult",
+                    "concept": "1204AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "WHO stage 2 adult",
+                    "concept": "1205AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "WHO stage 3 adult",
+                    "concept": "1206AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "WHO stage 4 adult",
+                    "concept": "1207AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "WHO STAGE 1 PEDS",
+                    "concept": "1220AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "WHO STAGE 2 PEDS",
+                    "concept": "1221AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "WHO STAGE 3 PEDS",
+                    "concept": "1222AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "WHO STAGE 4 PEDS",
+                    "concept": "1223AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Developmental Milestones",
+              "type": "obs",
+              "id": "developmentalMilestones",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "162069AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "38430d83-d2ee-4974-9752-07fe1044e15f",
+                    "label": "Appropriate for age"
+                  },
+                  {
+                    "concept": "b403638d-7059-40c6-94f7-25f836afda31",
+                    "label": "Delay"
+                  },
+                  {
+                    "concept": "49d2d6d9-92f0-4e35-bb40-3baf7f4c69ed",
+                    "label": "Regression"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "TB",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "TB Screening (PIN)",
+              "type": "obs",
+              "id": "tbScreenPin",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c5e7512a-c53e-4793-b82a-6d0f6adf10d5",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "For Children (0-14 years)",
+              "type": "obs",
+              "id": "forChildren014Yrs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0d5fbbe2-c2bf-4046-ab06-4bd5859473b1",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "TB Treatment / TB Prophylaxis",
+              "type": "obs",
+              "id": "tbTreatmentTbProphylaxis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "dd6173af-865e-443f-9750-64ace6140439",
+                "answers": [
+                  {
+                    "concept": "5702AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "INH (On Prophylaxis)"
+                  },
+                  {
+                    "concept": "42aff5b6-b132-4739-be67-554505a43c20",
+                    "label": "INH (Completed)"
+                  },
+                  {
+                    "concept": "10cd9ba0-25ec-4c51-87a4-1db177b3500f",
+                    "label": "INH dc"
+                  },
+                  {
+                    "concept": "79b53970-a1af-428b-aabe-c8150b6cffb3",
+                    "label": "TB Rx"
+                  },
+                  {
+                    "concept": "d010d06d-17fa-4af1-9c29-51504a344e05",
+                    "label": "TB Rx dc"
+                  },
+                  {
+                    "concept": "ac41ef99-a0db-43ac-85bd-eaf6af306e75",
+                    "label": "TB Rx c"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "INH Prophylaxis for (months)",
+              "type": "obs",
+              "id": "inhProphylaxisForMonths",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8f8d5432-13e8-47f7-9cfd-946ff913166e",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "TB Rx for (months)",
+              "type": "obs",
+              "id": "tbRxForMonths",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "35f98af7-3051-4bf4-8260-f2c01e212187",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Xpert MTB/RIF sample sent",
+              "type": "obs",
+              "id": "xpertMtbRifSentV",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c0cfd199-70ba-430d-9877-9e8afda5c0c3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Xpert MTB/RIF result (positive/negative)",
+              "type": "obs",
+              "id": "xpertMtbRifResultPN",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "162202AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "OIs, Pain",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Cervical Cancer Screened (VIA)",
+              "type": "obs",
+              "id": "cervicalCancerScreenedVia",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e7d4c4f6-4edd-4b51-ad84-c97fec45ea24",
+                "answers": [
+                  {
+                    "concept": "8d663ba6-92f0-4201-812e-b0c65acc8aaa",
+                    "label": "VIA Not Done"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "6ade78f0-9012-445b-f5cd-ef0123456789",
+                    "label": "VIA Positive: Eligible for Cryo"
+                  },
+                  {
+                    "concept": "5fcd67ef-8901-434a-e4bc-def012345678",
+                    "label": "VIA Positive: Non-Eligible for Cryo"
+                  },
+                  {
+                    "concept": "c8dcdf47-931d-5be7-b7fb-6b287750002e",
+                    "label": "Suspicious for Cervical Cancer"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "OIs / HIV related cancers",
+              "type": "obs",
+              "id": "oisHivRelatedCancers",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "13b8a6e4-c1ac-4fca-b361-1c760e08c6b5",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "b0ae6879-c107-4a1f-abdb-529264e6534a",
+                    "label": "Herpes Zoster"
+                  },
+                  {
+                    "concept": "212882ab-98a1-4017-8cf7-8dc2706b0e40",
+                    "label": "Bacterial Pneumonia"
+                  },
+                  {
+                    "concept": "c39f0322-4318-47e6-938e-cf17ef875cea",
+                    "label": "Pulmonary (TB)"
+                  },
+                  {
+                    "concept": "d4e5f607-1829-4dab-ce34-f5670a1b2c23",
+                    "label": "Extra Pulmonary (TB)"
+                  },
+                  {
+                    "concept": "0d5e6f70-8192-0123-def0-456789012345",
+                    "label": "Oral Thrush"
+                  },
+                  {
+                    "concept": "2cbc3047-4f36-48e3-862f-8265c71d8de0",
+                    "label": "Esophageal Candidiasis"
+                  },
+                  {
+                    "concept": "d26ff6ae-aaff-4be8-be9d-f5556e1542c4",
+                    "label": "Mouth Ulcers"
+                  },
+                  {
+                    "concept": "142412AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Diarrhoea"
+                  },
+                  {
+                    "concept": "66f56c86-f437-4835-9da2-0255cfb5c20a",
+                    "label": "Pneumocystis Pneumonia"
+                  },
+                  {
+                    "concept": "3f105b1c-c8fd-4ee0-a3b1-1bcbbd57c366",
+                    "label": "Toxoplasmosis (Brain)"
+                  },
+                  {
+                    "concept": "e94ab113-9757-4afd-be39-dee8770429e3",
+                    "label": "Cryptococcal Meningitis"
+                  },
+                  {
+                    "concept": "99d71cb4-945c-44b6-a890-6c3ef96810dc",
+                    "label": "Non-Hodgkin Lymphoma"
+                  },
+                  {
+                    "concept": "5155AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Kaposi Sarcoma"
+                  },
+                  {
+                    "concept": "fc4a1115-9a08-4f66-a80b-1566f86294a4",
+                    "label": "Cervical Cancer"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Assessed and Managed for Pain",
+              "type": "obs",
+              "id": "assessedAndManagedForPain",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d774942c-5167-4d1c-9ac3-e7a26b13f51b",
+                "answers": [
+                  {
+                    "concept": "49869001-1920-123d-4561-234567890123",
+                    "label": "No Pain"
+                  },
+                  {
+                    "concept": "f21a8628-b08a-47d4-a890-8758458002ec",
+                    "label": "WHO Step 1"
+                  },
+                  {
+                    "concept": "d852b30c-ae84-489b-9a88-9fa91e177d30",
+                    "label": "WHO Step 2"
+                  },
+                  {
+                    "concept": "d8926325-6677-427c-add7-28d8902a293b",
+                    "label": "WHO Step 3"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Laboratory",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "CD4 /mm3 or % if <5 yrs",
+              "type": "obs",
+              "id": "cd4Mm3OrIf5Yrs",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "30e342ac-1ccb-42bd-b3ff-d947848103cb"
+              }
+            },
+            {
+              "label": "VL Count (Copies/ml)",
+              "type": "obs",
+              "id": "vlCountCopiesMl",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Viral Load Clinical",
+              "type": "obs",
+              "id": "viralLoadClinical",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5b284b9a-43f8-495b-80de-64d57a6c3ca0",
+                "answers": [
+                  {
+                    "concept": "78251d33-63ef-423a-94fa-eb534df66c62",
+                    "label": "Detectable"
+                  },
+                  {
+                    "concept": "b4a8280f-ff72-4d1b-b1e9-62401db1a694",
+                    "label": "Undetectable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Description of Hemoglobin",
+              "type": "obs",
+              "id": "descriptionOfHemoglobin",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4bcf3511-4ca0-4d25-8e85-6e11db743d00"
+              }
+            },
+            {
+              "label": "Alt / Sgpt",
+              "type": "obs",
+              "id": "altSgpt",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9d07b066-4598-47bd-885f-cd2a3346ca96"
+              }
+            },
+            {
+              "label": "Ast / Sgot",
+              "type": "obs",
+              "id": "astSgot",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "276ea90e-451b-44ff-be20-e36508a7be19"
+              }
+            },
+            {
+              "label": "Creatinine",
+              "type": "obs",
+              "id": "creatinine",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "124c9470-5277-5965-a231-137986d48ab7"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Prophylaxis and Other Medication",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Co-trimoxazole preventive therapy (CPT) adherence",
+              "type": "obs",
+              "id": "coTrimoxazolePreventiveTherapyAdherence",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "79d1bf85-06cd-45fb-9626-949f0593bfdd",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fair"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "CPT dose dispensed (months)",
+              "type": "obs",
+              "id": "coTrimoxazolePreventiveTherapyDispenseDo",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "9af36922-7071-4e77-a0fb-0619ff54b152",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluconazole Preventive Therapy (FPT) (Dispensed Dose)",
+              "type": "obs",
+              "id": "fluconazolePreventiveTherapyFptDispensed",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "50c11331-bd5d-436d-bcdc-8897f7d75642"
+              }
+            },
+            {
+              "label": "Other Medications / nutritional Supplements dispensed",
+              "type": "obs",
+              "id": "otherMedicationsNutritionalSupplementsDi",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "13e072bc-f89f-44a6-b3e9-68b3f7c752e7"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Assess & Counsel for ARV Adherence",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Adherence",
+              "type": "obs",
+              "id": "adherence",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1658AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fair"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Why Fair or Poor?",
+              "type": "obs",
+              "id": "whyFairOrPoor",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "8d58d250-f5fd-4b33-8b2e-cd238ab5795b",
+                "answers": [
+                  {
+                    "concept": "824d6d3c-c155-476b-b99d-1a7117bca7ba",
+                    "label": "Toxicity / Side effects"
+                  },
+                  {
+                    "concept": "56ee06e2-3b32-4325-bfb5-7c0bcbd03227",
+                    "label": "Share with others"
+                  },
+                  {
+                    "concept": "3ad83a4d-e936-4746-98b1-2bc282f17e68",
+                    "label": "Forgot"
+                  },
+                  {
+                    "concept": "b559ad61-6f3a-47b9-9aa4-a1290c9989d6",
+                    "label": "Felt Better"
+                  },
+                  {
+                    "concept": "02bffbb9-0655-4df7-8548-9b16a84cae65",
+                    "label": "Too ill"
+                  },
+                  {
+                    "concept": "2e4fe531-bd77-4006-b904-14463bcc897b",
+                    "label": "Stigma / Disclosure"
+                  },
+                  {
+                    "concept": "dad0f7b0-d5d4-4f28-aedc-1ed886efc7a0",
+                    "label": "Drug Stock Out"
+                  },
+                  {
+                    "concept": "884f2533-71d9-4e3d-857d-e43f7faf1ed6",
+                    "label": "Lost / ran out of pills"
+                  },
+                  {
+                    "concept": "17ee070c-81a7-49bd-8944-12432be02996",
+                    "label": "Delivery / Travel Problems"
+                  },
+                  {
+                    "concept": "53471c83-7a4b-4c57-81ef-3a2c47119bf1",
+                    "label": "Inability To Pay"
+                  },
+                  {
+                    "concept": "6f708192-a314-4c43-c1ef-23456789012a",
+                    "label": "Alcohol"
+                  },
+                  {
+                    "concept": "6038AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Depression"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "ARV Drugs: Dispensing",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Adult First Line",
+              "type": "obs",
+              "id": "adultFirstLine",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f9a7ed20-0561-5fc4-9619-3e1e07ac63c4",
+                "answers": [
+                  {
+                    "concept": "d6071829-0314-2345-6789-012345901234",
+                    "label": "1c = AZT + 3TC + NVP"
+                  },
+                  {
+                    "concept": "09304152-3647-5678-9012-345678234567",
+                    "label": "1d = AZT + 3TC + EFV"
+                  },
+                  {
+                    "concept": "21526374-5869-7890-1234-567890456789",
+                    "label": "1e = TDF + 3TC + NVP"
+                  },
+                  {
+                    "concept": "43748596-7081-9012-3456-789012678901",
+                    "label": "1f = TDF + 3TC + NVP"
+                  },
+                  {
+                    "concept": "9b0c6ed2-09dc-534c-b9e9-3de040615c92",
+                    "label": "1g = ABC + 3TC + EFV"
+                  },
+                  {
+                    "concept": "cf809d39-6bfb-5fd8-b97f-97454b75360a",
+                    "label": "1h = ABC + 3TC + NVP"
+                  },
+                  {
+                    "concept": "db8d644d-0fbf-5a14-90f7-f3ae78730726",
+                    "label": "1j = TDF + 3TC + DTG"
+                  },
+                  {
+                    "concept": "d74a3ef6-332c-5579-ad16-9bcd3e632ad8",
+                    "label": "1k = AZT + 3TC + DTG"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Other Specify",
+              "type": "obs",
+              "id": "ifOtherSpecify",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              }
+            },
+            {
+              "label": "Adult Second Line",
+              "type": "obs",
+              "id": "adultSecondLine",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "174cfcb4-0db3-5c82-a64e-e750ee2065f5",
+                "answers": [
+                  {
+                    "concept": "e7182930-1425-3456-7890-123456012345",
+                    "label": "2e = AZT + 3TC + LPV/r"
+                  },
+                  {
+                    "concept": "164511AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2f = AZT + 3TC + ATV/r"
+                  },
+                  {
+                    "concept": "65960718-9203-1234-5678-901234890123",
+                    "label": "2g = TDF + 3TC + LPV/r"
+                  },
+                  {
+                    "concept": "164512AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2h = TDF + 3TC + ATV/r"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If other specify",
+              "type": "obs",
+              "id": "ifOtherSpecify2",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              }
+            },
+            {
+              "label": "Adult Third Line",
+              "type": "obs",
+              "id": "adultThirdLine",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d519bc51-7a6f-5b91-b705-d64cdedbad91",
+                "answers": [
+                  {
+                    "concept": "b52c4751-9638-55d4-bfb5-4254aca45f1a",
+                    "label": "3a = DRV/r + DTG + AZT + 3TC"
+                  },
+                  {
+                    "concept": "d1a3d7b7-81a2-5592-b286-e973a72f3d1e",
+                    "label": "3b = DRV/r + DTG + TDF + 3TC"
+                  },
+                  {
+                    "concept": "7d77b722-9b73-53fa-aabb-f379199f8de3",
+                    "label": "3D = DRV/r + ABC + EFV + 3TC"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Other Specify",
+              "type": "obs",
+              "id": "ifOtherSpecify3",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              }
+            },
+            {
+              "label": "Child First Line",
+              "type": "obs",
+              "id": "childFirstLine",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d1676b02-1f88-5182-b898-50afdf6758ba",
+                "answers": [
+                  {
+                    "concept": "f8293041-2536-4567-8901-234567123456",
+                    "label": "4c = AZT + 3TC + NVP"
+                  },
+                  {
+                    "concept": "10415263-4758-6789-0123-456789345678",
+                    "label": "4d = AZT + 3TC + EFV"
+                  },
+                  {
+                    "concept": "54859607-8192-0123-4567-890123789012",
+                    "label": "4e = TDF + 3TC + EFV"
+                  },
+                  {
+                    "concept": "e7182930-1425-3456-7890-123456012345",
+                    "label": "4f = AZT + 3TC + LPV/r"
+                  },
+                  {
+                    "concept": "b1a6a33e-7373-5148-9a85-d473eb40e6ce",
+                    "label": "4g = ABC + 3TC + LPV/r"
+                  },
+                  {
+                    "concept": "db8d644d-0fbf-5a14-90f7-f3ae78730726",
+                    "label": "4i = TDF + 3TC + DTG"
+                  },
+                  {
+                    "concept": "760ee2e1-0f02-56be-9e14-dc4885085c2c",
+                    "label": "4j = ABC + 3TC + DTG"
+                  },
+                  {
+                    "concept": "d74a3ef6-332c-5579-ad16-9bcd3e632ad8",
+                    "label": "4k = AZT + 3TC + DTG"
+                  },
+                  {
+                    "concept": "282dfce4-6bc6-433f-88ad-1a721f4b0909",
+                    "label": "4L = ABC + 3TC + DTG"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Other Specify",
+              "type": "obs",
+              "id": "ifOtherSpecify4",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              }
+            },
+            {
+              "label": "Child Second Line",
+              "type": "obs",
+              "id": "childSecondLine",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "47ccc5b1-6ce0-56e5-b9ea-625bc24e543c",
+                "answers": [
+                  {
+                    "concept": "b1a6a33e-7373-5148-9a85-d473eb40e6ce",
+                    "label": "5e = ABC + 3TC + LPV/r"
+                  },
+                  {
+                    "concept": "e7182930-1425-3456-7890-123456012345",
+                    "label": "5f = AZT + 3TC + LPV/r"
+                  },
+                  {
+                    "concept": "43748596-7081-9012-3456-789012678901",
+                    "label": "5g = TDF + 3TC + EFV"
+                  },
+                  {
+                    "concept": "9b0c6ed2-09dc-534c-b9e9-3de040615c92",
+                    "label": "5h = ABC + 3TC + EFV"
+                  },
+                  {
+                    "concept": "65960718-9203-1234-5678-901234890123",
+                    "label": "5i = TDF + 3TC + LPV/r"
+                  },
+                  {
+                    "concept": "af5c3115-254c-5122-b515-96e4db266cb4",
+                    "label": "5k = RAL + AZT + 3TC"
+                  },
+                  {
+                    "concept": "cf67c31a-f1d2-5edf-8b33-b6200de7b30d",
+                    "label": "5L = RAL + ABC + 3TC"
+                  },
+                  {
+                    "concept": "760ee2e1-0f02-56be-9e14-dc4885085c2c",
+                    "label": "5m = ABC + 3TC + DTG"
+                  },
+                  {
+                    "concept": "d74a3ef6-332c-5579-ad16-9bcd3e632ad8",
+                    "label": "5n = AZT + 3TC + DTG"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Other Specify",
+              "type": "obs",
+              "id": "ifOtherSpecify5",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              }
+            },
+            {
+              "label": "Child Third Line",
+              "type": "obs",
+              "id": "childThirdLine",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a578e1f9-9338-5688-974f-e8a492ab215b",
+                "answers": [
+                  {
+                    "concept": "9a2df21d-1f0f-5049-81cf-f496e8815da5",
+                    "label": "6a = DRV/r + RAL + AZT + 3TC"
+                  },
+                  {
+                    "concept": "cc5a0e2c-c33f-5200-baa9-1d663517340e",
+                    "label": "6b = DRV/r + RAL + TDF + 3TC"
+                  },
+                  {
+                    "concept": "8a8b6eb9-eee7-4d8f-9845-be836fca2bcf",
+                    "label": "6c = DRV/r + DTG + AZT + 3TC"
+                  },
+                  {
+                    "concept": "09907493-edf0-4c12-96cb-dde7e02ba4a6",
+                    "label": "6d = DRV/r + DTG + TDF + 3TC"
+                  },
+                  {
+                    "concept": "ab2e8085-096a-58ee-bc94-288c09960be5",
+                    "label": "6F = DRV/r + DTG + ABC + 3TC"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Other Specify",
+              "type": "obs",
+              "id": "ifOtherSpecify6",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              }
+            },
+            {
+              "label": "Dispense dose in month",
+              "type": "obs",
+              "id": "dispenseDoseInMonth",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "15b13628-b639-48ce-b7b1-de920e41cb96",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Side Effects and Regimen Change",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Side Effects",
+              "type": "obs",
+              "id": "sideEffects",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "79f0b95d-83f0-4662-80a5-8ecdebbef6c3",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "5978AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Nausea"
+                  },
+                  {
+                    "concept": "5983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Diarrhea"
+                  },
+                  {
+                    "concept": "5949AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fatigue"
+                  },
+                  {
+                    "concept": "620AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Headache"
+                  },
+                  {
+                    "concept": "625cba5e-0846-40e9-98f1-390999ec9bd0",
+                    "label": "Numbness / Tingling / Pain"
+                  },
+                  {
+                    "concept": "5180AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Rash"
+                  },
+                  {
+                    "concept": "6030AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Anemia"
+                  },
+                  {
+                    "concept": "151AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abdominal Pain"
+                  },
+                  {
+                    "concept": "215AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Jaundice"
+                  },
+                  {
+                    "concept": "27a5939b-a522-488c-aecd-1e1b17f6cea7",
+                    "label": "Fat Changes"
+                  },
+                  {
+                    "concept": "7b4b2b34-f678-4e59-a7f6-0abcd59bad11",
+                    "label": "Dizzy, Anxiety, Nightmares, Depression"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Reason For Change",
+              "type": "obs",
+              "id": "reasonForChange",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0606a973-1f24-464b-966d-5494bd560c4c",
+                "answers": [
+                  {
+                    "concept": "824d6d3c-c155-476b-b99d-1a7117bca7ba",
+                    "label": "Toxicity / Side effects"
+                  },
+                  {
+                    "concept": "b1a3e464-55eb-499e-8d2d-9b7404f243e9",
+                    "label": "Due to new TB"
+                  },
+                  {
+                    "concept": "160561AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "New drug available"
+                  },
+                  {
+                    "concept": "dad0f7b0-d5d4-4f28-aedc-1ed886efc7a0",
+                    "label": "Drug stock out"
+                  },
+                  {
+                    "concept": "160569AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Virologic failure"
+                  },
+                  {
+                    "concept": "bbd82e74-e9de-4bef-ab69-eeb15d8b2c22",
+                    "label": "Clinical treatment failure"
+                  },
+                  {
+                    "concept": "160566AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Immunological failure"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Client-set HIV Prevention Plan / Decision for Children",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date2",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "HIV Prevention Plan",
+              "type": "obs",
+              "id": "hivPreventionPlan",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "6890bb87-9397-43e5-bbf8-3d447fe2d030",
+                "answers": [
+                  {
+                    "concept": "f14a2c27-6816-4c2f-88a3-154fe180a37c",
+                    "label": "Agreed to disclose HIV status to partner/family"
+                  },
+                  {
+                    "concept": "4010ceed-313f-4c7c-9e53-5fffc3330013",
+                    "label": "Agreed to bring partner to test"
+                  },
+                  {
+                    "concept": "fec9a8d5-360d-440b-9b2d-c97a3ccc4729",
+                    "label": "Agreed to bring children to test"
+                  },
+                  {
+                    "concept": "f658417d-4734-40b7-94bd-4358f20ede85",
+                    "label": "Discussed and agreed to practice safer sex (condom use)"
+                  },
+                  {
+                    "concept": "6ba71bbd-def7-47dc-ae46-43bc52544103",
+                    "label": "Decides to avoid or reduce the number of sexual partners"
+                  },
+                  {
+                    "concept": "fa93cbe4-a6d7-4ab3-bcc2-1c960fc04b74",
+                    "label": "Assessed for STI"
+                  },
+                  {
+                    "concept": "3d51105e-a426-4e08-acf5-1941e34d0736",
+                    "label": "Client Managed for STI"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Disclosure for Child",
+              "type": "obs",
+              "id": "disclosureForChild",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3c3fad76-6967-44f1-b3b2-224b01951b06",
+                "answers": [
+                  {
+                    "concept": "2a920cce-d45a-48ef-8d5b-e4be8c601541",
+                    "label": "No Disclosure"
+                  },
+                  {
+                    "concept": "67844be0-6c5d-45d0-8bb0-b178638f07ea",
+                    "label": "Stage 1"
+                  },
+                  {
+                    "concept": "bd2c5374-96cd-4c97-8adc-5099c4818890",
+                    "label": "Stage 2"
+                  },
+                  {
+                    "concept": "7fb89442-ed4f-4ea7-81fd-16cdd2b2def7",
+                    "label": "Stage 3"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Next Visit",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of next visit",
+              "type": "obs",
+              "id": "dateOfNextVisit",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Cotrimoxazole start date",
+              "type": "obs",
+              "id": "cotrimoxazoleDateStarted",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "164361AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Cotrimoxazole stop date",
+              "type": "obs",
+              "id": "cotrimoxazoleDateStopped",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "164362AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Next Visit",
+              "type": "obs",
+              "id": "nextVisit",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

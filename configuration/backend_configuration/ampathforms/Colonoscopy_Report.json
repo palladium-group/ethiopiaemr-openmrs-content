@@ -1,0 +1,281 @@
+{
+  "name": "Colonoscopy Report",
+  "description": "Colonoscopy Report - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "277a2456-b80d-5295-9e67-de4b8f7735e9",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Colonoscopy Report Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
+              }
+            },
+            {
+              "label": "Indication",
+              "type": "obs",
+              "id": "indication",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c40b7105-5f72-56c9-a039-cfb3f5c9d425"
+              }
+            },
+            {
+              "label": "Medication Given",
+              "type": "obs",
+              "id": "medicationGiven",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6c122334-4556-2348-6782-0b12345678ab"
+              }
+            },
+            {
+              "label": "Instrument",
+              "type": "obs",
+              "id": "instrument",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "20040bdd-58ce-4235-9804-ffd596ec9356",
+                "answers": [
+                  {
+                    "label": "Vacuum",
+                    "concept": "b7b07c42-7251-4dc3-b10b-82e9fb17e5bd"
+                  },
+                  {
+                    "label": "Forceps",
+                    "concept": "dd55a56d-315f-47d4-aba4-e430533cccb8"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Technical",
+              "type": "obs",
+              "id": "technical",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "bc3cbe8b-ff9a-4edd-b18a-d55796fd2794"
+              }
+            },
+            {
+              "label": "Cleansing",
+              "type": "obs",
+              "id": "cleansing",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "abbb71d8-3663-4dd0-a9a6-da202e851ca6"
+              }
+            },
+            {
+              "label": "Cecal intubation",
+              "type": "obs",
+              "id": "cecalIntubation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1ca514ab-04bf-4440-acb2-021ea632450a"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Findings",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Perianal area",
+              "type": "obs",
+              "id": "perianalArea",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f8a1164d-1e4d-4b9e-a6c7-a43bc7ea3bf5"
+              }
+            },
+            {
+              "label": "Rectum",
+              "type": "obs",
+              "id": "rectum",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "51be896d-0144-411a-9b5f-ea675a50e820"
+              }
+            },
+            {
+              "label": "Colon",
+              "type": "obs",
+              "id": "colon",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d177bc42-1628-4e18-9109-6946c574d451"
+              }
+            },
+            {
+              "label": "Terminal ileum",
+              "type": "obs",
+              "id": "terminalIleum",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e0d4b410-9e3f-4daf-9383-6512b03f9d6f"
+              }
+            },
+            {
+              "label": "Therapy",
+              "type": "obs",
+              "id": "therapy",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a1ff8c66-3929-4142-9c15-c0e94a603cb5"
+              }
+            },
+            {
+              "label": "Biopsy",
+              "type": "obs",
+              "id": "biopsy",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5f6c6a07-e3aa-5b88-895e-15961eb29d4b",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "GI Conclusion",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Diagnosis notes",
+              "type": "obs",
+              "id": "diagnosisNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "159395AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Recommendation",
+              "type": "obs",
+              "id": "recommendation",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "36566305-0931-47d0-9de7-488c0ef4bef5"
+              }
+            },
+            {
+              "label": "Endoscopist (Supervisor)",
+              "type": "obs",
+              "id": "endoscopistSupervisor",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3b4a05df-4ba3-5bc0-bc27-77d3a0a686c7"
+              }
+            },
+            {
+              "label": "Colonoscopy image",
+              "type": "obs",
+              "id": "colonoscopyImage",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c1aa8beb-d07f-4235-bde4-1a546c8f02f6"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

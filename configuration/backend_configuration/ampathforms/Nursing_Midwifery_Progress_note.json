@@ -1,0 +1,151 @@
+{
+  "name": "Nursing/ Midwifery Progress note",
+  "description": "Nursing/ Midwifery Progress note - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "e715a8e5-bbb0-52ad-92e6-038337ebe747",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Nursing/ Midwifery Progress note Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Shift",
+              "type": "obs",
+              "id": "shift",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e8c1ae15-bd77-43cf-a54b-6ddaa80784f6",
+                "answers": [
+                  {
+                    "concept": "1e5f6071-8293-0123-4567-89abcdef0123",
+                    "label": "Day"
+                  },
+                  {
+                    "concept": "161018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Night"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Date & Time",
+              "type": "obs",
+              "id": "dateTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Subjective",
+              "type": "obs",
+              "id": "subjective",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d38cfc50-62e1-47d4-896e-090cc8d1e68c"
+              }
+            },
+            {
+              "label": "Objective",
+              "type": "obs",
+              "id": "objective",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b80b0dc5-6a84-4b51-a453-d7620661d078"
+              }
+            },
+            {
+              "label": "Analysis/Assessment",
+              "type": "obs",
+              "id": "analysisAssessment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0544cba6-51f6-5f3d-bb12-689bfed0c306"
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              }
+            },
+            {
+              "label": "Signature",
+              "type": "obs",
+              "id": "signature",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "28794bbc-ad22-4d8e-a8a3-8147bdfef6cd"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

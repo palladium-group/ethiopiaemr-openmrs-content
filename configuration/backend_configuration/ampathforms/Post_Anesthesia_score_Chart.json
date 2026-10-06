@@ -1,0 +1,292 @@
+{
+  "name": "Post Anesthesia score Chart",
+  "description": "Post Anesthesia score Chart - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "2f8aad9e-909d-58a8-a1f7-2d5ae7e1f6ef",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Post Anesthesia score Chart Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Taken",
+              "type": "obs",
+              "id": "taken",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "60629ae3-1f3b-4031-9c02-b1c8e26a5868",
+                "answers": [
+                  {
+                    "concept": "456e0ee4-8981-4a9a-9124-00975c9a9ea3",
+                    "label": "On admission"
+                  },
+                  {
+                    "concept": "fdb0af79-6ab6-5665-a4ab-e232ffc4ad63",
+                    "label": "On Discharge"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Activity",
+              "type": "obs",
+              "id": "activity",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8848902f-f8b9-5a02-b6eb-dedf78d309a6",
+                "answers": [
+                  {
+                    "concept": "57494ae6-a1f4-48da-9b49-41e6396e45b5",
+                    "label": "Move 4 extremities voluntarily or in command"
+                  },
+                  {
+                    "concept": "b98924ce-ab68-4cef-acdc-bf1e41919f09",
+                    "label": "Move 2 extremities voluntarily or in command"
+                  },
+                  {
+                    "concept": "78c89db3-8376-4672-b572-52ea22b2a671",
+                    "label": "Move 1 extremities voluntarily or in command"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Respiration",
+              "type": "obs",
+              "id": "respiration",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a0273a59-e72d-40b8-8b74-62c2533362c9",
+                "answers": [
+                  {
+                    "concept": "bb6dc238-b267-4d93-a35e-dd40e7d03d05",
+                    "label": "Able to breathe deeply or cough"
+                  },
+                  {
+                    "concept": "0bac980d-4dc0-4b67-8bc8-d33c143dce05",
+                    "label": "Dyspnea or limited breathing"
+                  },
+                  {
+                    "concept": "b2cae73a-c8f0-49cc-9032-921f4227b9a0",
+                    "label": "Apnea or mechanical ventilation"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Circulatory",
+              "type": "obs",
+              "id": "circulatory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "90133220-f3bd-4ea4-80b1-ba269a3e385b",
+                "answers": [
+                  {
+                    "concept": "31bb5794-bd35-4079-a822-5b4015f815e5",
+                    "label": "Systolic BP within 20mmHg from pre-anesthesia level"
+                  },
+                  {
+                    "concept": "623ca3ae-3a64-4dcd-8859-8a639d1de044",
+                    "label": "Systolic BP within 20-50mmHg from pre-anesthesia level"
+                  },
+                  {
+                    "concept": "5c84e0fa-00fd-4fda-9e6b-876dedc4bc38",
+                    "label": "Systolic BP >50 or <50mmHg from pre-anesthesia level"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Consciousness",
+              "type": "obs",
+              "id": "consciousness",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "162643AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "c39c33ef-d989-4eaa-94dd-6257838157a8",
+                    "label": "Fully awake"
+                  },
+                  {
+                    "concept": "c4b583f6-3bd7-45f4-9636-a9f156c3dedb",
+                    "label": "Arousal of calling"
+                  },
+                  {
+                    "concept": "60c7864e-4a90-468f-81bf-94a6dea9c898",
+                    "label": "Unresponsive"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Oxygen saturation(as compare to the baseline prior to surgery)",
+              "type": "obs",
+              "id": "oxygenSaturationAsCompareToTheBaselinePr",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a3f60b47-70f8-4610-9eab-4455d4223532",
+                "answers": [
+                  {
+                    "concept": "7f3e0a09-98fc-4db0-8ee4-f1c5ed4cdbe9",
+                    "label": "Saturation > 92% on room air"
+                  },
+                  {
+                    "concept": "f83250bc-2dcc-48c9-aac6-eafbeeb97d62",
+                    "label": "Need O2 to maintain oxygen saturation >92%"
+                  },
+                  {
+                    "concept": "5fe40ad5-a80e-4379-bd6e-b9d56ef9b279",
+                    "label": "Saturation less than 90% on oxygen"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pain level",
+              "type": "obs",
+              "id": "painLevel",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "30608161-79c3-4d6d-9286-31a970ae849b",
+                "answers": [
+                  {
+                    "concept": "49869001-1920-123d-4561-234567890123",
+                    "label": "No pain"
+                  },
+                  {
+                    "concept": "163478AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate/Mild pain"
+                  },
+                  {
+                    "concept": "163477AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe pain"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Total Score (Nine or more score for recovery to be confirmed)",
+              "type": "obs",
+              "id": "totalScoreNineOrMoreScoreForRecoveryToBe",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f6a97866-fe4d-46c1-a68d-5cee3152d054",
+                "calculate": {
+                  "calculateExpression": "(activity === '57494ae6-a1f4-48da-9b49-41e6396e45b5' ? 2 : activity === 'b98924ce-ab68-4cef-acdc-bf1e41919f09' ? 1 : 0) + (respiration === 'bb6dc238-b267-4d93-a35e-dd40e7d03d05' ? 2 : respiration === '0bac980d-4dc0-4b67-8bc8-d33c143dce05' ? 1 : 0) + (circulatory === '31bb5794-bd35-4079-a822-5b4015f815e5' ? 2 : circulatory === '623ca3ae-3a64-4dcd-8859-8a639d1de044' ? 1 : 0) + (consciousness === 'c39c33ef-d989-4eaa-94dd-6257838157a8' ? 2 : consciousness === 'c4b583f6-3bd7-45f4-9636-a9f156c3dedb' ? 1 : 0) + (oxygenSaturationAsCompareToTheBaselinePr === '7f3e0a09-98fc-4db0-8ee4-f1c5ed4cdbe9' ? 2 : oxygenSaturationAsCompareToTheBaselinePr === 'f83250bc-2dcc-48c9-aac6-eafbeeb97d62' ? 1 : 0) + (painLevel === '49869001-1920-123d-4561-234567890123' ? 2 : painLevel === '163478AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 0)"
+                }
+              }
+            },
+            {
+              "label": "Notes",
+              "type": "obs",
+              "id": "notes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Name of Nurse who discharges at PACU",
+              "type": "obs",
+              "id": "nameOfNurseWhoDischargesAtPacu",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Date/time",
+              "type": "obs",
+              "id": "dateTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Name of Nurses who took the patients to ward",
+              "type": "obs",
+              "id": "nameOfNursesWhoTookThePatientsToWard",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            },
+            {
+              "label": "Date & Time",
+              "type": "obs",
+              "id": "dateTime2",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

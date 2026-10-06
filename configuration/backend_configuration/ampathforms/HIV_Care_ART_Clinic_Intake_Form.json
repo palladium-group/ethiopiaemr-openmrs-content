@@ -1,0 +1,1664 @@
+{
+  "name": "HIV Care / ART Clinic Intake Form",
+  "description": "HIV Care / ART Clinic Intake Form - built from physician Word-doc spec (Phase 1, batch-three).",
+  "version": "1.0",
+  "published": true,
+  "uuid": "cc6d660e-c273-586e-8aa0-39afb6089bd3",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "HIV Care / ART Clinic Intake Form Assessment",
+      "sections": [
+        {
+          "label": "Enrollment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Enrollment Date",
+              "type": "obs",
+              "id": "enrollmentDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "9a5b7e89-96be-592b-939f-71ffa0ee76bb"
+              }
+            }
+          ]
+        },
+        {
+          "label": "If age < 5",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Mother's name (if child is under 5)",
+              "type": "obs",
+              "id": "ifAge5MotherSName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1593AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Place of delivery",
+              "type": "obs",
+              "id": "placeOfDelivery",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "95c1a421-bf82-5ecf-89cb-9b1bd9f46fa0",
+                "answers": [
+                  {
+                    "concept": "1537AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Health Facility"
+                  },
+                  {
+                    "concept": "1536AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Home"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If other specify",
+              "type": "obs",
+              "id": "ifOtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(placeOfDelivery) || placeOfDelivery !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "If age<5 Mode of delivery",
+              "type": "obs",
+              "id": "ifAge5ModeOfDelivery",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2392bb08-2801-4f3e-a59b-f9589d2e7422",
+                "answers": [
+                  {
+                    "concept": "dcf88ce9-74e9-4c6c-a2ff-d189136699d6",
+                    "label": "Spontaneous vaginal"
+                  },
+                  {
+                    "concept": "1171AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cesarean section"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Other Specify",
+              "type": "obs",
+              "id": "ifOtherSpecify2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(ifAge5ModeOfDelivery) || ifAge5ModeOfDelivery !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Client / caregiver",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Marital status (client or child's caregiver)",
+              "type": "obs",
+              "id": "clientChildSCaregiverMaritalStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "266ff101-762f-490f-b509-15f95fc53963",
+                "answers": [
+                  {
+                    "concept": "1057AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Never Married"
+                  },
+                  {
+                    "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Married"
+                  },
+                  {
+                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Divorced"
+                  },
+                  {
+                    "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Widowed"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Religion",
+              "type": "obs",
+              "id": "religion",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "162929AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "c76f0b5e-ff80-4e16-a16e-31d786d64fe9",
+                    "label": "Orthodox"
+                  },
+                  {
+                    "concept": "77c6ac72-d63e-4023-ba16-bbc468e817c0",
+                    "label": "Muslim"
+                  },
+                  {
+                    "concept": "b85e3fa6-16d1-4157-9dac-a3f9cc07ea79",
+                    "label": "Protestant"
+                  },
+                  {
+                    "concept": "162931AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Catholic"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If other specify",
+              "type": "obs",
+              "id": "ifOtherSpecify3",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(religion) || religion !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Level of Education",
+              "type": "obs",
+              "id": "levelOfEducation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5342a5d9-758a-4b5c-9de2-e67f2edf19eb",
+                "answers": [
+                  {
+                    "concept": "20ad0a73-de7d-479f-9866-dcdfb0433e42",
+                    "label": "No Education"
+                  },
+                  {
+                    "concept": "159943AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Primary"
+                  },
+                  {
+                    "concept": "159944AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Secondary"
+                  },
+                  {
+                    "concept": "159945AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tertiary"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Occupation",
+              "type": "obs",
+              "id": "occupation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b37c797c-8b51-4a61-9ab7-cf40792d0bdf"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Client Referral Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "From within the facility",
+              "type": "obs",
+              "id": "fromWithinTheFacility",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "33af70ed-7a66-431d-ab49-a094e95c4ffd",
+                "answers": [
+                  {
+                    "concept": "4d98d280-0612-4ff2-a655-3f5b2185fb2c",
+                    "label": "Medical OPD"
+                  },
+                  {
+                    "concept": "d8176d1b-1234-11ee-be56-0242ac120003",
+                    "label": "Pediatric OPD"
+                  },
+                  {
+                    "concept": "cc5b609b-5b85-5a15-8f41-91524e615cde",
+                    "label": "TB Clinic"
+                  },
+                  {
+                    "concept": "49557099-baf1-4ade-a0b5-7b04854a0d0a",
+                    "label": "MCH (PMTCT)"
+                  },
+                  {
+                    "concept": "160539AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "VCT"
+                  },
+                  {
+                    "concept": "08943855-3e30-5b5b-8786-3547cb06e8e2",
+                    "label": "Adult IPD"
+                  },
+                  {
+                    "concept": "79eff568-9aae-5260-9872-662a4c35e30e",
+                    "label": "Pediatric IPD"
+                  },
+                  {
+                    "concept": "d2070c98-271a-4211-998e-d84e47a887cf",
+                    "label": "Other Outpatient"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If other specify",
+              "type": "obs",
+              "id": "ifOtherSpecify4",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(fromWithinTheFacility) || fromWithinTheFacility !== 'd2070c98-271a-4211-998e-d84e47a887cf'"
+              }
+            },
+            {
+              "label": "Outside the facility",
+              "type": "obs",
+              "id": "outsideTheFacility",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1195dc15-037d-56b8-8e39-6cfc74e9ea70",
+                "answers": [
+                  {
+                    "concept": "ad455667-7889-5671-9015-012345678a01",
+                    "label": "Health Centers"
+                  },
+                  {
+                    "concept": "9a51f39c-3057-53b6-aeb2-4bc1c42f0798",
+                    "label": "Public Hospital"
+                  },
+                  {
+                    "concept": "1016a54e-b31f-4102-9d9f-f8c97fc467c7",
+                    "label": "Private Hospital"
+                  },
+                  {
+                    "concept": "b82e7cde-340f-4154-84b7-ae03f24351f2",
+                    "label": "NGO/FBO Hospital"
+                  },
+                  {
+                    "concept": "9d4cbba9-e086-4f7c-88fc-10da3a567851",
+                    "label": "Private Clinic"
+                  },
+                  {
+                    "concept": "165650AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Self-Referred"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Other Specify",
+              "type": "obs",
+              "id": "ifOtherSpecify5",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(outsideTheFacility) || outsideTheFacility !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Reason for Referral",
+              "type": "obs",
+              "id": "reasonForReferral",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "843471a8-580c-4b29-8257-426b41e5d1df",
+                "answers": [
+                  {
+                    "concept": "b8c9d0e1-f2a3-4456-b789-012345678901",
+                    "label": "To be enrolled as new pre-ART patient"
+                  },
+                  {
+                    "concept": "5baffe77-0b6f-4d51-aa34-eca594c66d68",
+                    "label": "To be enrolled as transferred-in patient"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "At Enrollment: Spouse",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Age",
+              "type": "obs",
+              "id": "age",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "15d60d87-49e3-4f9f-8474-801250d83b3b",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Sex",
+              "type": "obs",
+              "id": "sex",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3071a2b3-0415-2345-6789-012345abcd07",
+                "answers": [
+                  {
+                    "concept": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Male"
+                  },
+                  {
+                    "concept": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Health Status",
+              "type": "obs",
+              "id": "healthStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "159640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "a30bd5a1-2af0-44a7-8414-2341f7eae79b",
+                    "label": "Healthy"
+                  },
+                  {
+                    "concept": "6ca6835b-bc3e-4609-b557-b76b51dba558",
+                    "label": "Chronically ill"
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "At Enrollment: Child / Sibling",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Age",
+              "type": "obs",
+              "id": "age2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "15d60d87-49e3-4f9f-8474-801250d83b3b",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Sex",
+              "type": "obs",
+              "id": "sex2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3071a2b3-0415-2345-6789-012345abcd07",
+                "answers": [
+                  {
+                    "concept": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Male"
+                  },
+                  {
+                    "concept": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Health Status",
+              "type": "obs",
+              "id": "healthStatus2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "159640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "a30bd5a1-2af0-44a7-8414-2341f7eae79b",
+                    "label": "Healthy"
+                  },
+                  {
+                    "concept": "6ca6835b-bc3e-4609-b557-b76b51dba558",
+                    "label": "Chronically ill"
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Spouse at Enrollment or Follow-up visit",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Counselled for HIV",
+              "type": "obs",
+              "id": "counselledForHiv",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "118f43bd-3f2a-5084-bfd2-e0d60ab7bce6",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Tested for HIV",
+              "type": "obs",
+              "id": "testedForHiv",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "HIV test Result",
+              "type": "obs",
+              "id": "hivTestResult",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a90ebc9e-53b4-4a31-bf19-c5e474efe62d",
+                "answers": [
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NR"
+                  },
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "R"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If R Started ART",
+              "type": "obs",
+              "id": "ifRStartedArt",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "79dc85d8-0f70-55ce-a5b4-1a5529ff7562",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "isEmpty(hivTestResult) || hivTestResult !== '1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Unique ART No.",
+              "type": "obs",
+              "id": "uniqueArtNo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "31ee8c4c-1ae1-5641-beea-6701100da6c3"
+              }
+            },
+            {
+              "label": "Remark",
+              "type": "obs",
+              "id": "remark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Child / Sibling at Enrollment or Follow-up visit",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Counselled for HIV",
+              "type": "obs",
+              "id": "counselledForHiv2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "118f43bd-3f2a-5084-bfd2-e0d60ab7bce6",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Tested for HIV",
+              "type": "obs",
+              "id": "testedForHiv2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "164401AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "HIV test Result",
+              "type": "obs",
+              "id": "hivTestResult2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a90ebc9e-53b4-4a31-bf19-c5e474efe62d",
+                "answers": [
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "NR"
+                  },
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "R"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If R Started ART",
+              "type": "obs",
+              "id": "ifRStartedArt2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "79dc85d8-0f70-55ce-a5b4-1a5529ff7562",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true",
+              "hide": {
+                "hideWhenExpression": "isEmpty(hivTestResult2) || hivTestResult2 !== '1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Unique ART No.",
+              "type": "obs",
+              "id": "uniqueArtNo2",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "31ee8c4c-1ae1-5641-beea-6701100da6c3"
+              }
+            },
+            {
+              "label": "Remark",
+              "type": "obs",
+              "id": "remark2",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Past Opportunistic Illness (OI), Prophylaxis and Treatment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Past OI",
+              "type": "obs",
+              "id": "pastOi",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "74d409f0-4c82-4c58-bd25-f79a3eb00dab",
+                "answers": [
+                  {
+                    "concept": "c39f0322-4318-47e6-938e-cf17ef875cea",
+                    "label": "Pulmonary (TB)"
+                  },
+                  {
+                    "concept": "643d5e4d-7cac-4621-9092-9ce77006f663",
+                    "label": "Pharyngeal Candidiasis"
+                  },
+                  {
+                    "concept": "e94ab113-9757-4afd-be39-dee8770429e3",
+                    "label": "Cryptococcal Meningitis"
+                  },
+                  {
+                    "concept": "5155AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Kaposi Sarcoma"
+                  },
+                  {
+                    "concept": "d4e5f607-1829-4dab-ce34-f5670a1b2c23",
+                    "label": "Extra Pulmonary (TB)"
+                  },
+                  {
+                    "concept": "823AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Wasting Syndrome"
+                  },
+                  {
+                    "concept": "ae358dda-ff52-4260-8421-673fb6dc79bf",
+                    "label": "Minor Mucocutaneous Manifestations"
+                  },
+                  {
+                    "concept": "45c61a12-d85b-42f3-9b60-d8aa4ebf48c3",
+                    "label": "Fever (>1 month; unexplained)"
+                  },
+                  {
+                    "concept": "66f56c86-f437-4835-9da2-0255cfb5c20a",
+                    "label": "Pneumocystis Carinii Pneumonia"
+                  },
+                  {
+                    "concept": "9ef3304e-db6e-42ec-a5ee-deeb2c4d4250",
+                    "label": "Herpes-simplex (>1 month)"
+                  },
+                  {
+                    "concept": "7f0fc383-5a02-472f-9e7a-387e34880179",
+                    "label": "Diarrhea (>1 month)"
+                  },
+                  {
+                    "concept": "d3ba12a2-af36-49c8-a38c-6cb197742a8e",
+                    "label": "Pneumonia (recurrent)"
+                  },
+                  {
+                    "concept": "3f105b1c-c8fd-4ee0-a3b1-1bcbbd57c366",
+                    "label": "Toxoplasmosis (Brain)"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If other specify",
+              "type": "obs",
+              "id": "ifOtherSpecify6",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(pastOi) || !arrayContains(pastOi, '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Past Prophylaxis / Treatment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Cotrimoxazole start date",
+              "type": "obs",
+              "id": "cotrimoxazoleDateStarted",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "164361AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Cotrimoxazole stop date",
+              "type": "obs",
+              "id": "cotrimoxazoleDateStopped",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "164362AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "INH start date",
+              "type": "obs",
+              "id": "inhDateStarted",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "a3569702-f0c9-43e8-9836-74a49b1c5e54"
+              }
+            },
+            {
+              "label": "INH stop date",
+              "type": "obs",
+              "id": "inhDateStopped",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "fc1f28bb-a085-4d43-ab6c-161626aaae0a"
+              }
+            },
+            {
+              "label": "ART / TI",
+              "type": "obs",
+              "id": "artTi",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3f6db443-31fb-4fed-9cb8-5aeaf55e1faf",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes, ART regimen",
+              "type": "obs",
+              "id": "ifYesRegimen",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1d289688-e7f2-4124-81ed-ff167f15394a",
+                "answers": [
+                  {
+                    "concept": "d6071829-0314-2345-6789-012345901234",
+                    "label": "AZT/3TC/NVP"
+                  },
+                  {
+                    "concept": "e7182930-1425-3456-7890-123456012345",
+                    "label": "AZT/3TC/LPV/r"
+                  },
+                  {
+                    "concept": "f8293041-2536-4567-8901-234567123456",
+                    "label": "AZT/3TC/NVP-Paediatric"
+                  },
+                  {
+                    "concept": "09304152-3647-5678-9012-345678234567",
+                    "label": "AZT/3TC/EFV"
+                  },
+                  {
+                    "concept": "10415263-4758-6789-0123-456789345678",
+                    "label": "AZT/3TC/EFV-Paediatric"
+                  },
+                  {
+                    "concept": "21526374-5869-7890-1234-567890456789",
+                    "label": "TDF/3TC/NVP"
+                  },
+                  {
+                    "concept": "32637485-6970-8901-2345-678901567890",
+                    "label": "TDF/3TC/NVP-Paediatric"
+                  },
+                  {
+                    "concept": "43748596-7081-9012-3456-789012678901",
+                    "label": "TDF/3TC/EFV"
+                  },
+                  {
+                    "concept": "54859607-8192-0123-4567-890123789012",
+                    "label": "TDF/3TC/EFV-Paediatric"
+                  },
+                  {
+                    "concept": "65960718-9203-1234-5678-901234890123",
+                    "label": "TDF/3TC/LPV/r"
+                  },
+                  {
+                    "concept": "5ec51542-6a40-4f25-8654-6af7628002a9",
+                    "label": "Others"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(artTi) || artTi !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "If yes, ART start date",
+              "type": "obs",
+              "id": "ifYesDateStarted",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "a3569702-f0c9-43e8-9836-74a49b1c5e54"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(artTi) || artTi !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "If yes, months on ART",
+              "type": "obs",
+              "id": "ifYesMonthsOnArt",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c83d1e06-cc10-5e3d-8ad4-ccbcf3c416db",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(artTi) || artTi !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "If yes, still on treatment?",
+              "type": "obs",
+              "id": "ifYesStillOnTreatment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "34aaa457-b1e2-4870-999a-3d60536faafc",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(artTi) || artTi !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Vitals Adult",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulse Rate (per min)",
+              "type": "obs",
+              "id": "pulseRatePerMin",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Systolic Blood Pressure (mmHg)",
+              "type": "obs",
+              "id": "systolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic Blood Pressure (mmHg)",
+              "type": "obs",
+              "id": "diastolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "BP Low",
+              "type": "obs",
+              "id": "bpLow",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "bb1dd563-455d-4d66-9f39-3f8dd4dca82f",
+                "answers": [
+                  {
+                    "concept": "de7612e3-4739-4d6e-a14b-8b7f830379e1",
+                    "label": "Unrecordable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Temp (°C)",
+              "type": "obs",
+              "id": "temp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory Rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SPO2 (%)",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "required": "true",
+              "questionInfo": "Normal range: 95-100 %",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "required": "true",
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Pain score",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "166082AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Anti pain given?",
+              "type": "obs",
+              "id": "antiPainGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "649de9d2-6718-5dec-9382-5c7f33cabcd4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Anthropometry",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "BMI",
+              "type": "obs",
+              "id": "bmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8dbc97c1-cc29-4823-b10e-58f03773588d",
+                "min": "0",
+                "step": "0.01",
+                "calculate": {
+                  "calculateExpression": "calcBMI(height,weight)"
+                }
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Head circumference (cm), children",
+              "type": "obs",
+              "id": "forChildHeadCircumferenceCm",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Anthropometry interpretation (children)",
+              "type": "obs",
+              "id": "forChildAnthropometryInterpretation",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "efb5ad67-da8c-49ce-bce3-fd6755e79086",
+                "answers": [
+                  {
+                    "concept": "3dfdd3de-6a88-4993-9d4d-48f8e9e07cfb",
+                    "label": "Normal weight for age"
+                  },
+                  {
+                    "concept": "b3cdb49e-21b0-47cf-b5b0-3670ebdc4c60",
+                    "label": "Wasted"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Status and symptoms",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Functional Status",
+              "type": "obs",
+              "id": "functionalStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7475d56f-9568-4c76-a0f3-31eefa254d38",
+                "answers": [
+                  {
+                    "concept": "01151197-bce0-4c4d-9e5c-211d13dd8c10",
+                    "label": "Working"
+                  },
+                  {
+                    "concept": "160026AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Ambulatory"
+                  },
+                  {
+                    "concept": "162752AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Bed Ridden"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Developmental status (for a child <5)",
+              "type": "obs",
+              "id": "developmentalStatusForAChild5",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "09b6fd4d-dd9b-44c8-89cd-ae24712e7bcb",
+                "answers": [
+                  {
+                    "concept": "38430d83-d2ee-4974-9752-07fe1044e15f",
+                    "label": "Appropriate for age"
+                  },
+                  {
+                    "concept": "b403638d-7059-40c6-94f7-25f836afda31",
+                    "label": "Delay"
+                  },
+                  {
+                    "concept": "49d2d6d9-92f0-4e35-bb40-3baf7f4c69ed",
+                    "label": "Regression"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Presenting Symptom",
+              "type": "obs",
+              "id": "presentingSymptom",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "d51faef0-6e9c-58e6-8b67-649bc31b02e4",
+                "answers": [
+                  {
+                    "concept": "107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cough"
+                  },
+                  {
+                    "concept": "832AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Weight loss"
+                  },
+                  {
+                    "concept": "122496AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Dyspnea"
+                  },
+                  {
+                    "concept": "3321d980-bb18-431f-8ab7-54319dc2a2a0",
+                    "label": "Fever for >1 month"
+                  },
+                  {
+                    "concept": "133027AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Night sweat"
+                  },
+                  {
+                    "concept": "5983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Diarrhea"
+                  },
+                  {
+                    "concept": "6006AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Confusion"
+                  },
+                  {
+                    "concept": "087593e3-54af-432c-8b6b-a54215fc315a",
+                    "label": "STI Symptoms"
+                  },
+                  {
+                    "concept": "881AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Dysphagia"
+                  },
+                  {
+                    "concept": "538d892e-f910-49eb-84a3-09175567b6a8",
+                    "label": "Odynophagia"
+                  },
+                  {
+                    "concept": "5978AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Nausea"
+                  },
+                  {
+                    "concept": "5980AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Vomiting"
+                  },
+                  {
+                    "concept": "956ee25e-2a79-4704-b377-33d5ad985410",
+                    "label": "Persistent Headache"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If other specify",
+              "type": "obs",
+              "id": "ifOtherSpecify7",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(presentingSymptom) || !arrayContains(presentingSymptom, '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              }
+            },
+            {
+              "label": "Client's Pregnancy Status at Enrollment",
+              "type": "obs",
+              "id": "clientSPregnancyStatusAtEnrollment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7d747567-6918-4c53-b981-c55ec4351376",
+                "answers": [
+                  {
+                    "concept": "d3b42c5e-6f70-4189-bacd-ef0123456702",
+                    "label": "Pregnant"
+                  },
+                  {
+                    "concept": "3e38ebc2-9598-4ce4-832a-954a21507e3a",
+                    "label": "Non Pregnant"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not Applicable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Pregnant LMP",
+              "type": "obs",
+              "id": "ifPregnantLmp",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(clientSPregnancyStatusAtEnrollment) || clientSPregnancyStatusAtEnrollment !== 'd3b42c5e-6f70-4189-bacd-ef0123456702'"
+              }
+            },
+            {
+              "label": "If Pregnant EDD",
+              "type": "obs",
+              "id": "ifPregnantEdd",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5596AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(clientSPregnancyStatusAtEnrollment) || clientSPregnancyStatusAtEnrollment !== 'd3b42c5e-6f70-4189-bacd-ef0123456702'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Physical Examination at Enrollment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "General Appearance",
+              "type": "obs",
+              "id": "generalAppearance",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "167092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Chronically Sick Looking",
+                    "concept": "29ac819a-da31-4b6a-bb7c-d8b06be52911"
+                  },
+                  {
+                    "label": "Acutely Sick Looking",
+                    "concept": "5994a840-8ab2-4460-9cdd-b1f5c515b0fd"
+                  },
+                  {
+                    "label": "Well looking",
+                    "concept": "159438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Sick looking",
+                    "concept": "8c3d994c-2117-43b3-b204-c1f2007d9403"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "HEENT",
+              "type": "obs",
+              "id": "heent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1122AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Lymph nodes",
+              "type": "obs",
+              "id": "lymphNodes",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c82e80e2-4d0d-49a5-9357-1dd0555ec548",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Chest",
+              "type": "obs",
+              "id": "chest",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1123AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Heart",
+              "type": "obs",
+              "id": "heart",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "aee41c47-da4f-4092-af42-bd9d15fb3541",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Abdomen",
+              "type": "obs",
+              "id": "abdomen",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ed15c6c9-f215-459b-bd9d-a8e31996f4b5",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Genitourinary System",
+              "type": "obs",
+              "id": "genitourinarySystem",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "6f3542ac-9b52-43d9-9181-e44eb4d470fc",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Musculoskeletal System",
+              "type": "obs",
+              "id": "musculoskeletalSystem",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f6b6c6d1-3320-498c-818f-b4a8c7005f94",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Skin",
+              "type": "obs",
+              "id": "skin",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "99e2fe71-5dd6-4bba-a00c-3e23995684cb",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Central Nervous System",
+              "type": "obs",
+              "id": "centralNervousSystem",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "925306bd-9ce1-407f-8924-2063ec76b3b3",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Staging",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "WHO HIV Clinical Stage at enrollment",
+              "type": "obs",
+              "id": "whoHivClinicalStageAtEnrollment",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a56dd1ee-ce1e-47ea-ac55-17f32a3abe1d"
+              }
+            },
+            {
+              "label": "Why",
+              "type": "obs",
+              "id": "why",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c661d50a-7874-4e68-a36d-a45c547fa107"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

@@ -1,0 +1,803 @@
+{
+  "name": "MoH Pregnancy Follow-up",
+  "description": "MoH pregnancy followup - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "3cc5b6f2-8b02-50ee-8480-ea79d56e7bc1",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "MoH Pregnancy Follow-up Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weeks of gestation",
+              "type": "obs",
+              "id": "weeksOfGestation",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "45193838-337e-48a2-a986-e8e11cbf49c1",
+                "answers": [
+                  {
+                    "concept": "88582c47-a3ee-4933-b5e6-8ec1c43160b2",
+                    "label": "1st contact before 12Wks"
+                  },
+                  {
+                    "concept": "1855d52f-5de3-4a8f-ba62-03974afdbe82",
+                    "label": "2nd contact 20Wks"
+                  },
+                  {
+                    "concept": "9084b822-8ebf-4359-9195-a7e872cf2acc",
+                    "label": "3rd contact 26Wks"
+                  },
+                  {
+                    "concept": "fb1850e7-e1e4-4b61-82f6-ee27a22c4471",
+                    "label": "4th contact 30Wks"
+                  },
+                  {
+                    "concept": "3d41df65-0b79-47c8-b175-d84114686368",
+                    "label": "5th contact 34Wks"
+                  },
+                  {
+                    "concept": "41e3f5b9-a931-4957-a718-2441f1612838",
+                    "label": "6th contact 36Wks"
+                  },
+                  {
+                    "concept": "6fe9fb1e-a56d-4e8b-8a9d-914e89693198",
+                    "label": "7th contact 38Wks"
+                  },
+                  {
+                    "concept": "9455433f-6366-48e9-bbe3-d44fe67bbd0d",
+                    "label": "8th contact 40Wks"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Assessment (diagnosis, danger signs identified)",
+              "type": "obs",
+              "id": "assessmentDiagnosisDangerSignsIdentified",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "67b00dfb-a033-44b8-8538-c2a49b18cb8c"
+              }
+            },
+            {
+              "label": "Action taken",
+              "type": "obs",
+              "id": "actionTaken",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "164378AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Next Appointment",
+              "type": "obs",
+              "id": "nextAppointment",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "25db5489-c63c-48f8-a0ba-4f484884a061"
+              }
+            },
+            {
+              "label": "Provider Name",
+              "type": "obs",
+              "id": "providerName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7416af1a-7c60-4c55-a61a-5fe0cf5e8229"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pregnancy History",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date of contact",
+              "type": "obs",
+              "id": "dateOfContact",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "b2ac289b-a496-45d8-9aca-8a9cc111b3ae"
+              }
+            },
+            {
+              "label": "Gestational age",
+              "type": "obs",
+              "id": "gestationalAge",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7425364e-5869-7890-4567-123456789012",
+                "answers": [
+                  {
+                    "label": "Early Preterm GA 32-34 weeks",
+                    "concept": "0758697b-8192-0123-7890-456789012345"
+                  },
+                  {
+                    "label": "Late Preterm GA 34-36 weeks",
+                    "concept": "1869708c-9203-1234-8901-567890123456"
+                  },
+                  {
+                    "label": "Post Term GA >41+7 wk",
+                    "concept": "441b88ad-1d3b-4c63-b1ca-331eaa1a4146"
+                  },
+                  {
+                    "label": "Term GA = 37 weeks",
+                    "concept": "48fe3fc7-fcd1-400f-93e0-a82926e8b52e"
+                  },
+                  {
+                    "label": "Extremely Preterm GA less than 28 weeks",
+                    "concept": "8536475f-6970-8901-5678-234567890123"
+                  },
+                  {
+                    "label": "Very Preterm GA <32 weeks",
+                    "concept": "bd150567-807b-5a12-a054-df46394e1d31"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Present Pregnancy History (Complaints)",
+              "type": "obs",
+              "id": "presentPregnancyHistoryCompliants",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "cdc048d4-8b5f-5d0e-a852-d86b57b32248"
+              }
+            },
+            {
+              "label": "Family/Social History",
+              "type": "obs",
+              "id": "familySocialHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0b2ef91d-34cb-4ea3-8383-7ab69a12467d"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pregnancy Physical Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "General Appearance",
+              "type": "obs",
+              "id": "generalAppearance",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "167092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Chronically Sick Looking",
+                    "concept": "29ac819a-da31-4b6a-bb7c-d8b06be52911"
+                  },
+                  {
+                    "label": "Acutely Sick Looking",
+                    "concept": "5994a840-8ab2-4460-9cdd-b1f5c515b0fd"
+                  },
+                  {
+                    "label": "Well looking",
+                    "concept": "159438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Sick looking",
+                    "concept": "8c3d994c-2117-43b3-b204-c1f2007d9403"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Blood pressure",
+              "type": "obs",
+              "id": "bloodPressure",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "935e6ba6-c666-5296-8374-0360954d7834"
+              }
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Pallor",
+              "type": "obs",
+              "id": "pallor",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "b7c8d9e0-f1a2-4b3c-8d5e-6f7a8b9c0d1e",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Breast",
+              "type": "obs",
+              "id": "breast",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "162825AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Chest",
+              "type": "obs",
+              "id": "chest",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1123AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Normal",
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Abnormal",
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Abdominal examination Fundal height (wks)",
+              "type": "obs",
+              "id": "abdominalExaminationFundalHeightWks",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "3cb19e3d-6d3d-4f03-9c7b-6a569f0182fe"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Abdominal examination FHB",
+              "type": "obs",
+              "id": "abdominalExaminationFhb",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "160947AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Abdominal examination Presentation",
+              "type": "obs",
+              "id": "abdominalExaminationPresentation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a021bcdc-fdf1-4101-933a-e6885c7353a2"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pregnancy Investigations",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Ultrasound (up to 24 weeks of gestation)",
+              "type": "obs",
+              "id": "ultrasoundUpTo24WeeksOfGestation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8c0abafc-4bac-43be-b010-8d1547aecf87"
+              }
+            },
+            {
+              "label": "Haemoglobin",
+              "type": "obs",
+              "id": "haemoglobin",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "21AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Blood groupRH",
+              "type": "obs",
+              "id": "bloodGrouprh",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1429aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "answers": [
+                  {
+                    "label": "B+",
+                    "concept": "03dbdf85-7184-431f-a5c2-f7428c66f18d"
+                  },
+                  {
+                    "label": "Blood group A",
+                    "concept": "163115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Blood group B",
+                    "concept": "163116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Blood group AB",
+                    "concept": "163117AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Blood group O",
+                    "concept": "163118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "AB+",
+                    "concept": "62d85dd0-f9ce-47d5-8a6f-4f1ba99543d9"
+                  },
+                  {
+                    "label": "O",
+                    "concept": "702AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "O+",
+                    "concept": "73d8593d-edcd-454f-b2e8-c25f4c1b46a2"
+                  },
+                  {
+                    "label": "Adherence Level A",
+                    "concept": "83748596-7081-9012-3456-789012678901"
+                  },
+                  {
+                    "label": "Adherence Level B",
+                    "concept": "94859607-8192-0123-4567-890123789012"
+                  },
+                  {
+                    "label": "A+",
+                    "concept": "c85790b1-398f-4797-b5f4-25018a96fffc"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Rpr Vdrl",
+              "type": "obs",
+              "id": "rprVdrl",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ab961c28-0cd4-4c41-9953-1f914a56737a"
+              }
+            },
+            {
+              "label": "HIV (PITC) for pregnant",
+              "type": "obs",
+              "id": "hivPitcForPregnant",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b8c1cf5f-8fe9-47a9-953e-23952388db1f"
+              }
+            },
+            {
+              "label": "HIV (PITC) for partner",
+              "type": "obs",
+              "id": "hivPitcForPartner",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e4039f5d-7976-421d-b403-4d4640727cbd"
+              }
+            },
+            {
+              "label": "HBsAg",
+              "type": "obs",
+              "id": "hbsag",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2273174b-6081-7902-2456-789123abcd32",
+                "answers": [
+                  {
+                    "label": "Positive",
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Negative",
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Urine test",
+              "type": "obs",
+              "id": "urineTest",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "799e9fc8-8b6d-4e2a-a079-b89ff22fec74",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Screening for active TB",
+              "type": "obs",
+              "id": "screeningForActiveTb",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6fa5e9ff-a13f-4a61-9ef2-5ee303b9785b"
+              }
+            },
+            {
+              "label": "Indirect Coombs test for Rh-negative mothers",
+              "type": "obs",
+              "id": "indirectCoombSTestForRhNegatives",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2a4d1b91-a81c-42eb-9bc1-1c7462432e7d"
+              }
+            },
+            {
+              "label": "75 gm oral glucose test (for those at risk)",
+              "type": "obs",
+              "id": "75GmOralGlucoseTestForThoseAtRisk",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "db903aec-e1b0-4ad0-8f70-a9c3b2e45c7d"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pregnancy Medications and Vaccines",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Preventive anthelmintic",
+              "type": "obs",
+              "id": "preventiveAntihelminthic",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "dfe23ed4-1cee-4c53-8af5-c8863933808a"
+              }
+            },
+            {
+              "label": "Malaria prevention with ITN, and early diagnosis",
+              "type": "obs",
+              "id": "malariaPreventionWithItnAndEarlyDiagnosi",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ecf8ef24-b573-4911-8cfb-9882c1faea1a"
+              }
+            },
+            {
+              "label": "Td vaccination",
+              "type": "obs",
+              "id": "tdVaccination",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f6a7b8c9-d0e1-4f2a-3b45-c6d7e8f9a0b1",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "AntiD immunoglobulin at 28 weeks (for those unsensitised RH negatives)",
+              "type": "obs",
+              "id": "antidImmunoglobulinAt28WeeksForThoseUnse",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a79685f0-d493-4dd5-9ac3-11f528659ba2"
+              }
+            },
+            {
+              "label": "Iron/Folic Acid",
+              "type": "obs",
+              "id": "ironFolicAcid",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e4f5a6b7-c8d9-4e0f-1a23-b4c5d6e7f8a9",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "ARV Rx (type)",
+              "type": "obs",
+              "id": "arvRxType",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e92f4d1d-155d-4fa9-aa4c-f14c1d43ac79"
+              }
+            },
+            {
+              "label": "Syphilis Treatment",
+              "type": "obs",
+              "id": "syphilisTreatment",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "159918AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HBV prophylaxis",
+              "type": "obs",
+              "id": "hbvProphylaxis",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "fda06320-98c0-4101-a9b2-ef12fb4d3ba5",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Daily calcium supplementation",
+              "type": "obs",
+              "id": "dailyCalciumSupplementation",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "12737df5-ca0b-4116-a4f9-1ee14e0fc143",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pregnancy Advice and Counselling",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Nutrition healthy eating",
+              "type": "obs",
+              "id": "nutritionHealthyEating",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2622ae78-abc0-4c02-a11e-cb7008cd9258",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "PMTCT counselling and testing",
+              "type": "obs",
+              "id": "pmtctCounsellingAndTesting",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6a1eaaae-b173-4f57-8aa5-e318be961450"
+              }
+            },
+            {
+              "label": "Family planning",
+              "type": "obs",
+              "id": "familyPlanning",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5271AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Breast feeding counselling",
+              "type": "obs",
+              "id": "breastFeedingCounselling",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "912534bc-4612-4e25-934f-515a8e70b2e4"
+              }
+            },
+            {
+              "label": "Hygiene",
+              "type": "obs",
+              "id": "hygiene",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5a5f2124-6692-4f8b-b2d4-339ac353c6d6",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Avoidance of harmful traditional practices",
+              "type": "obs",
+              "id": "avoidanceOfHarmfulTraditionalPractices",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d0168909-208d-495a-9a65-3f98c84c7844",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Reduce caffeine intake",
+              "type": "obs",
+              "id": "reduceCaffeineIntake",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "11edfca9-46a3-4bf4-8709-66c6553f9788",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Gender based violence specially IPV",
+              "type": "obs",
+              "id": "genderBasedViolenceSpeciallyIpv",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2868a2b6-e62d-499e-8fec-6f67257a1b6b"
+              }
+            },
+            {
+              "label": "Birth Preparedness and Complication Readiness",
+              "type": "obs",
+              "id": "birthPreparednessAndComplicationReadines",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b4dcf276-efb2-44f9-91ae-faf0e172c343"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

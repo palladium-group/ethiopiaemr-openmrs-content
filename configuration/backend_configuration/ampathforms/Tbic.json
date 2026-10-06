@@ -1,0 +1,1551 @@
+{
+  "name": "TBIC",
+  "description": "TBIC - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "bb6721b9-bf1e-552e-b57c-8e068ce16839",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "TBIC Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Entry Point",
+              "type": "obs",
+              "id": "entryPoint",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1756627d-a236-4f87-9b3e-27180db67659",
+                "answers": [
+                  {
+                    "concept": "34c04a85-463f-49ff-96c9-db09754324f4",
+                    "label": "Referred from HC"
+                  },
+                  {
+                    "concept": "0ea04b92-3a1c-454f-829c-86f744011b88",
+                    "label": "Referred from Private Clinic"
+                  },
+                  {
+                    "concept": "978AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Self"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Contact Identification",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name of Contact Person",
+              "type": "obs",
+              "id": "nameOfContactPerson",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "163258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Sub-city of Contact",
+              "type": "obs",
+              "id": "subcityOfContacts",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7de9f189-d502-4bb9-b771-7c7b68e9413b"
+              }
+            },
+            {
+              "label": "Woreda of Contact",
+              "type": "obs",
+              "id": "woredaOfContact",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "25677889-9001-7893-1237-9012345f0123",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "House No. of Contact",
+              "type": "obs",
+              "id": "hNoOfContacts",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a8d688bf-1284-4ddd-b67e-4590e205bc69",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Telephone of Contact",
+              "type": "obs",
+              "id": "telOfContact",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "160642aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "min": "0",
+                "step": "0.01"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Physical Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "MUAC",
+              "type": "obs",
+              "id": "muac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "BMI",
+              "type": "obs",
+              "id": "bmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "8dbc97c1-cc29-4823-b10e-58f03773588d",
+                "min": "0",
+                "step": "0.01",
+                "calculate": {
+                  "calculateExpression": "calcBMI(height,weight)"
+                }
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Lymphoglandular System",
+              "type": "obs",
+              "id": "lymphoglandularSystem",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1121AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1929249f-e3ba-472b-b261-19e3cbfd9431",
+                    "label": "Scrofula"
+                  },
+                  {
+                    "concept": "135488AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "LAP"
+                  },
+                  {
+                    "concept": "8c1dc514-5de3-4add-b407-e0edf7890125",
+                    "label": "Not Palpable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Chest",
+              "type": "obs",
+              "id": "chest",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1123AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1f3c838c-358f-5c8b-9866-7284c99e733a",
+                    "label": "Decreased Chest Movement"
+                  },
+                  {
+                    "concept": "528AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Dullness"
+                  },
+                  {
+                    "concept": "626af54d-d3cc-4fee-98cd-1116492f7909",
+                    "label": "Relative Decrease in Air Entry"
+                  },
+                  {
+                    "concept": "76a1a900-e733-5c7c-abba-31a03e7e5a78",
+                    "label": "Crackles"
+                  },
+                  {
+                    "concept": "3bde80b9-5b64-45eb-988c-a8166ec977ac",
+                    "label": "Added Sound"
+                  },
+                  {
+                    "concept": "549836db-e4ff-4d3d-9e9b-06e15290de9b",
+                    "label": "Transmitted Sound"
+                  },
+                  {
+                    "concept": "5209AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Wheezing"
+                  },
+                  {
+                    "concept": "159484AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Clear"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Cardiovascular",
+              "type": "obs",
+              "id": "cardiovascular",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1124AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "f919c4d1-0369-4b7e-b8c4-21893e379991",
+                    "label": "Raised JVP"
+                  },
+                  {
+                    "concept": "1e7fa072-a959-4dcb-9a79-d32fb214888e",
+                    "label": "Distant Heart Sounds"
+                  },
+                  {
+                    "concept": "1e3d159b-462f-4f6e-be59-bd5459a9ecc9",
+                    "label": "S1 and S2"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Abdomen",
+              "type": "obs",
+              "id": "abdomen",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "ed15c6c9-f215-459b-bd9d-a8e31996f4b5",
+                "answers": [
+                  {
+                    "concept": "2ed69ade-bbed-4da2-9a36-3f14c06061aa",
+                    "label": "Hepatomegaly/Splenomegaly"
+                  },
+                  {
+                    "concept": "c448fb6b-5df8-54fa-b7dc-7c1852de0e24",
+                    "label": "Fluid Thrill"
+                  },
+                  {
+                    "concept": "ecb886a1-eb64-5e5c-8d77-5dcd87434d54",
+                    "label": "Shifting Dullness"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  },
+                  {
+                    "concept": "6f99b4d7-b6e7-5349-bc81-0511bc943d1a",
+                    "label": "No Findings"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Vertebrae",
+              "type": "obs",
+              "id": "vertebrae",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "42ef5a77-3e21-4fc3-80a0-bd9ee75588a8",
+                "answers": [
+                  {
+                    "concept": "116472AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Kyphosis"
+                  },
+                  {
+                    "concept": "cde0775c-29f4-47b2-ab4c-d0fe9278228c",
+                    "label": "Scoliosis"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Central Nervous System",
+              "type": "obs",
+              "id": "centralNervousSystem",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "925306bd-9ce1-407f-8924-2063ec76b3b3",
+                "answers": [
+                  {
+                    "concept": "323bb88e-58aa-42a2-8b28-dcf616b493e8",
+                    "label": "Neck Stiffness"
+                  },
+                  {
+                    "concept": "8d6a89a5-5b9f-49c8-9879-0edf5b2dffb9",
+                    "label": "Kernig Sign"
+                  },
+                  {
+                    "concept": "4b438210-4f2b-4718-958e-1ec1f57e0c4d",
+                    "label": "Brudzinski's Sign"
+                  },
+                  {
+                    "concept": "6f99b4d7-b6e7-5349-bc81-0511bc943d1a",
+                    "label": "No Findings"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Provider",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Name of Physician",
+              "type": "obs",
+              "id": "nameOfPhysician",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "History",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "EPTB Symptoms",
+              "type": "obs",
+              "id": "eptbSymptoms",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7bec0d28-e329-4aad-aeae-17d1bf1f8cc5",
+                "answers": [
+                  {
+                    "concept": "130053AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pleurisy"
+                  },
+                  {
+                    "concept": "88492f77-c6d1-48e9-850a-1f87ebe7b3b8",
+                    "label": "SOB"
+                  },
+                  {
+                    "concept": "620AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Headache"
+                  },
+                  {
+                    "concept": "6006AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Confusion"
+                  },
+                  {
+                    "concept": "b5c35e13-89b4-4ad5-bb59-4588c300c2ef",
+                    "label": "Photophobia"
+                  },
+                  {
+                    "concept": "a1a1ef8d-5f31-4d12-a896-c3b41f254114",
+                    "label": "Abnormal Body Movement"
+                  },
+                  {
+                    "concept": "b2dc5522-8ec4-4ae0-b345-fc3017eac7f7",
+                    "label": "Back Pain and Swelling"
+                  },
+                  {
+                    "concept": "9ebf2e4e-c0cb-458f-bbbd-129c56f1caff",
+                    "label": "Retrosternal Chest Pain"
+                  },
+                  {
+                    "concept": "5226AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Weakness"
+                  },
+                  {
+                    "concept": "151AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abdominal Pain"
+                  },
+                  {
+                    "concept": "6019AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abdominal Swelling"
+                  },
+                  {
+                    "concept": "a6db3c2b-268b-48f9-8404-d29683e60ac6",
+                    "label": "Neck Swelling"
+                  },
+                  {
+                    "concept": "1cc4dbcd-a43a-487a-bea6-a5bb6b874b79",
+                    "label": "Multiple Choices (see notes)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Contact History",
+              "type": "obs",
+              "id": "contactHistory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f41d4e7f-d45c-4764-ad65-68eec6119236",
+                "answers": [
+                  {
+                    "concept": "4e8f175b-af09-4b12-b40f-a7f85d12c872",
+                    "label": "Close Contact"
+                  },
+                  {
+                    "concept": "389bb8d7-91a6-4ba8-9a8e-9968abfa132a",
+                    "label": "If Close Contact"
+                  },
+                  {
+                    "concept": "19d67031-da96-4464-972d-8b0f2541e966",
+                    "label": "Casual Contact"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Risk Category for DRTB",
+              "type": "obs",
+              "id": "riskCatagoryForDrtb",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "515dda37-d1cc-41f4-a4ab-53775325251c",
+                "answers": [
+                  {
+                    "concept": "166674AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "High Risk"
+                  },
+                  {
+                    "concept": "4b33f972-07b1-5000-8dac-a0d840e7f3d3",
+                    "label": "Moderate Risk"
+                  },
+                  {
+                    "concept": "166675AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Low Risk"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Past Medical History",
+              "type": "obs",
+              "id": "pastMedicalHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c0a51001-0000-4000-8000-000000000003"
+              }
+            },
+            {
+              "label": "Pregnancy",
+              "type": "obs",
+              "id": "pregnancy",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5272AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "d3b42c5e-6f70-4189-bacd-ef0123456702",
+                    "label": "Pregnant"
+                  },
+                  {
+                    "concept": "6358528e-d578-486e-8781-b1af918057f2",
+                    "label": "No Pregnancy"
+                  },
+                  {
+                    "concept": "639173e6-7d13-4bb9-b6a3-4d3840566f82",
+                    "label": "Uncertain"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Pregnant",
+              "type": "obs",
+              "id": "ifPregnant",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e9a0f64e-1269-4ab8-bd97-1d7ac8098c9f",
+                "answers": [
+                  {
+                    "concept": "6941d14e-c3ff-5878-9c18-4718d79d5164",
+                    "label": "On Follow-up"
+                  },
+                  {
+                    "concept": "91e19825-8670-4729-85dd-df652832154e",
+                    "label": "Not on Follow-up"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(pregnancy) || pregnancy !== 'd3b42c5e-6f70-4189-bacd-ef0123456702'"
+              }
+            },
+            {
+              "label": "GA (Notes on Trimester)",
+              "type": "obs",
+              "id": "gaNotesOnTrimester",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "b6ec643e-65a3-47d6-b26f-e033e27210ca"
+              }
+            },
+            {
+              "label": "If Not Pregnant",
+              "type": "obs",
+              "id": "ifNotPregnant",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1a788dea-678b-4f75-aaf7-5016427d7a07",
+                "answers": [
+                  {
+                    "concept": "f84c84c9-d7b0-4163-859d-33caef7aeadf",
+                    "label": "On Contraceptives"
+                  },
+                  {
+                    "concept": "98afd8a3-0c4a-4aa3-a511-df7bbaae3472",
+                    "label": "Not on Contraceptives"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(pregnancy) || pregnancy !== '6358528e-d578-486e-8781-b1af918057f2'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Core Symptoms",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Non productive",
+              "type": "obs",
+              "id": "nonProductive",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "da90c5f4-4de2-5550-bde6-d35020c41769",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Sputum Color",
+              "type": "obs",
+              "id": "sputumColor",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "40712044-0b86-4ecb-a763-9fbebc791b15",
+                "answers": [
+                  {
+                    "concept": "e589928e-77fe-466b-bac2-aab35a7e69ad",
+                    "label": "Whitish"
+                  },
+                  {
+                    "concept": "054d01ec-5fd2-407d-8e09-934d4c442b43",
+                    "label": "Yellow"
+                  },
+                  {
+                    "concept": "967AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hemoptysis"
+                  },
+                  {
+                    "concept": "159484AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Clear"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Sputum Consistency",
+              "type": "obs",
+              "id": "sputumConsistency",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0b366e15-41fb-4972-96f9-81a77389e55d",
+                "answers": [
+                  {
+                    "concept": "f3398037-9253-459a-928b-2eea1c822e34",
+                    "label": "Frothy"
+                  },
+                  {
+                    "concept": "7b9fa391-71f5-43ed-b96f-7ddf7e863ccf",
+                    "label": "Thick"
+                  },
+                  {
+                    "concept": "de52a938-3692-4b29-bd0b-c143a62092de",
+                    "label": "Thin"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other symptom complex",
+              "type": "obs",
+              "id": "otherSymptomComplex",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d6433206-ee20-443d-bcec-672e82fca533",
+                "answers": [
+                  {
+                    "concept": "5945AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fever"
+                  },
+                  {
+                    "concept": "133027AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Night Sweat"
+                  },
+                  {
+                    "concept": "135595AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Loss of Appetite"
+                  },
+                  {
+                    "concept": "832AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Weight Loss"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "1cc4dbcd-a43a-487a-bea6-a5bb6b874b79",
+                    "label": "Multiple Choices (see notes)"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Previous History of TB",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Type of TB",
+              "type": "obs",
+              "id": "typeOfTb",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "160040AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "c39f0322-4318-47e6-938e-cf17ef875cea",
+                    "label": "PTB"
+                  },
+                  {
+                    "concept": "f2b03da0-4a59-5885-be2b-2bc40fe4f2d8",
+                    "label": "EPTB"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Type of Drug Susceptibility",
+              "type": "obs",
+              "id": "typeOfDrugSusceptability",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "620cd462-8034-4b0a-bb39-fb32fcb86224",
+                "answers": [
+                  {
+                    "concept": "bb54792c-5270-4c4b-af8f-ceb494703f87",
+                    "label": "DSTB"
+                  },
+                  {
+                    "concept": "12233445-5667-4bc8-ca12-d7e8f9011223",
+                    "label": "DRTB"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Type of Diagnosis",
+              "type": "obs",
+              "id": "typeOfDx",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6af7ff23-5e48-47ed-a952-59cf028fd7fd",
+                "answers": [
+                  {
+                    "concept": "162202AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "GeneXpert"
+                  },
+                  {
+                    "concept": "f5061499-934b-4d85-88b4-128cd3140970",
+                    "label": "Imaging"
+                  },
+                  {
+                    "concept": "164398AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Clinical"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Number of Times Treated",
+              "type": "obs",
+              "id": "numberOfTimesTreated",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "20566f97-e471-421c-9b49-b17d5e4b08eb",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Last Duration of Treatment",
+              "type": "obs",
+              "id": "lastDurationOfTreatment",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "86b25a43-b1ab-4f20-9b49-9937baf9e10d",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Final Outcome of Last Treatment",
+              "type": "obs",
+              "id": "finalOutcomeOfLastTreatment",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1954604a-72b0-4258-83d2-ccf7a6662b43",
+                "answers": [
+                  {
+                    "concept": "5f263748-5960-495f-fa60-718293041526",
+                    "label": "Cured"
+                  },
+                  {
+                    "concept": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Completed"
+                  },
+                  {
+                    "concept": "558c7e1a-e702-46fc-be5c-73bb162b5be9",
+                    "label": "Failed"
+                  },
+                  {
+                    "concept": "5240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Lost to Follow-up"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Comment",
+              "type": "obs",
+              "id": "comment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Investigations",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Bacteriology",
+              "type": "obs",
+              "id": "bacterology",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "eb1d0f47-2e99-403a-9f0f-359836198a31",
+                "answers": [
+                  {
+                    "concept": "162202AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "GeneXpert"
+                  },
+                  {
+                    "concept": "3aa67e9a-c1df-449a-9d5a-193e4e126490",
+                    "label": "Xpert XDR"
+                  },
+                  {
+                    "concept": "424aeb57-9a0d-42b3-afad-f904170e737b",
+                    "label": "AFB"
+                  },
+                  {
+                    "concept": "108e68aa-6902-42a2-83f7-52549e26641b",
+                    "label": "LF-LAM"
+                  },
+                  {
+                    "concept": "a9f7575b-3c18-476a-965c-3879565afae8",
+                    "label": "LPA"
+                  },
+                  {
+                    "concept": "1cc4dbcd-a43a-487a-bea6-a5bb6b874b79",
+                    "label": "Multiple Choices (see notes)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Imaging",
+              "type": "obs",
+              "id": "imaging",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f5061499-934b-4d85-88b4-128cd3140970",
+                "answers": [
+                  {
+                    "concept": "645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "CXR"
+                  },
+                  {
+                    "concept": "d3ab60f2-101d-41b7-9a00-ad29d9caf01d",
+                    "label": "Sonography"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  },
+                  {
+                    "concept": "1cc4dbcd-a43a-487a-bea6-a5bb6b874b79",
+                    "label": "Multiple Choices (see notes)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Histopathology",
+              "type": "obs",
+              "id": "histoPathology",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "4ed826d7-b8b3-45af-8b21-8b37edaaf6f9",
+                "answers": [
+                  {
+                    "concept": "161513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "FNAC"
+                  },
+                  {
+                    "concept": "07aeb9a0-a243-4fae-9089-4b8558e5270b",
+                    "label": "Fluid Analysis"
+                  },
+                  {
+                    "concept": "535aebd0-f381-4ae6-961c-caa0ecf64736",
+                    "label": "Biopsy"
+                  },
+                  {
+                    "concept": "1cc4dbcd-a43a-487a-bea6-a5bb6b874b79",
+                    "label": "Multiple Choices (see notes)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Urine HCG",
+              "type": "obs",
+              "id": "urineHcg",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "45AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Hematology",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "CBC",
+              "type": "obs",
+              "id": "cbc",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2076676a-495e-5032-9c7c-169202075d23",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "ESR",
+              "type": "obs",
+              "id": "esr",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c1a55f80-d6f1-4c36-a86a-dc0a172d997c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Serology",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Liver Enzymes",
+              "type": "obs",
+              "id": "liverEnzymes",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ff4e1e9e-12a9-487d-9b81-00f30bb64443",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "RFT",
+              "type": "obs",
+              "id": "rft",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1f0900f7-37aa-4e54-b18e-b50000570955",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HIV",
+              "type": "obs",
+              "id": "hiv",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "99b6c66f-10a1-4256-b5dd-39a56d79a159",
+                "answers": [
+                  {
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reactive"
+                  },
+                  {
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Non Reactive"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Diagnosis",
+      "sections": [
+        {
+          "label": "General",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Clinically Diagnosed TB",
+              "type": "obs",
+              "id": "clinicallyDiagnosedTb",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e4249684-aab7-4e79-92e8-743db76da968",
+                "answers": [
+                  {
+                    "concept": "a8a3429f-0e14-427f-8c9b-b5ea94eeee35",
+                    "label": "Clinically Diagnosed as DRTB"
+                  },
+                  {
+                    "concept": "8fec722b-a857-49b9-9a11-cac0b3b2f019",
+                    "label": "Clinically Diagnosed as DSTB"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pulmonary",
+              "type": "obs",
+              "id": "pulmonary",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1d9a3653-9b0f-462c-9927-3ae62e08a36a",
+                "answers": [
+                  {
+                    "concept": "a896d745-e3a5-45ce-b672-f3c1d8497104",
+                    "label": "Positive Sputum"
+                  },
+                  {
+                    "concept": "08186778-ab95-4795-91e8-5ee6b1792754",
+                    "label": "Negative Sputum"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "EPTB",
+              "type": "obs",
+              "id": "eptb",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f2b03da0-4a59-5885-be2b-2bc40fe4f2d8",
+                "answers": [
+                  {
+                    "concept": "68846d31-5e51-42b7-b8b0-1047debb4952",
+                    "label": "Bacteriologic Confirmation"
+                  },
+                  {
+                    "concept": "164398AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Clinical Diagnosis"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Bacteriologically Confirmed",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Drug Susceptibility Status",
+              "type": "obs",
+              "id": "drugSusceptabilityStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1236aa29-3766-472e-bcd6-4f8fd2a13986",
+                "answers": [
+                  {
+                    "concept": "bb54792c-5270-4c4b-af8f-ceb494703f87",
+                    "label": "DSTB"
+                  },
+                  {
+                    "concept": "7e3365d2-2f07-4911-bf85-4e6f1d0ab79d",
+                    "label": "RRTB"
+                  },
+                  {
+                    "concept": "2c59ce4c-932c-44ae-ac8e-b426381e2092",
+                    "label": "HRTB"
+                  },
+                  {
+                    "concept": "e3de3f5d-bd2b-42de-8d07-8b15056d96f6",
+                    "label": "MDRTB"
+                  },
+                  {
+                    "concept": "6ed306d8-c0c7-4573-9366-df111f8f56cd",
+                    "label": "Pre-XDRTB"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Co-morbid Conditions",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Comment on Comorbidities",
+              "type": "obs",
+              "id": "commentOnComorbidities",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "db78b555-4b83-4ffd-8f8a-2f0da1720e7f"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Treatment",
+      "sections": [
+        {
+          "label": "Pre-treatment Evaluation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Treatment Supporter Name",
+              "type": "obs",
+              "id": "txSupporterName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f3ed4a28-9723-500f-a028-dd8c39f018ac"
+              }
+            },
+            {
+              "label": "Treatment Supporter Woreda",
+              "type": "obs",
+              "id": "txSupporterWoreda",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "25677889-9001-7893-1237-9012345f0123",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Treatment Supporter Sub-city",
+              "type": "obs",
+              "id": "txSupporterSubcity",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "14566778-8990-6782-0126-89012345f012"
+              }
+            },
+            {
+              "label": "Treatment Supporter Telephone",
+              "type": "obs",
+              "id": "txSupporterTel",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "160642AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Screened Contacts",
+              "type": "obs",
+              "id": "screenedContacts",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b038b485-3d5b-4f9f-ba0d-c462fa263a79"
+              }
+            },
+            {
+              "label": "Number Unscreened",
+              "type": "obs",
+              "id": "numberUnscreened",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c9e7a63e-6b34-41fc-9482-f5ce6bfd661e",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Treatment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Inpatient",
+              "type": "obs",
+              "id": "inpatient",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "bdf5d5fa-984e-49cb-a769-63f6c481e144",
+                "answers": [
+                  {
+                    "concept": "b1130cb7-7a11-54dd-9f56-875eb4e3fc7e",
+                    "label": "First-line Anti-TB"
+                  },
+                  {
+                    "concept": "a0457ecc-ae61-4388-858a-d15503a3380a",
+                    "label": "To DRTB TIC for Second-line Anti-TB"
+                  },
+                  {
+                    "concept": "0943580e-4bfb-4e12-aca8-f443308b54f5",
+                    "label": "To DRTB TIC for HRTB Regimen"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Outpatient",
+              "type": "obs",
+              "id": "outpatient",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8e777f8f-120d-4f5a-9552-d17ac2b957ae",
+                "answers": [
+                  {
+                    "concept": "b1130cb7-7a11-54dd-9f56-875eb4e3fc7e",
+                    "label": "First-line Anti-TB"
+                  },
+                  {
+                    "concept": "2a7850e6-e745-4864-9ddc-17e4c10a4b0a",
+                    "label": "Transferred to DRTB TIC for HRTB Rx"
+                  },
+                  {
+                    "concept": "fd475c4f-d7f5-42b6-b5d1-758e5e3ca963",
+                    "label": "Transferred to DRTB TIC for RRTB Rx"
+                  },
+                  {
+                    "concept": "55afa075-53e6-478d-a009-6dae608808e7",
+                    "label": "Transferred to DRTB TIC for Pre-XDR Rx"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Steroids Prescribed",
+              "type": "obs",
+              "id": "steroidsPrescribed",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "88c1f1ca-5338-4e5e-865c-0b40a368d6b9",
+                "answers": [
+                  {
+                    "concept": "4cd90282-d2e6-4f22-9608-646870628348",
+                    "label": "IV Steroids"
+                  },
+                  {
+                    "concept": "a3dba5f4-d5c0-4ae4-9364-958df64601ef",
+                    "label": "Oral Steroids"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Name of Referral Center",
+              "type": "obs",
+              "id": "nameOfReferralCenter",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "73f7f206-c4ca-4323-96f3-5131d4ceaa80"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Counselling",
+      "sections": [
+        {
+          "label": "For Treatment Supporter",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Side Effect of Drugs",
+              "type": "obs",
+              "id": "sideEffectOfDrugs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "79f0b95d-83f0-4662-80a5-8ecdebbef6c3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Adherence to Drugs",
+              "type": "obs",
+              "id": "adheranceToDrugs",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "18c4263f-ef08-54da-b1e7-2a737453e42a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HIV Transmission And Prevention",
+              "type": "obs",
+              "id": "hivTransmissionAndPrevention",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b6bc2bde-68ca-5f2f-89ce-cd1cb8ed7b20",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Appointment",
+              "type": "obs",
+              "id": "appointment",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3071425e-0415-2345-6789-012345abcd17",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "For Patient",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Side Effect of Drugs",
+              "type": "obs",
+              "id": "sideEffectOfDrugs2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "79f0b95d-83f0-4662-80a5-8ecdebbef6c3",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Adherence to Drugs",
+              "type": "obs",
+              "id": "adheranceToDrugs2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "18c4263f-ef08-54da-b1e7-2a737453e42a",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HIV Transmission And Prevention",
+              "type": "obs",
+              "id": "hivTransmissionAndPrevention2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b6bc2bde-68ca-5f2f-89ce-cd1cb8ed7b20",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Nutritional",
+              "type": "obs",
+              "id": "nutritional",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5b64feca-6a51-4e90-afe3-f3bf2c99e245",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Appointment",
+              "type": "obs",
+              "id": "appointment2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3071425e-0415-2345-6789-012345abcd17",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

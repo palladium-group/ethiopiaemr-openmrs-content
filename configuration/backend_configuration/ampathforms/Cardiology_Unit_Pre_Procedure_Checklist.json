@@ -1,0 +1,132 @@
+{
+  "name": "Cardiology Unit Pre-Procedure Checklist",
+  "description": "Cardiology Unit Pre-Procedure Checklist - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "70d5dc7b-1b3b-52af-b4ab-422fea04273f",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Cardiology Unit Pre-Procedure Checklist Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Patient History",
+              "type": "obs",
+              "id": "patientHistory",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a3f07293-b635-5b51-b70f-9742290aa09e"
+              }
+            },
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Functional class",
+              "type": "obs",
+              "id": "functionalClass",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0ae24cbe-3ad8-49e4-982e-5b46526297cb",
+                "answers": [
+                  {
+                    "concept": "117531df-0a4b-4336-9bda-9198a7b2d305",
+                    "label": "Class I"
+                  },
+                  {
+                    "concept": "106999bd-d9d8-4d9e-a705-487988bc7c68",
+                    "label": "Class II"
+                  },
+                  {
+                    "concept": "35e11dce-3809-4294-8ba3-4df8a299efbd",
+                    "label": "Class III"
+                  },
+                  {
+                    "concept": "7fe95913-4d99-42e1-ac86-ed865653688e",
+                    "label": "Class IV"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Planned Procedure",
+              "type": "obs",
+              "id": "plannedProcedure",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0622a6ac-f949-46a4-aa89-d802c44e9a20"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

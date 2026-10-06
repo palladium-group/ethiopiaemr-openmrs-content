@@ -1,0 +1,495 @@
+{
+  "name": "Preeclampsia and Eclampsia Chart",
+  "description": "Preeclampsia and Eclampsia Chart - built from St-Petros (Bahmni) export. Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "2f2a7e68-3697-567e-b8ca-dff1c2f2848e",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Preeclampsia/Eclampsia Chart",
+      "sections": [
+        {
+          "label": "Vital Signs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pulse rate (bpm)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-100 bpm",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Systolic BP (mmHg)",
+              "type": "obs",
+              "id": "systolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Systolic blood pressure is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic BP (mmHg)",
+              "type": "obs",
+              "id": "diastolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Diastolic blood pressure is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SpO2 (%)",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal: >90%",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Anthropometry",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weightKg",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
+                "step": "0.01"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Fetal Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Fetal heart rate (beats/min)",
+              "type": "obs",
+              "id": "fetalHeartBeat",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1440AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "40",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 110-160 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 110 || myValue > 160)",
+                  "message": "Fetal heart rate is outside the normal range (110-160 beats/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "BPP",
+              "type": "obs",
+              "id": "bpp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "6a4c6e3c-4e6a-4e9b-9e86-9a4b8a3e5a11",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Clinical Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Urine output",
+              "type": "obs",
+              "id": "urineOutput",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161929AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Convulsion",
+              "type": "obs",
+              "id": "convulsion",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c01d301c-25ad-4ee6-b957-60d5db91c66d",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Deep Tendon Reflex",
+              "type": "obs",
+              "id": "deepTendonReflex",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "96c20fea-5b91-4485-bcc5-7bde9e8b7971"
+              }
+            },
+            {
+              "label": "Uterine contraction Notes",
+              "type": "obs",
+              "id": "uterineContractionNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "6bc9fb43-7bc4-4d9c-a52a-daf2f775e420"
+              }
+            },
+            {
+              "label": "Cervix",
+              "type": "obs",
+              "id": "cervix",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6304758b-3748-5678-9012-345678abcd13",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Fluid Input",
+              "type": "obs",
+              "id": "fluidInput",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Membrane",
+              "type": "obs",
+              "id": "membrane",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7415869c-4859-6789-0123-456789abcd14",
+                "answers": [
+                  {
+                    "concept": "a6d00512-9786-45d6-8886-be160acfd5d4",
+                    "label": "Intact"
+                  },
+                  {
+                    "concept": "9637081e-6071-8901-2345-678901abcd16",
+                    "label": "PROM"
+                  },
+                  {
+                    "concept": "0748192f-7182-9012-3456-789012abcd17",
+                    "label": "AROM"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Position",
+              "type": "obs",
+              "id": "position",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6db955d4-1317-4751-bfac-a18c5648049c",
+                "answers": [
+                  {
+                    "label": "Fowler's (Low 15°-30°)",
+                    "concept": "0443d17a-be65-4c3b-83b2-a17f18f2c455"
+                  },
+                  {
+                    "label": "sitting",
+                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Fowler's (Semi 30°-45°)",
+                    "concept": "27a4629c-668b-499d-9f30-db96f0ba67ea"
+                  },
+                  {
+                    "label": "Prone position",
+                    "concept": "31f79dca-021e-49cd-9784-150497976e62"
+                  },
+                  {
+                    "label": "Supine",
+                    "concept": "92709344-75b1-4093-a1b8-6d0bd998df7e"
+                  },
+                  {
+                    "label": "Fowler's (full/standard 45°-60°)",
+                    "concept": "94d9fe4d-4b3c-4a64-8ab2-26b816714892"
+                  },
+                  {
+                    "label": "Fowler's (High 60°-90°)",
+                    "concept": "955abfab-508c-4239-b145-d740c2f81cc7"
+                  },
+                  {
+                    "label": "Left lateral position",
+                    "concept": "e61aa344-daf9-41bd-9924-d2ff00c45446"
+                  },
+                  {
+                    "label": "Right lateral position",
+                    "concept": "fb8b15f3-3b3b-4849-891a-894cd010e2c8"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Station",
+              "type": "obs",
+              "id": "station",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b37f32e8-45f5-45b2-bd97-09801887aa7a"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Treatment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Magnesium sulfate",
+              "type": "obs",
+              "id": "magnesiumSulfate",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "fb7abffd-7130-4fd9-b68b-0fe82398f3a9"
+              }
+            },
+            {
+              "label": "Hydralazine Notes",
+              "type": "obs",
+              "id": "hydralazineNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c16db852-3fdf-4b95-93de-0a13790083d0"
+              }
+            },
+            {
+              "label": "Others",
+              "type": "obs",
+              "id": "others",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cc177191-2c36-4f22-89a0-9cfba86ad2fb"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Pain Management",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pain score",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "166082AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Anti pain given?",
+              "type": "obs",
+              "id": "antiPainGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "649de9d2-6718-5dec-9382-5c7f33cabcd4",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

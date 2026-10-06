@@ -1,7 +1,7 @@
 {
   "name": "APH Follow up Form",
   "description": "APH Follow up Form migrated from Bahmni",
-  "version": "1.1",
+  "version": "2.0",
   "published": true,
   "uuid": "e622fa9a-cff9-4525-afad-cc094a6ce04d",
   "retired": false,
@@ -28,7 +28,7 @@
                   "allowFutureDates": "false"
                 }
               ],
-              "readonly": false
+              "readonly": true
             },
             {
               "label": "Provider:",
@@ -55,29 +55,7 @@
                   }
                 }
               },
-              "readonly": false
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "label": "Visit Details",
-      "sections": [
-        {
-          "label": "Encounter Details",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Provider:",
-              "type": "encounterProvider",
-              "required": "true",
-              "questionOptions": {
-                "rendering": "ui-select-extended",
-                "isSearchable": true
-              },
-              "id": "encProvider",
-              "readonly": false
+              "readonly": true
             }
           ]
         }
@@ -95,7 +73,7 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "datetime",
-                "concept": "f1e179cc-050a-45ff-bad6-f58621b662e9"
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
               },
               "id": "date___time"
             }
@@ -106,7 +84,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Systolic BP",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "required": false,
               "questionOptions": {
@@ -116,14 +94,18 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal range for adults: 90-120 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 120.5 || myValue < 89.5)",
-                "message": "Systolic is out of range (Normal range 90-120)"
-              },
-              "id": "systolic_bp"
+              "id": "systolic_bp",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 120.5 || myValue < 89.5)",
+                  "message": "Systolic is out of range (Normal range 90-120)"
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Diastolic BP",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "required": false,
               "questionOptions": {
@@ -133,11 +115,15 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal range for adults: 60-90 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 90.5 || myValue < 59.5)",
-                "message": "Diastolic is out of range (Normal range 60-90)"
-              },
-              "id": "diastolic_bp"
+              "id": "diastolic_bp",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 90.5 || myValue < 59.5)",
+                  "message": "Diastolic is out of range (Normal range 60-90)"
+                }
+              ],
+              "hideSteppers": true
             }
           ]
         },
@@ -146,7 +132,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse",
+              "label": "Pulse (beats/min)",
               "type": "obs",
               "required": false,
               "questionOptions": {
@@ -156,14 +142,18 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal range for adults: 60-100 bpm",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 100.5 || myValue < 59.5)",
-                "message": "Pulse is out of range (Normal range 60-100)"
-              },
-              "id": "pulse"
+              "id": "pulse",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 100.5 || myValue < 59.5)",
+                  "message": "Pulse is out of range (Normal range 60-100)"
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "RR",
+              "label": "RR (breaths/min)",
               "type": "obs",
               "required": false,
               "questionOptions": {
@@ -173,14 +163,18 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal range for adults: 16-24 breaths/min",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 24.5 || myValue < 15.5)",
-                "message": "Respiratory Rate is out of range (Normal range 16-24)"
-              },
-              "id": "respiratory_rate_numeric"
+              "id": "respiratory_rate_numeric",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 24.5 || myValue < 15.5)",
+                  "message": "Respiratory Rate is out of range (Normal range 16-24)"
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Temperature",
+              "label": "Temperature (°C)",
               "type": "obs",
               "required": false,
               "questionOptions": {
@@ -191,28 +185,36 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal range: 36.5-37.5°C",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
-                "message": "Temperature is out of range (Normal range 35-37.5°C)"
-              },
-              "id": "temperature"
+              "id": "temperature",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
+                  "message": "Temperature is out of range (Normal range 35-37.5°C)"
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Fetal Heart Beat",
+              "label": "Fetal Heart Beat (beats/min)",
               "type": "obs",
               "required": false,
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1440AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
+                "min": "40",
                 "step": "0.01"
               },
               "questionInfo": "Typical fetal heart rate range: 110-160 bpm",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 160.5 || myValue < 109.5)",
-                "message": "Fetal Heart Beat is out of range (Normal range 110-160)"
-              },
-              "id": "fetal_heart_beat"
+              "id": "fetal_heart_beat",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 160.5 || myValue < 109.5)",
+                  "message": "Fetal Heart Beat is out of range (Normal range 110-160)"
+                }
+              ],
+              "hideSteppers": true
             },
             {
               "label": "BPP",
@@ -226,11 +228,15 @@
                 "step": "0.01"
               },
               "questionInfo": "Biophysical profile score (0-10)",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue > 10 || myValue < 0)",
-                "message": "BPP score should be between 0 and 10"
-              },
-              "id": "bpp"
+              "id": "bpp",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue > 10 || myValue < 0)",
+                  "message": "BPP score should be between 0 and 10"
+                }
+              ],
+              "hideSteppers": true
             },
             {
               "label": "Abdominal pain",
@@ -296,7 +302,8 @@
                 "rendering": "number",
                 "concept": "8f2c9b71-9d8f-4a42-9a40-1e6e4bb7c822"
               },
-              "id": "fetal_kick"
+              "id": "fetal_kick",
+              "hideSteppers": true
             },
             {
               "label": "Hgb/ Hct Result Notes",
@@ -311,10 +318,47 @@
               "label": "Remark",
               "type": "obs",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
               "id": "remark"
+            }
+          ]
+        },
+        {
+          "label": "Pain Management",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Pain Score",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "166082AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Anti pain given?",
+              "type": "obs",
+              "id": "antiPainGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "649de9d2-6718-5dec-9382-5c7f33cabcd4",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
             }
           ]
         }

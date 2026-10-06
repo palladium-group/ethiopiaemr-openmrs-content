@@ -1,0 +1,333 @@
+{
+  "name": "Medication Administration Form",
+  "description": "New Medication Administration Form - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "2d130e7c-ca7b-5abb-9540-acfafd495539",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Medication Administration Form Assessment",
+      "sections": [
+        {
+          "label": "New Medication Information",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Drug Name",
+              "type": "obs",
+              "id": "drugName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c3082af8-f935-40c5-aa5b-74c684e81aea"
+              }
+            },
+            {
+              "label": "Dose",
+              "type": "obs",
+              "id": "dose",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cd9f19fd-f82b-4777-93e4-a081b9e1f80f",
+                "min": "0",
+                "step": "0.01"
+              }
+            },
+            {
+              "label": "Route",
+              "type": "obs",
+              "id": "route",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0925e76f-84fa-48b7-8c98-8075038ab89a",
+                "answers": [
+                  {
+                    "label": "IV",
+                    "concept": "0041f9d1-20e5-43f8-a9ee-43a0aa297d5c"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Oral administration",
+                    "concept": "160240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Inhalation",
+                    "concept": "160241AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "IM",
+                    "concept": "2052f1c6-9ee9-4b18-857f-5cdce1879b70"
+                  },
+                  {
+                    "label": "O'Brien / Van Lint block",
+                    "concept": "4834b58e-4d7d-47b5-a6fe-eae60c9e4825"
+                  },
+                  {
+                    "label": "Other",
+                    "concept": "5256AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Retrobulbar anesthesia (route)",
+                    "concept": "6d8f3b52-1739-5fc8-8c9d-2be88b872db0"
+                  },
+                  {
+                    "label": "Rectal",
+                    "concept": "6f56af83-c15a-4b92-9a8e-848275ae8294"
+                  },
+                  {
+                    "label": "Topical",
+                    "concept": "7e09eb81-099f-4ce1-8125-14105d031c28"
+                  },
+                  {
+                    "label": "Sub-Tenon anesthesia (route)",
+                    "concept": "8145dac0-b17b-5e7d-a368-860d3175d4fd"
+                  },
+                  {
+                    "label": "gestational age (triage)",
+                    "concept": "8526f708-5960-7890-1234-567890abcd0b"
+                  },
+                  {
+                    "label": "O'Brien / Van Lint",
+                    "concept": "8f9d3a51-7f76-40b0-9b52-54a84c5f9763"
+                  },
+                  {
+                    "label": "Respiratory",
+                    "concept": "98eb62c3-8e5d-42a2-886c-1b936bbc4d52"
+                  },
+                  {
+                    "label": "IV Push",
+                    "concept": "9b55ccd6-fe12-47b6-9e47-df7fb7513fb1"
+                  },
+                  {
+                    "label": "Iv Infusion",
+                    "concept": "a951934f-d030-42b8-8e20-297e751db9db"
+                  },
+                  {
+                    "label": "Otic",
+                    "concept": "b30d4133-af56-422b-a241-e861dd89fb34"
+                  },
+                  {
+                    "label": "SC",
+                    "concept": "baf864b1-62b0-45df-b90f-d9a09f727b95"
+                  },
+                  {
+                    "label": "Peribulbar anesthesia (route)",
+                    "concept": "bde5bd81-43fa-555b-ad65-c7e7c1b52fa5"
+                  },
+                  {
+                    "label": "Nasal (route)",
+                    "concept": "c4ee92c2-dfc7-4118-8f9a-b454b8b8f29e"
+                  },
+                  {
+                    "label": "Ophthalmic",
+                    "concept": "d8a42fcc-ac60-4226-b2c8-d821c3b14a15"
+                  },
+                  {
+                    "label": "Oral temperature route",
+                    "concept": "e8bf0e40-3f47-4e28-a947-7784abd286a5"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Frequency",
+              "type": "obs",
+              "id": "frequency",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6e167626-7ec0-4030-9e3b-94d3ec23a4e1",
+                "answers": [
+                  {
+                    "label": "Once",
+                    "concept": "051720eb-0034-430d-b619-e93f1df90901"
+                  },
+                  {
+                    "label": "QD",
+                    "concept": "069d2899-a149-4767-b41f-3f23d796ad2a"
+                  },
+                  {
+                    "label": "CONTINUOUS",
+                    "concept": "1079AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Every Every other day",
+                    "concept": "11c8283b-ed42-4635-90d4-8a4ae3ee3f37"
+                  },
+                  {
+                    "label": "Every Shift",
+                    "concept": "130eb6a7-b7d2-4e83-83ce-e57c6f566537"
+                  },
+                  {
+                    "label": "Every two hours",
+                    "concept": "162245AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "BID",
+                    "concept": "16d1efc5-c008-4911-92fb-b33d971e22e4"
+                  },
+                  {
+                    "label": "PRN",
+                    "concept": "1d8bcc19-0537-4b63-905c-df6ccecfd1ff"
+                  },
+                  {
+                    "label": "Every 4 hours",
+                    "concept": "202e5b1c-886c-4a81-846f-d306847bf385"
+                  },
+                  {
+                    "label": "STAT",
+                    "concept": "325fc972-fc3c-4ff4-b0e1-32c6bd0c6d61"
+                  },
+                  {
+                    "label": "Every 6 week",
+                    "concept": "3e1e601c-b68a-477e-aef5-27555f529bdc"
+                  },
+                  {
+                    "label": "Once Per 5 month",
+                    "concept": "3ebd5c95-dfbb-4c7c-b0ce-a3caa9de801f"
+                  },
+                  {
+                    "label": "Once Per 3 month",
+                    "concept": "43c9e295-da49-4d58-80ee-9a9f4ddb3eae"
+                  },
+                  {
+                    "label": "Every 5 days",
+                    "concept": "4f9ad1e9-9853-4c60-90e8-d03f3669a340"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Once per 3 week",
+                    "concept": "71e2a5b6-4ea5-4a5f-9b01-353aa172dfb4"
+                  },
+                  {
+                    "label": "Once a year",
+                    "concept": "726788a9-eec8-403e-a771-3630fd09318e"
+                  },
+                  {
+                    "label": "Every 3 hours",
+                    "concept": "33460abd-8a92-11e4-977f-0800271c1b75"
+                  },
+                  {
+                    "label": "Daily",
+                    "concept": "8b2783b8-6206-463c-9f58-b4c39f42cd5d"
+                  },
+                  {
+                    "label": "Every 2 hours",
+                    "concept": "33436036-8a92-11e4-977f-0800271c1b75"
+                  },
+                  {
+                    "label": "TID",
+                    "concept": "b051c2e2-8350-45d9-bcab-f39fa0ab62cd"
+                  },
+                  {
+                    "label": "Once Per 2 month",
+                    "concept": "b9bb963c-6c5e-4fc4-afed-cabef10c7461"
+                  },
+                  {
+                    "label": "Q4H",
+                    "concept": "bcfdaedc-6be5-451f-adc5-e4a4f65ce899"
+                  },
+                  {
+                    "label": "Once Per month",
+                    "concept": "c1266278-54d4-4fef-a2fc-a1e1b695ba68"
+                  },
+                  {
+                    "label": "Once Per 4 month",
+                    "concept": "d65d37d5-b60a-4d23-8703-d8693dbd6831"
+                  },
+                  {
+                    "label": "Twice weekly",
+                    "concept": "d8a35aab-ed7c-40ab-8dcc-073d6c50dd04"
+                  },
+                  {
+                    "label": "Every Other week",
+                    "concept": "e602b903-01a1-4bb3-872a-e9e2ad0534db"
+                  },
+                  {
+                    "label": "Once Per 6 month",
+                    "concept": "e915db4f-bcb3-42b6-bfae-75b593da9fc9"
+                  },
+                  {
+                    "label": "Every other Month",
+                    "concept": "e9a931ba-5910-439e-8760-d4ef368c991d"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Time",
+              "type": "obs",
+              "id": "time",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "48489d16-d5a4-403d-a3a4-1275ff1755b6"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

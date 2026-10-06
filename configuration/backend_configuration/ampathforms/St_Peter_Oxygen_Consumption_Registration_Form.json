@@ -1,0 +1,175 @@
+{
+  "name": "St. Peter Oxygen Consumption Registration Form",
+  "description": "St. Peter Oxygen Consumption Registration Form - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "e2544140-addf-595f-a356-0877d65d9c82",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "St. Peter Oxygen Consumption Registration Form Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Start Time",
+              "type": "obs",
+              "id": "startTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "c48170e6-022c-40d8-a26d-89541982761b"
+              }
+            },
+            {
+              "label": "Oxygen Flow Rate (Liters/Minute)",
+              "type": "obs",
+              "id": "oxygenFlowRateLitersMinute",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "165986AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Patient Off Oxygen",
+              "type": "obs",
+              "id": "patientOffOxygen",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b4676876-d721-4305-9765-dd877acac582",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "End Time",
+              "type": "obs",
+              "id": "endTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "63d2576f-1048-44fd-b863-39af987a6875"
+              }
+            },
+            {
+              "label": "Total Hour on Oxygen",
+              "type": "obs",
+              "id": "totalHourOnOxygen",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c5aefe59-c140-4129-ac15-45004633f61e",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "O2 Total Liters Consumed",
+              "type": "obs",
+              "id": "o2TotalLitersConsumed",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "549be742-8b3f-4284-8e6d-201fe822e9bc",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "O2 Billing Duration (Minutes)",
+              "type": "obs",
+              "id": "o2BillingDurationMinutes",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "979155ca-9d55-40a1-86d4-bd15f85c9bdd",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "O2 Billing Trigger",
+              "type": "obs",
+              "id": "o2BillingTrigger",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "b6b298c9-b3a9-4961-aee5-32d26b4718a2",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

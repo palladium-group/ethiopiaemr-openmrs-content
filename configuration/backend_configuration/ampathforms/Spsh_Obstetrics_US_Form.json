@@ -1,0 +1,179 @@
+{
+  "name": "SPSH Obstetric Ultrasound Form",
+  "description": "SPSH Obstetrics US Form - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "809c555f-7878-5b77-841d-1954d64dd817",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "SPSH Obstetrics US Form Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Fetal Number",
+              "type": "obs",
+              "id": "fetalNumber",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5cc54d6c-5cec-54b0-a5cc-49fbc0b41b79"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "FHB( +Ve/-ve)",
+              "type": "obs",
+              "id": "fhbVeVe",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3071425c-0415-2345-6789-012345abcd1a"
+              }
+            },
+            {
+              "label": "AGA",
+              "type": "obs",
+              "id": "aga",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c4b96143-eff7-49ca-9de9-81fd8841efa3"
+              }
+            },
+            {
+              "label": "EFW",
+              "type": "obs",
+              "id": "efw",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "fdc12823-bdeb-5b3e-a7a7-3e58dde9fed0"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fetal presentation",
+              "type": "obs",
+              "id": "fetalPresentation",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "160090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "Vertex presentation",
+                    "concept": "160091AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Occiput Anterior Position",
+                    "concept": "164148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Brow Presentation",
+                    "concept": "164149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Face Presentation",
+                    "concept": "164150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Placenta location",
+              "type": "obs",
+              "id": "placentaLocation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d988dab1-8b92-5996-8e2c-1c072c859242"
+              }
+            },
+            {
+              "label": "Amniotic fluid volume",
+              "type": "obs",
+              "id": "amnioticFluidVolume",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e75ca7e0-b6cd-567d-8ce3-f48c72b1457b"
+              }
+            },
+            {
+              "label": "BPP",
+              "type": "obs",
+              "id": "bpp",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cec6f692-2833-5603-98a3-c204d3580577"
+              }
+            },
+            {
+              "label": "US remark",
+              "type": "obs",
+              "id": "usRemark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "28bc76ee-0cf3-5dd6-8e1c-620d388990ef"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

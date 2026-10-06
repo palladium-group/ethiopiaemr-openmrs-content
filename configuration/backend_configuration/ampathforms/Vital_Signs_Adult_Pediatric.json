@@ -19,7 +19,7 @@
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
-              "readonly": false,
+              "readonly": true,
               "questionOptions": {
                 "rendering": "date"
               },
@@ -55,7 +55,7 @@
                 }
               },
               "id": "encLocation",
-              "readonly": false
+              "readonly": true
             }
           ]
         }
@@ -69,7 +69,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse",
+              "label": "Pulse (beats/min)",
               "type": "obs",
               "required": false,
               "id": "idPulse",
@@ -80,16 +80,20 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal range for adults: 60-100 bpm",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 100.5 || myValue < 59.5)",
-                "message": "Pulse is out of range (Normal range 60-100)"
-              },
               "hide": {
                 "hideWhenExpression": "age < 18"
-              }
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 100.5 || myValue < 59.5)",
+                  "message": "Pulse is out of range (Normal range 60-100)"
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Pulse",
+              "label": "Pulse (beats/min)",
               "type": "obs",
               "required": false,
               "id": "idPulsePedi",
@@ -100,13 +104,17 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal range (pediatric ~6-12y): 70-110 bpm",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 110.5 || myValue < 69.5)",
-                "message": "Value is outside the pediatric normal range."
-              },
               "hide": {
                 "hideWhenExpression": "isEmpty(age) || age >= 18"
-              }
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 110.5 || myValue < 69.5)",
+                  "message": "Value is outside the pediatric normal range."
+                }
+              ],
+              "hideSteppers": true
             }
           ]
         },
@@ -115,7 +123,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Systolic",
+              "label": "Systolic (mmHg)",
               "type": "obs",
               "required": false,
               "id": "aDultVitalSystolic",
@@ -126,16 +134,20 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal range for adults: 90-120 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 120.5 || myValue < 89.5)",
-                "message": "Systolic is out of range (Normal range 90-120)"
-              },
               "hide": {
                 "hideWhenExpression": "age < 18"
-              }
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 120.5 || myValue < 89.5)",
+                  "message": "Systolic is out of range (Normal range 90-120)"
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Systolic",
+              "label": "Systolic (mmHg)",
               "type": "obs",
               "required": false,
               "id": "aDultVitalSystolicPedi",
@@ -146,16 +158,20 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal range (pediatric ~6-12y): 95-115 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 115.5 || myValue < 94.5)",
-                "message": "Value is outside the pediatric normal range."
-              },
               "hide": {
                 "hideWhenExpression": "isEmpty(age) || age >= 18"
-              }
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 115.5 || myValue < 94.5)",
+                  "message": "Value is outside the pediatric normal range."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Diastolic",
+              "label": "Diastolic (mmHg)",
               "type": "obs",
               "required": false,
               "id": "aDultVitalDiastolic",
@@ -166,17 +182,20 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal range for adults: 60-90 mmHg",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 90.5 || myValue < 59.5)",
-                "message": "Diastolic is out of range (Normal range 60-90)"
-              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 90.5 || myValue < 59.5)",
+                  "message": "Diastolic is out of range (Normal range 60-90)"
+                }
+              ],
               "hide": {
                 "hideWhenExpression": "age < 18"
-              }
+              },
+              "hideSteppers": true
             },
             {
-              "label": "Diastolic",
+              "label": "Diastolic (mmHg)",
               "type": "obs",
               "required": false,
               "id": "aDultVitalDiastolicPedi",
@@ -187,14 +206,17 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal range (pediatric ~6-12y): 55-75 mmHg",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 75.5 || myValue < 54.5)",
-                "message": "Value is outside the pediatric normal range."
-              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 75.5 || myValue < 54.5)",
+                  "message": "Value is outside the pediatric normal range."
+                }
+              ],
               "hide": {
                 "hideWhenExpression": "isEmpty(age) || age >= 18"
-              }
+              },
+              "hideSteppers": true
             },
             {
               "label": "Posture",
@@ -223,7 +245,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Temperature",
+              "label": "Temperature (°C)",
               "type": "obs",
               "required": false,
               "id": "aDultVitalTemperature",
@@ -235,11 +257,14 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal range: 36.5-37.5°C",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
-                "message": "Temperature is out of range (Normal range 35-37.5°C)"
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
+                  "message": "Temperature is out of range (Normal range 35-37.5°C)"
+                }
+              ],
+              "hideSteppers": true
             },
             {
               "label": "Respiratory Rate (RR)",
@@ -253,14 +278,17 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal range for adults: 16-24 breaths/min",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 24.5 || myValue < 15.5)",
-                "message": "Respiratory Rate is out of range (Normal range 16-24)"
-              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 24.5 || myValue < 15.5)",
+                  "message": "Respiratory Rate is out of range (Normal range 16-24)"
+                }
+              ],
               "hide": {
                 "hideWhenExpression": "age < 18"
-              }
+              },
+              "hideSteppers": true
             },
             {
               "label": "Respiratory Rate (RR)",
@@ -274,14 +302,17 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal range (pediatric ~6-12y): 18-25 breaths/min",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 25.5 || myValue < 17.5)",
-                "message": "Value is outside the pediatric normal range."
-              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 25.5 || myValue < 17.5)",
+                  "message": "Value is outside the pediatric normal range."
+                }
+              ],
               "hide": {
                 "hideWhenExpression": "isEmpty(age) || age >= 18"
-              }
+              },
+              "hideSteppers": true
             },
             {
               "label": "Saturation (SPO2%)",
@@ -296,11 +327,14 @@
                 "step": "0.01"
               },
               "questionInfo": "Normal: ≥90%",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && myValue < 89.5",
-                "message": "Oxygen Saturation is out of range (Normal range ≥90)"
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue < 89.5",
+                  "message": "Oxygen Saturation is out of range (Normal range ≥90)"
+                }
+              ],
+              "hideSteppers": true
             },
             {
               "label": "Weight (kg)",
@@ -314,7 +348,8 @@
                 "step": "0.01"
               },
               "questionInfo": "Adult weight measurement in kilograms",
-              "validators": []
+              "validators": [],
+              "hideSteppers": true
             },
             {
               "label": "Height (cm)",
@@ -329,7 +364,8 @@
                 "step": "0.01"
               },
               "questionInfo": "Adult height measurement in centimeters",
-              "validators": []
+              "validators": [],
+              "hideSteppers": true
             }
           ]
         },
@@ -350,11 +386,14 @@
                 "step": "0.01"
               },
               "questionInfo": "Pain scale 0-10. 0=No pain, 10=Severe pain",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && myValue > 10",
-                "message": "Pain score cannot exceed 10."
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue > 10",
+                  "message": "Pain score cannot exceed 10."
+                }
+              ],
+              "hideSteppers": true
             }
           ],
           "hide": {
@@ -370,7 +409,6 @@
               "type": "obs",
               "required": false,
               "id": "pediBMI",
-              "readonly": true,
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -382,10 +420,11 @@
               "questionInfo": "Body Mass Index. Auto-calculated from height and weight; not editable. Normal range varies by age and gender",
               "hide": {
                 "hideWhenExpression": "isEmpty(age) || age >= 18"
-              }
+              },
+              "hideSteppers": true
             },
             {
-              "label": "Head Circumference",
+              "label": "Head Circumference (cm)",
               "type": "obs",
               "required": false,
               "id": "pediHeadCircumference",
@@ -397,7 +436,8 @@
               "questionInfo": "Head circumference in centimeters (pediatric).",
               "hide": {
                 "hideWhenExpression": "isEmpty(age) || age >= 18"
-              }
+              },
+              "hideSteppers": true
             },
             {
               "label": "MUAC (cm)",
@@ -412,7 +452,8 @@
               "questionInfo": "Mid-Upper Arm Circumference in centimeters. Measure at midpoint between shoulder and elbow",
               "hide": {
                 "hideWhenExpression": "isEmpty(age) || age >= 18"
-              }
+              },
+              "hideSteppers": true
             }
           ]
         },
@@ -437,14 +478,14 @@
               "questionInfo": "WHO height/length-for-age z-score, auto-calculated from height, age and sex (0-17y).",
               "hide": {
                 "hideWhenExpression": "isEmpty(age) || age >= 18"
-              }
+              },
+              "hideSteppers": true
             },
             {
               "label": "BMI for Age (z-score)",
               "type": "obs",
               "required": false,
               "id": "pediBMIForAgeZscore",
-              "readonly": true,
               "questionOptions": {
                 "rendering": "number",
                 "concept": "c1d3da47-2013-5101-a3fc-8770b35ba32a",
@@ -456,7 +497,8 @@
               "questionInfo": "WHO BMI-for-age z-score, auto-calculated from height, weight, age and sex (5-17y).",
               "hide": {
                 "hideWhenExpression": "isEmpty(age) || age < 5 || age >= 18"
-              }
+              },
+              "hideSteppers": true
             },
             {
               "label": "Weight for Height (z-score)",
@@ -475,7 +517,8 @@
               "questionInfo": "WHO weight-for-height z-score, auto-calculated (under-5 only; engine loads this reference for age <5).",
               "hide": {
                 "hideWhenExpression": "isEmpty(age) || age >= 5"
-              }
+              },
+              "hideSteppers": true
             }
           ]
         }

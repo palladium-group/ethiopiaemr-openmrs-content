@@ -1,0 +1,399 @@
+{
+  "name": "HIV Risk Assessment tool for adult",
+  "description": "HIV Risk Assessment tool for adult - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "df0a02ca-125f-5067-94e8-09eb925378a6",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "HIV Risk Assessment tool for adult Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "If \"Yes\" to one of the criteria listed",
+              "type": "obs",
+              "id": "ifYesToOneOfTheCriteriaListed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "71448e8e-6b70-4d08-bcef-040de80b076f",
+                "answers": [
+                  {
+                    "concept": "ccf759b9-bdd4-4265-a71a-67a894d89dec",
+                    "label": "1. Eligible"
+                  },
+                  {
+                    "concept": "8877e01c-10ee-45c6-bf6d-645dc6e30f27",
+                    "label": "2. Not Eligible"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Patient is eligible select HIV test result",
+              "type": "obs",
+              "id": "ifPatientIsEligibleSelectHivTestResult",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e16fa844-c5bf-4a85-9e01-d9a2b1b7528d",
+                "answers": [
+                  {
+                    "concept": "163611AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Invalid"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "HIV negative"
+                  },
+                  {
+                    "concept": "138571AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "HIV positive"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(ifYesToOneOfTheCriteriaListed) || ifYesToOneOfTheCriteriaListed !== 'ccf759b9-bdd4-4265-a71a-67a894d89dec'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Patient HIV Testing Status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Has the patient ever been tested for HIV?",
+              "type": "obs",
+              "id": "hasThePatientEverBeenTestedForHiv",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c520e8e1-09a7-467c-b983-95020567e01e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "1. Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Yes write the last testing period",
+              "type": "obs",
+              "id": "ifYesWriteTheLastTestingPeriod",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "66bcb8c1-4394-4508-9070-704584dfb1be",
+                "answers": [
+                  {
+                    "concept": "7fece94c-e335-4c31-b586-6d230d4d9892",
+                    "label": "1. 1 month"
+                  },
+                  {
+                    "concept": "92dbc37e-98d7-43ed-9e63-e34b53dd7aaf",
+                    "label": "2. 3 month (STT)"
+                  },
+                  {
+                    "concept": "b66c6804-83e1-425c-a0a8-05bc27a4b171",
+                    "label": "Every 6 months (FSWs)"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(hasThePatientEverBeenTestedForHiv) || hasThePatientEverBeenTestedForHiv !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Occupational Status of patient",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Dose the patient has occupational risk/s?",
+              "type": "obs",
+              "id": "doseThePatientHasOccupationalRiskS",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9df3606d-a0d3-42f4-ba5a-10b2c2cabc3e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "1. Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes, mention occupational status",
+              "type": "obs",
+              "id": "ifYesMentionOccupationalStatus",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b37c797c-8b51-4a61-9ab7-cf40792d0bdf"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(doseThePatientHasOccupationalRiskS) || doseThePatientHasOccupationalRiskS !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "6. Other (Specify)",
+              "type": "obs",
+              "id": "6OtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(doseThePatientHasOccupationalRiskS) || doseThePatientHasOccupationalRiskS !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Marital Status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Dose the patient has marital status risk for HIV?",
+              "type": "obs",
+              "id": "doseThePatientHasMaritalStatusRiskForHiv",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7001341b-2ba3-4bb7-a4d9-8e17ddef65d5",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "1. Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes, mention marital status",
+              "type": "obs",
+              "id": "ifYesMentionMaritalStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1054aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "answers": [
+                  {
+                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "1. Divorced"
+                  },
+                  {
+                    "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Widow/widower"
+                  },
+                  {
+                    "concept": "5e0f2dd1-c9f9-4c1d-94ed-4f1cae55da5d",
+                    "label": "3. Remarried"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(doseThePatientHasMaritalStatusRiskForHiv) || doseThePatientHasMaritalStatusRiskForHiv !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "4. Other(specify)",
+              "type": "obs",
+              "id": "4OtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(doseThePatientHasMaritalStatusRiskForHiv) || doseThePatientHasMaritalStatusRiskForHiv !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            }
+          ]
+        },
+        {
+          "label": "OIs and Vulnerability Status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Dose the patient has clinical signs & Symptoms of HIV/AIDS",
+              "type": "obs",
+              "id": "doseThePatientHasClinicalSignsSymptomsOf",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c14acda0-7cbc-4948-ad8f-5f6ef03725d2",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "1. Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If Yes, mention the patient clinical signs & symptoms of HIV/AIDS",
+              "type": "obs",
+              "id": "ifYesMentionThePatientClinicalSignsSympt",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "29f9576c-8786-4213-9736-815d1a2f9246"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(doseThePatientHasClinicalSignsSymptomsOf) || doseThePatientHasClinicalSignsSymptomsOf !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Dose the patient have sexual risk factor/s",
+              "type": "obs",
+              "id": "doseThePatientHaveSexualRiskFactorS",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1a61fd2c-cb35-4f0f-a556-01e1ae07c5c6",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "1. Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "1. Those living in the street, orphans, Adolescent in child headed household",
+              "type": "obs",
+              "id": "1ThoseLivingInTheStreetOrphansAdolescent",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "f52edc4f-340d-4862-97b5-115f9aec8be6",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "1. Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "2. Girls engagement in sex with older men or in multiple & concurrent sexual partnership",
+              "type": "obs",
+              "id": "2GirlsEngagementInSexWithOlderMenOrInMul",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "e678dd25-14ef-4d06-bbe1-1f4384794833",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "1. Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "3. Out of School Youth & adolescents who are sexually exploited",
+              "type": "obs",
+              "id": "3OutOfSchoolYouthAdolescentsWhoAreSexual",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "93fbfac1-598a-453e-8a56-a61107a4cbcd",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "1. Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2. No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

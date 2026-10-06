@@ -1,7 +1,7 @@
 {
   "name": "Premature Vital Sign",
-  "description": "Premature infant vital signs and reflex assessment form",
-  "version": "1.1",
+  "description": "Premature Vital Sign - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
   "published": true,
   "uuid": "c1c4bad9-a62f-468e-8e0c-0939eef73286",
   "retired": false,
@@ -15,11 +15,10 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
-              "readonly": false,
               "questionOptions": {
                 "rendering": "date"
               },
@@ -28,7 +27,8 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "readonly": true
             },
             {
               "label": "Provider:",
@@ -55,96 +55,103 @@
                 }
               },
               "id": "encLocation",
-              "readonly": false
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Vital Sign for the Premature",
+      "label": "Premature Vital Sign Assessment",
       "sections": [
         {
-          "label": "Vitals",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse Rate",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
-              "required": false,
-              "id": "prematurePulseRate",
+              "id": "pulseRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range for premature infants: 60-100 bpm",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 100.5 || myValue < 59.5)",
-                "message": "Pulse is out of range (Normal range 60-100)"
-              }
+              "questionInfo": "Beats per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Temperature",
+              "label": "Temperature (°C)",
               "type": "obs",
-              "required": false,
-              "id": "prematureVitalTemperature",
+              "id": "temperature",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "max": "43",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range: 36.5-37.5°C",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
-                "message": "Temperature is out of range (Normal range 35-37.5°C)"
-              }
+              "questionInfo": "Degrees Celsius, one decimal place.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Respiratory Rate",
+              "label": "Respiratory Rate (breaths/min)",
               "type": "obs",
-              "required": false,
-              "id": "prematureRespiratoryRate",
+              "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Normal range for premature infants: 30-60 breaths/min",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 60.5 || myValue < 29.5)",
-                "message": "Respiratory Rate is out of range (Normal range 30-60)"
-              }
+              "questionInfo": "Breaths per minute.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Head Circumference",
+              "label": "Head Circumference (cm)",
               "type": "obs",
-              "required": false,
-              "id": "prematureHeadCircumference",
+              "id": "headCircumferenceCm",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
                 "step": "0.01"
               },
-              "validators": []
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
             },
             {
-              "label": "MUAC (cm)",
+              "label": "MUAC",
               "type": "obs",
-              "required": false,
-              "id": "prematureMUAC",
+              "id": "muac",
               "questionOptions": {
-                "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
                 "step": "0.01"
               },
-              "questionInfo": "Mid-Upper Arm Circumference in centimeters. Measure at midpoint between shoulder and elbow"
+              "hideSteppers": true
             }
           ]
         },
@@ -153,12 +160,11 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Moro Reflex",
+              "label": "Moro",
               "type": "obs",
-              "required": false,
-              "id": "prematureMoroReflex",
+              "id": "moro",
               "questionOptions": {
-                "rendering": "radio",
+                "rendering": "select",
                 "concept": "35425667-7586-7893-0127-890123456789",
                 "answers": [
                   {
@@ -166,15 +172,15 @@
                     "label": "Exaggerated"
                   },
                   {
-                    "concept": "37647889-9708-901b-2349-012345678901",
+                    "concept": "12ba0ee0-23cd-4e79-baef-a10c8bc5ea69",
                     "label": "Complete"
                   },
                   {
-                    "concept": "38758990-0819-012c-3450-123456789012",
-                    "label": "Incomplete"
+                    "concept": "581415ca-92aa-4e61-a4db-7f31c49d5787",
+                    "label": "Partial complete"
                   },
                   {
-                    "concept": "39869001-1920-123d-4561-234567890123",
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Absent"
                   }
                 ]
@@ -183,22 +189,21 @@
             {
               "label": "Grasp",
               "type": "obs",
-              "required": false,
-              "id": "prematureGrasp",
+              "id": "grasp",
               "questionOptions": {
+                "rendering": "select",
                 "concept": "40970112-2031-234e-5672-345678901234",
-                "rendering": "radio",
                 "answers": [
                   {
-                    "concept": "41081223-3142-345f-6783-456789012345",
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
                     "label": "Strong"
                   },
                   {
-                    "concept": "42192334-4253-4560-7894-567890123456",
+                    "concept": "750c7a46-03f0-4cba-aa58-f5dc0efca955",
                     "label": "Weak"
                   },
                   {
-                    "concept": "43203445-5364-5671-8905-678901234567",
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Absent"
                   }
                 ]
@@ -207,14 +212,13 @@
             {
               "label": "Suckling",
               "type": "obs",
-              "required": true,
-              "id": "prematureSuckling",
+              "id": "suckling",
               "questionOptions": {
+                "rendering": "select",
                 "concept": "44314556-6475-6782-9016-789012345678",
-                "rendering": "radio",
                 "answers": [
                   {
-                    "concept": "45425667-7586-7893-0127-890123456789",
+                    "concept": "c41b15a2-dc67-4a06-a536-1e9ddefce795",
                     "label": "Sustained"
                   },
                   {
@@ -222,7 +226,7 @@
                     "label": "Unsustained"
                   },
                   {
-                    "concept": "47647889-9708-901b-2349-012345678901",
+                    "concept": "163747AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Absent"
                   }
                 ]
