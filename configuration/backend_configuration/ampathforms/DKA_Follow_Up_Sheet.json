@@ -1,10 +1,10 @@
 {
   "name": "DKA Follow up Sheet",
-  "description": "Diabetic Ketoacidosis follow-up monitoring form migrated from Bahmni",
+  "description": "DKA Follow up Sheet - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
   "published": true,
-  "retired": false,
-  "version": "1.1",
   "uuid": "3351712e-2842-42cf-ace5-04b5ccb9d2d6",
+  "retired": false,
   "encounter": "Consultation",
   "pages": [
     {
@@ -15,11 +15,10 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
-              "readonly": false,
               "questionOptions": {
                 "rendering": "date"
               },
@@ -28,7 +27,8 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "readonly": true
             },
             {
               "label": "Provider:",
@@ -55,127 +55,102 @@
                 }
               },
               "id": "encLocation",
-              "readonly": false
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Vital Signs & Assessment",
+      "label": "DKA Follow up Sheet Assessment",
       "sections": [
         {
-          "label": "Basic Information",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Date and Time Form Filled in",
+              "label": "Date and Time",
               "type": "obs",
-              "required": true,
-              "id": "dateTimeFormFilled",
+              "id": "dateAndTime",
               "questionOptions": {
                 "rendering": "datetime",
-                "concept": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
               }
-            }
-          ]
-        },
-        {
-          "label": "Vital Signs",
-          "isExpanded": "true",
-          "questions": [
+            },
             {
               "label": "Pulse Rate",
               "type": "obs",
-              "required": false,
-              "id": "pulse",
+              "id": "pulseRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "max": "300",
                 "step": "0.01"
               },
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 100.5 || myValue < 59.5)",
-                "message": "Pulse Rate is out of range (Normal range 60-100)"
-              },
-              "questionInfo": "Normal range: 60-100 bpm"
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Systolic BP",
+              "label": "Systolic Blood Pressure (mmHg)",
               "type": "obs",
-              "required": false,
-              "id": "systolic",
+              "id": "systolicBloodPressure",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
                 "step": "0.01"
               },
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 130.5 || myValue < 119.5)",
-                "message": "Systolic is out of range (Normal range 120-130)"
-              },
-              "questionInfo": "Normal range: 90-120 mmHg"
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Systolic blood pressure is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Diastolic BP",
+              "label": "Diastolic Blood Pressure (mmHg)",
               "type": "obs",
-              "required": false,
-              "id": "diastolic",
+              "id": "diastolicBloodPressure",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
                 "step": "0.01"
               },
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 85.5 || myValue < 79.5)",
-                "message": "Diastolic is out of range (Normal range 80-85)"
-              },
-              "questionInfo": "Normal range: 60-90 mmHg"
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Diastolic blood pressure is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Posture",
+              "label": "Temp",
               "type": "obs",
-              "required": false,
-              "id": "posture",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "159633AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "answers": [
-                  {
-                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Sitting"
-                  },
-                  {
-                    "concept": "159629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Supine"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Temperature (°C)",
-              "type": "obs",
-              "required": false,
-              "id": "temperature",
+              "id": "temp",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "max": "43",
                 "step": "0.01"
               },
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
-                "message": "Temperature is out of range (Normal range 35-37.5°C)"
-              },
-              "questionInfo": "Normal range: 36.5-37.5°C"
+              "hideSteppers": true
             },
             {
               "label": "Respiratory Rate",
               "type": "obs",
-              "required": false,
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
@@ -183,169 +158,169 @@
                 "min": "0",
                 "step": "0.01"
               },
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 25 || myValue < 12)",
-                "message": "Respiratory Rate is out of range (Normal range 12-24)"
-              },
-              "questionInfo": "Normal range: 16-24 breaths/min"
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Saturation (SPO2%)",
+              "label": "SPO2",
               "type": "obs",
-              "required": false,
               "id": "spo2",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "0c5ec4fa-f41a-4a6d-bd07-969872b69165",
                 "min": "0",
-                "max": "100",
                 "step": "0.01"
               },
-              "alert": {
-                "alertWhenExpression": "myValue && myValue < 95",
-                "message": "SPO2 is below normal (Normal range ≥95%)"
-              },
-              "questionInfo": "Normal range: ≥90%"
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
               "label": "Weight (kg)",
               "type": "obs",
-              "required": false,
               "id": "weight",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": "0.01"
-              }
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
             },
             {
               "label": "Height (cm)",
               "type": "obs",
-              "required": false,
               "id": "height",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
+                "min": "10",
                 "step": "0.01"
-              }
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
             },
             {
-              "label": "Pain Score",
+              "label": "Pain score",
               "type": "obs",
-              "required": true,
               "id": "painScore",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "160287AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "166082AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "max": "10",
                 "step": "0.01"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "label": "Treatment & Monitoring",
-      "sections": [
-        {
-          "label": "Laboratory and Treatment",
-          "isExpanded": "true",
-          "questions": [
+              },
+              "hideSteppers": true
+            },
             {
-              "label": "RBS (Random Blood Sugar)",
+              "label": "Anti pain given?",
               "type": "obs",
-              "required": false,
+              "id": "antiPainGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "649de9d2-6718-5dec-9382-5c7f33cabcd4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "GCS",
+              "type": "obs",
+              "id": "gcs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "160347AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "RBS",
+              "type": "obs",
               "id": "rbs",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
+                "rendering": "text",
+                "concept": "590ff73f-c56c-43ec-bf41-7a6148072b78"
               }
             },
             {
-              "label": "Urine Ketone Value",
+              "label": "Ketone",
               "type": "obs",
-              "required": false,
               "id": "ketone",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "d9e8f7a6-b5c4-4d3e-8f2a-1b2c3d4e5f6a",
-                "min": "0",
-                "step": "0.1"
+                "rendering": "text",
+                "concept": "36a5572c-eff1-4c6b-b28f-4253be5f358a"
               }
             },
             {
-              "label": "Potassium (K+)",
+              "label": "K+",
               "type": "obs",
-              "required": false,
-              "id": "potassium",
+              "id": "k",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1133AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.1"
+                "step": "0.01"
               }
             },
             {
               "label": "Insulin",
               "type": "obs",
-              "required": false,
               "id": "insulin",
               "questionOptions": {
-                "rendering": "textarea",
+                "rendering": "text",
                 "concept": "e0f9a8b7-c6d5-4e4f-9a3b-2c3d4e5f6a7b"
               }
-            }
-          ]
-        },
-        {
-          "label": "Fluid Management",
-          "isExpanded": "true",
-          "questions": [
+            },
             {
-              "label": "Ringer Lactate Input",
+              "label": "Input (RL)",
               "type": "obs",
-              "required": false,
-              "id": "ringerLactateInput",
+              "id": "inputRl",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "166650AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
+                "rendering": "text",
+                "concept": "bf16a33f-4f00-48d1-b9bd-1f1b6f8d800c"
               }
             },
             {
               "label": "Total Fluid Output",
               "type": "obs",
-              "required": false,
               "id": "totalFluidOutput",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "162659AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "f2b9c07c-8c2a-44b6-ae8d-0adeeddcc8e0",
                 "min": "0",
                 "step": "0.01"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Notes",
-          "isExpanded": "true",
-          "questions": [
+              },
+              "hideSteppers": true
+            },
             {
-              "label": "Remarks",
+              "label": "Remark",
               "type": "obs",
-              "required": false,
-              "id": "remarks",
+              "id": "remark",
               "questionOptions": {
                 "rendering": "textarea",
-                "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "rows": "3"
+                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
               }
             }
           ]

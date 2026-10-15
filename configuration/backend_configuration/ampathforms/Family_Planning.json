@@ -1,7 +1,7 @@
 {
   "name": "Family Planning",
-  "description": "Family Planning form migrated from Bahmni",
-  "version": "1.1",
+  "description": "Family Planning - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
   "published": true,
   "uuid": "8357cfb2-5c21-4550-8958-21b487ae9e52",
   "retired": false,
@@ -15,11 +15,10 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
-              "readonly": false,
               "questionOptions": {
                 "rendering": "date"
               },
@@ -28,25 +27,24 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "readonly": true
             },
             {
               "label": "Provider:",
               "type": "encounterProvider",
               "required": "true",
-              "id": "encProvider",
-              "readonly": false,
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "isSearchable": true
-              }
+              },
+              "id": "encProvider",
+              "readonly": false
             },
             {
               "label": "Location:",
               "type": "encounterLocation",
               "required": "true",
-              "id": "encLocation",
-              "readonly": false,
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "datasource": {
@@ -55,152 +53,427 @@
                     "tag": "Login Location"
                   }
                 }
-              }
+              },
+              "id": "encLocation",
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Family Planning",
+      "label": "Family Planning Form Assessment",
       "sections": [
         {
-          "label": "Family Planning Information",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Family Planning Method Provided",
+              "label": "Date of visit",
               "type": "obs",
+              "id": "dateOfVisit",
               "questionOptions": {
-                "rendering": "radio",
+                "rendering": "date",
+                "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
+              }
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Family Planning Method Provided Coded",
+              "type": "obs",
+              "id": "familyPlanningMethodProvidedCoded",
+              "questionOptions": {
+                "rendering": "select",
                 "concept": "3b96324b-c6e9-4361-9709-9f7f25f7c131",
                 "answers": [
                   {
-                    "concept": "907AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Depo"
+                    "concept": "164813AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "MaC-Male Condom"
                   },
                   {
-                    "concept": "780AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Pills"
+                    "concept": "164814AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "FeC-Female Condom"
                   },
                   {
-                    "concept": "190AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Condoms"
+                    "concept": "ba1f92b1-741a-49a0-bf35-57d66a5194b3",
+                    "label": "Inj-Injectable"
+                  },
+                  {
+                    "concept": "ea3322bf-6644-40e0-a22e-04e2c2c7a128",
+                    "label": "EC-Emergency Contraception"
+                  },
+                  {
+                    "concept": "3b8e5288-63bb-4901-85fd-ba164f9e8c32",
+                    "label": "OC-Oral Contraceptive"
+                  },
+                  {
+                    "concept": "1472AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "TL-Tubal Ligation"
+                  },
+                  {
+                    "concept": "1489AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "V-Vasectomy"
+                  },
+                  {
+                    "concept": "76022AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Imp-Implanon"
                   },
                   {
                     "concept": "1359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Implant"
+                    "label": "Nr-Norplant"
                   },
                   {
-                    "concept": "5275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "IUCD"
+                    "concept": "1873AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "JD-Jedale"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
                   }
                 ]
-              },
-              "id": "familyPlanningMethodProvided"
-            },
-            {
-              "label": "Notes - (optional)",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "163042AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "id": "familyPlanningMethodNotes",
-              "hide": {
-                "hideWhenExpression": "isEmpty(familyPlanningMethodProvided)"
               }
             },
             {
-              "label": "Units Provided",
+              "label": "Reason for FP Method Switch",
               "type": "obs",
+              "id": "reasonForFpMethodSwitch",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "164901AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "164902AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unavailabiltiy of Methods"
+                  },
+                  {
+                    "concept": "164154AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unwanted side effects"
+                  },
+                  {
+                    "concept": "50891b89-2d3d-4234-bb32-bfa13f381d70",
+                    "label": "Desire being pregnant"
+                  },
+                  {
+                    "concept": "20be5018-19d7-4071-b488-a523e6200426",
+                    "label": "Developed illness and disease"
+                  },
+                  {
+                    "concept": "9fb5e037-748c-46ea-9bb1-1030d0e50ad7",
+                    "label": "Potential interaction with newly initiated treatment ingredient"
+                  },
+                  {
+                    "concept": "cb92d2ea-1b67-4958-825e-2b5366b72640",
+                    "label": "Risk of STI exposure"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Gravida",
+              "type": "obs",
+              "id": "gravida",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5624AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Parity",
+              "type": "obs",
+              "id": "parity",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1053AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Gestational Age(GA)",
+              "type": "obs",
+              "id": "gestationalAgeGa",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "9c4d5e6f-7081-9012-cdef-345678901999"
-              },
-              "id": "unitsProvided"
-            },
-            {
-              "label": "Notes (if necessary)",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "163042AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "id": "unitsProvidedNotes",
-              "hide": {
-                "hideWhenExpression": "isEmpty(unitsProvided)"
+                "concept": "b1826924-335e-40b2-a38a-fecf39e40de1"
               }
             },
             {
-              "label": "Users Type",
+              "label": "Ultrasound Date",
               "type": "obs",
+              "id": "ultrasoundDate",
               "questionOptions": {
-                "rendering": "radio",
-                "concept": "1e6f7081-9203-1234-ef01-56789012345a",
+                "rendering": "date",
+                "concept": "7415e6f7-4859-6789-0123-456789abcd0a"
+              }
+            },
+            {
+              "label": "Type of Abortion",
+              "type": "obs",
+              "id": "typeOfAbortion",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "160850AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
-                    "concept": "6bee05c0-d9e0-4c5f-9a8a-3cbad70fdc9d",
-                    "label": "Existing"
+                    "concept": "69fe57fe-126d-4bb5-8876-981958efddc2",
+                    "label": "Spontaneous"
                   },
                   {
-                    "concept": "763a1d59-f3b5-492a-ba63-f0a1562ce441",
-                    "label": "New"
+                    "concept": "7d0c44ce-1f50-47c6-8c3a-5c827542c5aa",
+                    "label": "Inevitable"
+                  },
+                  {
+                    "concept": "a39473d2-6097-46d5-b305-5e0abbfb1f17",
+                    "label": "Unsafe"
+                  },
+                  {
+                    "concept": "163339AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Incomplete"
+                  },
+                  {
+                    "concept": "55146024-766d-42dd-bcc6-985a50faedd0",
+                    "label": "Safe Abortion"
+                  },
+                  {
+                    "concept": "12ba0ee0-23cd-4e79-baef-a10c8bc5ea69",
+                    "label": "Complete"
                   }
                 ]
-              },
-              "id": "usersType"
-            },
-            {
-              "label": "Notes (if necessary)",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "163042AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "id": "usersTypeNotes",
-              "hide": {
-                "hideWhenExpression": "isEmpty(usersType)"
               }
             },
             {
-              "label": "Family Planning Method Discontinued/Removed",
+              "label": "Type of Evacuation",
               "type": "obs",
+              "id": "typeOfEvacuation",
               "questionOptions": {
-                "rendering": "radio",
-                "concept": "3081a2b3-1425-3456-0123-789012345abc",
+                "rendering": "select",
+                "concept": "38e93ecf-2867-487a-8778-b0429fce9d17",
                 "answers": [
                   {
-                    "concept": "5275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "IUCD"
+                    "concept": "159728AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "MVA"
                   },
                   {
-                    "concept": "907AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Depo"
+                    "concept": "45ec0150-7329-4fa8-be20-e6005cea0608",
+                    "label": "E & C"
                   },
                   {
-                    "concept": "780AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Pills"
+                    "concept": "e03a6b8d-c209-4570-a663-7398243fb646",
+                    "label": "MA"
                   },
                   {
-                    "concept": "1359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Implant"
+                    "concept": "226d38ff-87ed-4284-857a-2b5cb6e9cdf8",
+                    "label": "D & C"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Death other"
                   }
                 ]
-              },
-              "id": "familyPlanningMethodDiscontinued"
+              }
             },
             {
-              "label": "Notes (if necessary)",
+              "label": "Condition on discharge",
               "type": "obs",
+              "id": "conditionOnDischarge",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5b3c70cf-d18a-4161-b581-efd064bd181d",
+                "answers": [
+                  {
+                    "concept": "165b4679-5c0d-4edb-bb3d-e661d45122e4",
+                    "label": "Improved"
+                  },
+                  {
+                    "concept": "f672a8e7-9fe6-42ce-a779-63da9c57a858",
+                    "label": "Referred out"
+                  },
+                  {
+                    "concept": "97aebec3-6c98-44d3-921a-a12b6f35ce9b",
+                    "label": "Absconded"
+                  },
+                  {
+                    "concept": "1694AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Left Against Medical Advice"
+                  },
+                  {
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Remark",
+              "type": "obs",
+              "id": "remark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+              }
+            },
+            {
+              "label": "Analgesia",
+              "type": "obs",
+              "id": "analgesia",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "da8cdcf2-5a9e-4e2e-a6b6-a4257d206996",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Type",
+              "type": "obs",
+              "id": "type",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "331ee311-38a4-4fe5-a712-95eedd075200",
+                "answers": [
+                  {
+                    "concept": "f8691a2b-3b42-4ddc-5a67-123456789ab3",
+                    "label": "Lidocain 2% with adrenalin"
+                  },
+                  {
+                    "concept": "091a2b3c-4c53-4eed-6b78-23456789abc4",
+                    "label": "Lidocain 2% with out adrenalin"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Notes",
+              "type": "obs",
+              "id": "notes",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "163042AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "id": "familyPlanningMethodDiscontinuedNotes",
-              "hide": {
-                "hideWhenExpression": "isEmpty(familyPlanningMethodDiscontinued)"
               }
+            },
+            {
+              "label": "Place procedure Performed",
+              "type": "obs",
+              "id": "placeProcedurePerformed",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "faa36db6-eb06-4f85-9ca2-26401a1eb2be",
+                "answers": [
+                  {
+                    "concept": "160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Outpatient procedure"
+                  },
+                  {
+                    "concept": "167050AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Inpatient Procedure"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Post abortion contraception",
+              "type": "obs",
+              "id": "postAbortionContraception",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6539bae9-75b1-4853-b2f6-8ea19650c8e8"
+              }
+            },
+            {
+              "label": "Counseling",
+              "type": "obs",
+              "id": "counseling",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9f2598cb-19f1-4a21-8f2b-d7b7a8265e01",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Blood Pressure (set)",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic Blood Pressure (mmHg)",
+              "type": "obs",
+              "id": "systolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Systolic blood pressure is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic BP",
+              "type": "obs",
+              "id": "diastolicBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
             }
           ]
         }

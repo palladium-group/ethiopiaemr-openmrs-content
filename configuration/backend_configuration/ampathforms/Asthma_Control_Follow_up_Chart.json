@@ -1,0 +1,200 @@
+{
+  "name": "Asthma Control Follow up Chart",
+  "description": "Asthma Control Follow up Chart - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "78701fe4-b075-521f-9b8c-3767c4bc87a5",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Management of asthma control follow up chart Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Duration",
+              "type": "obs",
+              "id": "duration",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "efa82d2d-c82b-464c-b8d4-00e1a17a92ca"
+              }
+            },
+            {
+              "label": "Severity of astma",
+              "type": "obs",
+              "id": "severityOfAstma",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8a7c156b-2a49-4e7e-94b1-0e5859616a1e"
+              }
+            },
+            {
+              "label": "Family history of allergic diseases",
+              "type": "obs",
+              "id": "familyHistoryOfAllergicDiseases",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "601b16b0-d5e2-419a-b8b7-11340468bf51",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "True"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "False"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Was there emergency visit for exacerbation in the last 3 months",
+              "type": "obs",
+              "id": "wasThereEmergencyVisitForExacerbationInT",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9564437d-61ad-49b6-a049-8661674f2a45",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "True"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "False"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Classification of drugs used in maintenance treatment",
+              "type": "obs",
+              "id": "classificationOfDrugsUsedInMaintenanceTr",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2c512af7-d098-451f-b001-52928d3b1bda"
+              }
+            },
+            {
+              "label": "Asthma diary promoted",
+              "type": "obs",
+              "id": "asthmaDiaryPromoted",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "281326b6-43ef-45f0-9f70-ae23e7db7217",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "True"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "False"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Asthma control status",
+              "type": "obs",
+              "id": "asthmaControlStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "960c63b8-4414-4074-b899-cceef0183c55",
+                "answers": [
+                  {
+                    "concept": "bcc9ae1d-724f-5488-bfaa-97ea60de59f8",
+                    "label": "Controlled"
+                  },
+                  {
+                    "concept": "0389a0f2-3517-5b16-957e-6011f53b02b2",
+                    "label": "Not Controlled"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Smoking History",
+              "type": "obs",
+              "id": "smokingHistory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e3f4a5b6-7c8d-9e0f-1a2b-3c4d5e6f7a8b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

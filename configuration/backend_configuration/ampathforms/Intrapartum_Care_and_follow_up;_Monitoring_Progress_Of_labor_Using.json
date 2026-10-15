@@ -1,7 +1,7 @@
 {
   "name": "Intrapartum Care and follow-up; Monitoring Progress Of labor Using Partograph",
-  "description": "Partograph for monitoring progress of labor including fetal heart, cervix, contractions, vital signs, IV fluids and urine",
-  "version": "1.2",
+  "description": "Intrapartum Care and follow-up; Monitoring Progress Of labor Using Partograph - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
   "published": true,
   "uuid": "d3e4f506-1728-49ab-c012-d23456789abc",
   "retired": false,
@@ -15,11 +15,10 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
-              "readonly": false,
               "questionOptions": {
                 "rendering": "date"
               },
@@ -28,7 +27,8 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "readonly": true
             },
             {
               "label": "Provider:",
@@ -55,138 +55,151 @@
                 }
               },
               "id": "encLocation",
-              "readonly": false
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Fetal Monitoring",
+      "label": "Intrapartum Care and follow-up; Monitoring Progress Of labor Using PartographThu, 28 Dec 2023 09:44:33 GMT Assessment",
       "sections": [
         {
-          "label": "Fetal Heart Beat",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Fetal Heart Beat partograph",
+              "label": "Partograph Start Time",
               "type": "obs",
-              "id": "fetalHeartBeatPartograph",
+              "id": "partographStartTime",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "219c0ada-4ed7-47d5-950e-f45060ed4f96"
+              }
+            },
+            {
+              "label": "Labor starting time",
+              "type": "obs",
+              "id": "laborStartingTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "a58d731f-002e-424f-94ed-41fbb61132e3"
+              }
+            },
+            {
+              "label": "If membrane is ruptured, time of ROM",
+              "type": "obs",
+              "id": "ifMembraneIsRupturedTimeOfRom",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "41e63134-c7ab-4ca4-8576-6f6891b7e602"
+              }
+            },
+            {
+              "label": "Gravida",
+              "type": "obs",
+              "id": "gravida",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1440AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "5624AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Para",
+              "type": "obs",
+              "id": "para",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ce38ecf3-10ca-4227-bb48-5db53e9588cd",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Contraction per 10 minutes",
+              "type": "obs",
+              "id": "contractionPer10Minutes",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7fa183b6-3484-4976-9af7-818f4d417c98"
+              }
+            },
+            {
+              "label": "Drug given and IV fluid",
+              "type": "obs",
+              "id": "drugGivenAndIvFluid",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1f96f08e-741e-4d00-a82c-dd4c1a5874d2"
               }
             }
           ]
         },
         {
-          "label": "Amniotic Fluid",
+          "label": "New Fetal Heart Beat",
+          "isExpanded": "true",
+          "questions": []
+        },
+        {
+          "label": "Amniotic Fluid and MouldingThu, 28 Dec 2023 09:44:29 GMT",
           "isExpanded": "true",
           "questions": [
-            {
-              "label": "Description of Ammonitic fluid",
-              "type": "obs",
-              "id": "descriptionOfAmmoniticFluid",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "556df6f6-ac89-49d5-ab52-79b67c6cefa6",
-                "answers": [
-                  {
-                    "concept": "164899AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Intact membrane"
-                  },
-                  {
-                    "concept": "159484AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Clear ammonitic"
-                  },
-                  {
-                    "concept": "1077AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Bloody Amniotic"
-                  },
-                  {
-                    "concept": "9caace24-470c-48d2-b931-59f23bb7cb2b",
-                    "label": "meconium stained  fluid Coded"
-                  }
-                ]
-              }
-            },
             {
               "label": "Moulding Description",
               "type": "obs",
               "id": "mouldingDescription",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "a1c3e5f7-2b4d-4a6c-8e1f-0a2c4e6f8b10"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "label": "Labor Progress",
-      "sections": [
-        {
-          "label": "Cervix and Descent",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Cervical Dilatation",
-              "type": "obs",
-              "id": "cervicalDilatation",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "162261AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "a1c3e5f7-2b4d-4a6c-8e1f-0a2c4e6f8b10",
+                "min": "0",
                 "step": "0.01"
-              }
+              },
+              "hideSteppers": true
             },
             {
-              "label": "Descent of head",
+              "label": "Ammonitic fluid",
               "type": "obs",
-              "id": "descentOfHead",
+              "id": "ammoniticFluid",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "b2d4f6a8-3c5e-4b7d-9f20-1b3d5f7a9c21"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Contractions",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Contraction per 10 minutes",
-              "type": "obs",
-              "id": "contractionPer10Minutes",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "c3e5a7c9-4d6f-4c8e-a031-2c4e6a8b0d32",
+                "rendering": "select",
+                "concept": "76059a7b-cf2a-4b4c-847c-0f96648cba5a",
                 "answers": [
                   {
-                    "concept": "d4f6b8da-5e7a-4d9f-b142-3d5f7b9c1e43",
-                    "label": "0 - 20 second"
+                    "concept": "159484AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Clear"
                   },
                   {
-                    "concept": "e5a7c9eb-6f8b-4ea0-c253-4e6a8c0d2f54",
-                    "label": "20 - 40 second"
+                    "concept": "1077AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Bloody"
                   },
                   {
-                    "concept": "f6b8dae1-7a9c-4fb1-d364-5f7b9d1e3a65",
-                    "label": "> 40 second"
+                    "concept": "9caace24-470c-48d2-b931-59f23bb7cb2b",
+                    "label": "Meconium stained fluid"
+                  },
+                  {
+                    "concept": "373cd129-d4e0-41d9-9a96-c46999a4d200",
+                    "label": "Meconium stained fluid Coded Grade 2"
+                  },
+                  {
+                    "concept": "dde32d78-e897-4838-90df-15e8d3b9872c",
+                    "label": "Meconium stained fluid Coded Grade 3"
                   }
                 ]
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "label": "Oxytocin and Drugs",
-      "sections": [
+        },
         {
-          "label": "Oxytocin",
+          "label": "Cervical Dilation Graph",
+          "isExpanded": "true",
+          "questions": []
+        },
+        {
+          "label": "Oxy and drop",
           "isExpanded": "true",
           "questions": [
             {
@@ -196,8 +209,10 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "07c9ebf2-8bad-40c2-e475-6a8c0e2f4b76",
+                "min": "0",
                 "step": "0.01"
-              }
+              },
+              "hideSteppers": true
             },
             {
               "label": "Drop/min",
@@ -205,90 +220,48 @@
               "id": "dropMin",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "eaf41281-d7e7-4add-9fef-496ca854bbba"
-              }
-            },
-            {
-              "label": "Drug given and IV fluid",
-              "type": "obs",
-              "id": "drugGivenAndIvFluid",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "1f96f08e-741e-4d00-a82c-dd4c1a5874d2"
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "label": "Vital Signs",
-      "sections": [
-        {
-          "label": "Blood Pressure without posture",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Systolic BP",
-              "type": "obs",
-              "id": "systolicBp",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
-            },
-            {
-              "label": "Diastolic BP",
-              "type": "obs",
-              "id": "diastolicBp",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
-            },
-            {
-              "label": "Pulse rateWed, 14 Feb 2024 07:43:34 GMT (bpm)",
-              "type": "obs",
-              "id": "pulseRate",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
+                "concept": "eaf41281-d7e7-4add-9fef-496ca854bbba",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
             }
           ]
         },
         {
-          "label": "Temperature",
+          "label": "Pulse and BP graph",
+          "isExpanded": "true",
+          "questions": []
+        },
+        {
+          "label": "Temperature table",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Partograph Temprature",
+              "label": "Temprature",
               "type": "obs",
-              "id": "partographTemprature",
+              "id": "temprature",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
                 "step": "0.01"
-              }
+              },
+              "hideSteppers": true
             }
           ]
-        }
-      ]
-    },
-    {
-      "label": "Urine",
-      "sections": [
+        },
         {
-          "label": "Urine Description",
+          "label": "Urine Table",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Description of Urine Protein",
+              "label": "Urine Protein",
               "type": "obs",
-              "id": "descriptionOfUrineProtein",
+              "id": "urineProtein",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "18dae1f3-9cbe-41d3-f586-7b9d1f3a5c87"
+                "concept": "a24ed908-7dd2-464b-b69b-6e8a3f061cfb"
               }
             },
             {
@@ -296,7 +269,7 @@
               "type": "obs",
               "id": "descriptionOfUrineAcetone",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "29ebf204-adcf-42e4-a697-8c0e2a4b6d98"
               }
             },
@@ -306,8 +279,11 @@
               "id": "descriptionOfVolume",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "159660AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
+                "concept": "159660AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": "0.01"
+              },
+              "hideSteppers": true
             }
           ]
         }

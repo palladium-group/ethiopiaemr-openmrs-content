@@ -1,7 +1,7 @@
 {
   "name": "Order Sheet",
-  "description": "Order Sheet migrated from Bahmni",
-  "version": "1.1",
+  "description": "Order Sheet - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
   "published": true,
   "uuid": "8e4ca70c-97a6-4dde-b09a-f36a43830cb7",
   "retired": false,
@@ -15,7 +15,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
@@ -28,24 +28,23 @@
                   "allowFutureDates": "false"
                 }
               ],
-              "readonly": false
+              "readonly": true
             },
             {
               "label": "Provider:",
               "type": "encounterProvider",
               "required": "true",
-              "id": "encProvider",
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "isSearchable": true
               },
+              "id": "encProvider",
               "readonly": false
             },
             {
               "label": "Location:",
               "type": "encounterLocation",
               "required": "true",
-              "id": "encLocation",
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "datasource": {
@@ -55,207 +54,154 @@
                   }
                 }
               },
-              "readonly": false
+              "id": "encLocation",
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Order Sheet",
+      "label": "Order Sheet Assessment",
       "sections": [
         {
-          "label": "Visit Details",
-          "isExpanded": "true",
-          "questions": []
-        },
-        {
-          "label": "Order Information",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Date & Time",
+              "label": "Order type",
               "type": "obs",
-              "required": "true",
-              "id": "dateTime",
+              "id": "orderType",
               "questionOptions": {
-                "rendering": "datetime",
-                "concept": "159622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "validators": []
-            },
-            {
-              "label": "Problem list",
-              "type": "obs",
-              "required": "false",
-              "id": "problemList",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "162166AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "validators": []
-            },
-            {
-              "label": "Order",
-              "type": "obs",
-              "required": "true",
-              "id": "order",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "162169AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "validators": []
-            },
-            {
-              "label": "Patient Condition",
-              "type": "obs",
-              "required": "false",
-              "id": "patientCondition",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "7fc2a8d1-4e3b-4c9f-8a2d-6b1e9f3c5d70",
+                "rendering": "select",
+                "concept": "d208e4b4-4543-4ea8-abf7-f5fe0e3d6465",
                 "answers": [
                   {
-                    "concept": "8a3b9e2c-5f4a-4d8e-9b3c-7c2f0ae4d681",
+                    "concept": "9d271ff2-9ea8-4950-ad08-2393d2be38df",
+                    "label": "New Order"
+                  },
+                  {
+                    "concept": "78735779-816d-4d79-87b9-9743822600f6",
+                    "label": "Added Order"
+                  },
+                  {
+                    "concept": "1ca0deb8-25ab-4f43-824c-0891acf03d52",
+                    "label": "Revised Order"
+                  },
+                  {
+                    "concept": "ab5c1364-6ad7-40ca-866a-25ed045bc9be",
+                    "label": "Preop order"
+                  },
+                  {
+                    "concept": "84266248-1ccb-4052-9cc1-51b30d001007",
+                    "label": "Postop order"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5809a2b3-3ca3-b23e-8567-9ef012345678"
+              }
+            },
+            {
+              "label": "Main Diagnosis",
+              "type": "obs",
+              "id": "mainDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b9aa3a66-77d2-4078-845c-d0eaa72efa43"
+              }
+            },
+            {
+              "label": "ICD Code of Main Diagnosis",
+              "type": "obs",
+              "id": "icdCodeOfMainDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4c50a82f-b138-4029-b7b9-4766e8069e7e"
+              }
+            },
+            {
+              "label": "Condition",
+              "type": "obs",
+              "id": "condition",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8411fbfa-e070-4143-aca2-b85f6f7dbe6c",
+                "answers": [
+                  {
+                    "concept": "06398754-8865-4004-805e-926636d6d6c2",
                     "label": "Stable"
                   },
                   {
-                    "concept": "9b4caf3d-6a5b-4e9f-ac4d-8d3a1bf5e792",
-                    "label": "Extubated Operative Condition"
+                    "concept": "31585abf-48a2-4c80-af26-f3fb1d6a9a20",
+                    "label": "Sub-Critical"
                   },
                   {
-                    "concept": "ac5db14e-7b6c-4faf-bd5e-9e4b2c06f813",
-                    "label": "Transferred to recovery room"
-                  },
-                  {
-                    "concept": "bd6ec25f-8c7d-50b0-ce6f-af5c3d17a924",
-                    "label": "Death on OT Table"
+                    "concept": "8d956de6-e36f-468c-8485-50858340331c",
+                    "label": "Critical"
                   }
                 ]
-              },
-              "validators": []
+              }
             },
             {
-              "label": "Activity Note",
+              "label": "Activity",
               "type": "obs",
-              "required": "false",
-              "id": "activityNote",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "159397AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "validators": []
-            },
-            {
-              "label": "Diet",
-              "type": "obs",
-              "required": "false",
-              "id": "diet",
+              "id": "activity",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "validators": []
+                "concept": "6211a61e-ba24-4c5b-b9a3-08ba3881b1a9"
+              }
             },
             {
-              "label": "Investigation Notes",
+              "label": "Diet/Feeding",
               "type": "obs",
-              "required": "false",
-              "id": "investigationNotes",
+              "id": "dietFeeding",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "163042AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "validators": []
-            }
-          ]
-        },
-        {
-          "label": "Nursing Care Plan",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Problem Number",
-              "type": "obs",
-              "required": "false",
-              "id": "problemNumber",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "1731AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "validators": []
+                "concept": "bf82f0d9-3730-4a52-ac09-6b5c5242769e"
+              }
             },
             {
-              "label": "Description of Goals",
+              "label": "Investigation",
               "type": "obs",
-              "required": "false",
-              "id": "descriptionOfGoals",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "162879AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "validators": []
-            },
-            {
-              "label": "Expected Outcomes Notes",
-              "type": "obs",
-              "required": "false",
-              "id": "expectedOutcomesNotes",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "ce7fd360-9d8e-61c1-df70-b06d4e28ba35"
-              },
-              "validators": []
-            },
-            {
-              "label": "Interventions",
-              "type": "obs",
-              "required": "false",
-              "id": "interventions",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "df8ae471-ae9f-72d2-e081-c17e5f39cb46"
-              },
-              "validators": []
-            }
-          ]
-        },
-        {
-          "label": "Provider Information",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Doctors Name",
-              "type": "obs",
-              "required": "false",
-              "id": "doctorsName",
+              "id": "investigation",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "validators": []
+                "concept": "4182536d-1526-3456-7890-123456abcd1b"
+              }
             },
             {
-              "label": "Nurse Name",
+              "label": "V/S followup frequency",
               "type": "obs",
-              "required": "false",
-              "id": "nurseName",
+              "id": "vSFollowupFrequency",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "166690AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "validators": []
+                "concept": "c4b5fa0a-d8e3-4a60-8d86-27f2aba1747c"
+              }
             },
             {
-              "label": "Discharge on",
+              "label": "Treatments to be given",
               "type": "obs",
-              "required": "false",
-              "id": "dischargeOn",
+              "id": "treatmentsToBeGiven",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "validators": []
+                "concept": "1d55feb3-9f2b-4156-ae00-bdb2222df398"
+              }
+            },
+            {
+              "label": "Ordered by",
+              "type": "obs",
+              "id": "orderedBy",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "17ed1619-739d-4e25-b8b0-6d87bd66141e"
+              }
             }
           ]
         }

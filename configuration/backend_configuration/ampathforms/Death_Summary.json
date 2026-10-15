@@ -1,7 +1,7 @@
 {
   "name": "Death Summary",
-  "description": "Death Summary migrated from Bahmni",
-  "version": "1.1",
+  "description": "Death Summary - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
   "published": true,
   "uuid": "4beef0bb-03b9-4511-a5af-576dfd6b34bd",
   "retired": false,
@@ -15,11 +15,10 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
-              "readonly": false,
               "questionOptions": {
                 "rendering": "date"
               },
@@ -28,7 +27,8 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "readonly": true
             },
             {
               "label": "Provider:",
@@ -55,35 +55,53 @@
                 }
               },
               "id": "encLocation",
-              "readonly": false
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Death Summary",
+      "label": "Death Summary Assessment",
       "sections": [
         {
-          "label": "Death Summary",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
               "label": "Department",
               "type": "obs",
-              "required": false,
               "id": "department",
               "questionOptions": {
-                "rendering": "radio",
-                "concept": "8f9a0b1c-2d3e-4567-8901-234567890123",
+                "rendering": "select",
+                "concept": "164918AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
-                    "label": "Outpatient",
-                    "concept": "160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "8e777f8f-120d-4f5a-9552-d17ac2b957ae",
+                    "label": "Outpatient"
                   },
                   {
-                    "label": "Inpatient",
-                    "concept": "5485AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "bdf5d5fa-984e-49cb-a769-63f6c481e144",
+                    "label": "Inpatient"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Perioperative Mortality",
+              "type": "obs",
+              "id": "perioperativeMortality",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "11134473-1201-4bc7-80da-cdeb4587f4e6",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
                   }
                 ]
               }
@@ -91,8 +109,7 @@
             {
               "label": "Bed No.",
               "type": "obs",
-              "required": false,
-              "id": "bedNumber",
+              "id": "bedNo",
               "questionOptions": {
                 "rendering": "text",
                 "concept": "f6071829-0314-2345-6789-012345abcd16"
@@ -101,18 +118,25 @@
             {
               "label": "Date of Admission",
               "type": "obs",
-              "required": false,
               "id": "dateOfAdmission",
               "questionOptions": {
-                "rendering": "datetime",
-                "concept": "1640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "rendering": "date",
+                "concept": "421719a0-eef5-4181-b55d-fff16d845314"
               }
             },
             {
-              "label": "Date and Time of Death",
+              "label": "Date of Death if the client reported Death",
               "type": "obs",
-              "required": false,
-              "id": "dateTimeOfDeath",
+              "id": "dateOfDeathIfTheClientReportedDeath",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "1543AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Time of Death",
+              "type": "obs",
+              "id": "timeOfDeath",
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "293a415b-3647-5678-9012-345678abcd09"
@@ -121,57 +145,65 @@
             {
               "label": "Brief Medical History",
               "type": "obs",
-              "required": false,
               "id": "briefMedicalHistory",
               "questionOptions": {
                 "rendering": "textarea",
-                "concept": "160221AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "rows": "4"
+                "concept": "160221AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             },
             {
-              "label": "Important Physical Examination Finding",
+              "label": "Important physical examination finding",
               "type": "obs",
-              "required": false,
               "id": "importantPhysicalExaminationFinding",
               "questionOptions": {
-                "rendering": "textarea",
-                "concept": "9a0b1c2d-3e4f-5678-9012-345678901234",
-                "rows": "4"
+                "rendering": "text",
+                "concept": "9a0b1c2d-3e4f-5678-9012-345678901234"
               }
             },
             {
-              "label": "Immediate Cause of Death",
+              "label": "Working Diagnosis",
               "type": "obs",
-              "required": false,
+              "id": "workingDiagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8141ca9b-f165-4036-bc49-ec94030490ed"
+              }
+            },
+            {
+              "label": "Treatment Provided",
+              "type": "obs",
+              "id": "treatmentProvided",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5ad34065-a800-4b9e-b313-a09c1316e7ed"
+              }
+            },
+            {
+              "label": "Immediate cause of death",
+              "type": "obs",
               "id": "immediateCauseOfDeath",
               "questionOptions": {
-                "rendering": "textarea",
-                "concept": "3a4b526c-4758-6789-0123-456789abcd0a",
-                "rows": "4"
+                "rendering": "text",
+                "concept": "3a4b526c-4758-6789-0123-456789abcd0a"
               }
             },
             {
-              "label": "Physician WHO Confirmed the Death",
-              "type": "encounterProvider",
-              "required": false,
-              "id": "physicianWhoConfirmedDeath",
+              "label": "Physician who confirmed the Death",
+              "type": "obs",
+              "id": "physicianWhoConfirmedTheDeath",
               "questionOptions": {
-                "rendering": "ui-select-extended",
-                "isSearchable": true
-              },
-              "readonly": false
+                "rendering": "text",
+                "concept": "1829304b-2536-4567-8901-234567abcd08"
+              }
             },
             {
               "label": "Treating Physician Name",
-              "type": "encounterProvider",
-              "required": false,
+              "type": "obs",
               "id": "treatingPhysicianName",
               "questionOptions": {
-                "rendering": "ui-select-extended",
-                "isSearchable": true
-              },
-              "readonly": false
+                "rendering": "text",
+                "concept": "6db17571-2573-417b-bdc7-b3831b684807"
+              }
             }
           ]
         }

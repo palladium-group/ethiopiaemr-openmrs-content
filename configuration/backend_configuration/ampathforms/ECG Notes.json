@@ -1,7 +1,7 @@
 {
   "name": "ECG Notes",
-  "description": "ECG Notes migrated from Bahmni",
-  "version": "1.1",
+  "description": "ECG Notes - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "version": "1.0",
   "published": true,
   "uuid": "3196e46e-054b-489b-8c2e-9b15a005a192",
   "retired": false,
@@ -15,7 +15,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
@@ -28,24 +28,23 @@
                   "allowFutureDates": "false"
                 }
               ],
-              "readonly": false
+              "readonly": true
             },
             {
               "label": "Provider:",
               "type": "encounterProvider",
               "required": "true",
-              "id": "encProvider",
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "isSearchable": true
               },
+              "id": "encProvider",
               "readonly": false
             },
             {
               "label": "Location:",
               "type": "encounterLocation",
               "required": "true",
-              "id": "encLocation",
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "datasource": {
@@ -55,45 +54,47 @@
                   }
                 }
               },
-              "readonly": false
+              "id": "encLocation",
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "ECG Notes",
+      "label": "ECG Notes Assessment",
       "sections": [
         {
-          "label": "ECG Notes",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
               "label": "ECG Details",
               "type": "obs",
+              "id": "ecgDetails",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "160845AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "id": "ecgDetails"
+              }
             },
             {
               "label": "ECG Done in",
               "type": "obs",
+              "id": "ecgDoneIn",
               "questionOptions": {
-                "rendering": "radio",
+                "rendering": "select",
                 "concept": "1e860cec-fd0e-41f9-9ff3-0e01064f89ca",
                 "answers": [
                   {
-                    "concept": "160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "32d9bb0d-ce32-4ac3-b65e-85832fe905bb",
                     "label": "OPD"
                   },
                   {
-                    "concept": "160522AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "037446f4-adfc-40b3-928c-a39a4826b1bf",
                     "label": "Emergency"
                   },
                   {
-                    "concept": "160536AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "167050AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "IPD"
                   },
                   {
@@ -101,26 +102,25 @@
                     "label": "Other"
                   }
                 ]
-              },
-              "id": "ecgDoneIn"
+              }
             },
             {
               "label": "ECG Done by",
               "type": "obs",
+              "id": "ecgDoneBy",
               "questionOptions": {
-                "rendering": "textarea",
+                "rendering": "text",
                 "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "id": "ecgDoneBy"
+              }
             },
             {
               "label": "Remarks",
               "type": "obs",
+              "id": "remarks",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "id": "remarks"
+              }
             }
           ]
         }
