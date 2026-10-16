@@ -267,10 +267,16 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5624AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "1",
                 "step": 1,
                 "disallowDecimals": true
-              }
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(gravida) && (gravida < 1)",
+                  "message": "Gravida must be 1 or more"
+                }
+              ]
             },
             {
               "label": "Para",
@@ -1003,13 +1009,18 @@
                 "concept": "e6f78901-9012-4d34-ef56-a78901234567",
                 "rendering": "number",
                 "disallowDecimals": true,
-                "step": 1,
-                "min": "1",
-                "max": "5"
+                "step": 1
               },
               "hide": {
                 "hideWhenExpression": "!(!isEmpty(tdProvided) && arrayContains(tdProvided, '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
-              }
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(tdDoseNumber) && (tdDoseNumber < 1 || tdDoseNumber > 5)",
+                  "message": "Td dose number must be between 1 and 5"
+                }
+              ]
             },
             {
               "label": " ",
