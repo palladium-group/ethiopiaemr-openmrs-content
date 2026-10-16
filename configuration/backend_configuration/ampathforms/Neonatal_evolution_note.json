@@ -62,7 +62,7 @@
       ]
     },
     {
-      "label": "Neonatal evolution note Assessment",
+      "label": "Neonatal evaluation note Assessment",
       "sections": [
         {
           "label": "Assessment",
@@ -126,19 +126,22 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "f1ad9494-fbf6-5ca7-b6ef-9ab351c41667"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
-              "label": "Age at time of evaluation",
+              "label": "Age at time of evaluation (hours or days)",
               "type": "obs",
               "id": "ageAtTimeOfEvaluation",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "ddda5396-4822-5ac3-be04-2e099268b9e8",
-                "min": "0",
-                "step": 0.01
-              },
-              "hideSteppers": true
+                "rendering": "text",
+                "concept": "52b94e12-bb0e-5cf6-a75e-859985f53887"
+              }
             },
             {
               "label": "Sex",
@@ -201,7 +204,7 @@
                 "rendering": "number",
                 "concept": "1053AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1
               },
               "hideSteppers": true
             },
@@ -224,7 +227,7 @@
               }
             },
             {
-              "label": "Vdrl",
+              "label": "VDRL",
               "type": "obs",
               "id": "vdrl",
               "questionOptions": {
@@ -238,12 +241,16 @@
                   {
                     "label": "Reactive",
                     "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   }
                 ]
               }
             },
             {
-              "label": "HBSAG",
+              "label": "HBsAg",
               "type": "obs",
               "id": "hbsag",
               "questionOptions": {
@@ -257,17 +264,40 @@
                   {
                     "label": "Negative",
                     "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   }
                 ]
               }
             },
             {
-              "label": "GA from LNMP",
+              "label": "GA at delivery",
               "type": "obs",
               "id": "gaFromLnmp",
               "questionOptions": {
                 "rendering": "text",
                 "concept": "68c687e5-a101-43d7-90af-86618ba55230"
+              }
+            },
+            {
+              "label": "GA at delivery determined by",
+              "type": "obs",
+              "id": "gaAtDeliveryMethod",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "160697AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "LNMP",
+                    "concept": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Ultrasound",
+                    "concept": "159618AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
               }
             },
             {
@@ -378,7 +408,7 @@
                 "rendering": "number",
                 "concept": "5c8b528e-4778-44eb-825e-2c433f576985",
                 "min": "0",
-                "step": 0.01
+                "step": 1
               },
               "hideSteppers": true
             },
@@ -565,14 +595,15 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "230"
               },
-              "questionInfo": "Beats per minute.",
+              "questionInfo": "Beats per minute. Normal range for neonates: 100-160 bpm.",
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
-                  "message": "Value is outside the normal range (60-100 bpm)."
+                  "warnsWhenExpression": "myValue && (myValue < 100 || myValue > 160)",
+                  "message": "Value is outside the normal range for neonates (100-160 bpm)."
                 }
               ],
               "hideSteppers": true
@@ -585,14 +616,15 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "99"
               },
-              "questionInfo": "Breaths per minute.",
+              "questionInfo": "Breaths per minute. Normal range 30-60 breaths/min.",
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
-                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                  "warnsWhenExpression": "myValue && (myValue < 30 || myValue > 60)",
+                  "message": "Value is outside the normal range (30-60 breaths/min)."
                 }
               ],
               "hideSteppers": true
@@ -605,7 +637,8 @@
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "step": 0.01
+                "step": 0.01,
+                "max": "43"
               },
               "questionInfo": "Degrees Celsius, one decimal place.",
               "hideSteppers": true
@@ -870,7 +903,8 @@
                     "rendering": "number",
                     "concept": "1504AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "min": "0",
-                    "step": 0.01
+                    "step": 1,
+                    "max": "10"
                   },
                   "hideSteppers": true
                 }

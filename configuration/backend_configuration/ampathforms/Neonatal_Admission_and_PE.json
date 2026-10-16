@@ -81,6 +81,25 @@
               "hideSteppers": true
             },
             {
+              "label": "Sex of the infant",
+              "type": "obs",
+              "id": "sexOfInfant",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d8c915e9-0cd2-451c-ace2-a2b6910f69d4",
+                "answers": [
+                  {
+                    "concept": "1241a7b5-0187-43ef-8a52-b52ee91f7c1f",
+                    "label": "Male"
+                  },
+                  {
+                    "concept": "8524bad5-7021-4a20-b55c-82b7d3985779",
+                    "label": "Female"
+                  }
+                ]
+              }
+            },
+            {
               "label": "Gestational Age",
               "type": "obs",
               "id": "gestationalAge",
@@ -116,13 +135,19 @@
               }
             },
             {
-              "label": "Infant born on",
+              "label": "Date and time of birth",
               "type": "obs",
               "id": "infantBornOn",
               "questionOptions": {
-                "rendering": "date",
-                "concept": "1a9d86aa-ebbe-4352-bd42-873673f8dc5e"
-              }
+                "rendering": "datetime",
+                "concept": "7a1b2c3d-4e5f-6789-0123-456789abcde0"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Place of Delivery",
@@ -200,6 +225,63 @@
                   }
                 ]
               }
+            },
+            {
+              "label": "Feeding status",
+              "type": "obs",
+              "id": "feedingStatus",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "5fb2e238-5c23-4893-9273-f5baf038a01d",
+                "answers": [
+                  {
+                    "concept": "166909AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Adequate"
+                  },
+                  {
+                    "concept": "163794AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Inadequate"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Passed urine",
+              "type": "obs",
+              "id": "passedUrine",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d8f0ab0a-741b-46a1-84c0-957ad6f53e1f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Passed stool (meconium)",
+              "type": "obs",
+              "id": "passedStool",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "45d80eb1-a0ca-5399-b8e0-747bc7fed821",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -227,7 +309,7 @@
                 "rendering": "number",
                 "concept": "5624AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1
               },
               "hideSteppers": true
             },
@@ -239,7 +321,7 @@
                 "rendering": "number",
                 "concept": "ce38ecf3-10ca-4227-bb48-5db53e9588cd",
                 "min": "0",
-                "step": 0.01
+                "step": 1
               },
               "hideSteppers": true
             },
@@ -497,7 +579,7 @@
                 "rendering": "number",
                 "concept": "a85909c3-8293-0123-4567-890123abcd24",
                 "min": "0",
-                "step": 0.01
+                "step": 1
               },
               "hideSteppers": true
             },
@@ -590,7 +672,8 @@
                 "rendering": "number",
                 "concept": "159603AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "10"
               },
               "hideSteppers": true
             },
@@ -602,7 +685,8 @@
                 "rendering": "number",
                 "concept": "159604AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "10"
               },
               "hideSteppers": true
             },
@@ -614,7 +698,8 @@
                 "rendering": "number",
                 "concept": "1504AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "10"
               },
               "hideSteppers": true
             },
@@ -781,14 +866,15 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "230"
               },
-              "questionInfo": "Beats per minute.",
+              "questionInfo": "Beats per minute. Normal range 100-160 bpm.",
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
-                  "message": "Value is outside the normal range (60-100 bpm)."
+                  "warnsWhenExpression": "myValue && (myValue < 100 || myValue > 160)",
+                  "message": "Value is outside the normal range (100-160 bpm)."
                 }
               ],
               "hideSteppers": true
@@ -801,14 +887,15 @@
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "250"
               },
-              "questionInfo": "Millimetres of mercury.",
+              "questionInfo": "Millimetres of mercury. Normal range 60-90 mmHg.",
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
-                  "message": "Value is outside the normal range (90-120 mmHg)."
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
                 }
               ],
               "hideSteppers": true
@@ -821,14 +908,15 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "150"
               },
-              "questionInfo": "Millimetres of mercury.",
+              "questionInfo": "Millimetres of mercury. Normal range 30-60 mmHg.",
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
-                  "message": "Value is outside the normal range (60-90 mmHg)."
+                  "warnsWhenExpression": "myValue && (myValue < 30 || myValue > 60)",
+                  "message": "Value is outside the normal range (30-60 mmHg)."
                 }
               ],
               "hideSteppers": true
@@ -841,7 +929,8 @@
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "step": 0.01
+                "step": 0.01,
+                "max": "43"
               },
               "questionInfo": "Degrees Celsius, one decimal place.",
               "validators": [
@@ -861,14 +950,15 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "99"
               },
-              "questionInfo": "Breaths per minute.",
+              "questionInfo": "Breaths per minute. Normal range 30-60 breaths/min.",
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
-                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                  "warnsWhenExpression": "myValue && (myValue < 30 || myValue > 60)",
+                  "message": "Value is outside the normal range (30-60 breaths/min)."
                 }
               ],
               "hideSteppers": true
@@ -879,9 +969,10 @@
               "id": "spo2",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "100"
               },
               "validators": [
                 {
@@ -900,7 +991,8 @@
                 "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "250"
               },
               "questionInfo": "Kilograms.",
               "hideSteppers": true
@@ -912,6 +1004,18 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "97d878cf-4807-480a-a236-8f8f416f7be1",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Head circumference (cm)",
+              "type": "obs",
+              "id": "headCircumference",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 0.01
               },

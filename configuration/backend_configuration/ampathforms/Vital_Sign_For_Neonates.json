@@ -76,16 +76,18 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "230"
               },
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
-                  "message": "Value is outside the normal range (60-100 bpm)."
+                  "warnsWhenExpression": "myValue && (myValue < 100 || myValue > 160)",
+                  "message": "Value is outside the normal range (100-160 bpm)."
                 }
               ],
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range 100-160 bpm."
             },
             {
               "label": "Respiratory Rate (breaths/min)",
@@ -95,14 +97,15 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "99"
               },
-              "questionInfo": "Breaths per minute.",
+              "questionInfo": "Breaths per minute. Normal range 30-60 breaths/min.",
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
-                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                  "warnsWhenExpression": "myValue && (myValue < 30 || myValue > 60)",
+                  "message": "Value is outside the normal range (30-60 breaths/min)."
                 }
               ],
               "hideSteppers": true
@@ -115,7 +118,8 @@
                 "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "250"
               },
               "questionInfo": "Kilograms.",
               "hideSteppers": true
@@ -128,150 +132,33 @@
                 "rendering": "number",
                 "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "10",
-                "step": 0.01
+                "step": 0.01,
+                "max": "272"
               },
               "hideSteppers": true
             },
             {
-              "label": "Weight for Length",
+              "label": "Weight for gestational age",
               "type": "obs",
-              "id": "weightForLength",
+              "id": "weightForGestationalAge",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "17647889-9708-901b-2349-012345678901",
+                "concept": "7b3684df-25f1-5c8e-90c6-f295368975fc",
                 "answers": [
                   {
-                    "concept": "0f869001-1920-123d-4561-234567890123",
-                    "label": "Below -3"
+                    "concept": "89bad637-447c-4497-bc1e-e875b4d86a79",
+                    "label": "Small for gestational age (SGA)"
                   },
                   {
-                    "concept": "10970112-2031-234e-5672-345678901234",
-                    "label": "Between -3 and -2"
+                    "concept": "c4b96143-eff7-49ca-9de9-81fd8841efa3",
+                    "label": "Appropriate for gestational age (AGA)"
                   },
                   {
-                    "concept": "11081223-3142-345f-6783-456789012345",
-                    "label": "Between -2 and -1"
-                  },
-                  {
-                    "concept": "12192334-4253-4560-7894-567890123456",
-                    "label": "Between -1 and 0"
-                  },
-                  {
-                    "concept": "13203445-5364-5671-8905-678901234567",
-                    "label": "Between 0 and 1"
-                  },
-                  {
-                    "concept": "14314556-6475-6782-9016-789012345678",
-                    "label": "Between 1 and 2"
-                  },
-                  {
-                    "concept": "15425667-7586-7893-0127-890123456789",
-                    "label": "Between 2 and 3"
-                  },
-                  {
-                    "concept": "16536778-8697-890a-1238-901234567890",
-                    "label": "Above 3"
+                    "concept": "f9d5ce75-46c8-51d1-adaa-a88b10217576",
+                    "label": "Large for gestational age (LGA)"
                   }
                 ]
               }
-            },
-            {
-              "label": "Weight for age(Z-score)",
-              "type": "obs",
-              "id": "weightForAgeZScore",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "0e758f90-0819-012c-3450-123456789012",
-                "answers": [
-                  {
-                    "concept": "0f869001-1920-123d-4561-234567890123",
-                    "label": "Below -3"
-                  },
-                  {
-                    "concept": "10970112-2031-234e-5672-345678901234",
-                    "label": "[-3,-2)"
-                  },
-                  {
-                    "concept": "11081223-3142-345f-6783-456789012345",
-                    "label": "[-2,-1)"
-                  },
-                  {
-                    "concept": "12192334-4253-4560-7894-567890123456",
-                    "label": "[-1,0)"
-                  },
-                  {
-                    "concept": "13203445-5364-5671-8905-678901234567",
-                    "label": "[0,1)"
-                  },
-                  {
-                    "concept": "14314556-6475-6782-9016-789012345678",
-                    "label": "[1,2)"
-                  },
-                  {
-                    "concept": "15425667-7586-7893-0127-890123456789",
-                    "label": "[2,3]"
-                  },
-                  {
-                    "concept": "16536778-8697-890a-1238-901234567890",
-                    "label": "Above 3"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Length for age",
-              "type": "obs",
-              "id": "lengthForAge",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "26536778-8697-890a-1238-901234567890",
-                "answers": [
-                  {
-                    "concept": "0f869001-1920-123d-4561-234567890123",
-                    "label": "Below -3"
-                  },
-                  {
-                    "concept": "10970112-2031-234e-5672-345678901234",
-                    "label": "Between -3 and -2"
-                  },
-                  {
-                    "concept": "11081223-3142-345f-6783-456789012345",
-                    "label": "Between -2 and -1"
-                  },
-                  {
-                    "concept": "12192334-4253-4560-7894-567890123456",
-                    "label": "Between -1 and 0"
-                  },
-                  {
-                    "concept": "13203445-5364-5671-8905-678901234567",
-                    "label": "Between 0 and 1"
-                  },
-                  {
-                    "concept": "14314556-6475-6782-9016-789012345678",
-                    "label": "Between 1 and 2"
-                  },
-                  {
-                    "concept": "15425667-7586-7893-0127-890123456789",
-                    "label": "Between 2 and 3"
-                  },
-                  {
-                    "concept": "16536778-8697-890a-1238-901234567890",
-                    "label": "Above 3"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "MUAC",
-              "type": "obs",
-              "id": "muac",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
-                "min": "0",
-                "step": 0.01
-              },
-              "hideSteppers": true
             }
           ]
         },
@@ -287,16 +174,18 @@
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "250"
               },
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
-                  "message": "Value is outside the normal range (90-120 mmHg)."
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
                 }
               ],
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range 60-90 mmHg."
             },
             {
               "label": "Diastolic",
@@ -306,16 +195,18 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "150"
               },
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
-                  "message": "Value is outside the normal range (60-90 mmHg)."
+                  "warnsWhenExpression": "myValue && (myValue < 30 || myValue > 60)",
+                  "message": "Value is outside the normal range (30-60 mmHg)."
                 }
               ],
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range 30-60 mmHg."
             }
           ]
         },
@@ -331,7 +222,8 @@
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "step": 0.01
+                "step": 0.01,
+                "max": "43"
               },
               "validators": [
                 {

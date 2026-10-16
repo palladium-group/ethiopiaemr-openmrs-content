@@ -69,37 +69,6 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Age",
-              "type": "obs",
-              "id": "age",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "15d60d87-49e3-4f9f-8474-801250d83b3b",
-                "min": "0",
-                "step": 0.01
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Sex",
-              "type": "obs",
-              "id": "sex",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "3071a2b3-0415-2345-6789-012345abcd07",
-                "answers": [
-                  {
-                    "concept": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Male"
-                  },
-                  {
-                    "concept": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Female"
-                  }
-                ]
-              }
-            },
-            {
               "label": "Unique NCD-Treatment ID",
               "type": "obs",
               "id": "uniqueNcdTreatmentId",
@@ -120,7 +89,7 @@
               "id": "phoneNumber",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "160642aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "concept": "160642AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             },
             {
@@ -189,7 +158,7 @@
               "id": "phoneNumber2",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "160642aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "concept": "160642AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             },
             {
@@ -562,8 +531,22 @@
               "type": "obs",
               "id": "htnDyslipidemia",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "b1649461-92f8-45ad-983a-bd0b59a38ecd"
+                "rendering": "radio",
+                "concept": "3cb87e63-4187-580e-817a-b35aefa62d33",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
               }
             },
             {
@@ -689,6 +672,18 @@
                   }
                 ]
               }
+            },
+            {
+              "label": "If yes, specify the drug",
+              "type": "obs",
+              "id": "htnMedMiscellaneousSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d1600622-c463-4c71-ac9f-8dccf70678eb"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(htnMedMiscellaneous) || htnMedMiscellaneous !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             }
           ]
         },
@@ -739,8 +734,18 @@
               "type": "obs",
               "id": "dyslipidemia",
               "questionOptions": {
-                "rendering": "textarea",
-                "concept": "b1649461-92f8-45ad-983a-bd0b59a38ecd"
+                "rendering": "select",
+                "concept": "448e1069-45de-5999-8c61-c172c3e3d6df",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
               }
             },
             {
@@ -1036,7 +1041,10 @@
               "id": "edd",
               "questionOptions": {
                 "rendering": "date",
-                "concept": "2b592c8a-f68c-47a1-a5ab-3087bd13ace5"
+                "concept": "2b592c8a-f68c-47a1-a5ab-3087bd13ace5",
+                "calculate": {
+                  "calculateExpression": "isEmpty(lnmp) ? null : new Date(new Date(new Date(lnmp).getFullYear(), new Date(lnmp).getMonth(), new Date(lnmp).getDate() + 7).getFullYear() + 1, new Date(new Date(lnmp).getFullYear(), new Date(lnmp).getMonth(), new Date(lnmp).getDate() + 7).getMonth() - 3, new Date(new Date(lnmp).getFullYear(), new Date(lnmp).getMonth(), new Date(lnmp).getDate() + 7).getDate())"
+                }
               },
               "readonly": true
             }
@@ -1217,7 +1225,8 @@
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "250"
               },
               "questionInfo": "Normal range 80-120 mmHg",
               "validators": [
@@ -1237,7 +1246,8 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "150"
               },
               "questionInfo": "Normal range 60-80 mmHg",
               "validators": [
@@ -1257,7 +1267,8 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "230"
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -1323,7 +1334,8 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "99"
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -1343,7 +1355,8 @@
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "step": 0.01
+                "step": 0.01,
+                "max": "43"
               },
               "questionInfo": "Normal range: 36.5-37.5 °C",
               "validators": [
@@ -1363,7 +1376,8 @@
                 "rendering": "number",
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "100"
               },
               "questionInfo": "Normal range: 95-100 %",
               "validators": [
@@ -1389,7 +1403,8 @@
                 "rendering": "number",
                 "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "10",
-                "step": 0.01
+                "step": 0.01,
+                "max": "272"
               },
               "questionInfo": "Centimetres.",
               "hideSteppers": true
@@ -1402,7 +1417,8 @@
                 "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "250"
               },
               "questionInfo": "Kilograms.",
               "hideSteppers": true
@@ -1429,7 +1445,7 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "c1d3da47-2013-5101-a3fc-8770b35ba32a",
-                "min": "0",
+                "min": "-6",
                 "step": 0.01,
                 "calculate": {
                   "calculateExpression": "(isEmpty(heightCm) || isEmpty(weightKg)) ? '' : ((calcBMIForAgeZscore(Number(heightCm),Number(weightKg)) == null) ? '' : Number(calcBMIForAgeZscore(Number(heightCm),Number(weightKg))))"
@@ -1681,6 +1697,18 @@
                   }
                 ]
               }
+            },
+            {
+              "label": "Describe the abnormal findings",
+              "type": "obs",
+              "id": "organAbnormalFindings",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9a0b1c2d-3e4f-5678-9012-345678901234"
+              },
+              "hide": {
+                "hideWhenExpression": "organHeent !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && organGlandsThyroid !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && organRespiratory !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && organCvsHeart !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && organCvsPeripheralArteries !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && organAbdomenGus !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && organMskFootExam !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && organIgsInjectionSite !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && organNervousMentalStatus !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && organNervousMotorExam !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && organNervousSensoryExam !== '1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             }
           ]
         },
@@ -1904,22 +1932,8 @@
               "type": "obs",
               "id": "ecg",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "ccfea680-1702-49b3-8913-f859add98183",
-                "answers": [
-                  {
-                    "label": "Normal",
-                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Abnormal",
-                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Not done",
-                    "concept": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
-                ]
+                "rendering": "textarea",
+                "concept": "c40bf5c4-c892-5f4a-b99b-a97b0fc446ce"
               }
             },
             {
@@ -2001,7 +2015,7 @@
                 "rendering": "number",
                 "concept": "163214AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1
               },
               "hideSteppers": true
             },
@@ -2163,11 +2177,11 @@
           ]
         },
         {
-          "label": "Close",
+          "label": "Additional Remarks and Next Appointment",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Remark",
+              "label": "Additional remarks",
               "type": "obs",
               "id": "remark",
               "questionOptions": {

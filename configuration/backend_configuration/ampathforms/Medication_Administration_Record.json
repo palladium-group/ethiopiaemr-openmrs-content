@@ -65,6 +65,60 @@
       "label": "Medication Administration Record Sheet Assessment",
       "sections": [
         {
+          "label": "Allergies and Alerts",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Allergy status",
+              "type": "obs",
+              "id": "allergyStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3c4d5e6f-7081-9012-cdef-345678901234",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Unknown",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Food allergy",
+                    "concept": "139994AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Drug allergy",
+                    "concept": "141760AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "OTHER NON-CODED",
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Environment",
+                    "concept": "cef9c84c-0872-4877-ad78-f66603d20772"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Relevant medication alerts",
+              "type": "obs",
+              "id": "medicationAlerts",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "5d0c24e7-75df-5a84-a67e-2297fa58e1ea"
+              }
+            }
+          ]
+        },
+        {
           "label": "Medication",
           "isExpanded": "true",
           "questions": [
@@ -105,13 +159,34 @@
               }
             },
             {
+              "label": "Medication start date",
+              "type": "obs",
+              "id": "medicationStartDate",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "eebbdb56-cc3a-4ceb-b85d-4d91a2decc16"
+              },
+              "datePickerFormat": "both"
+            },
+            {
+              "label": "Medication stop date",
+              "type": "obs",
+              "id": "medicationStopDate",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "aed64274-3b7a-4060-b265-65c0e481bad9"
+              },
+              "datePickerFormat": "both"
+            },
+            {
               "label": "Time to be given",
               "type": "obs",
               "id": "timeToBeGiven",
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "b51c33a0-5753-492c-b8c5-e5c13f5ee2db"
-              }
+              },
+              "datePickerFormat": "both"
             },
             {
               "label": "Given by (name)",
@@ -129,6 +204,50 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "48489d16-d5a4-403d-a3a4-1275ff1755b6"
+              },
+              "datePickerFormat": "both"
+            },
+            {
+              "label": "Medication status",
+              "type": "obs",
+              "id": "medicationStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5f1b80e3-a99a-4f3a-ab4d-3ec42f069860",
+                "answers": [
+                  {
+                    "concept": "842cf386-80dc-42b1-a8c9-e7ccd616f91d",
+                    "label": "Given"
+                  },
+                  {
+                    "concept": "8c6689e5-1382-48bf-8598-e49d34742db9",
+                    "label": "Not given"
+                  },
+                  {
+                    "concept": "8b67c373-0c20-44df-ae66-8d0180172f1c",
+                    "label": "Refused"
+                  },
+                  {
+                    "concept": "5f988086-1dbf-480b-97c5-e015053f46e4",
+                    "label": "Held"
+                  },
+                  {
+                    "concept": "6bcf0dc7-0738-4e77-8f61-9f9716e1059f",
+                    "label": "Delayed"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Reason for omitted or delayed dose",
+              "type": "obs",
+              "id": "reasonForOmittedOrDelayedDose",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "0f0d7946-537e-5fd1-82d2-e9d68d668318"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(medicationStatus) || medicationStatus === '842cf386-80dc-42b1-a8c9-e7ccd616f91d'"
               }
             }
           ]

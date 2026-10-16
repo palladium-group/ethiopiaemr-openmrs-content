@@ -69,22 +69,19 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Address",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "d616d6d4-2548-4b68-99e7-f3c85fa96328"
-              },
-              "id": "address"
-            },
-            {
               "label": "Time of Arrival to ED",
               "type": "obs",
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "ebfd541a-b095-4d9f-aac6-9777ac42759d"
               },
-              "id": "timeArrivalED"
+              "id": "timeArrivalED",
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Triage Time",
@@ -93,16 +90,25 @@
                 "rendering": "datetime",
                 "concept": "71c2d3e4-f5a6-7890-1234-567890abcdef"
               },
-              "id": "triageTime"
+              "id": "triageTime",
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
-              "label": "Ambulance",
+              "label": "Ambulance details",
               "type": "obs",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "48a0a9be-b477-44cf-b370-8d407dffd152"
               },
-              "id": "ambulance"
+              "id": "ambulance",
+              "hide": {
+                "hideWhenExpression": "modeArrival !== '6e74d8e2-dd0e-4747-a973-ae0dd2e820ca'"
+              }
             }
           ]
         },
@@ -196,6 +202,18 @@
                 ]
               },
               "id": "preHospitalCare"
+            },
+            {
+              "label": "Pre-hospital care given, specify",
+              "type": "obs",
+              "id": "preHospitalCareDetails",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "03011223-3445-1237-5671-678a01234567"
+              },
+              "hide": {
+                "hideWhenExpression": "preHospitalCare !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             }
           ]
         },
@@ -208,7 +226,7 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "textarea",
-                "concept": "160531aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "concept": "160531AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
               "id": "chiefComplaint"
             },
@@ -216,30 +234,51 @@
               "label": "Gravida",
               "type": "obs",
               "questionOptions": {
-                "rendering": "textarea",
+                "rendering": "text",
                 "concept": "f33d1aeb-9033-4405-bdca-6f7f534663f9"
               },
               "questionInfo": "Gravida = Total number of pregnancies (including current)",
-              "id": "gravida"
+              "id": "gravida",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^[0-9]{1,2}$/.test(String(myValue).trim())",
+                  "message": "Enter a number of at most 2 digits."
+                }
+              ]
             },
             {
               "label": "Para",
               "type": "obs",
               "questionOptions": {
-                "rendering": "textarea",
+                "rendering": "text",
                 "concept": "610f3f1d-e5a0-42ea-bb4e-c816fe3cfee2"
               },
               "questionInfo": "Para = Number of viable births (≥20 weeks gestation)",
-              "id": "para"
+              "id": "para",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^[0-9]{1,2}$/.test(String(myValue).trim())",
+                  "message": "Enter a number of at most 2 digits."
+                }
+              ]
             },
             {
               "label": "Abortion",
               "type": "obs",
               "questionOptions": {
-                "rendering": "textarea",
+                "rendering": "text",
                 "concept": "775f3a78-1c78-40af-84cd-4ca7f4a7d7aa"
               },
-              "id": "abortion"
+              "id": "abortion",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^[0-9]{1,2}$/.test(String(myValue).trim())",
+                  "message": "Enter a number of at most 2 digits."
+                }
+              ]
             },
             {
               "label": "LNMP",
@@ -249,7 +288,13 @@
                 "concept": "af229755-0bee-4bb8-975a-7bacd689e388"
               },
               "questionInfo": "LNMP = Last Normal Menstrual Period",
-              "id": "lnmp"
+              "id": "lnmp",
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Ultrasound",
@@ -258,7 +303,48 @@
                 "rendering": "date",
                 "concept": "7415e6f7-4859-6789-0123-456789abcd0a"
               },
-              "id": "ultrasound"
+              "id": "ultrasound",
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Gestational age at the ultrasound (weeks)",
+              "type": "obs",
+              "id": "usGaWeeks",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "163166AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "disallowDecimals": true,
+                "step": 1,
+                "min": "0",
+                "max": "45"
+              },
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "isEmpty(ultrasound)"
+              }
+            },
+            {
+              "label": "Current gestational age (weeks, calculated)",
+              "type": "obs",
+              "id": "gaWeeksCurrent",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "disallowDecimals": true,
+                "step": 1,
+                "min": "0",
+                "max": "45",
+                "calculate": {
+                  "calculateExpression": "((!isEmpty(lnmp) ? Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(lnmp).setHours(0,0,0,0)) / 86400000) : ((isEmpty(ultrasound) || isEmpty(usGaWeeks)) ? null : (Number(usGaWeeks) * 7) + Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(ultrasound).setHours(0,0,0,0)) / 86400000))) === null || (!isEmpty(lnmp) ? Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(lnmp).setHours(0,0,0,0)) / 86400000) : ((isEmpty(ultrasound) || isEmpty(usGaWeeks)) ? null : (Number(usGaWeeks) * 7) + Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(ultrasound).setHours(0,0,0,0)) / 86400000))) < 0) ? null : Math.floor((!isEmpty(lnmp) ? Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(lnmp).setHours(0,0,0,0)) / 86400000) : ((isEmpty(ultrasound) || isEmpty(usGaWeeks)) ? null : (Number(usGaWeeks) * 7) + Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(ultrasound).setHours(0,0,0,0)) / 86400000))) / 7)"
+                }
+              },
+              "hideSteppers": true,
+              "questionInfo": "Calculated from the LNMP; if no LNMP is given, from the ultrasound date and the gestational age at that ultrasound."
             },
             {
               "label": "Gestational Age (GA)",
@@ -430,10 +516,13 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1859203a-8293-0123-4567-890123abcd18",
-                "step": 0.01
+                "step": 1
               },
               "id": "hours",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "membrane !== '9637081e-6071-8901-2345-678901abcd16' && membrane !== '0748192f-7182-9012-3456-789012abcd17'"
+              }
             }
           ]
         },
@@ -498,6 +587,18 @@
                     "label": "Other"
                   }
                 ]
+              }
+            },
+            {
+              "label": "Other uterus location, specify",
+              "type": "obs",
+              "id": "uterusLocationOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b75482ee-6d95-5a91-a1c0-5e137502003f"
+              },
+              "hide": {
+                "hideWhenExpression": "uterusLocation !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -569,7 +670,7 @@
                 "rendering": "number",
                 "concept": "f7a8b9c0-d1e2-4f3a-4b56-c7d8e9f0a1b2",
                 "min": "0",
-                "step": 0.01
+                "step": 1
               },
               "hideSteppers": true
             },
@@ -601,20 +702,40 @@
                 "concept": "160090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
-                    "label": "Vertex presentation",
+                    "label": "Cephalic - vertex",
                     "concept": "160091AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   {
-                    "label": "Occiput Anterior Position",
-                    "concept": "164148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Brow Presentation",
+                    "label": "Cephalic - brow",
                     "concept": "164149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   {
-                    "label": "Face Presentation",
+                    "label": "Cephalic - face",
                     "concept": "164150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Breech - frank",
+                    "concept": "5cc0bc97-5cfd-537a-96c5-7b02c8c7ffb1"
+                  },
+                  {
+                    "label": "Breech - complete",
+                    "concept": "c26e9761-df58-5197-a391-fc3017f84f68"
+                  },
+                  {
+                    "label": "Breech - incomplete",
+                    "concept": "1a34b83c-b8b8-5705-99b0-7cf3b729bcbe"
+                  },
+                  {
+                    "label": "Breech - footling",
+                    "concept": "68af813b-ba73-533b-8d3b-6d6a3fd1d04a"
+                  },
+                  {
+                    "label": "Shoulder",
+                    "concept": "7008d1b0-bbe7-526d-9b95-2fbb350b020e"
+                  },
+                  {
+                    "label": "Compound",
+                    "concept": "36acc736-9fce-5860-b121-77ebfa0b4c88"
                   }
                 ]
               }
@@ -681,7 +802,9 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": 0.01
+                "step": 1,
+                "max": "250",
+                "min": "0"
               },
               "id": "bpSystolic",
               "questionInfo": "Normal range: 90-120 mmHg",
@@ -700,7 +823,9 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": 0.01
+                "step": 0.01,
+                "max": "150",
+                "min": "0"
               },
               "id": "bpDiastolic",
               "questionInfo": "Normal range: 60-90 mmHg",
@@ -721,7 +846,8 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "230"
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -741,7 +867,8 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "99"
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -767,7 +894,8 @@
                 "rendering": "number",
                 "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "10",
-                "step": 0.01
+                "step": 0.01,
+                "max": "272"
               },
               "questionInfo": "Allowed range: 30-300 cm",
               "hideSteppers": true
@@ -780,7 +908,8 @@
                 "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "250"
               },
               "questionInfo": "Kilograms.",
               "hideSteppers": true
@@ -795,7 +924,9 @@
                 "calculate": {
                   "calculateExpression": "calcBMI(height,weight)"
                 },
-                "step": 0.01
+                "step": 0.01,
+                "max": "100",
+                "min": "0"
               },
               "hideSteppers": true
             },
@@ -869,6 +1000,10 @@
                   {
                     "label": "Negative",
                     "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -887,11 +1022,11 @@
                   },
                   {
                     "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "negative"
+                    "label": "Negative"
                   },
                   {
                     "concept": "c52c1c12-6480-538f-9edc-bde8ed3edb14",
-                    "label": "Unknown Status & alive"
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -925,6 +1060,10 @@
                   {
                     "concept": "163118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "O"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -944,6 +1083,10 @@
                   {
                     "concept": "2c58f9ec-cdf2-4b90-9bf3-5e8340d811d1",
                     "label": "Rh-"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -1030,15 +1173,15 @@
                 "answers": [
                   {
                     "concept": "6304758f-3748-5678-9012-345678abcd1d",
-                    "label": "Admit to Lw"
+                    "label": "Admit to Labour Ward"
                   },
                   {
                     "concept": "7415869a-4859-6789-0123-456789abcd1e",
-                    "label": "Send to Gw"
+                    "label": "Send to Gynecology Ward"
                   },
                   {
                     "concept": "8526970b-5960-7890-1234-567890abcd1f",
-                    "label": "ANC Referral"
+                    "label": "Antenatal care (ANC) referral"
                   },
                   {
                     "concept": "9637081c-6071-8901-2345-678901abcd20",
@@ -1046,7 +1189,27 @@
                   },
                   {
                     "concept": "0748192d-7182-9012-3456-789012abcd21",
-                    "label": "Reevaluate"
+                    "label": "Observe and reassess"
+                  },
+                  {
+                    "concept": "74fa0fef-35ab-5e18-b485-c59ca28acf58",
+                    "label": "Admit to Antenatal Ward"
+                  },
+                  {
+                    "concept": "164834AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Transfer to Operating Theatre"
+                  },
+                  {
+                    "concept": "bde1ee15-0ebb-484e-a465-2a4463f0d521",
+                    "label": "Refer to another facility"
+                  },
+                  {
+                    "concept": "1694AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Left against medical advice"
+                  },
+                  {
+                    "concept": "e8f85f01-2227-54b3-a4e7-f48c8484f4ac",
+                    "label": "Left without being seen"
                   }
                 ]
               },
@@ -1061,7 +1224,10 @@
                 "step": 0.01
               },
               "id": "reevaluateHours",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "plan !== '0748192d-7182-9012-3456-789012abcd21'"
+              }
             }
           ]
         },
@@ -1069,15 +1235,6 @@
           "label": "Assessment",
           "isExpanded": "true",
           "questions": [
-            {
-              "label": "Past Medical Illnessess",
-              "type": "obs",
-              "id": "pastMedicalIllnessess",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "6a900112-2334-0126-4560-ea0123456789"
-              }
-            },
             {
               "label": "Triage Officer name",
               "type": "obs",

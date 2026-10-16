@@ -119,7 +119,7 @@
               "type": "obs",
               "id": "coMorbidity",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "checkbox",
                 "concept": "33c6a00d-0f72-4fb6-89c1-e062d1a9313b",
                 "answers": [
                   {
@@ -151,6 +151,10 @@
                     "label": "Chronic kidney disease"
                   },
                   {
+                    "concept": "059e21ff-59e3-4556-81b5-6988adc021c7",
+                    "label": "Anemia"
+                  },
+                  {
                     "label": "Other",
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   }
@@ -166,7 +170,7 @@
                 "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
               },
               "hide": {
-                "hideWhenExpression": "isEmpty(coMorbidity) || coMorbidity !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "isEmpty(coMorbidity) || !arrayContains(coMorbidity, '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
               }
             },
             {
@@ -174,7 +178,7 @@
               "type": "obs",
               "id": "riskFactor",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "checkbox",
                 "concept": "88979f30-3abe-4269-a9e7-a897f6ce4d7a",
                 "answers": [
                   {
@@ -205,13 +209,31 @@
               }
             },
             {
+              "label": "Other risk factor, specify",
+              "type": "obs",
+              "id": "otherRiskFactorSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "80391bbe-50b5-5f12-9c3f-bcbb0ee53dae"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(riskFactor) || !arrayContains(riskFactor, '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              }
+            },
+            {
               "label": "Date of surgical procedure",
               "type": "obs",
               "id": "dateOfSurgicalProcedure",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "b858d81f-433c-455d-a576-68add865109e"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Operation procedure",

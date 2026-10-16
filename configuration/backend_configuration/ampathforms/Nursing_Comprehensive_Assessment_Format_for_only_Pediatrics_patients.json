@@ -267,7 +267,7 @@
               "id": "ifYesSpecify",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "161011aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(hasAChildPastMedicalAndOrSurgicalHistory) || hasAChildPastMedicalAndOrSurgicalHistory !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
@@ -363,6 +363,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "(isEmpty(medication) || medication !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') && (isEmpty(food) || food !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
               }
             },
             {
@@ -614,7 +617,7 @@
               "id": "ifYesPleaseSpecify",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "161011aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(congenitalDefect) || congenitalDefect !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
@@ -812,7 +815,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   }
                 ]
@@ -831,7 +834,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   },
                   {
@@ -858,7 +861,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   }
                 ]
@@ -912,7 +915,7 @@
               "id": "ifYesSpecify2",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "161011aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(othersActivities) || othersActivities !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
@@ -1325,7 +1328,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   }
                 ]
@@ -1348,7 +1351,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   }
                 ]
@@ -1371,7 +1374,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   }
                 ]
@@ -1394,7 +1397,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   }
                 ]
@@ -1654,7 +1657,8 @@
                 "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "250"
               },
               "questionInfo": "Kilograms.",
               "hideSteppers": true
@@ -1667,7 +1671,8 @@
                 "rendering": "number",
                 "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "10",
-                "step": 0.01
+                "step": 0.01,
+                "max": "272"
               },
               "questionInfo": "Centimetres.",
               "hideSteppers": true
@@ -1678,7 +1683,7 @@
               "id": "muacCm",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1343aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 0.01
               },
@@ -1794,7 +1799,8 @@
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "step": 0.01
+                "step": 0.01,
+                "max": "43"
               },
               "questionInfo": "Degrees Celsius, one decimal place.",
               "validators": [
@@ -1913,14 +1919,15 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "230"
               },
-              "questionInfo": "Beats per minute.",
+              "questionInfo": "Beats per minute. Normal range depends on age: under 1 year 100-180, 1-2 years 98-140, 3-5 years 80-120, 6-11 years 75-118, 12 years and over 60-100 bpm.",
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
-                  "message": "Value is outside the normal range (60-100 bpm)."
+                  "warnsWhenExpression": "myValue && (age < 1 ? (myValue < 100 || myValue > 180) : age < 3 ? (myValue < 98 || myValue > 140) : age < 6 ? (myValue < 80 || myValue > 120) : age < 12 ? (myValue < 75 || myValue > 118) : (myValue < 60 || myValue > 100))",
+                  "message": "Outside the normal range for the child's age (under 1 year 100-180, 1-2 years 98-140, 3-5 years 80-120, 6-11 years 75-118, 12 years and over 60-100 bpm)."
                 }
               ],
               "hideSteppers": true
@@ -1933,14 +1940,15 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "99"
               },
-              "questionInfo": "Breaths per minute.",
+              "questionInfo": "Breaths per minute. Normal range depends on age: under 1 year 30-53, 1-2 years 22-37, 3-5 years 20-28, 6-11 years 18-25, 12 years and over 16-24 breaths/min.",
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
-                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                  "warnsWhenExpression": "myValue && (age < 1 ? (myValue < 30 || myValue > 53) : age < 3 ? (myValue < 22 || myValue > 37) : age < 6 ? (myValue < 20 || myValue > 28) : age < 12 ? (myValue < 18 || myValue > 25) : (myValue < 16 || myValue > 24))",
+                  "message": "Outside the normal range for the child's age (under 1 year 30-53, 1-2 years 22-37, 3-5 years 20-28, 6-11 years 18-25, 12 years and over 16-24 breaths/min)."
                 }
               ],
               "hideSteppers": true
@@ -1953,7 +1961,8 @@
                 "rendering": "number",
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "100"
               },
               "questionInfo": "Percent, on room air unless stated.",
               "hideSteppers": true
@@ -1988,7 +1997,8 @@
                 "rendering": "number",
                 "concept": "166082AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "10"
               },
               "hideSteppers": true
             },
@@ -2034,7 +2044,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   }
                 ]
@@ -2057,7 +2067,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   }
                 ]
@@ -2080,7 +2090,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   }
                 ]
@@ -2103,7 +2113,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   }
                 ]
@@ -2126,7 +2136,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   }
                 ]
@@ -2517,7 +2527,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   }
                 ]
@@ -2807,7 +2817,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   }
                 ]
@@ -3121,7 +3131,7 @@
               "id": "ifYesSpecify3",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "161011aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(congenitalDefect2) || congenitalDefect2 !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
@@ -3615,7 +3625,7 @@
               "id": "ifYesSpecify4",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "161011aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(congenitalDefect3) || congenitalDefect3 !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
@@ -3698,7 +3708,8 @@
                 "rendering": "number",
                 "concept": "162513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "60"
               },
               "hideSteppers": true
             }
@@ -3730,7 +3741,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "NA"
                   }
                 ]

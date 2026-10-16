@@ -85,7 +85,8 @@
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "250"
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -105,7 +106,8 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "150"
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -125,7 +127,8 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "230"
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -145,7 +148,8 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "99"
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -165,7 +169,8 @@
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "step": 0.01
+                "step": 0.01,
+                "max": "43"
               },
               "questionInfo": "Normal range: 36.5-37.5 °C",
               "validators": [
@@ -183,9 +188,10 @@
               "id": "pso2",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "100"
               },
               "hideSteppers": true
             },
@@ -197,12 +203,46 @@
                 "rendering": "number",
                 "concept": "160347AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "15"
               },
               "hideSteppers": true
             },
             {
-              "label": "Pupil reaction",
+              "label": "Pupil size (mm)",
+              "type": "obs",
+              "id": "pupilSize",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "32423eb2-5d7a-56a0-80e5-cf28cbe4c15b",
+                "min": "1",
+                "max": "9",
+                "step": 0.5
+              },
+              "questionInfo": "Normal: 2-4 mm in bright light, 4-8 mm in the dark",
+              "hideSteppers": true
+            },
+            {
+              "label": "Pupil equality",
+              "type": "obs",
+              "id": "pupilEquality",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f35053e4-7cf6-5d3b-b812-01668a3df975",
+                "answers": [
+                  {
+                    "concept": "e5772b0a-30a7-4701-bfaf-a21e7471eeff",
+                    "label": "Equal"
+                  },
+                  {
+                    "concept": "6caa495c-1011-4079-8731-a8bf90279100",
+                    "label": "Unequal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pupil reaction to light",
               "type": "obs",
               "id": "pupilReaction",
               "questionOptions": {
@@ -221,24 +261,65 @@
               }
             },
             {
-              "label": "Power",
+              "label": "Muscle power: upper extremities (0-5)",
               "type": "obs",
               "id": "power",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "c9a51f95-08b0-5b04-99aa-7b13198d2b31",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "5"
               },
               "hideSteppers": true
             },
             {
-              "label": "Tone",
+              "label": "Muscle power: lower extremities (0-5)",
+              "type": "obs",
+              "id": "powerLower",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "b37f9d41-64e7-53af-9207-c085af411500",
+                "min": "0",
+                "max": "5",
+                "step": 1
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Muscle tone: upper extremities",
               "type": "obs",
               "id": "tone",
               "questionOptions": {
                 "rendering": "select",
                 "concept": "160388AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "label": "None",
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Two plus",
+                    "concept": "1363AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Three plus",
+                    "concept": "1364AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "One plus",
+                    "concept": "1362AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Muscle tone: lower extremities",
+              "type": "obs",
+              "id": "toneLower",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "80cfd343-cb8f-5be4-ae98-74fe139f8dc8",
                 "answers": [
                   {
                     "label": "None",
@@ -357,7 +438,7 @@
               }
             },
             {
-              "label": "Input",
+              "label": "Fluid input (ml)",
               "type": "obs",
               "id": "input",
               "questionOptions": {
@@ -367,7 +448,7 @@
               "hideSteppers": true
             },
             {
-              "label": "Output",
+              "label": "Fluid output (ml)",
               "type": "obs",
               "id": "output",
               "questionOptions": {
@@ -382,7 +463,8 @@
               "id": "rbsMgDl",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "887aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
               "hideSteppers": true
             },
