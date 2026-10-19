@@ -1,6 +1,6 @@
 {
-  "name": "St. Peter's Specialized Hospital Nutritional Assessment",
-  "description": "St. Peter's Specialized Hospital Nutritional Assessment.",
+  "name": "Nutritional Assessment",
+  "description": "Used by nutrition staff to assess a patient's body measurements, appetite, food intake and other risk factors, record the nutritional diagnosis, and document counseling, diet orders and any prescribed nutritional support.",
   "version": "1.0",
   "published": true,
   "uuid": "4855310d-c482-5994-8495-3e96e790f735",
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "label": "St. Peter's Specialized Hospital Nutritional Assessment",
+      "label": "Nutritional Assessment",
       "sections": [
         {
           "label": "Background Information",
@@ -78,11 +78,11 @@
                 "answers": [
                   {
                     "concept": "45f5d535-a2a9-57fb-a67d-4a48b116472c",
-                    "label": "New Patients"
+                    "label": "New Patient"
                   },
                   {
                     "concept": "37d779ed-b51f-51bd-a368-52ce83bcf61e",
-                    "label": "Revisit"
+                    "label": "Re-Visit"
                   }
                 ]
               }
@@ -96,20 +96,48 @@
                 "concept": "37fd000c-d185-4ab3-bd49-9005ce9868c7",
                 "answers": [
                   {
+                    "concept": "a28928a7-af76-5dd4-acee-7ff619b513df",
+                    "label": "Neonate (Birth - 28 days)"
+                  },
+                  {
+                    "concept": "5451b9f7-3eed-57bb-ad05-950bccfa30d4",
+                    "label": "Infant (29 days - under 1 Year)"
+                  },
+                  {
+                    "concept": "09dd80c6-d5cb-5f27-890d-6a8b54371233",
+                    "label": "Child (1 - 9 Years)"
+                  },
+                  {
+                    "concept": "3b4d92d0-a1cd-5ed7-9154-684597797152",
+                    "label": "Adolescent (10 - 19 Years)"
+                  },
+                  {
                     "concept": "166044AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Adult"
+                    "label": "Adult (20 - 59 Years)"
+                  },
+                  {
+                    "concept": "362188bc-b19b-5278-953b-1f2bca9f38f7",
+                    "label": "Older Adult (60+)"
                   },
                   {
                     "concept": "d3b42c5e-6f70-4189-bacd-ef0123456702",
-                    "label": "Pregnant"
+                    "label": "Pregnant Woman (Antenatal Nutritional Assessment)"
                   },
                   {
-                    "concept": "a3748596-7081-9012-3456-789012678901",
-                    "label": "Postnatal"
+                    "concept": "e4c53d6f-7081-429a-cbde-f01234567803",
+                    "label": "Lactating Woman"
                   },
                   {
-                    "concept": "ecbbb69d-43a8-4684-989e-4b4f83628925",
-                    "label": "Pediatrics (0-14 years)"
+                    "concept": "239de57b-418a-544b-a9d9-1881aa974299",
+                    "label": "Patient with Acute Malnutrition (Suspected or Diagnosed)"
+                  },
+                  {
+                    "concept": "fcb0cbde-77ea-5ba5-b90a-19f78e92ec4e",
+                    "label": "Patient With Chronic Disease (HIV, TB, CKD, DM…)"
+                  },
+                  {
+                    "concept": "2dada7fa-4aed-56eb-b501-59d58d6c2af8",
+                    "label": "Critically Ill Patient (ICU, HDU)"
                   }
                 ]
               }
@@ -147,7 +175,8 @@
                 "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "250"
               },
               "questionInfo": "Kilograms.",
               "hideSteppers": true
@@ -160,7 +189,7 @@
                 "rendering": "number",
                 "concept": "818cc127-6aea-5cca-a427-25cf7adf1c43",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01
               },
               "hideSteppers": true
             },
@@ -184,7 +213,7 @@
               "id": "wfaZscore",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "162584aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "concept": "162584AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
               "hideSteppers": true
             },
@@ -223,10 +252,11 @@
                 "rendering": "number",
                 "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01",
+                "step": 0.01,
                 "calculate": {
                   "calculateExpression": "(isEmpty(heightM) || isEmpty(weightKg)) ? '' : calcBMI(Number(heightM)*100,Number(weightKg))"
-                }
+                },
+                "max": "100"
               },
               "hideSteppers": true
             },
@@ -238,7 +268,7 @@
                 "rendering": "number",
                 "concept": "163080AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01
               },
               "hideSteppers": true
             },
@@ -250,7 +280,7 @@
                 "rendering": "number",
                 "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01
               },
               "questionInfo": "Centimetres.",
               "hideSteppers": true
@@ -263,7 +293,7 @@
                 "rendering": "number",
                 "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01
               },
               "questionInfo": "Mid-upper arm circumference in centimetres.",
               "hideSteppers": true
@@ -282,7 +312,7 @@
               "type": "obs",
               "id": "medicalDiagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             },
@@ -314,7 +344,7 @@
               "type": "obs",
               "id": "smokingAlcoholUse",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "b5b04677-2af2-4e9d-9994-bd31a3cedf4d"
               }
             },
@@ -361,7 +391,7 @@
                     "label": "Normal"
                   },
                   {
-                    "concept": "114413AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "590a7581-714a-4b47-a1c9-712501889e44",
                     "label": "Overweight"
                   },
                   {
@@ -411,8 +441,8 @@
                     "label": "Negative"
                   },
                   {
-                    "concept": "c52c1c12-6480-538f-9edc-bde8ed3edb14",
-                    "label": "Unknown Status & alive"
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -434,19 +464,25 @@
                     "label": "No"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(hivStatus) || hivStatus !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
-              "label": "CD4 count",
+              "label": "CD4 count (cells/µL)",
               "type": "obs",
               "id": "cd4Count",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 1
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "isEmpty(hivStatus) || hivStatus !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             },
             {
               "label": "Co-existing Conditions",
@@ -461,7 +497,7 @@
                     "label": "Tuberculosis (TB)"
                   },
                   {
-                    "concept": "5983AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "142412AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Diarrhea"
                   },
                   {
@@ -477,10 +513,26 @@
                     "label": "Nausea/Vomiting/Anorexia"
                   },
                   {
+                    "concept": "5ec51542-6a40-4f25-8654-6af7628002a9",
+                    "label": "Other"
+                  },
+                  {
                     "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "None"
                   }
                 ]
+              }
+            },
+            {
+              "label": "Other, specify",
+              "type": "obs",
+              "id": "coExistingConditionsOtherSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d8f5921b-6052-4226-99c2-280dec9a18f6"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(coExistingConditions) || coExistingConditions !== '5ec51542-6a40-4f25-8654-6af7628002a9'"
               }
             },
             {
@@ -573,7 +625,7 @@
                 "rendering": "number",
                 "concept": "5c1c03cb-f11e-472c-afa3-7b6cc34234e7",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01
               },
               "hideSteppers": true
             },
@@ -585,7 +637,7 @@
                 "rendering": "number",
                 "concept": "f2ed53d9-16d3-4834-843d-19b049c2364c",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01
               },
               "hideSteppers": true
             },
@@ -659,7 +711,7 @@
               "type": "obs",
               "id": "criticalNutritionPractices",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "checkbox",
                 "concept": "1efa565b-ce2a-4045-8607-1be359a804b9",
                 "answers": [
                   {
@@ -795,7 +847,7 @@
               "id": "otherSpecify2",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "b5adf074-67c9-527b-9423-9fa933755dee"
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(supplementalFoods) || supplementalFoods !== '5ec51542-6a40-4f25-8654-6af7628002a9'"
@@ -806,7 +858,7 @@
               "type": "obs",
               "id": "micronutrients",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "checkbox",
                 "concept": "a301fea4-74c0-433e-bd5e-e5e2833c7ffa",
                 "answers": [
                   {
@@ -814,19 +866,19 @@
                     "label": "Vitamin A"
                   },
                   {
-                    "concept": "86343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "52ccd06f-63d6-427d-b713-f02b3ed6ad8c",
                     "label": "Vitamin B6"
                   },
                   {
-                    "concept": "76613AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "40a137bf-f222-433d-9926-12f85427d3e8",
                     "label": "Folic Acid."
                   },
                   {
-                    "concept": "461AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "a342056c-3830-426c-aa0a-f957eb6e9baa",
                     "label": "Multivitamins"
                   },
                   {
-                    "concept": "78218AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "5173bb5e-9195-42e4-80ef-0220dc8bd263",
                     "label": "Iron."
                   },
                   {
@@ -834,7 +886,7 @@
                     "label": "Iron-Folate"
                   },
                   {
-                    "concept": "86672AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "c3751700-df60-474c-afa2-021df3f9085e",
                     "label": "Zinc."
                   },
                   {
@@ -858,10 +910,10 @@
               "id": "otherSpecify3",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "dbb5c6e6-38b7-55b8-bf63-503f391eca90"
               },
               "hide": {
-                "hideWhenExpression": "isEmpty(micronutrients) || micronutrients !== '5ec51542-6a40-4f25-8654-6af7628002a9'"
+                "hideWhenExpression": "isEmpty(micronutrients) || !arrayContains(micronutrients, '5ec51542-6a40-4f25-8654-6af7628002a9')"
               }
             }
           ]

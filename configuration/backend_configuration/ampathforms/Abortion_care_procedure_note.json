@@ -1,6 +1,6 @@
 {
   "name": "Abortion care procedure note",
-  "description": "Abortion care procedure note - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "description": "Documents an abortion care procedure, including gravida, parity, gestational age, type of abortion, analgesia, the procedure performed and its location, any complications, and post-abortion contraceptive counseling and method provided.",
   "version": "1.0",
   "published": true,
   "uuid": "9902eb08-9748-553e-bc05-85b7385d09f0",
@@ -85,7 +85,7 @@
                 "rendering": "number",
                 "concept": "5624AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 1
               },
               "hideSteppers": true
             },
@@ -97,9 +97,24 @@
                 "rendering": "number",
                 "concept": "ce38ecf3-10ca-4227-bb48-5db53e9588cd",
                 "min": "0",
-                "step": "0.01"
+                "step": 1
               },
               "hideSteppers": true
+            },
+            {
+              "label": "Last menstrual period (LMP)",
+              "type": "obs",
+              "id": "lmp",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "1427AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Gestational Age (Wks.)",
@@ -109,7 +124,7 @@
                 "rendering": "number",
                 "concept": "163166AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01
               },
               "hideSteppers": true
             },
@@ -208,6 +223,27 @@
               }
             },
             {
+              "label": "Procedure details",
+              "type": "obs",
+              "id": "procedureDetails",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "aaf6dcbf-83c8-5cb7-9dd1-f7c8aa6749b2"
+              }
+            },
+            {
+              "label": "Estimated blood loss (ml)",
+              "type": "obs",
+              "id": "estimatedBloodLoss",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161928AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1
+              },
+              "hideSteppers": true
+            },
+            {
               "label": "Complication of abortion",
               "type": "obs",
               "id": "complicationOfAbortion",
@@ -232,7 +268,7 @@
               "id": "ifYesSpecify",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "161011aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(complicationOfAbortion) || complicationOfAbortion !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
@@ -287,6 +323,126 @@
               "hide": {
                 "hideWhenExpression": "isEmpty(postAbortionContraceptiveGiven) || postAbortionContraceptiveGiven !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
+            },
+            {
+              "label": "Follow-up instructions",
+              "type": "obs",
+              "id": "followUpInstructions",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "dc917976-6362-5a63-9d94-85f7fe3ab237"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Vital Signs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic BP (mmHg)",
+              "type": "obs",
+              "id": "systolicBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "250"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Systolic blood pressure is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic BP (mmHg)",
+              "type": "obs",
+              "id": "diastolicBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "150"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Diastolic blood pressure is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse rate (beats/min)",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "230"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Pulse rate is outside the normal range (60-100 beats/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "99"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (\u00b0C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": 0.01,
+                "max": "43"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 \u00b0C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 \u00b0C)."
+                }
+              ],
+              "hideSteppers": true
             }
           ]
         }

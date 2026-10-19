@@ -1,0 +1,429 @@
+{
+  "name": "Blood Transfusion Follow Up Form",
+  "description": "Monitors a patient during blood transfusion, recording unit and donor pack numbers, blood group, indication, start and end times, and serial vital signs, transfusion rate, urine output and any transfusion reaction.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "bdfe78f5-263e-5c53-adf5-a714e2cb2f56",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Transfusion Details",
+      "sections": [
+        {
+          "label": "Transfusion Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Unit number",
+              "type": "obs",
+              "id": "unitNumber",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "61b85edc-f031-42dd-ba1a-7aa47f71e2f1"
+              }
+            },
+            {
+              "label": "Donor pack number",
+              "type": "obs",
+              "id": "donorPackNumber",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6c657a58-03d9-4b45-8240-ac5b56fb2982"
+              }
+            },
+            {
+              "label": "Patient blood group",
+              "type": "obs",
+              "id": "patientBloodGroup",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7fd27265-efcc-46e6-b580-e34d3476774e"
+              }
+            },
+            {
+              "label": "Indication for transfusion",
+              "type": "obs",
+              "id": "indicationForTransfusion",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "677bbfab-ebc7-4c5c-a568-6dbc632dcd6c",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Ordered by",
+              "type": "obs",
+              "id": "orderedBy",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "17ed1619-739d-4e25-b8b0-6d87bd66141e"
+              }
+            },
+            {
+              "label": "Starting time",
+              "type": "obs",
+              "id": "startingTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "472ee5f7-1b21-4514-bc67-0ac769d1292a"
+              }
+            },
+            {
+              "label": "Ending time",
+              "type": "obs",
+              "id": "endingTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "2625e69d-cf2b-4608-b3c6-c6b080d73e26"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Monitoring",
+      "sections": [
+        {
+          "label": "Monitoring",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Time since start of transfusion",
+              "type": "obs",
+              "id": "timeSinceStartOfTransfusion",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "87d147ee-bdd1-4fa3-8640-5b593a83cbd1",
+                "answers": [
+                  {
+                    "concept": "dd6f67cd-edc0-49c7-b6a3-e5c15035fe0b",
+                    "label": "0 min"
+                  },
+                  {
+                    "concept": "8cf3580c-aba6-408f-b7cc-40d7a1b11065",
+                    "label": "15 min"
+                  },
+                  {
+                    "concept": "1049AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "30 min"
+                  },
+                  {
+                    "concept": "60491032-2145-4acc-929a-96192854f9c1",
+                    "label": "45 min"
+                  },
+                  {
+                    "concept": "aee20c7d-db4a-4ea0-aee5-b88bfbdb4fc2",
+                    "label": "1 hr"
+                  },
+                  {
+                    "concept": "1052AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2 hr"
+                  },
+                  {
+                    "concept": "c6823d30-29f9-4483-a188-3dae6a1c16a7",
+                    "label": "3 hr"
+                  },
+                  {
+                    "concept": "3702bc12-7525-485b-b741-47ec22a771bd",
+                    "label": "4 hr"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Condition",
+              "type": "obs",
+              "id": "condition",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2fb61fef-d625-4e0f-9670-2b349762219a",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Systolic blood pressure (mmHg)",
+              "type": "obs",
+              "id": "systolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "250"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic blood pressure (mmHg)",
+              "type": "obs",
+              "id": "diastolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "150"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse (beats/min)",
+              "type": "obs",
+              "id": "pulse",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "230"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "99"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": 0.01,
+                "max": "43"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SpO2",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0c5ec4fa-f41a-4a6d-bd07-969872b69165",
+                "min": "0",
+                "step": 0.01
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Transfusion rate",
+              "type": "obs",
+              "id": "transfusionRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ca38ccab-0d68-4388-af16-fb163503fcea",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Urine output",
+              "type": "obs",
+              "id": "urineOutput",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161929AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Transfusion reaction",
+              "type": "obs",
+              "id": "transfusionReaction",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "48e500e5-60d9-4ac5-8135-ab891d6f851d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Rales",
+              "type": "obs",
+              "id": "rales",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8f75cda1-0b6e-4795-8a17-f05c0a26e3a1",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "S3 gallop",
+              "type": "obs",
+              "id": "s3Gallop",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c114b0d8-14a0-4e2d-9684-ca287e97c34f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Skin rash",
+              "type": "obs",
+              "id": "skinRash",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "512AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

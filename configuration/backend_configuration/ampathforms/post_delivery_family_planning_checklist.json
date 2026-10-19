@@ -1,10 +1,10 @@
 {
   "name": "Post Delivery Family Planning Checklist",
-  "description": "Post Delivery Family Planning Checklist migrated from Bahmni",
+  "description": "Checklist used after delivery to counsel women on family planning, recording fertility intentions, infant feeding, past contraceptive use, eligibility, the immediate or delayed postpartum method chosen, method provided and follow-up date.",
   "version": "1.1",
   "published": true,
   "uuid": "981ee726-d61d-4e85-b411-99e7682f75a4",
-  "retired": true,
+  "retired": false,
   "encounter": "Consultation",
   "processor": "EncounterFormProcessor",
   "referencedForms": [],
@@ -67,25 +67,51 @@
       "label": "Post Delivery Family Planning Assessment",
       "sections": [
         {
-          "label": "Patient and Delivery Demographics",
+          "label": "Patient and Delivery Information",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Date of Delivery",
+              "label": "User Type",
+              "type": "obs",
+              "required": false,
+              "id": "userType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1e6f7081-9203-1234-ef01-56789012345a",
+                "answers": [
+                  {
+                    "concept": "763a1d59-f3b5-492a-ba63-f0a1562ce441",
+                    "label": "New"
+                  },
+                  {
+                    "concept": "6bee05c0-d9e0-4c5f-9a8a-3cbad70fdc9d",
+                    "label": "Existing"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Delivery Date",
               "type": "obs",
               "id": "dateOfDelivery",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "ee91c1ee-ef51-4f01-962b-ecee32966c8d"
               },
-              "readonly": false
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Time Elapsed Since Delivery",
               "type": "obs",
               "id": "timeElapsedSinceDelivery",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "radio",
                 "concept": "5127814f-9ec7-40a5-b52e-5d112a4c2f77",
                 "answers": [
                   {
@@ -174,7 +200,7 @@
               "required": "false",
               "id": "contraceptionUsedPast",
               "questionOptions": {
-                "rendering": "radio",
+                "rendering": "checkbox",
                 "concept": "c01da2b3-4c5d-4e6f-8a7b-9c0d1e2f3041",
                 "answers": [
                   {
@@ -182,35 +208,55 @@
                     "label": "Condoms"
                   },
                   {
-                    "concept": "1359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Implant"
+                    "concept": "159589AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Implants"
                   },
                   {
                     "concept": "780AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Pills"
+                    "label": "Oral Contraceptive Pills"
+                  },
+                  {
+                    "concept": "160570AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Emergency Contraceptive Pills"
+                  },
+                  {
+                    "concept": "5275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "IUCD"
                   },
                   {
                     "concept": "5279AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "IUD"
-                  },
-                  {
-                    "concept": "907AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Depo"
+                    "label": "Injections"
                   },
                   {
                     "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "None"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
                   }
                 ]
               }
             },
             {
-              "label": "Why did you discontinue use",
+              "label": "Other contraception used, specify",
+              "type": "obs",
+              "id": "contraceptionUsedPastOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "fa5e07d0-fd49-5a28-a2c5-0839b9522655"
+              },
+              "hide": {
+                "hideWhenExpression": "!(!isEmpty(contraceptionUsedPast) && arrayContains(contraceptionUsedPast, '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+              }
+            },
+            {
+              "label": "Why did you discontinue use?",
               "type": "obs",
               "required": "false",
               "id": "reasonDiscontinuation",
               "questionOptions": {
-                "rendering": "radio",
+                "rendering": "checkbox",
                 "concept": "d12eb3c4-5d6e-4f70-9b8c-0d1e2f304152",
                 "answers": [
                   {
@@ -231,9 +277,21 @@
                   },
                   {
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Others"
+                    "label": "Other"
                   }
                 ]
+              }
+            },
+            {
+              "label": "Other reason, specify",
+              "type": "obs",
+              "id": "reasonDiscontinuationOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "742dabfd-0abc-5846-903b-e5bab859039a"
+              },
+              "hide": {
+                "hideWhenExpression": "!(!isEmpty(reasonDiscontinuation) && arrayContains(reasonDiscontinuation, '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
               }
             }
           ]
@@ -243,7 +301,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Are you interested in",
+              "label": "What are you interested in?",
               "type": "obs",
               "required": "false",
               "id": "motherInterested",
@@ -258,12 +316,16 @@
                   {
                     "concept": "e8952ac3-c4d5-46e7-f809-637485960718",
                     "label": "Birth Limiting"
+                  },
+                  {
+                    "concept": "87444ec0-6fd2-4140-920e-88e2f4aff768",
+                    "label": "Undecided"
                   }
                 ]
               }
             },
             {
-              "label": "Patient interested in",
+              "label": "Which contraceptive method are you interested in?",
               "type": "obs",
               "required": "false",
               "id": "patientInterestedMethod",
@@ -272,20 +334,24 @@
                 "concept": "f9a63bd4-d5e6-47f8-8091-748596071829",
                 "answers": [
                   {
+                    "concept": "5275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Intrauterine Contraceptive Device (IUCD)"
+                  },
+                  {
+                    "concept": "76022AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Implanon"
+                  },
+                  {
+                    "concept": "1873AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Jadelle"
+                  },
+                  {
                     "concept": "5279AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Intra Uterine Contraceptive Device"
+                    "label": "Injections"
                   },
                   {
-                    "concept": "1359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Implant"
-                  },
-                  {
-                    "concept": "907AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Depo"
-                  },
-                  {
-                    "concept": "5276AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Mini-lap"
+                    "concept": "190AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Condoms"
                   },
                   {
                     "concept": "1489AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -301,13 +367,13 @@
                   },
                   {
                     "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Not Interested in FP at this time"
+                    "label": "Not interested in family planning at this time"
                   }
                 ]
               }
             },
             {
-              "label": "FP method patient went home with",
+              "label": "Which family planning method did the patient go home with?",
               "type": "obs",
               "required": "false",
               "id": "fpMethodWentHome",
@@ -320,20 +386,24 @@
                     "label": "Condoms"
                   },
                   {
-                    "concept": "907AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Depo"
+                    "concept": "5279AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Injections"
                   },
                   {
                     "concept": "780AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Combined Oral Contraceptive Pill"
                   },
                   {
-                    "concept": "5279AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Intra Uterine Contraceptive Device"
+                    "concept": "5275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Intrauterine Contraceptive Device (IUCD)"
                   },
                   {
-                    "concept": "1359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Implant"
+                    "concept": "76022AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Implanon"
+                  },
+                  {
+                    "concept": "1873AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Jadelle"
                   },
                   {
                     "concept": "1472AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -347,7 +417,26 @@
               }
             },
             {
-              "label": "Patient referred to higher center for FP",
+              "label": "Patient referred to higher center for family planning (FP)",
+              "type": "obs",
+              "id": "referredToHigherCenter",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "66a36438-2fdf-48b0-a337-6a31cd2d800d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Reason for referral",
               "type": "obs",
               "required": "false",
               "id": "referredHigherCenter",
@@ -356,11 +445,11 @@
                 "concept": "b1c85df6-f708-49ba-a231-960718293a4b",
                 "answers": [
                   {
-                    "concept": "5279AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Intra Uterine Contraceptive Device"
+                    "concept": "5275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Intrauterine Contraceptive Device (IUCD)"
                   },
                   {
-                    "concept": "1359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "159589AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Implant"
                   },
                   {
@@ -372,6 +461,9 @@
                     "label": "Vasectomy"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "referredToHigherCenter !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             }
           ]
@@ -390,15 +482,15 @@
                 "answers": [
                   {
                     "concept": "17934f26-331d-411a-9a75-1450e86e06c0",
-                    "label": "Has the patient resumed sexual intercourse since delivery?"
+                    "label": "The patient has resumed sexual intercourse since delivery."
                   },
                   {
                     "concept": "2843e66e-daf3-47b5-b28c-46bbe7e7f305",
-                    "label": "Has the patient experienced any return of monthly menstrual bleeding?"
+                    "label": "The patient has experienced any return of monthly menstrual bleeding."
                   },
                   {
                     "concept": "e122d712-a317-4bcc-8671-9bd0bd00e128",
-                    "label": "Are there signs of a postpartum complication or infection? (e.g., severe fever, unexplained pelvic pain)"
+                    "label": "There are signs of a postpartum complication or infection (e.g., severe fever, unexplained pelvic pain)."
                   }
                 ]
               },
@@ -411,11 +503,30 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Immediate Postpartum Methods (< 48 hours / Before Discharge)",
+              "label": "Postpartum method timing",
+              "type": "obs",
+              "id": "postpartumMethodTiming",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "699fd262-a51d-5068-8eed-5375ba30b480",
+                "answers": [
+                  {
+                    "concept": "2b9c8853-0fa7-5fe7-b430-7a6afbb4d904",
+                    "label": "Immediate Postpartum Methods (< 48 hours / Before Discharge)"
+                  },
+                  {
+                    "concept": "2398f710-73cb-58e4-9582-f4243318f634",
+                    "label": "Delayed Postpartum Methods (Delayed to 6 weeks)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Immediate postpartum method",
               "type": "obs",
               "id": "immediatePostpartumMethods48HoursBeforeD",
               "questionOptions": {
-                "rendering": "checkbox",
+                "rendering": "radio",
                 "concept": "f5d93f22-7547-4381-8e7a-c8790532cdc6",
                 "answers": [
                   {
@@ -444,14 +555,17 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "postpartumMethodTiming !== '2b9c8853-0fa7-5fe7-b430-7a6afbb4d904'"
+              }
             },
             {
-              "label": "Delayed Postpartum Methods (Delayed to 6 weeks)",
+              "label": "Delayed postpartum method",
               "type": "obs",
               "id": "delayedPostpartumMethodsDelayedTo6Weeks",
               "questionOptions": {
-                "rendering": "checkbox",
+                "rendering": "radio",
                 "concept": "fe40122a-054d-42fc-b805-97a0e0f59d62",
                 "answers": [
                   {
@@ -468,7 +582,10 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "postpartumMethodTiming !== '2398f710-73cb-58e4-9582-f4243318f634'"
+              }
             }
           ]
         },
@@ -503,22 +620,6 @@
                 ]
               },
               "readonly": false
-            }
-          ]
-        },
-        {
-          "label": "Plan and Accountability",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Chosen Method Provided/Prescribed",
-              "type": "obs",
-              "id": "chosenMethodProvidedPrescribed",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "291a757d-a2a0-4f84-a366-b0dac790820d"
-              },
-              "readonly": false
             },
             {
               "label": "Follow-up Appointment Date",
@@ -528,28 +629,23 @@
                 "rendering": "date",
                 "concept": "0a65e846-7815-43f4-b768-d645f39a65be"
               },
-              "readonly": false
-            },
-            {
-              "label": "Counseling Provider Name",
-              "type": "obs",
-              "id": "counselingProviderName",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "693f200e-ed64-437e-9f57-8c8a17975cc6"
-              },
-              "readonly": false
-            },
-            {
-              "label": "Provider Signature Field",
-              "type": "obs",
-              "id": "providerSignatureField",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "b5b26f02-d1ac-40c2-a7bb-4a5166524b21"
-              },
               "readonly": false,
-              "questionInfo": "Not natively supported in O3 (O3 has no signature widget; flag for manual)."
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "message": "The date cannot be in the past.",
+                  "failsWhenExpression": "!isEmpty(followUpAppointmentDate) && new Date(followUpAppointmentDate).setHours(0,0,0,0) < new Date().setHours(0,0,0,0)"
+                }
+              ]
+            },
+            {
+              "label": "Remark",
+              "type": "obs",
+              "id": "remark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
             }
           ]
         }

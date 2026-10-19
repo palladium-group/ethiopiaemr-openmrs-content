@@ -1,6 +1,6 @@
 {
   "name": "Emergency Triage Form",
-  "description": "Emergency Triage Form Sheet from Bahmni",
+  "description": "Completed on arrival at the emergency department to record arrival time and condition, triage category, contact person, mode of arrival, address, referral source, complaints, vital signs and triage score, and initial interventions.",
   "version": "1.4",
   "published": true,
   "uuid": "4ff622f8-212e-4f0f-b6a6-1aa19d776ffb",
@@ -86,10 +86,7 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ],
-              "hide": {
-                "hideWhenExpression": ""
-              }
+              ]
             },
             {
               "label": "Date and Time of Triage",
@@ -109,10 +106,7 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ],
-              "hide": {
-                "hideWhenExpression": ""
-              }
+              ]
             }
           ]
         }
@@ -613,10 +607,7 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ],
-              "hide": {
-                "hideWhenExpression": ""
-              }
+              ]
             },
             {
               "label": "Duration of Illness (Days)",
@@ -626,7 +617,7 @@
                 "concept": "1731AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
                 "min": "0",
-                "step": "0.01"
+                "step": 1
               },
               "validators": []
             },
@@ -662,8 +653,9 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
+                "min": "10",
+                "step": 0.01,
+                "max": "272"
               },
               "questionInfo": "Normal range: 30–300 cm"
             },
@@ -675,7 +667,8 @@
                 "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "250"
               }
             },
             {
@@ -689,7 +682,9 @@
                 "calculate": {
                   "calculateExpression": "(isEmpty(height) || isEmpty(weight)) ? null : calcBMI(height,weight)"
                 },
-                "step": "0.01"
+                "step": 0.01,
+                "max": "100",
+                "min": "0"
               }
             },
             {
@@ -736,7 +731,7 @@
                   "calculateExpression": "height && weight ? Math.round(Math.sqrt((Number(height) * Number(weight)) / 3600) * 100) / 100 : null"
                 },
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01
               },
               "questionInfo": "Body surface area (BSA). Auto-calculated from height (cm) and weight (kg) using the Mosteller formula. Used to assist drug dosing calculations."
             }
@@ -754,13 +749,17 @@
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 1,
+                "max": "250"
               },
               "questionInfo": "Normal range: 90-120 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
-                "message": "Systolic BP is outside the normal range (90–120 mmHg). You can still save."
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Systolic BP is outside the normal range (90–120 mmHg). You can still save."
+                }
+              ]
             },
             {
               "label": "Diastolic BP (60-90)",
@@ -770,13 +769,17 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "150"
               },
               "questionInfo": "Normal range: 60-90 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
-                "message": "Diastolic BP is outside the normal range (60–90 mmHg). You can still save."
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Diastolic BP is outside the normal range (60–90 mmHg). You can still save."
+                }
+              ]
             },
             {
               "label": "Posture",
@@ -805,13 +808,17 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "99"
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
-                "message": "Respiratory Rate is outside the normal range (16–24 breaths/min). You can still save."
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory Rate is outside the normal range (16–24 breaths/min). You can still save."
+                }
+              ]
             },
             {
               "label": "Saturation (SPO2%)",
@@ -822,13 +829,16 @@
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "max": "100",
-                "step": "0.1"
+                "step": 0.1
               },
               "questionInfo": "Normal: >90%",
-              "alert": {
-                "alertWhenExpression": "myValue && myValue <= 90",
-                "message": "SPO2 is below the normal range (>90%). You can still save."
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%). You can still save."
+                }
+              ]
             },
             {
               "label": "Heart Rate (60-100 bpm)",
@@ -838,13 +848,17 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "230"
               },
               "questionInfo": "Normal range: 60-100 bpm",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
-                "message": "Heart Rate is outside the normal range (60–100 bpm). You can still save."
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Heart Rate is outside the normal range (60–100 bpm). You can still save."
+                }
+              ]
             },
             {
               "label": "Temperature (36.5-37.5°C ?C)",
@@ -853,15 +867,18 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01",
+                "step": 0.01,
                 "min": "25",
                 "max": "43"
               },
               "questionInfo": "Normal range: 36.5-37.5°C",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
-                "message": "Temperature is out of range (Normal range 35-37.5°C)"
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
+                  "message": "Temperature is out of range (Normal range 35-37.5°C)"
+                }
+              ]
             },
             {
               "label": "Random Blood Sugar (mg/dl)",
@@ -872,7 +889,7 @@
                 "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "max": "1000",
-                "step": "0.01"
+                "step": 0.01
               },
               "questionInfo": "Random blood glucose measurement. Normal: 70-140 mg/dL"
             },
@@ -955,10 +972,11 @@
               "id": "painScore",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "160287AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "166082AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "max": "10",
-                "step": "0.01"
+                "step": 1,
+                "disallowDecimals": true
               }
             }
           ]
@@ -1219,6 +1237,69 @@
                 "rows": "2"
               },
               "id": "idAllergies"
+            }
+          ]
+        },
+        {
+          "label": "TB Screening",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Does the patient have cough of > two weeks?",
+              "type": "obs",
+              "id": "tbCough",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "08ae3ce6-6e69-476d-be3b-13e362ba6863",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Does the patient have fever?",
+              "type": "obs",
+              "id": "tbFever",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cd47dece-33b8-4afc-b0d3-8c350b5873bc",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Does the patient have night sweats?",
+              "type": "obs",
+              "id": "tbNightSweats",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a146e62d-62ad-4502-b7bb-23b4d1ecd974",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
             }
           ]
         }

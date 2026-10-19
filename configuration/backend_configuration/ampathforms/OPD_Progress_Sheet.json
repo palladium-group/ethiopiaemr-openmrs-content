@@ -1,0 +1,157 @@
+{
+  "name": "OPD Progress Sheet",
+  "description": "Records dated outpatient progress notes at each follow-up visit, covering current problems, a medication summary, subjective and objective findings, investigation results, the clinician's assessment and the management plan.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "d18d6df5-bad8-528d-af9e-0b7e40ef28f0",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Progress Note",
+      "sections": [
+        {
+          "label": "Progress Note",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date and time",
+              "type": "obs",
+              "id": "dateAndTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "Problems",
+              "type": "obs",
+              "id": "problems",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "df3f7dee-9e86-44c6-9b74-d4cfe151a6ba",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Medication summary",
+              "type": "obs",
+              "id": "medicationSummary",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "26d89fac-8c93-4f41-915d-4b904d757dae",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Subjective",
+              "type": "obs",
+              "id": "subjective",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d38cfc50-62e1-47d4-896e-090cc8d1e68c",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Objective",
+              "type": "obs",
+              "id": "objective",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "b80b0dc5-6a84-4b51-a453-d7620661d078",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Investigation result",
+              "type": "obs",
+              "id": "investigationResult",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f0bececd-0965-4f8f-85f3-c311a4aa57f4",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Assessment",
+              "type": "obs",
+              "id": "assessment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "254fa001-263b-47c3-b2bc-b8385b29a96c",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "163104AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": 3
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

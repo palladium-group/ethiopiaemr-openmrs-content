@@ -1,0 +1,440 @@
+{
+  "name": "Transfer Note",
+  "description": "Completed when a patient is transferred between wards or units, recording the destination, active problems, subjective and objective findings, vital signs, urine output, system-by-system examination, and the assessment and plan.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "c726beea-35fc-56be-9e27-06d8ae605555",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Transfer Details",
+      "sections": [
+        {
+          "label": "Transfer",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "obs",
+              "id": "date",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
+              }
+            },
+            {
+              "label": "Ward",
+              "type": "obs",
+              "id": "ward",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ee7ce4a6-1bc2-401c-b2cd-6e51c5de3370"
+              }
+            },
+            {
+              "label": "Transferred to",
+              "type": "obs",
+              "id": "transferredTo",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6818b9f9-3fb2-48f2-9ce2-5190008e338f"
+              }
+            },
+            {
+              "label": "Problem",
+              "type": "obs",
+              "id": "problem",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "9b7db72e-b14a-4a0b-aa39-1e2547db8c5e",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Subjective",
+              "type": "obs",
+              "id": "subjective",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d38cfc50-62e1-47d4-896e-090cc8d1e68c",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Objective",
+              "type": "obs",
+              "id": "objective",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "b80b0dc5-6a84-4b51-a453-d7620661d078",
+                "rows": 3
+              }
+            },
+            {
+              "label": "General appearance",
+              "type": "obs",
+              "id": "generalAppearance",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "5f21ab79-6e09-486f-83a4-0034bce2233c",
+                "rows": 3
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Vital Signs",
+      "sections": [
+        {
+          "label": "Vital Signs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic blood pressure (mmHg)",
+              "type": "obs",
+              "id": "systolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "250"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic blood pressure (mmHg)",
+              "type": "obs",
+              "id": "diastolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "150"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Pulse (beats/min)",
+              "type": "obs",
+              "id": "pulse",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "230"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory rate (breaths/min)",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "99"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": 0.01,
+                "max": "43"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SpO2",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0c5ec4fa-f41a-4a6d-bd07-969872b69165",
+                "min": "0",
+                "step": 0.01
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Urine output",
+              "type": "obs",
+              "id": "urineOutput",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161929AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Physical Examination",
+      "sections": [
+        {
+          "label": "Physical Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "HEENT",
+              "type": "obs",
+              "id": "heent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1122AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abnormal"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
+              "label": "Lymphoglandular system",
+              "type": "obs",
+              "id": "lymphoglandularSystem",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "8a6f2874-5826-43c0-a9bb-d1af9829656e",
+                "rows": 3
+              },
+              "required": "true"
+            },
+            {
+              "label": "Respiratory system",
+              "type": "obs",
+              "id": "respiratorySystem",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "732be35c-8d82-4e8c-826b-f150729bb038",
+                "rows": 3
+              },
+              "required": "true"
+            },
+            {
+              "label": "Cardiovascular system",
+              "type": "obs",
+              "id": "cardiovascularSystem",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "98283469-823b-439a-b553-6451edcd6186",
+                "rows": 3
+              },
+              "required": "true"
+            },
+            {
+              "label": "Abdominal examination notes",
+              "type": "obs",
+              "id": "abdominalExaminationNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "160947AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Genitourinary system",
+              "type": "obs",
+              "id": "genitourinarySystem",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "e2b668ac-7efb-4344-8ea8-b7cb70976652",
+                "rows": 3
+              },
+              "required": "true"
+            },
+            {
+              "label": "Musculoskeletal system",
+              "type": "obs",
+              "id": "musculoskeletalSystem",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "163048AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": 3
+              },
+              "required": "true"
+            },
+            {
+              "label": "Integumentary system",
+              "type": "obs",
+              "id": "integumentarySystem",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2f70147f-7961-4937-acab-204676444dff",
+                "rows": 3
+              },
+              "required": "true"
+            },
+            {
+              "label": "Nervous system",
+              "type": "obs",
+              "id": "nervousSystem",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "163109AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": 3
+              },
+              "required": "true"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Assessment and Plan",
+      "sections": [
+        {
+          "label": "Assessment and Plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Assessment notes",
+              "type": "obs",
+              "id": "assessmentNotes",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "254fa001-263b-47c3-b2bc-b8385b29a96c",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "163104AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "rows": 3
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

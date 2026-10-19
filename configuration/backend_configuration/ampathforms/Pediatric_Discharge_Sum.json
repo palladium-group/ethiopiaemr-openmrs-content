@@ -1,6 +1,6 @@
 {
   "name": "Pediatric Discharge Summary",
-  "description": "Pediatric Discharge Sum - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "description": "Summarizes a child's hospital stay at discharge, including diagnosis, treatments given, condition and vital signs at discharge, discharge medications, advice on breastfeeding, vaccination, sunlight exposure and danger signs, and the follow-up appointment.",
   "version": "1.0",
   "published": true,
   "uuid": "2f7c9250-bea5-5d7f-9a07-82b7440aad84",
@@ -150,6 +150,15 @@
               }
             },
             {
+              "label": "Plan",
+              "type": "obs",
+              "id": "dischargePlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "163104AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
               "label": "Discharged at",
               "type": "obs",
               "id": "dischargedAt",
@@ -164,7 +173,7 @@
               "id": "nameOfDischargedPhysician",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "1473aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             }
           ]
@@ -209,7 +218,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "N/A"
                   }
                 ]
@@ -232,7 +241,7 @@
                     "label": "No"
                   },
                   {
-                    "concept": "21330d79-4826-4022-882e-17105b4f148c",
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "N/A"
                   }
                 ]
@@ -415,7 +424,8 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "99"
               },
               "questionInfo": "Breaths per minute.",
               "hideSteppers": true
@@ -428,7 +438,8 @@
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "43"
               },
               "questionInfo": "Degrees Celsius, one decimal place.",
               "hideSteppers": true
@@ -447,7 +458,8 @@
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 1,
+                "max": "250"
               },
               "questionInfo": "Millimetres of mercury.",
               "hideSteppers": true
@@ -460,7 +472,8 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "150"
               },
               "questionInfo": "Millimetres of mercury.",
               "hideSteppers": true
@@ -479,14 +492,15 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "230"
               },
-              "questionInfo": "Beats per minute.",
+              "questionInfo": "Beats per minute. Normal range depends on age: under 1 year 100-180, 1-2 years 98-140, 3-5 years 80-120, 6-11 years 75-118, 12 years and over 60-100 bpm.",
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
-                  "message": "Value is outside the normal range (60-100 bpm)."
+                  "warnsWhenExpression": "myValue && (age < 1 ? (myValue < 100 || myValue > 180) : age < 3 ? (myValue < 98 || myValue > 140) : age < 6 ? (myValue < 80 || myValue > 120) : age < 12 ? (myValue < 75 || myValue > 118) : (myValue < 60 || myValue > 100))",
+                  "message": "Outside the normal range for the child's age (under 1 year 100-180, 1-2 years 98-140, 3-5 years 80-120, 6-11 years 75-118, 12 years and over 60-100 bpm)."
                 }
               ],
               "hideSteppers": true
@@ -549,9 +563,10 @@
               "id": "spo2",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "100"
               },
               "validators": [
                 {

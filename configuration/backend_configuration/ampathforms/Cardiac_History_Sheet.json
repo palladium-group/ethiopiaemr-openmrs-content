@@ -1,6 +1,6 @@
 {
   "name": "Cardiac History Sheet",
-  "description": "Cardiac History Sheet - built from physician Word-doc spec (Phase 1, batch-three).",
+  "description": "Documents the cardiac history and examination of a patient, including presenting complaint, past medical history, cardiovascular risk factors such as smoking, hypertension and diabetes, previous treatment, physical findings and investigation results.",
   "version": "1.0",
   "published": true,
   "uuid": "63c23947-4e3b-5ed6-ad83-bb09f2d0990a",
@@ -75,7 +75,8 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "d1cb9e9c-e9ea-4313-87bb-2db8e4826950"
-              }
+              },
+              "questionInfo": "The clinic or unit where the patient is followed up (for example, cardiac OPD or referral hospital)"
             },
             {
               "label": "Initial presenting complaint / symptom and duration",
@@ -105,16 +106,47 @@
               }
             },
             {
-              "label": "Duration (per min)",
+              "label": "Duration",
               "type": "obs",
               "id": "durationPerMin",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "482e588d-0da9-4ac5-845b-a3614a0ba6c9",
+                "concept": "1731AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 1
               },
               "hideSteppers": true
+            },
+            {
+              "label": "Duration unit",
+              "type": "obs",
+              "id": "durationUnit",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "b51fc02b-e7a9-4147-8658-9917acd5461c",
+                "answers": [
+                  {
+                    "concept": "1733AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Minutes"
+                  },
+                  {
+                    "concept": "1822AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Hours"
+                  },
+                  {
+                    "concept": "1072AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Days"
+                  },
+                  {
+                    "concept": "1073AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Weeks"
+                  },
+                  {
+                    "concept": "1074AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Months"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -525,7 +557,8 @@
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "43"
               },
               "questionInfo": "Normal range: 36.5-37.5 °C",
               "validators": [
@@ -711,7 +744,8 @@
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 1,
+                "max": "250"
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -731,7 +765,8 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "150"
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -751,7 +786,8 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "230"
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -771,7 +807,8 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "99"
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -791,7 +828,8 @@
                 "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "250"
               },
               "questionInfo": "Kilograms.",
               "hideSteppers": true
@@ -804,7 +842,8 @@
                 "rendering": "number",
                 "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "10",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "272"
               },
               "questionInfo": "Centimetres.",
               "hideSteppers": true
@@ -817,10 +856,11 @@
                 "rendering": "number",
                 "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01",
+                "step": 0.01,
                 "calculate": {
                   "calculateExpression": "calcBMI(heightCm,weightKg)"
-                }
+                },
+                "max": "100"
               },
               "hideSteppers": true
             },
@@ -851,20 +891,12 @@
                 "concept": "9ce112d5-e4ed-4050-8409-ba3b35a22615",
                 "answers": [
                   {
-                    "label": "left hand",
-                    "concept": "1440a839-b8a9-403c-8e68-74e046329c8f"
+                    "concept": "1232AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Left arm"
                   },
                   {
-                    "label": "Pulmonary",
-                    "concept": "1d9a3653-9b0f-462c-9927-3ae62e08a36a"
-                  },
-                  {
-                    "label": "Right Hand",
-                    "concept": "b7ff7a6b-6dd0-411e-a160-68ece7ddd895"
-                  },
-                  {
-                    "label": "Extrapulmonary",
-                    "concept": "d28c1846-bcc5-4820-aa88-c347555904b5"
+                    "concept": "1233AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Right arm"
                   }
                 ]
               }
@@ -903,6 +935,48 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "3784e794-283e-554a-8689-be120f95d535"
+              }
+            },
+            {
+              "label": "Pulse volume",
+              "type": "obs",
+              "id": "radialPulseVolume",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "85213f44-a68f-5ef3-9919-4e9faf191071",
+                "answers": [
+                  {
+                    "concept": "9f0f09c7-7e54-4b3e-8c9f-d1eed1c67480",
+                    "label": "Non-palpable"
+                  },
+                  {
+                    "concept": "a6607d63-12b0-420c-bca3-92ba9598be82",
+                    "label": "Feeble-Weak"
+                  },
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Radio-femoral / radio-radial delay",
+              "type": "obs",
+              "id": "radioFemoralDelay",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7f0bd329-d0bb-5bfc-88da-49a3f4be35d0",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
               }
             }
           ]
@@ -947,7 +1021,8 @@
                 "rendering": "number",
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "100"
               },
               "questionInfo": "Normal range: 95-100 %",
               "validators": [
@@ -965,7 +1040,8 @@
               "id": "waistCircumferenceCm",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "163080AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "163080AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
               "hideSteppers": true
             },
@@ -975,7 +1051,8 @@
               "id": "hipCircumferenceCm",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "163081AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "163081AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
               "hideSteppers": true
             }
@@ -1394,33 +1471,39 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "WBC",
+              "label": "WBC (x10³/µL)",
               "type": "obs",
               "id": "wbc",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "678AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "678AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 4.0-11.0 x10³/µL"
             },
             {
-              "label": "Neutrophil",
+              "label": "Neutrophil (%)",
               "type": "obs",
               "id": "neutrophil",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "179d00c1-a909-40b4-a1e8-049dc5b268f7"
-              }
+              },
+              "questionInfo": "Normal range: 40-75 %"
             },
             {
-              "label": "Lymphocyte",
+              "label": "Lymphocyte (%)",
               "type": "obs",
               "id": "lymphocyte",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1021AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "1021AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "max": "100",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 20-45 %"
             },
             {
               "label": "Hgb/Hct Result Notes",
@@ -1429,37 +1512,44 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "1194fec8-4093-4479-bee5-f791012f544b"
-              }
+              },
+              "questionInfo": "Normal range: Hgb 12-16 g/dL (female), 13-17 g/dL (male); Hct 36-50 %"
             },
             {
-              "label": "MCV",
+              "label": "MCV (fL)",
               "type": "obs",
               "id": "mcv",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "851AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "851AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 80-100 fL"
             },
             {
-              "label": "MCH",
+              "label": "MCH (pg)",
               "type": "obs",
               "id": "mch",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "1018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 27-33 pg"
             },
             {
-              "label": "Platelet",
+              "label": "Platelet (x10³/µL)",
               "type": "obs",
               "id": "platelet",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "729AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 150-450 x10³/µL"
             },
             {
               "label": "ANC/TLC",
@@ -1468,7 +1558,8 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "1cc35c00-a614-4522-b492-15d937bf69d7"
-              }
+              },
+              "questionInfo": "Normal range: ANC 1.5-8.0 x10³/µL; TLC 1.0-4.8 x10³/µL"
             }
           ]
         },
@@ -1477,100 +1568,116 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "ESR",
+              "label": "ESR (mm/hr)",
               "type": "obs",
               "id": "esr",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 0-20 mm/hr"
             },
             {
-              "label": "BUN",
+              "label": "BUN (mg/dL)",
               "type": "obs",
               "id": "bun",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "83f0f09a-219a-592f-805e-e54258aa28c1"
-              }
+              },
+              "questionInfo": "Normal range: 7-20 mg/dL"
             },
             {
-              "label": "Creatinine",
+              "label": "Creatinine (mg/dL)",
               "type": "obs",
               "id": "creatinine",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "124c9470-5277-5965-a231-137986d48ab7"
-              }
+              },
+              "questionInfo": "Normal range: 0.6-1.2 mg/dL"
             },
             {
-              "label": "AST/SGOT",
+              "label": "AST/SGOT (U/L)",
               "type": "obs",
               "id": "astSgot",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "653AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "653AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 0-40 U/L"
             },
             {
-              "label": "ALT/SGPT",
+              "label": "ALT/SGPT (U/L)",
               "type": "obs",
               "id": "altSgpt",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "9d07b066-4598-47bd-885f-cd2a3346ca96"
-              }
+              },
+              "questionInfo": "Normal range: 0-41 U/L"
             },
             {
-              "label": "Total Bilirubin",
+              "label": "Total Bilirubin (mg/dL)",
               "type": "obs",
               "id": "totalBilirubin",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "655AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "655AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 0.1-1.2 mg/dL"
             },
             {
-              "label": "Direct Bilirubin",
+              "label": "Direct Bilirubin (mg/dL)",
               "type": "obs",
               "id": "directBilirubin",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1297AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "1297AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 0-0.3 mg/dL"
             },
             {
-              "label": "Albumin",
+              "label": "Albumin (g/dL)",
               "type": "obs",
               "id": "albumin",
               "questionOptions": {
                 "rendering": "text",
                 "concept": "ac15335c-932e-45ce-b678-7731a4b95d60"
-              }
+              },
+              "questionInfo": "Normal range: 3.5-5.0 g/dL"
             },
             {
-              "label": "PTT",
+              "label": "PTT (seconds)",
               "type": "obs",
               "id": "ptt",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "161153AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "161153AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 25-35 seconds"
             },
             {
-              "label": "PT",
+              "label": "PT (seconds)",
               "type": "obs",
               "id": "pt",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "161481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "161481AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 11-13.5 seconds"
             },
             {
               "label": "INR",
@@ -1579,65 +1686,84 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "38f4c1c0-e1a7-537e-8ff4-efe83a1a9d8e"
-              }
+              },
+              "questionInfo": "Normal range: 0.8-1.2"
             },
             {
-              "label": "Na+",
+              "label": "Na+ (mmol/L)",
               "type": "obs",
               "id": "na",
               "questionOptions": {
-                "rendering": "textarea",
-                "concept": "21330d79-4826-4022-882e-17105b4f148c"
-              }
+                "rendering": "number",
+                "concept": "1132AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "250",
+                "step": 0.1
+              },
+              "questionInfo": "Serum sodium. Normal range 135-145 mmol/L.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 135 || myValue > 145)",
+                  "message": "Value is outside the normal range (135-145 mmol/L)."
+                }
+              ]
             },
             {
-              "label": "K",
+              "label": "K+ (mmol/L)",
               "type": "obs",
               "id": "k",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1133AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "1133AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 3.5-5.0 mmol/L"
             },
             {
-              "label": "Ca",
+              "label": "Ca (mg/dL)",
               "type": "obs",
               "id": "ca",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "159497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 8.5-10.5 mg/dL"
             },
             {
-              "label": "Magnesium",
+              "label": "Magnesium (mg/dL)",
               "type": "obs",
               "id": "magnesium",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "204eab71-30a2-4348-94c4-7d36ab1ba189"
-              }
+              },
+              "questionInfo": "Normal range: 1.7-2.2 mg/dL"
             },
             {
-              "label": "Uric Acid",
+              "label": "Uric Acid (mg/dL)",
               "type": "obs",
               "id": "uricAcid",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "159825AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 3.5-7.2 mg/dL"
             },
             {
-              "label": "LDH",
+              "label": "LDH (U/L)",
               "type": "obs",
               "id": "ldh",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1014AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "1014AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 140-280 U/L"
             },
             {
               "label": "Urinalysis: Protein",
@@ -1681,6 +1807,10 @@
                   {
                     "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "R"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -1700,6 +1830,10 @@
                   {
                     "label": "Negative",
                     "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -1727,6 +1861,10 @@
                   {
                     "label": "Indeterminate",
                     "concept": "1138AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -1755,91 +1893,106 @@
               }
             },
             {
-              "label": "Total Cholesterol / LDL",
+              "label": "Total Cholesterol / LDL (mmol/L)",
               "type": "obs",
               "id": "totalCholesterolLdl",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "7f5091a1-3933-5e9e-bbaf-f14c1ff195f2"
-              }
+              },
+              "questionInfo": "Desirable: total cholesterol below 5.2 mmol/L; LDL below 2.6 mmol/L"
             },
             {
-              "label": "HDL",
+              "label": "HDL (mmol/L)",
               "type": "obs",
               "id": "hdl",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1007AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "1007AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Desirable: above 1.0 mmol/L (men), above 1.3 mmol/L (women)"
             },
             {
-              "label": "LDL",
+              "label": "LDL (mmol/L)",
               "type": "obs",
               "id": "ldl",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1008AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "1008AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Desirable: below 2.6 mmol/L"
             },
             {
-              "label": "Triglyceride",
+              "label": "Triglyceride (mmol/L)",
               "type": "obs",
               "id": "triglyceride",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1009AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "1009AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Desirable: below 1.7 mmol/L"
             },
             {
-              "label": "FBS",
+              "label": "FBS (mg/dL)",
               "type": "obs",
               "id": "fbs",
               "questionOptions": {
                 "rendering": "text",
                 "concept": "4f227fa2-1f8a-4030-9fe2-24fe6e19c429"
-              }
+              },
+              "questionInfo": "Normal range: 70-100 mg/dL"
             },
             {
-              "label": "HbA1c",
+              "label": "HbA1c (%)",
               "type": "obs",
               "id": "hba1c",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "159644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "159644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal: below 5.7 %"
             },
             {
-              "label": "TSH",
+              "label": "TSH (mIU/L)",
               "type": "obs",
               "id": "tsh",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "6fcd41c3-3c65-4dda-880e-7871c5bf41a9"
-              }
+              },
+              "questionInfo": "Normal range: 0.4-4.0 mIU/L"
             },
             {
-              "label": "FT3",
+              "label": "FT3 (pg/mL)",
               "type": "obs",
               "id": "ft3",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "6b0ffd6c-9e28-41a3-aac4-1f087a830f11"
+                "concept": "6b0ffd6c-9e28-41a3-aac4-1f087a830f11",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 2.3-4.2 pg/mL"
             },
             {
-              "label": "FT4",
+              "label": "FT4 (ng/dL)",
               "type": "obs",
               "id": "ft4",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "2a332a94-b337-49e9-bc34-4b78ace16049"
+                "concept": "2a332a94-b337-49e9-bc34-4b78ace16049",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal range: 0.8-1.8 ng/dL"
             },
             {
               "label": "Body Fluid Microbiology",
@@ -1851,36 +2004,48 @@
               }
             },
             {
-              "label": "Imaging",
+              "label": "Imaging studies done",
               "type": "obs",
               "id": "imaging",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "f5061499-934b-4d85-88b4-128cd3140970",
+                "rendering": "checkbox",
+                "concept": "e83bf891-cae5-532a-8dc9-29e361b82bda",
                 "answers": [
                   {
-                    "label": "Normal",
-                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "161157AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "12 lead ECG"
                   },
                   {
-                    "label": "Abnormal",
-                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "12AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Chest X-ray"
                   },
                   {
-                    "label": "Multiple Choices (see notes)",
-                    "concept": "1cc4dbcd-a43a-487a-bea6-a5bb6b874b79"
+                    "concept": "159567AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Echocardiography"
                   },
                   {
-                    "label": "OTHER NON-CODED",
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "845AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Abdominal/pelvic ultrasound"
                   },
                   {
-                    "label": "CXR",
-                    "concept": "645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "e8ff0800-9243-4dd0-86d9-d1d8790aecb3",
+                    "label": "Stress test"
                   },
                   {
-                    "label": "Sonography",
-                    "concept": "d3ab60f2-101d-41b7-9a00-ad29d9caf01d"
+                    "concept": "74c213aa-d33c-4320-bcd2-294d42a4b014",
+                    "label": "Coronary angiography (CAG)"
+                  },
+                  {
+                    "concept": "836b9d61-ccbd-44e7-ab03-ac93bac02ee8",
+                    "label": "Coronary CT angiography"
+                  },
+                  {
+                    "concept": "c46de269-ed68-469c-b8c9-e2b3a5db52f0",
+                    "label": "Cardiac MRI"
+                  },
+                  {
+                    "concept": "60e732bd-2dac-5063-b2b4-98fce3ccccd3",
+                    "label": "Electrophysiology study (EPS)"
                   }
                 ]
               }
@@ -1901,59 +2066,66 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "CTnI/T",
+              "label": "CTnI/T (ng/mL)",
               "type": "obs",
               "id": "ctniT",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "2dd0915d-f419-4bc6-bd48-642ce3c3781d"
-              }
+              },
+              "questionInfo": "Normal: below the 99th percentile of the assay (troponin I usually below 0.04 ng/mL)"
             },
             {
-              "label": "CK-MB",
+              "label": "CK-MB (U/L)",
               "type": "obs",
               "id": "ckMb",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "be9b0f14-b6ea-487a-aa2f-4a0817a544f4"
-              }
+              },
+              "questionInfo": "Normal: below 25 U/L"
             },
             {
-              "label": "CRP",
+              "label": "CRP (mg/L)",
               "type": "obs",
               "id": "crp",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "7e01cc88-4f36-4f5f-86f0-783b899746d0"
-              }
+              },
+              "questionInfo": "Normal: below 5 mg/L"
             },
             {
-              "label": "BNP",
+              "label": "BNP (pg/mL)",
               "type": "obs",
               "id": "bnp",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "2e378b57-9b22-4745-b509-5073db45062f"
-              }
+              },
+              "questionInfo": "Normal: below 100 pg/mL"
             },
             {
-              "label": "NT-Pro BNP",
+              "label": "NT-Pro BNP (pg/mL)",
               "type": "obs",
               "id": "ntProBnp",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "f1a390d0-a582-45c3-a06f-70cab1264e4c"
-              }
+              },
+              "questionInfo": "Normal: below 125 pg/mL (age under 75)"
             },
             {
-              "label": "D-dimer (%)",
+              "label": "D-dimer (mg/L FEU)",
               "type": "obs",
               "id": "dDimer",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "166018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "166018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "questionInfo": "Normal: below 0.5 mg/L FEU"
             }
           ]
         },
@@ -2007,7 +2179,7 @@
               }
             },
             {
-              "label": "CAG",
+              "label": "Coronary Angiography (CAG)",
               "type": "obs",
               "id": "cag",
               "questionOptions": {
@@ -2034,7 +2206,7 @@
               }
             },
             {
-              "label": "EPS",
+              "label": "Electrophysiology Study (EPS)",
               "type": "obs",
               "id": "eps",
               "questionOptions": {
@@ -2067,7 +2239,7 @@
               }
             },
             {
-              "label": "EF",
+              "label": "Ejection Fraction (EF)",
               "type": "obs",
               "id": "ef",
               "questionOptions": {
@@ -2156,7 +2328,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "PCI (Date done and outcome)",
+              "label": "Percutaneous Coronary Intervention (PCI): date done and outcome",
               "type": "obs",
               "id": "pciDateDoneAndOutcome",
               "questionOptions": {
@@ -2165,7 +2337,7 @@
               }
             },
             {
-              "label": "PTMC (Date done and outcome)",
+              "label": "Percutaneous Transvenous Mitral Commissurotomy (PTMC): date done and outcome",
               "type": "obs",
               "id": "ptmcDateDoneAndOutcome",
               "questionOptions": {
@@ -2174,7 +2346,7 @@
               }
             },
             {
-              "label": "PPI (Date done and outcome)",
+              "label": "Permanent Pacemaker Implantation (PPI): date done and outcome",
               "type": "obs",
               "id": "ppiDateDoneAndOutcome",
               "questionOptions": {
@@ -2183,7 +2355,7 @@
               }
             },
             {
-              "label": "EPS and RFA (Date done and outcome)",
+              "label": "Electrophysiology Study (EPS) and Radiofrequency Ablation (RFA): date done and outcome",
               "type": "obs",
               "id": "epsAndRfaDateDoneAndOutcome",
               "questionOptions": {
@@ -2567,7 +2739,7 @@
                 "rendering": "number",
                 "concept": "c12b9cb9-6892-4100-9316-cb7125bfb2a0",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01
               },
               "hideSteppers": true
             }

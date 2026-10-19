@@ -1,0 +1,249 @@
+{
+  "name": "Pediatric Vital Signs",
+  "description": "Records a child's vital signs at a set date and time, including pulse, blood pressure, oxygen saturation, respiratory rate, temperature, pain score, analgesia given and random blood sugar.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "dfe1b17d-11ad-55ce-9d70-297c28a9d694",
+  "retired": false,
+  "encounter": "Vitals",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Pedi vitals Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date and Time",
+              "type": "obs",
+              "id": "dateAndTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
+              }
+            },
+            {
+              "label": "PR",
+              "type": "obs",
+              "id": "pr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "230"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Systolic",
+              "type": "obs",
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "250"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (age < 1 ? (myValue < 72 || myValue > 104) : age < 3 ? (myValue < 86 || myValue > 106) : age < 6 ? (myValue < 89 || myValue > 112) : age < 12 ? (myValue < 97 || myValue > 115) : (myValue < 90 || myValue > 120))",
+                  "message": "Outside the normal range for the child's age (under 1 year 72-104, 1-2 years 86-106, 3-5 years 89-112, 6-11 years 97-115, 12 years and over 90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true,
+              "questionInfo": "Normal range depends on age: under 1 year 72-104, 1-2 years 86-106, 3-5 years 89-112, 6-11 years 97-115, 12 years and over 90-120 mmHg."
+            },
+            {
+              "label": "Diastolic",
+              "type": "obs",
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "150"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (age < 1 ? (myValue < 37 || myValue > 56) : age < 3 ? (myValue < 42 || myValue > 63) : age < 6 ? (myValue < 46 || myValue > 72) : age < 12 ? (myValue < 57 || myValue > 76) : (myValue < 60 || myValue > 90))",
+                  "message": "Outside the normal range for the child's age (under 1 year 37-56, 1-2 years 42-63, 3-5 years 46-72, 6-11 years 57-76, 12 years and over 60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true,
+              "questionInfo": "Normal range depends on age: under 1 year 37-56, 1-2 years 42-63, 3-5 years 46-72, 6-11 years 57-76, 12 years and over 60-90 mmHg."
+            },
+            {
+              "label": "SPO2",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0c5ec4fa-f41a-4a6d-bd07-969872b69165",
+                "min": "0",
+                "step": 0.01
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "RR",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "99"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Temprature",
+              "type": "obs",
+              "id": "temprature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": 0.01,
+                "max": "43"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Pain Score",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "166000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "49869001-1920-123d-4561-234567890123",
+                    "label": "No Pain(0)"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild (1-3)"
+                  },
+                  {
+                    "concept": "9623181f-86a6-4b47-a45e-51038f8b1bd9",
+                    "label": "Moderate to Sever (4-6)"
+                  },
+                  {
+                    "concept": "159409AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Very Sever (7-9)"
+                  },
+                  {
+                    "concept": "07d1ccf4-afcd-4e4b-b329-e68b900968eb",
+                    "label": "Worst possible pain (10)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Anti pain given?",
+              "type": "obs",
+              "id": "antiPainGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "649de9d2-6718-5dec-9382-5c7f33cabcd4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "RBS(mg/dl)",
+              "type": "obs",
+              "id": "rbsMgDl",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "d0d107f7-9452-4129-a209-b9a4d1b46d4a",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

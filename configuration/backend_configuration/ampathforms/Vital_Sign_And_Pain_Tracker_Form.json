@@ -1,7 +1,7 @@
 {
   "name": "Vital Sign and Pain Tracker Form",
-  "description": "Vital signs monitoring with pain assessment and treatment tracking",
-  "version": "1.1",
+  "description": "Used to track vital signs and pain over time, recording blood pressure, pulse, temperature, oxygen saturation, blood glucose, Glasgow coma scale, fluid balance, pain score and analgesia given according to the WHO pain ladder.",
+  "version": "1.0",
   "published": true,
   "uuid": "d4590b08-a83e-4889-a4f8-d210288d71ce",
   "retired": false,
@@ -15,11 +15,10 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
-              "readonly": false,
               "questionOptions": {
                 "rendering": "date"
               },
@@ -28,7 +27,8 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "readonly": true
             },
             {
               "label": "Provider:",
@@ -55,253 +55,189 @@
                 }
               },
               "id": "encLocation",
-              "readonly": false
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Vital Sign and Pain Tracker Form",
+      "label": "Vital Sign and Pain Tracker Format Assessment",
       "sections": [
         {
-          "label": "Date and Time",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
               "label": "Date and Time",
               "type": "obs",
-              "required": true,
-              "id": "painDateTime",
+              "id": "dateAndTime",
               "questionOptions": {
                 "rendering": "datetime",
-                "concept": "162869AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
               }
-            }
-          ]
-        },
-        {
-          "label": "Pulse Rate",
-          "isExpanded": "true",
-          "questions": [
+            },
             {
-              "label": "Pulse Rate",
+              "label": "Pulse rate",
               "type": "obs",
-              "required": false,
-              "id": "painTrackerPulse",
+              "id": "pulseRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "230"
               },
-              "questionInfo": "Normal range: 60-100 bpm",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 100.5 || myValue < 59.5)",
-                "message": "Pulse is out of range (Normal range 60-100)"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Blood Pressure",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Systolic",
-              "type": "obs",
-              "required": false,
-              "id": "painTrackerSystolic",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal range: 90-140 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 140.5 || myValue < 89.5)",
-                "message": "Systolic is out of range (Normal range 90-140)"
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Diastolic",
+              "label": "Respiratory Rate (breaths/min)",
               "type": "obs",
-              "required": false,
-              "id": "painTrackerDiastolic",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal range: 60-90 mmHg",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 90.5 || myValue < 59.5)",
-                "message": "Diastolic is out of range (Normal range 60-90)"
-              }
-            },
-            {
-              "label": "Posture",
-              "type": "obs",
-              "required": false,
-              "id": "painTrackerPosture",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "159633AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "answers": [
-                  {
-                    "label": "Sitting",
-                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Supine",
-                    "concept": "159629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "label": "Vitals",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Temperature",
-              "type": "obs",
-              "required": false,
-              "id": "painTrackerTemperature",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "25",
-                "max": "43",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal range: 36.5-37.5°C",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
-                "message": "Temperature is out of range (Normal range 35-37.5°C)"
-              }
-            },
-            {
-              "label": "Respiratory Rate",
-              "type": "obs",
-              "required": false,
-              "id": "painTrackerRespiratoryRate",
+              "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "99"
               },
-              "questionInfo": "Normal range: 12-20 breaths/min",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 20.5 || myValue < 11.5)",
-                "message": "Respiratory Rate is out of range (Normal range 12-20)"
-              }
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Saturation (SPO2%)",
+              "label": "Temperature",
               "type": "obs",
-              "required": false,
-              "id": "painTrackerSPO2",
+              "id": "temperature",
               "questionOptions": {
-                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
-                "min": "0",
-                "max": "100",
-                "step": "0.01"
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": 0.01,
+                "max": "43"
               },
-              "questionInfo": "Normal: ≥90%",
-              "validators": [],
-              "alert": {
-                "alertWhenExpression": "myValue && myValue < 89.5",
-                "message": "Oxygen Saturation is out of range (Normal range ≥90)"
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Weight",
+              "label": "Weight (kg)",
               "type": "obs",
-              "required": false,
-              "id": "painTrackerWeight",
+              "id": "weight",
               "questionOptions": {
+                "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "rendering": "number",
-                "step": "0.01"
+                "min": "0",
+                "step": 0.01,
+                "max": "250"
               },
-              "validators": []
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
             },
             {
-              "label": "Fluid Inputs",
+              "label": "SPO2",
               "type": "obs",
-              "required": false,
-              "id": "painTrackerFluidInputs",
+              "id": "spo2",
               "questionOptions": {
-                "concept": "163036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
-                "step": "0.01"
-              }
+                "concept": "0c5ec4fa-f41a-4a6d-bd07-969872b69165",
+                "min": "0",
+                "step": 0.01
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Fluid Outputs",
+              "label": "Rbs/fbs",
               "type": "obs",
-              "required": false,
-              "id": "painTrackerFluidOutputs",
-              "questionOptions": {
-                "concept": "163036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "rendering": "number",
-                "step": "0.01"
-              }
-            },
-            {
-              "label": "RBS/FBS",
-              "type": "obs",
-              "required": false,
-              "id": "painTrackerGlucose",
+              "id": "rbsFbs",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Glasgow coma scale",
+              "type": "obs",
+              "id": "glasgowComaScale",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1c6a40f0-ee7f-42bf-ad7c-ac2bcbc905ba"
               }
             },
             {
-              "label": "Glasgow Coma Scale",
+              "label": "Total Fluid Input",
               "type": "obs",
-              "required": false,
+              "id": "totalFluidInput",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "160347AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
+                "concept": "a93676f4-e2bf-446b-841f-c4853e92fd94",
+                "min": "0",
+                "step": 0.01
               },
-              "id": "glasgowComaScale"
+              "hideSteppers": true
             },
             {
-              "label": "Pain Scale",
+              "label": "Total Fluid Output",
               "type": "obs",
-              "required": true,
-              "id": "painScale",
+              "id": "totalFluidOutput",
               "questionOptions": {
-                "rendering": "radio",
-                "concept": "48758990-0819-012c-3450-123456789012",
+                "rendering": "number",
+                "concept": "f2b9c07c-8c2a-44b6-ae8d-0adeeddcc8e0",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Pain Score",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "166000AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
                     "concept": "49869001-1920-123d-4561-234567890123",
                     "label": "No Pain"
                   },
                   {
-                    "concept": "50970112-2031-234e-5672-345678901234",
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Mild"
                   },
                   {
-                    "concept": "51081223-3142-345f-6783-456789012345",
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Moderate"
                   },
                   {
-                    "concept": "52192334-4253-4560-7894-567890123456",
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Severe"
                   },
                   {
@@ -312,15 +248,78 @@
               }
             },
             {
+              "label": "Anti pain given?",
+              "type": "obs",
+              "id": "antiPainGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "649de9d2-6718-5dec-9382-5c7f33cabcd4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
               "label": "Rx Given by WHO Ladder",
               "type": "obs",
-              "required": false,
+              "id": "rxGivenByWhoLadder",
               "questionOptions": {
-                "rendering": "textarea",
-                "concept": "54647889-9708-901b-2349-012345678902",
-                "rows": "3"
+                "rendering": "text",
+                "concept": "54647889-9708-901b-2349-012345678902"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Blood Pressure without posture",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic BP",
+              "type": "obs",
+              "id": "systolicBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "250"
               },
-              "id": "whoPainLadder"
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic BP",
+              "type": "obs",
+              "id": "diastolicBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "150"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
             }
           ]
         }

@@ -1,6 +1,6 @@
 {
   "name": "NICU critical room follow up sheet",
-  "description": "NICU critical room follow up sheet - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "description": "Daily follow-up sheet for critically ill newborns in the neonatal intensive care unit (NICU), recording vital signs, weight, fluids, feeding, urine and stool output, system-by-system examination, laboratory findings and the clinical assessment.",
   "version": "1.0",
   "published": true,
   "uuid": "e497ee04-dc59-5917-8bfa-3ead43c7bec2",
@@ -85,10 +85,74 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "230"
               },
               "questionInfo": "Beats per minute.",
               "hideSteppers": true
+            },
+            {
+              "label": "Pulse strength",
+              "type": "obs",
+              "id": "pulseStrength",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2df0fb84-1367-4cc5-95ed-0991be7ffd99",
+                "answers": [
+                  {
+                    "concept": "78696882-91bd-43b1-b86f-c83b7e7f1c44",
+                    "label": "Strong"
+                  },
+                  {
+                    "concept": "750c7a46-03f0-4cba-aa58-f5dc0efca955",
+                    "label": "Weak"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Pulse rhythm",
+              "type": "obs",
+              "id": "pulseRhythm",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d5f88633-71f9-48e2-9618-4c7dab53f73d",
+                "answers": [
+                  {
+                    "concept": "d721e26c-4b0d-4e3a-967b-e98bf8870117",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "1d8e7336-6ece-4b88-9335-abdd10074ed5",
+                    "label": "Irregular"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "If irregular, type of irregular rhythm",
+              "type": "obs",
+              "id": "irregularType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "30e82928-1cb7-42dc-9d8c-65e4c50d7bad",
+                "answers": [
+                  {
+                    "concept": "ad645582-de45-46b7-9094-b61b5fb3248c",
+                    "label": "Regularly irregular"
+                  },
+                  {
+                    "concept": "458f9bbd-93c1-4b1a-b8cc-ea2cd8308771",
+                    "label": "Irregularly irregular"
+                  }
+                ]
+              },
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "pulseRhythm !== '1d8e7336-6ece-4b88-9335-abdd10074ed5'"
+              }
             },
             {
               "label": "Respiratory rate (breaths/min)",
@@ -98,17 +162,58 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "99"
               },
-              "questionInfo": "Breaths per minute.",
+              "questionInfo": "Breaths per minute. Normal range 30-60 breaths/min.",
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
-                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                  "warnsWhenExpression": "myValue && (myValue < 30 || myValue > 60)",
+                  "message": "Value is outside the normal range (30-60 breaths/min)."
                 }
               ],
               "hideSteppers": true
+            },
+            {
+              "label": "Respiratory depth",
+              "type": "obs",
+              "id": "respDepth",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "818757cc-9250-4325-b386-a9080b8a0cbd",
+                "answers": [
+                  {
+                    "concept": "c6d7e8f9-081f-4ca9-2734-ef0123456780",
+                    "label": "Deep"
+                  },
+                  {
+                    "concept": "b5c6d7e8-f70e-4b98-1623-def01234567f",
+                    "label": "Shallow"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
+              "label": "Respiratory rhythm",
+              "type": "obs",
+              "id": "respRhythm",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "19811f54-57f6-4546-976e-6ebbb7e90cf4",
+                "answers": [
+                  {
+                    "concept": "d721e26c-4b0d-4e3a-967b-e98bf8870117",
+                    "label": "Regular"
+                  },
+                  {
+                    "concept": "1d8e7336-6ece-4b88-9335-abdd10074ed5",
+                    "label": "Irregular"
+                  }
+                ]
+              },
+              "readonly": false
             },
             {
               "label": "Temperature (°C)",
@@ -118,7 +223,8 @@
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "43"
               },
               "questionInfo": "Degrees Celsius, one decimal place.",
               "validators": [
@@ -131,14 +237,47 @@
               "hideSteppers": true
             },
             {
+              "label": "Temperature route",
+              "type": "obs",
+              "id": "tempRoute",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c9528b14-d5ec-4c45-a7f6-619c6e7206e2",
+                "answers": [
+                  {
+                    "concept": "dec38730-9cd5-4ba9-b123-0e0f5aff1f15",
+                    "label": "Axillary"
+                  },
+                  {
+                    "concept": "e8bf0e40-3f47-4e28-a947-7784abd286a5",
+                    "label": "Oral"
+                  },
+                  {
+                    "concept": "2938ee83-ee6d-4ac3-b876-aa4ba794f310",
+                    "label": "Rectal"
+                  },
+                  {
+                    "concept": "c6ab3ad0-4f09-4408-8d78-cab2c3d2f792",
+                    "label": "Ear"
+                  },
+                  {
+                    "concept": "7656b86c-32a4-4b39-9b72-9238812a8b03",
+                    "label": "Forehead"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
               "label": "SpO2 (%)",
               "type": "obs",
               "id": "spo2",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "100"
               },
               "validators": [
                 {
@@ -150,6 +289,38 @@
               "hideSteppers": true
             },
             {
+              "label": "Oxygen delivery",
+              "type": "obs",
+              "id": "oxygenDelivery",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2c9764d5-f646-4c1b-898e-b6f426c028b9",
+                "answers": [
+                  {
+                    "concept": "162735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Room air"
+                  },
+                  {
+                    "concept": "4fa4c5fa-bfcf-42ca-b608-316eb7a988c6",
+                    "label": "Nasal oxygen"
+                  },
+                  {
+                    "concept": "e9172fb7-3860-49de-ac30-678caf11f785",
+                    "label": "Face mask"
+                  },
+                  {
+                    "concept": "91e99b02-2be8-446f-9af2-ac07d77c9c0c",
+                    "label": "CPAP"
+                  },
+                  {
+                    "concept": "165998AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mechanical ventilation"
+                  }
+                ]
+              },
+              "readonly": false
+            },
+            {
               "label": "Weight (kg)",
               "type": "obs",
               "id": "weight",
@@ -157,7 +328,8 @@
                 "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "250"
               },
               "questionInfo": "Kilograms.",
               "hideSteppers": true
@@ -170,7 +342,7 @@
                 "rendering": "number",
                 "concept": "c60ba033-e397-499a-8963-c06ca6fff303",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01
               },
               "hideSteppers": true
             },
@@ -182,7 +354,7 @@
                 "rendering": "number",
                 "concept": "161929AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01
               },
               "hideSteppers": true
             },

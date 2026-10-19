@@ -1,6 +1,6 @@
 {
   "name": "Family Planning Register",
-  "description": "Family Planning Register migrated from Bahmni",
+  "description": "Register entry for each family planning client, recording user type, marital and educational status, HIV testing and linkage to ART, target population, tetanus toxoid status, intrauterine device eligibility, contraceptive provided and next appointment.",
   "version": "1.1",
   "published": true,
   "uuid": "70577a57-5ec5-48b5-b15c-8d580fd6181d",
@@ -95,8 +95,17 @@
               "id": "registrationDate",
               "questionOptions": {
                 "rendering": "date",
-                "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
+                "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "calculate": {
+                  "calculateExpression": "isEmpty(registrationDate) ? today() : registrationDate"
+                }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Marital Status",
@@ -104,7 +113,7 @@
               "required": false,
               "id": "maritalStatus",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "radio",
                 "concept": "1054AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
@@ -132,18 +141,60 @@
               "required": false,
               "id": "educationalStatus",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "rendering": "radio",
+                "concept": "1712AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "160294AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No formal education"
+                  },
+                  {
+                    "concept": "1713AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Primary education"
+                  },
+                  {
+                    "concept": "1714AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Secondary education"
+                  },
+                  {
+                    "concept": "160292AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tertiary education"
+                  },
+                  {
+                    "concept": "160293AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Special education"
+                  },
+                  {
+                    "concept": "162570AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Prefer not to say"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other educational status, specify",
+              "type": "obs",
+              "id": "educationalStatusOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2fe798fd-baae-5bb9-b61a-f3ff75de7a66"
+              },
+              "hide": {
+                "hideWhenExpression": "educationalStatus !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             }
           ]
         },
         {
-          "label": "Hiv Testing",
+          "label": "HIV Testing",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Hiv Test Offered",
+              "label": "HIV Test Offered",
               "type": "obs",
               "required": false,
               "id": "hivTestOffered",
@@ -163,7 +214,7 @@
               }
             },
             {
-              "label": "Hiv Test Performed",
+              "label": "HIV Test Performed",
               "type": "obs",
               "required": false,
               "id": "hivTestPerformed",
@@ -186,12 +237,12 @@
               }
             },
             {
-              "label": "Hiv Result",
+              "label": "HIV Result",
               "type": "obs",
               "required": false,
               "id": "hivTestResult",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "radio",
                 "concept": "1396AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
@@ -209,27 +260,7 @@
               }
             },
             {
-              "label": "Hiv Specific Contraceptive Counseling Offered",
-              "type": "obs",
-              "required": false,
-              "id": "hivSpecificContraceptiveCounselingOffered",
-              "questionOptions": {
-                "rendering": "radio",
-                "answers": [
-                  {
-                    "label": "Yes",
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "No",
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
-                ],
-                "concept": "95c36e45-f734-4a0a-9eb8-b1e14cd79ee7"
-              }
-            },
-            {
-              "label": "Hiv Positive Linked to ART",
+              "label": "HIV Positive Linked to ART",
               "type": "obs",
               "required": false,
               "id": "hivPositiveLinkedToArt",
@@ -246,6 +277,29 @@
                   }
                 ],
                 "concept": "164849AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(hivTestResult) || hivTestResult !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "HIV Specific Contraceptive Counseling Offered",
+              "type": "obs",
+              "required": false,
+              "id": "hivSpecificContraceptiveCounselingOffered",
+              "questionOptions": {
+                "rendering": "radio",
+                "answers": [
+                  {
+                    "label": "Yes",
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "No",
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ],
+                "concept": "95c36e45-f734-4a0a-9eb8-b1e14cd79ee7"
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(hivTestResult) || hivTestResult !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
@@ -267,40 +321,40 @@
                 "concept": "4f8a2b1c-3d5e-4567-8901-234567890abc",
                 "answers": [
                   {
-                    "label": "Female Commercial Sex Workers",
-                    "concept": "160579AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "160579AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female Commercial Sex Workers"
                   },
                   {
-                    "label": "Long Distance Drivers",
-                    "concept": "162198AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "162198AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Long Distance Driver"
                   },
                   {
-                    "label": "Mobile Workers/Daily Laborers",
-                    "concept": "7e9f1a2b-4c6d-5678-9012-345678901de0"
+                    "concept": "7e9f1a2b-4c6d-5678-9012-345678901de0",
+                    "label": "Mobile Workers/Daily Labourers"
                   },
                   {
-                    "label": "Prisoners",
-                    "concept": "162277AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "162277AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Prisoners"
                   },
                   {
-                    "label": "OVC",
-                    "concept": "1174AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "9647586e-1081-901m-6345-7ef89abcdef0",
+                    "label": "Orphans and Vulnerable Children (OVC)"
                   },
                   {
-                    "label": "Children of PLHIV",
-                    "concept": "1393AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "0758697f-2192-012n-7456-8ef9abcdef01",
+                    "label": "Children of PLHIV (People Living with HIV)"
                   },
                   {
-                    "label": "Partner of PLHIV",
-                    "concept": "8f0a2b3c-5d7e-6789-0123-456789012e0a"
+                    "concept": "8f0a2b3c-5d7e-6789-0123-456789012e0a",
+                    "label": "Partner of PLHIV (People Living with HIV)"
                   },
                   {
-                    "label": "Other Marps",
-                    "concept": "9a1b3c4d-6e8f-7890-1234-567890123f0a"
+                    "concept": "9a1b3c4d-6e8f-7890-1234-567890123f0a",
+                    "label": "Other Most At-Risk Populations (MARPs)"
                   },
                   {
-                    "label": "General Population",
-                    "concept": "0b2c4d5e-7f9a-8901-2345-678901234a0b"
+                    "concept": "0b2c4d5e-7f9a-8901-2345-678901234a0b",
+                    "label": "General Population"
                   }
                 ]
               }
@@ -312,7 +366,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Tt Status Checked",
+              "label": "Tetanus Toxoid (TT) Immunization Status Checked?",
               "type": "obs",
               "required": false,
               "id": "ttStatusChecked",
@@ -332,7 +386,7 @@
               }
             },
             {
-              "label": "Contraindication for Iucd",
+              "label": "Contraindication for IUCD (Intrauterine Contraceptive Device)",
               "type": "obs",
               "required": false,
               "id": "contraindicationForIucd",
@@ -359,7 +413,9 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "164812AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
+                "step": 1,
+                "min": "1",
+                "disallowDecimals": true
               }
             },
             {
@@ -372,58 +428,70 @@
                 "concept": "3b96324b-c6e9-4361-9709-9f7f25f7c131",
                 "answers": [
                   {
-                    "label": "Male Condom",
-                    "concept": "164813AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "76022AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Implanon"
                   },
                   {
-                    "label": "Female Condom",
-                    "concept": "164814AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1873AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Jadelle"
                   },
                   {
-                    "label": "Oral Contraceptive",
-                    "concept": "5274AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sino Implant"
                   },
                   {
-                    "label": "Emergency Contraception",
-                    "concept": "160570AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "IUCD"
                   },
                   {
-                    "label": "Injectable",
-                    "concept": "5279AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5279AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Injectables"
                   },
                   {
-                    "label": "Implanon",
-                    "concept": "76022AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "164813AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Male Condom"
                   },
                   {
-                    "label": "IUCD",
-                    "concept": "5275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "164814AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female Condom"
                   },
                   {
-                    "label": "Tubal Ligation",
-                    "concept": "1472AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5278AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Diaphragm"
                   },
                   {
-                    "label": "Vasectomy",
-                    "concept": "1489AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "780AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Oral Contraceptives"
                   },
                   {
-                    "label": "Diaphragm",
-                    "concept": "5278AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "160570AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Emergency Contraception"
                   },
                   {
-                    "label": "Sinoplant",
-                    "concept": "1359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1472AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Tubal ligation"
                   },
                   {
-                    "label": "Jadelle",
-                    "concept": "1873AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1489AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Vasectomy"
                   },
                   {
-                    "label": "Other",
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
                   }
                 ]
+              }
+            },
+            {
+              "label": "Other contraceptive provided, specify",
+              "type": "obs",
+              "id": "contraceptiveProvidedOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3c91abac-2549-5842-be00-7b50ace2c51f"
+              },
+              "hide": {
+                "hideWhenExpression": "contraceptiveProvided !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -434,7 +502,14 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "message": "The date cannot be in the past.",
+                  "failsWhenExpression": "!isEmpty(appointmentDate) && new Date(appointmentDate).setHours(0,0,0,0) < new Date().setHours(0,0,0,0)"
+                }
+              ]
             },
             {
               "label": "Remark",

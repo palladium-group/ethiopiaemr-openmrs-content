@@ -1,7 +1,7 @@
 {
   "name": "Infant Immunization Card",
-  "description": "Infant Immunization Card migrated from Bahmni",
-  "version": "1.1",
+  "description": "Records an infant's vaccinations from birth to 15 months, including BCG, oral polio and other scheduled doses, vitamin A, appointment dates, full immunization status and any adverse events following immunization.",
+  "version": "1.0",
   "published": true,
   "uuid": "9d7c16d2-6808-4b4a-b192-a2073bc2a9e7",
   "retired": false,
@@ -15,11 +15,10 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
-              "readonly": false,
               "questionOptions": {
                 "rendering": "date"
               },
@@ -28,7 +27,8 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "readonly": true
             },
             {
               "label": "Provider:",
@@ -55,44 +55,58 @@
                 }
               },
               "id": "encLocation",
-              "readonly": false
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Patient Demographics",
+      "label": "Infant Immunization Card Assessment",
       "sections": [
         {
-          "label": "Patient Demographics",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Date of Birth",
+              "label": "Date of birth",
               "type": "obs",
               "id": "dateOfBirth",
               "questionOptions": {
-                "concept": "166575AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "rendering": "date"
+                "rendering": "date",
+                "concept": "166575AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "250"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
             },
             {
               "label": "Name of Mother",
               "type": "obs",
-              "id": "motherName",
+              "id": "nameOfMother",
               "questionOptions": {
-                "concept": "8b2c3d4e-5f60-7890-1234-567890abcde1",
-                "rendering": "text"
+                "rendering": "text",
+                "concept": "8b2c3d4e-5f60-7890-1234-567890abcde1"
               }
             },
             {
-              "label": "Name of Father",
+              "label": "Name of father",
               "type": "obs",
-              "id": "fatherName",
+              "id": "nameOfFather",
               "questionOptions": {
-                "concept": "9c3d4e5f-6071-8901-2345-678901abcde2",
-                "rendering": "text"
+                "rendering": "text",
+                "concept": "9c3d4e5f-6071-8901-2345-678901abcde2"
               }
             },
             {
@@ -100,8 +114,8 @@
               "type": "obs",
               "id": "woreda",
               "questionOptions": {
-                "concept": "25677889-9001-7893-1237-9012345f0123",
-                "rendering": "text"
+                "rendering": "text",
+                "concept": "25677889-9001-7893-1237-9012345f0123"
               }
             },
             {
@@ -109,8 +123,8 @@
               "type": "obs",
               "id": "kebele",
               "questionOptions": {
-                "concept": "1e5f6071-8293-0123-4567-890123abcde4",
-                "rendering": "text"
+                "rendering": "text",
+                "concept": "1e5f6071-8293-0123-4567-890123abcde4"
               }
             },
             {
@@ -118,201 +132,52 @@
               "type": "obs",
               "id": "gott",
               "questionOptions": {
-                "concept": "2f607182-9304-1234-5678-901234abcde5",
-                "rendering": "text",
-                "step": "0.01"
-              }
+                "rendering": "number",
+                "concept": "84bff596-70c1-4f8c-9e20-dd7ed35a6ffc",
+                "min": "0",
+                "step": 1
+              },
+              "hideSteppers": true
             },
             {
               "label": "House No",
               "type": "obs",
               "id": "houseNo",
               "questionOptions": {
-                "concept": "3071a2b3-0415-2345-6789-012345abcde6",
-                "rendering": "text"
-              }
+                "rendering": "number",
+                "concept": "7ec3367c-021e-4b43-983f-f3cd502410cd",
+                "min": "0",
+                "step": 1
+              },
+              "hideSteppers": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Infant Vaccines",
+      "label": "Infant vaccines",
       "sections": [
         {
-          "label": "Infant Vaccines",
+          "label": "General",
           "isExpanded": "true",
           "questions": [
-            {
-              "label": "Bcg Date",
-              "type": "obs",
-              "id": "bcgDate",
-              "questionOptions": {
-                "concept": "4182b3c4-1526-3456-7890-123456abcde7",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "OPV 0",
-              "type": "obs",
-              "id": "opv0",
-              "questionOptions": {
-                "concept": "5293c4d5-2637-4567-8901-234567abcde8",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "OPV1",
-              "type": "obs",
-              "id": "opv1",
-              "questionOptions": {
-                "concept": "6304d5e6-3748-5678-9012-345678abcde9",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "OPV 2",
-              "type": "obs",
-              "id": "opv2",
-              "questionOptions": {
-                "concept": "7415e6f7-4859-6789-0123-456789abcdea",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "OPV 3",
-              "type": "obs",
-              "id": "opv3",
-              "questionOptions": {
-                "concept": "8526f708-5960-7890-1234-567890abcdeb",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "IPV",
-              "type": "obs",
-              "id": "ipv",
-              "questionOptions": {
-                "concept": "9637081a-6071-8901-2345-678901abcdec",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "DPT-HepB-Hib 1",
-              "type": "obs",
-              "id": "dptHepbHib1",
-              "questionOptions": {
-                "concept": "0748192b-7182-9012-3456-789012abcded",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "DPT-HepB-Hib 2",
-              "type": "obs",
-              "id": "dptHepbHib2",
-              "questionOptions": {
-                "concept": "1859203c-8293-0123-4567-890123abcdee",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "DPT-HepB-Hib 3",
-              "type": "obs",
-              "id": "dptHepbHib3",
-              "questionOptions": {
-                "concept": "2960314d-9304-1234-5678-901234abcdef",
-                "rendering": "date"
-              }
-            },
             {
               "label": "Other Vaccine",
               "type": "obs",
               "id": "otherVaccine",
               "questionOptions": {
-                "concept": "3071425e-0415-2345-6789-012345abcdf0",
-                "rendering": "text"
+                "rendering": "text",
+                "concept": "3071425e-0415-2345-6789-012345abcdf0"
               }
             },
             {
-              "label": "PCV 1",
-              "type": "obs",
-              "id": "pcv1",
-              "questionOptions": {
-                "concept": "4182536f-1526-3456-7890-123456abcdf1",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "PCV 2",
-              "type": "obs",
-              "id": "pcv2",
-              "questionOptions": {
-                "concept": "5293647a-2637-4567-8901-234567abcdf2",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "PCV 3",
-              "type": "obs",
-              "id": "pcv3",
-              "questionOptions": {
-                "concept": "6304758b-3748-5678-9012-345678abcdf3",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "Rota 1",
-              "type": "obs",
-              "id": "rota1",
-              "questionOptions": {
-                "concept": "7415869c-4859-6789-0123-456789abcdf4",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "Rota 2",
-              "type": "obs",
-              "id": "rota2",
-              "questionOptions": {
-                "concept": "8526970d-5960-7890-1234-567890abcdf5",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "Measles",
-              "type": "obs",
-              "id": "measles",
-              "questionOptions": {
-                "concept": "9637081e-6071-8901-2345-678901abcdf6",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "Measles 2",
-              "type": "obs",
-              "id": "measles2",
-              "questionOptions": {
-                "concept": "0748192f-7182-9012-3456-789012abcdf7",
-                "rendering": "date"
-              }
-            },
-            {
-              "label": "Vitamin a",
+              "label": "Vitamin A",
               "type": "obs",
               "id": "vitaminA",
               "questionOptions": {
-                "concept": "1859203a-8293-0123-4567-890123abcdf8",
-                "rendering": "radio",
-                "answers": [
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
-                  },
-                  {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
-                  }
-                ]
+                "rendering": "text",
+                "concept": "790af49a-0040-4cb4-a424-af9a5b08322c"
               }
             },
             {
@@ -320,17 +185,23 @@
               "type": "obs",
               "id": "otherVaccineDate",
               "questionOptions": {
-                "concept": "2960314b-9304-1234-5678-901234abcdf9",
-                "rendering": "date"
-              }
+                "rendering": "date",
+                "concept": "2960314b-9304-1234-5678-901234abcdf9"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "true"
+                }
+              ]
             },
             {
               "label": "Fully Immunized",
               "type": "obs",
               "id": "fullyImmunized",
               "questionOptions": {
-                "concept": "3071425c-0415-2345-6789-012345abcdfa",
                 "rendering": "radio",
+                "concept": "3071425c-0415-2345-6789-012345abcdfa",
                 "answers": [
                   {
                     "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -339,59 +210,484 @@
                   {
                     "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "First appointment",
+              "type": "obs",
+              "id": "firstAppointment",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5deb2e05-a66e-4a17-b459-744fc63cf177"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "true"
+                }
+              ]
+            },
+            {
+              "label": "Second appointment",
+              "type": "obs",
+              "id": "secondAppointment",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "4c0298b8-87e9-4b6d-a916-8f318d6184bb"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "true"
+                }
+              ]
+            },
+            {
+              "label": "Third appointment",
+              "type": "obs",
+              "id": "thirdAppointment",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "79a4c094-085a-4040-b09e-9731ba72ca5f"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "true"
+                }
+              ]
+            },
+            {
+              "label": "Fourth appointment",
+              "type": "obs",
+              "id": "fourthAppointment",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5c193ead-4c79-4ae8-8a1a-bb043623b7ec"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "true"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": "At birth",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "BCG",
+              "type": "obs",
+              "id": "bcg",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "886AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
                   },
                   {
-                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Unknown"
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "OPV 0",
+              "type": "obs",
+              "id": "opv0",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "7e613438-bcac-4804-bd7a-951ca21d1696",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HB birth dose",
+              "type": "obs",
+              "id": "hbBirthDose",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "455754ea-697c-45a1-9ab6-b444e0db607e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
                   }
                 ]
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "label": "Appointments & Follow-up",
-      "sections": [
+        },
         {
-          "label": "Appointments",
+          "label": "At 6 week",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "First Appointment",
+              "label": "OPV 1",
               "type": "obs",
-              "id": "firstAppointment",
+              "id": "opv1",
               "questionOptions": {
-                "concept": "4182536d-1526-3456-7890-123456abcdfb",
-                "rendering": "date"
+                "rendering": "radio",
+                "concept": "a667a422-df63-4be3-ad43-bf931a76771f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
               }
             },
             {
-              "label": "Second Appointment",
+              "label": "DPT-HepB-Hib 1",
               "type": "obs",
-              "id": "secondAppointment",
+              "id": "dptHepbHib1",
               "questionOptions": {
-                "concept": "5293647e-2637-4567-8901-234567abcdfc",
-                "rendering": "date"
+                "rendering": "radio",
+                "concept": "924dc680-bdf2-446b-ab19-27ac4b82cf9b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
               }
             },
             {
-              "label": "Third Appointment",
+              "label": "PCV 1",
               "type": "obs",
-              "id": "thirdAppointment",
+              "id": "pcv1",
               "questionOptions": {
-                "concept": "6304758f-3748-5678-9012-345678abcdfd",
-                "rendering": "date"
+                "rendering": "radio",
+                "concept": "6ef4de8e-46fd-4d6b-8b53-9f352aac52fb",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
               }
             },
             {
-              "label": "Fourth Appointment",
+              "label": "Rota 1",
               "type": "obs",
-              "id": "fourthAppointment",
+              "id": "rota1",
               "questionOptions": {
-                "concept": "7415869a-4859-6789-0123-456789abcdfe",
-                "rendering": "date"
+                "rendering": "radio",
+                "concept": "a6c41028-b795-48b0-b5cd-fc450e141992",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "At 10 week",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "OPV 2",
+              "type": "obs",
+              "id": "opv2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9c3e1e23-b93b-4ff9-a5bf-477f5c75778e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "DPT-HepB-Hib 2",
+              "type": "obs",
+              "id": "dptHepbHib2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "cc9d2aa8-7e13-4884-971c-81220f5716d2",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "PCV 2",
+              "type": "obs",
+              "id": "pcv2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8ff4154a-0a49-420c-a995-5daa5dfca7b5",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Rota 2",
+              "type": "obs",
+              "id": "rota2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "2998095f-8165-4564-8815-af1438f7cb98",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "At 14 week",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "OPV 3",
+              "type": "obs",
+              "id": "opv3",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "e1735ee1-22fc-40d6-b9a2-0f26f8db6591",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "IPV 1",
+              "type": "obs",
+              "id": "ipv1",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4df6415c-f7f1-4277-9f04-ceffbc36c376",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "DPT-HepB-Hib 3",
+              "type": "obs",
+              "id": "dptHepbHib3",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "11dbf3f1-3478-420e-ba01-44fe3a87d64d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "PCV 3",
+              "type": "obs",
+              "id": "pcv3",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "680e4a07-3d55-456e-a4a7-dae92b80edad",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Rota 3",
+              "type": "obs",
+              "id": "rota3",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "29e46a9e-76e2-4b91-9f45-f9d8dd575dec",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "At 9 month",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Measeles 1",
+              "type": "obs",
+              "id": "measeles1",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "10fca327-d5d0-4980-9582-79aaf856bde8",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "IPV 2",
+              "type": "obs",
+              "id": "ipv2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "db767848-9ad0-455c-90ff-b6f97acebc13",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "At 15 month",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Measles 2",
+              "type": "obs",
+              "id": "measles2",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "bdb9b78e-6517-4666-95e4-71f1535b6897",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "IPV 3",
+              "type": "obs",
+              "id": "ipv3",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a4171a80-1ab3-4bf0-a003-166254dc7e39",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
               }
             }
           ]
@@ -401,12 +697,12 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Type of Aefi",
+              "label": "Type of AEFI",
               "type": "obs",
               "id": "typeOfAefi",
               "questionOptions": {
-                "concept": "8526970b-5960-7890-1234-567890abcdff",
-                "rendering": "text"
+                "rendering": "text",
+                "concept": "8526970b-5960-7890-1234-567890abcdff"
               }
             },
             {
@@ -414,8 +710,8 @@
               "type": "obs",
               "id": "dateObserved",
               "questionOptions": {
-                "concept": "9637081c-6071-8901-2345-678901abce00",
-                "rendering": "date"
+                "rendering": "date",
+                "concept": "9637081c-6071-8901-2345-678901abce00"
               }
             }
           ]

@@ -1,0 +1,296 @@
+{
+  "name": "Gyn Vital Sign Follow up",
+  "description": "Charts repeated observations for gynecology and obstetric patients, including blood pressure, pulse, respiratory rate, temperature, oxygen saturation, fetal heart beat, fluid input and urine output, blood sugar and pain score.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "221dbed3-ce52-5c05-aed1-4879a3d4ff5a",
+  "retired": false,
+  "encounter": "Vitals",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Gyn Vital Sign Follow up Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic",
+              "type": "obs",
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "250"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic",
+              "type": "obs",
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "150"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Posture",
+              "type": "obs",
+              "id": "posture",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "159633AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sitting"
+                  },
+                  {
+                    "concept": "159629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Supine"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pulse rate",
+              "type": "obs",
+              "id": "pulseRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "230"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Value is outside the normal range (60-100 bpm)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory Rate",
+              "type": "obs",
+              "id": "respiratoryRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "99"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Value is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": 0.01,
+                "max": "43"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SPO2",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0c5ec4fa-f41a-4a6d-bd07-969872b69165",
+                "min": "0",
+                "step": 0.01
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "FHB",
+              "type": "obs",
+              "id": "fhb",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3071425c-0415-2345-6789-012345abcd1a"
+              }
+            },
+            {
+              "label": "Input",
+              "type": "obs",
+              "id": "input",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a5b8bd7f-6859-4dff-93f1-5d82c510dc7b",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Urine output",
+              "type": "obs",
+              "id": "urineOutput",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "91749be5-01f4-426e-b77a-09e6ccaac030"
+              }
+            },
+            {
+              "label": "Fluid Balance",
+              "type": "obs",
+              "id": "fluidBalance",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+              }
+            },
+            {
+              "label": "RBS",
+              "type": "obs",
+              "id": "rbs",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "590ff73f-c56c-43ec-bf41-7a6148072b78"
+              }
+            },
+            {
+              "label": "Pain score",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "166082AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "10"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Anti pain given?",
+              "type": "obs",
+              "id": "antiPainGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "649de9d2-6718-5dec-9382-5c7f33cabcd4",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

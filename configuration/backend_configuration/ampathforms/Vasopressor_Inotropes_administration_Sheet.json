@@ -1,6 +1,6 @@
 {
   "name": "Vasopressor/Inotrope Administration Sheet",
-  "description": "Vasopressor/Inotropes administration Sheet - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "description": "Monitoring sheet for patients on vasopressor or inotrope infusions, recording vital signs, oxygen saturation, fluid input and output, drug dose and dilution, and each dose escalation or de-escalation with the responsible provider.",
   "version": "1.0",
   "published": true,
   "uuid": "fb4fe92e-a3aa-5596-a051-af8358e716ba",
@@ -69,7 +69,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Date & Time",
+              "label": "Date and time (pre-administration)",
               "type": "obs",
               "id": "dateTime",
               "questionOptions": {
@@ -78,161 +78,6 @@
               }
             },
             {
-              "label": "PR (beats/min)",
-              "type": "obs",
-              "id": "pr",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal range: 60-100 beats/min",
-              "validators": [
-                {
-                  "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
-                  "message": "Pulse rate is outside the normal range (60-100 beats/min)."
-                }
-              ],
-              "hideSteppers": true
-            },
-            {
-              "label": "Temperature (°C)",
-              "type": "obs",
-              "id": "temprature",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "25",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal range: 36.5-37.5 °C",
-              "validators": [
-                {
-                  "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
-                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
-                }
-              ],
-              "hideSteppers": true
-            },
-            {
-              "label": "RR (breaths/min)",
-              "type": "obs",
-              "id": "rr",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": "0.01"
-              },
-              "questionInfo": "Normal range: 16-24 breaths/min",
-              "validators": [
-                {
-                  "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
-                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
-                }
-              ],
-              "hideSteppers": true
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Total dose of drug",
-              "type": "obs",
-              "id": "totalDoseOfDrug",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "eb799c0d-b56e-4a7f-b27b-d0148bde1d5b"
-              }
-            },
-            {
-              "label": "Amount of fluid for dilution",
-              "type": "obs",
-              "id": "amountOfFluidForDilution",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "69658066-bc51-4982-a48d-66535d5cb508"
-              }
-            },
-            {
-              "label": "Starting dose",
-              "type": "obs",
-              "id": "startingDose",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "df27fdfb-6bf0-498b-9f53-27bac422d09c"
-              }
-            },
-            {
-              "label": "Escalation (ml/hr, drop/min)",
-              "type": "obs",
-              "id": "scalationMlHrDropMin",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "277bb901-be93-4857-9f02-0a2bee46d778",
-                "min": "0",
-                "step": "0.01"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "De-escalation amount (ml/hr, ml/min)",
-              "type": "obs",
-              "id": "descalationAmountMlHrMlMin",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "a4190ab2-e1c8-4ebd-a8ae-7a21830b8bfe",
-                "min": "0",
-                "step": "0.01"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Remark",
-              "type": "obs",
-              "id": "remark",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
-              }
-            },
-            {
-              "label": "Name of health care provider",
-              "type": "obs",
-              "id": "nameOfHealthCareProvider",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Blood Pressure",
-          "isExpanded": "true",
-          "questions": [
-            {
               "label": "Systolic Blood Pressure (mmHg)",
               "type": "obs",
               "id": "systolicBloodPressure",
@@ -240,7 +85,8 @@
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 1,
+                "max": "250"
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -260,7 +106,8 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "150"
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -271,36 +118,305 @@
                 }
               ],
               "hideSteppers": true
-            }
-          ]
-        },
-        {
-          "label": "SaO2",
-          "isExpanded": "true",
-          "questions": [
+            },
             {
-              "label": "With O2",
+              "label": "PR (beats/min)",
               "type": "obs",
-              "id": "withO2",
+              "id": "pr",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "7aa55d4c-bb8c-4749-a9e2-c2ad5c44ffe4",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "230"
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Pulse rate is outside the normal range (60-100 beats/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "RR (breaths/min)",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "99"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temprature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": 0.01,
+                "max": "43"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SpO2 (%)",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "100"
               },
               "hideSteppers": true
             },
             {
-              "label": "Without O2",
+              "label": "SpO2 measured on",
               "type": "obs",
-              "id": "withoutO2",
+              "id": "spo2MeasuredOn",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "13c90a55-e11f-56c1-88ce-e3995fcdaa1a",
+                "answers": [
+                  {
+                    "concept": "162735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Atmospheric (room) air"
+                  },
+                  {
+                    "concept": "81341AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Oxygen"
+                  },
+                  {
+                    "concept": "165998AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mechanical ventilation"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Input (ml)",
+              "type": "obs",
+              "id": "input",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "73931387-7e91-4007-8e06-50ba542af53e",
-                "min": "0",
-                "step": "0.01"
+                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
               },
               "hideSteppers": true
+            },
+            {
+              "label": "Input period (hours)",
+              "type": "obs",
+              "id": "inputPeriodHours",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "2e3f895c-f9b6-5a19-b4d4-2ca8d28e2f81",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output (ml)",
+              "type": "obs",
+              "id": "output",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Output period (hours)",
+              "type": "obs",
+              "id": "outputPeriodHours",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c877e0f8-7aa2-5ecc-b141-14e50485d89e",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Medication name",
+              "type": "obs",
+              "id": "medicationName",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c3082af8-f935-40c5-aa5b-74c684e81aea"
+              }
+            },
+            {
+              "label": "Indication",
+              "type": "obs",
+              "id": "indication",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "aacb5717-f5ce-5227-a6ce-55c094f21c88"
+              }
+            },
+            {
+              "label": "Prescribed dose",
+              "type": "obs",
+              "id": "prescribedDose",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cd9f19fd-f82b-4777-93e4-a081b9e1f80f"
+              }
+            },
+            {
+              "label": "Dose unit",
+              "type": "obs",
+              "id": "doseUnit",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c0202416-5770-5261-9562-6d944f382eab",
+                "answers": [
+                  {
+                    "concept": "fe651f49-5a4e-5e41-bca9-e3bd1ecd8781",
+                    "label": "mcg/min"
+                  },
+                  {
+                    "concept": "162838AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "mcg/kg/min"
+                  },
+                  {
+                    "concept": "38ab84a6-bb4c-574c-ac36-38f6e2241b5f",
+                    "label": "units/min"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Total drug amount (mg or units)",
+              "type": "obs",
+              "id": "totalDoseOfDrug",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "eb799c0d-b56e-4a7f-b27b-d0148bde1d5b"
+              }
+            },
+            {
+              "label": "Diluent and volume (type of fluid and ml)",
+              "type": "obs",
+              "id": "amountOfFluidForDilution",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "69658066-bc51-4982-a48d-66535d5cb508"
+              }
+            },
+            {
+              "label": "Final concentration (mcg/ml or units/ml)",
+              "type": "obs",
+              "id": "finalConcentration",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3b737224-1c0a-59af-9460-65f422fc2d6e"
+              }
+            },
+            {
+              "label": "Starting dose (mcg/min, mcg/kg/min or units/min)",
+              "type": "obs",
+              "id": "startingDose",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "df27fdfb-6bf0-498b-9f53-27bac422d09c"
+              }
+            },
+            {
+              "label": "Escalation amount (mcg/min, mcg/kg/min or units/min)",
+              "type": "obs",
+              "id": "scalationMlHrDropMin",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "277bb901-be93-4857-9f02-0a2bee46d778",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "De-escalation amount (mcg/min, mcg/kg/min or units/min)",
+              "type": "obs",
+              "id": "descalationAmountMlHrMlMin",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a4190ab2-e1c8-4ebd-a8ae-7a21830b8bfe",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Access site",
+              "type": "obs",
+              "id": "accessSite",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "567f29e4-c7c7-5dde-8f81-a1d04362e5df",
+                "answers": [
+                  {
+                    "concept": "9b4b6fdb-8784-5fd9-96f4-3bd1c4e5c9e7",
+                    "label": "Peripheral IV"
+                  },
+                  {
+                    "concept": "fa1d006d-159d-5959-a2f2-9597506e2018",
+                    "label": "Central IV infusion"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Start time",
+              "type": "obs",
+              "id": "startTime",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "c48170e6-022c-40d8-a26d-89541982761b"
+              }
+            },
+            {
+              "label": "Remarks",
+              "type": "obs",
+              "id": "remark",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef"
+              }
+            },
+            {
+              "label": "Name of health care provider",
+              "type": "obs",
+              "id": "nameOfHealthCareProvider",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
             }
           ]
         }

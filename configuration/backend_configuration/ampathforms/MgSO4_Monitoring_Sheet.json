@@ -1,0 +1,283 @@
+{
+  "name": "MgSO4 Monitoring Sheet",
+  "description": "Used to monitor women receiving magnesium sulphate (MgSO4) for pre-eclampsia or eclampsia, recording blood pressure, respiratory rate, deep tendon reflexes, urine output, fluid intake, convulsions and each dose, route and site given.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "583e2477-db8a-511b-b5f5-a1563f8ad30b",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "MGSO4 Monitoring Sheet Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Gravida",
+              "type": "obs",
+              "id": "gravida",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5624AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Para",
+              "type": "obs",
+              "id": "para",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "ce38ecf3-10ca-4227-bb48-5db53e9588cd",
+                "min": "0",
+                "step": 1
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Gestational Age(GA)",
+              "type": "obs",
+              "id": "gestationalAgeGa",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b1826924-335e-40b2-a38a-fecf39e40de1"
+              }
+            },
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosis",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5809a2b3-3ca3-b23e-8567-9ef012345678"
+              }
+            },
+            {
+              "label": "Systolic BP",
+              "type": "obs",
+              "id": "systolicBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "250"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic BP",
+              "type": "obs",
+              "id": "diastolicBp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "150"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "RR",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "99"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Reflexes (DTR)",
+              "type": "obs",
+              "id": "reflexesDtr",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5c5278bd-2742-48a6-8c6b-7ec5467bb40d"
+              }
+            },
+            {
+              "label": "Urine output",
+              "type": "obs",
+              "id": "urineOutput",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161929AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Fluid Intake",
+              "type": "obs",
+              "id": "fluidIntake",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9a3d695b-1ab6-4c0d-9c19-f4f53c20beb9"
+              }
+            },
+            {
+              "label": "Convulsion",
+              "type": "obs",
+              "id": "convulsion",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d9282919-d3ae-4978-840e-c0507c07071e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Mgso4 Route",
+              "type": "obs",
+              "id": "mgso4Route",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a633ff48-794a-4873-a01e-ebcd54fb350d",
+                "answers": [
+                  {
+                    "concept": "0041f9d1-20e5-43f8-a9ee-43a0aa297d5c",
+                    "label": "IV"
+                  },
+                  {
+                    "concept": "2052f1c6-9ee9-4b18-857f-5cdce1879b70",
+                    "label": "IM"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Site",
+              "type": "obs",
+              "id": "site",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "05b258d4-3355-4676-b867-bee913d4a260",
+                "answers": [
+                  {
+                    "concept": "b7ff7a6b-6dd0-411e-a160-68ece7ddd895",
+                    "label": "Right"
+                  },
+                  {
+                    "concept": "1440a839-b8a9-403c-8e68-74e046329c8f",
+                    "label": "Left"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Mgso4 Dose",
+              "type": "obs",
+              "id": "mgso4Dose",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "b4d987f6-9fc6-4dc0-922a-7c250ac57a00",
+                "answers": [
+                  {
+                    "concept": "b786095e-7bc8-48ef-ab0c-01dd65555f30",
+                    "label": "2gm"
+                  },
+                  {
+                    "concept": "5525323c-3c90-4750-9f1a-dc233a6f608b",
+                    "label": "4gm 20%"
+                  },
+                  {
+                    "concept": "dc236081-9bec-4a38-b337-6aa5c0221a5a",
+                    "label": "5gm 50%"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

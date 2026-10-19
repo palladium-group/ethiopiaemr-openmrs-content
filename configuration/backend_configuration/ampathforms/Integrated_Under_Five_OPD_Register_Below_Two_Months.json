@@ -1,6 +1,6 @@
 {
   "name": "Integrated under five OPD register Below two Months",
-  "description": "Integrated Under Five OPD Register (Below two Months) migrated from Bahmni",
+  "description": "Captures the integrated outpatient assessment of sick young infants under two months of age, covering possible bacterial infection, jaundice, diarrhea, HIV status, feeding and breastfeeding problems, immunization, vitamin A and follow-up.",
   "version": "1.1",
   "published": true,
   "uuid": "32560144-ab78-46c3-81bc-38802207180f",
@@ -75,7 +75,7 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
+                "step": 0.01
               },
               "questionInfo": "Infant weight measurement in kilograms. Normal range for infants below 2 months: 2.5-4.5 kg"
             },
@@ -86,15 +86,18 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01",
+                "step": 0.01,
                 "min": "25",
                 "max": "43"
               },
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
-                "message": "Temperature is out of range (Normal range 35-37.5°C)"
-              },
-              "questionInfo": "Normal range: 36.5-37.5°C"
+              "questionInfo": "Normal range: 36.5-37.5°C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
+                  "message": "Temperature is out of range (Normal range 35-37.5°C)"
+                }
+              ]
             },
             {
               "label": "Visit Type",
@@ -236,13 +239,16 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
+                "step": 0.01
               },
-              "alert": {
-                "alertWhenExpression": "respiratoryRate && (respiratoryRate > 60 || respiratoryRate < 30)",
-                "message": "Respiratory Rate is abnormal for infant (Normal range 30-60 breaths/min)"
-              },
-              "questionInfo": "Normal range for infants: 30-60 breaths/min"
+              "questionInfo": "Normal range for infants: 30-60 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "respiratoryRate && (respiratoryRate > 60 || respiratoryRate < 30)",
+                  "message": "Respiratory Rate is abnormal for infant (Normal range 30-60 breaths/min)"
+                }
+              ]
             },
             {
               "label": "Signs and Symptoms",
@@ -520,7 +526,7 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1e6f7081-9203-1234-ef01-567890123456",
-                "step": "0.01"
+                "step": 0.01
               },
               "hide": {
                 "hideWhenExpression": "infantBreastfeeds !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
@@ -574,7 +580,7 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "2f708192-0314-2345-f012-678901234567",
-                "step": "0.01"
+                "step": 0.01
               },
               "hide": {
                 "hideWhenExpression": "otherFoodDrinks !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
@@ -827,7 +833,29 @@
               "id": "immunizationStatus",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "164464AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "164464AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "164134AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fully immunized"
+                  },
+                  {
+                    "concept": "5585AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Up to date"
+                  },
+                  {
+                    "concept": "164468AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not up to date"
+                  },
+                  {
+                    "concept": "164463AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not started"
+                  },
+                  {
+                    "concept": "160031AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Defaulted"
+                  }
+                ]
               }
             },
             {

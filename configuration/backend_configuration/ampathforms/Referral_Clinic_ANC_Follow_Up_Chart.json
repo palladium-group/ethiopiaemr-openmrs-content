@@ -1,6 +1,6 @@
 {
-  "name": "SPSH Referral Clinic ANC Follow-up Chart",
-  "description": "SPSH Referral Clinic ANC Follow Up Chart - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "name": "Referral Clinic ANC Follow-up Chart",
+  "description": "Records antenatal follow-up of referred pregnant women, including risk factors, complaints, clinical pelvimetry, vital signs, gestational age, fundal height, presentation, supplements, tetanus toxoid vaccination, obstetric ultrasound findings and family planning choice.",
   "version": "1.0",
   "published": true,
   "uuid": "3919c67d-cc24-54e4-881f-2054937308ee",
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "label": "SPSH Referral Clinic ANC Follow Up Chart Assessment",
+      "label": "Referral Clinic ANC Follow Up Chart Assessment",
       "sections": [
         {
           "label": "Assessment",
@@ -90,19 +90,19 @@
                     "concept": "115115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   {
-                    "label": "cardiac dysrhythmia (sandbox backfill)",
+                    "label": "Cardiac dysrhythmia",
                     "concept": "120148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   {
                     "label": "Dehydration",
-                    "concept": "142630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "82c6d388-43e8-4c99-9b88-7fa52cc17b9f"
                   },
                   {
                     "label": "Congenital abnormality",
-                    "concept": "5547AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1aa6372e-916c-57a0-b020-a788ca119dc1"
                   },
                   {
-                    "label": "OTHER NON-CODED",
+                    "label": "Other",
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   {
@@ -239,66 +239,95 @@
       ]
     },
     {
-      "label": "SPSH Antenatal Visits and Findings",
+      "label": "Antenatal Vitals and Findings",
       "sections": [
         {
           "label": "General",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "SPSH Antenatal Visits and Findings BP",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
-              "id": "spshAntenatalVisitsAndFindingsBp",
+              "id": "systolicBloodPressure",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "29b451c3-e213-4245-9b2f-9a9f732581af"
-              }
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "250"
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Systolic blood pressure is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "R/R",
+              "label": "Diastolic BP (mmHg)",
+              "type": "obs",
+              "id": "diastolicBloodPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "150"
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Diastolic blood pressure is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "rR",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "1cedffd4-d703-454a-8b7e-08e61b84242a",
-                "answers": [
-                  {
-                    "label": "162976AA",
-                    "concept": "162976AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
-                ]
-              }
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "99"
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
-              "label": "Temp",
+              "label": "Temperature (\u00b0C)",
               "type": "obs",
               "id": "temp",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "a49c571a-ab24-5881-be5d-c83fee9cbcf0",
-                "answers": [
-                  {
-                    "label": "Cool",
-                    "concept": "11b483a9-5d45-4e4f-8a05-daec14ef54d4"
-                  },
-                  {
-                    "label": "Extremely Cool",
-                    "concept": "415ed25d-245c-4f90-b403-a5725fbbe4a0"
-                  },
-                  {
-                    "label": "OTHER NON-CODED",
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Extremely Warm",
-                    "concept": "b6bdd6a0-54c7-4346-b337-eef217a9a655"
-                  },
-                  {
-                    "label": "Warm",
-                    "concept": "be0f0161-5e1d-4160-bfb5-239c7f16e153"
-                  }
-                ]
-              }
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "max": "43",
+                "step": 0.01
+              },
+              "questionInfo": "Normal range: 36.5-37.5 \u00b0C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 \u00b0C)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
               "label": "Pulse (beats/min)",
@@ -306,7 +335,9 @@
               "id": "pulse",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "max": "230",
+                "min": "0"
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -324,20 +355,27 @@
               "id": "weight",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "max": "250",
+                "min": "0"
               },
               "questionInfo": "Kilograms.",
               "hideSteppers": true
             },
             {
-              "label": "GA(wks)",
+              "label": "GA (weeks)",
               "type": "obs",
               "id": "gaWks",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "c360399a-44a4-4188-957e-e2ce9033651e"
+                "rendering": "number",
+                "concept": "1438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "disallowDecimals": true,
+                "step": 1,
+                "min": "0",
+                "max": "45"
               },
-              "required": "true"
+              "required": "true",
+              "hideSteppers": true
             },
             {
               "label": "Fundal Height",
@@ -439,7 +477,7 @@
           ]
         },
         {
-          "label": "SPSH Supplement",
+          "label": "Supplement",
           "isExpanded": "true",
           "questions": [
             {
@@ -483,7 +521,7 @@
           ]
         },
         {
-          "label": "SPSH TT Vaccine",
+          "label": "TT Vaccine",
           "isExpanded": "true",
           "questions": [
             {
@@ -527,7 +565,7 @@
           ]
         },
         {
-          "label": "SPSH Obstetrics US Form",
+          "label": "Obstetrics US Form",
           "isExpanded": "true",
           "questions": [
             {

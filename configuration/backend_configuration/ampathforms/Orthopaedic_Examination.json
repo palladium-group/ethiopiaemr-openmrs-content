@@ -1,7 +1,7 @@
 {
   "name": "Orthopaedic Examination",
-  "description": "Orthopaedic Examination form migrated from Bahmni",
-  "version": "1.1",
+  "description": "Documents the orthopedic examination of a patient, recording inspection, palpation, range of motion, special tests and radiographic findings for the affected limb or joint during an outpatient or inpatient review.",
+  "version": "1.0",
   "published": true,
   "uuid": "f5d4b684-05d0-427f-b32b-ca9c65430727",
   "retired": false,
@@ -15,7 +15,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
@@ -28,24 +28,23 @@
                   "allowFutureDates": "false"
                 }
               ],
-              "readonly": false
+              "readonly": true
             },
             {
               "label": "Provider:",
               "type": "encounterProvider",
               "required": "true",
-              "id": "encProvider",
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "isSearchable": true
               },
+              "id": "encProvider",
               "readonly": false
             },
             {
               "label": "Location:",
               "type": "encounterLocation",
               "required": "true",
-              "id": "encLocation",
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "datasource": {
@@ -55,72 +54,103 @@
                   }
                 }
               },
-              "readonly": false
+              "id": "encLocation",
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Orthopaedic Examination",
+      "label": "Orthopaedic Examination Assessment",
       "sections": [
         {
-          "label": "Orthopaedic Assessment",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
               "label": "Inspection",
               "type": "obs",
-              "required": false,
-              "id": "orthopaedicInspection",
+              "id": "inspection",
               "questionOptions": {
-                "rendering": "textarea",
-                "rows": "3",
+                "rendering": "text",
                 "concept": "a7b8c9d0-e1f2-4a3b-8c4d-5e6f7a8b9c0d"
               }
             },
             {
               "label": "Palpation",
               "type": "obs",
-              "required": false,
-              "id": "orthopaedicPalpation",
+              "id": "palpation",
               "questionOptions": {
-                "rendering": "textarea",
-                "rows": "3",
+                "rendering": "text",
                 "concept": "b8c9d0e1-f2a3-4b4c-9d5e-6f7a8b9c0d1e"
               }
             },
             {
-              "label": "Range of Motion",
+              "label": "Range of motion",
               "type": "obs",
-              "required": false,
-              "id": "orthopaedicRangeOfMotion",
+              "id": "rangeOfMotion",
               "questionOptions": {
-                "rendering": "textarea",
-                "rows": "3",
-                "concept": "c9d0e1f2-a3b4-4c5d-0e6f-7a8b9c0d1e2f"
+                "rendering": "select",
+                "concept": "e4da04af-c844-4a5b-8ada-6c2321e28964",
+                "answers": [
+                  {
+                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Normal"
+                  },
+                  {
+                    "concept": "164470AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Decreased"
+                  }
+                ]
               }
             },
             {
               "label": "Special Tests",
               "type": "obs",
-              "required": false,
-              "id": "orthopaedicSpecialTests",
+              "id": "specialTests",
               "questionOptions": {
-                "rendering": "textarea",
-                "rows": "3",
+                "rendering": "text",
                 "concept": "d0e1f2a3-b4c5-4d6e-1f7a-8b9c0d1e2f3a"
               }
             },
             {
               "label": "Radiographic Examination",
               "type": "obs",
-              "required": false,
-              "id": "orthopaedicRadiographicExamination",
+              "id": "radiographicExamination",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e1f2a3b4-c5d6-4e7f-2a8b-9c0d1e2f3a4b"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Neurological Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Neurological examination",
+              "type": "obs",
+              "id": "neurologicalExamination",
               "questionOptions": {
                 "rendering": "textarea",
-                "rows": "3",
-                "concept": "e1f2a3b4-c5d6-4e7f-2a8b-9c0d1e2f3a4b"
+                "concept": "f809a2b3-3ca3-b23e-8567-9ef012345678"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Vascular Examination",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Vascular examination",
+              "type": "obs",
+              "id": "vascularExamination",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "b9505166-632e-59dc-83b5-54552f545796"
               }
             }
           ]

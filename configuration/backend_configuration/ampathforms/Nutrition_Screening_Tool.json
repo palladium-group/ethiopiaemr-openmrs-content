@@ -1,0 +1,347 @@
+{
+  "name": "Nutrition Screening Tool",
+  "description": "Screens patients for malnutrition risk using weight, height, BMI or z-scores and mid-upper arm circumference (MUAC), together with recent weight loss, reduced appetite, mobility and severe illness, and records dietary recommendations.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "a315d62e-93eb-5ad9-9be2-3994750b8081",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Nutrition screening tool Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weight (Kg)",
+              "type": "obs",
+              "id": "weightKg",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "250"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Height (m)",
+              "type": "obs",
+              "id": "heightM",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "818cc127-6aea-5cca-a427-25cf7adf1c43",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "BMI (≥18 yrs.)",
+              "type": "obs",
+              "id": "bmi18Yrs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(heightM) || isEmpty(weightKg)) ? '' : calcBMI(Number(heightM)*100,Number(weightKg))"
+                },
+                "max": "100"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "WFL/H (Z-score)",
+              "type": "obs",
+              "id": "wflHZScore",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "8ce46944-68b5-4a22-81ce-ec87378364bf",
+                "answers": [
+                  {
+                    "concept": "0f869001-1920-123d-4561-234567890123",
+                    "label": "Below -3"
+                  },
+                  {
+                    "concept": "10970112-2031-234e-5672-345678901234",
+                    "label": "[-3,-2)"
+                  },
+                  {
+                    "concept": "11081223-3142-345f-6783-456789012345",
+                    "label": "[-2,-1)"
+                  },
+                  {
+                    "concept": "12192334-4253-4560-7894-567890123456",
+                    "label": "[-1,0)"
+                  },
+                  {
+                    "concept": "13203445-5364-5671-8905-678901234567",
+                    "label": "[0,1)"
+                  },
+                  {
+                    "concept": "14314556-6475-6782-9016-789012345678",
+                    "label": "[1,2)"
+                  },
+                  {
+                    "concept": "15425667-7586-7893-0127-890123456789",
+                    "label": "[2,3]"
+                  },
+                  {
+                    "concept": "16536778-8697-890a-1238-901234567890",
+                    "label": "Above 3"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "BMI/Age(>5-19)(Z-score)",
+              "type": "obs",
+              "id": "bmiAge519ZScore",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "714db1f1-b8e5-4ab3-8eb1-ca685aa1dcad",
+                "answers": [
+                  {
+                    "concept": "0f869001-1920-123d-4561-234567890123",
+                    "label": "Below -3"
+                  },
+                  {
+                    "concept": "10970112-2031-234e-5672-345678901234",
+                    "label": "[-3,-2)"
+                  },
+                  {
+                    "concept": "11081223-3142-345f-6783-456789012345",
+                    "label": "[-2,-1)"
+                  },
+                  {
+                    "concept": "12192334-4253-4560-7894-567890123456",
+                    "label": "[-1,0)"
+                  },
+                  {
+                    "concept": "13203445-5364-5671-8905-678901234567",
+                    "label": "[0,1)"
+                  },
+                  {
+                    "concept": "14314556-6475-6782-9016-789012345678",
+                    "label": "[1,2)"
+                  },
+                  {
+                    "concept": "15425667-7586-7893-0127-890123456789",
+                    "label": "[2,3]"
+                  },
+                  {
+                    "concept": "16536778-8697-890a-1238-901234567890",
+                    "label": "Above 3"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "MUAC (Mid-upper arm circumference)",
+              "type": "obs",
+              "id": "muacMidUpperArmCircumference",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Dietary Recommendations",
+              "type": "obs",
+              "id": "dietaryRecommendations",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b5220bde-0907-4bef-a853-6a21b1370561"
+              }
+            }
+          ]
+        },
+        {
+          "label": "A. Weight loss history",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "How much weights have you/the patient lost in the past 3 months?",
+              "type": "obs",
+              "id": "howMuchWeightsHaveYouThePatientLostInThe",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a2691b2c-e66a-4345-a326-55a5e8e1edfc",
+                "answers": [
+                  {
+                    "concept": "6fa1c284-6a12-47eb-92c9-81082b407eb3",
+                    "label": "Weight loss > 3 Kg"
+                  },
+                  {
+                    "concept": "3094b72c-72e7-4c33-b0ea-df790137b7ef",
+                    "label": "Do not know the amount of weight lost"
+                  },
+                  {
+                    "concept": "7b5c564f-aec5-4d11-bf46-acbc73df9842",
+                    "label": "Weight loss between 1 – 3 Kg"
+                  },
+                  {
+                    "concept": "dbe9617f-fc9b-4ec6-b8aa-4c075ee3e12d",
+                    "label": "No weight loss or weight loss < 1Kg"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "B. Appetite history",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Has your/the patient food intake declined over the past 3 months?",
+              "type": "obs",
+              "id": "hasYourThePatientFoodIntakeDeclinedOverT",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "72c3196c-a10a-42e8-b7fc-f1ca4dd734ec",
+                "answers": [
+                  {
+                    "concept": "406d8ac4-b398-458d-bb09-cf868a37d693",
+                    "label": "Severe decrease in food intake"
+                  },
+                  {
+                    "concept": "7d2d9d90-787d-466a-b097-04bd37f7d208",
+                    "label": "Moderate decrease in food intake"
+                  },
+                  {
+                    "concept": "26fba679-ed5f-43cd-b1b3-bd73393d9464",
+                    "label": "No decrease in food intake"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "C. Functionality Status",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "How would you describe your/the patient current mobility?",
+              "type": "obs",
+              "id": "howWouldYouDescribeYourThePatientCurrent",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "16c7bc16-574e-4eeb-a11a-eb492bc1c9ad",
+                "answers": [
+                  {
+                    "concept": "162752AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Bed Ridden"
+                  },
+                  {
+                    "concept": "162751AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Decreased physical mobility/ move with assistance"
+                  },
+                  {
+                    "concept": "7eaf36ed-d3f2-4020-86fe-8f870f20d636",
+                    "label": "Good physical mobility/ able to leave my home"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "D. Sever illness history",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Have you/the patient been stressed or severely ill in the past 3 months?",
+              "type": "obs",
+              "id": "haveYouThePatientBeenStressedOrSeverelyI",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "cafa83f4-3e1c-4162-beab-1500419246b5",
+                "answers": [
+                  {
+                    "concept": "fbce3be2-ca0b-48e0-a314-720d2a67b71b",
+                    "label": "Severely ill/critical"
+                  },
+                  {
+                    "concept": "31585abf-48a2-4c80-af26-f3fb1d6a9a20",
+                    "label": "Sub critical"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

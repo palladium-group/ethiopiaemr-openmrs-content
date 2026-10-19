@@ -1,0 +1,440 @@
+{
+  "name": "Procedure Notes",
+  "description": "Documents a surgical or bedside procedure, including the procedure performed, anesthesia and medications, fluids and antibiotics given, blood loss and transfusion, findings, specimens, complications, post-procedure condition and the operating team.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "df958fa8-0d15-5087-93d8-5dfb27057527",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Procedure Notes",
+      "sections": [
+        {
+          "label": "Procedure",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Presented from",
+              "type": "obs",
+              "id": "presentedFrom",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "79b6ea73-7c92-4f88-adf3-61c284ef4c43",
+                "answers": [
+                  {
+                    "concept": "037446f4-adfc-40b3-928c-a39a4826b1bf",
+                    "label": "Emergency"
+                  },
+                  {
+                    "concept": "167050AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "IPD"
+                  },
+                  {
+                    "concept": "32d9bb0d-ce32-4ac3-b65e-85832fe905bb",
+                    "label": "OPD"
+                  },
+                  {
+                    "concept": "c103c6ce-d3fb-4a5f-a0c4-99a025f1a1ed",
+                    "label": "Direct outside referral"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Procedure performed",
+              "type": "obs",
+              "id": "procedurePerformed",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "1651AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "95efb78c-eca7-410c-a3b7-90c7265f5608",
+                    "label": "Cast adjustment"
+                  },
+                  {
+                    "concept": "eef1d6af-4ea8-4e54-a616-8d97cb6f1567",
+                    "label": "Figure-of-eight bandage"
+                  },
+                  {
+                    "concept": "484082d1-48ed-4f6b-b244-14c9cfcc979f",
+                    "label": "Foreign body removal"
+                  },
+                  {
+                    "concept": "37887777-39f4-499f-ac16-feea2435cb8d",
+                    "label": "First-time dressing"
+                  },
+                  {
+                    "concept": "3f31b7ee-c31f-4f69-8f97-1bd6d1d2f2fa",
+                    "label": "Follow-up dressing"
+                  },
+                  {
+                    "concept": "8ce0d034-34f2-4385-80b4-3c4b0a7eaeba",
+                    "label": "Hip spica"
+                  },
+                  {
+                    "concept": "166715AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Incision and drainage"
+                  },
+                  {
+                    "concept": "e2535856-bcef-46a2-aee5-eabf558c641f",
+                    "label": "Norplant removal"
+                  },
+                  {
+                    "concept": "ec5b239b-d09f-43a0-b14f-88bf1ac58f18",
+                    "label": "Reduction"
+                  },
+                  {
+                    "concept": "156055de-14a8-427a-ad26-b080ca4ae388",
+                    "label": "Slab"
+                  },
+                  {
+                    "concept": "166632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Suture in"
+                  },
+                  {
+                    "concept": "0614c302-6259-402a-9426-4d87e2e5d6c8",
+                    "label": "Cast removal"
+                  },
+                  {
+                    "concept": "166728AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Suture out"
+                  },
+                  {
+                    "concept": "f18ec0d3-208f-4c88-accc-aad2d8c32cd2",
+                    "label": "Syringing"
+                  },
+                  {
+                    "concept": "795b09e8-ec5d-452c-b37e-b945ab3128e3",
+                    "label": "Cast or splint"
+                  },
+                  {
+                    "concept": "d89e8371-8687-4ef7-b02b-a962cb93737e",
+                    "label": "Cast or splint removal"
+                  },
+                  {
+                    "concept": "a2b8b9c2-bd39-49c2-9f21-8da4037fff91",
+                    "label": "Catheterization"
+                  },
+                  {
+                    "concept": "cf422908-c9d2-47c7-91d4-c4a13cce0524",
+                    "label": "Crepe bandage application"
+                  },
+                  {
+                    "concept": "0dc03950-bfdf-4120-9e25-c3e9fbd894b3",
+                    "label": "Cyst removal"
+                  },
+                  {
+                    "concept": "7c831a22-56d0-47a3-901a-fdd56ddb6ce1",
+                    "label": "Dilatation"
+                  },
+                  {
+                    "concept": "ace23a56-7b49-44d6-a324-1e4b4c63fbed",
+                    "label": "Excision"
+                  },
+                  {
+                    "concept": "161803AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Circumcision"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Specific intervention",
+              "type": "obs",
+              "id": "specificIntervention",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "4c75c49f-0b82-43de-a098-e235e7cfd9ac",
+                "rows": 3
+              }
+            }
+          ]
+        },
+        {
+          "label": "Anesthesia and Medications",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Anesthesia",
+              "type": "obs",
+              "id": "anesthesia",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f47a1007-1a2b-4c3d-8e4f-100100100701",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Preoperative medications",
+              "type": "obs",
+              "id": "preoperativeMedications",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a01dffef-84f8-4bfe-ae86-5827fb70a9dd",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Intraoperative medications",
+              "type": "obs",
+              "id": "intraoperativeMedications",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "27a2aa72-73d7-4c94-9a04-f6f1c62d1a38",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Antibiotics administered",
+              "type": "obs",
+              "id": "antibioticsAdministered",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "60f829e3-8ca6-4a69-baa2-8a90908f04a4",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Fluid administered",
+              "type": "obs",
+              "id": "fluidAdministered",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "34dcfb55-038f-4d1d-86ed-df81251c6e56",
+                "rows": 3
+              }
+            }
+          ]
+        },
+        {
+          "label": "Intraoperative Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Tourniquet time",
+              "type": "obs",
+              "id": "tourniquetTime",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "459935ba-d2a3-4fb6-98ee-35648f7eac8b"
+              }
+            },
+            {
+              "label": "Estimated blood loss",
+              "type": "obs",
+              "id": "estimatedBloodLoss",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6507ba80-0185-54ad-bdc8-017f7eb0820e"
+              }
+            },
+            {
+              "label": "Blood transfusion quantity",
+              "type": "obs",
+              "id": "bloodTransfusionQuantity",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "48bb163d-381c-4546-b953-8e73f1e1954c",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Findings",
+              "type": "obs",
+              "id": "findings",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c1000004-1111-4a2b-8c3d-0e1f2a3b4c04",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Intraoperative investigations ordered",
+              "type": "obs",
+              "id": "intraoperativeInvestigationsOrdered",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "adf889bf-4c62-478e-9279-edafbbde3e2a",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Specimens",
+              "type": "obs",
+              "id": "specimens",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "24f134a3-ca01-4af2-809a-d10f9ee2a631",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Procedure note",
+              "type": "obs",
+              "id": "procedureNote",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "aaf6dcbf-83c8-5cb7-9dd1-f7c8aa6749b2",
+                "rows": 3
+              }
+            },
+            {
+              "label": "Complications",
+              "type": "obs",
+              "id": "complications",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "5f8fc250-b958-483c-b166-7dd9231daf77",
+                "rows": 3
+              }
+            }
+          ]
+        },
+        {
+          "label": "Outcome",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Condition after procedure",
+              "type": "obs",
+              "id": "conditionAfterProcedure",
+              "questionOptions": {
+                "rendering": "multiCheckbox",
+                "concept": "7fc2a8d1-4e3b-4c9f-8a2d-6b1e9f3c5d70",
+                "answers": [
+                  {
+                    "concept": "ac5db14e-7b6c-4faf-bd5e-9e4b2c06f813",
+                    "label": "Transferred to recovery room"
+                  },
+                  {
+                    "concept": "9b4caf3d-6a5b-4e9f-ac4d-8d3a1bf5e792",
+                    "label": "Extubated"
+                  },
+                  {
+                    "concept": "06398754-8865-4004-805e-926636d6d6c2",
+                    "label": "Stable"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Procedure Team",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Surgeons",
+              "type": "obs",
+              "id": "surgeons",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166688AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Anesthetist",
+              "type": "obs",
+              "id": "anesthetist",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4ee56c04-eaa8-425a-8a08-d61feef5dc6c"
+              }
+            },
+            {
+              "label": "Scrub nurse",
+              "type": "obs",
+              "id": "scrubNurse",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166690AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Circulating nurse",
+              "type": "obs",
+              "id": "circulatingNurse",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166691AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Other staff",
+              "type": "obs",
+              "id": "otherStaff",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d85256bf-933d-4be6-a368-35ea73c227a9"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

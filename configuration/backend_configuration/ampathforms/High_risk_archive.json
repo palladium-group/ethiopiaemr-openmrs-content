@@ -1,6 +1,6 @@
 {
   "name": "High Risk Archive",
-  "description": "High risk archive - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "description": "Summary record for high-risk pregnancies, capturing gravidity, parity, last menstrual period, expected delivery date, gestational age, bad obstetric history, past illnesses and medicines, last diagnosis notes and repeated vital signs.",
   "version": "1.0",
   "published": true,
   "uuid": "699afe95-e112-57f1-8dfb-a936929d3aca",
@@ -116,12 +116,15 @@
               }
             },
             {
-              "label": "EDD",
+              "label": "EDD (calculated from LNMP)",
               "type": "obs",
               "id": "edd",
               "questionOptions": {
                 "rendering": "date",
-                "concept": "2b592c8a-f68c-47a1-a5ab-3087bd13ace5"
+                "concept": "2b592c8a-f68c-47a1-a5ab-3087bd13ace5",
+                "calculate": {
+                  "calculateExpression": "isEmpty(lnmp) ? null : new Date(new Date(new Date(lnmp).getFullYear(), new Date(lnmp).getMonth(), new Date(lnmp).getDate() + 7).getFullYear() + 1, new Date(new Date(lnmp).getFullYear(), new Date(lnmp).getMonth(), new Date(lnmp).getDate() + 7).getMonth() - 3, new Date(new Date(lnmp).getFullYear(), new Date(lnmp).getMonth(), new Date(lnmp).getDate() + 7).getDate())"
+                }
               }
             },
             {
@@ -266,7 +269,8 @@
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 1,
+                "max": "250"
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -286,7 +290,8 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "150"
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -303,15 +308,15 @@
               "type": "obs",
               "id": "posture",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "e11356eb-df27-4dfd-8b6b-8c066bb2afd5",
+                "rendering": "radio",
+                "concept": "159633AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
                     "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Sitting"
                   },
                   {
-                    "concept": "92709344-75b1-4093-a1b8-6d0bd998df7e",
+                    "concept": "159629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Supine"
                   }
                 ]
@@ -325,7 +330,8 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "230"
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -345,7 +351,8 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "99"
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -365,7 +372,8 @@
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "43"
               },
               "questionInfo": "Normal range: 36.5-37.5 °C",
               "validators": [
@@ -383,9 +391,10 @@
               "id": "spo2",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "100"
               },
               "validators": [
                 {
@@ -405,7 +414,7 @@
                 "concept": "2597367c-e4c8-4327-9fcf-08fcada95ad1",
                 "answers": [
                   {
-                    "concept": "34c1bdbf-f678-4522-98c0-eddb360ad32f",
+                    "concept": "49869001-1920-123d-4561-234567890123",
                     "label": "No Pain(0)"
                   },
                   {
@@ -452,7 +461,8 @@
               "id": "rbsMgDl",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "887aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
               "hideSteppers": true
             },

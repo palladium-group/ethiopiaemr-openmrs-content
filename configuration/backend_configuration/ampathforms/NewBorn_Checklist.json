@@ -1,6 +1,6 @@
 {
   "name": "NewBorn checklist",
-  "description": "NewBorn checklist migrated from Bahmni",
+  "description": "Records essential care for each newborn at birth, including birth details, APGAR scores, birth outcome and resuscitation, the essential newborn care bundle, prophylaxis and routine immunizations, and the checklist completed before discharge.",
   "version": "1.2",
   "published": true,
   "uuid": "83dc9c9b-4d14-431b-a1b1-26fe3006dddb",
@@ -148,7 +148,7 @@
                 "concept": "5916AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "500",
                 "max": "6000",
-                "step": "0.01"
+                "step": 0.01
               },
               "questionInfo": "Newborn weight at birth. Normal range: 2500-4000g"
             },
@@ -160,13 +160,16 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
+                "step": 0.01
               },
               "questionInfo": "Newborn length at birth (crown to heel). Normal range: 45-55 cm",
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue < 45 || myValue > 55)",
-                "message": "Length is outside the normal range (45-55 cm). You can still save."
-              }
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 45 || myValue > 55)",
+                  "message": "Length is outside the normal range (45-55 cm). You can still save."
+                }
+              ]
             },
             {
               "label": "Gestational Age",
@@ -398,7 +401,7 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "159603AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
+                "step": 0.01
               },
               "questionInfo": "Newborn assessment score (0-10). Normal: 7-10"
             },
@@ -410,7 +413,7 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "159604AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
+                "step": 0.01
               },
               "questionInfo": "Newborn assessment score (0-10). Normal: 7-10"
             },
@@ -422,7 +425,7 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "159605AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": "0.01"
+                "step": 0.01
               },
               "questionInfo": "Newborn assessment score (0-10). Normal: 7-10"
             },
@@ -494,7 +497,7 @@
               },
               "readonly": false,
               "hide": {
-                "hideWhenExpression": "apgarScore5Min !== '072ec6fd-c3e1-40a6-a14e-52f634025efc'"
+                "hideWhenExpression": "isEmpty(apgarScore5Min) || apgarScore5Min === 'f252aef4-00b3-48a7-919a-95a7e9775e77' || apgarScore5Min === 'df46852b-73d0-4575-85cd-a5f3f44ff225' || apgarScore5Min === '27bb96ef-4f0e-4351-b96c-85dae1270bb9' || apgarScore5Min === 'a1abf370-cf96-452d-b2bb-3a59ea864c55'"
               }
             },
             {
@@ -525,7 +528,7 @@
               },
               "readonly": false,
               "hide": {
-                "hideWhenExpression": "apgarScore5Min !== '072ec6fd-c3e1-40a6-a14e-52f634025efc'"
+                "hideWhenExpression": "isEmpty(apgarScore5Min) || apgarScore5Min === 'f252aef4-00b3-48a7-919a-95a7e9775e77' || apgarScore5Min === 'df46852b-73d0-4575-85cd-a5f3f44ff225' || apgarScore5Min === '27bb96ef-4f0e-4351-b96c-85dae1270bb9' || apgarScore5Min === 'a1abf370-cf96-452d-b2bb-3a59ea864c55'"
               }
             }
           ]

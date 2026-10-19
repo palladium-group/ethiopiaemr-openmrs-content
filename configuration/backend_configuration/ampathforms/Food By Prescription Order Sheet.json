@@ -1,7 +1,7 @@
 {
   "name": "Food By Prescription Order Sheet",
-  "description": "Food By Prescription Order Sheet migrated from Bahmni",
-  "version": "1.1",
+  "description": "Records food by prescription for patients needing nutritional support, including weight, height, BMI, mid-upper arm circumference (MUAC), dietary assessment, the treatment given and the provider's signature.",
+  "version": "1.0",
   "published": true,
   "uuid": "f3e5a966-51b9-435d-8e4b-52ce485ddd8e",
   "retired": false,
@@ -15,7 +15,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
@@ -28,24 +28,23 @@
                   "allowFutureDates": "false"
                 }
               ],
-              "readonly": false
+              "readonly": true
             },
             {
               "label": "Provider:",
               "type": "encounterProvider",
               "required": "true",
-              "id": "encProvider",
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "isSearchable": true
               },
+              "id": "encProvider",
               "readonly": false
             },
             {
               "label": "Location:",
               "type": "encounterLocation",
               "required": "true",
-              "id": "encLocation",
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "datasource": {
@@ -55,102 +54,137 @@
                   }
                 }
               },
-              "readonly": false
+              "id": "encLocation",
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Food By Prescription Order Sheet",
+      "label": "Food By Prescription Order Sheet Assessment",
       "sections": [
         {
-          "label": "Prescription Orders",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
               "label": "Date",
               "type": "obs",
+              "id": "date",
               "questionOptions": {
                 "rendering": "date",
-                "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "id": "date"
+                "concept": "5bbbe370-d3ff-4526-a63b-df5c579ca30c"
+              }
             },
             {
-              "label": "WEIGHT",
+              "label": "Weight (kg)",
               "type": "obs",
+              "id": "weight",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "250"
               },
-              "id": "weight"
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
             },
             {
-              "label": "HEIGHT",
+              "label": "Height (cm)",
               "type": "obs",
+              "id": "height",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
+                "step": 0.01,
+                "max": "272"
               },
-              "id": "height"
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
             },
             {
               "label": "BMI",
               "type": "obs",
+              "id": "bmi",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
                 "calculate": {
                   "calculateExpression": "calcBMI(height,weight)"
-                }
+                },
+                "max": "100"
               },
-              "id": "bmi"
+              "hideSteppers": true
             },
             {
               "label": "MUAC",
               "type": "obs",
+              "id": "muac",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
+                "step": 0.01
               },
-              "id": "muac"
-            },
-            {
-              "label": "WFL/H",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "39aeca30-cc94-4bd6-a51b-144e1185b93b"
-              },
-              "id": "wflH"
+              "hideSteppers": true
             },
             {
               "label": "Dietary Assessment",
               "type": "obs",
+              "id": "dietaryAssessment",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "2c66c5a5-1481-411d-b7e6-5237a9d38597"
-              },
-              "id": "dietaryAssessment"
+              }
             },
             {
               "label": "Treatment Given",
               "type": "obs",
+              "id": "treatmentGiven",
               "questionOptions": {
-                "rendering": "textarea",
-                "concept": "b827b25a-c631-4f2e-a53f-94b0522e68ae"
-              },
-              "id": "treatmentGiven"
+                "rendering": "select",
+                "concept": "166665AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "163065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "ACT"
+                  },
+                  {
+                    "concept": "012345cd-5667-4456-abcd-567890123478",
+                    "label": "Act+sldpq"
+                  },
+                  {
+                    "concept": "12345def-6778-4567-bcde-678901234589",
+                    "label": "Cq+rcpq"
+                  },
+                  {
+                    "concept": "71561AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Arthesunate Injection"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  },
+                  {
+                    "concept": "fa19d295-73cc-4aa5-beb7-f317aa08ce2b",
+                    "label": "Referred"
+                  }
+                ]
+              }
             },
             {
               "label": "Signature",
               "type": "obs",
+              "id": "signature",
               "questionOptions": {
-                "rendering": "textarea",
+                "rendering": "text",
                 "concept": "28794bbc-ad22-4d8e-a8a3-8147bdfef6cd"
-              },
-              "id": "signature"
+              }
             }
           ]
         }

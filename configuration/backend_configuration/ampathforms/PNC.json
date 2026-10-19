@@ -1,6 +1,6 @@
 {
   "name": "PNC",
-  "description": "PNC migrated from Bahmni",
+  "description": "Records postnatal care for the mother and newborn, including treatment given, blood transfusion, iron-folic acid and vitamin A supplementation, discharge date, length of stay and outcome, with date and cause of any maternal or neonatal death.",
   "version": "2.0",
   "published": true,
   "uuid": "0bb9bf95-ccfb-4f29-aafc-92a455302453",
@@ -69,11 +69,14 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Time",
+              "label": "Postnatal visit number (1st, 2nd, 3rd or 4th)",
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "159893AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "159893AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "1",
+                "max": "4",
+                "disallowDecimals": true
               },
               "id": "visitTime",
               "hideSteppers": true
@@ -88,13 +91,19 @@
               "id": "maternalNeonatalDeathGroup",
               "questions": [
                 {
-                  "label": "Date of maternal death",
+                  "label": "Date and time of maternal death",
                   "type": "obs",
                   "questionOptions": {
                     "rendering": "datetime",
                     "concept": "7c5f82de-8a6b-4d19-9b58-0b6a2d8c3e11"
                   },
-                  "id": "dateOfMaternalDeath"
+                  "id": "dateOfMaternalDeath",
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+                  ]
                 },
                 {
                   "label": "Cause of maternal death",
@@ -106,13 +115,19 @@
                   "id": "causeOfMaternalDeath"
                 },
                 {
-                  "label": "Date of Neonatal death",
+                  "label": "Date and time of neonatal death",
                   "type": "obs",
                   "questionOptions": {
-                    "rendering": "date",
-                    "concept": "1543AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "rendering": "datetime",
+                    "concept": "2b41852e-9ecc-4773-8c1b-ebeb8e221b20"
                   },
-                  "id": "dateOfNeonatalDeath"
+                  "id": "dateOfNeonatalDeath",
+                  "validators": [
+                    {
+                      "type": "date",
+                      "allowFutureDates": "false"
+                    }
+                  ]
                 },
                 {
                   "label": "Cause of neonatal death",
@@ -163,14 +178,16 @@
               "id": "bloodTransfusionProvided"
             },
             {
-              "label": "Blood transfusion quantity",
+              "label": "If 'Yes', amount and type of blood product transfused",
               "type": "obs",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "3d8f2b6a-914c-4b7a-93e1-5f0c2d7a8e15"
+                "rendering": "text",
+                "concept": "fe34e546-5b9d-59e8-bd96-c034a4b98203"
               },
               "id": "bloodTransfusionQuantity",
-              "hideSteppers": true
+              "hide": {
+                "hideWhenExpression": "bloodTransfusionProvided !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             },
             {
               "label": "IFA Tablets Provided",
@@ -199,14 +216,21 @@
                 "rendering": "datetime",
                 "concept": "1641AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
-              "id": "dischargeDate"
+              "id": "dischargeDate",
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Length of stay",
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "162196aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                "concept": "162196AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
               },
               "id": "lengthOfStay",
               "hideSteppers": true
@@ -219,48 +243,6 @@
                 "concept": "d2f8b5c1-3e49-4a6d-9b72-4c1e7a9f0b18"
               },
               "id": "outcome"
-            }
-          ]
-        },
-        {
-          "label": "Maternal & Neonatal Death Details",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Date of maternal death",
-              "type": "obs",
-              "id": "dateOfMaternalDeath",
-              "questionOptions": {
-                "rendering": "datetime",
-                "concept": "7c5f82de-8a6b-4d19-9b58-0b6a2d8c3e11"
-              }
-            },
-            {
-              "label": "Cause of maternal death",
-              "type": "obs",
-              "id": "causeOfMaternalDeath",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "ab93f7c2-2a4d-4e8b-924c-5df6a71b2f12"
-              }
-            },
-            {
-              "label": "Date of Neonatal death",
-              "type": "obs",
-              "id": "dateOfNeonatalDeath",
-              "questionOptions": {
-                "rendering": "datetime",
-                "concept": "2b41852e-9ecc-4773-8c1b-ebeb8e221b20"
-              }
-            },
-            {
-              "label": "Cause of neonatal death",
-              "type": "obs",
-              "id": "causeOfNeonatalDeath",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "160218aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-              }
             }
           ]
         }

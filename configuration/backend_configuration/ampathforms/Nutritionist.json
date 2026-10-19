@@ -1,6 +1,6 @@
 {
   "name": "Nutritionist",
-  "description": "Nutritionist - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "description": "Records the nutritionist's assessment of nutrition-related risks or diagnosis and the treatment and advice given, including folic acid indication and use, folate-rich foods and advice on planned pregnancy.",
   "version": "1.0",
   "published": true,
   "uuid": "ec826761-3460-5c96-aa90-11425892a4c3",
@@ -64,6 +64,68 @@
     {
       "label": "Nutritionist Assessment",
       "sections": [
+        {
+          "label": "Anthropometry",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weightKg",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "250"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "heightCm",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
+                "step": 0.01,
+                "max": "272"
+              },
+              "questionInfo": "Centimetres.",
+              "hideSteppers": true
+            },
+            {
+              "label": "BMI (kg/m²)",
+              "type": "obs",
+              "id": "bmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "calculate": {
+                  "calculateExpression": "calcBMI(heightCm,weightKg)"
+                },
+                "max": "100"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "MUAC (cm)",
+              "type": "obs",
+              "id": "muacCm",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
+              },
+              "hideSteppers": true,
+              "questionInfo": "Mid-upper arm circumference in centimetres."
+            }
+          ]
+        },
         {
           "label": "Assessment",
           "isExpanded": "true",

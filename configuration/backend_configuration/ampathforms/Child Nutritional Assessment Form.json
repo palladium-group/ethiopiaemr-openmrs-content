@@ -1,7 +1,7 @@
 {
   "name": "Child Nutritional Assessment Form",
-  "description": "Child Nutritional Assessment Form migrated from Bahmni",
-  "version": "1.1",
+  "description": "Records the nutritional assessment of hospitalised children, including length or height, weight, MUAC and z-scores, signs of malnutrition, dietary history, and the nutritional diagnosis, intervention, counseling and monitoring plan.",
+  "version": "1.0",
   "published": true,
   "uuid": "e15d8668-d298-4981-aca0-cee40e2ccd4a",
   "retired": false,
@@ -15,7 +15,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
@@ -28,24 +28,23 @@
                   "allowFutureDates": "false"
                 }
               ],
-              "readonly": false
+              "readonly": true
             },
             {
               "label": "Provider:",
               "type": "encounterProvider",
               "required": "true",
-              "id": "encProvider",
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "isSearchable": true
               },
+              "id": "encProvider",
               "readonly": false
             },
             {
               "label": "Location:",
               "type": "encounterLocation",
               "required": "true",
-              "id": "encLocation",
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "datasource": {
@@ -55,43 +54,41 @@
                   }
                 }
               },
-              "readonly": false
+              "id": "encLocation",
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "Child Nutritional Assessment Form",
+      "label": "Child Nutritional Assessment Form Assessment",
       "sections": [
         {
-          "label": "Admission Details",
+          "label": "Assessment",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Ward Patient admitted at",
+              "label": "Ward",
               "type": "obs",
-              "required": "false",
-              "id": "wardPatientAdmittedAt",
+              "id": "ward",
               "questionOptions": {
                 "rendering": "text",
                 "concept": "49e8bb0a-9c58-436b-bcf3-9adebf401f7b"
               }
             },
             {
-              "label": "Bed Number",
+              "label": "Bed No.",
               "type": "obs",
-              "required": "false",
-              "id": "bedNumber",
+              "id": "bedNo",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "f6071829-0314-2345-6789-012345abcd16"
+                "concept": "42fa59ea-9457-4f04-a469-5cd49f59d98f"
               }
             },
             {
               "label": "Date of Admission",
               "type": "obs",
-              "required": "false",
               "id": "dateOfAdmission",
               "questionOptions": {
                 "rendering": "date",
@@ -101,7 +98,6 @@
             {
               "label": "Family marital status",
               "type": "obs",
-              "required": "false",
               "id": "familyMaritalStatus",
               "questionOptions": {
                 "rendering": "text",
@@ -111,7 +107,6 @@
             {
               "label": "Family Occupation",
               "type": "obs",
-              "required": "false",
               "id": "familyOccupation",
               "questionOptions": {
                 "rendering": "text",
@@ -121,7 +116,6 @@
             {
               "label": "Medical Diagnosis",
               "type": "obs",
-              "required": "false",
               "id": "medicalDiagnosis",
               "questionOptions": {
                 "rendering": "text",
@@ -131,194 +125,15 @@
             {
               "label": "Dietary Assessment- Dietary History",
               "type": "obs",
-              "required": "false",
-              "id": "dietaryHistory",
+              "id": "dietaryAssessmentDietaryHistory",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "de3bd045-b553-40d8-a964-8dcb4aeff260"
               }
-            }
-          ]
-        },
-        {
-          "label": "Anthropometric Measurement",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Length/Height",
-              "type": "obs",
-              "required": "false",
-              "id": "lengthHeight",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
             },
-            {
-              "label": "Weight",
-              "type": "obs",
-              "required": "false",
-              "id": "weight",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
-            },
-            {
-              "label": "BMI",
-              "type": "obs",
-              "required": "false",
-              "id": "bmi",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "calculate": {
-                  "calculateExpression": "calcBMI(height,weight)"
-                }
-              }
-            },
-            {
-              "label": "MUAC",
-              "type": "obs",
-              "required": "false",
-              "id": "muac",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0"
-              }
-            },
-            {
-              "label": "Weight for Length/ Height (WFL/H)",
-              "type": "obs",
-              "required": "false",
-              "id": "weightForLengthHeight",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "04e858be-7bd2-4180-80fd-47d2fc8a0027"
-              }
-            },
-            {
-              "label": "Z-Score",
-              "type": "obs",
-              "required": "false",
-              "id": "zScore",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "6f76bbf3-9880-4571-a9b9-7efb3d345be0"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Recognize malnutrition signs",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Edema Grade",
-              "type": "obs",
-              "required": "false",
-              "id": "edemaGrade",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "8b3c4d5e-6f70-8901-bcde-f23456789222",
-                "answers": [
-                  {
-                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Mild"
-                  },
-                  {
-                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Moderate"
-                  },
-                  {
-                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Severe"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Presence of Dermatosis",
-              "type": "obs",
-              "required": "false",
-              "id": "presenceOfDermatosis",
-              "questionOptions": {
-                "rendering": "toggle",
-                "toggleOptions": {
-                  "labelTrue": "Yes",
-                  "labelFalse": "No"
-                },
-                "concept": "b9ded8cc-9afa-4026-abe4-7c1cb4c32d91"
-              }
-            },
-            {
-              "label": "Dermatosis Severity",
-              "type": "obs",
-              "required": "false",
-              "id": "dermatosisSeverity",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "0d4e5f60-7182-901c-3456-789abcdef012",
-                "answers": [
-                  {
-                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Mild"
-                  },
-                  {
-                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Moderate"
-                  },
-                  {
-                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Severe"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Presence of Eye malnutrition signs",
-              "type": "obs",
-              "required": "false",
-              "id": "presenceOfEyeSign",
-              "questionOptions": {
-                "rendering": "toggle",
-                "toggleOptions": {
-                  "labelTrue": "Yes",
-                  "labelFalse": "No"
-                },
-                "concept": "d0900cb0-e5b3-4f3a-84ec-77688f6603ac"
-              }
-            },
-            {
-              "label": "Specify",
-              "type": "obs",
-              "required": "false",
-              "id": "specify",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "e2dfbf1b-9ad8-40e8-8333-ed03363edde6"
-              }
-            },
-            {
-              "label": "Description of Any medical complications",
-              "type": "obs",
-              "required": "false",
-              "id": "medicalComplications",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "0aa2b3c4-8d5e-678f-012a-901234567890"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Nutritional Assessment and Plan",
-          "isExpanded": "true",
-          "questions": [
             {
               "label": "Nutritional Diagnosis",
               "type": "obs",
-              "required": "false",
               "id": "nutritionalDiagnosis",
               "questionOptions": {
                 "rendering": "text",
@@ -328,31 +143,201 @@
             {
               "label": "Nutritional Intervention",
               "type": "obs",
-              "required": "false",
               "id": "nutritionalIntervention",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "2fe89e0f-da97-4ff6-804a-fdfe1e71df3a"
               }
             },
             {
               "label": "Nutritional Counseling",
               "type": "obs",
-              "required": "false",
               "id": "nutritionalCounseling",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "90ca0ec4-a4e8-4160-aacd-1cbeb34ce061"
               }
             },
             {
               "label": "Monitoring and Evaluation",
               "type": "obs",
-              "required": "false",
               "id": "monitoringAndEvaluation",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "dbf2f9f4-ad01-452c-a20e-79025cb5e3c6"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Child Nutritional Assessment, Anthropometric Measurement",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Length/Height",
+              "type": "obs",
+              "id": "lengthHeight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
+                "step": 0.01,
+                "max": "272"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "250"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "BMI",
+              "type": "obs",
+              "id": "bmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "calculate": {
+                  "calculateExpression": "calcBMI(lengthHeight,weight)"
+                },
+                "max": "100"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "MUAC",
+              "type": "obs",
+              "id": "muac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
+                "min": "0",
+                "step": 0.01
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Z-Score",
+              "type": "obs",
+              "id": "zScore",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6f76bbf3-9880-4571-a9b9-7efb3d345be0"
+              }
+            },
+            {
+              "label": "Head Circumference Z-Score",
+              "type": "obs",
+              "id": "headCircumferenceZScore",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "88f56373-0050-428a-be36-3826bba449c6"
+              }
+            },
+            {
+              "label": "Weight for Height Z-Score",
+              "type": "obs",
+              "id": "weightForHeightZScore",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2dabfcfe-1e70-4e88-837a-79531073b040"
+              }
+            },
+            {
+              "label": "Length Height For Age Z-Score",
+              "type": "obs",
+              "id": "lengthHeightForAgeZScore",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "75878fd7-d3a0-44e0-8543-d2027def679d"
+              }
+            },
+            {
+              "label": "Weight for Age Z-Score",
+              "type": "obs",
+              "id": "weightForAgeZScore",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e54a93fe-627e-46e8-9a99-006487c1a260"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Child Nutritional Assessment, Recognize malnutrition igns",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Dermatosis",
+              "type": "obs",
+              "id": "dermatosis",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b9ded8cc-9afa-4026-abe4-7c1cb4c32d91",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Severity",
+              "type": "obs",
+              "id": "severity",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "3289db46-ffda-4782-88d4-30ae3252f8a3",
+                "answers": [
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Eye sign",
+              "type": "obs",
+              "id": "eyeSign",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d0900cb0-e5b3-4f3a-84ec-77688f6603ac",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
               }
             }
           ]
@@ -364,8 +349,7 @@
             {
               "label": "Name",
               "type": "obs",
-              "required": "false",
-              "id": "nutritionistName",
+              "id": "name",
               "questionOptions": {
                 "rendering": "text",
                 "concept": "bd40c021-7492-4fd9-a2f7-5a0f4c10334e"
@@ -374,18 +358,16 @@
             {
               "label": "Signature",
               "type": "obs",
-              "required": "false",
-              "id": "nutritionistSignature",
+              "id": "signature",
               "questionOptions": {
                 "rendering": "text",
                 "concept": "91e6b94f-6e9d-49aa-966b-a5c65d94e77b"
               }
             },
             {
-              "label": "Date Form filled in",
+              "label": "Date",
               "type": "obs",
-              "required": "false",
-              "id": "dateFormFilledIn",
+              "id": "date",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "5bbbe370-d3ff-4526-a63b-df5c579ca30c"

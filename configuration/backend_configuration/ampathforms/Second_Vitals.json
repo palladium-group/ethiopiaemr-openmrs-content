@@ -1,6 +1,6 @@
 {
   "name": "Second Vitals",
-  "description": "Second Vitals - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "description": "Captures a repeat set of vital signs taken after the initial measurement, namely pulse rate, blood pressure, temperature, respiratory rate and oxygen saturation, to follow changes in the patient's condition.",
   "version": "1.0",
   "published": true,
   "uuid": "ae322b8a-5108-5661-9bce-acc82b420a27",
@@ -76,7 +76,8 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "230"
               },
               "questionInfo": "Normal range: 60-100 bpm",
               "validators": [
@@ -91,7 +92,7 @@
           ]
         },
         {
-          "label": "Blood Pressure without posture",
+          "label": "Blood Pressure",
           "isExpanded": "true",
           "questions": [
             {
@@ -102,7 +103,8 @@
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 1,
+                "max": "250"
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -122,7 +124,8 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "150"
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -133,6 +136,29 @@
                 }
               ],
               "hideSteppers": true
+            },
+            {
+              "label": "Blood pressure position",
+              "type": "obs",
+              "id": "bpPosition",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0a314b5c-6475-6782-901c-def012345678",
+                "answers": [
+                  {
+                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sitting"
+                  },
+                  {
+                    "concept": "159632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Standing"
+                  },
+                  {
+                    "concept": "92709344-75b1-4093-a1b8-6d0bd998df7e",
+                    "label": "Lying (supine)"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -148,7 +174,8 @@
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "43"
               },
               "questionInfo": "Normal range: 36.5-37.5 °C",
               "validators": [
@@ -174,7 +201,8 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "99"
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -198,9 +226,10 @@
               "id": "spo2",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "100"
               },
               "questionInfo": "Normal: >90%",
               "validators": [

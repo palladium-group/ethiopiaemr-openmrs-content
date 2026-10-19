@@ -1,6 +1,6 @@
 {
   "name": "CIC nurse",
-  "description": "CIC nurse - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "description": "Used by nurses to follow children on clean intermittent catheterisation (CIC), recording training and readiness of caregivers, who performs catheterisation, catheter size and interval, urine volumes, urinary infections, continence and bowel management.",
   "version": "1.0",
   "published": true,
   "uuid": "48c4f25e-8f64-524f-ac94-9f501bf24b25",
@@ -211,8 +211,8 @@
               "type": "obs",
               "id": "ifNoProvideReasonS",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "64b32182-f7de-48cc-9727-dcd7639aa72c",
+                "rendering": "checkbox",
+                "concept": "e8d62c52-9fa2-5f3c-93d3-e1b5c45f1631",
                 "answers": [
                   {
                     "concept": "e67801e7-abf8-4fd9-9154-7472eb3bf699",
@@ -248,12 +248,24 @@
                   },
                   {
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "If other, please explain"
+                    "label": "Other"
                   }
                 ]
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(currentlyDoingCic) || currentlyDoingCic !== '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "If other, please explain",
+              "type": "obs",
+              "id": "ifOtherReasonExplain",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "64b32182-f7de-48cc-9727-dcd7639aa72c"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(ifNoProvideReasonS) || !arrayContains(ifNoProvideReasonS, '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
               }
             },
             {
@@ -447,25 +459,6 @@
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(doesThePatientNeedBowelWash) || doesThePatientNeedBowelWash !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
-            },
-            {
-              "label": "Peer parent involved?",
-              "type": "obs",
-              "id": "peerParentInvolved2",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "a5405f2c-8988-5469-ad35-119a7543d4c2",
-                "answers": [
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
-                  },
-                  {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
-                  }
-                ]
               }
             },
             {

@@ -1,0 +1,991 @@
+{
+  "name": "Physiotherapy",
+  "description": "Records a physiotherapy evaluation covering history, sensory level, tone, strength and range of motion for each limb, mobility, bladder and bowel function, body functions, activities, participation and environmental factors, management plan and referrals.",
+  "version": "1.0",
+  "published": true,
+  "uuid": "b37e85da-4ee9-52df-a76c-c07496c145b2",
+  "retired": false,
+  "encounter": "Consultation",
+  "pages": [
+    {
+      "label": "Visit Details",
+      "sections": [
+        {
+          "label": "Encounter Details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Visit date:",
+              "type": "encounterDatetime",
+              "required": "true",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "readonly": true
+            },
+            {
+              "label": "Provider:",
+              "type": "encounterProvider",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              },
+              "id": "encProvider",
+              "readonly": false
+            },
+            {
+              "label": "Location:",
+              "type": "encounterLocation",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "datasource": {
+                  "name": "location_datasource",
+                  "config": {
+                    "tag": "Login Location"
+                  }
+                }
+              },
+              "id": "encLocation",
+              "readonly": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Physiotherapy Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "History (Past medical, developmental, peri-natal(pregnancy), family and social hx)",
+              "type": "obs",
+              "id": "historyPastMedicalDevelopmentalPeriNatal",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a3f07293-b635-5b51-b70f-9742290aa09e"
+              }
+            },
+            {
+              "label": "Sensory level",
+              "type": "obs",
+              "id": "sensoryLevel",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6b76c8a7-5202-4270-a4ce-b94df72f8623"
+              }
+            },
+            {
+              "label": "Tone RUE",
+              "type": "obs",
+              "id": "toneRue",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c94d8fcf-aedb-4f1d-ad95-b40951f9bcce"
+              }
+            },
+            {
+              "label": "LUE",
+              "type": "obs",
+              "id": "lue",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c6f050f8-6bc2-4542-9f47-202d29e49c83"
+              }
+            },
+            {
+              "label": "RLE",
+              "type": "obs",
+              "id": "rle",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a14912e9-7c43-447b-b28a-26c09fb7f8aa"
+              }
+            },
+            {
+              "label": "LLE",
+              "type": "obs",
+              "id": "lle",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "f0d45371-15d4-4295-90fb-8400589b0d35"
+              }
+            },
+            {
+              "label": "Motor/ Strength RUE",
+              "type": "obs",
+              "id": "motorStrengthRue",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "586aa664-95e7-4c28-8b7c-58f5b9a718e4"
+              }
+            },
+            {
+              "label": "Motor/ Strength LUE",
+              "type": "obs",
+              "id": "motorStrengthLue",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "ef910a92-4106-4498-8b3f-5d49ebc92ec0"
+              }
+            },
+            {
+              "label": "Motor/ Strength RLE",
+              "type": "obs",
+              "id": "motorStrengthRle",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "dfc01f76-8e79-4cf0-b51b-67e8b7c1ae23"
+              }
+            },
+            {
+              "label": "Motor/ Strength LLE",
+              "type": "obs",
+              "id": "motorStrengthLle",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "98905113-1324-49e3-8583-4b667fac3801"
+              }
+            },
+            {
+              "label": "Ambulation and Mobility",
+              "type": "obs",
+              "id": "ambulationAndMobility",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "310d9f48-28c7-4e06-bdb9-be8054121529"
+              }
+            },
+            {
+              "label": "Bladder",
+              "type": "obs",
+              "id": "bladder",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5f51b74b-81c1-4d27-bdd5-af5f3a883c36"
+              }
+            },
+            {
+              "label": "Bowel",
+              "type": "obs",
+              "id": "bowel",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "4ae3b28a-f4c4-48bf-a034-7b307917dd7f"
+              }
+            },
+            {
+              "label": "Investigation review",
+              "type": "obs",
+              "id": "investigationReview",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "18da52bc-7c23-4d51-866d-34c025a20caa"
+              }
+            },
+            {
+              "label": "Current assessment",
+              "type": "obs",
+              "id": "currentAssessment",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "ecdf60b8-26ad-4e42-927f-edb6cb319640"
+              }
+            },
+            {
+              "label": "Improvement in mobility follow upScore (FIM, 6 min walk test…)",
+              "type": "obs",
+              "id": "improvementInMobilityFollowUpscoreFim6Mi",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6fd08a56-844e-4743-820a-faff9630f897"
+              }
+            },
+            {
+              "label": "Management plan",
+              "type": "obs",
+              "id": "managementPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "57f88223-6397-4a96-a147-6aadee6d784c"
+              }
+            },
+            {
+              "label": "Recommended referrals",
+              "type": "obs",
+              "id": "recommendedReferrals",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "e2fa86e2-00fe-4723-a256-e25d4bfc34cc"
+              }
+            },
+            {
+              "label": "Next Appointment",
+              "type": "obs",
+              "id": "nextAppointment",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b0970bcc-530d-4ef6-8b56-22b9d1e319c2"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "ROM",
+      "sections": [
+        {
+          "label": "Active ROM",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Neck",
+              "type": "obs",
+              "id": "neck",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6fe6d4ca-45eb-4109-b9d0-4352cb20c0c6",
+                "answers": [
+                  {
+                    "concept": "fe875da5-20d5-4d69-b02d-376d7e16bb98",
+                    "label": "Very Poor/No active movement possible"
+                  },
+                  {
+                    "concept": "672777bd-3e59-455f-a4a8-43747405048e",
+                    "label": "Poor/ significant restrictions"
+                  },
+                  {
+                    "concept": "2da7a1d8-c23e-47eb-b459-f900278c29b1",
+                    "label": "Fair with some restrictions are present."
+                  },
+                  {
+                    "concept": "839626a3-01b4-4a8c-a920-275314bbad71",
+                    "label": "Good with minor limitations"
+                  },
+                  {
+                    "concept": "18ded970-dc6a-4905-927a-d380471b6251",
+                    "label": "Full /no restrictions."
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Shoulders",
+              "type": "obs",
+              "id": "shoulders",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9f0aadeb-0576-40d0-b338-8e971f410509",
+                "answers": [
+                  {
+                    "concept": "fe875da5-20d5-4d69-b02d-376d7e16bb98",
+                    "label": "Very Poor/No active movement possible"
+                  },
+                  {
+                    "concept": "672777bd-3e59-455f-a4a8-43747405048e",
+                    "label": "Poor/ significant restrictions"
+                  },
+                  {
+                    "concept": "2da7a1d8-c23e-47eb-b459-f900278c29b1",
+                    "label": "Fair with some restrictions are present."
+                  },
+                  {
+                    "concept": "839626a3-01b4-4a8c-a920-275314bbad71",
+                    "label": "Good with minor limitations"
+                  },
+                  {
+                    "concept": "18ded970-dc6a-4905-927a-d380471b6251",
+                    "label": "Full /no restrictions."
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Elbows",
+              "type": "obs",
+              "id": "elbows",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2a4554f9-32c7-4549-83c7-2355f722a5fb",
+                "answers": [
+                  {
+                    "concept": "fe875da5-20d5-4d69-b02d-376d7e16bb98",
+                    "label": "Very Poor/No active movement possible"
+                  },
+                  {
+                    "concept": "672777bd-3e59-455f-a4a8-43747405048e",
+                    "label": "Poor/ significant restrictions"
+                  },
+                  {
+                    "concept": "2da7a1d8-c23e-47eb-b459-f900278c29b1",
+                    "label": "Fair with some restrictions are present."
+                  },
+                  {
+                    "concept": "839626a3-01b4-4a8c-a920-275314bbad71",
+                    "label": "Good with minor limitations"
+                  },
+                  {
+                    "concept": "18ded970-dc6a-4905-927a-d380471b6251",
+                    "label": "Full /no restrictions."
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Wrists and Hands",
+              "type": "obs",
+              "id": "wristsAndHands",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "42b534c6-725e-5f85-8df1-5d9425902880",
+                "answers": [
+                  {
+                    "concept": "fe875da5-20d5-4d69-b02d-376d7e16bb98",
+                    "label": "Very Poor/No active movement possible"
+                  },
+                  {
+                    "concept": "672777bd-3e59-455f-a4a8-43747405048e",
+                    "label": "Poor/ significant restrictions"
+                  },
+                  {
+                    "concept": "2da7a1d8-c23e-47eb-b459-f900278c29b1",
+                    "label": "Fair with some restrictions are present."
+                  },
+                  {
+                    "concept": "839626a3-01b4-4a8c-a920-275314bbad71",
+                    "label": "Good with minor limitations"
+                  },
+                  {
+                    "concept": "18ded970-dc6a-4905-927a-d380471b6251",
+                    "label": "Full /no restrictions."
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Hips",
+              "type": "obs",
+              "id": "hips",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "943a5560-9ca3-5944-8e47-e897ec3c2dfb",
+                "answers": [
+                  {
+                    "concept": "fe875da5-20d5-4d69-b02d-376d7e16bb98",
+                    "label": "Very Poor/No active movement possible"
+                  },
+                  {
+                    "concept": "672777bd-3e59-455f-a4a8-43747405048e",
+                    "label": "Poor/ significant restrictions"
+                  },
+                  {
+                    "concept": "2da7a1d8-c23e-47eb-b459-f900278c29b1",
+                    "label": "Fair with some restrictions are present."
+                  },
+                  {
+                    "concept": "839626a3-01b4-4a8c-a920-275314bbad71",
+                    "label": "Good with minor limitations"
+                  },
+                  {
+                    "concept": "18ded970-dc6a-4905-927a-d380471b6251",
+                    "label": "Full /no restrictions."
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Knees",
+              "type": "obs",
+              "id": "knees",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5cee98d6-1caa-523b-bc1b-262803ad4fdc",
+                "answers": [
+                  {
+                    "concept": "fe875da5-20d5-4d69-b02d-376d7e16bb98",
+                    "label": "Very Poor/No active movement possible"
+                  },
+                  {
+                    "concept": "672777bd-3e59-455f-a4a8-43747405048e",
+                    "label": "Poor/ significant restrictions"
+                  },
+                  {
+                    "concept": "2da7a1d8-c23e-47eb-b459-f900278c29b1",
+                    "label": "Fair with some restrictions are present."
+                  },
+                  {
+                    "concept": "839626a3-01b4-4a8c-a920-275314bbad71",
+                    "label": "Good with minor limitations"
+                  },
+                  {
+                    "concept": "18ded970-dc6a-4905-927a-d380471b6251",
+                    "label": "Full /no restrictions."
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Ankles and Feet",
+              "type": "obs",
+              "id": "anklesAndFeet",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1881f844-4fb7-5964-a9cb-d2afdd8a28b4",
+                "answers": [
+                  {
+                    "concept": "fe875da5-20d5-4d69-b02d-376d7e16bb98",
+                    "label": "Very Poor/No active movement possible"
+                  },
+                  {
+                    "concept": "672777bd-3e59-455f-a4a8-43747405048e",
+                    "label": "Poor/ significant restrictions"
+                  },
+                  {
+                    "concept": "2da7a1d8-c23e-47eb-b459-f900278c29b1",
+                    "label": "Fair with some restrictions are present."
+                  },
+                  {
+                    "concept": "839626a3-01b4-4a8c-a920-275314bbad71",
+                    "label": "Good with minor limitations"
+                  },
+                  {
+                    "concept": "18ded970-dc6a-4905-927a-d380471b6251",
+                    "label": "Full /no restrictions."
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Passive ROM",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Neck",
+              "type": "obs",
+              "id": "neck2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6fe6d4ca-45eb-4109-b9d0-4352cb20c0c6",
+                "answers": [
+                  {
+                    "concept": "fe875da5-20d5-4d69-b02d-376d7e16bb98",
+                    "label": "Very Poor/No active movement possible"
+                  },
+                  {
+                    "concept": "672777bd-3e59-455f-a4a8-43747405048e",
+                    "label": "Poor/ significant restrictions"
+                  },
+                  {
+                    "concept": "2da7a1d8-c23e-47eb-b459-f900278c29b1",
+                    "label": "Fair with some restrictions are present."
+                  },
+                  {
+                    "concept": "839626a3-01b4-4a8c-a920-275314bbad71",
+                    "label": "Good with minor limitations"
+                  },
+                  {
+                    "concept": "18ded970-dc6a-4905-927a-d380471b6251",
+                    "label": "Full /no restrictions."
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Shoulders",
+              "type": "obs",
+              "id": "shoulders2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9f0aadeb-0576-40d0-b338-8e971f410509",
+                "answers": [
+                  {
+                    "concept": "fe875da5-20d5-4d69-b02d-376d7e16bb98",
+                    "label": "Very Poor/No active movement possible"
+                  },
+                  {
+                    "concept": "672777bd-3e59-455f-a4a8-43747405048e",
+                    "label": "Poor/ significant restrictions"
+                  },
+                  {
+                    "concept": "2da7a1d8-c23e-47eb-b459-f900278c29b1",
+                    "label": "Fair with some restrictions are present."
+                  },
+                  {
+                    "concept": "839626a3-01b4-4a8c-a920-275314bbad71",
+                    "label": "Good with minor limitations"
+                  },
+                  {
+                    "concept": "18ded970-dc6a-4905-927a-d380471b6251",
+                    "label": "Full /no restrictions."
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Elbows",
+              "type": "obs",
+              "id": "elbows2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2a4554f9-32c7-4549-83c7-2355f722a5fb",
+                "answers": [
+                  {
+                    "concept": "fe875da5-20d5-4d69-b02d-376d7e16bb98",
+                    "label": "Very Poor/No active movement possible"
+                  },
+                  {
+                    "concept": "672777bd-3e59-455f-a4a8-43747405048e",
+                    "label": "Poor/ significant restrictions"
+                  },
+                  {
+                    "concept": "2da7a1d8-c23e-47eb-b459-f900278c29b1",
+                    "label": "Fair with some restrictions are present."
+                  },
+                  {
+                    "concept": "839626a3-01b4-4a8c-a920-275314bbad71",
+                    "label": "Good with minor limitations"
+                  },
+                  {
+                    "concept": "18ded970-dc6a-4905-927a-d380471b6251",
+                    "label": "Full /no restrictions."
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Wrists and Hands",
+              "type": "obs",
+              "id": "wristsAndHands2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "42b534c6-725e-5f85-8df1-5d9425902880",
+                "answers": [
+                  {
+                    "concept": "fe875da5-20d5-4d69-b02d-376d7e16bb98",
+                    "label": "Very Poor/No active movement possible"
+                  },
+                  {
+                    "concept": "672777bd-3e59-455f-a4a8-43747405048e",
+                    "label": "Poor/ significant restrictions"
+                  },
+                  {
+                    "concept": "2da7a1d8-c23e-47eb-b459-f900278c29b1",
+                    "label": "Fair with some restrictions are present."
+                  },
+                  {
+                    "concept": "839626a3-01b4-4a8c-a920-275314bbad71",
+                    "label": "Good with minor limitations"
+                  },
+                  {
+                    "concept": "18ded970-dc6a-4905-927a-d380471b6251",
+                    "label": "Full /no restrictions."
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Hips",
+              "type": "obs",
+              "id": "hips2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "943a5560-9ca3-5944-8e47-e897ec3c2dfb",
+                "answers": [
+                  {
+                    "concept": "fe875da5-20d5-4d69-b02d-376d7e16bb98",
+                    "label": "Very Poor/No active movement possible"
+                  },
+                  {
+                    "concept": "672777bd-3e59-455f-a4a8-43747405048e",
+                    "label": "Poor/ significant restrictions"
+                  },
+                  {
+                    "concept": "2da7a1d8-c23e-47eb-b459-f900278c29b1",
+                    "label": "Fair with some restrictions are present."
+                  },
+                  {
+                    "concept": "839626a3-01b4-4a8c-a920-275314bbad71",
+                    "label": "Good with minor limitations"
+                  },
+                  {
+                    "concept": "18ded970-dc6a-4905-927a-d380471b6251",
+                    "label": "Full /no restrictions."
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Knees",
+              "type": "obs",
+              "id": "knees2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "5cee98d6-1caa-523b-bc1b-262803ad4fdc",
+                "answers": [
+                  {
+                    "concept": "fe875da5-20d5-4d69-b02d-376d7e16bb98",
+                    "label": "Very Poor/No active movement possible"
+                  },
+                  {
+                    "concept": "672777bd-3e59-455f-a4a8-43747405048e",
+                    "label": "Poor/ significant restrictions"
+                  },
+                  {
+                    "concept": "2da7a1d8-c23e-47eb-b459-f900278c29b1",
+                    "label": "Fair with some restrictions are present."
+                  },
+                  {
+                    "concept": "839626a3-01b4-4a8c-a920-275314bbad71",
+                    "label": "Good with minor limitations"
+                  },
+                  {
+                    "concept": "18ded970-dc6a-4905-927a-d380471b6251",
+                    "label": "Full /no restrictions."
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Ankles and Feet",
+              "type": "obs",
+              "id": "anklesAndFeet2",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1881f844-4fb7-5964-a9cb-d2afdd8a28b4",
+                "answers": [
+                  {
+                    "concept": "fe875da5-20d5-4d69-b02d-376d7e16bb98",
+                    "label": "Very Poor/No active movement possible"
+                  },
+                  {
+                    "concept": "672777bd-3e59-455f-a4a8-43747405048e",
+                    "label": "Poor/ significant restrictions"
+                  },
+                  {
+                    "concept": "2da7a1d8-c23e-47eb-b459-f900278c29b1",
+                    "label": "Fair with some restrictions are present."
+                  },
+                  {
+                    "concept": "839626a3-01b4-4a8c-a920-275314bbad71",
+                    "label": "Good with minor limitations"
+                  },
+                  {
+                    "concept": "18ded970-dc6a-4905-927a-d380471b6251",
+                    "label": "Full /no restrictions."
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Icf-yc",
+      "sections": [
+        {
+          "label": "Body Functions",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Attention",
+              "type": "obs",
+              "id": "attention",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "d054c10e-c85a-4d26-86fa-d660d19f9424",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "d0cef738-9845-5684-bcdf-4d5c206d5e94",
+                    "label": "Moderate RD"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Memory",
+              "type": "obs",
+              "id": "memory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2a8d5bb8-d868-42df-998a-6865b1926154",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "d0cef738-9845-5684-bcdf-4d5c206d5e94",
+                    "label": "Moderate RD"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Vision",
+              "type": "obs",
+              "id": "vision",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "43d34068-0028-4af8-998d-e0b854c67b45",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "d0cef738-9845-5684-bcdf-4d5c206d5e94",
+                    "label": "Moderate RD"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Hearing",
+              "type": "obs",
+              "id": "hearing",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "dc2aa2e1-250e-42dc-a9e9-56069fc32df0",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "d0cef738-9845-5684-bcdf-4d5c206d5e94",
+                    "label": "Moderate RD"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Activities",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Learning",
+              "type": "obs",
+              "id": "learning",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "301a895b-dbf4-4f20-8387-03116de4daf5",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "d0cef738-9845-5684-bcdf-4d5c206d5e94",
+                    "label": "Moderate RD"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Daily Tasks",
+              "type": "obs",
+              "id": "dailyTasks",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "17d42f9c-6996-4056-a071-1f17172e6319",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "d0cef738-9845-5684-bcdf-4d5c206d5e94",
+                    "label": "Moderate RD"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Participation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Social Interaction",
+              "type": "obs",
+              "id": "socialInteraction",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0a437b0d-0218-4d46-8d45-db87b78b1b87",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "d0cef738-9845-5684-bcdf-4d5c206d5e94",
+                    "label": "Moderate RD"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Community Engagement",
+              "type": "obs",
+              "id": "communityEngagement",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "9608485e-cace-4c8a-9379-b31061148a73",
+                "answers": [
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "d0cef738-9845-5684-bcdf-4d5c206d5e94",
+                    "label": "Moderate RD"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Environmental Factors",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Accessibility",
+              "type": "obs",
+              "id": "accessibility",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c27719cb-8d0a-4c72-8c5c-8c61653e940f",
+                "answers": [
+                  {
+                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Good"
+                  },
+                  {
+                    "concept": "159406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fair"
+                  },
+                  {
+                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Social Support",
+              "type": "obs",
+              "id": "socialSupport",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "416b4d9e-a4a2-4d30-a7cc-b35144b9e7ca",
+                "answers": [
+                  {
+                    "concept": "5c78dbad-3853-471f-bbe4-ff5c2b1b8a89",
+                    "label": "Supportive"
+                  },
+                  {
+                    "concept": "beff6fc5-9272-46d5-a342-636b42e484b9",
+                    "label": "Neutral"
+                  },
+                  {
+                    "concept": "ca812e51-e137-47c9-9a50-ebb7cfa83f23",
+                    "label": "Unsupportive"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "processor": "EncounterFormProcessor",
+  "referencedForms": []
+}

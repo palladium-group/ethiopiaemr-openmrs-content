@@ -1,7 +1,7 @@
 {
   "name": "TTI Immunization",
-  "description": "Tetanus Toxoid Immunization tracking form",
-  "version": "1.1",
+  "description": "Records tetanus toxoid immunisation for women of reproductive age, capturing the date each of the five doses was given and the date of the next scheduled visit.",
+  "version": "1.0",
   "published": true,
   "uuid": "097fbc8c-4443-4cb4-aa41-82d81c8467d0",
   "retired": false,
@@ -15,7 +15,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Visit Date:",
+              "label": "Visit date:",
               "type": "encounterDatetime",
               "required": "true",
               "id": "encDate",
@@ -28,24 +28,23 @@
                   "allowFutureDates": "false"
                 }
               ],
-              "readonly": false
+              "readonly": true
             },
             {
               "label": "Provider:",
               "type": "encounterProvider",
               "required": "true",
-              "id": "encProvider",
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "isSearchable": true
               },
+              "id": "encProvider",
               "readonly": false
             },
             {
               "label": "Location:",
               "type": "encounterLocation",
               "required": "true",
-              "id": "encLocation",
               "questionOptions": {
                 "rendering": "ui-select-extended",
                 "datasource": {
@@ -55,195 +54,191 @@
                   }
                 }
               },
-              "readonly": false
+              "id": "encLocation",
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "TTI Immunization",
+      "label": "TTI Immunization Assessment",
       "sections": [
         {
-          "label": "TT1",
+          "label": "TT Immunization TT1",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "First Contact",
-              "type": "obsGroup",
-              "id": "tt1Group",
+              "label": "Date given",
+              "type": "obs",
+              "id": "dateGiven",
               "questionOptions": {
-                "concept": "77c9a7b2-5eae-484f-ab30-7a0eafdcc31e",
-                "rendering": "group"
+                "rendering": "date",
+                "concept": "69294cab-6acc-4e6e-8a0a-11fd6a5e678b"
               },
-              "questions": [
+              "validators": [
                 {
-                  "label": "Date Given",
-                  "type": "obs",
-                  "required": false,
-                  "id": "tt1DateGiven",
-                  "questionOptions": {
-                    "rendering": "date",
-                    "concept": "1410AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
-                },
+                  "type": "date",
+                  "allowFutureDates": "true"
+                }
+              ]
+            },
+            {
+              "label": "Date of next visit",
+              "type": "obs",
+              "id": "dateOfNextVisit",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "7d0e2444-5413-4995-aa25-a325fab0b34b"
+              },
+              "validators": [
                 {
-                  "label": "Next Date",
-                  "type": "obs",
-                  "required": false,
-                  "id": "tt1NextDate",
-                  "questionOptions": {
-                    "rendering": "date",
-                    "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
+                  "type": "date",
+                  "allowFutureDates": "true"
                 }
               ]
             }
           ]
         },
         {
-          "label": "TT2",
+          "label": "TT Immunization TT2",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "4 weeks after TT1",
-              "type": "obsGroup",
-              "id": "tt2Group",
+              "label": "Date given",
+              "type": "obs",
+              "id": "dateGiven2",
               "questionOptions": {
-                "concept": "027eb50d-561c-4a89-b8b8-6ea7ccaaf279",
-                "rendering": "group"
+                "rendering": "date",
+                "concept": "69294cab-6acc-4e6e-8a0a-11fd6a5e678b"
               },
-              "questions": [
+              "validators": [
                 {
-                  "label": "Date Given",
-                  "type": "obs",
-                  "required": false,
-                  "id": "tt2DateGiven",
-                  "questionOptions": {
-                    "rendering": "date",
-                    "concept": "1410AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
-                },
+                  "type": "date",
+                  "allowFutureDates": "true"
+                }
+              ]
+            },
+            {
+              "label": "Date of next visit",
+              "type": "obs",
+              "id": "dateOfNextVisit2",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "7d0e2444-5413-4995-aa25-a325fab0b34b"
+              },
+              "validators": [
                 {
-                  "label": "Next Date",
-                  "type": "obs",
-                  "required": false,
-                  "id": "tt2NextDate",
-                  "questionOptions": {
-                    "rendering": "date",
-                    "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
+                  "type": "date",
+                  "allowFutureDates": "true"
                 }
               ]
             }
           ]
         },
         {
-          "label": "TT3",
+          "label": "TT Immunization TT3",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "6 months after TT2",
-              "type": "obsGroup",
-              "id": "tt3Group",
+              "label": "Date given",
+              "type": "obs",
+              "id": "dateGiven3",
               "questionOptions": {
-                "concept": "e3594955-dde9-4992-8ed2-71e53e016761",
-                "rendering": "group"
+                "rendering": "date",
+                "concept": "69294cab-6acc-4e6e-8a0a-11fd6a5e678b"
               },
-              "questions": [
+              "validators": [
                 {
-                  "label": "Date Given",
-                  "type": "obs",
-                  "required": false,
-                  "id": "tt3DateGiven",
-                  "questionOptions": {
-                    "rendering": "date",
-                    "concept": "1410AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
-                },
+                  "type": "date",
+                  "allowFutureDates": "true"
+                }
+              ]
+            },
+            {
+              "label": "Date of next visit",
+              "type": "obs",
+              "id": "dateOfNextVisit3",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "7d0e2444-5413-4995-aa25-a325fab0b34b"
+              },
+              "validators": [
                 {
-                  "label": "Next Date",
-                  "type": "obs",
-                  "required": false,
-                  "id": "tt3NextDate",
-                  "questionOptions": {
-                    "rendering": "date",
-                    "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
+                  "type": "date",
+                  "allowFutureDates": "true"
                 }
               ]
             }
           ]
         },
         {
-          "label": "TT4",
+          "label": "TT Immunization TT4",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "1 year after TT3",
-              "type": "obsGroup",
-              "id": "tt4Group",
+              "label": "Date given",
+              "type": "obs",
+              "id": "dateGiven4",
               "questionOptions": {
-                "concept": "c9aaa257-8af8-4c95-8f47-1defe72296a3",
-                "rendering": "group"
+                "rendering": "date",
+                "concept": "69294cab-6acc-4e6e-8a0a-11fd6a5e678b"
               },
-              "questions": [
+              "validators": [
                 {
-                  "label": "Date Given",
-                  "type": "obs",
-                  "required": false,
-                  "id": "tt4DateGiven",
-                  "questionOptions": {
-                    "rendering": "date",
-                    "concept": "1410AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
-                },
+                  "type": "date",
+                  "allowFutureDates": "true"
+                }
+              ]
+            },
+            {
+              "label": "Date of next visit",
+              "type": "obs",
+              "id": "dateOfNextVisit4",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "7d0e2444-5413-4995-aa25-a325fab0b34b"
+              },
+              "validators": [
                 {
-                  "label": "Next Date",
-                  "type": "obs",
-                  "required": false,
-                  "id": "tt4NextDate",
-                  "questionOptions": {
-                    "rendering": "date",
-                    "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
+                  "type": "date",
+                  "allowFutureDates": "true"
                 }
               ]
             }
           ]
         },
         {
-          "label": "TT5",
+          "label": "TT Immunization TT5",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "1 year after TT4",
-              "type": "obsGroup",
-              "id": "tt5Group",
+              "label": "Date given",
+              "type": "obs",
+              "id": "dateGiven5",
               "questionOptions": {
-                "concept": "61269792-c93b-4b36-972b-e08f67d154ce",
-                "rendering": "group"
+                "rendering": "date",
+                "concept": "69294cab-6acc-4e6e-8a0a-11fd6a5e678b"
               },
-              "questions": [
+              "validators": [
                 {
-                  "label": "Date Given",
-                  "type": "obs",
-                  "required": false,
-                  "id": "tt5DateGiven",
-                  "questionOptions": {
-                    "rendering": "date",
-                    "concept": "1410AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
-                },
+                  "type": "date",
+                  "allowFutureDates": "true"
+                }
+              ]
+            },
+            {
+              "label": "Date of next visit",
+              "type": "obs",
+              "id": "dateOfNextVisit5",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "7d0e2444-5413-4995-aa25-a325fab0b34b"
+              },
+              "validators": [
                 {
-                  "label": "Next Date",
-                  "type": "obs",
-                  "required": false,
-                  "id": "tt5NextDate",
-                  "questionOptions": {
-                    "rendering": "date",
-                    "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  }
+                  "type": "date",
+                  "allowFutureDates": "true"
                 }
               ]
             }

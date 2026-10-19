@@ -1,6 +1,6 @@
 {
   "name": "Post Anesthesia Patient hand over format from OR",
-  "description": "Post Anesthesia Patient hand over format from OR - built from Bahmni export (Phase 1). Abnormal toggles -> soft range alerts.",
+  "description": "Records the handover of a patient from the operating room to recovery, with pre-operative vital signs, procedure and anesthesia type and duration, blood loss, intra-operative complications, allergies, chronic illnesses and positioning.",
   "version": "1.0",
   "published": true,
   "uuid": "28d43327-b2f2-5fce-afab-f12874337119",
@@ -77,7 +77,7 @@
                 "concept": "2597367c-e4c8-4327-9fcf-08fcada95ad1",
                 "answers": [
                   {
-                    "concept": "34c1bdbf-f678-4522-98c0-eddb360ad32f",
+                    "concept": "49869001-1920-123d-4561-234567890123",
                     "label": "No Pain(0)"
                   },
                   {
@@ -121,7 +121,7 @@
           ]
         },
         {
-          "label": "Blood Pressure without posture",
+          "label": "Blood Pressure",
           "isExpanded": "true",
           "questions": [
             {
@@ -132,7 +132,8 @@
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 1,
+                "max": "250"
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -152,7 +153,8 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "150"
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -178,7 +180,8 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "230"
               },
               "questionInfo": "Normal range: 60-100 bpm",
               "validators": [
@@ -193,7 +196,7 @@
           ]
         },
         {
-          "label": "RR",
+          "label": "Respiratory Rate",
           "isExpanded": "true",
           "questions": [
             {
@@ -204,7 +207,8 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "99"
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -219,7 +223,7 @@
           ]
         },
         {
-          "label": "SPO2",
+          "label": "Oxygen Saturation (SpO2)",
           "isExpanded": "true",
           "questions": [
             {
@@ -228,9 +232,10 @@
               "id": "spo2",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "5092aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": "0.01"
+                "step": 0.01,
+                "max": "100"
               },
               "questionInfo": "Normal: >90%",
               "validators": [
@@ -238,6 +243,33 @@
                   "type": "js_expression",
                   "warnsWhenExpression": "myValue && myValue <= 90",
                   "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Temperature",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "max": "43",
+                "step": 0.01
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
                 }
               ],
               "hideSteppers": true
@@ -280,7 +312,7 @@
                 "concept": "164254AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
-                    "concept": "8526f708-5960-7890-1234-567890abcd0b",
+                    "concept": "161909AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "GA"
                   },
                   {
@@ -425,7 +457,7 @@
                 "concept": "578ef7cc-edf0-4070-a415-c75f340e37f4",
                 "answers": [
                   {
-                    "concept": "85edd372-77b0-476d-b9f1-198980b9fd11",
+                    "concept": "03552218-ecab-562f-9705-9dd8fb7d0254",
                     "label": "CVC"
                   },
                   {
