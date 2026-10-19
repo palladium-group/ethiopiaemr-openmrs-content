@@ -90,11 +90,14 @@
                 "min": "25",
                 "max": "43"
               },
-              "alert": {
-                "alertWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
-                "message": "Temperature is out of range (Normal range 35-37.5°C)"
-              },
-              "questionInfo": "Normal range: 36.5-37.5°C"
+              "questionInfo": "Normal range: 36.5-37.5°C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
+                  "message": "Temperature is out of range (Normal range 35-37.5°C)"
+                }
+              ]
             },
             {
               "label": "Visit Type",
@@ -238,11 +241,14 @@
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": 0.01
               },
-              "alert": {
-                "alertWhenExpression": "respiratoryRate && (respiratoryRate > 60 || respiratoryRate < 30)",
-                "message": "Respiratory Rate is abnormal for infant (Normal range 30-60 breaths/min)"
-              },
-              "questionInfo": "Normal range for infants: 30-60 breaths/min"
+              "questionInfo": "Normal range for infants: 30-60 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "respiratoryRate && (respiratoryRate > 60 || respiratoryRate < 30)",
+                  "message": "Respiratory Rate is abnormal for infant (Normal range 30-60 breaths/min)"
+                }
+              ]
             },
             {
               "label": "Signs and Symptoms",
@@ -827,7 +833,29 @@
               "id": "immunizationStatus",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "164464AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "164464AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "164134AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Fully immunized"
+                  },
+                  {
+                    "concept": "5585AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Up to date"
+                  },
+                  {
+                    "concept": "164468AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not up to date"
+                  },
+                  {
+                    "concept": "164463AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not started"
+                  },
+                  {
+                    "concept": "160031AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Defaulted"
+                  }
+                ]
               }
             },
             {

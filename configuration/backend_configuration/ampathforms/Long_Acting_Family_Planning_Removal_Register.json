@@ -4,7 +4,7 @@
   "version": "1.1",
   "published": true,
   "uuid": "fa6b8584-5128-4871-8146-c819fd7188b2",
-  "retired": true,
+  "retired": false,
   "encounter": "Consultation",
   "pages": [
     {
@@ -62,88 +62,10 @@
       ]
     },
     {
-      "label": "Client Information",
+      "label": "LAFP Detail",
       "sections": [
         {
-          "label": "Basic Information",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Date Form filled in",
-              "type": "obs",
-              "required": "true",
-              "id": "dateFormFilled",
-              "questionOptions": {
-                "rendering": "date",
-                "concept": "166079AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "calculate": {
-                  "calculateExpression": "today()"
-                }
-              },
-              "validators": [
-                {
-                  "type": "date",
-                  "allowFutureDates": "false"
-                }
-              ],
-              "questionInfo": "Date when this form was completed"
-            },
-            {
-              "label": "Medical Record Number (MRN)",
-              "type": "obs",
-              "required": "false",
-              "id": "mrn",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "c0a51001-0000-4000-8000-000000000001"
-              }
-            },
-            {
-              "label": "Name of client",
-              "type": "obs",
-              "required": "false",
-              "id": "clientName",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
-            },
-            {
-              "label": "Age",
-              "type": "obs",
-              "required": "false",
-              "id": "age",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "1532AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
-            },
-            {
-              "label": "Registration date",
-              "type": "obs",
-              "required": "false",
-              "id": "registrationDate",
-              "questionOptions": {
-                "rendering": "date",
-                "concept": "160753AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              },
-              "validators": [
-                {
-                  "type": "date",
-                  "allowFutureDates": "false"
-                }
-              ],
-              "questionInfo": "Date when client was registered"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "label": "LAFP Information",
-      "sections": [
-        {
-          "label": "Long Acting Family Planning Details",
+          "label": "LAFP Detail",
           "isExpanded": "true",
           "questions": [
             {
@@ -164,7 +86,7 @@
               "questionInfo": "Date when the LAFP method was originally inserted"
             },
             {
-              "label": "Type of LAFP used",
+              "label": "Latest type of LAFP (long acting family planning) used",
               "type": "obs",
               "required": "false",
               "id": "lafpType",
@@ -177,8 +99,12 @@
                     "label": "Implant"
                   },
                   {
-                    "concept": "5279AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "5275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "IUCD"
+                  },
+                  {
+                    "concept": "5276AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Surgical Method"
                   },
                   {
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -188,7 +114,7 @@
               }
             },
             {
-              "label": "Place of LAFP received",
+              "label": "Place of latest LAFP (long acting family planning) received",
               "type": "obs",
               "required": "false",
               "id": "lafpPlace",
@@ -201,20 +127,20 @@
                     "label": "Within facility (WI)"
                   },
                   {
-                    "concept": "1537AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Hospital -Out of Facility"
+                    "concept": "2f708192-a314-2345-f678-90123456bcde",
+                    "label": "Hospital - Out of Facility"
                   },
                   {
-                    "concept": "1536AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Health Center -Out of Facility"
+                    "concept": "3081920a-b425-3456-0789-123456cdefab",
+                    "label": "Health Center - Out of Facility"
                   },
                   {
                     "concept": "4192031b-c536-4567-1890-23456defabcd",
-                    "label": "Health Post -Out of Facility"
+                    "label": "Health Post - Out of Facility"
                   },
                   {
-                    "concept": "1538AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Private Clinic -Out of Facility"
+                    "concept": "5203142c-d647-5678-2901-3456efabcdef",
+                    "label": "Private Clinic - Out of Facility"
                   }
                 ]
               }
@@ -227,7 +153,7 @@
       "label": "Removal Information",
       "sections": [
         {
-          "label": "Removal Details",
+          "label": "Removal Information",
           "isExpanded": "true",
           "questions": [
             {
@@ -237,80 +163,66 @@
               "id": "removalDate",
               "questionOptions": {
                 "rendering": "date",
-                "concept": "5474bf3c-ab47-441f-848a-9640cb5c6056"
+                "concept": "5474bf3c-ab47-441f-848a-9640cb5c6056",
+                "calculate": {
+                  "calculateExpression": "isEmpty(removalDate) ? today() : removalDate"
+                }
               },
               "validators": [
                 {
                   "type": "date",
                   "allowFutureDates": "false"
+                },
+                {
+                  "type": "js_expression",
+                  "message": "The removal date cannot be before the insertion date.",
+                  "failsWhenExpression": "!isEmpty(removalDate) && !isEmpty(dateInsertion) && new Date(removalDate) < new Date(dateInsertion)"
                 }
               ],
               "questionInfo": "Date when the LAFP removal procedure was performed"
             },
             {
-              "label": "Implanon",
+              "label": "LAFP type removed",
               "type": "obs",
-              "required": "false",
-              "id": "implanon",
+              "id": "lafpTypeRemoved",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "6314253d-e758-6789-3012-456fabcdef01",
-                "min": "0",
-                "step": 0.01
-              },
-              "questionInfo": "Number of Implanon implants removed (enter 0 if none)"
+                "rendering": "radio",
+                "concept": "a81d4664-5308-5a02-a4e6-bf06e6b5e2dc",
+                "answers": [
+                  {
+                    "concept": "76022AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Implanon"
+                  },
+                  {
+                    "concept": "1873AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Jadelle"
+                  },
+                  {
+                    "concept": "1359AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sino-Implant"
+                  },
+                  {
+                    "concept": "5275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "IUCD"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
             },
             {
-              "label": "Sino-implant",
+              "label": "Other LAFP type removed, specify",
               "type": "obs",
-              "required": "false",
-              "id": "sinoImplant",
+              "id": "lafpTypeRemovedOther",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "7425364e-f869-789a-4123-567abcdef012",
-                "min": "0",
-                "step": 0.01
+                "rendering": "text",
+                "concept": "06961a8f-2e85-5fd5-9eea-23f58bd8897c"
               },
-              "questionInfo": "Number of Sino-implant devices removed (enter 0 if none)"
-            },
-            {
-              "label": "Jadelle",
-              "type": "obs",
-              "required": "false",
-              "id": "jadell",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "d2d5eaca-8fa4-463f-94b4-7e0a487dfd3f",
-                "min": "0",
-                "step": 0.01
-              },
-              "questionInfo": "Number of Jadelle implants removed (enter 0 if none)"
-            },
-            {
-              "label": "Intrauterine Device (IUD)",
-              "type": "obs",
-              "required": "false",
-              "id": "iud",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5def6330-0816-4efb-a9e3-131aa6020392",
-                "min": "0",
-                "step": 0.01
-              },
-              "questionInfo": "Number of IUDs removed (enter 0 if none)"
-            },
-            {
-              "label": "Other LAFP",
-              "type": "obs",
-              "required": "false",
-              "id": "lafpOthers",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "8536475f-0970-890b-5234-678bcdef0123",
-                "min": "0",
-                "step": 0.01
-              },
-              "questionInfo": "Number of other LAFP devices removed not listed above (enter 0 if none)"
+              "hide": {
+                "hideWhenExpression": "lafpTypeRemoved !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             },
             {
               "label": "Reason for removal",
@@ -318,7 +230,7 @@
               "required": "false",
               "id": "removalReason",
               "questionOptions": {
-                "rendering": "radio",
+                "rendering": "checkbox",
                 "concept": "a192b3c4-d5e6-f789-0123-456789abcdef",
                 "answers": [
                   {
@@ -326,7 +238,7 @@
                     "label": "On recommended time"
                   },
                   {
-                    "concept": "1778AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "0758697b-2192-012d-7456-89def0123456",
                     "label": "LAFP Side Effect"
                   },
                   {
@@ -334,8 +246,12 @@
                     "label": "Want to get Pregnant"
                   },
                   {
+                    "concept": "95d39333-5fab-51f8-aa7f-a62a88367a82",
+                    "label": "Partner / Husband Opposition"
+                  },
+                  {
                     "concept": "1869708c-3203-123e-8567-9ef012345678",
-                    "label": "Misconception"
+                    "label": "Myths and Misconception"
                   },
                   {
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -344,16 +260,44 @@
                 ]
               },
               "questionInfo": "Primary reason why the LAFP method was removed"
+            },
+            {
+              "label": "Other reason for removal, specify",
+              "type": "obs",
+              "id": "removalReasonOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "94fc3e3f-dbf2-5455-8763-d40a327d62d6"
+              },
+              "hide": {
+                "hideWhenExpression": "!(!isEmpty(removalReason) && arrayContains(removalReason, '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
+              }
+            },
+            {
+              "label": "LAFP method duration used (months)",
+              "type": "obs",
+              "id": "lafpDurationMonths",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "baee2853-f838-5b70-97fe-759fda487e97",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(dateInsertion) || isEmpty(removalDate)) ? null : Math.max(0, Math.floor((new Date(removalDate) - new Date(dateInsertion)) / 2629800000))"
+                },
+                "step": 1,
+                "disallowDecimals": true,
+                "min": "0"
+              },
+              "readonly": true
             }
           ]
         }
       ]
     },
     {
-      "label": "HIV Testing & Counseling",
+      "label": "HIV Testing and Counseling",
       "sections": [
         {
-          "label": "HIV Services",
+          "label": "HIV Testing and Counseling",
           "isExpanded": "true",
           "questions": [
             {
@@ -396,7 +340,10 @@
                   }
                 ]
               },
-              "questionInfo": "Whether HIV test was actually performed on the patient"
+              "questionInfo": "Whether HIV test was actually performed on the patient",
+              "hide": {
+                "hideWhenExpression": "isEmpty(hivTestOffered) || hivTestOffered !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             },
             {
               "label": "HIV Test Result",
@@ -422,7 +369,7 @@
               }
             },
             {
-              "label": "HIV Specific counseling/methods offered",
+              "label": "HIV Specific Contraceptive Counseling offered",
               "type": "obs",
               "required": "false",
               "id": "hivCounseling",
@@ -440,7 +387,10 @@
                   }
                 ]
               },
-              "questionInfo": "Whether HIV-specific counseling or prevention methods were offered"
+              "questionInfo": "Whether HIV-specific counseling or prevention methods were offered",
+              "hide": {
+                "hideWhenExpression": "isEmpty(hivTestResult) || hivTestResult !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             },
             {
               "label": "HIV positive linked to ART",
@@ -465,80 +415,69 @@
                 "hideWhenExpression": "isEmpty(hivTestResult) || hivTestResult !== '703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               },
               "questionInfo": "Whether HIV positive patient was successfully linked to ART services"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "label": "Target Population",
-      "sections": [
-        {
-          "label": "Population Category",
-          "isExpanded": "true",
-          "questions": [
+            },
             {
               "label": "Target Population Category",
               "type": "obs",
-              "required": "false",
+              "required": false,
               "id": "targetPopulationCategory",
               "questionOptions": {
                 "rendering": "select",
                 "concept": "4f8a2b1c-3d5e-4567-8901-234567890abc",
                 "answers": [
                   {
-                    "label": "Female Commercial Sex Workers",
-                    "concept": "160579AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "160579AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female Commercial Sex Workers"
                   },
                   {
-                    "label": "Long Distance Drivers",
-                    "concept": "162198AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "162198AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Long Distance Driver"
                   },
                   {
-                    "label": "Mobile Workers/Daily Laborers",
-                    "concept": "7e9f1a2b-4c6d-5678-9012-345678901de0"
+                    "concept": "7e9f1a2b-4c6d-5678-9012-345678901de0",
+                    "label": "Mobile Workers/Daily Labourers"
                   },
                   {
-                    "label": "Prisoners",
-                    "concept": "162277AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "162277AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Prisoners"
                   },
                   {
-                    "label": "OVC",
-                    "concept": "1174AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "9647586e-1081-901m-6345-7ef89abcdef0",
+                    "label": "Orphans and Vulnerable Children (OVC)"
                   },
                   {
-                    "label": "Children of PLHIV",
-                    "concept": "1393AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "0758697f-2192-012n-7456-8ef9abcdef01",
+                    "label": "Children of PLHIV (People Living with HIV)"
                   },
                   {
-                    "label": "Partner of PLHIV",
-                    "concept": "8f0a2b3c-5d7e-6789-0123-456789012e0a"
+                    "concept": "8f0a2b3c-5d7e-6789-0123-456789012e0a",
+                    "label": "Partner of PLHIV (People Living with HIV)"
                   },
                   {
-                    "label": "Other Marps",
-                    "concept": "9a1b3c4d-6e8f-7890-1234-567890123f0a"
+                    "concept": "9a1b3c4d-6e8f-7890-1234-567890123f0a",
+                    "label": "Other Most At-Risk Populations (MARPs)"
                   },
                   {
-                    "label": "General Population",
-                    "concept": "0b2c4d5e-7f9a-8901-2345-678901234a0b"
+                    "concept": "0b2c4d5e-7f9a-8901-2345-678901234a0b",
+                    "label": "General Population"
                   }
                 ]
               },
-              "questionInfo": "Client target population category for reporting purposes"
+              "help": null
             }
           ]
         }
       ]
     },
     {
-      "label": "Post-Removal Care",
+      "label": "Post Removal Care",
       "sections": [
         {
-          "label": "Follow-up Services",
+          "label": "Post Removal Care",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Post removal Contraceptive provided",
+              "label": "Is post removal contraceptive provided?",
               "type": "obs",
               "required": "false",
               "id": "postRemovalContraceptive",
@@ -557,6 +496,52 @@
                 ]
               },
               "questionInfo": "Whether a contraceptive method was provided after LAFP removal"
+            },
+            {
+              "label": "Post removal contraceptive provided",
+              "type": "obs",
+              "id": "postRemovalContraceptiveMethod",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "164813AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Male Condom"
+                  },
+                  {
+                    "concept": "164814AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female Condom"
+                  },
+                  {
+                    "concept": "780AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Oral Contraceptive"
+                  },
+                  {
+                    "concept": "5279AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Injectable"
+                  },
+                  {
+                    "concept": "160570AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Emergency Contraception"
+                  },
+                  {
+                    "concept": "5278AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Diaphragm"
+                  },
+                  {
+                    "concept": "5275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Intrauterine Contraceptive Device"
+                  },
+                  {
+                    "concept": "159589AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Implant"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "postRemovalContraceptive !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             },
             {
               "label": "Remark",
