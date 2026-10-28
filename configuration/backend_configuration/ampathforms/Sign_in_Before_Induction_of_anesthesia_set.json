@@ -69,11 +69,11 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Patient has confirmed",
+              "label": "Patient has confirmed (identity, site, procedure, consent)",
               "type": "obs",
               "id": "patientHasConfirmed",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "checkbox",
                 "concept": "22f2c6cb-f8b4-4bf8-9a3b-eb123409f362",
                 "answers": [
                   {
@@ -96,7 +96,7 @@
               }
             },
             {
-              "label": "Site marked/ not applicable",
+              "label": "Is the site marked?",
               "type": "obs",
               "id": "siteMarkedNotApplicable",
               "questionOptions": {
@@ -110,12 +110,16 @@
                   {
                     "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "No"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not applicable"
                   }
                 ]
               }
             },
             {
-              "label": "Anesthesia Safety Check Complete",
+              "label": "Is the anaesthesia machine and medication check complete?",
               "type": "obs",
               "id": "anesthesiaSafetyCheckComplete",
               "questionOptions": {
@@ -134,7 +138,26 @@
               }
             },
             {
-              "label": "Does the Patient has Known allergy",
+              "label": "Is the pulse oximeter on the patient and functioning?",
+              "type": "obs",
+              "id": "pulseOximeterOnPatientAndFunctioning",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "81273bff-3b5a-4715-a58a-a28d7a93c024",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Does the patient have any known allergies?",
               "type": "obs",
               "id": "doesThePatientHasKnownAllergy",
               "questionOptions": {
@@ -172,34 +195,24 @@
               }
             },
             {
-              "label": "If yes",
+              "label": "Difficult airway or aspiration risk: equipment and assistance available, details",
               "type": "obs",
               "id": "ifYes",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "9b9ea5ca-254a-4316-a943-f0a0a597ec8f",
-                "answers": [
-                  {
-                    "concept": "083ec80a-ba88-48a8-a6c5-5ef9441f5d6f",
-                    "label": "Pre-Eclampsia"
-                  },
-                  {
-                    "concept": "267a4a17-088f-475f-be76-902e36bdcc37",
-                    "label": "Eclampsia"
-                  }
-                ]
+                "rendering": "textarea",
+                "concept": "9b9ea5ca-254a-4316-a943-f0a0a597ec8f"
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(difficultAirwayOrAspirationRisk) || difficultAirwayOrAspirationRisk !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
-              "label": "Risk of < 500ml blood loss/ 7ml/kg in children",
+              "label": "Is blood loss of more than 500 mL (7 mL/kg in children) anticipated?",
               "type": "obs",
               "id": "riskOf500mlBloodLoss7mlKgInChildren",
               "questionOptions": {
                 "rendering": "radio",
-                "concept": "3a107e3c-c51e-4a83-a806-7d3662481bd5",
+                "concept": "c54872ec-8702-49fe-b428-bdb4c69baf3c",
                 "answers": [
                   {
                     "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -213,16 +226,20 @@
               }
             },
             {
-              "label": "If Yes",
+              "label": "Two IVs or central access and fluids planned?",
               "type": "obs",
               "id": "ifYes2",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "9b9ea5ca-254a-4316-a943-f0a0a597ec8f",
+                "rendering": "radio",
+                "concept": "c9ec6b42-86c8-41b5-9d38-b3f3f89db7a1",
                 "answers": [
                   {
-                    "concept": "156c7923-6f8b-4537-b47f-b549f478a54d",
-                    "label": "Intravenous fluid available"
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
                   }
                 ]
               },

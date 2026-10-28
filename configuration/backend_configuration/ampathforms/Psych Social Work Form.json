@@ -73,9 +73,27 @@
             {
               "label": "Diagnosis",
               "type": "obs",
+              "id": "diagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Diagnosis notes",
+              "type": "obs",
               "id": "diagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "62c3f2f7-c9ab-4ead-bffc-4f780d4de04a"
               },
               "readonly": false
@@ -131,24 +149,52 @@
                 "concept": "cc27a91e-c4a8-44ad-b2ed-25219216dfbb",
                 "answers": [
                   {
-                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "None"
+                    "concept": "160294AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No formal education"
                   },
                   {
-                    "concept": "71129829-dc9b-4730-90cb-a38ac72d8fd7",
-                    "label": "Elementary"
+                    "concept": "166855AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Can read and write, but no formal schooling"
                   },
                   {
-                    "concept": "818c725f-cc73-4e35-8277-291dcdc37bb0",
-                    "label": "High school"
+                    "concept": "71be8c02-af00-40fb-8c09-f2ed52382763",
+                    "label": "Primary education (Grades 1–8)"
                   },
                   {
-                    "concept": "a7bfc404-61e6-482b-9b50-e31b958eff30",
+                    "concept": "594ca3f5-8918-4c06-954a-17a81d379d3c",
+                    "label": "Secondary education (Grades 9–10)"
+                  },
+                  {
+                    "concept": "85a4ba27-7ca2-5efe-9b72-803841422086",
+                    "label": "Preparatory education (Grades 11–12)"
+                  },
+                  {
+                    "concept": "0f66086a-d1ba-448d-8c47-47a32343deb3",
+                    "label": "TVET / Technical or vocational certificate"
+                  },
+                  {
+                    "concept": "b614b6bf-0b2e-46be-b986-46dcd5f407bf",
                     "label": "Diploma"
                   },
                   {
-                    "concept": "9cc9d880-dcbb-49a7-a1c8-76379e364a3a",
-                    "label": "Degree+"
+                    "concept": "9246b3fc-82b6-4a9c-a1ff-615619babb9c",
+                    "label": "Bachelor's degree"
+                  },
+                  {
+                    "concept": "edfd55c2-963b-47d2-a8e8-95a1303a8622",
+                    "label": "Master's degree"
+                  },
+                  {
+                    "concept": "4b76ec17-e61d-458a-bd0b-86b7e801f590",
+                    "label": "Doctoral degree (PhD or equivalent)"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown / Not stated"
                   }
                 ]
               },
@@ -497,7 +543,13 @@
                 "rendering": "datetime",
                 "concept": "726afe8a-46bc-4473-9c18-6e9edb9c318a"
               },
-              "readonly": false
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Attendance",
@@ -949,7 +1001,13 @@
               "readonly": false,
               "hide": {
                 "hideWhenExpression": "signedBy !== '5ec51542-6a40-4f25-8654-6af7628002a9'"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             }
           ]
         },

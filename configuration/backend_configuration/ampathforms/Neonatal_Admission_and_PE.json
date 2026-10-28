@@ -69,7 +69,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Birth weight in gram",
+              "label": "Birth weight (g)",
               "type": "obs",
               "id": "birthWeightInGram",
               "questionOptions": {
@@ -79,6 +79,29 @@
                 "step": 0.01
               },
               "hideSteppers": true
+            },
+            {
+              "label": "Weight for gestational age",
+              "type": "obs",
+              "id": "weightForGestationalAge",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7b3684df-25f1-5c8e-90c6-f295368975fc",
+                "answers": [
+                  {
+                    "concept": "89bad637-447c-4497-bc1e-e875b4d86a79",
+                    "label": "Small for gestational age (SGA)"
+                  },
+                  {
+                    "concept": "c4b96143-eff7-49ca-9de9-81fd8841efa3",
+                    "label": "Appropriate for gestational age (AGA)"
+                  },
+                  {
+                    "concept": "f9d5ce75-46c8-51d1-adaa-a88b10217576",
+                    "label": "Large for gestational age (LGA)"
+                  }
+                ]
+              }
             },
             {
               "label": "Sex of the infant",
@@ -100,7 +123,7 @@
               }
             },
             {
-              "label": "Gestational Age",
+              "label": "Gestational age at time of birth",
               "type": "obs",
               "id": "gestationalAge",
               "questionOptions": {
@@ -109,27 +132,39 @@
                 "answers": [
                   {
                     "concept": "8536475f-6970-8901-5678-234567890123",
-                    "label": "Extremely Preterm GA < 28 wks"
+                    "label": "Extremely preterm (less than 28 weeks)"
                   },
                   {
-                    "concept": "bd150567-807b-5a12-a054-df46394e1d31",
-                    "label": "Very Preterm GA <32 weeks"
+                    "concept": "9647586a-7081-9012-6789-345678901234",
+                    "label": "Very preterm (28 to 31+6 weeks)"
                   },
                   {
-                    "concept": "0758697b-8192-0123-7890-456789012345",
-                    "label": "Early Preterm GA 32 - 34 weeks"
+                    "concept": "d1490b3e-9117-5513-bbf1-dd0ea15758ca",
+                    "label": "Moderate preterm (32 to 33+6 weeks)"
                   },
                   {
                     "concept": "1869708c-9203-1234-8901-567890123456",
-                    "label": "Late Preterm GA 34 -36 wk"
+                    "label": "Late preterm (34 to 36+6 weeks)"
                   },
                   {
-                    "concept": "48fe3fc7-fcd1-400f-93e0-a82926e8b52e",
-                    "label": "Term GA = 37 weeks"
+                    "concept": "b2f2bb9a-f498-5c77-ba21-d8a7f635e710",
+                    "label": "Early term (37 to 38+6 weeks)"
                   },
                   {
-                    "concept": "441b88ad-1d3b-4c63-b1ca-331eaa1a4146",
-                    "label": "Post Term GA >41+7 wk"
+                    "concept": "845d4093-106a-50fc-b774-70c87298147b",
+                    "label": "Full term (39 to 40+6 weeks)"
+                  },
+                  {
+                    "concept": "12e57a7d-0e74-52d6-93a6-a47e0f9ec643",
+                    "label": "Late term (41 to 41+6 weeks)"
+                  },
+                  {
+                    "concept": "2960314d-9304-1234-5678-901234abcd0f",
+                    "label": "Post term (42 weeks or more)"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -201,7 +236,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "421719a0-eef5-4181-b55d-fff16d845314"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Reason for admission",
@@ -403,11 +444,11 @@
                 "answers": [
                   {
                     "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "NR"
+                    "label": "Non-reactive"
                   },
                   {
                     "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "R"
+                    "label": "Reactive"
                   }
                 ]
               }
@@ -433,12 +474,16 @@
                 "concept": "2273174b-6081-7902-2456-789123abcd32",
                 "answers": [
                   {
-                    "label": "Positive",
-                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
                   },
                   {
-                    "label": "Negative",
-                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -526,30 +571,14 @@
               }
             },
             {
-              "label": "Duration",
+              "label": "Duration of labor (hours)",
               "type": "obs",
               "id": "duration",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "5127814f-9ec7-40a5-b52e-5d112a4c2f77",
-                "answers": [
-                  {
-                    "label": "6-24 hrs stay",
-                    "concept": "3042b395-0a73-4416-8a1f-89eab4792a18"
-                  },
-                  {
-                    "label": "48-72 Hrs",
-                    "concept": "7861bdbc-419c-4c5c-805f-90978d5dc83a"
-                  },
-                  {
-                    "label": "42days",
-                    "concept": "d7bc6662-f095-4e5b-991b-48ef9aeda92d"
-                  },
-                  {
-                    "label": "7-14 days",
-                    "concept": "da3ded3e-b0ad-43da-9fa6-ae0553bff0ae"
-                  }
-                ]
+                "rendering": "number",
+                "concept": "159616AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "72"
               }
             },
             {
@@ -622,23 +651,27 @@
                 "answers": [
                   {
                     "concept": "1170AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Spontaneous Vaginal Delivery"
+                    "label": "Spontaneous vaginal delivery (SVD)"
                   },
                   {
-                    "concept": "f0415263-4758-6789-0123-456789345678",
-                    "label": "Cesarean Section Delivery"
+                    "concept": "b7b07c42-7251-4dc3-b10b-82e9fb17e5bd",
+                    "label": "Vacuum assisted delivery"
                   },
                   {
-                    "concept": "5577AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Episiotomy"
+                    "concept": "dd55a56d-315f-47d4-aba4-e430533cccb8",
+                    "label": "Forceps assisted delivery"
                   },
                   {
-                    "concept": "159901AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Forceps Delivery"
+                    "concept": "1172AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Assisted breech vaginal delivery"
                   },
                   {
-                    "concept": "d8293041-2536-4567-8901-234567123456",
-                    "label": "Vacuum Delivery"
+                    "concept": "9940841c-3758-4679-9123-456890abcd39",
+                    "label": "Cesarean section - elective"
+                  },
+                  {
+                    "concept": "159739AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cesarean section - emergency"
                   }
                 ]
               }
@@ -652,7 +685,7 @@
                 "concept": "60a0aa1a-b5df-4713-9d6a-8d001e493bea"
               },
               "hide": {
-                "hideWhenExpression": "isEmpty(deliveryType) || deliveryType !== 'f0415263-4758-6789-0123-456789345678'"
+                "hideWhenExpression": "isEmpty(deliveryType) || (deliveryType !== '9940841c-3758-4679-9123-456890abcd39' && deliveryType !== '159739AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
               }
             },
             {
@@ -859,15 +892,16 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse Rate (beats/min)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulseRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Beats per minute. Normal range 100-160 bpm.",
               "validators": [
@@ -880,7 +914,7 @@
               "hideSteppers": true
             },
             {
-              "label": "Systolic (mmHg)",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolic",
               "questionOptions": {
@@ -888,7 +922,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Millimetres of mercury. Normal range 60-90 mmHg.",
               "validators": [
@@ -901,15 +936,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Diastolic (mmHg)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolic",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Millimetres of mercury. Normal range 30-60 mmHg.",
               "validators": [
@@ -943,15 +979,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Respiratory Rate (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Breaths per minute. Normal range 30-60 breaths/min.",
               "validators": [
@@ -964,15 +1001,16 @@
               "hideSteppers": true
             },
             {
-              "label": "SPO2",
+              "label": "SpO2 (%)",
               "type": "obs",
               "id": "spo2",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "100"
+                "step": 1,
+                "max": "100",
+                "disallowDecimals": true
               },
               "validators": [
                 {
@@ -998,7 +1036,7 @@
               "hideSteppers": true
             },
             {
-              "label": "Length",
+              "label": "Length (cm)",
               "type": "obs",
               "id": "length",
               "questionOptions": {
@@ -1022,14 +1060,15 @@
               "hideSteppers": true
             },
             {
-              "label": "MUAC",
+              "label": "MUAC (cm)",
               "type": "obs",
               "id": "muac",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
-                "min": "0",
-                "step": 0.01
+                "min": "5",
+                "step": 0.1,
+                "max": "60"
               },
               "hideSteppers": true
             }

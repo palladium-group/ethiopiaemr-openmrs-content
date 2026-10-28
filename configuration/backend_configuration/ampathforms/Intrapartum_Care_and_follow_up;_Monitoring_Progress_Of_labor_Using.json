@@ -84,7 +84,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "a58d731f-002e-424f-94ed-41fbb61132e3"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "If membrane is ruptured, time of ROM",
@@ -93,7 +99,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "41e63134-c7ab-4ca4-8576-6f6891b7e602"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Gravida",
@@ -238,7 +250,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Temprature",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "temprature",
               "questionOptions": {
@@ -248,7 +260,14 @@
                 "step": 0.01,
                 "max": "43"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
+                }
+              ]
             }
           ]
         },

@@ -75,7 +75,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Indication",
@@ -104,12 +110,12 @@
                 "concept": "20040bdd-58ce-4235-9804-ffd596ec9356",
                 "answers": [
                   {
-                    "label": "Vacuum",
-                    "concept": "b7b07c42-7251-4dc3-b10b-82e9fb17e5bd"
+                    "concept": "bc0e9bb5-7c36-5b9d-962a-d003e62296c6",
+                    "label": "Gastroscope"
                   },
                   {
-                    "label": "Forceps",
-                    "concept": "dd55a56d-315f-47d4-aba4-e430533cccb8"
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
                   }
                 ]
               }
@@ -149,6 +155,81 @@
                     "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   }
                 ]
+              }
+            },
+            {
+              "label": "H. pylori test done?",
+              "type": "obs",
+              "id": "hPyloriTestDone",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "89bc2d09-4a11-52c9-84a7-8d97659ca75d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "H. pylori test method",
+              "type": "obs",
+              "id": "hPyloriTestMethod",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6b0e50b6-0f43-5deb-bd34-386799bff952",
+                "answers": [
+                  {
+                    "concept": "be8b6890-8e52-5694-ac17-cefcf1333891",
+                    "label": "Rapid urease test"
+                  },
+                  {
+                    "concept": "67a83b39-0780-5009-952b-3a0395f7921d",
+                    "label": "Histology"
+                  },
+                  {
+                    "concept": "163348AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Stool antigen"
+                  },
+                  {
+                    "concept": "163620AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Serology"
+                  },
+                  {
+                    "concept": "8449f6ec-2d5d-5e6d-8a2a-2ad6e9318b82",
+                    "label": "Urea breath test"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "hPyloriTestDone !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "H. pylori result",
+              "type": "obs",
+              "id": "hPyloriTestResult",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b991fd27-ca7c-56e1-afde-e820b479165b",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "hPyloriTestDone !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -211,9 +292,27 @@
             {
               "label": "Diagnosis",
               "type": "obs",
+              "id": "diagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Diagnosis notes",
+              "type": "obs",
               "id": "diagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             },

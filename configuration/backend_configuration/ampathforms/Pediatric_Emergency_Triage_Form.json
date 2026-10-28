@@ -1,6 +1,6 @@
 {
   "name": "Pediatrics Emergency Triage Form",
-  "description": "Used to triage children arriving at the pediatric emergency department, capturing vital signs, anthropometry, assessment of airway, breathing, circulation and other emergency signs, the assigned triage level, and basic and referral information.",
+  "description": "Used to triage sick newborns and children at the pediatric emergency department or outpatient clinic. It opens with the triage type (neonate, pediatric emergency or pediatric OPD) and records vital signs, anthropometry, the emergency and priority signs for that type, the assigned triage level, immediate actions for newborns, and basic and referral information.",
   "version": "1.4",
   "published": true,
   "uuid": "070e7d10-c6b8-4540-9718-5908738039c3",
@@ -62,8 +62,46 @@
       ]
     },
     {
-      "label": "Pediatric Emergency Triage",
+      "label": "Pediatric Triage",
       "sections": [
+        {
+          "label": "Triage type",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Triage type",
+              "type": "obs",
+              "id": "pediatricTriageType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "a9140d9a-c721-5399-bf6c-b84bd9a2ebfa",
+                "answers": [
+                  {
+                    "concept": "a28928a7-af76-5dd4-acee-7ff619b513df",
+                    "label": "Neonate (0 to 28 days)"
+                  },
+                  {
+                    "concept": "160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pediatric emergency"
+                  },
+                  {
+                    "concept": "160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pediatric OPD"
+                  }
+                ]
+              },
+              "required": "true",
+              "questionInfo": "Choose the triage that fits the patient; only that triage opens below.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && !isEmpty(patient) && !isEmpty(patient.birthDate) && ((myValue === 'a28928a7-af76-5dd4-acee-7ff619b513df' && ((new Date() - new Date(patient.birthDate)) / 86400000) > 28) || (myValue !== 'a28928a7-af76-5dd4-acee-7ff619b513df' && ((new Date() - new Date(patient.birthDate)) / 86400000) <= 28))",
+                  "message": "Check the triage type: a neonate is 0 to 28 days old."
+                }
+              ]
+            }
+          ]
+        },
         {
           "label": "Vital Signs",
           "isExpanded": "true",
@@ -87,10 +125,13 @@
                 ]
               },
               "readonly": false,
-              "questionInfo": "If checked Yes, the pulse rate box is hidden."
+              "questionInfo": "If checked Yes, the pulse rate box is hidden.",
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
-              "label": "Pulse Rate (PR) (bpm)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulseRate",
               "questionOptions": {
@@ -98,7 +139,8 @@
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": 1,
                 "min": "0",
-                "max": "230"
+                "max": "230",
+                "disallowDecimals": true
               },
               "readonly": false,
               "validators": [
@@ -106,11 +148,16 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
                   "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 100 || myValue > 180) : age < 3 ? (myValue < 98 || myValue > 140) : age < 6 ? (myValue < 80 || myValue > 120) : age < 12 ? (myValue < 75 || myValue > 118) : (myValue < 60 || myValue > 100))",
+                  "message": "Outside the normal pulse range for the patient's age."
                 }
               ],
               "questionInfo": "Beats per minute. Whole numbers only.",
               "hide": {
-                "hideWhenExpression": "pulseNotPalpable === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "(pulseNotPalpable === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               },
               "hideSteppers": true
             },
@@ -134,7 +181,7 @@
               },
               "required": "true",
               "hide": {
-                "hideWhenExpression": "pulseNotPalpable === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "(pulseNotPalpable === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               },
               "readonly": false
             },
@@ -158,7 +205,7 @@
               },
               "required": "true",
               "hide": {
-                "hideWhenExpression": "pulseNotPalpable === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "(pulseNotPalpable === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               },
               "readonly": false
             },
@@ -182,12 +229,34 @@
               },
               "required": "true",
               "hide": {
-                "hideWhenExpression": "pulseRhythm !== '1d8e7336-6ece-4b88-9335-abdd10074ed5' || pulseNotPalpable === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "(pulseRhythm !== '1d8e7336-6ece-4b88-9335-abdd10074ed5' || pulseNotPalpable === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               },
               "readonly": false
             },
             {
-              "label": "Respiratory Rate (RR) (breaths/min)",
+              "label": "Posture",
+              "type": "obs",
+              "id": "posture",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "159633AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Sitting"
+                  },
+                  {
+                    "concept": "159629AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Supine"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "(!(pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
+            },
+            {
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRate",
               "questionOptions": {
@@ -195,7 +264,8 @@
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": 1,
                 "min": "0",
-                "max": "99"
+                "max": "99",
+                "disallowDecimals": true
               },
               "readonly": false,
               "validators": [
@@ -203,10 +273,18 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
                   "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 30 || myValue > 53) : age < 3 ? (myValue < 22 || myValue > 37) : age < 6 ? (myValue < 20 || myValue > 28) : age < 12 ? (myValue < 18 || myValue > 25) : (myValue < 12 || myValue > 20))",
+                  "message": "Outside the normal respiratory rate for the patient's age."
                 }
               ],
               "questionInfo": "Breaths per minute. Whole numbers only.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Respiratory depth",
@@ -227,7 +305,10 @@
                 ]
               },
               "required": "true",
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Respiratory rhythm",
@@ -248,10 +329,13 @@
                 ]
               },
               "required": "true",
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
-              "label": "Oxygen Saturation (SpO2) (%)",
+              "label": "SpO2 (%)",
               "type": "obs",
               "id": "spo2",
               "questionOptions": {
@@ -259,7 +343,8 @@
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": 1,
                 "min": "0",
-                "max": "100"
+                "max": "100",
+                "disallowDecimals": true
               },
               "readonly": false,
               "validators": [
@@ -267,10 +352,18 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
                   "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue < 94",
+                  "message": "SpO2 below 94%."
                 }
               ],
               "questionInfo": "Percent. Whole numbers only.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Oxygen delivery",
@@ -303,7 +396,10 @@
                 ]
               },
               "required": "true",
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Oxygen Liter (L)",
@@ -317,7 +413,7 @@
               },
               "readonly": false,
               "hide": {
-                "hideWhenExpression": "!oxygenDelivery || oxygenDelivery === '162735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "(!oxygenDelivery || oxygenDelivery === '162735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               },
               "hideSteppers": true
             },
@@ -341,7 +437,7 @@
                 }
               ],
               "hide": {
-                "hideWhenExpression": "oxygenDelivery !== '91e99b02-2be8-446f-9af2-ac07d77c9c0c' && oxygenDelivery !== '165998AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "(oxygenDelivery !== '91e99b02-2be8-446f-9af2-ac07d77c9c0c' && oxygenDelivery !== '165998AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               },
               "hideSteppers": true
             },
@@ -357,7 +453,7 @@
               },
               "readonly": false,
               "hide": {
-                "hideWhenExpression": "oxygenDelivery !== '91e99b02-2be8-446f-9af2-ac07d77c9c0c' && oxygenDelivery !== '165998AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "(oxygenDelivery !== '91e99b02-2be8-446f-9af2-ac07d77c9c0c' && oxygenDelivery !== '165998AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               },
               "hideSteppers": true
             },
@@ -378,10 +474,18 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
                   "message": "At most 1 decimal place allowed."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
                 }
               ],
               "questionInfo": "Degrees Centigrade. 1 decimal place.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Temperature route",
@@ -414,10 +518,13 @@
                 ]
               },
               "required": "true",
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
-              "label": "Systolic Blood Pressure (SBP) (mmHg)",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolic",
               "questionOptions": {
@@ -425,7 +532,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": 1,
                 "min": "0",
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "readonly": false,
               "validators": [
@@ -433,13 +541,21 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
                   "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 72 || myValue > 104) : age < 3 ? (myValue < 86 || myValue > 106) : age < 6 ? (myValue < 89 || myValue > 112) : age < 12 ? (myValue < 97 || myValue > 115) : (myValue < 90 || myValue > 139))",
+                  "message": "Outside the normal systolic range for the patient's age."
                 }
               ],
               "questionInfo": "Whole numbers only.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
-              "label": "Diastolic Blood Pressure (DBP) (mmHg)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolic",
               "questionOptions": {
@@ -447,7 +563,8 @@
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": 1,
                 "min": "0",
-                "max": "150"
+                "max": "150",
+                "disallowDecimals": true
               },
               "readonly": false,
               "validators": [
@@ -455,10 +572,18 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
                   "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 37 || myValue > 56) : age < 3 ? (myValue < 42 || myValue > 63) : age < 6 ? (myValue < 46 || myValue > 72) : age < 12 ? (myValue < 57 || myValue > 76) : (myValue < 60 || myValue > 89))",
+                  "message": "Outside the normal diastolic range for the patient's age."
                 }
               ],
               "questionInfo": "Whole numbers only.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "RBS(mg/dl)",
@@ -470,7 +595,17 @@
                 "min": "0",
                 "step": 0.01
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && pediatricTriageType === 'a28928a7-af76-5dd4-acee-7ff619b513df' && myValue < 45",
+                  "message": "Low blood glucose for a newborn (below 45 mg/dL)."
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             }
           ]
         },
@@ -498,7 +633,10 @@
                 }
               ],
               "questionInfo": "Use kilograms for age ≥ 30 days (2 decimals allowed).",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "(!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))) || pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Weight (g) - infants under 30 days",
@@ -520,7 +658,10 @@
                 }
               ],
               "questionInfo": "Use grams for infants under 30 days (no decimals).",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Height / Length (cm)",
@@ -542,18 +683,21 @@
                 }
               ],
               "questionInfo": "Centimetres.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
-              "label": "Mid Upper Arm Circumference (MUAC) (cm)",
+              "label": "MUAC (cm)",
               "type": "obs",
               "id": "muac",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": 0.1,
-                "min": "0",
-                "max": "50"
+                "min": "5",
+                "max": "60"
               },
               "readonly": false,
               "validators": [
@@ -561,10 +705,18 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
                   "message": "At most 1 decimal place allowed."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 12.5) || (age >= 18 && myValue < 21))",
+                  "message": "MUAC below the cut-off (under 5 years: 12.5 cm; adults: 21 cm): screen for acute malnutrition."
                 }
               ],
               "questionInfo": "Mid-upper arm circumference in centimetres.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "(!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))) || pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Head Circumference (HC) (cm)",
@@ -586,7 +738,10 @@
                 }
               ],
               "questionInfo": "Centimetres.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Weight for Height/Length (WFH/L) z-score",
@@ -596,8 +751,8 @@
                 "rendering": "number",
                 "concept": "98b6233c-7cf8-4218-b516-d2142dad9a0a",
                 "step": 0.1,
-                "min": "-5",
-                "max": "5",
+                "min": "-10",
+                "max": "10",
                 "calculate": {
                   "calculateExpression": "(isEmpty(height) || isEmpty(weightKg)) ? '' : ((calcWeightForHeightZscore(Number(height),Number(weightKg)) == null) ? '' : Number(calcWeightForHeightZscore(Number(height),Number(weightKg))))"
                 },
@@ -605,7 +760,65 @@
               },
               "readonly": false,
               "questionInfo": "Typical range -3 to 3 (extended -5 to 5 under discussion).",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < -5 || myValue > 5)",
+                  "message": "Outside -5 to +5: re-check the weight, height and age."
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "(!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))) || pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
+            },
+            {
+              "label": "Weight for Height/Length (WHO z-score category)",
+              "type": "obs",
+              "required": false,
+              "id": "wfhZCategory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "17647889-9708-901b-2349-012345678901",
+                "answers": [
+                  {
+                    "concept": "18758990-0819-012c-3450-123456789012",
+                    "label": "Below -3"
+                  },
+                  {
+                    "concept": "19869001-1920-123d-4561-234567890123",
+                    "label": "Between -3 and -2"
+                  },
+                  {
+                    "concept": "20970112-2031-234e-5672-345678901234",
+                    "label": "Between -2 and -1"
+                  },
+                  {
+                    "concept": "21081223-3142-345f-6783-456789012345",
+                    "label": "Between -1 and 0"
+                  },
+                  {
+                    "concept": "22192334-4253-4560-7894-567890123456",
+                    "label": "Between 0 and 1"
+                  },
+                  {
+                    "concept": "23203445-5364-5671-8905-678901234567",
+                    "label": "Between 1 and 2"
+                  },
+                  {
+                    "concept": "24314556-6475-6782-9016-789012345678",
+                    "label": "Between 2 and 3"
+                  },
+                  {
+                    "concept": "25425667-7586-7893-0127-890123456789",
+                    "label": "Above 3"
+                  }
+                ]
+              },
+              "questionInfo": "WHO growth-standard z-score category for the child's age and sex (read from the WHO chart).",
+              "hide": {
+                "hideWhenExpression": "(!(pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Weight for Age (WFA) z-score",
@@ -615,12 +828,70 @@
                 "rendering": "number",
                 "concept": "162584AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": 0.1,
-                "min": "-5",
-                "max": "5"
+                "min": "-10",
+                "max": "10"
               },
               "readonly": false,
               "questionInfo": "Typical range -3 to 3.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < -5 || myValue > 5)",
+                  "message": "Outside -5 to +5: re-check the weight, height and age."
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "(!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))) || pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
+            },
+            {
+              "label": "Weight for Age (WHO z-score category)",
+              "type": "obs",
+              "required": false,
+              "id": "wfaZCategory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0e758f90-0819-012c-3450-123456789012",
+                "answers": [
+                  {
+                    "concept": "0f869001-1920-123d-4561-234567890123",
+                    "label": "Below -3"
+                  },
+                  {
+                    "concept": "10970112-2031-234e-5672-345678901234",
+                    "label": "Between -3 and -2"
+                  },
+                  {
+                    "concept": "11081223-3142-345f-6783-456789012345",
+                    "label": "Between -2 and -1"
+                  },
+                  {
+                    "concept": "12192334-4253-4560-7894-567890123456",
+                    "label": "Between -1 and 0"
+                  },
+                  {
+                    "concept": "13203445-5364-5671-8905-678901234567",
+                    "label": "Between 0 and 1"
+                  },
+                  {
+                    "concept": "14314556-6475-6782-9016-789012345678",
+                    "label": "Between 1 and 2"
+                  },
+                  {
+                    "concept": "15425667-7586-7893-0127-890123456789",
+                    "label": "Between 2 and 3"
+                  },
+                  {
+                    "concept": "16536778-8697-890a-1238-901234567890",
+                    "label": "Above 3"
+                  }
+                ]
+              },
+              "questionInfo": "WHO growth-standard z-score category for the child's age and sex (read from the WHO chart).",
+              "hide": {
+                "hideWhenExpression": "(!(pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Height/Length for Age (H/LFA) z-score",
@@ -630,8 +901,8 @@
                 "rendering": "number",
                 "concept": "d2ecb899-60de-48ad-bfe8-5b14e2b5c1ce",
                 "step": 0.1,
-                "min": "-5",
-                "max": "5",
+                "min": "-10",
+                "max": "10",
                 "calculate": {
                   "calculateExpression": "(isEmpty(height)) ? '' : ((calcHeightForAgeZscore(Number(height)) == null) ? '' : Number(calcHeightForAgeZscore(Number(height))))"
                 },
@@ -639,7 +910,65 @@
               },
               "readonly": false,
               "questionInfo": "Typical range -3 to 3.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < -5 || myValue > 5)",
+                  "message": "Outside -5 to +5: re-check the weight, height and age."
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "(!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))) || pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
+            },
+            {
+              "label": "Height/Length for Age (WHO z-score category)",
+              "type": "obs",
+              "required": false,
+              "id": "hfaZCategory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "26536778-8697-890a-1238-901234567890",
+                "answers": [
+                  {
+                    "concept": "27647889-9708-901b-2349-012345678901",
+                    "label": "Below -3"
+                  },
+                  {
+                    "concept": "28758990-0819-012c-3450-123456789012",
+                    "label": "Between -3 and -2"
+                  },
+                  {
+                    "concept": "29869001-1920-123d-4561-234567890123",
+                    "label": "Between -2 and -1"
+                  },
+                  {
+                    "concept": "30970112-2031-234e-5672-345678901234",
+                    "label": "Between -1 and 0"
+                  },
+                  {
+                    "concept": "31081223-3142-345f-6783-456789012345",
+                    "label": "Between 0 and 1"
+                  },
+                  {
+                    "concept": "32192334-4253-4560-7894-567890123456",
+                    "label": "Between 1 and 2"
+                  },
+                  {
+                    "concept": "33203445-5364-5671-8905-678901234567",
+                    "label": "Between 2 and 3"
+                  },
+                  {
+                    "concept": "34314556-6475-6782-9016-789012345678",
+                    "label": "Above 3"
+                  }
+                ]
+              },
+              "questionInfo": "WHO growth-standard z-score category for the child's age and sex (read from the WHO chart).",
+              "hide": {
+                "hideWhenExpression": "(!(pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Head Circumference for Age (HCFA) z-score",
@@ -649,12 +978,22 @@
                 "rendering": "number",
                 "concept": "0b6da8af-6037-4e38-9e7e-5817a4a7c6d1",
                 "step": 0.1,
-                "min": "-5",
-                "max": "5"
+                "min": "-10",
+                "max": "10"
               },
               "readonly": false,
               "questionInfo": "Typical range -3 to 3.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < -5 || myValue > 5)",
+                  "message": "Outside -5 to +5: re-check the weight, height and age."
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "(!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))) || pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Body Mass Index (BMI) (kg/m²)",
@@ -665,13 +1004,176 @@
                 "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": 0.1,
                 "calculate": {
-                  "calculateExpression": "calcBMI(height,weightKg)"
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weightKg) || !calcBMI(height,weightKg) || calcBMI(height,weightKg) > 100) ? '' : calcBMI(height,weightKg)"
                 },
                 "max": "100",
                 "min": "0"
               },
               "questionInfo": "Auto-calculated from Weight (kg) and Height (rounded to 1 decimal). Note: unit is kg/m².",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "(!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))) || pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
+            },
+            {
+              "label": "BMI-for-age z-score",
+              "type": "obs",
+              "id": "bmiForAgeZ",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "c1d3da47-2013-5101-a3fc-8770b35ba32a",
+                "min": "-10",
+                "max": "10",
+                "step": 0.1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weightKg)) ? '' : ((calcBMIForAgeZscore(Number(height),Number(weightKg)) == null) ? '' : Number(calcBMIForAgeZscore(Number(height),Number(weightKg))))"
+                }
+              },
+              "hide": {
+                "hideWhenExpression": "(!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))) || pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Newborn assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Gestational age at birth (weeks)",
+              "type": "obs",
+              "id": "gestationalAgeAtBirthWeeks",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1409AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "22",
+                "max": "44",
+                "disallowDecimals": true,
+                "step": 1
+              },
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "!(pediatricTriageType === 'a28928a7-af76-5dd4-acee-7ff619b513df')"
+              }
+            },
+            {
+              "label": "Birth weight (g)",
+              "type": "obs",
+              "id": "birthWeightGrams",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "30415263-4758-6789-0123-456789345678",
+                "min": "300",
+                "max": "6000",
+                "disallowDecimals": true,
+                "step": 1
+              },
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 2500 || myValue > 4000)",
+                  "message": "Outside 2500-4000 g (low or high birth weight)."
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "!(pediatricTriageType === 'a28928a7-af76-5dd4-acee-7ff619b513df')"
+              }
+            },
+            {
+              "label": "Newborn triage signs (tick all present)",
+              "type": "obs",
+              "id": "newbornTriageSigns",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "b74a80ce-a04b-5da1-8c9a-f0262583f604",
+                "answers": [
+                  {
+                    "concept": "148517AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Apnoea"
+                  },
+                  {
+                    "concept": "164439AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Gasping"
+                  },
+                  {
+                    "concept": "7dcd7908-2118-43d3-b469-c90fb042836c",
+                    "label": "Severe respiratory distress"
+                  },
+                  {
+                    "concept": "96a12f0c-ba52-455b-bbb4-db12f7e9ee5e",
+                    "label": "Central cyanosis"
+                  },
+                  {
+                    "concept": "112989AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Poor perfusion or shock"
+                  },
+                  {
+                    "concept": "206AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Convulsions"
+                  },
+                  {
+                    "concept": "b9190517-408c-4898-b4e9-035d742fe97d",
+                    "label": "Unresponsive"
+                  },
+                  {
+                    "concept": "fe7d18e0-327b-45a9-915d-13c2f356f9ec",
+                    "label": "Hypothermia"
+                  },
+                  {
+                    "concept": "146e7829-3388-4308-99ef-6e08682a9611",
+                    "label": "Poor feeding"
+                  },
+                  {
+                    "concept": "116334AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Lethargy"
+                  },
+                  {
+                    "concept": "a80f1f49-9249-5086-ac42-432866f24636",
+                    "label": "Suspected sepsis"
+                  },
+                  {
+                    "concept": "159908AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Prematurity"
+                  },
+                  {
+                    "concept": "1797c883-f0b4-4712-a9ab-29385baf4bea",
+                    "label": "Low birth weight"
+                  },
+                  {
+                    "concept": "079737d0-daf0-46d5-89ea-8556a8deb4d5",
+                    "label": "Significant jaundice"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other concern"
+                  }
+                ]
+              },
+              "questionInfo": "RED (emergency): apnoea or gasping, severe respiratory distress, central cyanosis, shock, convulsions or unresponsive - resuscitate and stabilise at once, do not delay for registration. YELLOW (urgent): abnormal vital signs, suspected sepsis, poor feeding or lethargy, significant jaundice, hypothermia, prematurity or low birth weight - prompt clinician assessment. GREEN (stable): no emergency signs, stable breathing and circulation.",
+              "hide": {
+                "hideWhenExpression": "!(pediatricTriageType === 'a28928a7-af76-5dd4-acee-7ff619b513df')"
+              }
+            },
+            {
+              "label": "Other concern, specify",
+              "type": "obs",
+              "id": "newbornOtherConcern",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "8c464747-4322-5844-96f2-2cb069424cd8"
+              },
+              "hide": {
+                "hideWhenExpression": "(!arrayContains(newbornTriageSigns, '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || !(pediatricTriageType === 'a28928a7-af76-5dd4-acee-7ff619b513df')"
+              }
             }
           ]
         },
@@ -684,7 +1186,7 @@
               "type": "obs",
               "id": "underlyingDisease",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "checkbox",
                 "concept": "8cebdfa2-7251-4ada-8cb1-0079317d71cb",
                 "answers": [
                   {
@@ -716,6 +1218,9 @@
                     "label": "Malnutrition"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))) || pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
               }
             },
             {
@@ -739,6 +1244,9 @@
                     "label": "lethargic/Unconscious/Coma"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))) || pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
               }
             },
             {
@@ -756,8 +1264,15 @@
                   {
                     "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Moderate"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))) || pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
               }
             },
             {
@@ -777,6 +1292,9 @@
                     "label": "No"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))) || pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
               }
             }
           ]
@@ -815,7 +1333,10 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
+              }
             },
             {
               "label": "Severe respiratory distress",
@@ -843,7 +1364,10 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
+              }
             },
             {
               "label": "Circulation or shock: Cold hands",
@@ -863,7 +1387,10 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
+              }
             },
             {
               "label": "With capillary refill ≥ 3 seconds",
@@ -885,7 +1412,7 @@
               },
               "readonly": false,
               "hide": {
-                "hideWhenExpression": "coldHands !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "(coldHands !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || !((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
               }
             },
             {
@@ -908,7 +1435,7 @@
               },
               "readonly": false,
               "hide": {
-                "hideWhenExpression": "coldHands !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "(coldHands !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || !((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
               }
             },
             {
@@ -938,7 +1465,10 @@
                 ]
               },
               "required": "true",
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
+              }
             },
             {
               "label": "Convulsion during triage or while waiting",
@@ -958,7 +1488,10 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
+              }
             },
             {
               "label": "Dehydration: Diarrhoea present",
@@ -979,7 +1512,10 @@
                 ]
               },
               "readonly": false,
-              "questionInfo": "If Yes, severe dehydration signs are shown."
+              "questionInfo": "If Yes, severe dehydration signs are shown.",
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
+              }
             },
             {
               "label": "Severe dehydration signs (with diarrhoea)",
@@ -1008,7 +1544,7 @@
                 ]
               },
               "hide": {
-                "hideWhenExpression": "diarrhoea !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "(diarrhoea !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || !((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
               },
               "readonly": false
             },
@@ -1030,7 +1566,10 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
+              }
             },
             {
               "label": "Other emergency signs",
@@ -1055,7 +1594,7 @@
                 ]
               },
               "hide": {
-                "hideWhenExpression": "otherSignsPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "(otherSignsPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || !((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
               },
               "readonly": false
             }
@@ -1087,7 +1626,10 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
+              }
             },
             {
               "label": "3P (Pallor, Poisoning, Pain)",
@@ -1111,7 +1653,10 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
+              }
             },
             {
               "label": "3R (Respiratory distress, Restless, Referral)",
@@ -1135,7 +1680,10 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
+              }
             },
             {
               "label": "MOB (Malnutrition, Oedema, Burn)",
@@ -1159,7 +1707,274 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "!((pediatricTriageType === '160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || (isEmpty(pediatricTriageType) && !isEmpty(triageLevel))))"
+              }
+            }
+          ]
+        },
+        {
+          "label": "OPD clinical assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Respiratory Disease",
+              "type": "obs",
+              "id": "respiratoryDisease",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "55a15784-e60c-42c9-9a9b-6cddbe391cf9",
+                "answers": [
+                  {
+                    "concept": "c6728b6b-defe-4a20-a8c1-1137b381af71",
+                    "label": "None/Mild"
+                  },
+                  {
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "!(pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              }
+            },
+            {
+              "label": "Dehydration Status",
+              "type": "obs",
+              "id": "dehydrationStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "1497AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "22a39ff0-ed01-494b-a46e-64974ef0d5fa",
+                    "label": "No Dehydration"
+                  },
+                  {
+                    "concept": "6ed0d1fb-35e1-4019-9f4d-0e38d306beb8",
+                    "label": "Some Dehydration"
+                  },
+                  {
+                    "concept": "aec6f3c3-7c26-437f-a548-310bc05b7730",
+                    "label": "Severe Dehydration"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "!(pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              }
+            },
+            {
+              "label": "Signs of Convulsion",
+              "type": "obs",
+              "id": "signsOfConvulsion",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1897377e-e00b-469e-b98d-5cc7ad9e0f87",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "!(pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              }
+            }
+          ]
+        },
+        {
+          "label": "OPD triage colour signs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Red",
+              "type": "obs",
+              "id": "red",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "421bfd2e-9372-55d9-9054-59070241b4f1",
+                "answers": [
+                  {
+                    "concept": "112989AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Signs of shock"
+                  },
+                  {
+                    "concept": "4563fa28-e8c0-56d2-b3ca-2b8bdc24394a",
+                    "label": "Active convulsions, altered mental status"
+                  },
+                  {
+                    "concept": "de6c10dc-25b3-589a-9aa4-52247aeffe55",
+                    "label": "Signs of severe dehydration"
+                  },
+                  {
+                    "concept": "409ace31-3846-55ef-a2dd-3ca6baa19d48",
+                    "label": "Disabilities like motor deficit"
+                  },
+                  {
+                    "concept": "147241AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Bleeding child"
+                  },
+                  {
+                    "concept": "cc1fc145-41f6-4c9c-acc1-45e3599781fd",
+                    "label": "Immediate poisoning"
+                  },
+                  {
+                    "concept": "2f66da8e-60a5-5648-aac9-fb99867041ad",
+                    "label": "Major trauma"
+                  },
+                  {
+                    "concept": "dba8fc84-0363-5f58-b2c2-4b76408ab061",
+                    "label": "Any infant 39°C"
+                  },
+                  {
+                    "concept": "425f6fc0-efad-4751-9fc9-76478fddbf4d",
+                    "label": "Threatened limb"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No Sign"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "!(pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              }
+            },
+            {
+              "label": "Yellow",
+              "type": "obs",
+              "id": "yellow",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7d69b9dd-43c2-5f87-9a81-241173db72cc",
+                "answers": [
+                  {
+                    "concept": "9aa11929-6bc1-53d2-965d-331d468d1960",
+                    "label": "Any swelling/mass of mouth, throat or neck"
+                  },
+                  {
+                    "concept": "122863AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Wheezing"
+                  },
+                  {
+                    "concept": "159861AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unable to feed or drink"
+                  },
+                  {
+                    "concept": "164482AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Vomits everything"
+                  },
+                  {
+                    "concept": "d9699a63-cfb8-5b85-b949-ea0763d58c40",
+                    "label": "Ongoing diarrhoea"
+                  },
+                  {
+                    "concept": "82c6d388-43e8-4c99-9b88-7fa52cc17b9f",
+                    "label": "Dehydration"
+                  },
+                  {
+                    "concept": "7dd9e0f1-5a2b-345c-789d-678901234567",
+                    "label": "Severe pallor"
+                  },
+                  {
+                    "concept": "843b93f3-303a-4358-ae57-0ef855b5e79a",
+                    "label": "Restless, continuously irritable or lethargy"
+                  },
+                  {
+                    "concept": "163477AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe pain"
+                  },
+                  {
+                    "concept": "6aa61e53-36e8-530d-a33a-37e36a6fc63c",
+                    "label": "Any sick child aged less than two months up to 6months"
+                  },
+                  {
+                    "concept": "af12f3b3-b056-498c-9c5e-edd34dff72d6",
+                    "label": "Child is very hot or very cold"
+                  },
+                  {
+                    "concept": "72d950f7-17c5-469d-abf0-8882d656e049",
+                    "label": "Trauma or other urgent surgical condition"
+                  },
+                  {
+                    "concept": "2d0f2789-d951-4c00-bb7e-ed507cd256e0",
+                    "label": "Poisoning"
+                  },
+                  {
+                    "concept": "127639AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Respiratory distress"
+                  },
+                  {
+                    "concept": "ad5d211b-1701-4cd0-b55b-dd681598ddc6",
+                    "label": "Referral (urgent)"
+                  },
+                  {
+                    "concept": "c8c3d3cb-30e5-4e6b-980c-b78bfa289e1f",
+                    "label": "Malnutrition, Visible severe wasting"
+                  },
+                  {
+                    "concept": "45bb0b1a-0159-4cd6-8855-af08e89521a7",
+                    "label": "Oedema of both feet"
+                  },
+                  {
+                    "concept": "c70d74b7-8647-4140-aafc-097b5d953267",
+                    "label": "Burns"
+                  },
+                  {
+                    "concept": "250082fa-1f2b-5f9a-b345-e0440a2381f9",
+                    "label": "Sexual assault"
+                  },
+                  {
+                    "concept": "b8631299-ec89-58ec-bbee-645db2ef87b4",
+                    "label": "New rash worsening over hours or peeling"
+                  },
+                  {
+                    "concept": "3a4e8cc9-283f-56c2-9189-ae4c8116f2fe",
+                    "label": "Exposure requiring time-sensitive prophylaxis"
+                  },
+                  {
+                    "concept": "139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Headache"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No Sign"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "!(pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              }
+            },
+            {
+              "label": "Action to be taken",
+              "type": "obs",
+              "id": "actionToBeTaken",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "63c3e397-bdd6-437a-b6d6-06725983e17f",
+                "answers": [
+                  {
+                    "concept": "de95d3e4-063a-4be1-9b1e-b4c6d2450b2d",
+                    "label": "Seen within 1-4 hours"
+                  },
+                  {
+                    "concept": "4b17471d-290e-42b6-a4d5-05b1d2dffc19",
+                    "label": "Seen Immediately"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "!(pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+              }
             }
           ]
         },
@@ -1177,24 +1992,23 @@
                 "answers": [
                   {
                     "concept": "ecee70d1-8ec1-42c4-9cc6-7ac6addf2517",
-                    "label": "Red"
-                  },
-                  {
-                    "concept": "876c9989-2492-422e-b034-1151860ae975",
-                    "label": "Orange"
+                    "label": "Emergency (red)"
                   },
                   {
                     "concept": "f05aee3c-ba96-4a43-b0b4-2894db7999d0",
-                    "label": "Yellow"
+                    "label": "Urgent (yellow)"
                   },
                   {
                     "concept": "668a4165-5515-405d-9fd1-d2aaedd1dbbd",
-                    "label": "Green"
+                    "label": "Non-urgent (green)"
                   }
                 ]
               },
               "required": "true",
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Triage Color Result",
@@ -1205,26 +2019,111 @@
                 "concept": "70566778-8990-6782-0126-4f5678abcde0",
                 "answers": [
                   {
-                    "label": "Red Triage Category",
-                    "concept": "25899001-1223-9015-3459-9456789abcde"
+                    "concept": "25899001-1223-9015-3459-9456789abcde",
+                    "label": "Red"
                   },
                   {
-                    "label": "Orange Triage Category",
-                    "concept": "47011223-3445-1237-5671-b6789abcdef0"
+                    "concept": "60900112-2334-0126-4560-4f0123456789",
+                    "label": "Yellow"
                   },
                   {
-                    "label": "Yellow Triage Category",
-                    "concept": "60900112-2334-0126-4560-4f0123456789"
+                    "concept": "66566778-8990-6782-0126-a5678a012345",
+                    "label": "Green"
+                  }
+                ],
+                "calculate": {
+                  "calculateExpression": "pediatricTriageType === 'a28928a7-af76-5dd4-acee-7ff619b513df' ? ((arrayContains(newbornTriageSigns, '148517AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || arrayContains(newbornTriageSigns, '164439AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || arrayContains(newbornTriageSigns, '7dcd7908-2118-43d3-b469-c90fb042836c') || arrayContains(newbornTriageSigns, '96a12f0c-ba52-455b-bbb4-db12f7e9ee5e') || arrayContains(newbornTriageSigns, '112989AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || arrayContains(newbornTriageSigns, '206AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || arrayContains(newbornTriageSigns, 'b9190517-408c-4898-b4e9-035d742fe97d')) ? '25899001-1223-9015-3459-9456789abcde' : ((arrayContains(newbornTriageSigns, 'fe7d18e0-327b-45a9-915d-13c2f356f9ec') || arrayContains(newbornTriageSigns, '146e7829-3388-4308-99ef-6e08682a9611') || arrayContains(newbornTriageSigns, '116334AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || arrayContains(newbornTriageSigns, 'a80f1f49-9249-5086-ac42-432866f24636') || arrayContains(newbornTriageSigns, '159908AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || arrayContains(newbornTriageSigns, '1797c883-f0b4-4712-a9ab-29385baf4bea') || arrayContains(newbornTriageSigns, '079737d0-daf0-46d5-89ea-8556a8deb4d5') || arrayContains(newbornTriageSigns, '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || (!isEmpty(temperature) && (temperature < 36.5 || temperature > 37.5)) || (!isEmpty(pulseRate) && (pulseRate < 100 || pulseRate > 180)) || (!isEmpty(respiratoryRate) && (respiratoryRate < 30 || respiratoryRate > 60)) || (!isEmpty(spo2) && spo2 < 90) || (!isEmpty(rbsMgDl) && rbsMgDl < 45)) ? '60900112-2334-0126-4560-4f0123456789' : (!isEmpty(newbornTriageSigns) || !isEmpty(temperature) || !isEmpty(pulseRate) || !isEmpty(respiratoryRate)) ? '66566778-8990-6782-0126-a5678a012345' : '') : (pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? (!isEmpty(red) ? '25899001-1223-9015-3459-9456789abcde' : (!isEmpty(yellow) ? '60900112-2334-0126-4560-4f0123456789' : ((isEmpty(pulseRate) && isEmpty(respiratoryRate) && isEmpty(temperature)) ? '' : '66566778-8990-6782-0126-a5678a012345'))) : ((!isEmpty(airwayProblems) || !isEmpty(severeRespDistress) || !isEmpty(otherSigns) || !isEmpty(dehydrationSigns) || (coldHands === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && capRefill3 === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' && weakFastPulse === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || avpu === '162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' || avpu === 'b9190517-408c-4898-b4e9-035d742fe97d' || convulsionTriage === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') ? '25899001-1223-9015-3459-9456789abcde' : ((!isEmpty(signs3T) || !isEmpty(signs3P) || !isEmpty(signs3R) || !isEmpty(signsMOB)) ? '60900112-2334-0126-4560-4f0123456789' : (isEmpty(avpu) ? '' : '66566778-8990-6782-0126-a5678a012345'))))"
+                }
+              },
+              "readonly": true,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Immediate action and disposition",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Immediate actions taken",
+              "type": "obs",
+              "id": "newbornImmediateActions",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "8d4d806b-8d3c-42af-9a14-16c84fb0e3c4",
+                "answers": [
+                  {
+                    "concept": "8e76e35d-2cee-52f9-8135-70e2ee22e897",
+                    "label": "Warmth / thermal care"
                   },
                   {
-                    "label": "Green Triage Category",
-                    "concept": "66566778-8990-6782-0126-a5678a012345"
+                    "concept": "c131ef96-ed62-5700-8e1a-d1d5a5af7f2f",
+                    "label": "Airway and breathing support"
                   },
                   {
-                    "label": "Black Triage Category",
-                    "concept": "68788990-0112-8904-2348-c78a01234567"
+                    "concept": "bd42bc76-87f1-5eee-ab1a-e03495aea0c3",
+                    "label": "Blood glucose checked and managed"
+                  },
+                  {
+                    "concept": "9e52ee7a-4f0b-450f-9d8c-b37aa49c6b49",
+                    "label": "Oxygen and monitoring"
+                  },
+                  {
+                    "concept": "98de0b0d-7832-47e8-a6a4-2f79a36e5c3b",
+                    "label": "Clinician notified"
+                  },
+                  {
+                    "concept": "164174AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Infection management (antibiotics)"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "!(pediatricTriageType === 'a28928a7-af76-5dd4-acee-7ff619b513df')"
+              }
+            },
+            {
+              "label": "Disposition",
+              "type": "obs",
+              "id": "newbornDisposition",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "82553c4e-fbc4-4415-a31a-2f2e6e1c1272",
+                "answers": [
+                  {
+                    "concept": "d8176d1b-1234-11ee-be56-0242ac120014",
+                    "label": "NICU admission"
+                  },
+                  {
+                    "concept": "cf2e9d04-709d-49d1-a04f-6787326dbe95",
+                    "label": "Stabilization or resuscitation"
+                  },
+                  {
+                    "concept": "ca574255-0a09-4c9a-8139-43e48df73847",
+                    "label": "Transfer"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "!(pediatricTriageType === 'a28928a7-af76-5dd4-acee-7ff619b513df')"
+              }
+            },
+            {
+              "label": "Other disposition, specify",
+              "type": "obs",
+              "id": "newbornDispositionOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9e2638c0-3323-5251-92ad-039c3031ec2d"
+              },
+              "hide": {
+                "hideWhenExpression": "(newbornDisposition !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || !(pediatricTriageType === 'a28928a7-af76-5dd4-acee-7ff619b513df')"
               }
             }
           ]
@@ -1234,7 +2133,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Chief complaint",
+              "label": "Chief complaints",
               "type": "obsGroup",
               "id": "chiefComplaintGroup",
               "questionOptions": {
@@ -1243,7 +2142,7 @@
               },
               "questions": [
                 {
-                  "label": "Chief complaint",
+                  "label": "Complaint",
                   "type": "obs",
                   "id": "chiefComplaint",
                   "questionOptions": {
@@ -1271,6 +2170,14 @@
                         "label": "Vomiting"
                       },
                       {
+                        "concept": "151AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Abdominal pain"
+                      },
+                      {
+                        "concept": "139084AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                        "label": "Headache"
+                      },
+                      {
                         "concept": "3faf0630-c208-4b15-8ba1-ca94585b6d52",
                         "label": "Convulsion"
                       },
@@ -1279,8 +2186,16 @@
                         "label": "Trauma or injury"
                       },
                       {
+                        "concept": "d1bb1ba2-c7f8-43cf-ac13-46ef76b9800e",
+                        "label": "Burn"
+                      },
+                      {
                         "concept": "2d0f2789-d951-4c00-bb7e-ed507cd256e0",
                         "label": "Poisoning"
+                      },
+                      {
+                        "concept": "bb20207d-9776-4749-b1c7-760b2afeb3e4",
+                        "label": "Swallowed object"
                       },
                       {
                         "concept": "fa432089-99ca-4d65-b6dd-c3d7361f3688",
@@ -1296,7 +2211,7 @@
                   "readonly": false
                 },
                 {
-                  "label": "Chief complaint notes",
+                  "label": "If other, specify / notes",
                   "type": "obs",
                   "id": "chiefComplaintNotes",
                   "questionOptions": {
@@ -1305,7 +2220,10 @@
                   },
                   "readonly": false
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Time of illness / accident",
@@ -1322,10 +2240,13 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
-              "label": "Other known illness",
+              "label": "Other underlying disease not listed above?",
               "type": "obs",
               "id": "otherKnownIllness",
               "questionOptions": {
@@ -1342,10 +2263,34 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
-              "label": "If yes, specify (ICD-11)",
+              "label": "If yes, which disease?",
+              "type": "obs",
+              "id": "otherIllnessSpecifyCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              },
+              "hide": {
+                "hideWhenExpression": "(otherKnownIllness !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
+            },
+            {
+              "label": "If yes, notes",
               "type": "obs",
               "id": "otherIllnessSpecify",
               "questionOptions": {
@@ -1355,7 +2300,7 @@
               "readonly": false,
               "questionInfo": "Ideally coded to ICD-11.",
               "hide": {
-                "hideWhenExpression": "otherKnownIllness !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "(otherKnownIllness !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
@@ -1367,7 +2312,10 @@
                 "concept": "d616d6d4-2548-4b68-99e7-f3c85fa96328"
               },
               "readonly": true,
-              "questionInfo": "Auto-populated from the patient's demographics."
+              "questionInfo": "Auto-populated from the patient's demographics.",
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Time of arrival",
@@ -1387,7 +2335,10 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Triage time",
@@ -1404,7 +2355,10 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Mode of arrival",
@@ -1436,7 +2390,10 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Prehospital care / first aid",
@@ -1456,7 +2413,10 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "If yes, please specify",
@@ -1468,7 +2428,7 @@
               },
               "readonly": false,
               "hide": {
-                "hideWhenExpression": "prehospitalCare !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "(prehospitalCare !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             }
           ]
@@ -1495,7 +2455,10 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Name of institution",
@@ -1507,7 +2470,7 @@
               },
               "readonly": false,
               "hide": {
-                "hideWhenExpression": "referralSystem !== 'c4ab2fb4-7d34-42f9-950a-7e8261cba9f9'"
+                "hideWhenExpression": "(referralSystem !== 'c4ab2fb4-7d34-42f9-950a-7e8261cba9f9') || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
@@ -1525,10 +2488,34 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
-              "label": "Diagnosis at referral (ICD-11)",
+              "label": "Diagnosis at referral",
+              "type": "obs",
+              "id": "referralDiagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "5216795d-694c-4baf-933f-592fe6ad0d62",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              },
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
+            },
+            {
+              "label": "Diagnosis at referral notes",
               "type": "obs",
               "id": "referralDiagnosis",
               "questionOptions": {
@@ -1536,7 +2523,10 @@
                 "concept": "00a98c63-746a-4b4a-b8bd-72d5fdaf1dfa"
               },
               "readonly": false,
-              "questionInfo": "Ideally coded to ICD-11."
+              "questionInfo": "Ideally coded to ICD-11.",
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Reason for referral",
@@ -1568,7 +2558,10 @@
                   }
                 ]
               },
-              "readonly": false
+              "readonly": false,
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
             },
             {
               "label": "Attachment",
@@ -1579,72 +2572,9 @@
                 "concept": "7cac8397-53cd-4f00-a6fe-028e8d743f8e"
               },
               "readonly": false,
-              "questionInfo": "Upload referral document(s)."
-            },
-            {
-              "label": "Was the patient referred",
-              "type": "obs",
-              "id": "wasThePatientReferred",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "58900112-2334-0126-4560-2345f0123456",
-                "answers": [
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
-                  },
-                  {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Patient diagnosis",
-              "type": "obs",
-              "id": "patientDiagnosis",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
-            },
-            {
-              "label": "if yes",
-              "type": "obs",
-              "id": "ifYes",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "38c7439b-e3d9-458d-a0ba-aa8d3fa18a23",
-                "answers": [
-                  {
-                    "concept": "0c8a3bf0-e80b-484e-adb4-e9aaed156c41",
-                    "label": "Addis Ababa Government Hospital"
-                  },
-                  {
-                    "concept": "b7e2d82b-a1af-4f78-beb7-c7b4afa29861",
-                    "label": "Addis Ababa Private Hospital"
-                  },
-                  {
-                    "concept": "9c344556-6778-4560-8904-f012345678a0",
-                    "label": "Regional Hospital"
-                  },
-                  {
-                    "concept": "ad455667-7889-5671-9015-012345678a01",
-                    "label": "Health Center"
-                  },
-                  {
-                    "concept": "be566778-8990-6782-0126-12345678a012",
-                    "label": "Police/Prison"
-                  },
-                  {
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Other"
-                  }
-                ]
-              },
+              "questionInfo": "Upload referral document(s).",
               "hide": {
-                "hideWhenExpression": "isEmpty(wasThePatientReferred) || wasThePatientReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
@@ -1656,16 +2586,7 @@
                 "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
               },
               "hide": {
-                "hideWhenExpression": "isEmpty(referralReason) || referralReason !== '9213e9d3-97e7-4403-b915-29a8543da604'"
-              }
-            },
-            {
-              "label": "Referral reason",
-              "type": "obs",
-              "id": "referralReason2",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "961273d3-371f-45d2-addf-927b171d4035"
+                "hideWhenExpression": "(isEmpty(referralReason) || referralReason !== '9213e9d3-97e7-4403-b915-29a8543da604') || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
@@ -1685,34 +2606,27 @@
                     "label": "with Out Communication"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
-              "label": "Time of communication",
+              "label": "Date and time of communication",
               "type": "obs",
               "id": "timeOfCommunication",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "cae1832a-c324-4b75-9d71-d9e17f074224"
-              }
-            },
-            {
-              "label": "Time of Arrival",
-              "type": "obs",
-              "id": "timeOfArrival2",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "0d4e5f60-7182-9012-3456-789abcdef012",
-                "answers": [
-                  {
-                    "concept": "1e5f6071-8293-0123-4567-89abcdef0123",
-                    "label": "Day"
-                  },
-                  {
-                    "concept": "161018AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Night"
-                  }
-                ]
+                "rendering": "datetime",
+                "concept": "c92536fe-7a55-5de7-909c-cb36818af08c"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
@@ -1748,6 +2662,9 @@
                     "label": "Unknown"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
@@ -1757,50 +2674,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
-            },
-            {
-              "label": "Mode of arrival",
-              "type": "obs",
-              "id": "modeOfArrival2",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "529a4b5c-6d7e-4567-890b-cdef01234567",
-                "answers": [
-                  {
-                    "concept": "1377AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Ambulance"
-                  },
-                  {
-                    "concept": "74bc6d7e-8f90-6789-012d-ef0123456789",
-                    "label": "Taxi"
-                  },
-                  {
-                    "concept": "85cd7e8f-9001-789a-123e-f01234567890",
-                    "label": "Private Car"
-                  },
-                  {
-                    "concept": "4f694879-6290-411b-8140-b6562715854e",
-                    "label": "Walking"
-                  },
-                  {
-                    "concept": "b8f00112-2334-012d-4560-234567890123",
-                    "label": "Public Taxi"
-                  },
-                  {
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Other"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Name of referring facility",
-              "type": "obs",
-              "id": "nameOfReferringFacility",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "161550AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
@@ -1810,6 +2686,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "8ffe4c88-0f5c-4810-a94f-fb9cc5b0bbb9"
+              },
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
@@ -1819,6 +2698,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "7d14d990-5c44-49b0-82f1-e580eca53d64"
+              },
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
@@ -1830,22 +2712,53 @@
                 "concept": "dd4e5f60-7182-9012-3456-789abcdef012",
                 "answers": [
                   {
+                    "concept": "06398754-8865-4004-805e-926636d6d6c2",
+                    "label": "Stable"
+                  },
+                  {
+                    "concept": "70d68ce3-d932-4f97-a186-efb4c3608efc",
+                    "label": "Unstable"
+                  },
+                  {
                     "concept": "8d956de6-e36f-468c-8485-50858340331c",
                     "label": "Critical"
+                  },
+                  {
+                    "concept": "60c7864e-4a90-468f-81bf-94a6dea9c898",
+                    "label": "Unresponsive"
+                  },
+                  {
+                    "concept": "160432AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Dead on arrival"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
                   },
                   {
                     "concept": "037446f4-adfc-40b3-928c-a39a4826b1bf",
                     "label": "Emergency"
                   },
                   {
-                    "concept": "06398754-8865-4004-805e-926636d6d6c2",
-                    "label": "Stable"
-                  },
-                  {
-                    "concept": "160432AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "6b6ac4cd-923f-5888-a62b-695f9ecd6237",
                     "label": "Death (no any sign of life)"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
+            },
+            {
+              "label": "If other, specify",
+              "type": "obs",
+              "id": "conditionOnArrivalOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "add8c593-dc20-57ac-98b0-054800a83c5f"
+              },
+              "hide": {
+                "hideWhenExpression": "(conditionOfPatientOnArrival !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
@@ -1865,6 +2778,9 @@
                     "label": "No"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
@@ -1884,6 +2800,9 @@
                     "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
@@ -1893,6 +2812,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "543cb805-f873-4419-a432-ed37d0f79b2e"
+              },
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
@@ -1902,6 +2824,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "083e33bc-4581-4c2c-b2c9-eb4ac84408d9"
+              },
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             },
             {
@@ -1911,6 +2836,23 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "616e0654-95c5-4621-9e9b-b69b1e370cbc"
+              },
+              "hide": {
+                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+              }
+            },
+            {
+              "label": "Investigation Note",
+              "type": "obs",
+              "id": "investigationNote",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "613973f3-817e-4b51-b79d-b04430e51df1"
+              },
+              "readonly": false,
+              "questionInfo": "Free-text investigation notes.",
+              "hide": {
+                "hideWhenExpression": "(!(pediatricTriageType === '160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')) || (isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
               }
             }
           ]

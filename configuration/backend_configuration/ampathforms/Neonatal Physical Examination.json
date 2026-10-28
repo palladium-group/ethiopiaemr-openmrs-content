@@ -84,43 +84,67 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse Rate",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
-              "id": "pulseRate"
+              "id": "pulseRate",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 100 || myValue > 180) : age < 3 ? (myValue < 98 || myValue > 140) : age < 6 ? (myValue < 80 || myValue > 120) : age < 12 ? (myValue < 75 || myValue > 118) : (myValue < 60 || myValue > 100))",
+                  "message": "Outside the normal pulse range for the patient's age."
+                }
+              ]
             },
             {
-              "label": "Systolic",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
-              "id": "systolic"
+              "id": "systolic",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 72 || myValue > 104) : age < 3 ? (myValue < 86 || myValue > 106) : age < 6 ? (myValue < 89 || myValue > 112) : age < 12 ? (myValue < 97 || myValue > 115) : (myValue < 90 || myValue > 139))",
+                  "message": "Outside the normal systolic range for the patient's age."
+                }
+              ]
             },
             {
-              "label": "Diastolic",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
-              "id": "diastolic"
+              "id": "diastolic",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 37 || myValue > 56) : age < 3 ? (myValue < 42 || myValue > 63) : age < 6 ? (myValue < 46 || myValue > 72) : age < 12 ? (myValue < 57 || myValue > 76) : (myValue < 60 || myValue > 89))",
+                  "message": "Outside the normal diastolic range for the patient's age."
+                }
+              ]
             },
             {
-              "label": "Temperature",
+              "label": "Temperature (°C)",
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
@@ -129,31 +153,54 @@
                 "max": "43",
                 "step": 0.01
               },
-              "id": "temperature"
+              "id": "temperature",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
+                }
+              ]
             },
             {
-              "label": "Respiratory Rate",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
-              "id": "respiratoryRate"
+              "id": "respiratoryRate",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 30 || myValue > 53) : age < 3 ? (myValue < 22 || myValue > 37) : age < 6 ? (myValue < 20 || myValue > 28) : age < 12 ? (myValue < 18 || myValue > 25) : (myValue < 12 || myValue > 20))",
+                  "message": "Outside the normal respiratory rate for the patient's age."
+                }
+              ]
             },
             {
-              "label": "SPO2",
+              "label": "SpO2 (%)",
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "max": "100",
-                "step": 0.01
+                "step": 1,
+                "disallowDecimals": true
               },
-              "id": "spo2"
+              "id": "spo2",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue < 94",
+                  "message": "SpO2 below 94%."
+                }
+              ]
             },
             {
               "label": "Capillary Refilling time",
@@ -168,7 +215,7 @@
               "id": "capillaryRefillingTime"
             },
             {
-              "label": "WEIGHT",
+              "label": "Weight (kg)",
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
@@ -177,10 +224,17 @@
                 "step": 0.01,
                 "max": "250"
               },
-              "id": "weight"
+              "id": "weight",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue > 10",
+                  "message": "Above 10 kg: check the weight was entered in kg, not grams."
+                }
+              ]
             },
             {
-              "label": "Length",
+              "label": "Length (cm)",
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
@@ -190,6 +244,63 @@
                 "max": "272"
               },
               "id": "length"
+            },
+            {
+              "label": "Head circumference (cm)",
+              "type": "obs",
+              "id": "headCircumferenceCm",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "60",
+                "step": 0.1
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Birth weight (g)",
+              "type": "obs",
+              "id": "birthWeightGrams",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "30415263-4758-6789-0123-456789345678",
+                "min": "300",
+                "max": "6000",
+                "step": 1,
+                "disallowDecimals": true
+              },
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 2500 || myValue > 4000)",
+                  "message": "Outside 2500-4000 g (low or high birth weight)."
+                }
+              ]
+            },
+            {
+              "label": "Weight for gestational age",
+              "type": "obs",
+              "id": "weightForGestationalAge",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7b3684df-25f1-5c8e-90c6-f295368975fc",
+                "answers": [
+                  {
+                    "concept": "89bad637-447c-4497-bc1e-e875b4d86a79",
+                    "label": "Small for gestational age (SGA)"
+                  },
+                  {
+                    "concept": "c4b96143-eff7-49ca-9de9-81fd8841efa3",
+                    "label": "Appropriate for gestational age (AGA)"
+                  },
+                  {
+                    "concept": "f9d5ce75-46c8-51d1-adaa-a88b10217576",
+                    "label": "Large for gestational age (LGA)"
+                  }
+                ]
+              }
             }
           ]
         },

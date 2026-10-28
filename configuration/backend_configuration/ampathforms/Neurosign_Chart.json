@@ -75,10 +75,16 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
-              "label": "Systolic Blood Pressure (mmHg)",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolicBloodPressure",
               "questionOptions": {
@@ -86,7 +92,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -99,15 +106,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Diastolic Blood Pressure (mmHg)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolicBloodPressure",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -120,15 +128,16 @@
               "hideSteppers": true
             },
             {
-              "label": "PR (beats/min)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -141,15 +150,16 @@
               "hideSteppers": true
             },
             {
-              "label": "RR (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "rr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -190,10 +200,18 @@
                 "rendering": "number",
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "100"
+                "step": 1,
+                "max": "100",
+                "disallowDecimals": true
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue < 94",
+                  "message": "SpO2 below 94%."
+                }
+              ]
             },
             {
               "label": "GCS",
@@ -292,23 +310,19 @@
               "id": "tone",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "160388AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "0713cc98-a447-49d7-b4bb-493106b8a4b3",
                 "answers": [
                   {
-                    "label": "None",
-                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "dbf0ec92-5c73-517f-86c7-7105716d1298",
+                    "label": "Normotonic"
                   },
                   {
-                    "label": "Two plus",
-                    "concept": "1363AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "453eb1b1-7a18-43fa-8657-8499d933acbc",
+                    "label": "Hypotonic"
                   },
                   {
-                    "label": "Three plus",
-                    "concept": "1364AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "One plus",
-                    "concept": "1362AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "f95e55f6-c416-4327-a9cd-43c4cea8478c",
+                    "label": "Hypertonic"
                   }
                 ]
               }
@@ -322,20 +336,16 @@
                 "concept": "80cfd343-cb8f-5be4-ae98-74fe139f8dc8",
                 "answers": [
                   {
-                    "label": "None",
-                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "dbf0ec92-5c73-517f-86c7-7105716d1298",
+                    "label": "Normotonic"
                   },
                   {
-                    "label": "Two plus",
-                    "concept": "1363AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "453eb1b1-7a18-43fa-8657-8499d933acbc",
+                    "label": "Hypotonic"
                   },
                   {
-                    "label": "Three plus",
-                    "concept": "1364AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "One plus",
-                    "concept": "1362AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "f95e55f6-c416-4327-a9cd-43c4cea8478c",
+                    "label": "Hypertonic"
                   }
                 ]
               }

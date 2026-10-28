@@ -69,36 +69,22 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Name",
-              "type": "obs",
-              "id": "name",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
-            },
-            {
-              "label": "MRN",
-              "type": "obs",
-              "id": "mrn",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "5a9aa304-a80d-4315-909a-70875754e74e",
-                "min": "0",
-                "step": 0.01
-              }
-            },
-            {
               "label": "Date of birth",
               "type": "obs",
               "id": "dateOfBirth",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "166575AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
-              "label": "Gestational Age(GA)",
+              "label": "Gestational age at time of birth",
               "type": "obs",
               "id": "gestationalAgeGa",
               "questionOptions": {
@@ -106,41 +92,55 @@
                 "concept": "7425364e-5869-7890-4567-123456789012",
                 "answers": [
                   {
-                    "label": "Early Preterm GA 32-34 weeks",
-                    "concept": "0758697b-8192-0123-7890-456789012345"
+                    "concept": "8536475f-6970-8901-5678-234567890123",
+                    "label": "Extremely preterm (less than 28 weeks)"
                   },
                   {
-                    "label": "Late Preterm GA 34-36 weeks",
-                    "concept": "1869708c-9203-1234-8901-567890123456"
+                    "concept": "9647586a-7081-9012-6789-345678901234",
+                    "label": "Very preterm (28 to 31+6 weeks)"
                   },
                   {
-                    "label": "Post Term GA >41+7 wk",
-                    "concept": "441b88ad-1d3b-4c63-b1ca-331eaa1a4146"
+                    "concept": "d1490b3e-9117-5513-bbf1-dd0ea15758ca",
+                    "label": "Moderate preterm (32 to 33+6 weeks)"
                   },
                   {
-                    "label": "Term GA = 37 weeks",
-                    "concept": "48fe3fc7-fcd1-400f-93e0-a82926e8b52e"
+                    "concept": "1869708c-9203-1234-8901-567890123456",
+                    "label": "Late preterm (34 to 36+6 weeks)"
                   },
                   {
-                    "label": "Extremely Preterm GA less than 28 weeks",
-                    "concept": "8536475f-6970-8901-5678-234567890123"
+                    "concept": "b2f2bb9a-f498-5c77-ba21-d8a7f635e710",
+                    "label": "Early term (37 to 38+6 weeks)"
                   },
                   {
-                    "label": "Very Preterm GA <32 weeks",
-                    "concept": "bd150567-807b-5a12-a054-df46394e1d31"
+                    "concept": "845d4093-106a-50fc-b774-70c87298147b",
+                    "label": "Full term (39 to 40+6 weeks)"
+                  },
+                  {
+                    "concept": "12e57a7d-0e74-52d6-93a6-a47e0f9ec643",
+                    "label": "Late term (41 to 41+6 weeks)"
+                  },
+                  {
+                    "concept": "2960314d-9304-1234-5678-901234abcd0f",
+                    "label": "Post term (42 weeks or more)"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
             },
             {
-              "label": "Birth Weight",
+              "label": "Birth weight (g)",
               "type": "obs",
               "id": "birthWeight",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "30415263-4758-6789-0123-456789345678",
-                "min": "0",
-                "step": 0.01
+                "min": "300",
+                "step": 1,
+                "max": "6000",
+                "disallowDecimals": true
               },
               "hideSteppers": true
             },
@@ -154,66 +154,117 @@
               }
             },
             {
-              "label": "Date",
+              "label": "Date CPAP started",
               "type": "obs",
               "id": "date",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
-              "label": "HR",
+              "label": "Heart rate (beats/min)",
               "type": "obs",
               "id": "hr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "02187b0e-a4e4-49aa-8043-fdca00c3bc65",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "250"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 100 || myValue > 160)",
+                  "message": "Outside the neonatal range 100-160 beats/min."
+                }
+              ]
             },
             {
-              "label": "RR (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "rr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Breaths per minute.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 30 || myValue > 53) : age < 3 ? (myValue < 22 || myValue > 37) : age < 6 ? (myValue < 20 || myValue > 28) : age < 12 ? (myValue < 18 || myValue > 25) : (myValue < 12 || myValue > 20))",
+                  "message": "Outside the normal respiratory rate for the patient's age."
+                }
+              ]
             },
             {
-              "label": "Temp. AM Axillary/Rectum (°C)",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "tempAmAxillaryRectum",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "step": 0.01
+                "step": 0.01,
+                "max": "43"
               },
               "questionInfo": "Degrees Celsius, one decimal place.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
+                }
+              ]
             },
             {
-              "label": "CPAP depth of",
+              "label": "Temperature route",
+              "type": "obs",
+              "id": "tempRoute",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "c9528b14-d5ec-4c45-a7f6-619c6e7206e2",
+                "answers": [
+                  {
+                    "concept": "dec38730-9cd5-4ba9-b123-0e0f5aff1f15",
+                    "label": "Axillary"
+                  },
+                  {
+                    "concept": "2938ee83-ee6d-4ac3-b876-aa4ba794f310",
+                    "label": "Rectal"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "CPAP depth (cmH2O)",
               "type": "obs",
               "id": "cpapDepthOf",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "e51ba4a6-6f90-50e7-afbd-eec7e0efc01d",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "15"
               },
               "hideSteppers": true
             },
             {
-              "label": "Work of Breathing (normal Mild/severe)",
+              "label": "Work of breathing (normal / mild / moderate / severe)",
               "type": "obs",
               "id": "workOfBreathingNormalMildSevere",
               "questionOptions": {
@@ -295,8 +346,8 @@
                     "label": "NPO"
                   },
                   {
-                    "concept": "3aa85ca0-421e-4e65-8675-8b7407102e05",
-                    "label": "NG"
+                    "concept": "a5c7f899-4ee9-5aa9-8394-3aceea98f8e1",
+                    "label": "NG tube feeding"
                   },
                   {
                     "concept": "e8bf0e40-3f47-4e28-a947-7784abd286a5",
@@ -306,23 +357,24 @@
               }
             },
             {
-              "label": "Mf(ml)",
+              "label": "Maintenance fluid (ml), if applicable",
               "type": "obs",
               "id": "mfMl",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "ac8fe479-c263-42fa-b289-390ad4bd2955",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "1000"
               },
               "hideSteppers": true
             },
             {
-              "label": "Interventions.",
+              "label": "Interventions",
               "type": "obs",
               "id": "interventions",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "checkbox",
                 "concept": "10628b26-c102-46c5-8773-082ed4672961",
                 "answers": [
                   {
@@ -331,7 +383,7 @@
                   },
                   {
                     "concept": "d728f207-a584-48af-bf0e-4744a7fb223b",
-                    "label": "Positioning."
+                    "label": "Positioning"
                   },
                   {
                     "concept": "3c7bc83c-8291-4daf-9609-0f905798662a",

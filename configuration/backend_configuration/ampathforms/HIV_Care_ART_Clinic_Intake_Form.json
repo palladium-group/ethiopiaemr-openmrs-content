@@ -75,7 +75,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "9a5b7e89-96be-592b-939f-71ffa0ee76bb"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             }
           ]
         },
@@ -136,12 +142,28 @@
                 "concept": "2392bb08-2801-4f3e-a59b-f9589d2e7422",
                 "answers": [
                   {
-                    "concept": "dcf88ce9-74e9-4c6c-a2ff-d189136699d6",
-                    "label": "Spontaneous vaginal"
+                    "concept": "1170AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Spontaneous vaginal delivery (SVD)"
                   },
                   {
-                    "concept": "1171AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Cesarean section"
+                    "concept": "b7b07c42-7251-4dc3-b10b-82e9fb17e5bd",
+                    "label": "Vacuum assisted delivery"
+                  },
+                  {
+                    "concept": "dd55a56d-315f-47d4-aba4-e430533cccb8",
+                    "label": "Forceps assisted delivery"
+                  },
+                  {
+                    "concept": "1172AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Assisted breech vaginal delivery"
+                  },
+                  {
+                    "concept": "9940841c-3758-4679-9123-456890abcd39",
+                    "label": "Cesarean section - elective"
+                  },
+                  {
+                    "concept": "159739AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cesarean section - emergency"
                   },
                   {
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -585,11 +607,11 @@
                 "answers": [
                   {
                     "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "NR"
+                    "label": "Non-reactive"
                   },
                   {
                     "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "R"
+                    "label": "Reactive"
                   }
                 ]
               }
@@ -691,11 +713,11 @@
                 "answers": [
                   {
                     "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "NR"
+                    "label": "Non-reactive"
                   },
                   {
                     "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "R"
+                    "label": "Reactive"
                   }
                 ]
               }
@@ -839,7 +861,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "164361AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Cotrimoxazole stop date",
@@ -857,7 +885,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "a3569702-f0c9-43e8-9836-74a49b1c5e54"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "INH stop date",
@@ -955,7 +989,13 @@
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(artTi) || artTi !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "If yes, months on ART",
@@ -1001,15 +1041,16 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse Rate (per min)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulseRatePerMin",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -1022,7 +1063,7 @@
               "hideSteppers": true
             },
             {
-              "label": "Systolic Blood Pressure (mmHg)",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolicBloodPressure",
               "questionOptions": {
@@ -1030,7 +1071,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -1043,15 +1085,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Diastolic Blood Pressure (mmHg)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolicBloodPressure",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -1079,7 +1122,7 @@
               }
             },
             {
-              "label": "Temp (°C)",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "temp",
               "questionOptions": {
@@ -1100,15 +1143,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Respiratory Rate (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -1121,15 +1165,16 @@
               "hideSteppers": true
             },
             {
-              "label": "SPO2 (%)",
+              "label": "SpO2 (%)",
               "type": "obs",
               "id": "spo2",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "100"
+                "step": 1,
+                "max": "100",
+                "disallowDecimals": true
               },
               "required": "true",
               "questionInfo": "Normal range: 95-100 %",
@@ -1420,7 +1465,13 @@
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(clientSPregnancyStatusAtEnrollment) || clientSPregnancyStatusAtEnrollment !== 'd3b42c5e-6f70-4189-bacd-ef0123456702'"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "If Pregnant EDD",

@@ -75,7 +75,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "feba1cfe-8791-4909-8280-5aa1c341cf04"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Linked patient identification",
@@ -116,9 +122,27 @@
             {
               "label": "Preliminary diagnosis",
               "type": "obs",
+              "id": "preliminaryDiagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Preliminary diagnosis notes",
+              "type": "obs",
               "id": "preliminaryDiagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "ae9dd2ea-f2ab-5713-8be9-1fd0cda60bab"
               }
             },
@@ -134,15 +158,16 @@
               }
             },
             {
-              "label": "RR (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "rr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -256,7 +281,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "aa9cd77e-d49e-4c74-9ada-3e42bd328b6a"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Presenting compliant",
@@ -301,20 +332,20 @@
                 "concept": "9ce112d5-e4ed-4050-8409-ba3b35a22615",
                 "answers": [
                   {
-                    "label": "left hand",
-                    "concept": "1440a839-b8a9-403c-8e68-74e046329c8f"
+                    "concept": "160542AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "OPD"
                   },
                   {
-                    "label": "Pulmonary",
-                    "concept": "1d9a3653-9b0f-462c-9927-3ae62e08a36a"
+                    "concept": "160473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Emergency department"
                   },
                   {
-                    "label": "Right Hand",
-                    "concept": "b7ff7a6b-6dd0-411e-a160-68ece7ddd895"
+                    "concept": "167050AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Inpatient department"
                   },
                   {
-                    "label": "Extrapulmonary",
-                    "concept": "d28c1846-bcc5-4820-aa88-c347555904b5"
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
                   }
                 ]
               }

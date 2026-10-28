@@ -75,7 +75,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Filled in By",
@@ -93,7 +99,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "c0f404a6-43d3-5a98-a497-4f1387d71bd9"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             }
           ]
         },
@@ -766,10 +778,22 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "d2ecb899-60de-48ad-bfe8-5b14e2b5c1ce",
-                "min": "-6",
-                "step": 0.01
+                "min": "-10",
+                "step": 0.1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height)) ? '' : ((calcHeightForAgeZscore(Number(height)) == null) ? '' : Number(calcHeightForAgeZscore(Number(height))))"
+                },
+                "max": "10"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < -5 || myValue > 5)",
+                  "message": "Outside -5 to +5: re-check the weight, height and age."
+                }
+              ]
             },
             {
               "label": "BMI-for-age z-score",
@@ -1147,13 +1171,14 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "HbA1c",
+              "label": "HbA1c (%)",
               "type": "obs",
               "id": "hba1c",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "159644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0"
+                "min": "0",
+                "max": "20"
               },
               "hideSteppers": true
             },
@@ -1177,13 +1202,23 @@
               }
             },
             {
-              "label": "Blood Glucose (mg/dl)",
+              "label": "Blood glucose (mg/dl)",
               "type": "obs",
               "id": "bloodGlucose",
               "questionOptions": {
-                "rendering": "textarea",
-                "concept": "b6945d42-a9bc-5f81-bfd8-6a1ffb50771c"
-              }
+                "rendering": "number",
+                "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "600",
+                "step": 1
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 70 || myValue > 180)",
+                  "message": "Outside 70-180 mg/dl."
+                }
+              ]
             }
           ]
         },

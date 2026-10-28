@@ -79,30 +79,98 @@
               "hideSteppers": true
             },
             {
-              "label": "FHB( +Ve/-ve)",
+              "label": "Fetal heart rate (beats/min)",
               "type": "obs",
               "id": "fhbVeVe",
               "questionOptions": {
+                "rendering": "number",
+                "concept": "1440AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "40",
+                "max": "250",
+                "disallowDecimals": true,
+                "step": 1
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 110 || myValue > 160)",
+                  "message": "Fetal heart rate is outside the normal range (110-160 beats/min)."
+                }
+              ]
+            },
+            {
+              "label": "BPD (cm)",
+              "type": "obs",
+              "id": "bpd",
+              "questionOptions": {
                 "rendering": "text",
-                "concept": "3071425c-0415-2345-6789-012345abcd1a"
+                "concept": "2cf4b72d-26fd-47ba-9503-a8d0a1c61989"
               }
             },
             {
-              "label": "AGA",
+              "label": "HC (cm)",
+              "type": "obs",
+              "id": "hc",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "50"
+              }
+            },
+            {
+              "label": "AC (cm)",
+              "type": "obs",
+              "id": "ac",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f325998a-bd01-5a5e-b65f-e9dfefb3e092",
+                "min": "0",
+                "max": "50"
+              }
+            },
+            {
+              "label": "FL (cm)",
+              "type": "obs",
+              "id": "fl",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "30dd17fd-d22e-4abf-afab-c36488633d4c"
+              }
+            },
+            {
+              "label": "Gestational age by ultrasound (weeks)",
               "type": "obs",
               "id": "aga",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "c4b96143-eff7-49ca-9de9-81fd8841efa3"
+                "rendering": "number",
+                "concept": "163166AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "45",
+                "disallowDecimals": true,
+                "step": 1
               }
             },
             {
-              "label": "EFW",
+              "label": "EDD by ultrasound",
+              "type": "obs",
+              "id": "eddByUs",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5596AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "EFW (g)",
               "type": "obs",
               "id": "efw",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "fdc12823-bdeb-5b3e-a7a7-3e58dde9fed0"
+                "concept": "fdc12823-bdeb-5b3e-a7a7-3e58dde9fed0",
+                "min": "0",
+                "max": "6000",
+                "disallowDecimals": true,
+                "step": 1
               },
               "hideSteppers": true
             },
@@ -115,20 +183,40 @@
                 "concept": "160090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
-                    "label": "Vertex presentation",
-                    "concept": "160091AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "160091AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cephalic - vertex"
                   },
                   {
-                    "label": "Occiput Anterior Position",
-                    "concept": "164148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "164149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cephalic - brow"
                   },
                   {
-                    "label": "Brow Presentation",
-                    "concept": "164149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "164150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cephalic - face"
                   },
                   {
-                    "label": "Face Presentation",
-                    "concept": "164150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5cc0bc97-5cfd-537a-96c5-7b02c8c7ffb1",
+                    "label": "Breech - frank"
+                  },
+                  {
+                    "concept": "c26e9761-df58-5197-a391-fc3017f84f68",
+                    "label": "Breech - complete"
+                  },
+                  {
+                    "concept": "1a34b83c-b8b8-5705-99b0-7cf3b729bcbe",
+                    "label": "Breech - incomplete"
+                  },
+                  {
+                    "concept": "68af813b-ba73-533b-8d3b-6d6a3fd1d04a",
+                    "label": "Breech - footling"
+                  },
+                  {
+                    "concept": "7008d1b0-bbe7-526d-9b95-2fbb350b020e",
+                    "label": "Shoulder"
+                  },
+                  {
+                    "concept": "36acc736-9fce-5860-b121-77ebfa0b4c88",
+                    "label": "Compound"
                   }
                 ]
               }
@@ -152,6 +240,17 @@
               }
             },
             {
+              "label": "Amniotic fluid index, AFI (cm)",
+              "type": "obs",
+              "id": "afi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5c6fab46-1d36-50c7-844f-4c47ea75772b",
+                "min": "0",
+                "max": "50"
+              }
+            },
+            {
               "label": "BPP",
               "type": "obs",
               "id": "bpp",
@@ -167,6 +266,15 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "28bc76ee-0cf3-5dd6-8e1c-620d388990ef"
+              }
+            },
+            {
+              "label": "Impression",
+              "type": "obs",
+              "id": "impression",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "d8e9f54d-05b1-4243-8305-b2fa4d6e6af1"
               }
             }
           ]

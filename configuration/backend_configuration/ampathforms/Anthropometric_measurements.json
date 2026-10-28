@@ -69,7 +69,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Height (cm)",
+              "label": "Height / length (cm)",
               "type": "obs",
               "id": "height",
               "questionOptions": {
@@ -123,9 +123,13 @@
               "id": "weightForHeightZScore",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "98b6233c-7cf8-4218-b516-d2142dad9a0a"
+                "concept": "98b6233c-7cf8-4218-b516-d2142dad9a0a",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight)) ? '' : ((calcWeightForHeightZscore(Number(height),Number(weight)) == null) ? '' : Number(calcWeightForHeightZscore(Number(height),Number(weight))))"
+                }
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true
             },
             {
               "label": "Length Height For Age Z-Score",
@@ -133,9 +137,13 @@
               "id": "lengthHeightForAgeZScore",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "d2ecb899-60de-48ad-bfe8-5b14e2b5c1ce"
+                "concept": "d2ecb899-60de-48ad-bfe8-5b14e2b5c1ce",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height)) ? '' : ((calcHeightForAgeZscore(Number(height)) == null) ? '' : Number(calcHeightForAgeZscore(Number(height))))"
+                }
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true
             },
             {
               "label": "Weight for Age Z-Score",

@@ -75,7 +75,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "5bbbe370-d3ff-4526-a63b-df5c579ca30c"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Gravida",
@@ -113,7 +119,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "af229755-0bee-4bb8-975a-7bacd689e388"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "EDD (calculated from LNMP)",
@@ -180,36 +192,28 @@
                 "concept": "2392bb08-2801-4f3e-a59b-f9589d2e7422",
                 "answers": [
                   {
-                    "label": "Spontaneous vaginal delivery",
-                    "concept": "1170AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1170AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Spontaneous vaginal delivery (SVD)"
                   },
                   {
-                    "label": "Cesarean section",
-                    "concept": "1171AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "b7b07c42-7251-4dc3-b10b-82e9fb17e5bd",
+                    "label": "Vacuum assisted delivery"
                   },
                   {
-                    "label": "OTHER NON-CODED",
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "dd55a56d-315f-47d4-aba4-e430533cccb8",
+                    "label": "Forceps assisted delivery"
                   },
                   {
-                    "label": "Operative Vaginal",
-                    "concept": "8757065d-f074-48bc-b10a-8ab26ec21892"
+                    "concept": "1172AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Assisted breech vaginal delivery"
                   },
                   {
-                    "label": "Caesarean section",
-                    "concept": "9ac3d994-fc0a-5541-90ca-ac537f98e976"
+                    "concept": "9940841c-3758-4679-9123-456890abcd39",
+                    "label": "Cesarean section - elective"
                   },
                   {
-                    "label": "Vacuum",
-                    "concept": "b7b07c42-7251-4dc3-b10b-82e9fb17e5bd"
-                  },
-                  {
-                    "label": "Spontaneous Vaginal",
-                    "concept": "dcf88ce9-74e9-4c6c-a2ff-d189136699d6"
-                  },
-                  {
-                    "label": "Forceps",
-                    "concept": "dd55a56d-315f-47d4-aba4-e430533cccb8"
+                    "concept": "159739AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cesarean section - emergency"
                   }
                 ]
               }
@@ -259,10 +263,16 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
-              "label": "Systolic (mmHg)",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolic",
               "questionOptions": {
@@ -270,7 +280,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -283,15 +294,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Diastolic (mmHg)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolic",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -330,8 +342,9 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -344,15 +357,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Respiratory Rate (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -386,15 +400,16 @@
               "hideSteppers": true
             },
             {
-              "label": "SPO2",
+              "label": "SpO2 (%)",
               "type": "obs",
               "id": "spo2",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "100"
+                "step": 1,
+                "max": "100",
+                "disallowDecimals": true
               },
               "validators": [
                 {
@@ -538,7 +553,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "12d9b04e-17bf-4c20-a940-83eedb4f3037"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Last diagnosis",

@@ -74,14 +74,24 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "MUAC",
+              "label": "MUAC (cm)",
               "type": "obs",
               "required": "false",
               "id": "imamMuac",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
+                "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "5",
+                "max": "60",
+                "step": 0.1
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 12.5) || (age >= 18 && myValue < 21))",
+                  "message": "MUAC below the cut-off (under 5 years: 12.5 cm; adults: 21 cm): screen for acute malnutrition."
+                }
+              ]
             },
             {
               "label": "Weight",
@@ -201,7 +211,7 @@
                 "concept": "e4a5b6c7-d8e9-4a0b-bc23-d4e5f6a7c521",
                 "answers": [
                   {
-                    "concept": "160429AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "90457239-cbe0-4b20-9ab0-e262df08f06f",
                     "label": "Recovered"
                   },
                   {

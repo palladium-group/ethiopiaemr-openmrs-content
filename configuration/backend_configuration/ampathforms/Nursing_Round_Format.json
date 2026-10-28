@@ -75,7 +75,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Starting Time",
@@ -84,14 +90,38 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "c48170e6-022c-40d8-a26d-89541982761b"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Diagnosis",
               "type": "obs",
+              "id": "diagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Diagnosis notes",
+              "type": "obs",
               "id": "diagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             },
@@ -114,7 +144,7 @@
               }
             },
             {
-              "label": "Does Parenteral(IV, IM, SC medication Administering based on order?",
+              "label": "Are parenteral medications (IV, IM, SC) administered as ordered?",
               "type": "obs",
               "id": "doesParenteralIvImScMedicationAdminister",
               "questionOptions": {
@@ -137,7 +167,7 @@
               }
             },
             {
-              "label": "Does enteral (PO ,NG tube ) medication Administering based on order?",
+              "label": "Are enteral medications (oral/PO or via NG tube) administered as prescribed?",
               "type": "obs",
               "id": "doesEnteralPoNgTubeMedicationAdministeri",
               "questionOptions": {
@@ -183,7 +213,7 @@
               }
             },
             {
-              "label": "Does dosages of medications adjusted?",
+              "label": "Have medication dosages been adjusted as needed?",
               "type": "obs",
               "id": "doesDosagesOfMedicationsAdjusted",
               "questionOptions": {
@@ -206,7 +236,7 @@
               }
             },
             {
-              "label": "Actual nursing diagnosis (only problem part",
+              "label": "Actual nursing diagnosis - problem (P) only",
               "type": "obs",
               "id": "actualNursingDiagnosisOnlyProblemPart",
               "questionOptions": {
@@ -215,7 +245,7 @@
               }
             },
             {
-              "label": "Potential nursing diagnosis (only Problem part )",
+              "label": "Potential nursing diagnosis - problem (P) only",
               "type": "obs",
               "id": "potentialNursingDiagnosisOnlyProblemPart",
               "questionOptions": {
@@ -253,11 +283,11 @@
           ]
         },
         {
-          "label": "Does complete Vital Sign taking and recording upon demand and order?",
+          "label": "Vital signs",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "At least QID",
+              "label": "Are complete vital signs measured and recorded as scheduled, and whenever indicated?",
               "type": "obs",
               "id": "atLeastQid",
               "questionOptions": {
@@ -271,8 +301,79 @@
                   {
                     "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "No"
+                  },
+                  {
+                    "concept": "8eb61ddd-415c-5aa5-a53b-390ed5cf4097",
+                    "label": "Partially completed"
                   }
                 ]
+              }
+            },
+            {
+              "label": "Vital signs monitoring frequency",
+              "type": "obs",
+              "id": "vitalSignsMonitoringFrequency",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a992ebab-d1c8-5627-94b1-1a6b69bee7ec",
+                "answers": [
+                  {
+                    "concept": "162244AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Every hour"
+                  },
+                  {
+                    "concept": "33436036-8a92-11e4-977f-0800271c1b75",
+                    "label": "Every 2 hours"
+                  },
+                  {
+                    "concept": "202e5b1c-886c-4a81-846f-d306847bf385",
+                    "label": "Every 4 hours"
+                  },
+                  {
+                    "concept": "162249AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Every 6 hours"
+                  },
+                  {
+                    "concept": "334ea16c-8a92-11e4-977f-0800271c1b75",
+                    "label": "Every 8 hours"
+                  },
+                  {
+                    "concept": "44bead48-74a0-4107-a09d-e52be2c25803",
+                    "label": "Once a day"
+                  },
+                  {
+                    "concept": "1942d7a9-0039-4904-94bc-1cc87e9069cf",
+                    "label": "Twice a day"
+                  },
+                  {
+                    "concept": "aff74faa-29ea-4f92-b52f-6f53c9fb4f8f",
+                    "label": "Three times a day"
+                  },
+                  {
+                    "concept": "3ab26113-d7ba-4618-8c95-7d4db7352519",
+                    "label": "Four times a day"
+                  },
+                  {
+                    "concept": "1079AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Continuous monitoring"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other monitoring frequency, specify",
+              "type": "obs",
+              "id": "vitalSignsMonitoringFrequencyOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalSignsMonitoringFrequency !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             }
           ]

@@ -229,7 +229,7 @@
                 "concept": "1091b649-9eff-4284-a119-26b6a79a0642",
                 "answers": [
                   {
-                    "concept": "1cedffd4-d703-454a-8b7e-08e61b84242a",
+                    "concept": "7e3365d2-2f07-4911-bf85-4e6f1d0ab79d",
                     "label": "RR"
                   },
                   {
@@ -287,16 +287,24 @@
               "hideSteppers": true
             },
             {
-              "label": "MUAC",
+              "label": "MUAC (cm)",
               "type": "obs",
               "id": "muac",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
-                "min": "0",
-                "step": 0.01
+                "min": "5",
+                "step": 0.1,
+                "max": "60"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 12.5) || (age >= 18 && myValue < 21))",
+                  "message": "MUAC below the cut-off (under 5 years: 12.5 cm; adults: 21 cm): screen for acute malnutrition."
+                }
+              ]
             },
             {
               "label": "Medication",
@@ -323,7 +331,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "d773d729-74dd-4515-886b-47befdc5b5a9"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Smear result",
@@ -503,7 +517,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "510fce75-2bbb-56f5-8930-0fe850c67d91"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "HIV test Result",
@@ -515,11 +535,11 @@
                 "answers": [
                   {
                     "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "NR"
+                    "label": "Non-reactive"
                   },
                   {
                     "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "R"
+                    "label": "Reactive"
                   }
                 ]
               }
@@ -625,7 +645,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "164361AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "ART",
@@ -653,7 +679,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "159599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             }
           ]
         },
@@ -792,7 +824,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Treatment outcome (free text)",
@@ -803,44 +841,32 @@
                 "concept": "b53fb2a6-a3d2-54e0-b979-0bee34a875a5",
                 "answers": [
                   {
-                    "label": "Uncontrolled disease status",
-                    "concept": "0389a0f2-3517-5b16-957e-6011f53b02b2"
+                    "concept": "5f263748-5960-495f-fa60-718293041526",
+                    "label": "Cured"
                   },
                   {
-                    "label": "Completed",
-                    "concept": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Completed"
                   },
                   {
-                    "label": "Died",
-                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "4baf4a30-d60b-4942-b0ab-9f48bfc7a314",
+                    "label": "Failure"
                   },
                   {
-                    "label": "Failure",
-                    "concept": "4baf4a30-d60b-4942-b0ab-9f48bfc7a314"
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died"
                   },
                   {
-                    "label": "Lost to followup",
-                    "concept": "5240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Lost to follow-up"
                   },
                   {
-                    "label": "Others",
-                    "concept": "5ec51542-6a40-4f25-8654-6af7628002a9"
+                    "concept": "f355cf33-f07c-40c1-8fb2-c41219e8cbc5",
+                    "label": "Moved to second line treatment register"
                   },
                   {
-                    "label": "Treatment outcome cured",
-                    "concept": "5f263748-5960-495f-fa60-718293041526"
-                  },
-                  {
-                    "label": "Uncle",
-                    "concept": "974AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Controlled disease status",
-                    "concept": "bcc9ae1d-724f-5488-bfaa-97ea60de59f8"
-                  },
-                  {
-                    "label": "Moved to second line treatment register",
-                    "concept": "f355cf33-f07c-40c1-8fb2-c41219e8cbc5"
+                    "concept": "5ec51542-6a40-4f25-8654-6af7628002a9",
+                    "label": "Others"
                   }
                 ]
               }

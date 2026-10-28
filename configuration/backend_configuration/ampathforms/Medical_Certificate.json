@@ -93,13 +93,48 @@
               }
             },
             {
-              "label": "Blood Pressure",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
-              "id": "bloodPressure",
+              "id": "systolic",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "935e6ba6-c666-5296-8374-0360954d7834"
-              }
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "250",
+                "disallowDecimals": true
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic BP (mmHg)",
+              "type": "obs",
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
             },
             {
               "label": "Pulse rate (beats/min)",
@@ -109,8 +144,9 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -123,15 +159,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Breathing Rate (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "breathingRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -228,7 +265,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "WBC",
+              "label": "WBC (x10³/µL)",
               "type": "obs",
               "id": "wbc",
               "questionOptions": {
@@ -239,7 +276,7 @@
               "hideSteppers": true
             },
             {
-              "label": "HCT",
+              "label": "HCT (%)",
               "type": "obs",
               "id": "hct",
               "questionOptions": {
@@ -249,7 +286,7 @@
               "hideSteppers": true
             },
             {
-              "label": "PLT",
+              "label": "Platelet (x10³/µL)",
               "type": "obs",
               "id": "plt",
               "questionOptions": {
@@ -284,12 +321,14 @@
               }
             },
             {
-              "label": "Blood Glucose (rbs/fbs)",
+              "label": "Blood glucose, RBS or FBS (mg/dL)",
               "type": "obs",
               "id": "bloodGlucoseRbsFbs",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "b6945d42-a9bc-5f81-bfd8-6a1ffb50771c"
+                "rendering": "number",
+                "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01
               }
             },
             {
@@ -301,12 +340,16 @@
                 "concept": "2273174b-6081-7902-2456-789123abcd32",
                 "answers": [
                   {
-                    "label": "Positive",
-                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
                   },
                   {
-                    "label": "Negative",
-                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -316,8 +359,18 @@
               "type": "obs",
               "id": "hcv",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "104863d4-936d-4a1a-aa84-f4b63ff4910f"
+                "rendering": "select",
+                "concept": "1325AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
+                  },
+                  {
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  }
+                ]
               }
             },
             {
@@ -345,25 +398,29 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "GOT",
+              "label": "AST/GOT (U/L)",
               "type": "obs",
               "id": "got",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "26cc5746-7e5f-462e-aa53-83a3fbd260b5"
+                "rendering": "number",
+                "concept": "653AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01
               }
             },
             {
-              "label": "GPT",
+              "label": "ALT/GPT (U/L)",
               "type": "obs",
               "id": "gpt",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "e72eea3a-0e77-4662-8dee-c33b0fd17ec5"
+                "rendering": "number",
+                "concept": "654AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01
               }
             },
             {
-              "label": "ALP",
+              "label": "ALP (U/L)",
               "type": "obs",
               "id": "alp",
               "questionOptions": {
@@ -379,16 +436,18 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "BUN",
+              "label": "BUN (mg/dL)",
               "type": "obs",
               "id": "bun",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "83f0f09a-219a-592f-805e-e54258aa28c1"
+                "rendering": "number",
+                "concept": "857AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01
               }
             },
             {
-              "label": "CR",
+              "label": "Creatinine (µmol/L)",
               "type": "obs",
               "id": "cr",
               "questionOptions": {

@@ -75,7 +75,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Method Provided",
@@ -160,7 +166,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Name",
@@ -342,12 +354,38 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Mode of Delivery",
+              "label": "Mode of last delivery",
               "type": "obs",
               "id": "modeOfDelivery",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "c2421f50-813a-4484-a5db-31ba1183e6e5"
+                "rendering": "select",
+                "concept": "2392bb08-2801-4f3e-a59b-f9589d2e7422",
+                "answers": [
+                  {
+                    "concept": "1170AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Spontaneous vaginal delivery (SVD)"
+                  },
+                  {
+                    "concept": "b7b07c42-7251-4dc3-b10b-82e9fb17e5bd",
+                    "label": "Vacuum-assisted delivery"
+                  },
+                  {
+                    "concept": "dd55a56d-315f-47d4-aba4-e430533cccb8",
+                    "label": "Forceps-assisted delivery"
+                  },
+                  {
+                    "concept": "1172AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Assisted breech delivery"
+                  },
+                  {
+                    "concept": "9940841c-3758-4679-9123-456890abcd39",
+                    "label": "Cesarean section, elective"
+                  },
+                  {
+                    "concept": "159739AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cesarean section, emergency"
+                  }
+                ]
               }
             },
             {
@@ -357,7 +395,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "1596AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Breast Feeding",
@@ -466,7 +510,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4028a76b-5690-4bca-a173-8e888e8fb362"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Age of Menarche",
@@ -1124,7 +1174,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Systolic Blood Pressure (mmHg)",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolicBloodPressure",
               "questionOptions": {
@@ -1132,7 +1182,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -1145,15 +1196,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Diastolic Blood Pressure (mmHg)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolicBloodPressure",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -1166,15 +1218,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Pulse Rate",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulseRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "validators": [
                 {
@@ -1232,15 +1285,16 @@
               }
             },
             {
-              "label": "Respiratory Rate (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -1253,7 +1307,7 @@
               "hideSteppers": true
             },
             {
-              "label": "Temperature",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "temperature",
               "questionOptions": {
@@ -1263,7 +1317,14 @@
                 "step": 0.01,
                 "max": "43"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
+                }
+              ]
             },
             {
               "label": "SPO2",

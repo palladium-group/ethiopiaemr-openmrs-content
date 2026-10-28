@@ -75,7 +75,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Summary Subjective",
@@ -126,7 +132,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "4f624502-bbe5-4fc0-b957-43e8b9437535"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Problem No",
@@ -156,7 +168,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "6a6987d8-4251-4ef4-8b47-2a3e488cd8c9"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             }
           ]
         },
@@ -171,7 +189,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Prioritized Problem No",
@@ -225,7 +249,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Problem Number",
@@ -271,9 +301,27 @@
             {
               "label": "Medical Diagnosis",
               "type": "obs",
+              "id": "medicalDiagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Medical Diagnosis notes",
+              "type": "obs",
               "id": "medicalDiagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "0f2b0b07-75d7-4307-81e6-49deb08c49fe"
               }
             },
@@ -289,6 +337,10 @@
                 {
                   "type": "date",
                   "allowFutureDates": "true"
+                },
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
                 }
               ]
             },
@@ -328,8 +380,8 @@
                 "concept": "f634d574-3925-4bbe-97c8-bdc2a9b89a04",
                 "answers": [
                   {
-                    "concept": "7659c02c-a969-4de4-a9c8-bdd6b6d17ebe",
-                    "label": "Single"
+                    "concept": "1057AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Never married / Single"
                   },
                   {
                     "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -340,8 +392,20 @@
                     "label": "Divorced"
                   },
                   {
+                    "concept": "1056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Separated"
+                  },
+                  {
                     "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Widowed"
+                  },
+                  {
+                    "concept": "8f878873-0de1-4abe-a3a0-3152caa6fe03",
+                    "label": "Cohabiting / Living with partner"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -463,10 +527,6 @@
                   {
                     "concept": "477f7e11-88d9-48c4-9c0c-78115ec3c5d1",
                     "label": "Tobacco"
-                  },
-                  {
-                    "concept": "164069AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "CT Scan"
                   }
                 ]
               }
@@ -760,7 +820,7 @@
               }
             },
             {
-              "label": "Temperature",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "temperature",
               "questionOptions": {
@@ -780,15 +840,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Pulse rate",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulseRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "validators": [
                 {
@@ -828,15 +889,16 @@
               }
             },
             {
-              "label": "Respiratory Rate (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -887,7 +949,7 @@
               }
             },
             {
-              "label": "Systolic BP",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolicBp",
               "questionOptions": {
@@ -895,7 +957,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "validators": [
                 {
@@ -907,15 +970,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Diastolic BP",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolicBp",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "validators": [
                 {
@@ -1906,12 +1970,16 @@
                 "concept": "331ee311-38a4-4fe5-a712-95eedd075200",
                 "answers": [
                   {
-                    "concept": "f8691a2b-3b42-4ddc-5a67-123456789ab3",
-                    "label": "Lidocain 2% with adrenalin"
+                    "concept": "49ee96bc-78d0-4acf-90d4-a9d3e0982b41",
+                    "label": "Foley catheter"
                   },
                   {
-                    "concept": "091a2b3c-4c53-4eed-6b78-23456789abc4",
-                    "label": "Lidocain 2% with out adrenalin"
+                    "concept": "5ec9753b-b70d-5a5e-bde9-7a63e0199392",
+                    "label": "Condom catheter"
+                  },
+                  {
+                    "concept": "686fc8d6-4f04-5903-a6e6-c4165fa29988",
+                    "label": "Suprapubic catheter"
                   },
                   {
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -2171,10 +2239,6 @@
                   {
                     "concept": "0d963c36-340c-4ff9-b27d-fcf253cae915",
                     "label": "Bathing"
-                  },
-                  {
-                    "concept": "164069AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "CT Scan"
                   }
                 ]
               }
@@ -2711,10 +2775,6 @@
                   {
                     "concept": "526AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Both thumbs limited"
-                  },
-                  {
-                    "concept": "164069AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "CT Scan"
                   }
                 ]
               }

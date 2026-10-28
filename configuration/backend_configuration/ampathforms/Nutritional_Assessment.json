@@ -242,10 +242,11 @@
                   "calculateExpression": "(isEmpty(heightM) || isEmpty(weightKg)) ? '' : ((calcBMIForAgeZscore(Number(heightM)*100,Number(weightKg)) == null) ? '' : Number(calcBMIForAgeZscore(Number(heightM)*100,Number(weightKg))))"
                 }
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true
             },
             {
-              "label": "BMI (≥18 yrs.)",
+              "label": "BMI (kg/m², 18 years and over)",
               "type": "obs",
               "id": "bmi18Yrs",
               "questionOptions": {
@@ -258,10 +259,11 @@
                 },
                 "max": "100"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true
             },
             {
-              "label": "Waist Circumference (WC)",
+              "label": "Waist circumference (cm)",
               "type": "obs",
               "id": "waistCircumferenceWc",
               "questionOptions": {
@@ -273,7 +275,7 @@
               "hideSteppers": true
             },
             {
-              "label": "Head Circumference (HC)",
+              "label": "Head circumference (cm)",
               "type": "obs",
               "id": "headCircumferenceHc",
               "questionOptions": {
@@ -286,17 +288,25 @@
               "hideSteppers": true
             },
             {
-              "label": "MUAC (Mid-upper arm circumference)",
+              "label": "MUAC (cm)",
               "type": "obs",
               "id": "muacMidUpperArmCircumference",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": 0.01
+                "min": "5",
+                "step": 0.1,
+                "max": "60"
               },
               "questionInfo": "Mid-upper arm circumference in centimetres.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 12.5) || (age >= 18 && myValue < 21))",
+                  "message": "MUAC below the cut-off (under 5 years: 12.5 cm; adults: 21 cm): screen for acute malnutrition."
+                }
+              ]
             },
             {
               "label": "Other Anthropometric Measures",
@@ -309,6 +319,24 @@
             },
             {
               "label": "Medical Diagnosis",
+              "type": "obs",
+              "id": "medicalDiagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Medical Diagnosis notes",
               "type": "obs",
               "id": "medicalDiagnosis",
               "questionOptions": {
@@ -575,8 +603,8 @@
                     "label": "Severe"
                   },
                   {
-                    "concept": "d0cef738-9845-5684-bcdf-4d5c206d5e94",
-                    "label": "Moderate RD"
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
                   },
                   {
                     "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -606,7 +634,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Type of Diet (Specific) and Amount",
@@ -765,15 +799,15 @@
                 "answers": [
                   {
                     "concept": "72d80279-d745-5c1f-9066-805e4ff8c3c5",
-                    "label": "Rutf"
+                    "label": "RUTF"
                   },
                   {
                     "concept": "3d9e6823-adc8-4da1-9f0f-1737e04bd299",
-                    "label": "F75"
+                    "label": "F-75"
                   },
                   {
                     "concept": "fe2e6f32-e653-4216-96d4-fa2aa2d4ffeb",
-                    "label": "F100"
+                    "label": "F-100"
                   },
                   {
                     "concept": "2b5911a6-5df0-4a7c-8265-b5f522197435",
@@ -781,7 +815,7 @@
                   },
                   {
                     "concept": "af220bec-c0b6-484b-8752-ee3e137ee285",
-                    "label": "ReSomol"
+                    "label": "ReSoMal"
                   },
                   {
                     "concept": "5ec51542-6a40-4f25-8654-6af7628002a9",
@@ -824,7 +858,7 @@
                   },
                   {
                     "concept": "0be376a9-96aa-4b38-a0a3-35535d0bf631",
-                    "label": "Rusf"
+                    "label": "RUSF"
                   },
                   {
                     "concept": "8a3781c5-b737-42c7-abbb-833abee7d5d0",
@@ -871,7 +905,7 @@
                   },
                   {
                     "concept": "40a137bf-f222-433d-9926-12f85427d3e8",
-                    "label": "Folic Acid."
+                    "label": "Folic acid"
                   },
                   {
                     "concept": "a342056c-3830-426c-aa0a-f957eb6e9baa",
@@ -879,7 +913,7 @@
                   },
                   {
                     "concept": "5173bb5e-9195-42e4-80ef-0220dc8bd263",
-                    "label": "Iron."
+                    "label": "Iron"
                   },
                   {
                     "concept": "11ce7b2f-c8f2-4f47-8506-d2cc4c20e4de",
@@ -887,7 +921,7 @@
                   },
                   {
                     "concept": "c3751700-df60-474c-afa2-021df3f9085e",
-                    "label": "Zinc."
+                    "label": "Zinc"
                   },
                   {
                     "concept": "e111d0ad-0080-4b99-973c-1f5a5cac0e23",

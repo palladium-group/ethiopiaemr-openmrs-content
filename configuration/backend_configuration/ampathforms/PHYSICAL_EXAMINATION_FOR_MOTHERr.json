@@ -128,9 +128,27 @@
             {
               "label": "Diagnosis",
               "type": "obs",
+              "id": "diagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Diagnosis notes",
+              "type": "obs",
               "id": "diagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             },
@@ -318,7 +336,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "af229755-0bee-4bb8-975a-7bacd689e388"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "EDD",
@@ -2487,7 +2511,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -2507,8 +2532,9 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -2528,8 +2554,9 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -2542,15 +2569,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Respiratory Rate (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -2563,15 +2591,16 @@
               "hideSteppers": true
             },
             {
-              "label": "SPO2",
+              "label": "SpO2 (%)",
               "type": "obs",
               "id": "spo2",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "100"
+                "step": 1,
+                "max": "100",
+                "disallowDecimals": true
               },
               "validators": [
                 {
@@ -2653,16 +2682,24 @@
               "hideSteppers": true
             },
             {
-              "label": "MUAC",
+              "label": "MUAC (cm)",
               "type": "obs",
               "id": "muac",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
-                "min": "0",
-                "step": 0.01
+                "min": "5",
+                "step": 0.1,
+                "max": "60"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue < 23",
+                  "message": "MUAC below 23 cm in a pregnant or lactating woman: screen for acute malnutrition."
+                }
+              ]
             }
           ]
         }
@@ -2900,40 +2937,16 @@
                 "concept": "6db955d4-1317-4751-bfac-a18c5648049c",
                 "answers": [
                   {
-                    "label": "Fowler's (Low 15°-30°)",
-                    "concept": "0443d17a-be65-4c3b-83b2-a17f18f2c455"
+                    "concept": "e8288620-2684-5933-8ccc-130c43ad6964",
+                    "label": "Anterior"
                   },
                   {
-                    "label": "sitting",
-                    "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "cb2ffa2b-fe56-52f2-a63c-7ca73112c66f",
+                    "label": "Mid-position"
                   },
                   {
-                    "label": "Fowler's (Semi 30°-45°)",
-                    "concept": "27a4629c-668b-499d-9f30-db96f0ba67ea"
-                  },
-                  {
-                    "label": "Prone position",
-                    "concept": "31f79dca-021e-49cd-9784-150497976e62"
-                  },
-                  {
-                    "label": "Supine",
-                    "concept": "92709344-75b1-4093-a1b8-6d0bd998df7e"
-                  },
-                  {
-                    "label": "Fowler's (full/standard 45°-60°)",
-                    "concept": "94d9fe4d-4b3c-4a64-8ab2-26b816714892"
-                  },
-                  {
-                    "label": "Fowler's (High 60°-90°)",
-                    "concept": "955abfab-508c-4239-b145-d740c2f81cc7"
-                  },
-                  {
-                    "label": "Left lateral position",
-                    "concept": "e61aa344-daf9-41bd-9924-d2ff00c45446"
-                  },
-                  {
-                    "label": "Right lateral position",
-                    "concept": "fb8b15f3-3b3b-4849-891a-894cd010e2c8"
+                    "concept": "53d2a353-403c-5117-930f-2867226c2dbc",
+                    "label": "Posterior"
                   }
                 ]
               }

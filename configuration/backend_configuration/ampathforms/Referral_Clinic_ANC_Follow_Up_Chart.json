@@ -207,7 +207,7 @@
               }
             },
             {
-              "label": "Pubic angel",
+              "label": "Pubic angle",
               "type": "obs",
               "id": "pubicAngel",
               "questionOptions": {
@@ -254,7 +254,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -274,8 +275,9 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -295,8 +297,9 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -330,14 +333,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Pulse (beats/min)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulse",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "max": "230",
-                "min": "0"
+                "min": "0",
+                "disallowDecimals": true,
+                "step": 1
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -397,64 +402,59 @@
               }
             },
             {
-              "label": "Engagement",
+              "label": "Engagement: descent of the head (fifths palpable)",
               "type": "obs",
               "id": "engagement",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "4e354c77-5851-4b7c-bd24-6b06b6791af4",
+                "concept": "73721cf7-d5f4-4dc7-990e-83e2704e4047",
                 "answers": [
                   {
-                    "label": "Good",
-                    "concept": "159405AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "49ed509d-7982-4da7-921b-94c39547cfe2",
+                    "label": "5/5"
                   },
                   {
-                    "label": "Fair",
-                    "concept": "159406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "d330c88d-c605-44ea-b60f-77f21db7cef6",
+                    "label": "4/5"
                   },
                   {
-                    "label": "Poor",
-                    "concept": "159407AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "bcc5a839-00a3-4635-8adb-9bf8d80d8b30",
+                    "label": "3/5"
                   },
                   {
-                    "label": "Partial",
-                    "concept": "46969e18-a3c4-4fcc-ba87-907917ac0986"
+                    "concept": "b772099f-e80a-41d8-bd0e-5cd22c99ee5c",
+                    "label": "2/5"
                   },
                   {
-                    "label": "Full",
-                    "concept": "490dca17-a568-49e8-9da4-b5982d36a3ce"
+                    "concept": "af9455ab-39ed-41c5-8734-030048df39b6",
+                    "label": "1/5"
                   },
                   {
-                    "label": "Requires prompting",
-                    "concept": "657dd4f6-45b7-41cb-9c08-fa5f90727c3b"
-                  },
-                  {
-                    "label": "Distracted",
-                    "concept": "888c1cad-c890-47a8-90ef-e17827184801"
-                  },
-                  {
-                    "label": "Limited",
-                    "concept": "8d82393f-2ca0-43e1-99b7-1cc73cac19ee"
-                  },
-                  {
-                    "label": "Focused",
-                    "concept": "a7fdde71-d503-428f-abd2-7d7e3631790d"
-                  },
-                  {
-                    "label": "Withdrawn",
-                    "concept": "d3b1e013-27ab-4b8c-a4f4-be2e7650ac77"
+                    "concept": "c1648dd1-f435-49ba-ab15-6679496c55ac",
+                    "label": "0/5 (fully engaged)"
                   }
                 ]
               }
             },
             {
-              "label": "FHB",
+              "label": "Fetal heart rate (beats/min)",
               "type": "obs",
               "id": "fhb",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "3071425c-0415-2345-6789-012345abcd1a"
-              }
+                "rendering": "number",
+                "concept": "1440AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "40",
+                "max": "250",
+                "disallowDecimals": true,
+                "step": 1
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 110 || myValue > 160)",
+                  "message": "Fetal heart rate is outside the normal range (110-160 beats/min)."
+                }
+              ]
             },
             {
               "label": "Edema",
@@ -615,20 +615,40 @@
                 "concept": "160090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
-                    "label": "Vertex presentation",
-                    "concept": "160091AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "160091AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cephalic - vertex"
                   },
                   {
-                    "label": "Occiput Anterior Position",
-                    "concept": "164148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "164149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cephalic - brow"
                   },
                   {
-                    "label": "Brow Presentation",
-                    "concept": "164149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "164150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cephalic - face"
                   },
                   {
-                    "label": "Face Presentation",
-                    "concept": "164150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5cc0bc97-5cfd-537a-96c5-7b02c8c7ffb1",
+                    "label": "Breech - frank"
+                  },
+                  {
+                    "concept": "c26e9761-df58-5197-a391-fc3017f84f68",
+                    "label": "Breech - complete"
+                  },
+                  {
+                    "concept": "1a34b83c-b8b8-5705-99b0-7cf3b729bcbe",
+                    "label": "Breech - incomplete"
+                  },
+                  {
+                    "concept": "68af813b-ba73-533b-8d3b-6d6a3fd1d04a",
+                    "label": "Breech - footling"
+                  },
+                  {
+                    "concept": "7008d1b0-bbe7-526d-9b95-2fbb350b020e",
+                    "label": "Shoulder"
+                  },
+                  {
+                    "concept": "36acc736-9fce-5860-b121-77ebfa0b4c88",
+                    "label": "Compound"
                   }
                 ]
               }

@@ -71,9 +71,27 @@
             {
               "label": "Medical Diagnosis",
               "type": "obs",
+              "id": "medicalDiagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Medical Diagnosis notes",
+              "type": "obs",
               "id": "medicalDiagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             },
@@ -102,11 +120,11 @@
                 "answers": [
                   {
                     "concept": "45f5d535-a2a9-57fb-a67d-4a48b116472c",
-                    "label": "New Patients"
+                    "label": "New Patient"
                   },
                   {
                     "concept": "37d779ed-b51f-51bd-a368-52ce83bcf61e",
-                    "label": "Revisit"
+                    "label": "Re-Visit"
                   }
                 ]
               }
@@ -120,20 +138,44 @@
                 "concept": "37fd000c-d185-4ab3-bd49-9005ce9868c7",
                 "answers": [
                   {
+                    "concept": "a28928a7-af76-5dd4-acee-7ff619b513df",
+                    "label": "Neonate (Birth - 28 days)"
+                  },
+                  {
+                    "concept": "5451b9f7-3eed-57bb-ad05-950bccfa30d4",
+                    "label": "Infant (29 days - under 1 Year)"
+                  },
+                  {
+                    "concept": "09dd80c6-d5cb-5f27-890d-6a8b54371233",
+                    "label": "Child (1 - 9 Years)"
+                  },
+                  {
+                    "concept": "3b4d92d0-a1cd-5ed7-9154-684597797152",
+                    "label": "Adolescent (10 - 19 Years)"
+                  },
+                  {
                     "concept": "166044AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Adult"
+                    "label": "Adult (20 - 59 Years)"
+                  },
+                  {
+                    "concept": "362188bc-b19b-5278-953b-1f2bca9f38f7",
+                    "label": "Older Adult (60+)"
                   },
                   {
                     "concept": "d3b42c5e-6f70-4189-bacd-ef0123456702",
-                    "label": "Pregnant"
+                    "label": "Pregnant Woman (Antenatal Nutritional Assessment)"
                   },
                   {
-                    "concept": "a3748596-7081-9012-3456-789012678901",
-                    "label": "Postnatal"
+                    "concept": "e4c53d6f-7081-429a-cbde-f01234567803",
+                    "label": "Lactating Woman"
                   },
                   {
-                    "concept": "ecbbb69d-43a8-4684-989e-4b4f83628925",
-                    "label": "Pediatrics (0-14 years)"
+                    "concept": "239de57b-418a-544b-a9d9-1881aa974299",
+                    "label": "Patient with Acute Malnutrition (Suspected or Diagnosed)"
+                  },
+                  {
+                    "concept": "fcb0cbde-77ea-5ba5-b90a-19f78e92ec4e",
+                    "label": "Patient With Chronic Disease (HIV, TB, CKD, DM…)"
                   }
                 ]
               }
@@ -230,16 +272,24 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Nut. Dx",
+              "label": "Nutritional diagnosis",
               "type": "obs",
               "id": "nutDx",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "checkbox",
                 "concept": "141a95b0-a31f-4595-b02d-69846c0e8893",
                 "answers": [
                   {
-                    "concept": "f1ac86a2-5934-49c5-aecc-16426e6b1d59",
-                    "label": "Underweight"
+                    "concept": "f1a2b3c4-d5e6-47f8-89a0-b1c2d3e4f502",
+                    "label": "Normal nutritional status"
+                  },
+                  {
+                    "concept": "52bd7805-f535-4269-8b47-eb0406d5ab9f",
+                    "label": "Undernutrition"
+                  },
+                  {
+                    "concept": "c8c3d3cb-30e5-4e6b-980c-b78bfa289e1f",
+                    "label": "Malnutrition"
                   },
                   {
                     "concept": "590a7581-714a-4b47-a1c9-712501889e44",
@@ -250,28 +300,58 @@
                     "label": "Obesity"
                   },
                   {
-                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Normal"
+                    "concept": "70ff9cba-3ded-5565-a286-b9742c88ef56",
+                    "label": "Protein-energy malnutrition"
+                  },
+                  {
+                    "concept": "9f847dda-1d65-57fa-b566-8b3af3cdb3e4",
+                    "label": "Vitamin deficiency (specify)"
+                  },
+                  {
+                    "concept": "e10a94f1-25c7-43a7-bf83-89a891372a41",
+                    "label": "Mineral deficiency (specify)"
+                  },
+                  {
+                    "concept": "e2a30ead-6373-5683-9d4f-750c42fb776a",
+                    "label": "Nutritional anaemia"
+                  },
+                  {
+                    "concept": "82c6d388-43e8-4c99-9b88-7fa52cc17b9f",
+                    "label": "Dehydration related to nutritional status"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other nutritional disorder (specify)"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No nutritional diagnosis"
                   }
                 ]
               }
             },
             {
-              "label": "Micro-nutrient deficiency (specify)",
+              "label": "Vitamin or mineral deficiency, specify",
               "type": "obs",
               "id": "microNutrientDeficiencySpecify",
               "questionOptions": {
                 "rendering": "text",
                 "concept": "b644443f-a546-45e2-a06e-a95cf8eedca8"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(nutDx) || !(arrayContains(nutDx, '9f847dda-1d65-57fa-b566-8b3af3cdb3e4') || arrayContains(nutDx, 'e10a94f1-25c7-43a7-bf83-89a891372a41'))"
               }
             },
             {
-              "label": "Other Nutritional diagnosis",
+              "label": "Other nutritional disorder, specify",
               "type": "obs",
               "id": "otherNutritionalDiagnosis",
               "questionOptions": {
                 "rendering": "text",
                 "concept": "f26480c3-99fd-4ace-9caa-7e5affe75ca1"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(nutDx) || !arrayContains(nutDx, '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
               }
             }
           ]
@@ -343,11 +423,11 @@
                 "concept": "167017AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
-                    "concept": "25955088-40c8-4613-a9a2-e9ab0ed645e0",
+                    "concept": "8dc6cd6a-b838-511a-92be-79e2d97bc338",
                     "label": "1-2 weeks"
                   },
                   {
-                    "concept": "d5b8772c-eebe-4792-8fc3-7d088aee6b8c",
+                    "concept": "29ca45ba-2449-5298-883f-5bf7732676c6",
                     "label": "2-4 weeks"
                   },
                   {
@@ -409,7 +489,7 @@
               "hideSteppers": true
             },
             {
-              "label": "BMI",
+              "label": "BMI (kg/m²)",
               "type": "obs",
               "id": "bmi",
               "questionOptions": {
@@ -418,10 +498,11 @@
                 "min": "0",
                 "step": 0.01,
                 "calculate": {
-                  "calculateExpression": "calcBMI(heightCm,weightKg)"
+                  "calculateExpression": "(isEmpty(heightCm) || isEmpty(weightKg)) ? '' : calcBMI(heightCm, weightKg)"
                 }
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true
             },
             {
               "label": "MUAC (cm)",
@@ -430,13 +511,21 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": 0.01
+                "min": "5",
+                "step": 0.1,
+                "max": "60"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 12.5) || (age >= 18 && myValue < 21))",
+                  "message": "MUAC below the cut-off (under 5 years: 12.5 cm; adults: 21 cm): screen for acute malnutrition."
+                }
+              ]
             },
             {
-              "label": "Waist Circumference (WC)",
+              "label": "Waist circumference (cm)",
               "type": "obs",
               "id": "waistCircumferenceWc",
               "questionOptions": {
@@ -448,7 +537,7 @@
               "hideSteppers": true
             },
             {
-              "label": "Hip circumference (HC)",
+              "label": "Hip circumference (cm)",
               "type": "obs",
               "id": "hipCircumferenceHc",
               "questionOptions": {
@@ -487,7 +576,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Hemoglobin (Hgb g/dL)",
+              "label": "Hemoglobin (g/dL)",
               "type": "obs",
               "id": "hemoglobinHgbGDl",
               "questionOptions": {
@@ -499,16 +588,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Blood Glucose (rbs/fbs)",
+              "label": "Blood glucose, RBS or FBS (mg/dL)",
               "type": "obs",
               "id": "bloodGlucoseRbsFbs",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "b6945d42-a9bc-5f81-bfd8-6a1ffb50771c"
               }
             },
             {
-              "label": "Albumin (Serum)",
+              "label": "Serum albumin (g/dL)",
               "type": "obs",
               "id": "albuminSerum",
               "questionOptions": {
@@ -520,16 +609,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Micro-nutrient profile",
+              "label": "Micronutrient profile",
               "type": "obs",
               "id": "microNutrientProfile",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "9d05e3dc-6700-4cc5-8184-dea386e3be79"
               }
             },
             {
-              "label": "Triglyceride",
+              "label": "Triglycerides (mg/dL)",
               "type": "obs",
               "id": "triglyceride",
               "questionOptions": {
@@ -541,7 +630,7 @@
               "hideSteppers": true
             },
             {
-              "label": "HDL",
+              "label": "HDL cholesterol (mg/dL)",
               "type": "obs",
               "id": "hdl",
               "questionOptions": {
@@ -553,7 +642,7 @@
               "hideSteppers": true
             },
             {
-              "label": "LDL",
+              "label": "LDL cholesterol (mg/dL)",
               "type": "obs",
               "id": "ldl",
               "questionOptions": {
@@ -565,7 +654,7 @@
               "hideSteppers": true
             },
             {
-              "label": "Total Cholesterol",
+              "label": "Total cholesterol (mg/dL)",
               "type": "obs",
               "id": "totalCholesterol",
               "questionOptions": {
@@ -666,16 +755,30 @@
                   {
                     "concept": "160406AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Bilateral"
-                  },
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pitting or non-pitting edema?",
+              "type": "obs",
+              "id": "edemaType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b13956fa-f361-56f6-8335-5c2eff401389",
+                "answers": [
                   {
                     "concept": "130166AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Pitting"
                   },
                   {
                     "concept": "9c3aa3d7-e8fa-56cf-9163-419b1dc28e67",
-                    "label": "Non pitting"
+                    "label": "Non-pitting"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(edema) || edema === 'db576a3e-08a3-578c-bf31-803a3991af7e'"
               }
             },
             {

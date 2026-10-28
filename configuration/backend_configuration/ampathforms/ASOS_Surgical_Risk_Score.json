@@ -88,7 +88,10 @@
                     "concept": "77fb1804-f0f6-4d31-b805-3580ef44b253",
                     "label": "≥70"
                   }
-                ]
+                ],
+                "calculate": {
+                  "calculateExpression": "age >= 70 ? '77fb1804-f0f6-4d31-b805-3580ef44b253' : (age >= 30 ? 'ca6cdf3b-e370-4394-afbc-e618361742d1' : 'cac260cf-25b8-41f2-bd6a-67f233e7c73d')"
+                }
               }
             },
             {
@@ -227,13 +230,24 @@
               }
             },
             {
-              "label": "ASOS Score",
+              "label": "ASOS score (calculated)",
               "type": "obs",
               "id": "asosScore",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "a43dc037-dc98-4033-9906-3603f9b6d3a3"
-              }
+                "concept": "a43dc037-dc98-4033-9906-3603f9b6d3a3",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(asa) || isEmpty(surgeryTiming) || isEmpty(surgerySeverity) || isEmpty(indicationForSurgery) || isEmpty(surgeryType)) ? '' : String((age >= 70 ? 3 : (age >= 30 ? 1 : 0)) + (asa === '930a7db4-2b33-4c94-921d-bba9230d4472' ? 2 : (asa === 'a45b3604-4ac4-4047-a60d-7d07cf20c238' ? 5 : (asa === '8c2660b1-e23e-4233-9a08-74acc03f7ac9' ? 8 : 0))) + (surgeryTiming === 'f909eca2-5610-4b29-888c-daacec40ef38' ? 3 : (surgeryTiming === 'f243ceb7-b0ed-4b6c-abc5-dc2c1ba8b060' ? 4 : 0)) + (surgerySeverity === 'fa510000-0000-4000-8000-000000000002' ? 2 : (surgerySeverity === '6bc780ff-2255-4139-8a5d-03f09b74a74e' ? 4 : 0)) + (indicationForSurgery === '1171AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? -2 : (indicationForSurgery === 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4' ? 1 : (indicationForSurgery === 'fd5769b8-1443-471a-963d-8fa5fe8aa759' ? 2 : 0))) + (surgeryType === '79afc37a-4851-4751-a5fd-f867292c5ca2' ? -1 : (surgeryType === 'f21567fe-1fca-40a4-b775-28215ea1a0c6' ? 1 : (surgeryType === 'e0b76976-eede-428c-942e-8dde54367320' ? 2 : (surgeryType === 'd232a244-c367-4e31-89bd-1a586fb746dc' ? 3 : (surgeryType === 'c139fa79-58bd-49b7-80cc-d0c6105ca975' ? 4 : 0))))))"
+                }
+              },
+              "readonly": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && Number(myValue) >= 10",
+                  "message": "High risk (ASOS score 10 or more): plan increased postoperative surveillance."
+                }
+              ]
             }
           ]
         }
