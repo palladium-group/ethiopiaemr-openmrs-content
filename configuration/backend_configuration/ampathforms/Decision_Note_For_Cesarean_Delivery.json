@@ -96,7 +96,7 @@
               }
             },
             {
-              "label": "Subjective Compliant",
+              "label": "Subjective complaint",
               "type": "obs",
               "id": "subjectiveCompliant",
               "questionOptions": {
@@ -254,7 +254,107 @@
               }
             },
             {
-              "label": "Indication",
+              "label": "Urgency of caesarean section (RCOG/NICE category)",
+              "type": "obs",
+              "id": "csUrgencyCategory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "eea7c5a9-8307-4f0c-917c-d88eef82330d",
+                "answers": [
+                  {
+                    "concept": "2526536e-1077-5753-9cf4-6b668091ef23",
+                    "label": "Category 1: immediate threat to the life of the woman or fetus"
+                  },
+                  {
+                    "concept": "0fae8cc1-999d-540e-ab95-9c8e7d4cec88",
+                    "label": "Category 2: maternal or fetal compromise, not immediately life-threatening"
+                  },
+                  {
+                    "concept": "2a7fff3f-4809-5310-bbc5-fc70199b0ce6",
+                    "label": "Category 3: no compromise, but needs early delivery"
+                  },
+                  {
+                    "concept": "c430c00c-4787-5f87-94ef-acf0028e37b5",
+                    "label": "Category 4: delivery timed to suit the woman and the team"
+                  }
+                ]
+              },
+              "required": true
+            },
+            {
+              "label": "Main indication for caesarean section",
+              "type": "obs",
+              "id": "csMainIndication",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "166400AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "66b76c3f-c1bf-4bf5-81cf-ed0191f6b865",
+                    "label": "Previous caesarean section (uterine scar)"
+                  },
+                  {
+                    "concept": "01be4ceb-9b5f-4ade-83df-5b0a517f00e1",
+                    "label": "Non-reassuring fetal status (fetal distress)"
+                  },
+                  {
+                    "concept": "cbba0457-6e9a-4924-9cd8-2de177861ae1",
+                    "label": "Failure to progress in labour"
+                  },
+                  {
+                    "concept": "6795a42c-c9fd-462f-8978-bf50ac0a10b3",
+                    "label": "Cephalopelvic disproportion"
+                  },
+                  {
+                    "concept": "34f66f8d-42a2-42f6-a087-fcc983ed2874",
+                    "label": "Malpresentation (breech, transverse or other)"
+                  },
+                  {
+                    "concept": "66a214be-e49a-4171-b8c1-f94dac2aeddd",
+                    "label": "Antepartum haemorrhage (placenta praevia or abruption)"
+                  },
+                  {
+                    "concept": "180c1f7e-7913-40f7-ac82-b88fc3d1705c",
+                    "label": "Severe pre-eclampsia"
+                  },
+                  {
+                    "concept": "267a4a17-088f-475f-be76-902e36bdcc37",
+                    "label": "Eclampsia"
+                  },
+                  {
+                    "concept": "d84e5344-a366-47c6-9a84-afd8e5fcf1ab",
+                    "label": "Multiple pregnancy"
+                  },
+                  {
+                    "concept": "6045e0bc-3d8f-4c35-88ec-ee353cf1de32",
+                    "label": "Cord prolapse"
+                  },
+                  {
+                    "concept": "00f57241-68b4-47fe-ad48-94c33b235ef4",
+                    "label": "Failed induction of labour"
+                  },
+                  {
+                    "concept": "161632AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Failed instrumental delivery"
+                  },
+                  {
+                    "concept": "4d148ae6-9a90-417e-aaaa-93e98804a6d3",
+                    "label": "Suspected macrosomia"
+                  },
+                  {
+                    "concept": "574cc79b-df57-579c-b167-cb3dc01cb187",
+                    "label": "Maternal request"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              },
+              "required": true
+            },
+            {
+              "label": "Indication details",
               "type": "obs",
               "id": "indication",
               "questionOptions": {
@@ -271,6 +371,33 @@
                 "concept": "2ad20b043cf54dd48e698e1c8e231c99"
               },
               "required": "true"
+            },
+            {
+              "label": "Informed consent for caesarean section obtained?",
+              "type": "obs",
+              "id": "csConsentObtained",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "179523cb-240b-47a5-8873-b0324449802b",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue === '1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'",
+                  "message": "Consent not obtained: document the reason and follow the emergency consent procedure."
+                }
+              ]
             }
           ]
         },
@@ -308,7 +435,7 @@
               }
             },
             {
-              "label": "Pict",
+              "label": "PITC (HIV test)",
               "type": "obs",
               "id": "pict",
               "questionOptions": {
@@ -350,7 +477,7 @@
               }
             },
             {
-              "label": "Vdrl",
+              "label": "VDRL",
               "type": "obs",
               "id": "vdrl",
               "questionOptions": {

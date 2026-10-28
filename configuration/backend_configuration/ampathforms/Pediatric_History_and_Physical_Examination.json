@@ -108,42 +108,56 @@
               }
             },
             {
-              "label": "Allergies",
+              "label": "Known allergies?",
+              "type": "obs",
+              "id": "allergyPresent",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8efb0023-a138-4998-af57-343cee424937",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Allergy type (select all that apply)",
               "type": "obs",
               "id": "allergies",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "checkbox",
                 "concept": "3c4d5e6f-7081-9012-cdef-345678901234",
                 "answers": [
                   {
-                    "label": "Yes",
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "139994AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Food"
                   },
                   {
-                    "label": "No",
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "141760AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Drug"
                   },
                   {
-                    "label": "Unknown",
-                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "cef9c84c-0872-4877-ad78-f66603d20772",
+                    "label": "Environmental"
                   },
                   {
-                    "label": "Food allergy",
-                    "concept": "139994AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Drug allergy",
-                    "concept": "141760AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "OTHER NON-CODED",
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Environment",
-                    "concept": "cef9c84c-0872-4877-ad78-f66603d20772"
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "!isEmpty(allergyPresent) && allergyPresent !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -497,7 +511,7 @@
               }
             },
             {
-              "label": "Any other related issues",
+              "label": "Other issues related to pneumonia and young infant illness",
               "type": "obs",
               "id": "anyOtherRelatedIssues",
               "questionOptions": {
@@ -525,7 +539,7 @@
               }
             },
             {
-              "label": "Any other related issues",
+              "label": "Other issues related to diarrhoea",
               "type": "obs",
               "id": "anyOtherRelatedIssues2",
               "questionOptions": {
@@ -557,7 +571,7 @@
               }
             },
             {
-              "label": "Any other related issues",
+              "label": "Other issues related to development",
               "type": "obs",
               "id": "anyOtherRelatedIssues3",
               "questionOptions": {
@@ -681,7 +695,7 @@
               }
             },
             {
-              "label": "Any other related issues",
+              "label": "Other issues related to nutrition",
               "type": "obs",
               "id": "anyOtherRelatedIssues4",
               "questionOptions": {
@@ -1489,7 +1503,8 @@
                     "label": "No"
                   }
                 ]
-              }
+              },
+              "questionInfo": "If yes, interpret growth with Down syndrome-specific growth charts (CDC 2015); the WHO z-scores on this form use the general reference."
             },
             {
               "label": "MUAC (cm)",
@@ -1507,8 +1522,13 @@
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 12.5) || (age >= 18 && myValue < 21))",
-                  "message": "MUAC below the cut-off (under 5 years: 12.5 cm; adults: 21 cm): screen for acute malnutrition."
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 11.5) || (age >= 18 && myValue < 18.5))",
+                  "message": "MUAC in the severe acute malnutrition range (under 5 years: below 11.5 cm; adults: below 18.5 cm)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue >= 11.5 && myValue < 12.5) || (age >= 18 && myValue >= 18.5 && myValue < 21))",
+                  "message": "MUAC in the moderate acute malnutrition range (under 5 years: 11.5 to 12.4 cm; adults: 18.5 to 20.9 cm)."
                 }
               ]
             },
@@ -1607,32 +1627,28 @@
               "hideSteppers": true
             },
             {
-              "label": "Peripheral edema",
+              "label": "Bilateral pitting oedema (nutritional oedema grade)",
               "type": "obs",
               "id": "peripheralEdema",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "164494AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "1f7ee031-c173-42be-b048-ab27024c818a",
                 "answers": [
                   {
                     "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "None"
                   },
                   {
-                    "concept": "166987AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "G-I"
+                    "concept": "165598AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "+ (feet)"
                   },
                   {
-                    "concept": "0d9301fe-9963-41f7-b593-a4f28e987313",
-                    "label": "G-II"
+                    "concept": "165599AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "++ (feet and legs)"
                   },
                   {
-                    "concept": "d676679a-59b0-42b7-87eb-4adecb209411",
-                    "label": "G-III"
-                  },
-                  {
-                    "concept": "4f2b872a-751c-40fc-9d66-b25eca1a5968",
-                    "label": "G-IV(anasarca)"
+                    "concept": "165600AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "+++ (feet, legs, hands and face)"
                   }
                 ]
               }

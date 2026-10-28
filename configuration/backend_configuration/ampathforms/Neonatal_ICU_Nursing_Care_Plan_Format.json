@@ -542,7 +542,105 @@
               }
             },
             {
-              "label": "Cardiovascular",
+              "label": "Skin colour",
+              "type": "obs",
+              "id": "skinColour",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d46e24b1-6452-4f48-be67-41aba8ceafa6",
+                "answers": [
+                  {
+                    "concept": "6d8dd2f3-1eab-4a22-a9fe-0048214fa549",
+                    "label": "Pink"
+                  },
+                  {
+                    "concept": "5ad2e850-0e15-4ecb-b896-4780529d5880",
+                    "label": "Pale"
+                  },
+                  {
+                    "concept": "8eb90f79-16cd-4aee-b213-4dd50afcd4a9",
+                    "label": "Cyanosed"
+                  },
+                  {
+                    "concept": "079737d0-daf0-46d5-89ea-8556a8deb4d5",
+                    "label": "Jaundiced"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Capillary refill time (seconds)",
+              "type": "obs",
+              "id": "capillaryRefillTime",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "162513AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "20",
+                "step": 1,
+                "disallowDecimals": true
+              },
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue >= 3",
+                  "message": "Capillary refill 3 seconds or more: poor perfusion."
+                }
+              ]
+            },
+            {
+              "label": "Chest retractions (work of breathing)",
+              "type": "obs",
+              "id": "chestRetractions",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "71ee01e7-3d0b-47fa-a75e-25a32d5d9981",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Mild"
+                  },
+                  {
+                    "concept": "1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Severe"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Grunting",
+              "type": "obs",
+              "id": "grunting",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "ad672fbd-bcc2-4a70-8a9e-e11350b724a2",
+                "answers": [
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
+                  },
+                  {
+                    "concept": "8da81516-fd4d-48b8-9426-8e6aefe2e7c1",
+                    "label": "Audible with ear"
+                  },
+                  {
+                    "concept": "f85e25ba-ea54-48f5-8ff1-ee91f3203706",
+                    "label": "Audible with stethoscope"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Cardiovascular notes",
               "type": "obs",
               "id": "cardiovascular",
               "questionOptions": {
@@ -556,6 +654,39 @@
           "label": "Elimination and exchange",
           "isExpanded": "true",
           "questions": [
+            {
+              "label": "Urine output (mL)",
+              "type": "obs",
+              "id": "urineOutput",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "161929AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "2000",
+                "step": 1,
+                "disallowDecimals": true
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Stool passed?",
+              "type": "obs",
+              "id": "stoolPassed",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "45d80eb1-a0ca-5399-b8e0-747bc7fed821",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
             {
               "label": "Gastrointestinal function",
               "type": "obs",
@@ -728,7 +859,58 @@
               "hideSteppers": true
             },
             {
-              "label": "Nursing Dx",
+              "label": "Nursing diagnoses (select all that apply)",
+              "type": "obs",
+              "id": "neonatalNursingDiagnoses",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "67abb246-6233-5b86-8577-cf8046820d6b",
+                "answers": [
+                  {
+                    "concept": "1c9ec2c9-3631-563c-a354-f486d54a449d",
+                    "label": "Ineffective breathing pattern"
+                  },
+                  {
+                    "concept": "8726d32e-0a5e-58f8-834d-ad029bc4578e",
+                    "label": "Impaired gas exchange"
+                  },
+                  {
+                    "concept": "16f50a5f-8bce-580d-b624-d2447747ec29",
+                    "label": "Ineffective thermoregulation"
+                  },
+                  {
+                    "concept": "643ffee2-9f2f-5b19-9149-3643dac27fdc",
+                    "label": "Risk for infection"
+                  },
+                  {
+                    "concept": "e4d43f79-8e8c-5511-95dc-30a2367fc9c1",
+                    "label": "Ineffective infant feeding pattern"
+                  },
+                  {
+                    "concept": "cacb90a9-e74d-56f7-9f3b-60f04fc92cf0",
+                    "label": "Risk for deficient fluid volume"
+                  },
+                  {
+                    "concept": "fafc683f-8b77-501a-93ea-6bd8eaaff849",
+                    "label": "Risk for unstable blood glucose level"
+                  },
+                  {
+                    "concept": "b9b60c31-a44d-555c-bdf7-540830a61b55",
+                    "label": "Risk for impaired skin integrity"
+                  },
+                  {
+                    "concept": "88b836db-09a5-468b-9c82-0c057312284b",
+                    "label": "Neonatal hyperbilirubinaemia (jaundice)"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Nursing diagnosis notes",
               "type": "obs",
               "id": "nursingDx",
               "questionOptions": {
@@ -845,6 +1027,26 @@
                   {
                     "concept": "3c7bc83c-8291-4daf-9609-0f905798662a",
                     "label": "CPAP adjustment"
+                  },
+                  {
+                    "concept": "9e52ee7a-4f0b-450f-9d8c-b37aa49c6b49",
+                    "label": "Oxygen therapy"
+                  },
+                  {
+                    "concept": "8e76e35d-2cee-52f9-8135-70e2ee22e897",
+                    "label": "Thermal care"
+                  },
+                  {
+                    "concept": "167422AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Phototherapy"
+                  },
+                  {
+                    "concept": "9f419e7a-eb60-4f9d-9dfa-76610440eee7",
+                    "label": "Tube feeding"
+                  },
+                  {
+                    "concept": "162651AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Maintenance IV fluids"
                   },
                   {
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
