@@ -1,5 +1,5 @@
 {
-  "name": "Immediate PPFP",
+  "name": "Immediate Postpartum Family Planning (PPFP) Assessment Form",
   "description": "Records the family planning method chosen immediately after childbirth, the acceptor, insertion and removal dates, insertion site, batch number and expiry date, and the next appointment.",
   "version": "1.0",
   "published": true,
@@ -69,7 +69,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Method's Method chosen",
+              "label": "Family planning method chosen",
               "type": "obs",
               "id": "methodSChoosed",
               "questionOptions": {
@@ -77,30 +77,66 @@
                 "concept": "374AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
-                    "concept": "0869cdc6-ca91-4abf-b345-62d8d578d494",
-                    "label": "Implanol"
+                    "concept": "c69ea33f-4cc3-42ea-909b-5d7403bb3c3c",
+                    "label": "Postpartum IUCD (PPIUD)"
                   },
                   {
-                    "concept": "1873AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Jadelle"
+                    "concept": "9937be1d-a516-48a1-8e56-68abf0e7d754",
+                    "label": "Implant"
                   },
                   {
-                    "concept": "5275AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Iucd"
+                    "concept": "e7b2e98b-4022-42d2-a2c7-6aa79ff184e5",
+                    "label": "Progestin-only pills (POP)"
                   },
                   {
-                    "concept": "4971f072-f402-4431-a790-14571dc687cd",
-                    "label": "POP"
+                    "concept": "ba1f92b1-741a-49a0-bf35-57d66a5194b3",
+                    "label": "Progestin-only injectable"
                   },
                   {
-                    "concept": "301b1b09-d886-4857-a695-a1ae0b811188",
-                    "label": "Depo-Provera"
+                    "concept": "bb734330-1853-4842-8a8e-425e2257e298",
+                    "label": "Condoms"
                   },
                   {
-                    "concept": "a050b5a9-aece-49f7-9b4a-583cf85641d0",
-                    "label": "Tube ligation"
+                    "concept": "bdb738f0-9b84-4d01-9d65-0eeb19c7516b",
+                    "label": "Lactational amenorrhoea method (LAM)"
+                  },
+                  {
+                    "concept": "5276AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Female sterilization"
+                  },
+                  {
+                    "concept": "1489AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Vasectomy (partner)"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No method chosen"
+                  },
+                  {
+                    "concept": "47a7b9e1-9917-470d-9647-f82a29860845",
+                    "label": "Declines contraception"
+                  },
+                  {
+                    "concept": "87444ec0-6fd2-4140-920e-88e2f4aff768",
+                    "label": "Undecided"
                   }
                 ]
+              }
+            },
+            {
+              "label": "Other method, specify",
+              "type": "obs",
+              "id": "otherMethodSpecify",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3c91abac-2549-5842-be00-7b50ace2c51f"
+              },
+              "hide": {
+                "hideWhenExpression": "methodSChoosed !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -129,6 +165,15 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "16e4f22a-3e7c-4ca0-a566-2d5cc064a33c"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "methodSChoosed !== '9937be1d-a516-48a1-8e56-68abf0e7d754' && methodSChoosed !== 'c69ea33f-4cc3-42ea-909b-5d7403bb3c3c'"
               }
             },
             {
@@ -136,8 +181,11 @@
               "type": "obs",
               "id": "dateOfRemoval",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "150ed745-790c-4351-8768-4d1bdb5e1012"
+                "rendering": "date",
+                "concept": "5474bf3c-ab47-441f-848a-9640cb5c6056"
+              },
+              "hide": {
+                "hideWhenExpression": "methodSChoosed !== '9937be1d-a516-48a1-8e56-68abf0e7d754' && methodSChoosed !== 'c69ea33f-4cc3-42ea-909b-5d7403bb3c3c'"
               }
             },
             {
@@ -157,6 +205,9 @@
                     "label": "Left"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "methodSChoosed !== '9937be1d-a516-48a1-8e56-68abf0e7d754'"
               }
             },
             {
@@ -166,15 +217,21 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "2de2861b-7a8b-4139-82a2-8dc8db4d6abd"
+              },
+              "hide": {
+                "hideWhenExpression": "methodSChoosed !== '9937be1d-a516-48a1-8e56-68abf0e7d754' && methodSChoosed !== 'c69ea33f-4cc3-42ea-909b-5d7403bb3c3c'"
               }
             },
             {
-              "label": "Expired date",
+              "label": "Expiry date",
               "type": "obs",
               "id": "expiredDate",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "8045889d-9564-4c7a-8afd-54ebfbc21c4f"
+                "rendering": "date",
+                "concept": "162502AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "methodSChoosed !== '9937be1d-a516-48a1-8e56-68abf0e7d754' && methodSChoosed !== 'c69ea33f-4cc3-42ea-909b-5d7403bb3c3c'"
               }
             },
             {

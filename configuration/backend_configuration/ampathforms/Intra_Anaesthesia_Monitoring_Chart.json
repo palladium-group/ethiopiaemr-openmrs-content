@@ -83,7 +83,7 @@
               "hideSteppers": true
             },
             {
-              "label": "Temp (°C)",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "temp",
               "questionOptions": {
@@ -104,15 +104,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Pulse (beats/min)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulse",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -137,14 +138,15 @@
               "hideSteppers": true
             },
             {
-              "label": "Hgb (mg/dl)",
+              "label": "Hgb (g/dL)",
               "type": "obs",
               "id": "hgbMgDl",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "21AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "25"
               },
               "hideSteppers": true
             },
@@ -163,9 +165,27 @@
             {
               "label": "Diagnosis",
               "type": "obs",
+              "id": "diagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Diagnosis notes",
+              "type": "obs",
               "id": "diagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             },
@@ -371,7 +391,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "b8468f6c-1fe4-4757-ace5-70d09f1b489d"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Incision time",
@@ -380,7 +406,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "f2fc1b9f-3b67-433b-be87-16fe8f4cf320"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Pre medication",
@@ -601,7 +633,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Systolic (mmHg)",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolic",
               "questionOptions": {
@@ -609,7 +641,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -622,15 +655,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Diastolic (mmHg)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolic",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -649,19 +683,19 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Blood Type",
+              "label": "Blood group",
               "type": "obs",
               "id": "bloodType",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "1429AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "concept": "160706AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
-                    "concept": "83748596-7081-9012-3456-789012678901",
+                    "concept": "163115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "A"
                   },
                   {
-                    "concept": "94859607-8192-0123-4567-890123789012",
+                    "concept": "163116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "B"
                   },
                   {
@@ -676,7 +710,7 @@
               }
             },
             {
-              "label": "New, RH",
+              "label": "Rh factor",
               "type": "obs",
               "id": "newRh",
               "questionOptions": {
@@ -685,11 +719,11 @@
                 "answers": [
                   {
                     "concept": "adcca038-ad62-5c9f-b5a1-fd325d9dfe0f",
-                    "label": "Rh+"
+                    "label": "Rh positive"
                   },
                   {
                     "concept": "2c58f9ec-cdf2-4b90-9bf3-5e8340d811d1",
-                    "label": "Rh"
+                    "label": "Rh negative"
                   }
                 ]
               }
@@ -751,11 +785,11 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Graph",
+              "label": "Anaesthesia chart notes",
               "type": "obs",
               "id": "graph",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "023b9a7e-cca7-403d-bc4c-2e9fc63d068c"
               }
             },

@@ -881,7 +881,7 @@
           ]
         },
         {
-          "label": "Current Symptoms",
+          "label": "Current complications and comorbid conditions",
           "isExpanded": "true",
           "questions": [
             {
@@ -1033,7 +1033,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "af229755-0bee-4bb8-975a-7bacd689e388"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "EDD",
@@ -1093,7 +1099,7 @@
               }
             },
             {
-              "label": "Harmful alcohol Use",
+              "label": "Harmful alcohol use (60 g or more of alcohol on one occasion in the past 30 days, or AUDIT score 8 or more)?",
               "type": "obs",
               "id": "riskHarmfulAlcoholUse",
               "questionOptions": {
@@ -1131,7 +1137,7 @@
               }
             },
             {
-              "label": "Unhealthy Diet",
+              "label": "Unhealthy diet (fewer than 5 servings of fruit and vegetables a day)?",
               "type": "obs",
               "id": "riskUnhealthyDiet",
               "questionOptions": {
@@ -1218,7 +1224,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Systolic Blood Pressure (mmHg)",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolicBloodPressure",
               "questionOptions": {
@@ -1226,7 +1232,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range 80-120 mmHg",
               "validators": [
@@ -1239,15 +1246,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Diastolic Blood Pressure (mmHg)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolicBloodPressure",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range 60-80 mmHg",
               "validators": [
@@ -1260,15 +1268,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Pulse Rate (per min)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulseRatePerMin",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -1327,15 +1336,16 @@
               }
             },
             {
-              "label": "Respiratory Rate (breath/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRateBreathMin",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -1369,15 +1379,16 @@
               "hideSteppers": true
             },
             {
-              "label": "SPO2 (%)",
+              "label": "SpO2 (%)",
               "type": "obs",
               "id": "spo2",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "100"
+                "step": 1,
+                "max": "100",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 95-100 %",
               "validators": [
@@ -1464,20 +1475,14 @@
                 "step": 0.01
               },
               "required": "true",
-              "hideSteppers": true
-            },
-            {
-              "label": "Waist Circumference Interpretation",
-              "type": "obs",
-              "id": "waistCircumferenceInterpretation",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "992b4725-2a22-4e3d-a59f-020d8043dc38",
-                "min": "0",
-                "step": 0.01
-              },
-              "readonly": true,
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && ((sex === 'M' && myValue > 94) || (sex === 'F' && myValue > 80))",
+                  "message": "Waist circumference above the risk cut-off (men above 94 cm, women above 80 cm)."
+                }
+              ]
             }
           ]
         },
@@ -2028,7 +2033,7 @@
                 "concept": "109a9eeb-f18a-4715-9beb-7950e3819c3f",
                 "answers": [
                   {
-                    "concept": "7f8c744d-0c49-4ba7-9077-b2d14a53e743",
+                    "concept": "0e02a1b2-0b5a-57ef-8234-148871dd646a",
                     "label": "<5%"
                   },
                   {

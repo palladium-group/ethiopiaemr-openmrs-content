@@ -546,15 +546,6 @@
                 "concept": "2960314b-9304-1234-5678-901234abcd19"
               },
               "id": "presentation"
-            },
-            {
-              "label": "FHB",
-              "type": "obs",
-              "questionOptions": {
-                "rendering": "textarea",
-                "concept": "3071425c-0415-2345-6789-012345abcd1a"
-              },
-              "id": "fhb"
             }
           ]
         },
@@ -641,8 +632,8 @@
                     "label": "firm"
                   },
                   {
-                    "concept": "162976AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Boggy(soft)"
+                    "concept": "247048a8-35b1-4eae-b299-5fab8d830126",
+                    "label": "Boggy (soft)"
                   }
                 ]
               }
@@ -772,15 +763,24 @@
               }
             },
             {
-              "label": "FHB",
+              "label": "Fetal heart rate (beats/min)",
               "type": "obs",
               "id": "fhb2",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "3071425c-0415-2345-6789-012345abcd1a",
-                "min": "0",
-                "step": 0.01
-              }
+                "rendering": "number",
+                "concept": "1440AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "40",
+                "step": 1,
+                "max": "250",
+                "disallowDecimals": true
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 110 || myValue > 160)",
+                  "message": "Fetal heart rate is outside the normal range (110-160 beats/min)."
+                }
+              ]
             },
             {
               "label": "Ux contraction",
@@ -805,14 +805,15 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Bp-systolic (mmHg)",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": 1,
                 "max": "250",
-                "min": "0"
+                "min": "0",
+                "disallowDecimals": true
               },
               "id": "bpSystolic",
               "questionInfo": "Normal range: 90-120 mmHg",
@@ -826,14 +827,15 @@
               "hideSteppers": true
             },
             {
-              "label": "Bp-diastolic (mmHg)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": 0.01,
+                "step": 1,
                 "max": "150",
-                "min": "0"
+                "min": "0",
+                "disallowDecimals": true
               },
               "id": "bpDiastolic",
               "questionInfo": "Normal range: 60-90 mmHg",
@@ -847,15 +849,16 @@
               "hideSteppers": true
             },
             {
-              "label": "PR (beats/min)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -868,15 +871,16 @@
               "hideSteppers": true
             },
             {
-              "label": "RR (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "rr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -884,6 +888,49 @@
                   "type": "js_expression",
                   "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
                   "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": 0.01,
+                "max": "43"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SpO2 (%)",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "100",
+                "disallowDecimals": true
+              },
+              "questionInfo": "Normal: >90%",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
                 }
               ],
               "hideSteppers": true
@@ -1033,7 +1080,7 @@
                     "label": "Negative"
                   },
                   {
-                    "concept": "c52c1c12-6480-538f-9edc-bde8ed3edb14",
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Unknown"
                   }
                 ]
@@ -1054,11 +1101,11 @@
                 "concept": "160706AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
-                    "concept": "83748596-7081-9012-3456-789012678901",
+                    "concept": "163115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "A"
                   },
                   {
-                    "concept": "94859607-8192-0123-4567-890123789012",
+                    "concept": "163116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "B"
                   },
                   {

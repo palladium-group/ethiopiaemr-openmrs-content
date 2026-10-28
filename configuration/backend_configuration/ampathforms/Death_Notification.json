@@ -109,7 +109,13 @@
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(patientManagedAs) || patientManagedAs !== '5485AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Date and Time of Death",
@@ -123,6 +129,10 @@
               "validators": [
                 {
                   "type": "datetime",
+                  "allowFutureDates": "false"
+                },
+                {
+                  "type": "date",
                   "allowFutureDates": "false"
                 }
               ]
@@ -204,6 +214,24 @@
             },
             {
               "label": "Final Diagnosis",
+              "type": "obs",
+              "id": "finalDiagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Final Diagnosis notes",
               "type": "obs",
               "required": false,
               "id": "finalDiagnosis",
@@ -444,7 +472,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "e5f60718-9203-1234-5678-901234abcd05"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Notification Form Issued by",

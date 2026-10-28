@@ -75,23 +75,53 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
-              "label": "Starting Time",
+              "label": "Round start time",
               "type": "obs",
               "id": "startingTime",
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "c48170e6-022c-40d8-a26d-89541982761b"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Diagnosis",
               "type": "obs",
+              "id": "diagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Diagnosis notes",
+              "type": "obs",
               "id": "diagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             },
@@ -114,7 +144,7 @@
               }
             },
             {
-              "label": "Does Parenteral(IV, IM, SC medication Administering based on order?",
+              "label": "Are parenteral medications (IV, IM, SC) administered as ordered?",
               "type": "obs",
               "id": "doesParenteralIvImScMedicationAdminister",
               "questionOptions": {
@@ -137,7 +167,7 @@
               }
             },
             {
-              "label": "Does enteral (PO ,NG tube ) medication Administering based on order?",
+              "label": "Are enteral medications (oral/PO or via NG tube) administered as prescribed?",
               "type": "obs",
               "id": "doesEnteralPoNgTubeMedicationAdministeri",
               "questionOptions": {
@@ -183,7 +213,7 @@
               }
             },
             {
-              "label": "Does dosages of medications adjusted?",
+              "label": "Have medication dosages been adjusted as needed?",
               "type": "obs",
               "id": "doesDosagesOfMedicationsAdjusted",
               "questionOptions": {
@@ -206,7 +236,194 @@
               }
             },
             {
-              "label": "Actual nursing diagnosis (only problem part",
+              "label": "Is the patient identification band in place and correct?",
+              "type": "obs",
+              "id": "identificationBandInPlace",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d67d9e0e-d7dc-41cf-845a-c21b312202de",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pain score (0-10)",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "166082AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "10",
+                "step": 1,
+                "disallowDecimals": true
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "IV cannula site condition (leave blank if no IV line)",
+              "type": "obs",
+              "id": "ivSiteCheck",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "33b2d439-3f46-4ef0-9164-5f9d3678264c",
+                "answers": [
+                  {
+                    "concept": "145ae1ea-24c7-430f-9fb3-6c439634f599",
+                    "label": "Normal / intact"
+                  },
+                  {
+                    "concept": "26127232-328e-43cb-8d85-93613456f780",
+                    "label": "Painful"
+                  },
+                  {
+                    "concept": "cbb5c0bf-a8cf-4f49-83c0-7f92e9049a94",
+                    "label": "Swelling"
+                  },
+                  {
+                    "concept": "b6f8afb4-5b0c-45f9-9cfc-ea8d35b29624",
+                    "label": "Redness (erythema)"
+                  },
+                  {
+                    "concept": "5a2315f3-6c66-45d8-8a1b-29919927c42d",
+                    "label": "Skin breakdown"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Have drains and catheters been checked?",
+              "type": "obs",
+              "id": "drainsCathetersChecked",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "f2ccda48-97c1-5744-a4bc-53e902e9b3df",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not applicable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Have pressure areas been checked (patient repositioned if needed)?",
+              "type": "obs",
+              "id": "pressureAreasChecked",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "b83441e0-dd0e-5e87-8739-65b13e424906",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not applicable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Is the patient at risk of falls?",
+              "type": "obs",
+              "id": "fallRisk",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "4e41d99a-c30a-5176-a8c1-cffb863c4cfa",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'",
+                  "message": "Patient at risk of falls: apply fall-prevention measures (bed rails, call bell within reach, assisted mobility)."
+                }
+              ]
+            },
+            {
+              "label": "Has personal hygiene care been given?",
+              "type": "obs",
+              "id": "hygieneCareGiven",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "38c0a113-2529-5baa-bfd4-15e2782a9d2e",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  },
+                  {
+                    "concept": "1175AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Not applicable"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Are nutrition and fluid intake adequate?",
+              "type": "obs",
+              "id": "nutritionFluidsAdequate",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "60a39dde-8d14-54bb-8c59-f4d8d19d9529",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Patient concerns",
+              "type": "obs",
+              "id": "patientConcerns",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "a1080688-a427-45ec-97d4-570d76d24e59"
+              }
+            },
+            {
+              "label": "Actual nursing diagnosis - problem (P) only",
               "type": "obs",
               "id": "actualNursingDiagnosisOnlyProblemPart",
               "questionOptions": {
@@ -215,7 +432,7 @@
               }
             },
             {
-              "label": "Potential nursing diagnosis (only Problem part )",
+              "label": "Potential nursing diagnosis - problem (P) only",
               "type": "obs",
               "id": "potentialNursingDiagnosisOnlyProblemPart",
               "questionOptions": {
@@ -253,11 +470,11 @@
           ]
         },
         {
-          "label": "Does complete Vital Sign taking and recording upon demand and order?",
+          "label": "Vital signs",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "At least QID",
+              "label": "Are complete vital signs measured and recorded as scheduled, and whenever indicated?",
               "type": "obs",
               "id": "atLeastQid",
               "questionOptions": {
@@ -271,8 +488,79 @@
                   {
                     "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "No"
+                  },
+                  {
+                    "concept": "8eb61ddd-415c-5aa5-a53b-390ed5cf4097",
+                    "label": "Partially completed"
                   }
                 ]
+              }
+            },
+            {
+              "label": "Vital signs monitoring frequency",
+              "type": "obs",
+              "id": "vitalSignsMonitoringFrequency",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "a992ebab-d1c8-5627-94b1-1a6b69bee7ec",
+                "answers": [
+                  {
+                    "concept": "162244AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Every hour"
+                  },
+                  {
+                    "concept": "33436036-8a92-11e4-977f-0800271c1b75",
+                    "label": "Every 2 hours"
+                  },
+                  {
+                    "concept": "202e5b1c-886c-4a81-846f-d306847bf385",
+                    "label": "Every 4 hours"
+                  },
+                  {
+                    "concept": "162249AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Every 6 hours"
+                  },
+                  {
+                    "concept": "334ea16c-8a92-11e4-977f-0800271c1b75",
+                    "label": "Every 8 hours"
+                  },
+                  {
+                    "concept": "44bead48-74a0-4107-a09d-e52be2c25803",
+                    "label": "Once a day"
+                  },
+                  {
+                    "concept": "1942d7a9-0039-4904-94bc-1cc87e9069cf",
+                    "label": "Twice a day"
+                  },
+                  {
+                    "concept": "aff74faa-29ea-4f92-b52f-6f53c9fb4f8f",
+                    "label": "Three times a day"
+                  },
+                  {
+                    "concept": "3ab26113-d7ba-4618-8c95-7d4db7352519",
+                    "label": "Four times a day"
+                  },
+                  {
+                    "concept": "1079AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Continuous monitoring"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Other monitoring frequency, specify",
+              "type": "obs",
+              "id": "vitalSignsMonitoringFrequencyOther",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "161011AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "vitalSignsMonitoringFrequency !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             }
           ]

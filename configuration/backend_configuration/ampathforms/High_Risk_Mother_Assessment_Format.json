@@ -253,7 +253,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "af229755-0bee-4bb8-975a-7bacd689e388"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "EDD",
@@ -2090,32 +2096,16 @@
                 "concept": "02b29c2c-3635-4e09-9a52-0a06efcc11da",
                 "answers": [
                   {
-                    "label": "Yes",
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Reactive"
                   },
                   {
-                    "label": "No",
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Non-reactive"
                   },
                   {
-                    "label": "Unknown",
-                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Reactive",
-                    "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Non-reactive",
-                    "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Negative",
-                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Positive",
-                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -2166,7 +2156,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Investigations",
@@ -2235,7 +2231,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "List of Problems",
@@ -2249,9 +2251,27 @@
             {
               "label": "Diagnosis",
               "type": "obs",
+              "id": "diagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Diagnosis notes",
+              "type": "obs",
               "id": "diagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             }
@@ -2268,7 +2288,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Prioritized Problems",
@@ -2319,10 +2345,16 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
-              "label": "Problems NO",
+              "label": "Problems",
               "type": "obs",
               "id": "problemsNo",
               "questionOptions": {
@@ -2417,7 +2449,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -2437,8 +2470,9 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -2470,15 +2504,16 @@
               }
             },
             {
-              "label": "Pulse rate (bpm)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulseRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-100 bpm",
               "validators": [
@@ -2519,11 +2554,19 @@
                 "rendering": "number",
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "100"
+                "step": 1,
+                "max": "100",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal: >90%",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue < 94",
+                  "message": "SpO2 below 94%."
+                }
+              ]
             },
             {
               "label": "Respiratory rate (breaths/min)",
@@ -2533,8 +2576,9 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -2581,10 +2625,18 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": 0.01
+                "min": "5",
+                "step": 0.1,
+                "max": "60"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue < 23",
+                  "message": "MUAC below 23 cm in a pregnant or lactating woman: screen for acute malnutrition."
+                }
+              ]
             }
           ]
         },
@@ -2629,44 +2681,24 @@
                 "concept": "5a97ebf3-bc50-4c99-84d2-eae99be03ab5",
                 "answers": [
                   {
-                    "label": "Brown/yellow (Normal)",
-                    "concept": "09a03d5e-8a37-4c2e-83ca-3d8cf078019b"
+                    "concept": "162065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Black"
                   },
                   {
-                    "label": "Black color",
-                    "concept": "162065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "162100AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Brown"
                   },
                   {
-                    "label": "Petechial",
-                    "concept": "1845e575-a4bc-4891-91e2-b903bf8c4a0e"
+                    "concept": "163639AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Grey"
                   },
                   {
-                    "label": "Pallor",
-                    "concept": "5245AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1075AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "White"
                   },
                   {
-                    "label": "OTHER NON-CODED",
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Clay",
-                    "concept": "56f0f0e2-0a5a-4b44-9cbd-0cee4c01c2f7"
-                  },
-                  {
-                    "label": "Cyanosis",
-                    "concept": "143050AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-                  },
-                  {
-                    "label": "Red emergency color",
-                    "concept": "65a8c74c-544d-4517-8dc9-485efd819ff6"
-                  },
-                  {
-                    "label": "Erythema",
-                    "concept": "6197a7ba-efee-4d5e-a704-948c784ab12e"
-                  },
-                  {
-                    "label": "Pink",
-                    "concept": "e38c3137-63fa-4041-96d9-f8bea8a09af3"
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
                   }
                 ]
               }
@@ -3294,16 +3326,40 @@
                 "concept": "160090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
-                    "concept": "6d51af28-a156-4463-a031-1f1f459ddcb0",
-                    "label": "Cephalic"
+                    "concept": "160091AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cephalic - vertex"
                   },
                   {
-                    "concept": "1ec0f5f1-1585-409d-87b0-26abe5fa19fe",
-                    "label": "Breech"
+                    "concept": "164149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cephalic - brow"
                   },
                   {
-                    "concept": "6d41236b-9e2f-4c21-90df-751455df15f6",
-                    "label": "Oblique"
+                    "concept": "164150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cephalic - face"
+                  },
+                  {
+                    "concept": "5cc0bc97-5cfd-537a-96c5-7b02c8c7ffb1",
+                    "label": "Breech - frank"
+                  },
+                  {
+                    "concept": "c26e9761-df58-5197-a391-fc3017f84f68",
+                    "label": "Breech - complete"
+                  },
+                  {
+                    "concept": "1a34b83c-b8b8-5705-99b0-7cf3b729bcbe",
+                    "label": "Breech - incomplete"
+                  },
+                  {
+                    "concept": "68af813b-ba73-533b-8d3b-6d6a3fd1d04a",
+                    "label": "Breech - footling"
+                  },
+                  {
+                    "concept": "7008d1b0-bbe7-526d-9b95-2fbb350b020e",
+                    "label": "Shoulder"
+                  },
+                  {
+                    "concept": "36acc736-9fce-5860-b121-77ebfa0b4c88",
+                    "label": "Compound"
                   }
                 ]
               }
@@ -3606,7 +3662,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Evaluation",
@@ -3689,7 +3751,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Evaluation",
@@ -3772,7 +3840,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Evaluation",

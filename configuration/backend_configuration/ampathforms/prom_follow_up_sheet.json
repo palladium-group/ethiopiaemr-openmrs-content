@@ -78,7 +78,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "159622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             }
           ]
         },
@@ -87,7 +93,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Systolic",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "required": false,
               "id": "systolic",
@@ -95,17 +101,24 @@
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true,
+                "step": 1
               },
               "validators": [
                 {
                   "type": "warning",
                   "jsExpression": "value > 140 || value < 90 ? 'Abnormal systolic BP (Normal: 90-140 mmHg)' : null"
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 72 || myValue > 104) : age < 3 ? (myValue < 86 || myValue > 106) : age < 6 ? (myValue < 89 || myValue > 112) : age < 12 ? (myValue < 97 || myValue > 115) : (myValue < 90 || myValue > 139))",
+                  "message": "Outside the normal systolic range for the patient's age."
                 }
               ]
             },
             {
-              "label": "Diastolic",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "required": false,
               "id": "diastolic",
@@ -113,12 +126,19 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "max": "150"
+                "max": "150",
+                "disallowDecimals": true,
+                "step": 1
               },
               "validators": [
                 {
                   "type": "warning",
                   "jsExpression": "value > 90 || value < 60 ? 'Abnormal diastolic BP (Normal: 60-90 mmHg)' : null"
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 37 || myValue > 56) : age < 3 ? (myValue < 42 || myValue > 63) : age < 6 ? (myValue < 46 || myValue > 72) : age < 12 ? (myValue < 57 || myValue > 76) : (myValue < 60 || myValue > 89))",
+                  "message": "Outside the normal diastolic range for the patient's age."
                 }
               ]
             },
@@ -149,7 +169,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse Rate (bpm)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "required": false,
               "id": "pulse",
@@ -157,12 +177,19 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "max": "230"
+                "max": "230",
+                "disallowDecimals": true,
+                "step": 1
               },
               "validators": [
                 {
                   "type": "warning",
                   "jsExpression": "value > 100 || value < 60 ? 'Abnormal pulse rate (Normal: 60-100 bpm)' : null"
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 100 || myValue > 180) : age < 3 ? (myValue < 98 || myValue > 140) : age < 6 ? (myValue < 80 || myValue > 120) : age < 12 ? (myValue < 75 || myValue > 118) : (myValue < 60 || myValue > 100))",
+                  "message": "Outside the normal pulse range for the patient's age."
                 }
               ]
             }
@@ -181,12 +208,18 @@
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "max": "43"
+                "max": "43",
+                "step": 0.1
               },
               "validators": [
                 {
                   "type": "warning",
                   "jsExpression": "value > 37.5 || value < 36.0 ? 'Abnormal temperature (Normal: 36.0-37.5°C)' : null"
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
                 }
               ]
             }
@@ -197,17 +230,25 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Respiratory Rate (RR)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRateRr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": 0.01,
+                "step": 1,
                 "max": "99",
-                "min": "0"
+                "min": "0",
+                "disallowDecimals": true
               },
-              "readonly": false
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 30 || myValue > 53) : age < 3 ? (myValue < 22 || myValue > 37) : age < 6 ? (myValue < 20 || myValue > 28) : age < 12 ? (myValue < 18 || myValue > 25) : (myValue < 12 || myValue > 20))",
+                  "message": "Outside the normal respiratory rate for the patient's age."
+                }
+              ]
             }
           ]
         },
@@ -228,7 +269,7 @@
               }
             },
             {
-              "label": "Fetal Kick Count",
+              "label": "Fetal kick count (number of movements)",
               "type": "obs",
               "required": false,
               "id": "fetalKick",
@@ -239,14 +280,39 @@
               }
             },
             {
-              "label": "Fetal kick count method",
+              "label": "Counting method",
               "type": "obs",
               "id": "fetalKickCountMethod",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "0f962269-6eb8-5139-98ed-f663383fe731"
+                "rendering": "radio",
+                "concept": "1693a803-939f-58ab-a06d-db1ada5860f9",
+                "answers": [
+                  {
+                    "concept": "9b427982-148f-5600-b1c7-bb1974407e95",
+                    "label": "Count to ten (Cardiff)"
+                  },
+                  {
+                    "concept": "7e1f4698-cfb4-59e8-aac6-3f4aeb32dfe4",
+                    "label": "One hour after a meal (Sadovsky)"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
               },
               "questionInfo": "Method used to count fetal kicks, e.g. count-to-ten (Cardiff) or kicks counted over 1-2 hours"
+            },
+            {
+              "label": "Counting period (hours)",
+              "type": "obs",
+              "id": "fetalKickPeriod",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "2094505d-be4f-5b49-8438-a60300dbe0f4",
+                "min": "0",
+                "max": "24"
+              }
             }
           ]
         },

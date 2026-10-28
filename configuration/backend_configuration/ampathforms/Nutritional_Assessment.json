@@ -188,8 +188,9 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "818cc127-6aea-5cca-a427-25cf7adf1c43",
-                "min": "0",
-                "step": 0.01
+                "min": "0.3",
+                "step": 0.01,
+                "max": "2.5"
               },
               "hideSteppers": true
             },
@@ -205,7 +206,10 @@
                 }
               },
               "readonly": true,
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "age >= 5"
+              }
             },
             {
               "label": "WFA (z-score)",
@@ -215,7 +219,10 @@
                 "rendering": "number",
                 "concept": "162584AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "age >= 10"
+              }
             },
             {
               "label": "HFA/LFA (z score)",
@@ -229,7 +236,10 @@
                 }
               },
               "readonly": true,
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "age >= 19"
+              }
             },
             {
               "label": "BMI/Age(>5-19)(Z-score)",
@@ -242,10 +252,14 @@
                   "calculateExpression": "(isEmpty(heightM) || isEmpty(weightKg)) ? '' : ((calcBMIForAgeZscore(Number(heightM)*100,Number(weightKg)) == null) ? '' : Number(calcBMIForAgeZscore(Number(heightM)*100,Number(weightKg))))"
                 }
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true,
+              "hide": {
+                "hideWhenExpression": "age < 5 || age >= 19"
+              }
             },
             {
-              "label": "BMI (≥18 yrs.)",
+              "label": "BMI (kg/m², 18 years and over)",
               "type": "obs",
               "id": "bmi18Yrs",
               "questionOptions": {
@@ -258,10 +272,14 @@
                 },
                 "max": "100"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true,
+              "hide": {
+                "hideWhenExpression": "age < 18"
+              }
             },
             {
-              "label": "Waist Circumference (WC)",
+              "label": "Waist circumference (cm)",
               "type": "obs",
               "id": "waistCircumferenceWc",
               "questionOptions": {
@@ -273,7 +291,7 @@
               "hideSteppers": true
             },
             {
-              "label": "Head Circumference (HC)",
+              "label": "Head circumference (cm)",
               "type": "obs",
               "id": "headCircumferenceHc",
               "questionOptions": {
@@ -283,20 +301,36 @@
                 "step": 0.01
               },
               "questionInfo": "Centimetres.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "age >= 2"
+              }
             },
             {
-              "label": "MUAC (Mid-upper arm circumference)",
+              "label": "MUAC (cm)",
               "type": "obs",
               "id": "muacMidUpperArmCircumference",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": 0.01
+                "min": "5",
+                "step": 0.1,
+                "max": "60"
               },
               "questionInfo": "Mid-upper arm circumference in centimetres.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 11.5) || (age >= 18 && myValue < 18.5))",
+                  "message": "MUAC in the severe acute malnutrition range (under 5 years: below 11.5 cm; adults: below 18.5 cm)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue >= 11.5 && myValue < 12.5) || (age >= 18 && myValue >= 18.5 && myValue < 21))",
+                  "message": "MUAC in the moderate acute malnutrition range (under 5 years: 11.5 to 12.4 cm; adults: 18.5 to 20.9 cm)."
+                }
+              ]
             },
             {
               "label": "Other Anthropometric Measures",
@@ -309,6 +343,24 @@
             },
             {
               "label": "Medical Diagnosis",
+              "type": "obs",
+              "id": "medicalDiagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Medical Diagnosis notes",
               "type": "obs",
               "id": "medicalDiagnosis",
               "questionOptions": {
@@ -422,6 +474,9 @@
                     "label": "Readmission"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "nutritionalStatus !== 'f1a2b3c4-d5e6-47f8-89a0-b1c2d3e4f504' && nutritionalStatus !== 'f1a2b3c4-d5e6-47f8-89a0-b1c2d3e4f503'"
               }
             },
             {
@@ -536,34 +591,75 @@
               }
             },
             {
-              "label": "Micronutrient Imbalance",
+              "label": "Signs of micronutrient deficiency (select all that apply)",
               "type": "obs",
               "id": "micronutrientImbalance",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "fef1b84c-9143-4439-acb1-1a8f24f7a4cd",
+                "rendering": "checkbox",
+                "concept": "891b548f-ddbb-5ae0-83f0-03f2fa187149",
                 "answers": [
                   {
-                    "concept": "b644443f-a546-45e2-a06e-a95cf8eedca8",
-                    "label": "Deficiency"
+                    "concept": "5c401ca5-67d6-43b4-9bce-6189b62224df",
+                    "label": "Pallor (iron)"
                   },
                   {
-                    "concept": "7d9b9a0c-0f76-450f-bb13-5c546614c358",
-                    "label": "Excess"
+                    "concept": "d5bbec6b-31de-45bb-bf86-7a640a7ce803",
+                    "label": "Bitot spots (vitamin A)"
                   },
                   {
-                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Normal"
+                    "concept": "d6e78e71-510c-47fa-98f2-47cb71a2b7df",
+                    "label": "Night blindness (vitamin A)"
                   },
                   {
-                    "concept": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Not Done"
+                    "concept": "b9964f3c-6cc6-457a-9e7d-37c698d3e13e",
+                    "label": "Corneal xerosis (vitamin A)"
+                  },
+                  {
+                    "concept": "4574bcfb-09fb-5ee8-8b51-8bcc7e86e3fe",
+                    "label": "Goitre (iodine)"
+                  },
+                  {
+                    "concept": "d53a93df-504a-455e-8d09-e7886702a001",
+                    "label": "Angular stomatitis (B vitamins)"
+                  },
+                  {
+                    "concept": "e5785772-ceac-4732-8cf1-7f93a0e60dc0",
+                    "label": "Glossitis (B vitamins, iron)"
+                  },
+                  {
+                    "concept": "ffaab2b0-1fa5-4cac-b99c-86a5fcf7e5b0",
+                    "label": "Bow legs or knock knees (vitamin D)"
+                  },
+                  {
+                    "concept": "94a43599-f087-47e6-a21f-f07e17bdf92f",
+                    "label": "Flaky paint dermatosis (zinc, protein)"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  },
+                  {
+                    "concept": "1107AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "None"
                   }
                 ]
               }
             },
             {
-              "label": "Anemia Magnitude",
+              "label": "Haemoglobin (g/dL)",
+              "type": "obs",
+              "id": "hemoglobin",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "21AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "1",
+                "max": "25",
+                "step": 0.1
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Anaemia severity (from haemoglobin)",
               "type": "obs",
               "id": "anemiaMagnitude",
               "questionOptions": {
@@ -575,8 +671,8 @@
                     "label": "Severe"
                   },
                   {
-                    "concept": "d0cef738-9845-5684-bcdf-4d5c206d5e94",
-                    "label": "Moderate RD"
+                    "concept": "1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Moderate"
                   },
                   {
                     "concept": "1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -590,7 +686,10 @@
                     "concept": "1118AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Not Done"
                   }
-                ]
+                ],
+                "calculate": {
+                  "calculateExpression": "isEmpty(hemoglobin) ? anemiaMagnitude : (Number(hemoglobin) < ((patientCategory === 'd3b42c5e-6f70-4189-bacd-ef0123456702' || age < 5) ? 7 : 8) ? '1500AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' : Number(hemoglobin) < ((patientCategory === 'd3b42c5e-6f70-4189-bacd-ef0123456702' || age < 5) ? 10 : 11) ? '1499AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' : Number(hemoglobin) < ((patientCategory === 'd3b42c5e-6f70-4189-bacd-ef0123456702' || age < 5) ? 11 : age < 12 ? 11.5 : (age < 15 || sex === 'F') ? 12 : 13) ? '1498AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' : '1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                }
               }
             }
           ]
@@ -606,7 +705,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Type of Diet (Specific) and Amount",
@@ -704,6 +809,9 @@
                     "label": "Postnatal"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientCategory !== 'd3b42c5e-6f70-4189-bacd-ef0123456702' && patientCategory !== 'e4c53d6f-7081-429a-cbde-f01234567803'"
               }
             },
             {
@@ -765,15 +873,15 @@
                 "answers": [
                   {
                     "concept": "72d80279-d745-5c1f-9066-805e4ff8c3c5",
-                    "label": "Rutf"
+                    "label": "RUTF"
                   },
                   {
                     "concept": "3d9e6823-adc8-4da1-9f0f-1737e04bd299",
-                    "label": "F75"
+                    "label": "F-75"
                   },
                   {
                     "concept": "fe2e6f32-e653-4216-96d4-fa2aa2d4ffeb",
-                    "label": "F100"
+                    "label": "F-100"
                   },
                   {
                     "concept": "2b5911a6-5df0-4a7c-8265-b5f522197435",
@@ -781,7 +889,7 @@
                   },
                   {
                     "concept": "af220bec-c0b6-484b-8752-ee3e137ee285",
-                    "label": "ReSomol"
+                    "label": "ReSoMal"
                   },
                   {
                     "concept": "5ec51542-6a40-4f25-8654-6af7628002a9",
@@ -824,7 +932,7 @@
                   },
                   {
                     "concept": "0be376a9-96aa-4b38-a0a3-35535d0bf631",
-                    "label": "Rusf"
+                    "label": "RUSF"
                   },
                   {
                     "concept": "8a3781c5-b737-42c7-abbb-833abee7d5d0",
@@ -871,7 +979,7 @@
                   },
                   {
                     "concept": "40a137bf-f222-433d-9926-12f85427d3e8",
-                    "label": "Folic Acid."
+                    "label": "Folic acid"
                   },
                   {
                     "concept": "a342056c-3830-426c-aa0a-f957eb6e9baa",
@@ -879,7 +987,7 @@
                   },
                   {
                     "concept": "5173bb5e-9195-42e4-80ef-0220dc8bd263",
-                    "label": "Iron."
+                    "label": "Iron"
                   },
                   {
                     "concept": "11ce7b2f-c8f2-4f47-8506-d2cc4c20e4de",
@@ -887,7 +995,7 @@
                   },
                   {
                     "concept": "c3751700-df60-474c-afa2-021df3f9085e",
-                    "label": "Zinc."
+                    "label": "Zinc"
                   },
                   {
                     "concept": "e111d0ad-0080-4b99-973c-1f5a5cac0e23",

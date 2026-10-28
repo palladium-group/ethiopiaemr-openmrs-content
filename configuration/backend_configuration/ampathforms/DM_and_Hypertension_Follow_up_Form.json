@@ -89,9 +89,27 @@
             {
               "label": "Diagnosis",
               "type": "obs",
+              "id": "diagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Diagnosis notes",
+              "type": "obs",
               "id": "diagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             },
@@ -102,7 +120,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Treatment Outcome",
@@ -113,24 +137,24 @@
                 "concept": "b53fb2a6-a3d2-54e0-b979-0bee34a875a5",
                 "answers": [
                   {
-                    "concept": "5f263748-5960-495f-fa60-718293041526",
-                    "label": "Cured"
+                    "concept": "bcc9ae1d-724f-5488-bfaa-97ea60de59f8",
+                    "label": "Controlled"
                   },
                   {
-                    "concept": "1267AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Completed"
+                    "concept": "0389a0f2-3517-5b16-957e-6011f53b02b2",
+                    "label": "Not controlled"
                   },
                   {
-                    "concept": "4baf4a30-d60b-4942-b0ab-9f48bfc7a314",
-                    "label": "Failure"
+                    "concept": "160034AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Died"
                   },
                   {
-                    "concept": "f355cf33-f07c-40c1-8fb2-c41219e8cbc5",
-                    "label": "Moved to second line treatment register"
+                    "concept": "5240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Lost to follow-up"
                   },
                   {
-                    "concept": "5ec51542-6a40-4f25-8654-6af7628002a9",
-                    "label": "Others"
+                    "concept": "159492AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Transferred out"
                   }
                 ]
               }
@@ -403,7 +427,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -423,8 +448,9 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -520,8 +546,9 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -540,15 +567,16 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Respiratory Rate (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [

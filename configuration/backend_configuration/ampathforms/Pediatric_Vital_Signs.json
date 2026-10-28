@@ -75,23 +75,37 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
-              "label": "PR",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 100 || myValue > 180) : age < 3 ? (myValue < 98 || myValue > 140) : age < 6 ? (myValue < 80 || myValue > 120) : age < 12 ? (myValue < 75 || myValue > 118) : (myValue < 60 || myValue > 100))",
+                  "message": "Outside the normal pulse range for the patient's age."
+                }
+              ]
             },
             {
-              "label": "Systolic",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolic",
               "questionOptions": {
@@ -99,7 +113,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "validators": [
                 {
@@ -112,15 +127,16 @@
               "questionInfo": "Normal range depends on age: under 1 year 72-104, 1-2 years 86-106, 3-5 years 89-112, 6-11 years 97-115, 12 years and over 90-120 mmHg."
             },
             {
-              "label": "Diastolic",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolic",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "validators": [
                 {
@@ -152,20 +168,28 @@
               "hideSteppers": true
             },
             {
-              "label": "RR",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "rr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 30 || myValue > 53) : age < 3 ? (myValue < 22 || myValue > 37) : age < 6 ? (myValue < 20 || myValue > 28) : age < 12 ? (myValue < 18 || myValue > 25) : (myValue < 12 || myValue > 20))",
+                  "message": "Outside the normal respiratory rate for the patient's age."
+                }
+              ]
             },
             {
-              "label": "Temprature",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "temprature",
               "questionOptions": {
@@ -175,7 +199,14 @@
                 "step": 0.01,
                 "max": "43"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
+                }
+              ]
             },
             {
               "label": "Pain Score",

@@ -75,7 +75,13 @@
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
               },
-              "id": "date___time"
+              "id": "date___time",
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             }
           ]
         },
@@ -92,7 +98,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range for adults: 90-120 mmHg",
               "id": "systolic_bp",
@@ -113,8 +120,9 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range for adults: 60-90 mmHg",
               "id": "diastolic_bp",
@@ -134,15 +142,16 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse (beats/min)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "required": false,
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range for adults: 60-100 bpm",
               "id": "pulse",
@@ -156,15 +165,16 @@
               "hideSteppers": true
             },
             {
-              "label": "RR (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "required": false,
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range for adults: 16-24 breaths/min",
               "id": "respiratory_rate_numeric",
@@ -305,11 +315,56 @@
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "8f2c9b71-9d8f-4a42-9a40-1e6e4bb7c822"
+                "concept": "8f2c9b71-9d8f-4a42-9a40-1e6e4bb7c822",
+                "min": "0",
+                "max": "100",
+                "disallowDecimals": true,
+                "step": 1
               },
               "id": "fetal_kick",
               "hideSteppers": true,
-              "questionInfo": "Count of fetal movements felt in 2 hours. Normal: at least 10 kicks in 2 hours."
+              "questionInfo": "Count of fetal movements felt in 2 hours. Normal: at least 10 kicks in 2 hours.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue < 10",
+                  "message": "Fewer than 10 movements in 2 hours: decreased fetal movement, assess the baby."
+                }
+              ]
+            },
+            {
+              "label": "Counting method",
+              "type": "obs",
+              "id": "fetalKickMethod",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "1693a803-939f-58ab-a06d-db1ada5860f9",
+                "answers": [
+                  {
+                    "concept": "9b427982-148f-5600-b1c7-bb1974407e95",
+                    "label": "Count to ten (Cardiff)"
+                  },
+                  {
+                    "concept": "7e1f4698-cfb4-59e8-aac6-3f4aeb32dfe4",
+                    "label": "One hour after a meal (Sadovsky)"
+                  },
+                  {
+                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Other"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Counting period (hours)",
+              "type": "obs",
+              "id": "fetalKickPeriod",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "2094505d-be4f-5b49-8438-a60300dbe0f4",
+                "min": "0",
+                "max": "24"
+              }
             },
             {
               "label": "Hgb/ Hct Result Notes",

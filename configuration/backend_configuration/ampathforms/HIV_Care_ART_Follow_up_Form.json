@@ -75,7 +75,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "85977739-2e98-5ac2-9a69-64b64c8a5e2d"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Type of HIV Test",
@@ -103,7 +109,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "97b91091-013d-41f5-8719-dbd8f9e22b40"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Why Eligible (code)",
@@ -121,7 +133,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "c63c1dee-0c82-45ee-a21b-156f3cca5813"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             }
           ]
         },
@@ -169,7 +187,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Months on ART",
@@ -214,16 +238,29 @@
               "hideSteppers": true
             },
             {
-              "label": "MUAC",
+              "label": "MUAC (cm)",
               "type": "obs",
               "id": "muac",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
-                "min": "0",
-                "step": 0.01
+                "min": "5",
+                "step": 0.1,
+                "max": "60"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 11.5) || (age >= 18 && myValue < 18.5))",
+                  "message": "MUAC in the severe acute malnutrition range (under 5 years: below 11.5 cm; adults: below 18.5 cm)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue >= 11.5 && myValue < 12.5) || (age >= 18 && myValue >= 18.5 && myValue < 21))",
+                  "message": "MUAC in the moderate acute malnutrition range (under 5 years: 11.5 to 12.4 cm; adults: 18.5 to 20.9 cm)."
+                }
+              ]
             },
             {
               "label": "If child: Length / Height / Head circumference for age <3 yrs",
@@ -1412,7 +1449,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "HIV Prevention Plan",
@@ -1502,7 +1545,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "164361AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Cotrimoxazole stop date",

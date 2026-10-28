@@ -167,21 +167,29 @@
               }
             },
             {
-              "label": "Respiratory Rate",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "required": false,
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": 0.01,
+                "step": 1,
                 "max": "99",
-                "min": "0"
+                "min": "0",
+                "disallowDecimals": true
               },
               "hide": {
                 "hideWhenExpression": "isEmpty(acuteRespiratoryInfectionPresent) || !acuteRespiratoryInfectionPresent"
               },
-              "questionInfo": "Normal range for school age: 18-25 breaths/min"
+              "questionInfo": "Normal range for school age: 18-25 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 30 || myValue > 53) : age < 3 ? (myValue < 22 || myValue > 37) : age < 6 ? (myValue < 20 || myValue > 28) : age < 12 ? (myValue < 18 || myValue > 25) : (myValue < 12 || myValue > 20))",
+                  "message": "Outside the normal respiratory rate for the patient's age."
+                }
+              ]
             },
             {
               "label": "Duration Units",

@@ -1,5 +1,5 @@
 {
-  "name": "Neonatal evolution note",
+  "name": "Neonatal Evaluation Note",
   "description": "Records the initial evaluation of a newborn after delivery, including identification and labelling, the mother's obstetric details and test results, APGAR scores, delivery summary, assessment and plan.",
   "version": "1.0",
   "published": true,
@@ -422,19 +422,27 @@
                 "answers": [
                   {
                     "concept": "1170AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "SVD"
-                  },
-                  {
-                    "concept": "dd55a56d-315f-47d4-aba4-e430533cccb8",
-                    "label": "Forceps"
+                    "label": "Spontaneous vaginal delivery (SVD)"
                   },
                   {
                     "concept": "b7b07c42-7251-4dc3-b10b-82e9fb17e5bd",
-                    "label": "Vacuum"
+                    "label": "Vacuum assisted delivery"
                   },
                   {
-                    "concept": "9ac3d994-fc0a-5541-90ca-ac537f98e976",
-                    "label": "C/S"
+                    "concept": "dd55a56d-315f-47d4-aba4-e430533cccb8",
+                    "label": "Forceps assisted delivery"
+                  },
+                  {
+                    "concept": "1172AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Assisted breech vaginal delivery"
+                  },
+                  {
+                    "concept": "9940841c-3758-4679-9123-456890abcd39",
+                    "label": "Cesarean section - elective"
+                  },
+                  {
+                    "concept": "159739AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cesarean section - emergency"
                   }
                 ]
               }
@@ -448,7 +456,7 @@
                 "concept": "7507ed3e-4852-4fe6-865a-f49609ebf215"
               },
               "hide": {
-                "hideWhenExpression": "isEmpty(modeOfDelivery) || modeOfDelivery !== '9ac3d994-fc0a-5541-90ca-ac537f98e976'"
+                "hideWhenExpression": "isEmpty(modeOfDelivery) || (modeOfDelivery !== '9940841c-3758-4679-9123-456890abcd39' && modeOfDelivery !== '159739AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
               }
             },
             {
@@ -595,8 +603,9 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Beats per minute. Normal range for neonates: 100-160 bpm.",
               "validators": [
@@ -609,15 +618,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Respiratory Rate (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Breaths per minute. Normal range 30-60 breaths/min.",
               "validators": [
@@ -630,7 +640,7 @@
               "hideSteppers": true
             },
             {
-              "label": "Temp (°C)",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "temp",
               "questionOptions": {
@@ -641,10 +651,17 @@
                 "max": "43"
               },
               "questionInfo": "Degrees Celsius, one decimal place.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
+                }
+              ]
             },
             {
-              "label": "BP",
+              "label": "Blood pressure (mmHg)",
               "type": "obs",
               "id": "bp",
               "questionOptions": {
@@ -655,7 +672,7 @@
               }
             },
             {
-              "label": "Birth weight (in grams)",
+              "label": "Birth weight (g)",
               "type": "obs",
               "id": "birthWeightInGrams",
               "questionOptions": {
@@ -667,19 +684,43 @@
               "hideSteppers": true
             },
             {
-              "label": "Length",
+              "label": "Weight for gestational age",
+              "type": "obs",
+              "id": "weightForGestationalAge",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7b3684df-25f1-5c8e-90c6-f295368975fc",
+                "answers": [
+                  {
+                    "concept": "89bad637-447c-4497-bc1e-e875b4d86a79",
+                    "label": "Small for gestational age (SGA)"
+                  },
+                  {
+                    "concept": "c4b96143-eff7-49ca-9de9-81fd8841efa3",
+                    "label": "Appropriate for gestational age (AGA)"
+                  },
+                  {
+                    "concept": "f9d5ce75-46c8-51d1-adaa-a88b10217576",
+                    "label": "Large for gestational age (LGA)"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Length (cm)",
               "type": "obs",
               "id": "length",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "97d878cf-4807-480a-a236-8f8f416f7be1",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "70"
               },
               "hideSteppers": true
             },
             {
-              "label": "Head Circumference (cm)",
+              "label": "Head circumference (cm)",
               "type": "obs",
               "id": "headCircumferenceCm",
               "questionOptions": {

@@ -79,23 +79,23 @@
                 "concept": "84e65038-44e5-4d6a-9efd-bfff54c3b608",
                 "answers": [
                   {
-                    "concept": "2192bceb-2c89-45a7-88d4-e379e9014acd",
+                    "concept": "c05a6502-f814-570f-9e29-9dc059bafeaa",
                     "label": "Day 1"
                   },
                   {
-                    "concept": "2f3f0dbe-6266-4162-b319-13a70851b52e",
+                    "concept": "aa4e2e4c-c6e8-5365-8a8d-efde37f2c6b5",
                     "label": "Day 2"
                   },
                   {
-                    "concept": "112cb702-94e3-48f8-bea7-bb69728fa339",
+                    "concept": "69936ac7-045a-5217-a3a0-a09b5de3f7bb",
                     "label": "Day 3"
                   },
                   {
-                    "concept": "b55c244e-84e0-40d4-af61-f882213ac321",
+                    "concept": "e5fc9cac-0b0d-51c4-8a56-2c5a0fba6c09",
                     "label": "Day 4"
                   },
                   {
-                    "concept": "7f8c744d-0c49-4ba7-9077-b2d14a53e743",
+                    "concept": "486fbc5d-9093-5d29-a6f6-580238d27433",
                     "label": "Day 5"
                   }
                 ]
@@ -110,35 +110,51 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse Rate (PR)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulseRatePr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": 0.01,
+                "step": 1,
                 "max": "230",
-                "min": "0"
+                "min": "0",
+                "disallowDecimals": true
               },
               "readonly": false,
-              "required": "true"
+              "required": "true",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 100 || myValue > 180) : age < 3 ? (myValue < 98 || myValue > 140) : age < 6 ? (myValue < 80 || myValue > 120) : age < 12 ? (myValue < 75 || myValue > 118) : (myValue < 60 || myValue > 100))",
+                  "message": "Outside the normal pulse range for the patient's age."
+                }
+              ]
             },
             {
-              "label": "Respiratory Rate (RR)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRateRr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": 0.01,
+                "step": 1,
                 "max": "99",
-                "min": "0"
+                "min": "0",
+                "disallowDecimals": true
               },
               "readonly": false,
-              "required": "true"
+              "required": "true",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 30 || myValue > 53) : age < 3 ? (myValue < 22 || myValue > 37) : age < 6 ? (myValue < 20 || myValue > 28) : age < 12 ? (myValue < 18 || myValue > 25) : (myValue < 12 || myValue > 20))",
+                  "message": "Outside the normal respiratory rate for the patient's age."
+                }
+              ]
             },
             {
-              "label": "Temperature (T°)",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "temperatureT",
               "questionOptions": {
@@ -149,7 +165,14 @@
                 "min": "25"
               },
               "readonly": false,
-              "required": "true"
+              "required": "true",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
+                }
+              ]
             },
             {
               "label": "Oxygen Saturation (SPo2)",

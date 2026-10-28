@@ -127,7 +127,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "e356f078-129a-4bc3-ce45-6789abcdef01"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Dose-2",
@@ -136,7 +142,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "f4670189-23ab-4cd4-df56-789abcdef012"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             }
           ]
         },
@@ -151,7 +163,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "0578129a-34bc-4de5-e067-89abcdef0123"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Dose-2",
@@ -160,7 +178,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "168923ab-45cd-4ef6-f178-9abcdef01234"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             }
           ]
         },
@@ -227,17 +251,29 @@
               }
             },
             {
-              "label": "Mid-Upper Arm Circumference (MUAC) (cm)",
+              "label": "MUAC (cm)",
               "type": "obs",
               "id": "screenMuac",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
                 "min": "5",
-                "max": "30",
+                "max": "60",
                 "step": 0.1
               },
-              "questionInfo": "One decimal place, e.g. 11.5"
+              "questionInfo": "One decimal place, e.g. 11.5",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 11.5) || (age >= 18 && myValue < 18.5))",
+                  "message": "MUAC in the severe acute malnutrition range (under 5 years: below 11.5 cm; adults: below 18.5 cm)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue >= 11.5 && myValue < 12.5) || (age >= 18 && myValue >= 18.5 && myValue < 21))",
+                  "message": "MUAC in the moderate acute malnutrition range (under 5 years: 11.5 to 12.4 cm; adults: 18.5 to 20.9 cm)."
+                }
+              ]
             },
             {
               "label": "Bilateral Pitting Edema",

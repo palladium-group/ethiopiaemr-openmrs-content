@@ -79,8 +79,8 @@
                 "concept": "1321d860-ca6f-4518-be56-949dc5661ba6",
                 "answers": [
                   {
-                    "concept": "52dcc88b-4dac-4e30-b5cd-7e31fa90b4b2",
-                    "label": "Single"
+                    "concept": "1057AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Never married / Single"
                   },
                   {
                     "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -91,8 +91,20 @@
                     "label": "Divorced"
                   },
                   {
+                    "concept": "1056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Separated"
+                  },
+                  {
                     "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Widowed"
+                  },
+                  {
+                    "concept": "8f878873-0de1-4abe-a3a0-3152caa6fe03",
+                    "label": "Cohabiting / Living with partner"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               },
@@ -551,7 +563,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse Rate (PR)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulseRatePr",
               "questionOptions": {
@@ -559,7 +571,8 @@
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": 1,
                 "max": "230",
-                "min": "0"
+                "min": "0",
+                "disallowDecimals": true
               },
               "readonly": false,
               "validators": [
@@ -567,6 +580,11 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
                   "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 100 || myValue > 180) : age < 3 ? (myValue < 98 || myValue > 140) : age < 6 ? (myValue < 80 || myValue > 120) : age < 12 ? (myValue < 75 || myValue > 118) : (myValue < 60 || myValue > 100))",
+                  "message": "Outside the normal pulse range for the patient's age."
                 }
               ]
             },
@@ -637,7 +655,7 @@
               "required": "true"
             },
             {
-              "label": "Respiratory Rate (RR)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRateRr",
               "questionOptions": {
@@ -645,7 +663,8 @@
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": 1,
                 "max": "99",
-                "min": "0"
+                "min": "0",
+                "disallowDecimals": true
               },
               "readonly": false,
               "validators": [
@@ -653,6 +672,11 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
                   "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 30 || myValue > 53) : age < 3 ? (myValue < 22 || myValue > 37) : age < 6 ? (myValue < 20 || myValue > 28) : age < 12 ? (myValue < 18 || myValue > 25) : (myValue < 12 || myValue > 20))",
+                  "message": "Outside the normal respiratory rate for the patient's age."
                 }
               ]
             },
@@ -862,7 +886,7 @@
               }
             },
             {
-              "label": "Temperature (T)",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "temperatureT",
               "questionOptions": {
@@ -878,6 +902,11 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
                   "message": "At most 1 decimal place allowed."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
                 }
               ]
             },
@@ -933,7 +962,7 @@
               ]
             },
             {
-              "label": "Diastolic Blood Pressure (DBP)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolicBloodPressureDbp",
               "questionOptions": {
@@ -941,7 +970,8 @@
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": 1,
                 "max": "150",
-                "min": "0"
+                "min": "0",
+                "disallowDecimals": true
               },
               "readonly": false,
               "validators": [
@@ -949,6 +979,11 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
                   "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 37 || myValue > 56) : age < 3 ? (myValue < 42 || myValue > 63) : age < 6 ? (myValue < 46 || myValue > 72) : age < 12 ? (myValue < 57 || myValue > 76) : (myValue < 60 || myValue > 89))",
+                  "message": "Outside the normal diastolic range for the patient's age."
                 }
               ]
             },
@@ -1001,9 +1036,12 @@
                 "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "step": 0.1,
                 "max": "100",
-                "min": "0"
+                "min": "0",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(heightHt) || isEmpty(weightWt) || !calcBMI(heightHt,weightWt) || calcBMI(heightHt,weightWt) > 100) ? '' : calcBMI(heightHt,weightWt)"
+                }
               },
-              "readonly": false,
+              "readonly": true,
               "validators": [
                 {
                   "type": "js_expression",
@@ -1858,7 +1896,13 @@
               "readonly": false,
               "hide": {
                 "hideWhenExpression": "suicidePlan !== 'fe99cf75-7b4e-4910-b5a0-8f8cd111c4fe'"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Suicide Plan - Means",
@@ -2051,7 +2095,13 @@
               "readonly": false,
               "hide": {
                 "hideWhenExpression": "planForHarm !== 'fe99cf75-7b4e-4910-b5a0-8f8cd111c4fe'"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Plan for Harm - Means",

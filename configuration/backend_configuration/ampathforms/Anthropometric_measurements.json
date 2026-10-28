@@ -69,7 +69,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Height (cm)",
+              "label": "Height / length (cm)",
               "type": "obs",
               "id": "height",
               "questionOptions": {
@@ -108,6 +108,54 @@
               "hideSteppers": true
             },
             {
+              "label": "BMI-for-age (WHO z-score category)",
+              "type": "obs",
+              "id": "bmiZScoreCategory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "714db1f1-b8e5-4ab3-8eb1-ca685aa1dcad",
+                "answers": [
+                  {
+                    "concept": "0f869001-1920-123d-4561-234567890123",
+                    "label": "Below -3"
+                  },
+                  {
+                    "concept": "10970112-2031-234e-5672-345678901234",
+                    "label": "Between -3 and -2"
+                  },
+                  {
+                    "concept": "11081223-3142-345f-6783-456789012345",
+                    "label": "Between -2 and -1"
+                  },
+                  {
+                    "concept": "12192334-4253-4560-7894-567890123456",
+                    "label": "Between -1 and 0"
+                  },
+                  {
+                    "concept": "13203445-5364-5671-8905-678901234567",
+                    "label": "Between 0 and 1"
+                  },
+                  {
+                    "concept": "14314556-6475-6782-9016-789012345678",
+                    "label": "Between 1 and 2"
+                  },
+                  {
+                    "concept": "15425667-7586-7893-0127-890123456789",
+                    "label": "Between 2 and 3"
+                  },
+                  {
+                    "concept": "16536778-8697-890a-1238-901234567890",
+                    "label": "Above 3"
+                  }
+                ],
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight) || calcBMIForAgeZscore(Number(height),Number(weight)) == null) ? '' : (Number(calcBMIForAgeZscore(Number(height),Number(weight))) < -3 ? '0f869001-1920-123d-4561-234567890123' : Number(calcBMIForAgeZscore(Number(height),Number(weight))) < -2 ? '10970112-2031-234e-5672-345678901234' : Number(calcBMIForAgeZscore(Number(height),Number(weight))) < -1 ? '11081223-3142-345f-6783-456789012345' : Number(calcBMIForAgeZscore(Number(height),Number(weight))) < 0 ? '12192334-4253-4560-7894-567890123456' : Number(calcBMIForAgeZscore(Number(height),Number(weight))) < 1 ? '13203445-5364-5671-8905-678901234567' : Number(calcBMIForAgeZscore(Number(height),Number(weight))) < 2 ? '14314556-6475-6782-9016-789012345678' : Number(calcBMIForAgeZscore(Number(height),Number(weight))) <= 3 ? '15425667-7586-7893-0127-890123456789' : '16536778-8697-890a-1238-901234567890')"
+                }
+              },
+              "readonly": true,
+              "questionInfo": "Calculated from the z-score above (WHO growth reference)."
+            },
+            {
               "label": "Head Circumference Z-Score",
               "type": "obs",
               "id": "headCircumferenceZScore",
@@ -118,14 +166,114 @@
               "hideSteppers": true
             },
             {
+              "label": "Head circumference for age (WHO z-score category)",
+              "type": "obs",
+              "id": "headCircumferenceZScoreCategory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "7cce755d-4f7a-57fa-a21a-1304066aafdb",
+                "answers": [
+                  {
+                    "concept": "0f869001-1920-123d-4561-234567890123",
+                    "label": "Below -3"
+                  },
+                  {
+                    "concept": "10970112-2031-234e-5672-345678901234",
+                    "label": "Between -3 and -2"
+                  },
+                  {
+                    "concept": "11081223-3142-345f-6783-456789012345",
+                    "label": "Between -2 and -1"
+                  },
+                  {
+                    "concept": "12192334-4253-4560-7894-567890123456",
+                    "label": "Between -1 and 0"
+                  },
+                  {
+                    "concept": "13203445-5364-5671-8905-678901234567",
+                    "label": "Between 0 and 1"
+                  },
+                  {
+                    "concept": "14314556-6475-6782-9016-789012345678",
+                    "label": "Between 1 and 2"
+                  },
+                  {
+                    "concept": "15425667-7586-7893-0127-890123456789",
+                    "label": "Between 2 and 3"
+                  },
+                  {
+                    "concept": "16536778-8697-890a-1238-901234567890",
+                    "label": "Above 3"
+                  }
+                ],
+                "calculate": {
+                  "calculateExpression": "(isEmpty(headCircumferenceZScore)) ? '' : (Number(headCircumferenceZScore) < -3 ? '0f869001-1920-123d-4561-234567890123' : Number(headCircumferenceZScore) < -2 ? '10970112-2031-234e-5672-345678901234' : Number(headCircumferenceZScore) < -1 ? '11081223-3142-345f-6783-456789012345' : Number(headCircumferenceZScore) < 0 ? '12192334-4253-4560-7894-567890123456' : Number(headCircumferenceZScore) < 1 ? '13203445-5364-5671-8905-678901234567' : Number(headCircumferenceZScore) < 2 ? '14314556-6475-6782-9016-789012345678' : Number(headCircumferenceZScore) <= 3 ? '15425667-7586-7893-0127-890123456789' : '16536778-8697-890a-1238-901234567890')"
+                }
+              },
+              "readonly": true,
+              "questionInfo": "Calculated from the z-score above (WHO growth reference)."
+            },
+            {
               "label": "Weight for Height Z-Score",
               "type": "obs",
               "id": "weightForHeightZScore",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "98b6233c-7cf8-4218-b516-d2142dad9a0a"
+                "concept": "98b6233c-7cf8-4218-b516-d2142dad9a0a",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight)) ? '' : ((calcWeightForHeightZscore(Number(height),Number(weight)) == null) ? '' : Number(calcWeightForHeightZscore(Number(height),Number(weight))))"
+                }
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true
+            },
+            {
+              "label": "Weight for height/length (WHO z-score category)",
+              "type": "obs",
+              "id": "weightForHeightZScoreCategory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "17647889-9708-901b-2349-012345678901",
+                "answers": [
+                  {
+                    "concept": "18758990-0819-012c-3450-123456789012",
+                    "label": "Below -3"
+                  },
+                  {
+                    "concept": "19869001-1920-123d-4561-234567890123",
+                    "label": "Between -3 and -2"
+                  },
+                  {
+                    "concept": "20970112-2031-234e-5672-345678901234",
+                    "label": "Between -2 and -1"
+                  },
+                  {
+                    "concept": "21081223-3142-345f-6783-456789012345",
+                    "label": "Between -1 and 0"
+                  },
+                  {
+                    "concept": "22192334-4253-4560-7894-567890123456",
+                    "label": "Between 0 and 1"
+                  },
+                  {
+                    "concept": "23203445-5364-5671-8905-678901234567",
+                    "label": "Between 1 and 2"
+                  },
+                  {
+                    "concept": "24314556-6475-6782-9016-789012345678",
+                    "label": "Between 2 and 3"
+                  },
+                  {
+                    "concept": "25425667-7586-7893-0127-890123456789",
+                    "label": "Above 3"
+                  }
+                ],
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight) || calcWeightForHeightZscore(Number(height),Number(weight)) == null) ? '' : (Number(calcWeightForHeightZscore(Number(height),Number(weight))) < -3 ? '18758990-0819-012c-3450-123456789012' : Number(calcWeightForHeightZscore(Number(height),Number(weight))) < -2 ? '19869001-1920-123d-4561-234567890123' : Number(calcWeightForHeightZscore(Number(height),Number(weight))) < -1 ? '20970112-2031-234e-5672-345678901234' : Number(calcWeightForHeightZscore(Number(height),Number(weight))) < 0 ? '21081223-3142-345f-6783-456789012345' : Number(calcWeightForHeightZscore(Number(height),Number(weight))) < 1 ? '22192334-4253-4560-7894-567890123456' : Number(calcWeightForHeightZscore(Number(height),Number(weight))) < 2 ? '23203445-5364-5671-8905-678901234567' : Number(calcWeightForHeightZscore(Number(height),Number(weight))) <= 3 ? '24314556-6475-6782-9016-789012345678' : '25425667-7586-7893-0127-890123456789')"
+                }
+              },
+              "readonly": true,
+              "questionInfo": "Calculated from the z-score above (WHO growth reference)."
             },
             {
               "label": "Length Height For Age Z-Score",
@@ -133,9 +281,61 @@
               "id": "lengthHeightForAgeZScore",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "d2ecb899-60de-48ad-bfe8-5b14e2b5c1ce"
+                "concept": "d2ecb899-60de-48ad-bfe8-5b14e2b5c1ce",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height)) ? '' : ((calcHeightForAgeZscore(Number(height)) == null) ? '' : Number(calcHeightForAgeZscore(Number(height))))"
+                }
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true
+            },
+            {
+              "label": "Height/length for age (WHO z-score category)",
+              "type": "obs",
+              "id": "lengthHeightForAgeZScoreCategory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "26536778-8697-890a-1238-901234567890",
+                "answers": [
+                  {
+                    "concept": "27647889-9708-901b-2349-012345678901",
+                    "label": "Below -3"
+                  },
+                  {
+                    "concept": "28758990-0819-012c-3450-123456789012",
+                    "label": "Between -3 and -2"
+                  },
+                  {
+                    "concept": "29869001-1920-123d-4561-234567890123",
+                    "label": "Between -2 and -1"
+                  },
+                  {
+                    "concept": "30970112-2031-234e-5672-345678901234",
+                    "label": "Between -1 and 0"
+                  },
+                  {
+                    "concept": "31081223-3142-345f-6783-456789012345",
+                    "label": "Between 0 and 1"
+                  },
+                  {
+                    "concept": "32192334-4253-4560-7894-567890123456",
+                    "label": "Between 1 and 2"
+                  },
+                  {
+                    "concept": "33203445-5364-5671-8905-678901234567",
+                    "label": "Between 2 and 3"
+                  },
+                  {
+                    "concept": "34314556-6475-6782-9016-789012345678",
+                    "label": "Above 3"
+                  }
+                ],
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || calcHeightForAgeZscore(Number(height)) == null) ? '' : (Number(calcHeightForAgeZscore(Number(height))) < -3 ? '27647889-9708-901b-2349-012345678901' : Number(calcHeightForAgeZscore(Number(height))) < -2 ? '28758990-0819-012c-3450-123456789012' : Number(calcHeightForAgeZscore(Number(height))) < -1 ? '29869001-1920-123d-4561-234567890123' : Number(calcHeightForAgeZscore(Number(height))) < 0 ? '30970112-2031-234e-5672-345678901234' : Number(calcHeightForAgeZscore(Number(height))) < 1 ? '31081223-3142-345f-6783-456789012345' : Number(calcHeightForAgeZscore(Number(height))) < 2 ? '32192334-4253-4560-7894-567890123456' : Number(calcHeightForAgeZscore(Number(height))) <= 3 ? '33203445-5364-5671-8905-678901234567' : '34314556-6475-6782-9016-789012345678')"
+                }
+              },
+              "readonly": true,
+              "questionInfo": "Calculated from the z-score above (WHO growth reference)."
             },
             {
               "label": "Weight for Age Z-Score",
@@ -146,6 +346,54 @@
                 "concept": "162584AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
               "hideSteppers": true
+            },
+            {
+              "label": "Weight for age (WHO z-score category)",
+              "type": "obs",
+              "id": "weightForAgeZScoreCategory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "0e758f90-0819-012c-3450-123456789012",
+                "answers": [
+                  {
+                    "concept": "0f869001-1920-123d-4561-234567890123",
+                    "label": "Below -3"
+                  },
+                  {
+                    "concept": "10970112-2031-234e-5672-345678901234",
+                    "label": "Between -3 and -2"
+                  },
+                  {
+                    "concept": "11081223-3142-345f-6783-456789012345",
+                    "label": "Between -2 and -1"
+                  },
+                  {
+                    "concept": "12192334-4253-4560-7894-567890123456",
+                    "label": "Between -1 and 0"
+                  },
+                  {
+                    "concept": "13203445-5364-5671-8905-678901234567",
+                    "label": "Between 0 and 1"
+                  },
+                  {
+                    "concept": "14314556-6475-6782-9016-789012345678",
+                    "label": "Between 1 and 2"
+                  },
+                  {
+                    "concept": "15425667-7586-7893-0127-890123456789",
+                    "label": "Between 2 and 3"
+                  },
+                  {
+                    "concept": "16536778-8697-890a-1238-901234567890",
+                    "label": "Above 3"
+                  }
+                ],
+                "calculate": {
+                  "calculateExpression": "(isEmpty(weightForAgeZScore)) ? '' : (Number(weightForAgeZScore) < -3 ? '0f869001-1920-123d-4561-234567890123' : Number(weightForAgeZScore) < -2 ? '10970112-2031-234e-5672-345678901234' : Number(weightForAgeZScore) < -1 ? '11081223-3142-345f-6783-456789012345' : Number(weightForAgeZScore) < 0 ? '12192334-4253-4560-7894-567890123456' : Number(weightForAgeZScore) < 1 ? '13203445-5364-5671-8905-678901234567' : Number(weightForAgeZScore) < 2 ? '14314556-6475-6782-9016-789012345678' : Number(weightForAgeZScore) <= 3 ? '15425667-7586-7893-0127-890123456789' : '16536778-8697-890a-1238-901234567890')"
+                }
+              },
+              "readonly": true,
+              "questionInfo": "Calculated from the z-score above (WHO growth reference)."
             }
           ]
         }

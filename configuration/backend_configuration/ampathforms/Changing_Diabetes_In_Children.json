@@ -75,7 +75,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Filled in By",
@@ -93,7 +99,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "c0f404a6-43d3-5a98-a497-4f1387d71bd9"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             }
           ]
         },
@@ -766,10 +778,22 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "d2ecb899-60de-48ad-bfe8-5b14e2b5c1ce",
-                "min": "-6",
-                "step": 0.01
+                "min": "-10",
+                "step": 0.1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height)) ? '' : ((calcHeightForAgeZscore(Number(height)) == null) ? '' : Number(calcHeightForAgeZscore(Number(height))))"
+                },
+                "max": "10"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < -5 || myValue > 5)",
+                  "message": "Outside -5 to +5: re-check the weight, height and age."
+                }
+              ]
             },
             {
               "label": "BMI-for-age z-score",
@@ -785,6 +809,54 @@
                 }
               },
               "hideSteppers": true
+            },
+            {
+              "label": "BMI-for-age (WHO z-score category)",
+              "type": "obs",
+              "id": "bmiForAgeZCategory",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "714db1f1-b8e5-4ab3-8eb1-ca685aa1dcad",
+                "answers": [
+                  {
+                    "concept": "0f869001-1920-123d-4561-234567890123",
+                    "label": "Below -3"
+                  },
+                  {
+                    "concept": "10970112-2031-234e-5672-345678901234",
+                    "label": "Between -3 and -2"
+                  },
+                  {
+                    "concept": "11081223-3142-345f-6783-456789012345",
+                    "label": "Between -2 and -1"
+                  },
+                  {
+                    "concept": "12192334-4253-4560-7894-567890123456",
+                    "label": "Between -1 and 0"
+                  },
+                  {
+                    "concept": "13203445-5364-5671-8905-678901234567",
+                    "label": "Between 0 and 1"
+                  },
+                  {
+                    "concept": "14314556-6475-6782-9016-789012345678",
+                    "label": "Between 1 and 2"
+                  },
+                  {
+                    "concept": "15425667-7586-7893-0127-890123456789",
+                    "label": "Between 2 and 3"
+                  },
+                  {
+                    "concept": "16536778-8697-890a-1238-901234567890",
+                    "label": "Above 3"
+                  }
+                ],
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight) || calcBMIForAgeZscore(Number(height),Number(weight)) == null) ? '' : (Number(calcBMIForAgeZscore(Number(height),Number(weight))) < -3 ? '0f869001-1920-123d-4561-234567890123' : Number(calcBMIForAgeZscore(Number(height),Number(weight))) < -2 ? '10970112-2031-234e-5672-345678901234' : Number(calcBMIForAgeZscore(Number(height),Number(weight))) < -1 ? '11081223-3142-345f-6783-456789012345' : Number(calcBMIForAgeZscore(Number(height),Number(weight))) < 0 ? '12192334-4253-4560-7894-567890123456' : Number(calcBMIForAgeZscore(Number(height),Number(weight))) < 1 ? '13203445-5364-5671-8905-678901234567' : Number(calcBMIForAgeZscore(Number(height),Number(weight))) < 2 ? '14314556-6475-6782-9016-789012345678' : Number(calcBMIForAgeZscore(Number(height),Number(weight))) <= 3 ? '15425667-7586-7893-0127-890123456789' : '16536778-8697-890a-1238-901234567890')"
+                }
+              },
+              "readonly": true,
+              "questionInfo": "Calculated from the z-score above (WHO growth reference)."
             },
             {
               "label": "Eye (Fundoscopic) exam",
@@ -1147,13 +1219,14 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "HbA1c",
+              "label": "HbA1c (%)",
               "type": "obs",
               "id": "hba1c",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "159644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0"
+                "min": "0",
+                "max": "20"
               },
               "hideSteppers": true
             },
@@ -1177,13 +1250,23 @@
               }
             },
             {
-              "label": "Blood Glucose (mg/dl)",
+              "label": "Blood glucose (mg/dl)",
               "type": "obs",
               "id": "bloodGlucose",
               "questionOptions": {
-                "rendering": "textarea",
-                "concept": "b6945d42-a9bc-5f81-bfd8-6a1ffb50771c"
-              }
+                "rendering": "number",
+                "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "600",
+                "step": 1
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 70 || myValue > 180)",
+                  "message": "Outside 70-180 mg/dl."
+                }
+              ]
             }
           ]
         },

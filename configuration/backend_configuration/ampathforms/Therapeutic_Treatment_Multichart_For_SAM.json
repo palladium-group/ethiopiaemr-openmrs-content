@@ -87,7 +87,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4adc1ced-b345-4f5e-9863-a73602a16db6"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Phase",
@@ -175,7 +181,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "48489d16-d5a4-403d-a3a4-1275ff1755b6"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "ReSoMal (mL)",
@@ -233,27 +245,54 @@
               "hideSteppers": true
             },
             {
-              "label": "WFL",
+              "label": "Weight-for-length z-score",
               "type": "obs",
               "id": "wfl",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "31f2383e-2d35-5cbc-8e43-966e714ee934"
+                "concept": "31f2383e-2d35-5cbc-8e43-966e714ee934",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(lengthHeightCm) || isEmpty(weightKg)) ? '' : ((calcWeightForHeightZscore(Number(lengthHeightCm),Number(weightKg)) == null) ? '' : Number(calcWeightForHeightZscore(Number(lengthHeightCm),Number(weightKg))))"
+                },
+                "min": "-10",
+                "max": "10",
+                "step": 0.1
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < -5 || myValue > 5)",
+                  "message": "Outside -5 to +5: re-check the weight, height and age."
+                }
+              ]
             },
             {
-              "label": "MUAC(cm)",
+              "label": "MUAC (cm)",
               "type": "obs",
               "id": "muacCm",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": 0.01
+                "min": "5",
+                "step": 0.1,
+                "max": "60"
               },
               "questionInfo": "Mid-upper arm circumference in centimetres.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 11.5) || (age >= 18 && myValue < 18.5))",
+                  "message": "MUAC in the severe acute malnutrition range (under 5 years: below 11.5 cm; adults: below 18.5 cm)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue >= 11.5 && myValue < 12.5) || (age >= 18 && myValue >= 18.5 && myValue < 21))",
+                  "message": "MUAC in the moderate acute malnutrition range (under 5 years: 11.5 to 12.4 cm; adults: 18.5 to 20.9 cm)."
+                }
+              ]
             },
             {
               "label": "Edema(0,+,++,+++)",

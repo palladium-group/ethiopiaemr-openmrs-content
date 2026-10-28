@@ -69,15 +69,16 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse Rate",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulseRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "validators": [
                 {
@@ -90,15 +91,16 @@
               "questionInfo": "Normal range 100-160 bpm."
             },
             {
-              "label": "Respiratory Rate (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Breaths per minute. Normal range 30-60 breaths/min.",
               "validators": [
@@ -122,10 +124,17 @@
                 "max": "250"
               },
               "questionInfo": "Kilograms.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue > 10",
+                  "message": "Above 10 kg: check the weight was entered in kg, not grams."
+                }
+              ]
             },
             {
-              "label": "Length",
+              "label": "Length (cm)",
               "type": "obs",
               "id": "length",
               "questionOptions": {
@@ -136,6 +145,40 @@
                 "max": "272"
               },
               "hideSteppers": true
+            },
+            {
+              "label": "Head circumference (cm)",
+              "type": "obs",
+              "id": "headCircumferenceCm",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5314AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "60",
+                "step": 0.1
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Birth weight (g)",
+              "type": "obs",
+              "id": "birthWeightGrams",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "30415263-4758-6789-0123-456789345678",
+                "min": "300",
+                "max": "6000",
+                "step": 1,
+                "disallowDecimals": true
+              },
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 2500 || myValue > 4000)",
+                  "message": "Outside 2500-4000 g (low or high birth weight)."
+                }
+              ]
             },
             {
               "label": "Weight for gestational age",
@@ -167,7 +210,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Systolic",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolic",
               "questionOptions": {
@@ -175,7 +218,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "validators": [
                 {
@@ -188,15 +232,16 @@
               "questionInfo": "Normal range 60-90 mmHg."
             },
             {
-              "label": "Diastolic",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolic",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "validators": [
                 {
@@ -215,7 +260,7 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Temperature",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "temperature",
               "questionOptions": {

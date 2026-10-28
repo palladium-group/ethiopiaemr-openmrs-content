@@ -86,6 +86,92 @@
                   }
                 ]
               }
+            },
+            {
+              "label": "Systolic BP (mmHg)",
+              "type": "obs",
+              "id": "systolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "250",
+                "disallowDecimals": true
+              },
+              "questionInfo": "Normal range: 90-120 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
+                  "message": "Value is outside the normal range (90-120 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Diastolic BP (mmHg)",
+              "type": "obs",
+              "id": "diastolic",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
+              },
+              "questionInfo": "Normal range: 60-90 mmHg",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
+                  "message": "Value is outside the normal range (60-90 mmHg)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": 0.01,
+                "max": "43"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
+                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SpO2 (%)",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "100",
+                "disallowDecimals": true
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
             }
           ]
         }
@@ -131,6 +217,9 @@
                     "label": "Other"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -141,7 +230,10 @@
                 "rendering": "number",
                 "concept": "a860e302-4786-52c1-9c6f-7d948068d098"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
+              }
             },
             {
               "label": "Name Of Institution",
@@ -150,6 +242,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "38e50167-1fb5-4d3e-997e-3a67535e91cf"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -177,6 +272,9 @@
                     "label": "Chronic"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -186,6 +284,9 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "160531AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -195,6 +296,9 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "6218aa28-c5b8-49a1-9fca-c6e133ee19e1"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -204,6 +308,9 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "0948f769-a5c7-4fba-a3e6-9676dcbf2f48"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -213,6 +320,9 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "ce6f6eb7-949b-48f7-ad1d-00bdbc89a695"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -236,6 +346,9 @@
                     "label": "Other"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -247,7 +360,7 @@
                 "concept": "70256d25-f526-41c7-ad3e-1682fae51320"
               },
               "hide": {
-                "hideWhenExpression": "isEmpty(medications) || (medications !== 'ec465882-73be-475b-a983-3b783e508710' && medications !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4' || (isEmpty(medications) || (medications !== 'ec465882-73be-475b-a983-3b783e508710' && medications !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'))"
               }
             },
             {
@@ -287,6 +400,9 @@
                     "concept": "cef9c84c-0872-4877-ad78-f66603d20772"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -322,6 +438,9 @@
                     "label": "Unknown"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -331,6 +450,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "cc177191-2c36-4f22-89a0-9cfba86ad2fb"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -340,6 +462,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "29eacfc4-7281-479e-980d-a71667d95327"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -349,6 +474,15 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "d1b8a5b1-753c-49f8-8c2c-0e4ffe7865e2"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -358,6 +492,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "b8cffa95-a55d-4303-baab-7ef6f9a10f79"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -367,6 +504,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "0599979a-f9dc-45ef-91a8-62f02b09076a"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -386,6 +526,9 @@
                     "label": "No"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -407,7 +550,7 @@
                 ]
               },
               "hide": {
-                "hideWhenExpression": "isEmpty(pregnant) || pregnant !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4' || (isEmpty(pregnant) || pregnant !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')"
               }
             },
             {
@@ -417,6 +560,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "863577fa-b6e9-434e-9de4-1494caf3376d"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -448,6 +594,9 @@
                     "label": "Unknown"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -457,6 +606,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "7daa1528-5f9e-4bb6-83be-c9253cf4314f"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -466,6 +618,9 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "2fe1cb43-07e2-5b51-83f1-33d1c5804f1e"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -475,6 +630,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "091bef40-512a-586a-b27b-8f4a2f026b77"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -484,6 +642,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "e819ae49-db36-5ccc-9fa3-243471e4da86"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -527,6 +688,9 @@
                     "label": "Unknown"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -550,6 +714,9 @@
                     "label": "Pedestrian"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -585,6 +752,9 @@
                     "label": "Ejected"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -594,6 +764,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "9d2ed0af-7671-5ac5-b564-afa05bff5597"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -603,6 +776,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "33833403-d5a5-5ab1-b46d-b221b350de64"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -612,6 +788,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "5fc8f5aa-ef10-5833-95eb-3c4f9313d3b3"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -621,6 +800,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "af43622e-7499-57d6-86f5-38cd2e383396"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -630,6 +812,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "86659f29-a14d-5790-a221-403fd59f8ffe"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -649,6 +834,9 @@
                     "label": "No"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -658,6 +846,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "6d974df9-525b-5951-a42b-a4632d2f8824"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -667,6 +858,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "01a1ee79-2c86-5817-8a63-05f5310d2988"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -676,6 +870,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "4236b889-a0aa-5372-bb35-9b270439aa79"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -685,6 +882,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "d5487d56-ee66-4a53-9d96-a8887ecec868"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -694,6 +894,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "254fa001-263b-47c3-b2bc-b8385b29a96c"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             }
           ]
@@ -709,6 +912,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "163258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -718,6 +924,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "160642AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -727,6 +936,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "a663836b-914d-4585-aee5-85722eebde67"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             }
           ]
@@ -764,15 +976,18 @@
                     "label": "Oral/Airway burns"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
-              "label": "Airway",
+              "label": "Airway intervention",
               "type": "obs",
               "id": "airway2",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "10d2039e-52b7-4cd6-a99a-3467c19e2563",
+                "rendering": "checkbox",
+                "concept": "dd67e07b-e3eb-50ff-b399-4e3ceb54605a",
                 "answers": [
                   {
                     "concept": "978320fa-1f79-5869-b8d7-f34d1c7e2703",
@@ -803,6 +1018,9 @@
                     "label": "ETT"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -834,6 +1052,9 @@
                     "label": "Foreign body"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -857,6 +1078,9 @@
                     "label": "Done in EU"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -872,6 +1096,9 @@
                     "label": "NML"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -882,8 +1109,9 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Breaths per minute.",
               "validators": [
@@ -893,7 +1121,10 @@
                   "message": "Value is outside the normal range (16-24 breaths/min)."
                 }
               ],
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
+              }
             },
             {
               "label": "Chest Rise",
@@ -916,6 +1147,9 @@
                     "label": "Paradoxical"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -935,6 +1169,9 @@
                     "label": "Deviated"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -944,6 +1181,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "18fd64ea-667f-4980-99af-09f91b1cd808"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -953,6 +1193,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "18aee68b-03bf-445a-8448-76c010bb65dd"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -963,7 +1206,10 @@
                 "rendering": "number",
                 "concept": "d269a661-f1bf-4a11-8b82-1207de30a4da"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
+              }
             },
             {
               "label": "Oxygen",
@@ -1002,6 +1248,9 @@
                     "label": "Bronchodilator"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -1025,6 +1274,9 @@
                     "label": "3 Sided Dressing"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -1044,6 +1296,9 @@
                     "label": "Abnormal"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -1063,18 +1318,22 @@
                     "label": "Normal <2 Sec"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
-              "label": "Pulse (beats/min)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulse",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Beats per minute.",
               "validators": [
@@ -1084,7 +1343,10 @@
                   "message": "Value is outside the normal range (60-100 bpm)."
                 }
               ],
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
+              }
             },
             {
               "label": "JVD",
@@ -1103,6 +1365,9 @@
                     "label": "No"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -1126,6 +1391,9 @@
                     "label": "IO"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -1135,6 +1403,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "34dcfb55-038f-4d1d-86ed-df81251c6e56"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -1145,7 +1416,10 @@
                 "rendering": "number",
                 "concept": "f8d7181d-a152-503d-9c5d-cbe27cc8885d"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
+              }
             },
             {
               "label": "Disability 2",
@@ -1180,6 +1454,9 @@
                     "label": "Moves all extremities"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -1189,6 +1466,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "d3b95d66-7183-49f7-b39c-72a17d19326a"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -1198,6 +1478,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "78175a3f-f7db-4f7b-a420-64b82f14d75f"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -1207,6 +1490,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "0966d8dc-825b-40b8-b929-c7fbc90cc839"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -1216,6 +1502,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "b6945d42-a9bc-5f81-bfd8-6a1ffb50771c"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -1239,6 +1528,9 @@
                     "label": "Naloxone"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -1254,6 +1546,9 @@
                     "label": "Exposed completely"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -1277,6 +1572,9 @@
                     "label": "Not Available"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             },
             {
@@ -1316,6 +1614,9 @@
                     "label": "Pericardial effusion"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             }
           ]
@@ -1345,6 +1646,9 @@
                     "label": "Health care professional (EMT, medic)"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== 'afcd1bc5-13e0-4f7f-a9b6-3f6b2b298fa4'"
               }
             }
           ]
@@ -1391,6 +1695,9 @@
                     "label": "Other"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1401,7 +1708,10 @@
                 "rendering": "number",
                 "concept": "a860e302-4786-52c1-9c6f-7d948068d098"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
+              }
             },
             {
               "label": "Name Of Institution",
@@ -1410,6 +1720,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "38e50167-1fb5-4d3e-997e-3a67535e91cf"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1437,6 +1750,9 @@
                     "label": "Chronic"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1446,6 +1762,9 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "160531AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1455,6 +1774,9 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "e120f46c-cb58-48bd-bbaa-f1c90e71d36d"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1464,6 +1786,9 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "1390AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1473,6 +1798,9 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "c0a51001-0000-4000-8000-000000000003"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1482,6 +1810,9 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "af954a5d-5e8b-4c38-8a4a-2f844d331b69"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1491,6 +1822,9 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "13f82aece2cd4e3bbb950140e6cbffce"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1500,6 +1834,9 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             }
           ]
@@ -1515,6 +1852,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "163258AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1524,6 +1864,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "160642AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1533,6 +1876,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "a663836b-914d-4585-aee5-85722eebde67"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             }
           ]
@@ -1570,6 +1916,9 @@
                     "label": "Oral/Airway burns"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1601,15 +1950,18 @@
                     "label": "Foreign body"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
-              "label": "Airway",
+              "label": "Airway intervention",
               "type": "obs",
               "id": "airway4",
               "questionOptions": {
-                "rendering": "select",
-                "concept": "10d2039e-52b7-4cd6-a99a-3467c19e2563",
+                "rendering": "checkbox",
+                "concept": "dd67e07b-e3eb-50ff-b399-4e3ceb54605a",
                 "answers": [
                   {
                     "concept": "978320fa-1f79-5869-b8d7-f34d1c7e2703",
@@ -1640,6 +1992,9 @@
                     "label": "ETT"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1655,6 +2010,9 @@
                     "label": "NML"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1665,8 +2023,9 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Breaths per minute.",
               "validators": [
@@ -1676,7 +2035,10 @@
                   "message": "Value is outside the normal range (16-24 breaths/min)."
                 }
               ],
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
+              }
             },
             {
               "label": "Chest Rise",
@@ -1699,6 +2061,9 @@
                     "label": "Paradoxical"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1718,6 +2083,9 @@
                     "label": "Deviated"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1727,6 +2095,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "18fd64ea-667f-4980-99af-09f91b1cd808"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1736,6 +2107,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "18aee68b-03bf-445a-8448-76c010bb65dd"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1746,7 +2120,10 @@
                 "rendering": "number",
                 "concept": "d269a661-f1bf-4a11-8b82-1207de30a4da"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
+              }
             },
             {
               "label": "Oxygen",
@@ -1785,6 +2162,9 @@
                     "label": "Bronchodilator"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1808,6 +2188,9 @@
                     "label": "3 Sided Dressing"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1827,6 +2210,9 @@
                     "label": "Abnormal"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1846,18 +2232,22 @@
                     "label": "Normal <2 Sec"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
-              "label": "Pulse (beats/min)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulse2",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Beats per minute.",
               "validators": [
@@ -1867,28 +2257,10 @@
                   "message": "Value is outside the normal range (60-100 bpm)."
                 }
               ],
-              "hideSteppers": true
-            },
-            {
-              "label": "Pulse rate (beats/min)",
-              "type": "obs",
-              "id": "pulseRate",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
-                "step": 0.01,
-                "max": "230"
-              },
-              "questionInfo": "Beats per minute.",
-              "validators": [
-                {
-                  "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
-                  "message": "Value is outside the normal range (60-100 bpm)."
-                }
-              ],
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
+              }
             },
             {
               "label": "JVD",
@@ -1907,6 +2279,9 @@
                     "label": "No"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1930,6 +2305,9 @@
                     "label": "IO"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1939,6 +2317,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "34dcfb55-038f-4d1d-86ed-df81251c6e56"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1949,7 +2330,10 @@
                 "rendering": "number",
                 "concept": "f8d7181d-a152-503d-9c5d-cbe27cc8885d"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
+              }
             },
             {
               "label": "Disability 2",
@@ -1984,6 +2368,9 @@
                     "label": "Moves all extremities"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -1993,6 +2380,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "d3b95d66-7183-49f7-b39c-72a17d19326a"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -2002,6 +2392,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "78175a3f-f7db-4f7b-a420-64b82f14d75f"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -2011,6 +2404,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "0966d8dc-825b-40b8-b929-c7fbc90cc839"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -2020,6 +2416,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "b6945d42-a9bc-5f81-bfd8-6a1ffb50771c"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             }
           ]
@@ -2045,6 +2444,9 @@
                     "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -2064,6 +2466,9 @@
                     "concept": "8c1dc514-5de3-4add-b407-e0edf7890125"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -2073,6 +2478,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "732be35c-8d82-4e8c-826b-f150729bb038"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -2082,6 +2490,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "98283469-823b-439a-b553-6451edcd6186"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -2091,6 +2502,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "160947AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -2110,6 +2524,9 @@
                     "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -2129,6 +2546,9 @@
                     "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -2138,6 +2558,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "2f70147f-7961-4937-acab-204676444dff"
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             },
             {
@@ -2173,6 +2596,9 @@
                     "concept": "8d6a89a5-5b9f-49c8-9879-0edf5b2dffb9"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "patientType !== '2c83ca41-d323-40e6-833c-eda94b609ddc'"
               }
             }
           ]

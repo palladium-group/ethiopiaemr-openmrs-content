@@ -125,7 +125,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Assessment Notes",
@@ -255,7 +261,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -275,8 +282,9 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -289,15 +297,16 @@
               "hideSteppers": true
             },
             {
-              "label": "PR (beats/min)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -324,16 +333,24 @@
               "hideSteppers": true
             },
             {
-              "label": "MUAC",
+              "label": "MUAC (cm)",
               "type": "obs",
               "id": "muac",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
-                "min": "0",
-                "step": 0.01
+                "min": "5",
+                "step": 0.1,
+                "max": "60"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue < 23",
+                  "message": "MUAC below 23 cm in a pregnant or lactating woman: screen for acute malnutrition."
+                }
+              ]
             },
             {
               "label": "Pallor",
@@ -436,11 +453,11 @@
                 "concept": "160706AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
-                    "concept": "83748596-7081-9012-3456-789012678901",
+                    "concept": "163115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "A"
                   },
                   {
-                    "concept": "94859607-8192-0123-4567-890123789012",
+                    "concept": "163116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "B"
                   },
                   {
@@ -512,11 +529,11 @@
                 "answers": [
                   {
                     "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "NR"
+                    "label": "Non-reactive"
                   },
                   {
                     "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "R"
+                    "label": "Reactive"
                   }
                 ]
               }
@@ -535,7 +552,7 @@
                   },
                   {
                     "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Non-Reactive"
+                    "label": "Non-reactive"
                   },
                   {
                     "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -553,12 +570,16 @@
                 "concept": "2273174b-6081-7902-2456-789123abcd32",
                 "answers": [
                   {
-                    "label": "Positive",
-                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "703AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Positive"
                   },
                   {
-                    "label": "Negative",
-                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "664AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Negative"
+                  },
+                  {
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -843,7 +864,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Assessment Notes",
@@ -964,7 +991,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -984,8 +1012,9 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -1387,7 +1416,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Assessment Notes",
@@ -1508,7 +1543,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -1528,8 +1564,9 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -1968,7 +2005,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Assessment Notes",
@@ -2089,7 +2132,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -2109,8 +2153,9 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -2241,11 +2286,11 @@
                 "answers": [
                   {
                     "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "NR"
+                    "label": "Non-reactive"
                   },
                   {
                     "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "R"
+                    "label": "Reactive"
                   }
                 ]
               }
@@ -2264,7 +2309,7 @@
                   },
                   {
                     "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Non-Reactive"
+                    "label": "Non-reactive"
                   },
                   {
                     "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -2611,7 +2656,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Assessment Notes",
@@ -2732,7 +2783,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -2752,8 +2804,9 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -2893,11 +2946,11 @@
                 "answers": [
                   {
                     "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "NR"
+                    "label": "Non-reactive"
                   },
                   {
                     "concept": "1228AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "R"
+                    "label": "Reactive"
                   }
                 ]
               }
@@ -2916,7 +2969,7 @@
                   },
                   {
                     "concept": "1229AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Non-Reactive"
+                    "label": "Non-reactive"
                   },
                   {
                     "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -3272,7 +3325,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Assessment Notes",
@@ -3393,7 +3452,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -3413,8 +3473,9 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -3891,7 +3952,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Assessment Notes",
@@ -4012,7 +4079,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -4032,8 +4100,9 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -4501,7 +4570,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Assessment Notes",
@@ -4622,7 +4697,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -4642,8 +4718,9 @@
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [

@@ -163,7 +163,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "4c01850f-f51f-43ba-9fff-785eac33a454"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Gestational Age (Wks)",
@@ -641,29 +647,47 @@
               }
             },
             {
-              "label": "Heart Rate (bpm)",
+              "label": "Heart rate (beats/min)",
               "type": "obs",
               "id": "heartRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
-              }
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 100 || myValue > 180) : age < 3 ? (myValue < 98 || myValue > 140) : age < 6 ? (myValue < 80 || myValue > 120) : age < 12 ? (myValue < 75 || myValue > 118) : (myValue < 60 || myValue > 100))",
+                  "message": "Outside the normal pulse range for the patient's age."
+                }
+              ]
             },
             {
-              "label": "Respiratory Rate (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRateBreathsPerMinute",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
-              }
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 30 || myValue > 53) : age < 3 ? (myValue < 22 || myValue > 37) : age < 6 ? (myValue < 20 || myValue > 28) : age < 12 ? (myValue < 18 || myValue > 25) : (myValue < 12 || myValue > 20))",
+                  "message": "Outside the normal respiratory rate for the patient's age."
+                }
+              ]
             },
             {
-              "label": "Temperature (?C)",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "temperature",
               "questionOptions": {
@@ -673,10 +697,17 @@
                 "max": "43",
                 "step": 0.01
               },
-              "questionInfo": "36.5 - 37.5"
+              "questionInfo": "36.5 - 37.5",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
+                }
+              ]
             },
             {
-              "label": "SPO2 (%)",
+              "label": "SpO2 (%)",
               "type": "obs",
               "id": "spo2",
               "questionOptions": {
@@ -684,9 +715,17 @@
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "max": "100",
-                "step": 0.01
+                "step": 1,
+                "disallowDecimals": true
               },
-              "questionInfo": "> 97"
+              "questionInfo": "> 97",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue < 94",
+                  "message": "SpO2 below 94%."
+                }
+              ]
             }
           ]
         },
@@ -695,27 +734,45 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Systolic (mmHg)",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolicMmhg",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "250",
+                "disallowDecimals": true
               },
-              "questionInfo": "110 - 140"
+              "questionInfo": "110 - 140",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 72 || myValue > 104) : age < 3 ? (myValue < 86 || myValue > 106) : age < 6 ? (myValue < 89 || myValue > 112) : age < 12 ? (myValue < 97 || myValue > 115) : (myValue < 90 || myValue > 139))",
+                  "message": "Outside the normal systolic range for the patient's age."
+                }
+              ]
             },
             {
-              "label": "Diastolic (mmHg)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolicMmhg",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
-              }
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 37 || myValue > 56) : age < 3 ? (myValue < 42 || myValue > 63) : age < 6 ? (myValue < 46 || myValue > 72) : age < 12 ? (myValue < 57 || myValue > 76) : (myValue < 60 || myValue > 89))",
+                  "message": "Outside the normal diastolic range for the patient's age."
+                }
+              ]
             },
             {
               "label": "HEENT",
@@ -920,6 +977,24 @@
             },
             {
               "label": "Triaging physician established working diagnosis",
+              "type": "obs",
+              "id": "triagingPhysicianEstablishedWorkingDiagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Triaging physician established working diagnosis notes",
               "type": "obs",
               "id": "triagingPhysicianEstablishedWorkingDiagnosis",
               "questionOptions": {

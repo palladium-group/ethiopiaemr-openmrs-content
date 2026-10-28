@@ -76,8 +76,9 @@
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -90,34 +91,32 @@
               "hideSteppers": true
             },
             {
-              "label": "Pulse Rate score",
+              "label": "Pulse rate score",
               "type": "obs",
               "id": "pulseRateScore",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "98e1ae72-e087-434b-bbc3-806bbed78cd4",
                 "min": "0",
-                "step": 1
-              },
-              "validators": [
-                {
-                  "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
-                  "message": "Value is outside the normal range (60-100 bpm)."
+                "step": 1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(pulseRate) ? '' : (Number(pulseRate) <= 40 ? 3 : Number(pulseRate) <= 50 ? 1 : Number(pulseRate) <= 90 ? 0 : Number(pulseRate) <= 110 ? 1 : Number(pulseRate) <= 130 ? 2 : 3))"
                 }
-              ],
-              "hideSteppers": true
+              },
+              "hideSteppers": true,
+              "readonly": true
             },
             {
-              "label": "Respiratory Rate (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -137,12 +136,16 @@
                 "rendering": "number",
                 "concept": "33527161-9d15-5685-a40c-db78faaa5e1d",
                 "min": "0",
-                "step": 1
+                "step": 1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(respiratoryRate) ? '' : (Number(respiratoryRate) <= 8 ? 3 : Number(respiratoryRate) <= 11 ? 1 : Number(respiratoryRate) <= 20 ? 0 : Number(respiratoryRate) <= 24 ? 2 : 3))"
+                }
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true
             },
             {
-              "label": "Systolic (mmHg)",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolic",
               "questionOptions": {
@@ -150,7 +153,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -163,15 +167,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Diastolic (mmHg)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolic",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -184,27 +189,32 @@
               "hideSteppers": true
             },
             {
-              "label": "Systolic Score",
+              "label": "Systolic BP score",
               "type": "obs",
               "id": "systolicScore",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "6d997573-0801-43cf-b461-1a4dc3b0f74d",
                 "min": "0",
-                "step": 1
+                "step": 1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(systolic) ? '' : (Number(systolic) <= 90 ? 3 : Number(systolic) <= 100 ? 2 : Number(systolic) <= 110 ? 1 : Number(systolic) <= 219 ? 0 : 3))"
+                }
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true
             },
             {
-              "label": "SPO2",
+              "label": "SpO2 (%)",
               "type": "obs",
               "id": "spo2",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "100"
+                "step": 1,
+                "max": "100",
+                "disallowDecimals": true
               },
               "validators": [
                 {
@@ -216,19 +226,42 @@
               "hideSteppers": true
             },
             {
-              "label": "SPO2 score",
+              "label": "SpO2 score",
               "type": "obs",
               "id": "spo2Score",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "0ad48464-138d-4bea-9b55-e3b284e4fc91",
                 "min": "0",
-                "step": 1
+                "step": 1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(spo2) ? '' : (Number(spo2) <= 91 ? 3 : Number(spo2) <= 93 ? 2 : Number(spo2) <= 95 ? 1 : 0))"
+                }
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true
             },
             {
-              "label": "Oxygen flow rate",
+              "label": "Breathing room air or supplemental oxygen?",
+              "type": "obs",
+              "id": "oxygenDelivery",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "0a1b6af2-5fa3-40b2-858a-791c237b44af",
+                "answers": [
+                  {
+                    "concept": "162735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Room air"
+                  },
+                  {
+                    "concept": "81341AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Supplemental oxygen"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If supplemental oxygen given, oxygen flow rate (L/min)",
               "type": "obs",
               "id": "oxygenFlowRate",
               "questionOptions": {
@@ -237,19 +270,26 @@
                 "min": "0",
                 "step": 0.01
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "oxygenDelivery !== '81341AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             },
             {
-              "label": "Oxygen flow rate score",
+              "label": "Supplemental oxygen score",
               "type": "obs",
               "id": "oxygenFlowRateScore",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "70f44013-3dff-4ded-ba9a-b1622d8bc82e",
                 "min": "0",
-                "step": 1
+                "step": 1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(oxygenDelivery) ? '' : (oxygenDelivery === '81341AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 2 : 0))"
+                }
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true
             },
             {
               "label": "Temperature (°C)",
@@ -280,9 +320,13 @@
                 "rendering": "number",
                 "concept": "aa4820ee-d14b-5b9c-9a05-ee5526c8de17",
                 "min": "0",
-                "step": 1
+                "step": 1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(temperature) ? '' : (Number(temperature) <= 35.0 ? 3 : Number(temperature) <= 36.0 ? 1 : Number(temperature) <= 38.0 ? 0 : Number(temperature) <= 39.0 ? 1 : 2))"
+                }
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true
             },
             {
               "label": "RBS(mg/dl)",
@@ -380,21 +424,54 @@
                 "rendering": "number",
                 "concept": "e4050494-32d0-4ffb-8e5d-26ececf51c98",
                 "min": "0",
-                "step": 1
+                "step": 1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(consciousness) ? '' : (consciousness === '9694701e-109a-41d3-8adb-8f07670fbcb5' ? 0 : 3))"
+                }
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true
             },
             {
-              "label": "Total EWS Score",
+              "label": "Total early warning score (NEWS2)",
               "type": "obs",
               "id": "totalEwsScore",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "f92b1339-461a-5b9d-90ed-4b322d305708",
                 "min": "0",
-                "step": 1
+                "step": 1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(pulseRate) || isEmpty(respiratoryRate) || isEmpty(systolic) || isEmpty(spo2) || isEmpty(oxygenDelivery) || isEmpty(temperature) || isEmpty(consciousness)) ? '' : ((isEmpty(pulseRate) ? '' : (Number(pulseRate) <= 40 ? 3 : Number(pulseRate) <= 50 ? 1 : Number(pulseRate) <= 90 ? 0 : Number(pulseRate) <= 110 ? 1 : Number(pulseRate) <= 130 ? 2 : 3)) + (isEmpty(respiratoryRate) ? '' : (Number(respiratoryRate) <= 8 ? 3 : Number(respiratoryRate) <= 11 ? 1 : Number(respiratoryRate) <= 20 ? 0 : Number(respiratoryRate) <= 24 ? 2 : 3)) + (isEmpty(systolic) ? '' : (Number(systolic) <= 90 ? 3 : Number(systolic) <= 100 ? 2 : Number(systolic) <= 110 ? 1 : Number(systolic) <= 219 ? 0 : 3)) + (isEmpty(spo2) ? '' : (Number(spo2) <= 91 ? 3 : Number(spo2) <= 93 ? 2 : Number(spo2) <= 95 ? 1 : 0)) + (isEmpty(oxygenDelivery) ? '' : (oxygenDelivery === '81341AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 2 : 0)) + (isEmpty(temperature) ? '' : (Number(temperature) <= 35.0 ? 3 : Number(temperature) <= 36.0 ? 1 : Number(temperature) <= 38.0 ? 0 : Number(temperature) <= 39.0 ? 1 : 2)) + (isEmpty(consciousness) ? '' : (consciousness === '9694701e-109a-41d3-8adb-8f07670fbcb5' ? 0 : 3)))"
+                }
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "readonly": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue !== \"\" && Number(myValue) >= 5",
+                  "message": "NEWS2 score 5 or more: urgent clinical review (7 or more: emergency response)."
+                }
+              ]
+            },
+            {
+              "label": "Action plan",
+              "type": "obs",
+              "id": "actionPlan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "2ad20b043cf54dd48e698e1c8e231c99"
+              }
+            },
+            {
+              "label": "Next evaluation",
+              "type": "obs",
+              "id": "nextEvaluation",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "28fcd7de-5810-5fa0-a185-da4d6cab90bc"
+              }
             },
             {
               "label": "Trigger Response( Yes/No)",

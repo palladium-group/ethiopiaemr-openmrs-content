@@ -149,13 +149,16 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pulse Rate (PR)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulseRatePr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": 1
+                "step": 1,
+                "min": "0",
+                "max": "230",
+                "disallowDecimals": true
               },
               "readonly": false,
               "validators": [
@@ -163,6 +166,11 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
                   "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 100 || myValue > 180) : age < 3 ? (myValue < 98 || myValue > 140) : age < 6 ? (myValue < 80 || myValue > 120) : age < 12 ? (myValue < 75 || myValue > 118) : (myValue < 60 || myValue > 100))",
+                  "message": "Outside the normal pulse range for the patient's age."
                 }
               ]
             },
@@ -233,13 +241,16 @@
               "required": "true"
             },
             {
-              "label": "Respiratory Rate (RR)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRateRr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": 1
+                "step": 1,
+                "min": "0",
+                "max": "99",
+                "disallowDecimals": true
               },
               "readonly": false,
               "validators": [
@@ -247,6 +258,11 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
                   "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 30 || myValue > 53) : age < 3 ? (myValue < 22 || myValue > 37) : age < 6 ? (myValue < 20 || myValue > 28) : age < 12 ? (myValue < 18 || myValue > 25) : (myValue < 12 || myValue > 20))",
+                  "message": "Outside the normal respiratory rate for the patient's age."
                 }
               ]
             },
@@ -456,13 +472,15 @@
               }
             },
             {
-              "label": "Temperature (T)",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "temperatureT",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": 0.1
+                "step": 0.1,
+                "min": "25",
+                "max": "43"
               },
               "readonly": false,
               "validators": [
@@ -470,6 +488,11 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
                   "message": "At most 1 decimal place allowed."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
                 }
               ]
             },
@@ -524,13 +547,16 @@
               ]
             },
             {
-              "label": "Diastolic Blood Pressure (DBP)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolicBloodPressureDbp",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": 1
+                "step": 1,
+                "min": "0",
+                "max": "150",
+                "disallowDecimals": true
               },
               "readonly": false,
               "validators": [
@@ -538,6 +564,11 @@
                   "type": "js_expression",
                   "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
                   "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 37 || myValue > 56) : age < 3 ? (myValue < 42 || myValue > 63) : age < 6 ? (myValue < 46 || myValue > 72) : age < 12 ? (myValue < 57 || myValue > 76) : (myValue < 60 || myValue > 89))",
+                  "message": "Outside the normal diastolic range for the patient's age."
                 }
               ]
             },
@@ -584,9 +615,12 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": 0.1
+                "step": 0.1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(heightHt) || isEmpty(weightWt) || !calcBMI(heightHt,weightWt) || calcBMI(heightHt,weightWt) > 100) ? '' : calcBMI(heightHt,weightWt)"
+                }
               },
-              "readonly": false,
+              "readonly": true,
               "validators": [
                 {
                   "type": "js_expression",
@@ -1055,9 +1089,27 @@
             {
               "label": "Revised Diagnosis",
               "type": "obs",
+              "id": "revisedDiagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Revised Diagnosis notes",
+              "type": "obs",
               "id": "revisedDiagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "a6836bce-3cec-4ac1-b89b-ed50d1967941"
               },
               "readonly": false

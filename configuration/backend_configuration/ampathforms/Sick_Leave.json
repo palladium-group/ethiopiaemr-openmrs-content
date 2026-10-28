@@ -1,5 +1,5 @@
 {
-  "name": "Sick Leave",
+  "name": "Sick Leave Medical Certificate",
   "description": "Documents sick leave issued to a patient, recording the date seen, the amount of sick leave granted and the physician's recommendation.",
   "version": "1.0",
   "published": true,
@@ -69,13 +69,125 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Date seen",
+              "label": "Date of examination",
               "type": "obs",
               "id": "dateSeen",
               "questionOptions": {
                 "rendering": "date",
                 "concept": "0a21bba8-7117-4fda-ae48-4ad9d6ec1399"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Employer or institution",
+              "type": "obs",
+              "id": "employer",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "9b87211c-0337-5e88-9505-06fcddafb227"
               }
+            },
+            {
+              "label": "Occupation",
+              "type": "obs",
+              "id": "occupation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b37c797c-8b51-4a61-9ab7-cf40792d0bdf"
+              }
+            },
+            {
+              "label": "Diagnosis",
+              "type": "obs",
+              "id": "diagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Clinical findings",
+              "type": "obs",
+              "id": "clinicalFindings",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f7439191-f29e-44d5-b95e-02d7e37be2cf"
+              }
+            },
+            {
+              "label": "Type of sick leave",
+              "type": "obs",
+              "id": "leaveType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d54ac1e0-b020-5fda-8ce6-daeb5029c86d",
+                "answers": [
+                  {
+                    "concept": "355251bf-b021-4c5b-b192-a4eb91461086",
+                    "label": "Initial"
+                  },
+                  {
+                    "concept": "5d6ae975-c701-5494-8c1b-07106a54de52",
+                    "label": "Extension"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Leave start date",
+              "type": "obs",
+              "id": "leaveStartDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "ba43a818-f8b3-5ddf-a3cb-318a2c60ef91"
+              }
+            },
+            {
+              "label": "Leave end date",
+              "type": "obs",
+              "id": "leaveEndDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "0e4399d5-0666-5417-9431-8f92c8e070cf"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !isEmpty(leaveStartDate) && new Date(myValue) < new Date(leaveStartDate)",
+                  "message": "Leave end date cannot be before the start date."
+                }
+              ]
+            },
+            {
+              "label": "Total number of days",
+              "type": "obs",
+              "id": "totalLeaveDays",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "e420f014-c133-5ce8-b65b-12e08d7cdf85",
+                "min": "0",
+                "step": 1,
+                "disallowDecimals": true,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(leaveStartDate) || isEmpty(leaveEndDate)) ? '' : Math.round((new Date(leaveEndDate) - new Date(leaveStartDate)) / 86400000) + 1"
+                }
+              },
+              "readonly": true,
+              "hideSteppers": true
             },
             {
               "label": "Number of sick leaves given",
@@ -87,12 +199,21 @@
               }
             },
             {
-              "label": "Physician's recommendation",
+              "label": "Restrictions and recommendations",
               "type": "obs",
               "id": "physicianSRecommendation",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "652dd477-5303-4ad5-be8d-aa453d865caf"
+              }
+            },
+            {
+              "label": "Follow-up date",
+              "type": "obs",
+              "id": "followUpDate",
+              "questionOptions": {
+                "rendering": "date",
+                "concept": "5096AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             }
           ]

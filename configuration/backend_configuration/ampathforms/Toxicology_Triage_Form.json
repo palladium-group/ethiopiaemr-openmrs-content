@@ -75,7 +75,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "125ab063-1916-4912-8569-c1cf2256cfcf"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Time of arrival",
@@ -262,11 +268,11 @@
                     "label": "Accidental"
                   },
                   {
-                    "concept": "162976AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "2ecc77ed-f863-4991-93a4-596413551f58",
                     "label": "Occupational"
                   },
                   {
-                    "concept": "639173e6-7d13-4bb9-b6a3-4d3840566f82",
+                    "concept": "5f7423ac-7c5f-4172-a7c4-f9239bb3e990",
                     "label": "Uncertain"
                   },
                   {
@@ -424,8 +430,8 @@
                 "concept": "a5726786-bd9c-517d-aa9c-69497e1594b8",
                 "answers": [
                   {
-                    "concept": "162976AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "SPO2>90"
+                    "concept": "d138d38a-ac5c-5fe6-a40d-72b430feb171",
+                    "label": "SpO2 above 90%"
                   },
                   {
                     "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -439,48 +445,85 @@
               }
             },
             {
-              "label": "RR",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "rr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "5",
-                "max": "60"
-              }
+                "max": "60",
+                "disallowDecimals": true,
+                "step": 1
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 30 || myValue > 53) : age < 3 ? (myValue < 22 || myValue > 37) : age < 6 ? (myValue < 20 || myValue > 28) : age < 12 ? (myValue < 18 || myValue > 25) : (myValue < 12 || myValue > 20))",
+                  "message": "Outside the normal respiratory rate for the patient's age."
+                }
+              ]
             },
             {
-              "label": "Heart rate",
+              "label": "Heart rate (beats/min)",
               "type": "obs",
               "id": "heartRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "20",
-                "max": "230"
-              }
+                "max": "230",
+                "disallowDecimals": true,
+                "step": 1
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 100 || myValue > 180) : age < 3 ? (myValue < 98 || myValue > 140) : age < 6 ? (myValue < 80 || myValue > 120) : age < 12 ? (myValue < 75 || myValue > 118) : (myValue < 60 || myValue > 100))",
+                  "message": "Outside the normal pulse range for the patient's age."
+                }
+              ]
             },
             {
-              "label": "SBP (mmHg)",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "sbp",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "250",
+                "disallowDecimals": true,
+                "step": 1
               },
               "questionInfo": "Millimetres of mercury.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 72 || myValue > 104) : age < 3 ? (myValue < 86 || myValue > 106) : age < 6 ? (myValue < 89 || myValue > 112) : age < 12 ? (myValue < 97 || myValue > 115) : (myValue < 90 || myValue > 139))",
+                  "message": "Outside the normal systolic range for the patient's age."
+                }
+              ]
             },
             {
-              "label": "Temp",
+              "label": "Temperature (°C)",
               "type": "obs",
               "id": "temp",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "max": "43"
-              }
+                "max": "43",
+                "step": 0.1
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
+                }
+              ]
             },
             {
               "label": "Pain",
@@ -645,7 +688,7 @@
                     "label": "Sunken eyes"
                   },
                   {
-                    "concept": "162976AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "concept": "1841AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "label": "Slow skin pinch"
                   }
                 ]
@@ -661,30 +704,48 @@
               }
             },
             {
-              "label": "RR (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "rr2",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Breaths per minute.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 30 || myValue > 53) : age < 3 ? (myValue < 22 || myValue > 37) : age < 6 ? (myValue < 20 || myValue > 28) : age < 12 ? (myValue < 18 || myValue > 25) : (myValue < 12 || myValue > 20))",
+                  "message": "Outside the normal respiratory rate for the patient's age."
+                }
+              ]
             },
             {
-              "label": "PR (beats/min)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Beats per minute.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 100 || myValue > 180) : age < 3 ? (myValue < 98 || myValue > 140) : age < 6 ? (myValue < 80 || myValue > 120) : age < 12 ? (myValue < 75 || myValue > 118) : (myValue < 60 || myValue > 100))",
+                  "message": "Outside the normal pulse range for the patient's age."
+                }
+              ]
             },
             {
               "label": "Temperature (°C)",
@@ -694,10 +755,18 @@
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "25",
-                "step": 0.01
+                "step": 0.01,
+                "max": "43"
               },
               "questionInfo": "Degrees Celsius, one decimal place.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
+                }
+              ]
             },
             {
               "label": "TRIAGE DECISION",
@@ -707,10 +776,6 @@
                 "rendering": "select",
                 "concept": "081a617a-8805-44b2-8e7d-d41b79ba6f77",
                 "answers": [
-                  {
-                    "concept": "d3b5c439-e7ac-4e20-9b7c-ab5057a309ef",
-                    "label": "Remarks"
-                  },
                   {
                     "concept": "90457239-cbe0-4b20-9ab0-e262df08f06f",
                     "label": "YELLOW/GREEN  (RECOVERY)"

@@ -147,7 +147,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "d170eb95-b657-46f3-a08a-464762f60006"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Re-admission?",
@@ -249,7 +255,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Height (cm)",
@@ -285,20 +297,44 @@
               "id": "wfhZScore",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "2dabfcfe-1e70-4e88-837a-79531073b040"
-              }
+                "concept": "2dabfcfe-1e70-4e88-837a-79531073b040",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight)) ? '' : ((calcWeightForHeightZscore(Number(height),Number(weight)) == null) ? '' : String(Number(calcWeightForHeightZscore(Number(height),Number(weight)))))"
+                }
+              },
+              "readonly": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (Number(myValue) < -5 || Number(myValue) > 5)",
+                  "message": "Outside -5 to +5: re-check the weight, height and age."
+                }
+              ]
             },
             {
-              "label": "MUAC",
+              "label": "MUAC (cm)",
               "type": "obs",
               "id": "muac",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
-                "min": "0",
-                "step": 0.01
+                "min": "5",
+                "step": 0.1,
+                "max": "60"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 11.5) || (age >= 18 && myValue < 18.5))",
+                  "message": "MUAC in the severe acute malnutrition range (under 5 years: below 11.5 cm; adults: below 18.5 cm)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue >= 11.5 && myValue < 12.5) || (age >= 18 && myValue >= 18.5 && myValue < 21))",
+                  "message": "MUAC in the moderate acute malnutrition range (under 5 years: 11.5 to 12.4 cm; adults: 18.5 to 20.9 cm)."
+                }
+              ]
             },
             {
               "label": "Bilateral pitting edema",
@@ -401,7 +437,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Phase",
@@ -635,8 +677,9 @@
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Breaths per minute.",
               "validators": [
@@ -679,7 +722,14 @@
                 "max": "43"
               },
               "questionInfo": "Degrees Celsius, one decimal place.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
+                }
+              ]
             },
             {
               "label": "Temp. PM Axillary/Rectum (°C)",
@@ -693,7 +743,14 @@
                 "max": "43"
               },
               "questionInfo": "Degrees Celsius, one decimal place.",
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
+                }
+              ]
             },
             {
               "label": "Dermatosis",
@@ -738,7 +795,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Malaria Treatment",
@@ -810,7 +873,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Time 1 Provider",
@@ -828,7 +897,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Time 2 Provider",
@@ -846,7 +921,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Time 3 Provider",
@@ -864,7 +945,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Time 4 Provider",
@@ -888,7 +975,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Hb/PCV",
@@ -1040,7 +1133,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Time 1 Provider",
@@ -1058,7 +1157,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Time 2 Provider",
@@ -1076,7 +1181,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Time 3 Provider",
@@ -1094,7 +1205,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Time 4 Provider",
@@ -1127,7 +1244,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Time 1 Provider",
@@ -1145,7 +1268,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Time 2 Provider",
@@ -1163,7 +1292,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Time 3 Provider",
@@ -1181,7 +1316,13 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "583384f0-35b2-44ed-903b-985e1c77d669"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Time 4 Provider",

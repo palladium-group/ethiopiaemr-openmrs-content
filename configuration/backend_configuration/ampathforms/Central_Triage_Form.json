@@ -69,14 +69,16 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Systolic (mmHg)",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolicBP",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -89,14 +91,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Diastolic (mmHg)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolicBP",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -128,14 +132,16 @@
               }
             },
             {
-              "label": "Heart Rate (bpm)",
+              "label": "Heart rate (beats/min)",
               "type": "obs",
               "id": "pulse",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-100 bpm",
               "validators": [
@@ -148,14 +154,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Respiratory Rate (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -189,7 +197,7 @@
               "hideSteppers": true
             },
             {
-              "label": "SPO2 (%)",
+              "label": "SpO2 (%)",
               "type": "obs",
               "id": "spo2",
               "questionOptions": {
@@ -197,7 +205,8 @@
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "max": "100",
-                "step": 0.01
+                "step": 1,
+                "disallowDecimals": true
               },
               "questionInfo": "Normal: >90%",
               "validators": [
@@ -826,9 +835,27 @@
             {
               "label": "Patient diagnosis",
               "type": "obs",
+              "id": "referralDiagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "5216795d-694c-4baf-933f-592fe6ad0d62",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Patient diagnosis notes",
+              "type": "obs",
               "id": "referralDiagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
             },

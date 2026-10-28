@@ -151,7 +151,26 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Medical condition",
+              "label": "Was the neonate's current medical condition explained?",
+              "type": "obs",
+              "id": "medicalConditionExplained",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "8c1c023f-0888-53b7-8c27-f483ce88680d",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Medical condition, details",
               "type": "obs",
               "id": "medicalCondition",
               "questionOptions": {
@@ -160,7 +179,26 @@
               }
             },
             {
-              "label": "What treatment , supportive and targeted treatment is the neonate currently on",
+              "label": "Was the neonate's current treatment (supportive and targeted) explained?",
+              "type": "obs",
+              "id": "treatmentExplained",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "aef5c03b-79da-54da-859a-0e2ac62af0ab",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Current treatment, details",
               "type": "obs",
               "id": "whatTreatmentSupportiveAndTargetedTreatm",
               "questionOptions": {
@@ -261,7 +299,7 @@
               "type": "obs",
               "id": "adviseOnWhenDischargeWillBePossible",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "checkbox",
                 "concept": "64064dec-9e07-44b7-85b1-58ffe6b6a35c",
                 "answers": [
                   {
@@ -339,40 +377,32 @@
                 "concept": "1054aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                 "answers": [
                   {
-                    "label": "Separated",
-                    "concept": "1056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1057AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Never married / single"
                   },
                   {
-                    "label": "Never married",
-                    "concept": "1057AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Married"
                   },
                   {
-                    "label": "Divorced",
-                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Divorced"
                   },
                   {
-                    "label": "Widowed",
-                    "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Separated"
                   },
                   {
-                    "label": "Married",
-                    "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Widowed"
                   },
                   {
-                    "label": "OTHER NON-CODED",
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "8f878873-0de1-4abe-a3a0-3152caa6fe03",
+                    "label": "Cohabiting / living with partner"
                   },
                   {
-                    "label": "Living together",
-                    "concept": "6f4e7a3f-55ef-4da0-b07d-bdead49528b8"
-                  },
-                  {
-                    "label": "Single",
-                    "concept": "7659c02c-a969-4de4-a9c8-bdd6b6d17ebe"
-                  },
-                  {
-                    "label": "Cohabiting",
-                    "concept": "8f878873-0de1-4abe-a3a0-3152caa6fe03"
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -404,7 +434,14 @@
                 "concept": "160642aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                 "min": "0",
                 "step": 0.01
-              }
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^\\+?[0-9]{9,13}$/.test(myValue)",
+                  "message": "Digits only (9-13), e.g. 0911234567."
+                }
+              ]
             }
           ]
         },
@@ -442,40 +479,32 @@
                 "concept": "1054aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                 "answers": [
                   {
-                    "label": "Separated",
-                    "concept": "1056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1057AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Never married / single"
                   },
                   {
-                    "label": "Never married",
-                    "concept": "1057AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Married"
                   },
                   {
-                    "label": "Divorced",
-                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1058AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Divorced"
                   },
                   {
-                    "label": "Widowed",
-                    "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1056AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Separated"
                   },
                   {
-                    "label": "Married",
-                    "concept": "5555AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "1059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Widowed"
                   },
                   {
-                    "label": "OTHER NON-CODED",
-                    "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "8f878873-0de1-4abe-a3a0-3152caa6fe03",
+                    "label": "Cohabiting / living with partner"
                   },
                   {
-                    "label": "Living together",
-                    "concept": "6f4e7a3f-55ef-4da0-b07d-bdead49528b8"
-                  },
-                  {
-                    "label": "Single",
-                    "concept": "7659c02c-a969-4de4-a9c8-bdd6b6d17ebe"
-                  },
-                  {
-                    "label": "Cohabiting",
-                    "concept": "8f878873-0de1-4abe-a3a0-3152caa6fe03"
+                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Unknown"
                   }
                 ]
               }
@@ -507,7 +536,14 @@
                 "concept": "160642aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                 "min": "0",
                 "step": 0.01
-              }
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^\\+?[0-9]{9,13}$/.test(myValue)",
+                  "message": "Digits only (9-13), e.g. 0911234567."
+                }
+              ]
             }
           ]
         }

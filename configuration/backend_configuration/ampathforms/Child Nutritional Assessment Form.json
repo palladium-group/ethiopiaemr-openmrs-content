@@ -93,7 +93,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "421719a0-eef5-4181-b55d-fff16d845314"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
               "label": "Family marital status",
@@ -116,9 +122,27 @@
             {
               "label": "Medical Diagnosis",
               "type": "obs",
+              "id": "medicalDiagnosisCoded",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "012fad59-0be6-4472-815a-f0dd3c70f7ac",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Medical Diagnosis notes",
+              "type": "obs",
               "id": "medicalDiagnosis",
               "questionOptions": {
-                "rendering": "text",
+                "rendering": "textarea",
                 "concept": "5809a2b3-3ca3-b23e-8567-9ef012345678"
               }
             },
@@ -217,16 +241,29 @@
               "hideSteppers": true
             },
             {
-              "label": "MUAC",
+              "label": "MUAC (cm)",
               "type": "obs",
               "id": "muac",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
-                "min": "0",
-                "step": 0.01
+                "min": "5",
+                "step": 0.1,
+                "max": "60"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 11.5) || (age >= 18 && myValue < 18.5))",
+                  "message": "MUAC in the severe acute malnutrition range (under 5 years: below 11.5 cm; adults: below 18.5 cm)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue >= 11.5 && myValue < 12.5) || (age >= 18 && myValue >= 18.5 && myValue < 21))",
+                  "message": "MUAC in the moderate acute malnutrition range (under 5 years: 11.5 to 12.4 cm; adults: 18.5 to 20.9 cm)."
+                }
+              ]
             },
             {
               "label": "Z-Score",
@@ -252,8 +289,19 @@
               "id": "weightForHeightZScore",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "2dabfcfe-1e70-4e88-837a-79531073b040"
-              }
+                "concept": "2dabfcfe-1e70-4e88-837a-79531073b040",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(lengthHeight) || isEmpty(weight)) ? '' : ((calcWeightForHeightZscore(Number(lengthHeight),Number(weight)) == null) ? '' : String(Number(calcWeightForHeightZscore(Number(lengthHeight),Number(weight)))))"
+                }
+              },
+              "readonly": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (Number(myValue) < -5 || Number(myValue) > 5)",
+                  "message": "Outside -5 to +5: re-check the weight, height and age."
+                }
+              ]
             },
             {
               "label": "Length Height For Age Z-Score",
@@ -261,8 +309,19 @@
               "id": "lengthHeightForAgeZScore",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "75878fd7-d3a0-44e0-8543-d2027def679d"
-              }
+                "concept": "75878fd7-d3a0-44e0-8543-d2027def679d",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(lengthHeight)) ? '' : ((calcHeightForAgeZscore(Number(lengthHeight)) == null) ? '' : String(Number(calcHeightForAgeZscore(Number(lengthHeight)))))"
+                }
+              },
+              "readonly": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (Number(myValue) < -5 || Number(myValue) > 5)",
+                  "message": "Outside -5 to +5: re-check the weight, height and age."
+                }
+              ]
             },
             {
               "label": "Weight for Age Z-Score",
@@ -371,7 +430,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "5bbbe370-d3ff-4526-a63b-df5c579ca30c"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             }
           ]
         }

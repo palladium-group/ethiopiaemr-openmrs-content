@@ -112,7 +112,13 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "917e1c9e-68d8-41c1-af94-75c0fb792f0f"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             }
           ]
         },
@@ -162,6 +168,29 @@
               "hideSteppers": true
             },
             {
+              "label": "Weight-for-height z-score (WHZ)",
+              "type": "obs",
+              "id": "whz",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "98b6233c-7cf8-4218-b516-d2142dad9a0a",
+                "min": "-10",
+                "max": "10",
+                "step": 0.1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight)) ? '' : ((calcWeightForHeightZscore(Number(height),Number(weight)) == null) ? '' : Number(calcWeightForHeightZscore(Number(height),Number(weight))))"
+                }
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < -5 || myValue > 5)",
+                  "message": "Outside -5 to +5: re-check the weight, height and age."
+                }
+              ]
+            },
+            {
               "label": "WHM (weight-for-height, % of median)",
               "type": "obs",
               "id": "whmWeightForHeightZ",
@@ -180,10 +209,23 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "aae2be11-0e07-497d-8e7c-a5b74fbd7cb0",
-                "min": "0",
-                "step": 0.01
+                "min": "5",
+                "step": 0.1,
+                "max": "60"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 11.5) || (age >= 18 && myValue < 18.5))",
+                  "message": "MUAC in the severe acute malnutrition range (under 5 years: below 11.5 cm; adults: below 18.5 cm)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue >= 11.5 && myValue < 12.5) || (age >= 18 && myValue >= 18.5 && myValue < 21))",
+                  "message": "MUAC in the moderate acute malnutrition range (under 5 years: 11.5 to 12.4 cm; adults: 18.5 to 20.9 cm)."
+                }
+              ]
             }
           ]
         },
@@ -278,15 +320,16 @@
               "hideSteppers": true
             },
             {
-              "label": "RR (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "rr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Breaths per minute.",
               "validators": [

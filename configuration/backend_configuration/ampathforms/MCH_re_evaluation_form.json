@@ -75,10 +75,16 @@
               "questionOptions": {
                 "rendering": "datetime",
                 "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              }
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
             },
             {
-              "label": "Problems",
+              "label": "Problem list",
               "type": "obs",
               "id": "problems",
               "questionOptions": {
@@ -87,7 +93,7 @@
               }
             },
             {
-              "label": "Subjective",
+              "label": "Subjective (complaints today)",
               "type": "obs",
               "id": "subjective",
               "questionOptions": {
@@ -96,7 +102,7 @@
               }
             },
             {
-              "label": "Systolic Blood Pressure (mmHg)",
+              "label": "Systolic BP (mmHg)",
               "type": "obs",
               "id": "systolicBloodPressure",
               "questionOptions": {
@@ -104,7 +110,8 @@
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "max": "250"
+                "max": "250",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 90-120 mmHg",
               "validators": [
@@ -117,15 +124,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Diastolic Blood Pressure (mmHg)",
+              "label": "Diastolic BP (mmHg)",
               "type": "obs",
               "id": "diastolicBloodPressure",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "150"
+                "step": 1,
+                "max": "150",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-90 mmHg",
               "validators": [
@@ -138,15 +146,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Pulse Rate (beats/min)",
+              "label": "Pulse rate (beats/min)",
               "type": "obs",
               "id": "pulseRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "230"
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 60-100 beats/min",
               "validators": [
@@ -159,15 +168,16 @@
               "hideSteppers": true
             },
             {
-              "label": "Respiratory Rate (breaths/min)",
+              "label": "Respiratory rate (breaths/min)",
               "type": "obs",
               "id": "respiratoryRate",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01,
-                "max": "99"
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
               },
               "questionInfo": "Normal range: 16-24 breaths/min",
               "validators": [
@@ -240,26 +250,46 @@
                 "concept": "160090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "answers": [
                   {
-                    "label": "Vertex presentation",
-                    "concept": "160091AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "160091AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cephalic - vertex"
                   },
                   {
-                    "label": "Occiput Anterior Position",
-                    "concept": "164148AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "164149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cephalic - brow"
                   },
                   {
-                    "label": "Brow Presentation",
-                    "concept": "164149AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "164150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Cephalic - face"
                   },
                   {
-                    "label": "Face Presentation",
-                    "concept": "164150AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "5cc0bc97-5cfd-537a-96c5-7b02c8c7ffb1",
+                    "label": "Breech - frank"
+                  },
+                  {
+                    "concept": "c26e9761-df58-5197-a391-fc3017f84f68",
+                    "label": "Breech - complete"
+                  },
+                  {
+                    "concept": "1a34b83c-b8b8-5705-99b0-7cf3b729bcbe",
+                    "label": "Breech - incomplete"
+                  },
+                  {
+                    "concept": "68af813b-ba73-533b-8d3b-6d6a3fd1d04a",
+                    "label": "Breech - footling"
+                  },
+                  {
+                    "concept": "7008d1b0-bbe7-526d-9b95-2fbb350b020e",
+                    "label": "Shoulder"
+                  },
+                  {
+                    "concept": "36acc736-9fce-5860-b121-77ebfa0b4c88",
+                    "label": "Compound"
                   }
                 ]
               }
             },
             {
-              "label": "Fetal lie text",
+              "label": "Fetal lie",
               "type": "obs",
               "id": "fetalLieText",
               "questionOptions": {
@@ -268,15 +298,24 @@
               }
             },
             {
-              "label": "FHB",
+              "label": "Fetal heart rate (beats/min)",
               "type": "obs",
               "id": "fhb",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "3071425c-0415-2345-6789-012345abcd1a",
-                "min": "0",
-                "step": 0.01
-              }
+                "rendering": "number",
+                "concept": "1440AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "40",
+                "step": 1,
+                "max": "250",
+                "disallowDecimals": true
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 110 || myValue > 160)",
+                  "message": "Fetal heart rate is outside the normal range (110-160 beats/min)."
+                }
+              ]
             },
             {
               "label": "Ux contraction",
@@ -290,7 +329,7 @@
               }
             },
             {
-              "label": "Cervical status text",
+              "label": "Cervical status",
               "type": "obs",
               "id": "cervicalStatusText",
               "questionOptions": {
@@ -299,7 +338,7 @@
               }
             },
             {
-              "label": "Membrane status text",
+              "label": "Membrane status",
               "type": "obs",
               "id": "membraneStatusText",
               "questionOptions": {
@@ -307,32 +346,16 @@
                 "concept": "7415869c-4859-6789-0123-456789abcd14",
                 "answers": [
                   {
-                    "label": "AROM",
-                    "concept": "0748192f-7182-9012-3456-789012abcd17"
+                    "concept": "8526970d-5960-7890-1234-567890abcd15",
+                    "label": "Intact"
                   },
                   {
-                    "label": "Unknown",
-                    "concept": "1067AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "56d5b8ed-25a9-4407-a148-ca49a81eaea1",
+                    "label": "Spontaneously ruptured"
                   },
                   {
-                    "label": "Artificial Rupture of Membrane (ARM)",
-                    "concept": "15d529e0-2f29-48b5-bc41-5ade28396910"
-                  },
-                  {
-                    "label": "Intact membranes",
-                    "concept": "8526970d-5960-7890-1234-567890abcd15"
-                  },
-                  {
-                    "label": "PROM",
-                    "concept": "9637081e-6071-8901-2345-678901abcd16"
-                  },
-                  {
-                    "label": "Ruptured (Clear)",
-                    "concept": "a4568e24-5da3-51a6-9476-cb450145370f"
-                  },
-                  {
-                    "label": "Intact",
-                    "concept": "a6d00512-9786-45d6-8886-be160acfd5d4"
+                    "concept": "15d529e0-2f29-48b5-bc41-5ade28396910",
+                    "label": "Artificially ruptured"
                   }
                 ]
               }
