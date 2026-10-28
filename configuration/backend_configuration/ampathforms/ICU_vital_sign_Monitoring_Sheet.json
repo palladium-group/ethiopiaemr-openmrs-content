@@ -62,10 +62,10 @@
       ]
     },
     {
-      "label": "ICU Vital Sign Monitoring Sheet Assessment",
+      "label": "Vital signs and ventilation",
       "sections": [
         {
-          "label": "Assessment",
+          "label": "Vital signs",
           "isExpanded": "true",
           "questions": [
             {
@@ -75,30 +75,52 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "step": 0.1,
                 "min": "25",
-                "step": 0.01,
                 "max": "43"
               },
-              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "readonly": false,
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 35 || myValue > 37.5)",
-                  "message": "Value is outside the normal range (35-37.5 deg C)."
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 36.5 || myValue > 37.5) : (myValue < 35 || myValue > 37.5))",
+                  "message": "Outside the normal range (36.5-37.5 °C for infants, 35-37.5 °C otherwise)."
                 }
               ],
+              "questionInfo": "Degrees Centigrade. 1 decimal place.",
               "hideSteppers": true
             },
             {
-              "label": "HR",
+              "label": "Heart rate (beats/min)",
               "type": "obs",
               "id": "hr",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "02187b0e-a4e4-49aa-8043-fdca00c3bc65",
+                "step": 1,
                 "min": "0",
-                "step": 0.01
+                "max": "230",
+                "disallowDecimals": true
               },
+              "readonly": false,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 100 || myValue > 180) : age < 3 ? (myValue < 98 || myValue > 140) : age < 6 ? (myValue < 80 || myValue > 120) : age < 12 ? (myValue < 75 || myValue > 118) : (myValue < 60 || myValue > 100))",
+                  "message": "Outside the normal heart rate range for the patient's age."
+                }
+              ],
+              "questionInfo": "Beats per minute. Whole numbers only.",
               "hideSteppers": true
             },
             {
@@ -115,11 +137,11 @@
                   },
                   {
                     "concept": "1febdf09-d7d9-4c40-80e0-5b57de967738",
-                    "label": "Regularly-Irregular"
+                    "label": "Regularly irregular"
                   },
                   {
                     "concept": "66e60dad-b89b-45ed-948f-66dec904cfd9",
-                    "label": "Irregularly-Irregular"
+                    "label": "Irregularly irregular"
                   }
                 ]
               }
@@ -131,112 +153,25 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
                 "step": 1,
+                "min": "0",
                 "max": "99",
                 "disallowDecimals": true
               },
-              "questionInfo": "Normal range: 16-24 breaths/min",
+              "readonly": false,
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
-                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 30 || myValue > 53) : age < 3 ? (myValue < 22 || myValue > 37) : age < 6 ? (myValue < 20 || myValue > 28) : age < 12 ? (myValue < 18 || myValue > 25) : (myValue < 12 || myValue > 20))",
+                  "message": "Outside the normal respiratory rate for the patient's age."
                 }
               ],
-              "hideSteppers": true
-            },
-            {
-              "label": "Pain Scale",
-              "type": "obs",
-              "id": "painScale",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "bd8288fd-223b-4bbb-a1e5-16be65c75c74",
-                "min": "0",
-                "step": 0.01
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "AC",
-              "type": "obs",
-              "id": "ac",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "f325998a-bd01-5a5e-b65f-e9dfefb3e092"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "VCV",
-              "type": "obs",
-              "id": "vcv",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "8c163014-d7a7-5e69-968f-18643998d7ad",
-                "answers": [
-                  {
-                    "concept": "165938AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "PCV"
-                  },
-                  {
-                    "concept": "da226a17-711c-5db9-a69f-746964364ab5",
-                    "label": "SIMV"
-                  },
-                  {
-                    "concept": "19a86e31-08d9-48bf-843a-4f76bf25a147",
-                    "label": "CPAP with"
-                  },
-                  {
-                    "concept": "fb5d64b0-878d-456c-aed5-4e0da473fb03",
-                    "label": "PSV"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "TV",
-              "type": "obs",
-              "id": "tv",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "5bcf0841-80da-576d-b1be-f76bff1fe99c"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "PEEP",
-              "type": "obs",
-              "id": "peep",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "0f1451d5-c089-5fe1-b5b3-95ec1fb2249c",
-                "min": "0",
-                "step": 0.01
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "P Pressure",
-              "type": "obs",
-              "id": "pPressure",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "c26cdae9-4bd6-443d-8721-85efdf5b0bd3",
-                "min": "0",
-                "step": 0.01
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "FiO2",
-              "type": "obs",
-              "id": "fio2",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "f759d9d0-d25e-4aa0-8fd8-d7160f7b3859"
-              },
+              "questionInfo": "Breaths per minute. Whole numbers only.",
               "hideSteppers": true
             },
             {
@@ -246,46 +181,77 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
                 "step": 1,
+                "min": "0",
                 "max": "100",
                 "disallowDecimals": true
               },
+              "readonly": false,
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && myValue <= 90",
-                  "message": "SPO2 is below the normal range (>90%)."
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue < 94",
+                  "message": "SpO2 below 94%."
                 }
               ],
+              "questionInfo": "Percent. Whole numbers only.",
               "hideSteppers": true
             },
             {
-              "label": "RASS Score",
+              "label": "Pain score (0-10)",
+              "type": "obs",
+              "id": "painScale",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "bd8288fd-223b-4bbb-a1e5-16be65c75c74",
+                "min": "0",
+                "step": 1,
+                "max": "10",
+                "disallowDecimals": true
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "RASS sedation score (-5 to +4)",
               "type": "obs",
               "id": "rassScore",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "56680caf-1356-53cd-9fbb-259d48946938",
-                "min": "0",
-                "step": 1
+                "min": "-5",
+                "step": 1,
+                "max": "4",
+                "disallowDecimals": true
               },
               "hideSteppers": true
             },
             {
-              "label": "RBS",
+              "label": "Random blood sugar (mg/dL)",
               "type": "obs",
               "id": "rbs",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
-                "step": 0.01
+                "step": 0.01,
+                "max": "1000"
               },
-              "hideSteppers": true
+              "hideSteppers": true,
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 70 || myValue > 180)",
+                  "message": "Blood sugar outside 70-180 mg/dL."
+                }
+              ]
             },
             {
-              "label": "Position",
+              "label": "Patient position",
               "type": "obs",
               "id": "position",
               "questionOptions": {
@@ -297,7 +263,7 @@
                     "concept": "0443d17a-be65-4c3b-83b2-a17f18f2c455"
                   },
                   {
-                    "label": "sitting",
+                    "label": "Sitting",
                     "concept": "159630AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   },
                   {
@@ -330,110 +296,11 @@
                   }
                 ]
               }
-            },
-            {
-              "label": "IV fluids",
-              "type": "obs",
-              "id": "ivFluids",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "6c3eaf06-bade-5ddc-ba99-a0276d3b7c33",
-                "answers": [
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
-                  },
-                  {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "IV medication",
-              "type": "obs",
-              "id": "ivMedication",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "3a26d6ec-82c6-5d6a-b55a-d53c16c8fa0f",
-                "answers": [
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
-                  },
-                  {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Feeding type",
-              "type": "obs",
-              "id": "feedingType",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "d31b70f1-9878-4fb8-8be4-3eae868ad516",
-                "answers": [
-                  {
-                    "concept": "160240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "PO"
-                  },
-                  {
-                    "concept": "a5c7f899-4ee9-5aa9-8394-3aceea98f8e1",
-                    "label": "NGT"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Stool Pass",
-              "type": "obs",
-              "id": "stoolPass",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "45d80eb1-a0ca-5399-b8e0-747bc7fed821",
-                "answers": [
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
-                  },
-                  {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "outPut",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "676d828a-017e-42c7-9743-20eb71f5f767",
-                "answers": [
-                  {
-                    "concept": "73a4267a-f82f-4b23-8241-aeb480db2bcb",
-                    "label": "U.O. P"
-                  },
-                  {
-                    "concept": "159993AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Stool"
-                  },
-                  {
-                    "concept": "7f05962f-b23a-4069-9c71-735552162678",
-                    "label": "Nausea/ vomiting"
-                  }
-                ]
-              }
             }
           ]
         },
         {
-          "label": "Blood Pressure",
+          "label": "Blood pressure",
           "isExpanded": "true",
           "questions": [
             {
@@ -443,19 +310,25 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
                 "step": 1,
+                "min": "0",
                 "max": "250",
                 "disallowDecimals": true
               },
-              "questionInfo": "Normal range: 90-120 mmHg",
+              "readonly": false,
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 90 || myValue > 120)",
-                  "message": "Value is outside the normal range (90-120 mmHg)."
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 72 || myValue > 104) : age < 3 ? (myValue < 86 || myValue > 106) : age < 6 ? (myValue < 89 || myValue > 112) : age < 12 ? (myValue < 97 || myValue > 115) : (myValue < 90 || myValue > 139))",
+                  "message": "Outside the normal systolic range for the patient's age."
                 }
               ],
+              "questionInfo": "Whole numbers only.",
               "hideSteppers": true
             },
             {
@@ -465,23 +338,54 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0",
                 "step": 1,
+                "min": "0",
                 "max": "150",
                 "disallowDecimals": true
               },
-              "questionInfo": "Normal range: 60-90 mmHg",
+              "readonly": false,
               "validators": [
                 {
                   "type": "js_expression",
-                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 90)",
-                  "message": "Value is outside the normal range (60-90 mmHg)."
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                  "message": "Whole numbers only (no decimals)."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 37 || myValue > 56) : age < 3 ? (myValue < 42 || myValue > 63) : age < 6 ? (myValue < 46 || myValue > 72) : age < 12 ? (myValue < 57 || myValue > 76) : (myValue < 60 || myValue > 89))",
+                  "message": "Outside the normal diastolic range for the patient's age."
+                }
+              ],
+              "questionInfo": "Whole numbers only.",
+              "hideSteppers": true
+            },
+            {
+              "label": "Mean arterial pressure (mmHg)",
+              "type": "obs",
+              "id": "meanArterialPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "163187AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "250",
+                "step": 1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(systolic) || isEmpty(diastolic)) ? null : Math.round((Number(systolic) + 2 * Number(diastolic)) / 3)"
+                }
+              },
+              "readonly": true,
+              "questionInfo": "Calculated from the blood pressure: (systolic + 2 x diastolic) / 3.",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue < 65",
+                  "message": "MAP below 65 mmHg."
                 }
               ],
               "hideSteppers": true
             },
             {
-              "label": "Posture",
+              "label": "Posture during blood pressure measurement",
               "type": "obs",
               "id": "posture",
               "questionOptions": {
@@ -502,23 +406,155 @@
           ]
         },
         {
-          "label": "Adrenaline",
+          "label": "Ventilator settings",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Ug",
+              "label": "Ventilator mode",
               "type": "obs",
-              "id": "ug",
+              "id": "vcv",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "165932AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "165939AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Volume control / assist control (VCV, AC)"
+                  },
+                  {
+                    "concept": "165938AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pressure control (PCV)"
+                  },
+                  {
+                    "concept": "165942AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "SIMV"
+                  },
+                  {
+                    "concept": "165943AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Pressure support (PSV)"
+                  },
+                  {
+                    "concept": "165944AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "CPAP"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Tidal volume (mL)",
+              "type": "obs",
+              "id": "tv",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "798ba6cc-7732-4034-b7dc-e3d8a328ba62",
+                "concept": "5bcf0841-80da-576d-b1be-f76bff1fe99c",
                 "min": "0",
-                "step": 0.01
+                "max": "2000",
+                "disallowDecimals": true,
+                "step": 1
               },
               "hideSteppers": true
             },
             {
-              "label": "Weight(kg)",
+              "label": "PEEP (cmH2O)",
+              "type": "obs",
+              "id": "peep",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "0f1451d5-c089-5fe1-b5b3-95ec1fb2249c",
+                "min": "0",
+                "step": 1,
+                "max": "30",
+                "disallowDecimals": true
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Peak inspiratory pressure (cmH2O)",
+              "type": "obs",
+              "id": "pPressure",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "87aee544-341f-56fe-8ec4-e0ebd3be32a2",
+                "min": "0",
+                "step": 1,
+                "max": "80",
+                "disallowDecimals": true
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "FiO2 (%)",
+              "type": "obs",
+              "id": "fio2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f759d9d0-d25e-4aa0-8fd8-d7160f7b3859",
+                "min": "21",
+                "max": "100",
+                "disallowDecimals": true,
+                "step": 1
+              },
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "IV fluids, medication and feeding",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "IV fluids given?",
+              "type": "obs",
+              "id": "ivFluids",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "6c3eaf06-bade-5ddc-ba99-a0276d3b7c33",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "IV medication given?",
+              "type": "obs",
+              "id": "ivMedication",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3a26d6ec-82c6-5d6a-b55a-d53c16c8fa0f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Adrenaline infusion rate (mcg/kg/min)",
+              "type": "obs",
+              "id": "ug",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5cc020fb-8667-463c-84f6-100cd9da8fe8",
+                "min": "0",
+                "step": 0.01,
+                "max": "5"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight (kg)",
               "type": "obs",
               "id": "weightKg",
               "questionOptions": {
@@ -532,138 +568,129 @@
               "hideSteppers": true
             },
             {
-              "label": "Min",
+              "label": "Feeding type",
               "type": "obs",
-              "id": "min",
+              "id": "feedingType",
               "questionOptions": {
-                "rendering": "datetime",
-                "concept": "ef1ed08a-6857-4e59-b816-04ab4f909c0d"
-              },
-              "validators": [
-                {
-                  "type": "date",
-                  "allowFutureDates": "false"
-                }
-              ]
+                "rendering": "select",
+                "concept": "d31b70f1-9878-4fb8-8be4-3eae868ad516",
+                "answers": [
+                  {
+                    "concept": "160240AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Oral (PO)"
+                  },
+                  {
+                    "concept": "a5c7f899-4ee9-5aa9-8394-3aceea98f8e1",
+                    "label": "Nasogastric tube (NGT)"
+                  }
+                ]
+              }
             }
           ]
         }
       ]
     },
     {
-      "label": "Time",
+      "label": "Fluid balance",
       "sections": [
         {
-          "label": "1st 8 hours",
+          "label": "Intake and output by shift",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Input",
-              "type": "obs",
-              "id": "input",
+              "label": "Intake and output entry",
+              "type": "obsGroup",
+              "id": "fluidEntryGroup",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
+                "concept": "2d30f578-6afe-58b3-994c-cbf6c7b87338",
+                "rendering": "repeating"
               },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
+              "questions": [
+                {
+                  "label": "Shift",
+                  "type": "obs",
+                  "id": "fluidShift",
+                  "questionOptions": {
+                    "rendering": "select",
+                    "concept": "e8c1ae15-bd77-43cf-a54b-6ddaa80784f6",
+                    "answers": [
+                      {
+                        "concept": "db22b342-fbbf-49b0-a43e-22abbb53c6b3",
+                        "label": "Morning (1st 8 hours)"
+                      },
+                      {
+                        "concept": "ea96b311-bbc5-407c-859e-e5a4c1ec71e9",
+                        "label": "Evening (2nd 8 hours)"
+                      },
+                      {
+                        "concept": "99b09cea-6460-4b81-8d80-c2814b11cbb8",
+                        "label": "Night (3rd 8 hours)"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "label": "Intake (mL)",
+                  "type": "obs",
+                  "id": "input",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f",
+                    "min": "0",
+                    "max": "10000",
+                    "step": 1,
+                    "disallowDecimals": true
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                      "message": "Whole numbers only (no decimals)."
+                    }
+                  ],
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Output (mL)",
+                  "type": "obs",
+                  "id": "output",
+                  "questionOptions": {
+                    "rendering": "number",
+                    "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e",
+                    "min": "0",
+                    "max": "10000",
+                    "step": 1,
+                    "disallowDecimals": true
+                  },
+                  "validators": [
+                    {
+                      "type": "js_expression",
+                      "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+$/.test(''+myValue)",
+                      "message": "Whole numbers only (no decimals)."
+                    }
+                  ],
+                  "hideSteppers": true
+                },
+                {
+                  "label": "Fluid balance for the shift (mL)",
+                  "type": "obs",
+                  "id": "fluidBalance",
+                  "questionOptions": {
+                    "rendering": "text",
+                    "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+                  },
+                  "questionInfo": "Intake minus output, for example +350 or -200."
+                }
+              ]
             }
           ]
         },
         {
-          "label": "2nd 8 hours",
+          "label": "24-hour totals",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Input",
-              "type": "obs",
-              "id": "input2",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output2",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance2",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            }
-          ]
-        },
-        {
-          "label": "3rd 8 hours",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input3",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output3",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance3",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            }
-          ]
-        },
-        {
-          "label": "24 hours",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Input",
+              "label": "Total intake in 24 hours (mL)",
               "type": "obs",
               "id": "input4",
               "questionOptions": {
@@ -671,27 +698,84 @@
                 "concept": "163036AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "min": "0",
                 "step": 1,
-                "disallowDecimals": true
+                "disallowDecimals": true,
+                "max": "20000"
               },
               "hideSteppers": true
             },
             {
-              "label": "Output",
+              "label": "Total output in 24 hours (mL)",
               "type": "obs",
               "id": "output4",
               "questionOptions": {
                 "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
+                "concept": "162659AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "20000",
+                "disallowDecimals": true,
+                "step": 1
               },
               "hideSteppers": true
             },
             {
-              "label": "Fluid Balance",
+              "label": "24-hour fluid balance (mL)",
               "type": "obs",
               "id": "fluidBalance4",
               "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+                "rendering": "number",
+                "concept": "6413702c-097d-5e94-b124-c539743c9a15",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(input4) || isEmpty(output4)) ? null : Number(input4) - Number(output4)"
+                }
+              },
+              "readonly": true
+            }
+          ]
+        },
+        {
+          "label": "Stool and other output",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Stool passed?",
+              "type": "obs",
+              "id": "stoolPass",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "45d80eb1-a0ca-5399-b8e0-747bc7fed821",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Output observed (tick all that apply)",
+              "type": "obs",
+              "id": "outPut",
+              "questionOptions": {
+                "rendering": "checkbox",
+                "concept": "676d828a-017e-42c7-9743-20eb71f5f767",
+                "answers": [
+                  {
+                    "concept": "159994AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Urine"
+                  },
+                  {
+                    "concept": "159993AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Stool"
+                  },
+                  {
+                    "concept": "7f05962f-b23a-4069-9c71-735552162678",
+                    "label": "Nausea or vomiting"
+                  }
+                ]
               }
             }
           ]
@@ -699,63 +783,12 @@
       ]
     },
     {
-      "label": "Physical system Assessment",
+      "label": "Physical assessment and nursing care",
       "sections": [
         {
-          "label": "General",
+          "label": "Diagnosis",
           "isExpanded": "true",
           "questions": [
-            {
-              "label": "Name of Patient",
-              "type": "obs",
-              "id": "nameOfPatient",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "b2c3d4e5-f601-4890-bcde-f01234567812"
-              }
-            },
-            {
-              "label": "Age",
-              "type": "obs",
-              "id": "age",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "15d60d87-49e3-4f9f-8474-801250d83b3b",
-                "min": "0",
-                "step": 0.01
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Sex",
-              "type": "obs",
-              "id": "sex",
-              "questionOptions": {
-                "rendering": "select",
-                "concept": "3071a2b3-0415-2345-6789-012345abcd07",
-                "answers": [
-                  {
-                    "concept": "1534AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Male"
-                  },
-                  {
-                    "concept": "1535AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Female"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "MRN",
-              "type": "obs",
-              "id": "mrn",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "5a9aa304-a80d-4315-909a-70875754e74e",
-                "min": "0",
-                "step": 0.01
-              }
-            },
             {
               "label": "Diagnosis",
               "type": "obs",
@@ -782,81 +815,15 @@
                 "rendering": "textarea",
                 "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               }
-            },
-            {
-              "label": "Physiotherapy",
-              "type": "obs",
-              "id": "physiotherapy",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "078e82f4-c534-4b44-9dc2-7ce653767e10"
-              }
-            },
-            {
-              "label": "Side Rails UP",
-              "type": "obs",
-              "id": "sideRailsUp",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "f674a6f3-e683-515c-b725-4a10c7a78092",
-                "answers": [
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
-                  },
-                  {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Family Teaching",
-              "type": "obs",
-              "id": "familyTeaching",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "19ad131a-2a4a-5e34-b34f-e725baea0f87",
-                "answers": [
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
-                  },
-                  {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
-                  }
-                ]
-              }
-            },
-            {
-              "label": "Patient Ambulated",
-              "type": "obs",
-              "id": "patientAmbulated",
-              "questionOptions": {
-                "rendering": "radio",
-                "concept": "64392a67-6598-5576-b28b-09f59a26f5af",
-                "answers": [
-                  {
-                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
-                  },
-                  {
-                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
-                  }
-                ]
-              }
             }
           ]
         },
         {
-          "label": "Neuro",
+          "label": "Neurological",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pupil reaction",
+              "label": "Pupils react to light?",
               "type": "obs",
               "id": "pupilReaction",
               "questionOptions": {
@@ -875,7 +842,7 @@
               }
             },
             {
-              "label": "Follows Commands",
+              "label": "Follows commands",
               "type": "obs",
               "id": "followsCommands",
               "questionOptions": {
@@ -884,7 +851,7 @@
               }
             },
             {
-              "label": "All extremities' equal in Strength",
+              "label": "Strength equal in all limbs",
               "type": "obs",
               "id": "allExtremitiesEqualInStrength",
               "questionOptions": {
@@ -893,16 +860,7 @@
               }
             },
             {
-              "label": "HOB up",
-              "type": "obs",
-              "id": "hobUp",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "6f8f305c-aaee-4284-a90b-6ba0144e5f46"
-              }
-            },
-            {
-              "label": "Degrees",
+              "label": "Level of consciousness",
               "type": "obs",
               "id": "degrees",
               "questionOptions": {
@@ -929,7 +887,7 @@
               }
             },
             {
-              "label": "Speaks Clearly",
+              "label": "Speaks clearly?",
               "type": "obs",
               "id": "speaksClearly",
               "questionOptions": {
@@ -948,7 +906,7 @@
               }
             },
             {
-              "label": "Gag reflex intact",
+              "label": "Gag reflex intact?",
               "type": "obs",
               "id": "gagReflexIntact",
               "questionOptions": {
@@ -967,7 +925,7 @@
               }
             },
             {
-              "label": "Cough reflex",
+              "label": "Cough reflex present?",
               "type": "obs",
               "id": "coughReflex",
               "questionOptions": {
@@ -988,11 +946,11 @@
           ]
         },
         {
-          "label": "CVS",
+          "label": "Cardiovascular",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Skin warm",
+              "label": "Skin",
               "type": "obs",
               "id": "skinWarm",
               "questionOptions": {
@@ -1011,7 +969,7 @@
               }
             },
             {
-              "label": "Brisk capillary refill(<5 sec)",
+              "label": "Capillary refill time",
               "type": "obs",
               "id": "briskCapillaryRefill5Sec",
               "questionOptions": {
@@ -1019,20 +977,12 @@
                 "concept": "1d6e974a-5c97-43e7-bcb3-ff4ee4bbcf07",
                 "answers": [
                   {
-                    "label": "Delayed >2 Sec",
-                    "concept": "6a95e040-c5a7-4017-9aac-2754757ce53f"
+                    "concept": "fd9ef368-a9cc-5689-a766-47d256725cbc",
+                    "label": "Normal (2 seconds or less)"
                   },
                   {
-                    "label": "<2s",
-                    "concept": "8871e3f8-b960-45c4-8199-9743ed857691"
-                  },
-                  {
-                    "label": "< 2 secs",
-                    "concept": "9be4cbeb-e958-4269-832c-e66889d628ce"
-                  },
-                  {
-                    "label": "Normal capillary refill (<2 sec)",
-                    "concept": "fd9ef368-a9cc-5689-a766-47d256725cbc"
+                    "concept": "6a95e040-c5a7-4017-9aac-2754757ce53f",
+                    "label": "Delayed (more than 2 seconds)"
                   }
                 ]
               }
@@ -1057,7 +1007,7 @@
               }
             },
             {
-              "label": "S1 and S2 Well Heard",
+              "label": "Heart sounds S1 and S2 well heard?",
               "type": "obs",
               "id": "s1AndS2WellHeard",
               "questionOptions": {
@@ -1082,43 +1032,31 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "EET",
+              "label": "Endotracheal tube depth at the lips (cm)",
               "type": "obs",
               "id": "eet",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "d348e93e-43a6-4e2d-ad0c-e5ad236654c1",
                 "min": "0",
-                "step": 0.01
+                "step": 0.5,
+                "max": "40"
               },
               "hideSteppers": true
             },
             {
-              "label": "Size intact",
+              "label": "Endotracheal tube size",
               "type": "obs",
               "id": "sizeIntact",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "4763905c-135b-4d63-9c8e-ed6cc029708d",
-                "min": "0",
+                "rendering": "text",
+                "concept": "6e2ccda8-4adc-4637-85c4-3cf6c010e4e2",
                 "step": 0.01
               },
               "hideSteppers": true
             },
             {
-              "label": "Intact Size",
-              "type": "obs",
-              "id": "intactSize",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "193df10e-85d6-4a20-a254-805ea9d22553",
-                "min": "0",
-                "step": 0.01
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Breathing Sound Bilateral",
+              "label": "Breath sounds (both sides)",
               "type": "obs",
               "id": "breathingSoundBilateral",
               "questionOptions": {
@@ -1127,7 +1065,7 @@
               }
             },
             {
-              "label": "Breath sound clear after Suctioned",
+              "label": "Breath sounds clear after suctioning?",
               "type": "obs",
               "id": "breathSoundClearAfterSuctioned",
               "questionOptions": {
@@ -1155,11 +1093,11 @@
                 "answers": [
                   {
                     "concept": "30bfe5d2-7e3d-5830-8d97-9331521b097f",
-                    "label": "Wheezing During Inspiration"
+                    "label": "Inspiratory wheeze"
                   },
                   {
                     "concept": "dac16ca8-a766-5ef7-b2b3-8096676ef82c",
-                    "label": "Wheezing During Expiration sound do not clear with Tracheal Care"
+                    "label": "Expiratory wheeze not clearing with tracheal care"
                   }
                 ]
               }
@@ -1167,15 +1105,15 @@
           ]
         },
         {
-          "label": "GI",
+          "label": "Gastrointestinal",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Abdomen condition",
+              "label": "Abdomen (tick all that apply)",
               "type": "obs",
               "id": "abdomenCondition",
               "questionOptions": {
-                "rendering": "select",
+                "rendering": "checkbox",
                 "concept": "0630bc27-209c-52d8-9385-525a966d207e",
                 "answers": [
                   {
@@ -1184,13 +1122,13 @@
                   },
                   {
                     "concept": "69119059-7880-5ac4-aa05-d4b235f3c88a",
-                    "label": "Non tender"
+                    "label": "Non-tender"
                   }
                 ]
               }
             },
             {
-              "label": "Condom Catheter",
+              "label": "Condom catheter in place?",
               "type": "obs",
               "id": "condomCatheter",
               "questionOptions": {
@@ -1209,7 +1147,7 @@
               }
             },
             {
-              "label": "Abdominal Distended",
+              "label": "Abdominal distension?",
               "type": "obs",
               "id": "abdominalDistended",
               "questionOptions": {
@@ -1228,7 +1166,7 @@
               }
             },
             {
-              "label": "NG tube ,Suction ,Foley insertion Date",
+              "label": "NG tube, suction or Foley catheter insertion date",
               "type": "obs",
               "id": "ngTubeSuctionFoleyInsertionDate",
               "questionOptions": {
@@ -1245,758 +1183,121 @@
           ]
         },
         {
-          "label": "Time",
+          "label": "Nursing care",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Input",
+              "label": "Nursing care given (tick all done)",
               "type": "obs",
-              "id": "input5",
+              "id": "nursingCareGiven",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output5",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance5",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+                "rendering": "checkbox",
+                "concept": "10628b26-c102-46c5-8773-082ed4672961",
+                "answers": [
+                  {
+                    "concept": "978320fa-1f79-5869-b8d7-f34d1c7e2703",
+                    "label": "Repositioned"
+                  },
+                  {
+                    "concept": "6f836744-c6d7-5494-b8db-785ff44c4987",
+                    "label": "Oral and tooth care"
+                  },
+                  {
+                    "concept": "65ad8125-536b-514e-b81d-6dc006e8a555",
+                    "label": "Head of bed raised above 30°"
+                  },
+                  {
+                    "concept": "c8d84112-bb1f-5a85-b4af-35bfce3a3f1d",
+                    "label": "Sedation vacation"
+                  },
+                  {
+                    "concept": "d099e1dd-a7bf-52c8-a08b-6c86a2de0bd4",
+                    "label": "Ventilator weaning"
+                  },
+                  {
+                    "concept": "287565ae-02ed-4a44-aa44-75739ac837fc",
+                    "label": "Physiotherapy"
+                  }
+                ]
               }
             },
             {
-              "label": "Input",
+              "label": "Physiotherapy notes",
               "type": "obs",
-              "id": "input6",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output6",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance6",
+              "id": "physiotherapy",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+                "concept": "078e82f4-c534-4b44-9dc2-7ce653767e10"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(nursingCareGiven) || !arrayContains(nursingCareGiven, '287565ae-02ed-4a44-aa44-75739ac837fc')"
               }
             },
             {
-              "label": "Input",
+              "label": "Side rails up?",
               "type": "obs",
-              "id": "input7",
+              "id": "sideRailsUp",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output7",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance7",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+                "rendering": "radio",
+                "concept": "f674a6f3-e683-515c-b725-4a10c7a78092",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
               }
             },
             {
-              "label": "Input",
+              "label": "Family teaching given?",
               "type": "obs",
-              "id": "input8",
+              "id": "familyTeaching",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
+                "rendering": "radio",
+                "concept": "19ad131a-2a4a-5e34-b34f-e725baea0f87",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
             },
             {
-              "label": "Output",
+              "label": "Patient ambulated?",
               "type": "obs",
-              "id": "output8",
+              "id": "patientAmbulated",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance8",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
+                "rendering": "radio",
+                "concept": "64392a67-6598-5576-b28b-09f59a26f5af",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
               }
             }
           ]
         },
         {
-          "label": "Repositioned",
+          "label": "Nursing progress note",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Input",
-              "type": "obs",
-              "id": "input9",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output9",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance9",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input10",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output10",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance10",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input11",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output11",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance11",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input12",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output12",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance12",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Oral/tooth care",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input13",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output13",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance13",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input14",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output14",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance14",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input15",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output15",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance15",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input16",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output16",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance16",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            }
-          ]
-        },
-        {
-          "label": "HOB>30",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input17",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output17",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance17",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input18",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output18",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance18",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input19",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output19",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance19",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input20",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output20",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance20",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Sedation Vacation",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input21",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output21",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance21",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input22",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output22",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance22",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input23",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output23",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance23",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input24",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output24",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance24",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Vent. Weaning",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input25",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output25",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance25",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input26",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output26",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance26",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input27",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output27",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance27",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            },
-            {
-              "label": "Input",
-              "type": "obs",
-              "id": "input28",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "e6c5a098-f9d8-45fa-aa0c-8cc30e27a79f"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Output",
-              "type": "obs",
-              "id": "output28",
-              "questionOptions": {
-                "rendering": "number",
-                "concept": "18dd029d-81ee-5d57-9bcb-abb1b21ba17e"
-              },
-              "hideSteppers": true
-            },
-            {
-              "label": "Fluid Balance",
-              "type": "obs",
-              "id": "fluidBalance28",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "8e33f9f6-0ecf-4589-9a0c-91aedfb110b8"
-              }
-            }
-          ]
-        },
-        {
-          "label": "Nursing Progress done",
-          "isExpanded": "true",
-          "questions": [
-            {
-              "label": "Date & Time",
-              "type": "obs",
-              "id": "dateTime",
-              "questionOptions": {
-                "rendering": "datetime",
-                "concept": "9e71e964-a2b1-4a91-b3bd-96dd54689723"
-              },
-              "validators": [
-                {
-                  "type": "date",
-                  "allowFutureDates": "false"
-                }
-              ]
-            },
-            {
-              "label": "Day Time",
+              "label": "Day-shift progress note written at",
               "type": "obs",
               "id": "dayTime",
               "questionOptions": {
@@ -2011,7 +1312,7 @@
               ]
             },
             {
-              "label": "Night Time",
+              "label": "Night-shift progress note written at",
               "type": "obs",
               "id": "nightTime",
               "questionOptions": {
