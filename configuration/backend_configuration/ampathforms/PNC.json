@@ -69,20 +69,52 @@
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Postnatal visit number (1st, 2nd, 3rd or 4th)",
+              "label": "Date and time of visit",
+              "type": "obs",
+              "id": "visitDateTime",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "163137AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Postnatal visit number",
               "type": "obs",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "159893AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "1",
-                "max": "4",
-                "disallowDecimals": true
+                "rendering": "select",
+                "concept": "111b77e4-42f0-5850-8d4a-b2d5569fbcef",
+                "disallowDecimals": true,
+                "answers": [
+                  {
+                    "concept": "166074AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "1st"
+                  },
+                  {
+                    "concept": "166075AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "2nd"
+                  },
+                  {
+                    "concept": "166076AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "3rd"
+                  },
+                  {
+                    "concept": "0ebe03e6-c917-462f-9d8b-322436906df7",
+                    "label": "4th"
+                  }
+                ]
               },
               "id": "visitTime",
               "hideSteppers": true
             },
             {
-              "label": "Maternal and Neonatal Death",
+              "label": "Maternal and neonatal death (if applicable)",
               "type": "obsGroup",
               "questionOptions": {
                 "rendering": "group",
@@ -91,13 +123,14 @@
               "id": "maternalNeonatalDeathGroup",
               "questions": [
                 {
-                  "label": "Date and time of maternal death",
+                  "label": "Date of maternal death",
                   "type": "obs",
+                  "id": "dateOfMaternalDeath",
+                  "datePickerFormat": "calendar",
                   "questionOptions": {
                     "rendering": "datetime",
                     "concept": "7c5f82de-8a6b-4d19-9b58-0b6a2d8c3e11"
                   },
-                  "id": "dateOfMaternalDeath",
                   "validators": [
                     {
                       "type": "date",
@@ -117,11 +150,12 @@
                 {
                   "label": "Date and time of neonatal death",
                   "type": "obs",
+                  "id": "dateOfNeonatalDeath",
+                  "datePickerFormat": "both",
                   "questionOptions": {
                     "rendering": "datetime",
                     "concept": "2b41852e-9ecc-4773-8c1b-ebeb8e221b20"
                   },
-                  "id": "dateOfNeonatalDeath",
                   "validators": [
                     {
                       "type": "date",
@@ -190,33 +224,78 @@
               }
             },
             {
-              "label": "IFA Tablets Provided",
+              "label": "Iron and folic acid (IFA) tablets provided?",
               "type": "obs",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "6b1e4c8d-2a79-4d5f-9c31-7e8a0b3f2c16"
+                "rendering": "radio",
+                "concept": "e9b84844-3f98-450b-a1b1-8b78110ceb15",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
               },
               "id": "ifaTabletsProvided",
               "hideSteppers": true
             },
             {
-              "label": "Vitamin A Capsules Provided",
+              "label": "If 'Yes', specify amount and duration (tabs or mg)",
+              "type": "obs",
+              "id": "ifaAmountAndDuration",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d89324c2-1028-52ac-9883-cf838f5d73bc"
+              },
+              "hide": {
+                "hideWhenExpression": "ifaTabletsProvided !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Vitamin A capsules provided?",
               "type": "obs",
               "questionOptions": {
-                "rendering": "number",
-                "concept": "c7e3a1d4-5b8f-4c2e-87a9-1f0d3b6a9e17"
+                "rendering": "radio",
+                "concept": "1859203a-8293-0123-4567-890123abcdf8",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
               },
               "id": "vitaminACapsulesProvided",
               "hideSteppers": true
             },
             {
-              "label": "Discharge date",
+              "label": "If 'Yes', specify amount and duration",
               "type": "obs",
+              "id": "vitaminAAmountAndDuration",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2dc3cd99-ce04-5eae-b0c8-7ac31302a157"
+              },
+              "hide": {
+                "hideWhenExpression": "vitaminACapsulesProvided !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Admission date and time",
+              "type": "obs",
+              "id": "admissionDate",
+              "datePickerFormat": "both",
               "questionOptions": {
                 "rendering": "datetime",
-                "concept": "1641AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                "concept": "1640AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
               },
-              "id": "dischargeDate",
               "validators": [
                 {
                   "type": "date",
@@ -225,15 +304,58 @@
               ]
             },
             {
-              "label": "Length of stay",
+              "label": "Discharge date and time",
+              "type": "obs",
+              "id": "dischargeDate",
+              "datePickerFormat": "both",
+              "questionOptions": {
+                "rendering": "datetime",
+                "concept": "1641AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                },
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !isEmpty(admissionDate) && new Date(myValue) < new Date(admissionDate)",
+                  "message": "Discharge cannot be before admission."
+                }
+              ]
+            },
+            {
+              "label": "Length of stay (days)",
               "type": "obs",
               "questionOptions": {
                 "rendering": "number",
                 "concept": "162196AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "min": "0"
+                "min": "0",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(admissionDate) || isEmpty(dischargeDate)) ? lengthOfStay : Math.max(0, Math.floor((new Date(dischargeDate) - new Date(admissionDate)) / 86400000))"
+                },
+                "disallowDecimals": true,
+                "step": 1
               },
               "id": "lengthOfStay",
               "hideSteppers": true
+            },
+            {
+              "label": "Length of stay, additional hours (0-23)",
+              "type": "obs",
+              "id": "lengthOfStayHours",
+              "hideSteppers": true,
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "f6115464-77b5-4c47-8fd6-fbaf398b942b",
+                "min": "0",
+                "max": "23",
+                "disallowDecimals": true,
+                "step": 1,
+                "calculate": {
+                  "calculateExpression": "(isEmpty(admissionDate) || isEmpty(dischargeDate)) ? lengthOfStayHours : Math.max(0, Math.floor((new Date(dischargeDate) - new Date(admissionDate)) / 3600000)) % 24"
+                }
+              }
             },
             {
               "label": "Outcome",

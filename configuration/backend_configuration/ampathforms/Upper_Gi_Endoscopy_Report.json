@@ -69,6 +69,26 @@
           "isExpanded": "true",
           "questions": [
             {
+              "label": "Consent obtained?",
+              "type": "obs",
+              "id": "consentObtained",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3c99ac8e-4fed-4110-a458-d83e0ed6243f",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "required": "true"
+            },
+            {
               "label": "Date",
               "type": "obs",
               "id": "date",
@@ -102,16 +122,46 @@
               }
             },
             {
-              "label": "Instrument",
+              "label": "Type of scope used",
               "type": "obs",
-              "id": "instrument",
+              "id": "typeOfScope",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3c0e765a-38e8-5eb9-8d96-bbc2fefe16f6"
+              }
+            },
+            {
+              "label": "Sedation / anaesthesia",
+              "type": "obs",
+              "id": "sedationAnaesthesia",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "13a85afc-9502-5cf6-9706-62278cb3b1fc"
+              }
+            },
+            {
+              "label": "Extent of examination",
+              "type": "obs",
+              "id": "extentOfExamination",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "20040bdd-58ce-4235-9804-ffd596ec9356",
+                "concept": "02b3075d-2772-5d1f-b45d-5c19b6042db0",
                 "answers": [
                   {
-                    "concept": "bc0e9bb5-7c36-5b9d-962a-d003e62296c6",
-                    "label": "Gastroscope"
+                    "concept": "8ac7e052-2643-4fd0-863d-c3c71a39dc8e",
+                    "label": "Esophagus"
+                  },
+                  {
+                    "concept": "162670AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Stomach"
+                  },
+                  {
+                    "concept": "3448ff3a-37c3-5430-aded-b8bd141f5dc1",
+                    "label": "Duodenal bulb (D1)"
+                  },
+                  {
+                    "concept": "4f97f085-41a4-58e1-bbaa-00c365143767",
+                    "label": "Second part of duodenum (D2)"
                   },
                   {
                     "concept": "5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -121,38 +171,40 @@
               }
             },
             {
-              "label": "Technical",
+              "label": "Other extent, specify",
               "type": "obs",
-              "id": "technical",
+              "id": "extentOfExaminationOther",
               "questionOptions": {
                 "rendering": "text",
-                "concept": "bc3cbe8b-ff9a-4edd-b18a-d55796fd2794"
+                "concept": "37c943fb-c416-4916-a3b4-fb052d3fe32a"
+              },
+              "hide": {
+                "hideWhenExpression": "extentOfExamination !== '5622AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
-              "label": "Therapy",
+              "label": "Procedure tolerance",
               "type": "obs",
-              "id": "therapy",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "a1ff8c66-3929-4142-9c15-c0e94a603cb5"
-              }
-            },
-            {
-              "label": "Biopsy",
-              "type": "obs",
-              "id": "biopsy",
+              "id": "procedureTolerance",
               "questionOptions": {
                 "rendering": "select",
-                "concept": "5f6c6a07-e3aa-5b88-895e-15961eb29d4b",
+                "concept": "10e49bb2-6fce-588a-969d-b1656c5c4dd9",
                 "answers": [
                   {
-                    "label": "Normal",
-                    "concept": "1115AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "a5c0fbb5-816f-5e9b-aed9-b27653bd4771",
+                    "label": "Well tolerated"
                   },
                   {
-                    "label": "Abnormal",
-                    "concept": "1116AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    "concept": "933eeadb-b0e8-591d-a4c2-ab8a30ce6440",
+                    "label": "Fairly tolerated"
+                  },
+                  {
+                    "concept": "909c19ca-a5b9-587d-8d0d-ae09bc32db4d",
+                    "label": "Poorly tolerated"
+                  },
+                  {
+                    "concept": "e5bbcba9-7f99-5022-a6a6-a1b02025ee3b",
+                    "label": "Not tolerated / procedure discontinued"
                   }
                 ]
               }
@@ -231,15 +283,6 @@
               "hide": {
                 "hideWhenExpression": "hPyloriTestDone !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
-            },
-            {
-              "label": "Endoscopy image",
-              "type": "obs",
-              "id": "endoImage",
-              "questionOptions": {
-                "rendering": "text",
-                "concept": "925788cd-36f1-4f53-b9e8-e665dcbdca63"
-              }
             }
           ]
         },
@@ -286,11 +329,131 @@
           ]
         },
         {
-          "label": "GI Conclusion",
+          "label": "Interventions",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Diagnosis",
+              "label": "Endoscopic therapy given (if applicable)",
+              "type": "obs",
+              "id": "therapy",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a1ff8c66-3929-4142-9c15-c0e94a603cb5"
+              }
+            },
+            {
+              "label": "Biopsy taken?",
+              "type": "obs",
+              "id": "biopsyTaken",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "71422cbf-d210-5e1a-aad2-acdb09cc58d5",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes, site(s)",
+              "type": "obs",
+              "id": "biopsySites",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "0ba402ff-69a6-471f-94fd-cb51a80e7055"
+              },
+              "hide": {
+                "hideWhenExpression": "biopsyTaken !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Polypectomy done?",
+              "type": "obs",
+              "id": "polypectomyDone",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "34179d03-739d-5896-9183-cf719d2a9388",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "If yes, technique",
+              "type": "obs",
+              "id": "polypectomyTechnique",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "b1174d2c-dd6d-59c1-8ba1-d362698bc2f0"
+              },
+              "hide": {
+                "hideWhenExpression": "polypectomyDone !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Hemostasis / other intervention",
+              "type": "obs",
+              "id": "haemostasisOtherIntervention",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "166631AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
+              "label": "Specimens sent for histopathology?",
+              "type": "obs",
+              "id": "specimensSentHistopathology",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "161933AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "label": "Complications",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Complications during procedure",
+              "type": "obs",
+              "id": "complicationsDuringProcedure",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "5f8fc250-b958-483c-b166-7dd9231daf77"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Impression / Endoscopic Diagnosis",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Endoscopic Diagnosis",
               "type": "obs",
               "id": "diagnosisCoded",
               "questionOptions": {
@@ -317,7 +480,7 @@
               }
             },
             {
-              "label": "Recommendation",
+              "label": "Recommendations",
               "type": "obs",
               "id": "recommendation",
               "questionOptions": {
@@ -332,6 +495,22 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "3b4a05df-4ba3-5bc0-bc27-77d3a0a686c7"
+              },
+              "questionInfo": "The provider is recorded automatically from the logged-in user. Enter the supervising endoscopist here."
+            }
+          ]
+        },
+        {
+          "label": "Upper GI endoscopy images",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Upper GI endoscopy image",
+              "type": "obs",
+              "id": "endoscopyImage",
+              "questionOptions": {
+                "rendering": "file",
+                "concept": "7cac8397-53cd-4f00-a6fe-028e8d743f8e"
               }
             }
           ]
