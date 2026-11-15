@@ -87,8 +87,22 @@
                   "type": "js_expression",
                   "warnsWhenExpression": "myValue && (myValue >= 100.5 || myValue < 59.5)",
                   "message": "Pulse is out of range (Normal range 60-100)"
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 60 || myValue > 100)",
+                  "message": "Pulse rate outside the normal 60-100 beats per minute range."
                 }
               ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "pulseNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5538f0be-764f-566e-bb6a-daccc5aabd20"
+              }
             }
           ]
         },
@@ -115,6 +129,11 @@
                   "type": "js_expression",
                   "warnsWhenExpression": "myValue && (myValue >= 120.5 || myValue < 89.5)",
                   "message": "Systolic is out of range (Normal range 90-120)"
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 90 || myValue > 120)",
+                  "message": "Systolic BP outside the normal 90-120 mmHg range."
                 }
               ]
             },
@@ -137,8 +156,22 @@
                   "type": "js_expression",
                   "warnsWhenExpression": "myValue && (myValue >= 90.5 || myValue < 59.5)",
                   "message": "Diastolic is out of range (Normal range 60-90)"
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 60 || myValue > 90)",
+                  "message": "Diastolic BP outside the normal 60-90 mmHg range."
                 }
               ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "bpNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6b6344d0-e269-52a0-8daa-634e7337ce1b"
+              }
             },
             {
               "label": "Posture",
@@ -184,8 +217,22 @@
                   "type": "js_expression",
                   "warnsWhenExpression": "myValue && (myValue >= 37.5 || myValue < 35)",
                   "message": "Temperature is out of range (Normal range 35-37.5°C)"
+                },
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
                 }
               ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "tempNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2adff6a8-61fe-5128-8f1f-16f4d03bd23d"
+              }
             },
             {
               "label": "Respiratory rate (breaths/min)",
@@ -206,8 +253,22 @@
                   "type": "js_expression",
                   "warnsWhenExpression": "myValue && (myValue >= 24.5 || myValue < 15.5)",
                   "message": "Respiratory Rate is out of range (Normal range 16-24)"
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 12 || myValue > 20)",
+                  "message": "Respiratory rate outside the normal 12-20 breaths per minute range."
                 }
               ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "rrNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3661284f-64d4-5d68-a03e-9c3e483544c4"
+              }
             },
             {
               "label": "SpO2 (%)",
@@ -228,8 +289,22 @@
                   "type": "js_expression",
                   "warnsWhenExpression": "myValue && myValue < 89.5",
                   "message": "Oxygen Saturation is out of range (Normal range ≥90)"
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue < 90",
+                  "message": "SpO2 below 90 percent."
                 }
               ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "spo2Note",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "141315d4-537c-5b8d-be88-8e3bdec49262"
+              }
             },
             {
               "label": "Weight (kg)",
@@ -244,7 +319,22 @@
                 "max": "250"
               },
               "questionInfo": "Adult weight measurement in kilograms",
-              "validators": []
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "weightNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a363f94e-360d-52f2-9677-b8b8628a074e"
+              }
             },
             {
               "label": "Height (cm)",
@@ -256,19 +346,29 @@
                 "rendering": "number",
                 "min": "30",
                 "max": "250",
-                "step": 0.01
+                "step": 0.01,
+                "disallowDecimals": true
               },
               "questionInfo": "Adult height measurement in centimeters",
               "validators": []
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "heightNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a0b0ed65-f235-56cc-857a-911432a7238a"
+              }
             }
           ]
         },
         {
-          "label": "Pain Point",
+          "label": "Pain and Anthropometry Results",
           "isExpanded": "true",
           "questions": [
             {
-              "label": "Pain Point Score",
+              "label": "Pain Score",
               "type": "obs",
               "required": true,
               "id": "aDultVitalPainPointScore",
@@ -288,6 +388,123 @@
                   "message": "Pain score cannot exceed 10."
                 }
               ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "painNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d57d427e-f878-5af7-905a-e91a9c730104"
+              }
+            },
+            {
+              "label": "BMI (kg/m2)",
+              "type": "obs",
+              "id": "bmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "100",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(aDultVitalHeight) || isEmpty(aDultVitalWeight)) ? null : calcBMI(aDultVitalHeight,aDultVitalWeight)"
+                }
+              }
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "bmiNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "95577fb5-31b8-57bf-9bf4-dc998c0fc27a"
+              }
+            },
+            {
+              "label": "BMI Category",
+              "type": "obs",
+              "id": "bmiCategory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "255b89fc-8a01-4dae-90b3-613d65bb76bb",
+                "answers": [
+                  {
+                    "label": "Underweight",
+                    "concept": "f1ac86a2-5934-49c5-aecc-16426e6b1d59"
+                  },
+                  {
+                    "label": "Healthy Weight",
+                    "concept": "ad106589-fb33-4ce5-9159-0cf793996bce"
+                  },
+                  {
+                    "label": "Overweight",
+                    "concept": "590a7581-714a-4b47-a1c9-712501889e44"
+                  },
+                  {
+                    "label": "Obese",
+                    "concept": "9f2f66bf-dc75-47ac-b201-c891a9d5bbd6"
+                  }
+                ],
+                "calculate": {
+                  "calculateExpression": "(isEmpty(aDultVitalHeight) || isEmpty(aDultVitalWeight) || Number(aDultVitalHeight) <= 0 || Number(aDultVitalWeight) <= 0) ? null : (calcBMI(aDultVitalHeight,aDultVitalWeight) < 18.5 ? 'f1ac86a2-5934-49c5-aecc-16426e6b1d59' : calcBMI(aDultVitalHeight,aDultVitalWeight) < 25 ? 'ad106589-fb33-4ce5-9159-0cf793996bce' : calcBMI(aDultVitalHeight,aDultVitalWeight) < 30 ? '590a7581-714a-4b47-a1c9-712501889e44' : '9f2f66bf-dc75-47ac-b201-c891a9d5bbd6')"
+                }
+              }
+            },
+            {
+              "label": "Body Surface Area (m2)",
+              "type": "obs",
+              "id": "bodySurfaceArea",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "980AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "calculate": {
+                  "calculateExpression": "aDultVitalHeight && aDultVitalWeight ? Math.round(Math.sqrt((Number(aDultVitalHeight) * Number(aDultVitalWeight)) / 3600) * 100) / 100 : null"
+                }
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 1.7 || myValue > 1.9)",
+                  "message": "Body surface area outside the typical 1.7-1.9 square metre adult range."
+                }
+              ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "bsaNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "01ea14a6-8ff5-5c31-bd6c-66b92035047b"
+              }
+            },
+            {
+              "label": "RBS (mg/dl)",
+              "type": "obs",
+              "id": "rbs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 70 || myValue > 200)",
+                  "message": "Random blood sugar outside the normal 70-200 mg/dl range."
+                }
+              ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "rbsNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "540850b4-902c-5098-a910-cbc3181112c4"
+              }
             }
           ]
         }

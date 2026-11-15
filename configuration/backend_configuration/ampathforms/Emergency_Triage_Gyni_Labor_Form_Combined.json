@@ -236,7 +236,7 @@
           "label": "Chief Complaint and History",
           "isExpanded": "true",
           "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+            "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
           },
           "questions": [
             {
@@ -318,14 +318,35 @@
               ]
             },
             {
-              "label": "Gestational Age (GA)",
+              "label": "Gestational age at the ultrasound (weeks)",
+              "type": "obs",
+              "id": "usGaWeeks",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "163166AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "disallowDecimals": true,
+                "step": 1,
+                "min": "0",
+                "max": "45"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "Current gestational age (weeks, calculated)",
               "type": "obs",
               "questionOptions": {
-                "rendering": "textarea",
-                "concept": "8526f708-5960-7890-1234-567890abcd0b",
-                "rows": "2"
+                "rendering": "number",
+                "concept": "1438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "disallowDecimals": true,
+                "step": 1,
+                "min": "0",
+                "max": "45",
+                "calculate": {
+                  "calculateExpression": "((!isEmpty(lnmp) ? Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(lnmp).setHours(0,0,0,0)) / 86400000) : ((isEmpty(ultrasound) || isEmpty(usGaWeeks)) ? null : (Number(usGaWeeks) * 7) + Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(ultrasound).setHours(0,0,0,0)) / 86400000))) === null || (!isEmpty(lnmp) ? Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(lnmp).setHours(0,0,0,0)) / 86400000) : ((isEmpty(ultrasound) || isEmpty(usGaWeeks)) ? null : (Number(usGaWeeks) * 7) + Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(ultrasound).setHours(0,0,0,0)) / 86400000))) < 0) ? null : Math.floor((!isEmpty(lnmp) ? Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(lnmp).setHours(0,0,0,0)) / 86400000) : ((isEmpty(ultrasound) || isEmpty(usGaWeeks)) ? null : (Number(usGaWeeks) * 7) + Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(ultrasound).setHours(0,0,0,0)) / 86400000))) / 7)"
+                }
               },
-              "id": "gestationalAge"
+              "id": "gestationalAge",
+              "validators": []
             }
           ]
         },
@@ -333,7 +354,7 @@
           "label": "Gestation Status",
           "isExpanded": "true",
           "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+            "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
           },
           "questions": [
             {
@@ -374,7 +395,7 @@
           "label": "Gynecological Assessment",
           "isExpanded": "true",
           "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+            "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
           },
           "questions": [
             {
@@ -434,6 +455,36 @@
                 "rows": "3"
               },
               "id": "cervix"
+            },
+            {
+              "label": "Cervical dilation (cm)",
+              "type": "obs",
+              "id": "cervicalDilation",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "162261AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "10",
+                "disallowDecimals": true
+              }
+            },
+            {
+              "label": "Cervical effacement",
+              "type": "obs",
+              "id": "cervicalEffacement",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5c1d4069-ba49-5ae2-a9da-771c80f54fb4"
+              }
+            },
+            {
+              "label": "Fetal station",
+              "type": "obs",
+              "id": "fetalStation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cbcd8cf2-a54a-461d-9b4e-5f64b32753de"
+              }
             }
           ]
         },
@@ -441,7 +492,7 @@
           "label": "Membrane Status",
           "isExpanded": "true",
           "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+            "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
           },
           "questions": [
             {
@@ -484,7 +535,7 @@
           "label": "Clinical Presentation",
           "isExpanded": "true",
           "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+            "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
           },
           "questions": [
             {
@@ -506,6 +557,37 @@
                 "rows": "3"
               },
               "id": "fhb"
+            },
+            {
+              "label": "Ux contraction",
+              "type": "obs",
+              "id": "uxContraction",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7fa183b6-3484-4976-9af7-818f4d417c98",
+                "min": "0",
+                "step": 0.01
+              }
+            },
+            {
+              "label": "Fetal heart rate (beats/min)",
+              "type": "obs",
+              "id": "fhb2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1440AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "40",
+                "step": 1,
+                "max": "250",
+                "disallowDecimals": true
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 110 || myValue > 160)",
+                  "message": "Fetal heart rate is outside the normal range (110-160 beats/min)."
+                }
+              ]
             }
           ]
         }
@@ -515,10 +597,10 @@
       "label": "Vital Signs and Assessment",
       "sections": [
         {
-          "label": "Blood Pressure",
+          "label": "Vital Signs",
           "isExpanded": "true",
           "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+            "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
           },
           "questions": [
             {
@@ -560,6 +642,195 @@
                   "message": "Outside the normal diastolic range for the patient's age."
                 }
               ]
+            },
+            {
+              "label": "Pulse rate (beats/min)",
+              "type": "obs",
+              "id": "pr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Pulse rate is outside the normal range (60-100 beats/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Respiratory rate (breaths/min)",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": 0.01,
+                "max": "43"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
+                }
+              ],
+              "hideSteppers": true
+            },
+            {
+              "label": "SpO2 (%)",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "100",
+                "disallowDecimals": true
+              },
+              "questionInfo": "Normal: >90%",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true
+            }
+          ]
+        },
+        {
+          "label": "Anthropometrics",
+          "isExpanded": "true",
+          "hide": {
+            "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+          },
+          "questions": [
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
+                "step": 0.01,
+                "max": "272"
+              },
+              "questionInfo": "Allowed range: 30-300 cm",
+              "hideSteppers": true
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "250"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true
+            },
+            {
+              "label": "BMI (kg/m²)",
+              "type": "obs",
+              "id": "bmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "calculate": {
+                  "calculateExpression": "calcBMI(height,weight)"
+                },
+                "step": 0.01,
+                "max": "100",
+                "min": "0"
+              },
+              "hideSteppers": true
+            },
+            {
+              "label": "BMI Category",
+              "type": "obs",
+              "id": "bmiCategory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "255b89fc-8a01-4dae-90b3-613d65bb76bb",
+                "answers": [
+                  {
+                    "concept": "f1ac86a2-5934-49c5-aecc-16426e6b1d59",
+                    "label": "Underweight"
+                  },
+                  {
+                    "concept": "ad106589-fb33-4ce5-9159-0cf793996bce",
+                    "label": "Healthy Weight"
+                  },
+                  {
+                    "concept": "590a7581-714a-4b47-a1c9-712501889e44",
+                    "label": "Overweight"
+                  },
+                  {
+                    "concept": "9f2f66bf-dc75-47ac-b201-c891a9d5bbd6",
+                    "label": "Obese"
+                  }
+                ],
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight) || Number(height) <= 0 || Number(weight) <= 0) ? null : (calcBMI(height,weight) < 18.5 ? 'f1ac86a2-5934-49c5-aecc-16426e6b1d59' : calcBMI(height,weight) < 25 ? 'ad106589-fb33-4ce5-9159-0cf793996bce' : calcBMI(height,weight) < 30 ? '590a7581-714a-4b47-a1c9-712501889e44' : '9f2f66bf-dc75-47ac-b201-c891a9d5bbd6')"
+                }
+              },
+              "questionInfo": "Auto-classified from BMI: <18.5 Underweight, 18.5-24.9 Healthy Weight, 25.0-29.9 Overweight, ≥30.0 Obese.",
+              "readonly": true
+            },
+            {
+              "label": "Body Surface Area (m²)",
+              "type": "obs",
+              "id": "bodySurfaceArea",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "980AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "calculate": {
+                  "calculateExpression": "height && weight ? Math.round(Math.sqrt((Number(height) * Number(weight)) / 3600) * 100) / 100 : null"
+                },
+                "min": "0",
+                "step": 0.01
+              },
+              "questionInfo": "Body surface area (BSA). Auto-calculated from height (cm) and weight (kg) using the Mosteller formula. Used to assist drug dosing calculations.",
+              "hideSteppers": true
             }
           ]
         },
@@ -567,7 +838,7 @@
           "label": "Medical History",
           "isExpanded": "true",
           "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+            "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
           },
           "questions": [
             {
@@ -578,6 +849,82 @@
                 "concept": "6a900112-2334-0126-4560-ea0123456789"
               },
               "id": "pastMedicalIllness"
+            },
+            {
+              "label": "Previous surgery on reproductive tract? (myomectomy, removal of septum, fistula repair, cone biopsy, C/S, repaired rupture, cervical cerclage)",
+              "type": "obs",
+              "id": "previousSurgeryOnReproductiveTractMyomec",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d5483856-4634-4766-a63e-5e7208fa0555",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Last pregnancy: hospital admission for hypertension or preeclampsia/eclampsia",
+              "type": "obs",
+              "id": "lastPregnancyHospitalAdmissionForHyperte",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "164895AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Diagnosed or suspected multiple pregnancy?",
+              "type": "obs",
+              "id": "diagnosedOrSuspectedMultiplePregnancy",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3384285c-7192-8013-3567-890234abcd33",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Pregnant mother eligible for high risk/MFM clinic follow-up",
+              "type": "obs",
+              "id": "highRiskPregnancyPathway",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "80eb28c4-ff29-425e-9efd-9f0829bd2f7c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -585,7 +932,7 @@
           "label": "Investigation and Plan",
           "isExpanded": "true",
           "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+            "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
           },
           "questions": [
             {
@@ -604,7 +951,7 @@
           "label": "Disposition Plan",
           "isExpanded": "true",
           "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+            "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
           },
           "questions": [
             {
@@ -694,12 +1041,16 @@
                   {
                     "concept": "9ca8b4a5-63c1-4710-abcf-68e962742293",
                     "label": "Transverse"
+                  },
+                  {
+                    "label": "Unable to assess",
+                    "concept": "160737AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   }
                 ]
               }
             },
             {
-              "label": "FHS",
+              "label": "Fetal Heart Sound/s",
               "type": "obs",
               "questionOptions": {
                 "rendering": "radio",

@@ -219,6 +219,40 @@
               "hideSteppers": true
             },
             {
+              "label": "Oxygen support",
+              "type": "obs",
+              "id": "oxygenDeliveryMethod",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2c9764d5-f646-4c1b-898e-b6f426c028b9",
+                "answers": [
+                  {
+                    "label": "Room air",
+                    "concept": "162735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Supplemental oxygen",
+                    "concept": "cf833575-ef91-5999-a3b6-0991705fb259"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Oxygen flow rate (L/min)",
+              "type": "obs",
+              "id": "oxygenFlowRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a84241e7-a750-4821-8838-5f4d7ea18576",
+                "min": "0",
+                "max": "60",
+                "disallowDecimals": true
+              },
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== 'cf833575-ef91-5999-a3b6-0991705fb259'"
+              }
+            },
+            {
               "label": "Pain Score (0-10)",
               "type": "obs",
               "id": "painScore",
@@ -302,7 +336,10 @@
                     "concept": "9f2f66bf-dc75-47ac-b201-c891a9d5bbd6",
                     "label": "Obese"
                   }
-                ]
+                ],
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight) || Number(height) <= 0 || Number(weight) <= 0) ? null : (calcBMI(height,weight) < 18.5 ? 'f1ac86a2-5934-49c5-aecc-16426e6b1d59' : calcBMI(height,weight) < 25 ? 'ad106589-fb33-4ce5-9159-0cf793996bce' : calcBMI(height,weight) < 30 ? '590a7581-714a-4b47-a1c9-712501889e44' : '9f2f66bf-dc75-47ac-b201-c891a9d5bbd6')"
+                }
               },
               "questionInfo": "Auto-classified from BMI: <18.5 Underweight, 18.5-24.9 Healthy Weight, 25.0-29.9 Overweight, ≥30.0 Obese."
             },
@@ -508,7 +545,7 @@
               }
             },
             {
-              "label": "RBS",
+              "label": "RBS (mg/dl)",
               "type": "obs",
               "id": "rbs",
               "questionOptions": {
@@ -527,7 +564,7 @@
               "label": "Occupational risks?",
               "type": "obs",
               "id": "occupationalRisks",
-              "required": "true",
+              "required": false,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "b6ac3a1a-f198-44c3-a10c-349b2699faba",
@@ -581,7 +618,7 @@
               "label": "Marital Status / Sexual risks for HIV?",
               "type": "obs",
               "id": "maritalSexualRisks",
-              "required": "true",
+              "required": false,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "bf17e463-97bb-4529-81ce-97e659a1b4cc",
@@ -631,7 +668,7 @@
               "label": "Clinical sign of HIV/AIDS or diagnosis?",
               "type": "obs",
               "id": "hivClinicalSign",
-              "required": "true",
+              "required": false,
               "questionOptions": {
                 "rendering": "radio",
                 "concept": "3453907c-3ceb-4ae6-b315-7ab1aa1fd63a",
@@ -749,7 +786,17 @@
               "questionOptions": {
                 "rendering": "date",
                 "concept": "2b592c8a-f68c-47a1-a5ab-3087bd13ace5"
-              }
+              },
+              "hide": {
+                "hideWhenExpression": "isPregnant !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(edd) && new Date(edd).setHours(0,0,0,0) < new Date().setHours(0,0,0,0)",
+                  "message": "EDD cannot be in the past"
+                }
+              ]
             },
             {
               "label": "LNMP",
@@ -764,7 +811,10 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "isPregnant !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
             },
             {
               "label": "Gestational Age (GA)",
@@ -775,30 +825,33 @@
                 "concept": "7425364e-5869-7890-4567-123456789012",
                 "answers": [
                   {
-                    "label": "Early Preterm GA 32-34 weeks",
-                    "concept": "0758697b-8192-0123-7890-456789012345"
-                  },
-                  {
-                    "label": "Late Preterm GA 34-36 weeks",
-                    "concept": "1869708c-9203-1234-8901-567890123456"
-                  },
-                  {
-                    "label": "Post Term GA >41+7 wk",
-                    "concept": "441b88ad-1d3b-4c63-b1ca-331eaa1a4146"
-                  },
-                  {
-                    "label": "Term GA = 37 weeks",
-                    "concept": "48fe3fc7-fcd1-400f-93e0-a82926e8b52e"
-                  },
-                  {
-                    "label": "Extremely Preterm GA less than 28 weeks",
+                    "label": "Extremely preterm (less than 28 weeks)",
                     "concept": "8536475f-6970-8901-5678-234567890123"
                   },
                   {
-                    "label": "Very Preterm GA <32 weeks",
+                    "label": "Very preterm (28 to less than 32 weeks)",
                     "concept": "bd150567-807b-5a12-a054-df46394e1d31"
+                  },
+                  {
+                    "label": "Early preterm (32 to 34 weeks)",
+                    "concept": "0758697b-8192-0123-7890-456789012345"
+                  },
+                  {
+                    "label": "Late preterm (34 to less than 37 weeks)",
+                    "concept": "1869708c-9203-1234-8901-567890123456"
+                  },
+                  {
+                    "label": "Term (37 to 41 weeks + 6 days)",
+                    "concept": "48fe3fc7-fcd1-400f-93e0-a82926e8b52e"
+                  },
+                  {
+                    "label": "Post-term (more than 41 weeks + 6 days)",
+                    "concept": "441b88ad-1d3b-4c63-b1ca-331eaa1a4146"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "isPregnant !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             }
           ]
@@ -833,6 +886,110 @@
               }
             },
             {
+              "label": "Referring institution",
+              "type": "obs",
+              "id": "referringInstitutionType",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "9d4fe7e6-4684-5b4b-b090-154898d4f74d",
+                "answers": [
+                  {
+                    "label": "Catchment institution",
+                    "concept": "c4f19426-3e12-5050-940b-69e2f8de808e"
+                  },
+                  {
+                    "label": "Non-catchment institution",
+                    "concept": "a46f73b9-e648-5462-bb69-81a09bc86732"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
+              }
+            },
+            {
+              "label": "Catchment referring facility",
+              "type": "obs",
+              "id": "catchmentReferringFacility",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "881fbc70-657d-4f42-9749-6aacb54b4a86",
+                "answers": [
+                  {
+                    "label": "Shiromeda Health Center",
+                    "concept": "e7f23250-3b59-594c-8a46-4a485412ecaa"
+                  },
+                  {
+                    "label": "Entoto Fans Health Center",
+                    "concept": "34454866-ff11-5d96-ac6b-86308f2779ee"
+                  },
+                  {
+                    "label": "Maychew Health Center",
+                    "concept": "c6f73d64-9786-59d8-a004-0a7f51edaa7c"
+                  },
+                  {
+                    "label": "Gurara Health Center",
+                    "concept": "fe71627c-0e11-5ba1-833d-f430e52a094c"
+                  },
+                  {
+                    "label": "Bella Health Center",
+                    "concept": "92a29a9d-82ee-5623-8e54-95ba280fef73"
+                  },
+                  {
+                    "label": "Ferncay w1 Health Center",
+                    "concept": "56195314-406d-5177-bea4-f4124e2f26f2"
+                  },
+                  {
+                    "label": "Hidasse Health Center",
+                    "concept": "51ede4d9-db14-5379-ab66-fb1fc2515e37"
+                  },
+                  {
+                    "label": "Guto Meda Health Center",
+                    "concept": "7773276d-0711-53ff-a8b6-4c4ad4f9936f"
+                  },
+                  {
+                    "label": "Tibebkchne Health Center",
+                    "concept": "787c0baa-e58c-5d83-b660-3fb7b8618550"
+                  },
+                  {
+                    "label": "Mercy Care Health Center",
+                    "concept": "cefa7249-100b-507b-a75a-2a363b8751b8"
+                  },
+                  {
+                    "label": "Addis Hiwot Health Center",
+                    "concept": "ec20d1b5-522f-558e-8b20-ccecc3aa34e2"
+                  },
+                  {
+                    "label": "Chancho Primary Hospital",
+                    "concept": "5a1aed1d-a9f7-52a1-be3a-72a43d2abf66"
+                  },
+                  {
+                    "label": "Fitche Primary Hospital",
+                    "concept": "fbfe6818-ba65-5d14-aef4-0c02d3574f08"
+                  },
+                  {
+                    "label": "Kuyu Primary Hospital",
+                    "concept": "84a721c4-e2d1-57b3-b31e-7ec88eeff153"
+                  },
+                  {
+                    "label": "Sululta Primary Hospital",
+                    "concept": "124e5d3f-a910-5d8a-ab44-2e83b7c3f3b1"
+                  },
+                  {
+                    "label": "Manabichu Health Center",
+                    "concept": "9ca45166-ca92-524b-9cbd-64648534fa0a"
+                  },
+                  {
+                    "label": "Kasowesrbi Health Center",
+                    "concept": "2a78bd0c-0f1c-5933-bfe9-b4ed15205d94"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "referringInstitutionType !== 'c4f19426-3e12-5050-940b-69e2f8de808e'"
+              }
+            },
+            {
               "label": "Patient diagnosis",
               "type": "obs",
               "id": "referralDiagnosisCoded",
@@ -848,6 +1005,9 @@
                     ]
                   }
                 }
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -857,6 +1017,9 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "161602AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -892,6 +1055,9 @@
                     "label": "Other"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -913,6 +1079,9 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "961273d3-371f-45d2-addf-927b171d4035"
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -932,6 +1101,9 @@
                     "label": "Without Communication"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -941,6 +1113,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "cae1832a-c324-4b75-9d71-d9e17f074224"
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -960,6 +1135,9 @@
                     "label": "Night"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -995,6 +1173,9 @@
                     "label": "Unknown"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -1004,6 +1185,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "1473AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -1039,6 +1223,9 @@
                     "label": "Other"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -1048,6 +1235,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "161550AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              },
+              "hide": {
+                "hideWhenExpression": "referringInstitutionType !== 'a46f73b9-e648-5462-bb69-81a09bc86732'"
               }
             },
             {
@@ -1057,6 +1247,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "8ffe4c88-0f5c-4810-a94f-fb9cc5b0bbb9"
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -1066,6 +1259,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "7d14d990-5c44-49b0-82f1-e580eca53d64"
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -1093,6 +1289,9 @@
                     "label": "Death (no any sign of life)"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -1105,13 +1304,16 @@
                 "answers": [
                   {
                     "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "Yes"
+                    "label": "Necessary"
                   },
                   {
                     "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    "label": "No"
+                    "label": "Unnecessary"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -1131,6 +1333,9 @@
                     "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -1140,6 +1345,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "543cb805-f873-4419-a432-ed37d0f79b2e"
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -1149,6 +1357,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "083e33bc-4581-4c2c-b2c9-eb4ac84408d9"
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             },
             {
@@ -1158,6 +1369,9 @@
               "questionOptions": {
                 "rendering": "text",
                 "concept": "616e0654-95c5-4621-9e9b-b69b1e370cbc"
+              },
+              "hide": {
+                "hideWhenExpression": "wasReferred !== '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'"
               }
             }
           ]
