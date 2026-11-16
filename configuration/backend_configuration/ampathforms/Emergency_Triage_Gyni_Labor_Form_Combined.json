@@ -87,9 +87,6 @@
         {
           "label": "Patient Information",
           "isExpanded": "true",
-          "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
-          },
           "questions": [
             {
               "label": "Address",
@@ -99,7 +96,10 @@
                 "concept": "d616d6d4-2548-4b68-99e7-f3c85fa96328",
                 "rows": "3"
               },
-              "id": "address"
+              "id": "address",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+              }
             },
             {
               "label": "Time of Arrival to ED",
@@ -114,7 +114,10 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+              }
             },
             {
               "label": "Triage Time",
@@ -129,16 +132,16 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+              }
             }
           ]
         },
         {
           "label": "Mode of Arrival",
           "isExpanded": "true",
-          "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
-          },
           "questions": [
             {
               "label": "Mode of Arrival to the Hospital/ED",
@@ -169,16 +172,16 @@
                   }
                 ]
               },
-              "id": "modeArrival"
+              "id": "modeArrival",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+              }
             }
           ]
         },
         {
           "label": "Referral Information",
           "isExpanded": "true",
-          "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
-          },
           "questions": [
             {
               "label": "Origin of Referral",
@@ -209,7 +212,10 @@
                   }
                 ]
               },
-              "id": "originReferral"
+              "id": "originReferral",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+              }
             },
             {
               "label": "Pre Hospital Care/First Aid Given",
@@ -228,16 +234,16 @@
                   }
                 ]
               },
-              "id": "preHospitalCare"
+              "id": "preHospitalCare",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
+              }
             }
           ]
         },
         {
           "label": "Chief Complaint and History",
           "isExpanded": "true",
-          "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
-          },
           "questions": [
             {
               "label": "Chief Complaint",
@@ -247,7 +253,10 @@
                 "concept": "2f607182-9304-1234-5678-901234abcd05",
                 "rows": "2"
               },
-              "id": "chiefComplaint"
+              "id": "chiefComplaint",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             },
             {
               "label": "Gravida",
@@ -261,7 +270,10 @@
                 "step": 1,
                 "disallowDecimals": true
               },
-              "id": "gravida"
+              "id": "gravida",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             },
             {
               "label": "Para",
@@ -275,7 +287,10 @@
                 "step": 1,
                 "disallowDecimals": true
               },
-              "id": "para"
+              "id": "para",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             },
             {
               "label": "Abortion",
@@ -285,7 +300,10 @@
                 "concept": "775f3a78-1c78-40af-84cd-4ca7f4a7d7aa",
                 "rows": "2"
               },
-              "id": "abortion"
+              "id": "abortion",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             },
             {
               "label": "LNMP",
@@ -300,7 +318,10 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             },
             {
               "label": "Ultrasound",
@@ -315,26 +336,53 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             },
             {
-              "label": "Gestational Age (GA)",
+              "label": "Gestational age at the ultrasound (weeks)",
+              "type": "obs",
+              "id": "usGaWeeks",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "163166AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "disallowDecimals": true,
+                "step": 1,
+                "min": "0",
+                "max": "45"
+              },
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Current gestational age (weeks, calculated)",
               "type": "obs",
               "questionOptions": {
-                "rendering": "textarea",
-                "concept": "8526f708-5960-7890-1234-567890abcd0b",
-                "rows": "2"
+                "rendering": "number",
+                "concept": "1438AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "disallowDecimals": true,
+                "step": 1,
+                "min": "0",
+                "max": "45",
+                "calculate": {
+                  "calculateExpression": "((!isEmpty(lnmp) ? Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(lnmp).setHours(0,0,0,0)) / 86400000) : ((isEmpty(ultrasound) || isEmpty(usGaWeeks)) ? null : (Number(usGaWeeks) * 7) + Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(ultrasound).setHours(0,0,0,0)) / 86400000))) === null || (!isEmpty(lnmp) ? Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(lnmp).setHours(0,0,0,0)) / 86400000) : ((isEmpty(ultrasound) || isEmpty(usGaWeeks)) ? null : (Number(usGaWeeks) * 7) + Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(ultrasound).setHours(0,0,0,0)) / 86400000))) < 0) ? null : Math.floor((!isEmpty(lnmp) ? Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(lnmp).setHours(0,0,0,0)) / 86400000) : ((isEmpty(ultrasound) || isEmpty(usGaWeeks)) ? null : (Number(usGaWeeks) * 7) + Math.round((new Date((encDate ? encDate : new Date())).setHours(0,0,0,0) - new Date(ultrasound).setHours(0,0,0,0)) / 86400000))) / 7)"
+                }
               },
-              "id": "gestationalAge"
+              "id": "gestationalAge",
+              "validators": [],
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             }
           ]
         },
         {
           "label": "Gestation Status",
           "isExpanded": "true",
-          "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
-          },
           "questions": [
             {
               "label": "Gestation",
@@ -361,7 +409,10 @@
                   }
                 ]
               },
-              "id": "gestation"
+              "id": "gestation",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             }
           ]
         }
@@ -373,9 +424,6 @@
         {
           "label": "Gynecological Assessment",
           "isExpanded": "true",
-          "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
-          },
           "questions": [
             {
               "label": "Vaginal Bleeding",
@@ -394,7 +442,10 @@
                   }
                 ]
               },
-              "id": "vaginalBleeding"
+              "id": "vaginalBleeding",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             },
             {
               "label": "Seizure",
@@ -413,7 +464,10 @@
                   }
                 ]
               },
-              "id": "seizure"
+              "id": "seizure",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             },
             {
               "label": "PV",
@@ -423,7 +477,10 @@
                 "concept": "5293647a-2637-4567-8901-234567abcd12",
                 "rows": "3"
               },
-              "id": "pv"
+              "id": "pv",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             },
             {
               "label": "Cervix",
@@ -433,16 +490,55 @@
                 "concept": "6304758b-3748-5678-9012-345678abcd13",
                 "rows": "3"
               },
-              "id": "cervix"
+              "id": "cervix",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Cervical dilation (cm)",
+              "type": "obs",
+              "id": "cervicalDilation",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "162261AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "10",
+                "disallowDecimals": true
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Cervical effacement",
+              "type": "obs",
+              "id": "cervicalEffacement",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5c1d4069-ba49-5ae2-a9da-771c80f54fb4"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Fetal station",
+              "type": "obs",
+              "id": "fetalStation",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "cbcd8cf2-a54a-461d-9b4e-5f64b32753de"
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             }
           ]
         },
         {
           "label": "Membrane Status",
           "isExpanded": "true",
-          "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
-          },
           "questions": [
             {
               "label": "Membrane",
@@ -465,7 +561,10 @@
                   }
                 ]
               },
-              "id": "membrane"
+              "id": "membrane",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             },
             {
               "label": "Hours",
@@ -476,16 +575,16 @@
                 "min": "0",
                 "step": 0.1
               },
-              "id": "hours"
+              "id": "hours",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             }
           ]
         },
         {
           "label": "Clinical Presentation",
           "isExpanded": "true",
-          "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
-          },
           "questions": [
             {
               "label": "Presentation",
@@ -495,7 +594,10 @@
                 "concept": "2960314b-9304-1234-5678-901234abcd19",
                 "rows": "3"
               },
-              "id": "presentation"
+              "id": "presentation",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             },
             {
               "label": "FHB",
@@ -505,7 +607,47 @@
                 "concept": "3071425c-0415-2345-6789-012345abcd1a",
                 "rows": "3"
               },
-              "id": "fhb"
+              "id": "fhb",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Ux contraction",
+              "type": "obs",
+              "id": "uxContraction",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "7fa183b6-3484-4976-9af7-818f4d417c98",
+                "min": "0",
+                "step": 0.01
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Fetal heart rate (beats/min)",
+              "type": "obs",
+              "id": "fhb2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1440AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "40",
+                "step": 1,
+                "max": "250",
+                "disallowDecimals": true
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 110 || myValue > 160)",
+                  "message": "Fetal heart rate is outside the normal range (110-160 beats/min)."
+                }
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             }
           ]
         }
@@ -515,11 +657,8 @@
       "label": "Vital Signs and Assessment",
       "sections": [
         {
-          "label": "Blood Pressure",
+          "label": "Vital Signs",
           "isExpanded": "true",
-          "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
-          },
           "questions": [
             {
               "label": "Systolic BP (mmHg)",
@@ -539,7 +678,10 @@
                   "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 72 || myValue > 104) : age < 3 ? (myValue < 86 || myValue > 106) : age < 6 ? (myValue < 89 || myValue > 112) : age < 12 ? (myValue < 97 || myValue > 115) : (myValue < 90 || myValue > 139))",
                   "message": "Outside the normal systolic range for the patient's age."
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             },
             {
               "label": "Diastolic BP (mmHg)",
@@ -559,16 +701,229 @@
                   "warnsWhenExpression": "!isEmpty(myValue) && (age < 1 ? (myValue < 37 || myValue > 56) : age < 3 ? (myValue < 42 || myValue > 63) : age < 6 ? (myValue < 46 || myValue > 72) : age < 12 ? (myValue < 57 || myValue > 76) : (myValue < 60 || myValue > 89))",
                   "message": "Outside the normal diastolic range for the patient's age."
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Pulse rate (beats/min)",
+              "type": "obs",
+              "id": "pr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "230",
+                "disallowDecimals": true
+              },
+              "questionInfo": "Normal range: 60-100 beats/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 60 || myValue > 100)",
+                  "message": "Pulse rate is outside the normal range (60-100 beats/min)."
+                }
+              ],
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Respiratory rate (breaths/min)",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "99",
+                "disallowDecimals": true
+              },
+              "questionInfo": "Normal range: 16-24 breaths/min",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 16 || myValue > 24)",
+                  "message": "Respiratory rate is outside the normal range (16-24 breaths/min)."
+                }
+              ],
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Temperature (°C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "step": 0.01,
+                "max": "43"
+              },
+              "questionInfo": "Normal range: 36.5-37.5 °C",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && (myValue < 36.5 || myValue > 37.5)",
+                  "message": "Temperature is outside the normal range (36.5-37.5 °C)."
+                }
+              ],
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "SpO2 (%)",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 1,
+                "max": "100",
+                "disallowDecimals": true
+              },
+              "questionInfo": "Normal: >90%",
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "myValue && myValue <= 90",
+                  "message": "SPO2 is below the normal range (>90%)."
+                }
+              ],
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            }
+          ]
+        },
+        {
+          "label": "Anthropometrics",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
+                "step": 0.01,
+                "max": "272"
+              },
+              "questionInfo": "Allowed range: 30-300 cm",
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "step": 0.01,
+                "max": "250"
+              },
+              "questionInfo": "Kilograms.",
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "BMI (kg/m²)",
+              "type": "obs",
+              "id": "bmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "calculate": {
+                  "calculateExpression": "calcBMI(height,weight)"
+                },
+                "step": 0.01,
+                "max": "100",
+                "min": "0"
+              },
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "BMI Category",
+              "type": "obs",
+              "id": "bmiCategory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "255b89fc-8a01-4dae-90b3-613d65bb76bb",
+                "answers": [
+                  {
+                    "concept": "f1ac86a2-5934-49c5-aecc-16426e6b1d59",
+                    "label": "Underweight"
+                  },
+                  {
+                    "concept": "ad106589-fb33-4ce5-9159-0cf793996bce",
+                    "label": "Healthy Weight"
+                  },
+                  {
+                    "concept": "590a7581-714a-4b47-a1c9-712501889e44",
+                    "label": "Overweight"
+                  },
+                  {
+                    "concept": "9f2f66bf-dc75-47ac-b201-c891a9d5bbd6",
+                    "label": "Obese"
+                  }
+                ],
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight) || Number(height) <= 0 || Number(weight) <= 0) ? null : (calcBMI(height,weight) < 18.5 ? 'f1ac86a2-5934-49c5-aecc-16426e6b1d59' : calcBMI(height,weight) < 25 ? 'ad106589-fb33-4ce5-9159-0cf793996bce' : calcBMI(height,weight) < 30 ? '590a7581-714a-4b47-a1c9-712501889e44' : '9f2f66bf-dc75-47ac-b201-c891a9d5bbd6')"
+                }
+              },
+              "questionInfo": "Auto-classified from BMI: <18.5 Underweight, 18.5-24.9 Healthy Weight, 25.0-29.9 Overweight, ≥30.0 Obese.",
+              "readonly": true,
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Body Surface Area (m²)",
+              "type": "obs",
+              "id": "bodySurfaceArea",
+              "readonly": true,
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "980AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "calculate": {
+                  "calculateExpression": "height && weight ? Math.round(Math.sqrt((Number(height) * Number(weight)) / 3600) * 100) / 100 : null"
+                },
+                "min": "0",
+                "step": 0.01
+              },
+              "questionInfo": "Body surface area (BSA). Auto-calculated from height (cm) and weight (kg) using the Mosteller formula. Used to assist drug dosing calculations.",
+              "hideSteppers": true,
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             }
           ]
         },
         {
           "label": "Medical History",
           "isExpanded": "true",
-          "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
-          },
           "questions": [
             {
               "label": "Past Medical Illness",
@@ -577,16 +932,104 @@
                 "rendering": "textarea",
                 "concept": "6a900112-2334-0126-4560-ea0123456789"
               },
-              "id": "pastMedicalIllness"
+              "id": "pastMedicalIllness",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Previous surgery on reproductive tract? (myomectomy, removal of septum, fistula repair, cone biopsy, C/S, repaired rupture, cervical cerclage)",
+              "type": "obs",
+              "id": "previousSurgeryOnReproductiveTractMyomec",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "d5483856-4634-4766-a63e-5e7208fa0555",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Last pregnancy: hospital admission for hypertension or preeclampsia/eclampsia",
+              "type": "obs",
+              "id": "lastPregnancyHospitalAdmissionForHyperte",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "164895AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Diagnosed or suspected multiple pregnancy?",
+              "type": "obs",
+              "id": "diagnosedOrSuspectedMultiplePregnancy",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "3384285c-7192-8013-3567-890234abcd33",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
+            },
+            {
+              "label": "Pregnant mother eligible for high risk/MFM clinic follow-up",
+              "type": "obs",
+              "id": "highRiskPregnancyPathway",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "80eb28c4-ff29-425e-9efd-9f0829bd2f7c",
+                "answers": [
+                  {
+                    "concept": "1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "Yes"
+                  },
+                  {
+                    "concept": "1066AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    "label": "No"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             }
           ]
         },
         {
           "label": "Investigation and Plan",
           "isExpanded": "true",
-          "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
-          },
           "questions": [
             {
               "label": "Investigation Plan",
@@ -596,16 +1039,16 @@
                 "concept": "4182536d-1526-3456-7890-123456abcd1b",
                 "rows": "3"
               },
-              "id": "investigationPlan"
+              "id": "investigationPlan",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             }
           ]
         },
         {
           "label": "Disposition Plan",
           "isExpanded": "true",
-          "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '33445548-3f35-4d32-b45a-432ebfe475c0'"
-          },
           "questions": [
             {
               "label": "Plan",
@@ -636,7 +1079,10 @@
                   }
                 ]
               },
-              "id": "plan"
+              "id": "plan",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             },
             {
               "label": "Reevaluate after (hours)",
@@ -647,7 +1093,10 @@
                 "min": "0",
                 "step": 0.1
               },
-              "id": "reevaluateHours"
+              "id": "reevaluateHours",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory)"
+              }
             }
           ]
         }
@@ -659,9 +1108,6 @@
         {
           "label": "Physical Examination - Per Abdomen",
           "isExpanded": "true",
-          "hide": {
-            "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '0ae36e05-0a16-4603-935b-5d9f538aaed5'"
-          },
           "questions": [
             {
               "label": "Fundal Height (Weeks)",
@@ -672,7 +1118,10 @@
                 "min": "0",
                 "step": 0.1
               },
-              "id": "fundal_height_weeks"
+              "id": "fundal_height_weeks",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '0ae36e05-0a16-4603-935b-5d9f538aaed5'"
+              }
             },
             {
               "label": "P/A Presenting Part",
@@ -694,12 +1143,19 @@
                   {
                     "concept": "9ca8b4a5-63c1-4710-abcf-68e962742293",
                     "label": "Transverse"
+                  },
+                  {
+                    "label": "Unable to assess",
+                    "concept": "160737AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                   }
                 ]
+              },
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '0ae36e05-0a16-4603-935b-5d9f538aaed5'"
               }
             },
             {
-              "label": "FHS",
+              "label": "Fetal Heart Sound/s",
               "type": "obs",
               "questionOptions": {
                 "rendering": "radio",
@@ -715,7 +1171,10 @@
                   }
                 ]
               },
-              "id": "fhs"
+              "id": "fhs",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '0ae36e05-0a16-4603-935b-5d9f538aaed5'"
+              }
             },
             {
               "label": "LMP",
@@ -730,7 +1189,10 @@
                   "type": "date",
                   "allowFutureDates": "false"
                 }
-              ]
+              ],
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '0ae36e05-0a16-4603-935b-5d9f538aaed5'"
+              }
             },
             {
               "label": "Amount of Liquor",
@@ -740,7 +1202,10 @@
                 "concept": "ffdae04b-b351-4a8d-9368-4658c4e52f49",
                 "rows": "3"
               },
-              "id": "amount_of_liquor"
+              "id": "amount_of_liquor",
+              "hide": {
+                "hideWhenExpression": "isEmpty(emergencyTriageCategory) || emergencyTriageCategory !== '0ae36e05-0a16-4603-935b-5d9f538aaed5'"
+              }
             }
           ]
         }

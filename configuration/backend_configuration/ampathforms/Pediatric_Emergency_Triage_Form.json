@@ -695,9 +695,7 @@
               "questionOptions": {
                 "rendering": "number",
                 "concept": "1343AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                "step": 0.1,
-                "min": "5",
-                "max": "60"
+                "step": 0.1
               },
               "readonly": false,
               "validators": [
@@ -710,6 +708,11 @@
                   "type": "js_expression",
                   "warnsWhenExpression": "!isEmpty(myValue) && ((age < 5 && myValue < 12.5) || (age >= 18 && myValue < 21))",
                   "message": "MUAC below the cut-off (under 5 years: 12.5 cm; adults: 21 cm): screen for acute malnutrition."
+                },
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 5 || myValue > 60)",
+                  "message": "MUAC outside 5-60 cm: re-check the measurement."
                 }
               ],
               "questionInfo": "Mid-upper arm circumference in centimetres.",
@@ -783,37 +786,40 @@
                 "answers": [
                   {
                     "concept": "18758990-0819-012c-3450-123456789012",
-                    "label": "Below -3"
+                    "label": "Severe wasting (below -3)"
                   },
                   {
                     "concept": "19869001-1920-123d-4561-234567890123",
-                    "label": "Between -3 and -2"
+                    "label": "Moderate wasting (-3 to -2)"
                   },
                   {
                     "concept": "20970112-2031-234e-5672-345678901234",
-                    "label": "Between -2 and -1"
+                    "label": "Normal (-2 to -1)"
                   },
                   {
                     "concept": "21081223-3142-345f-6783-456789012345",
-                    "label": "Between -1 and 0"
+                    "label": "Normal (-1 to 0)"
                   },
                   {
                     "concept": "22192334-4253-4560-7894-567890123456",
-                    "label": "Between 0 and 1"
+                    "label": "Normal (0 to 1)"
                   },
                   {
                     "concept": "23203445-5364-5671-8905-678901234567",
-                    "label": "Between 1 and 2"
+                    "label": "Normal (1 to 2)"
                   },
                   {
                     "concept": "24314556-6475-6782-9016-789012345678",
-                    "label": "Between 2 and 3"
+                    "label": "Possible risk of overweight (2 to 3)"
                   },
                   {
                     "concept": "25425667-7586-7893-0127-890123456789",
-                    "label": "Above 3"
+                    "label": "Overweight (above 3)"
                   }
-                ]
+                ],
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weightKg)) ? null : ((calcWeightForHeightZscore(Number(height),Number(weightKg))) == null || (calcWeightForHeightZscore(Number(height),Number(weightKg))) === '') ? null : ((calcWeightForHeightZscore(Number(height),Number(weightKg))) < -3 ? '18758990-0819-012c-3450-123456789012' : (calcWeightForHeightZscore(Number(height),Number(weightKg))) < -2 ? '19869001-1920-123d-4561-234567890123' : (calcWeightForHeightZscore(Number(height),Number(weightKg))) < -1 ? '20970112-2031-234e-5672-345678901234' : (calcWeightForHeightZscore(Number(height),Number(weightKg))) < 0 ? '21081223-3142-345f-6783-456789012345' : (calcWeightForHeightZscore(Number(height),Number(weightKg))) < 1 ? '22192334-4253-4560-7894-567890123456' : (calcWeightForHeightZscore(Number(height),Number(weightKg))) < 2 ? '23203445-5364-5671-8905-678901234567' : (calcWeightForHeightZscore(Number(height),Number(weightKg))) < 3 ? '24314556-6475-6782-9016-789012345678' : '25425667-7586-7893-0127-890123456789')"
+                }
               },
               "questionInfo": "WHO growth-standard z-score category for the child's age and sex (read from the WHO chart).",
               "hide": {
@@ -933,37 +939,40 @@
                 "answers": [
                   {
                     "concept": "27647889-9708-901b-2349-012345678901",
-                    "label": "Below -3"
+                    "label": "Severe stunting (below -3)"
                   },
                   {
                     "concept": "28758990-0819-012c-3450-123456789012",
-                    "label": "Between -3 and -2"
+                    "label": "Moderate stunting (-3 to -2)"
                   },
                   {
                     "concept": "29869001-1920-123d-4561-234567890123",
-                    "label": "Between -2 and -1"
+                    "label": "Normal (-2 to -1)"
                   },
                   {
                     "concept": "30970112-2031-234e-5672-345678901234",
-                    "label": "Between -1 and 0"
+                    "label": "Normal (-1 to 0)"
                   },
                   {
                     "concept": "31081223-3142-345f-6783-456789012345",
-                    "label": "Between 0 and 1"
+                    "label": "Normal (0 to 1)"
                   },
                   {
                     "concept": "32192334-4253-4560-7894-567890123456",
-                    "label": "Between 1 and 2"
+                    "label": "Normal (1 to 2)"
                   },
                   {
                     "concept": "33203445-5364-5671-8905-678901234567",
-                    "label": "Between 2 and 3"
+                    "label": "Above average (2 to 3)"
                   },
                   {
                     "concept": "34314556-6475-6782-9016-789012345678",
-                    "label": "Above 3"
+                    "label": "Tall (above 3)"
                   }
-                ]
+                ],
+                "calculate": {
+                  "calculateExpression": "isEmpty(height) ? null : ((calcHeightForAgeZscore(Number(height))) == null || (calcHeightForAgeZscore(Number(height))) === '') ? null : ((calcHeightForAgeZscore(Number(height))) < -3 ? '27647889-9708-901b-2349-012345678901' : (calcHeightForAgeZscore(Number(height))) < -2 ? '28758990-0819-012c-3450-123456789012' : (calcHeightForAgeZscore(Number(height))) < -1 ? '29869001-1920-123d-4561-234567890123' : (calcHeightForAgeZscore(Number(height))) < 0 ? '30970112-2031-234e-5672-345678901234' : (calcHeightForAgeZscore(Number(height))) < 1 ? '31081223-3142-345f-6783-456789012345' : (calcHeightForAgeZscore(Number(height))) < 2 ? '32192334-4253-4560-7894-567890123456' : (calcHeightForAgeZscore(Number(height))) < 3 ? '33203445-5364-5671-8905-678901234567' : '34314556-6475-6782-9016-789012345678')"
+                }
               },
               "questionInfo": "WHO growth-standard z-score category for the child's age and sex (read from the WHO chart).",
               "hide": {
@@ -2341,13 +2350,16 @@
               }
             },
             {
-              "label": "Triage time",
+              "label": "Triage date and time",
               "type": "obs",
               "id": "triageTime",
               "datePickerFormat": "both",
               "questionOptions": {
                 "rendering": "datetime",
-                "concept": "71c2d3e4-f5a6-7890-1234-567890abcdef"
+                "concept": "71c2d3e4-f5a6-7890-1234-567890abcdef",
+                "calculate": {
+                  "calculateExpression": "today()"
+                }
               },
               "readonly": false,
               "validators": [
@@ -2626,7 +2638,7 @@
                 }
               ],
               "hide": {
-                "hideWhenExpression": "(isEmpty(pediatricTriageType) && isEmpty(triageLevel))"
+                "hideWhenExpression": "((isEmpty(pediatricTriageType) && isEmpty(triageLevel))) || (communication !== 'adcbafa1-d682-4f11-a93a-9fd0916d3e65')"
               }
             },
             {

@@ -610,16 +610,40 @@
               ]
             },
             {
-              "label": "Duration of Illness (Days)",
+              "label": "Duration of Illness",
               "type": "obs",
               "id": "complaintDuration",
               "questionOptions": {
                 "concept": "1731AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 "rendering": "number",
                 "min": "0",
-                "step": 1
+                "step": 1,
+                "disallowDecimals": true
               },
               "validators": []
+            },
+            {
+              "label": "Duration unit",
+              "type": "obs",
+              "id": "complaintDurationUnit",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "b51fc02b-e7a9-4147-8658-9917acd5461c",
+                "answers": [
+                  {
+                    "label": "Minutes",
+                    "concept": "1733AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Hours",
+                    "concept": "1822AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Days",
+                    "concept": "1072AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  }
+                ]
+              }
             },
             {
               "label": "Mechanism of injury (Write if self inflicted)",
@@ -972,7 +996,7 @@
               }
             },
             {
-              "label": "Pain Score",
+              "label": "Pain Score (0-10)",
               "type": "obs",
               "id": "painScore",
               "questionOptions": {
@@ -1345,7 +1369,7 @@
                 "rendering": "number",
                 "concept": "6f455667-7889-5671-9015-3e45678abcde",
                 "calculate": {
-                  "calculateExpression": "(isEmpty(mobility) ? 0 : (mobility === '162750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : mobility === '162751AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 2)) + (isEmpty(heartRate) ? 0 : (heartRate <= 40 ? 2 : heartRate <= 50 ? 1 : heartRate <= 100 ? 0 : heartRate <= 110 ? 1 : heartRate <= 129 ? 2 : 3)) + (isEmpty(respiratoryRate) ? 0 : (respiratoryRate <= 8 ? 2 : respiratoryRate <= 14 ? 0 : respiratoryRate <= 20 ? 1 : respiratoryRate <= 29 ? 2 : 3)) + (isEmpty(spo2) ? 0 : (spo2 >= 94 ? 0 : spo2 > 90 ? 1 : 2)) + (isEmpty(temperature) ? 0 : (temperature <= 35.0 ? 2 : temperature <= 37.2 ? 0 : temperature < 38.5 ? 1 : 2)) + (isEmpty(avpu) ? 0 : (avpu === '160282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : avpu === '162645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : avpu === '162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 2 : 3)) + (isEmpty(systolicBP) ? 0 : (systolicBP <= 70 ? 3 : systolicBP <= 80 ? 2 : systolicBP <= 100 ? 1 : systolicBP <= 199 ? 0 : 2)) + (traumaVitalSigns === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 0) + (isEmpty(painScore) ? 0 : (painScore === 0 ? 0 : painScore <= 3 ? 1 : painScore < 7 ? 2 : 3))"
+                  "calculateExpression": "(isEmpty(mobility) ? 0 : (mobility === '162750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : mobility === '162751AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 2)) + (isEmpty(heartRate) ? 0 : (heartRate <= 40 ? 2 : heartRate <= 50 ? 1 : heartRate <= 100 ? 0 : heartRate <= 110 ? 1 : heartRate <= 129 ? 2 : 3)) + (isEmpty(respiratoryRate) ? 0 : (respiratoryRate <= 8 ? 2 : respiratoryRate <= 14 ? 0 : respiratoryRate <= 20 ? 1 : respiratoryRate <= 29 ? 2 : 3)) + (isEmpty(temperature) ? 0 : (temperature < 35 ? 2 : temperature <= 38.4 ? 0 : 2)) + (isEmpty(avpu) ? 0 : (avpu === '160282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : avpu === '162645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : avpu === '162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 2 : 3)) + (isEmpty(systolicBP) ? 0 : (systolicBP <= 70 ? 3 : systolicBP <= 80 ? 2 : systolicBP <= 100 ? 1 : systolicBP <= 199 ? 0 : 2)) + (traumaVitalSigns === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 0)"
                 }
               },
               "id": "idTriageScoreResult"
@@ -1358,7 +1382,7 @@
                 "rendering": "radio",
                 "concept": "70566778-8990-6782-0126-4f5678abcde0",
                 "calculate": {
-                  "calculateExpression": "!isEmpty(idBlack) ? '68788990-0112-8904-2348-c78a01234567' : (!isEmpty(idRed) || ((isEmpty(mobility) ? 0 : (mobility === '162750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : mobility === '162751AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 2)) + (isEmpty(heartRate) ? 0 : (heartRate <= 40 ? 2 : heartRate <= 50 ? 1 : heartRate <= 100 ? 0 : heartRate <= 110 ? 1 : heartRate <= 129 ? 2 : 3)) + (isEmpty(respiratoryRate) ? 0 : (respiratoryRate <= 8 ? 2 : respiratoryRate <= 14 ? 0 : respiratoryRate <= 20 ? 1 : respiratoryRate <= 29 ? 2 : 3)) + (isEmpty(spo2) ? 0 : (spo2 >= 94 ? 0 : spo2 > 90 ? 1 : 2)) + (isEmpty(temperature) ? 0 : (temperature <= 35.0 ? 2 : temperature <= 37.2 ? 0 : temperature < 38.5 ? 1 : 2)) + (isEmpty(avpu) ? 0 : (avpu === '160282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : avpu === '162645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : avpu === '162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 2 : 3)) + (isEmpty(systolicBP) ? 0 : (systolicBP <= 70 ? 3 : systolicBP <= 80 ? 2 : systolicBP <= 100 ? 1 : systolicBP <= 199 ? 0 : 2)) + (traumaVitalSigns === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 0) + (isEmpty(painScore) ? 0 : (painScore === 0 ? 0 : painScore <= 3 ? 1 : painScore < 7 ? 2 : 3))) >= 7) ? '25899001-1223-9015-3459-9456789abcde' : (!isEmpty(idOrange) || ((isEmpty(mobility) ? 0 : (mobility === '162750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : mobility === '162751AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 2)) + (isEmpty(heartRate) ? 0 : (heartRate <= 40 ? 2 : heartRate <= 50 ? 1 : heartRate <= 100 ? 0 : heartRate <= 110 ? 1 : heartRate <= 129 ? 2 : 3)) + (isEmpty(respiratoryRate) ? 0 : (respiratoryRate <= 8 ? 2 : respiratoryRate <= 14 ? 0 : respiratoryRate <= 20 ? 1 : respiratoryRate <= 29 ? 2 : 3)) + (isEmpty(spo2) ? 0 : (spo2 >= 94 ? 0 : spo2 > 90 ? 1 : 2)) + (isEmpty(temperature) ? 0 : (temperature <= 35.0 ? 2 : temperature <= 37.2 ? 0 : temperature < 38.5 ? 1 : 2)) + (isEmpty(avpu) ? 0 : (avpu === '160282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : avpu === '162645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : avpu === '162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 2 : 3)) + (isEmpty(systolicBP) ? 0 : (systolicBP <= 70 ? 3 : systolicBP <= 80 ? 2 : systolicBP <= 100 ? 1 : systolicBP <= 199 ? 0 : 2)) + (traumaVitalSigns === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 0) + (isEmpty(painScore) ? 0 : (painScore === 0 ? 0 : painScore <= 3 ? 1 : painScore < 7 ? 2 : 3))) >= 5) ? '47011223-3445-1237-5671-b6789abcdef0' : (!isEmpty(idYellow) || ((isEmpty(mobility) ? 0 : (mobility === '162750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : mobility === '162751AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 2)) + (isEmpty(heartRate) ? 0 : (heartRate <= 40 ? 2 : heartRate <= 50 ? 1 : heartRate <= 100 ? 0 : heartRate <= 110 ? 1 : heartRate <= 129 ? 2 : 3)) + (isEmpty(respiratoryRate) ? 0 : (respiratoryRate <= 8 ? 2 : respiratoryRate <= 14 ? 0 : respiratoryRate <= 20 ? 1 : respiratoryRate <= 29 ? 2 : 3)) + (isEmpty(spo2) ? 0 : (spo2 >= 94 ? 0 : spo2 > 90 ? 1 : 2)) + (isEmpty(temperature) ? 0 : (temperature <= 35.0 ? 2 : temperature <= 37.2 ? 0 : temperature < 38.5 ? 1 : 2)) + (isEmpty(avpu) ? 0 : (avpu === '160282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : avpu === '162645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : avpu === '162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 2 : 3)) + (isEmpty(systolicBP) ? 0 : (systolicBP <= 70 ? 3 : systolicBP <= 80 ? 2 : systolicBP <= 100 ? 1 : systolicBP <= 199 ? 0 : 2)) + (traumaVitalSigns === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 0) + (isEmpty(painScore) ? 0 : (painScore === 0 ? 0 : painScore <= 3 ? 1 : painScore < 7 ? 2 : 3))) >= 3) ? '60900112-2334-0126-4560-4f0123456789' : '66566778-8990-6782-0126-a5678a012345'"
+                  "calculateExpression": "!isEmpty(idBlack) ? '68788990-0112-8904-2348-c78a01234567' : (!isEmpty(idRed) || ((isEmpty(mobility) ? 0 : (mobility === '162750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : mobility === '162751AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 2)) + (isEmpty(heartRate) ? 0 : (heartRate <= 40 ? 2 : heartRate <= 50 ? 1 : heartRate <= 100 ? 0 : heartRate <= 110 ? 1 : heartRate <= 129 ? 2 : 3)) + (isEmpty(respiratoryRate) ? 0 : (respiratoryRate <= 8 ? 2 : respiratoryRate <= 14 ? 0 : respiratoryRate <= 20 ? 1 : respiratoryRate <= 29 ? 2 : 3)) + (isEmpty(temperature) ? 0 : (temperature < 35 ? 2 : temperature <= 38.4 ? 0 : 2)) + (isEmpty(avpu) ? 0 : (avpu === '160282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : avpu === '162645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : avpu === '162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 2 : 3)) + (isEmpty(systolicBP) ? 0 : (systolicBP <= 70 ? 3 : systolicBP <= 80 ? 2 : systolicBP <= 100 ? 1 : systolicBP <= 199 ? 0 : 2)) + (traumaVitalSigns === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 0)) >= 7) ? '25899001-1223-9015-3459-9456789abcde' : (!isEmpty(idOrange) || ((isEmpty(mobility) ? 0 : (mobility === '162750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : mobility === '162751AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 2)) + (isEmpty(heartRate) ? 0 : (heartRate <= 40 ? 2 : heartRate <= 50 ? 1 : heartRate <= 100 ? 0 : heartRate <= 110 ? 1 : heartRate <= 129 ? 2 : 3)) + (isEmpty(respiratoryRate) ? 0 : (respiratoryRate <= 8 ? 2 : respiratoryRate <= 14 ? 0 : respiratoryRate <= 20 ? 1 : respiratoryRate <= 29 ? 2 : 3)) + (isEmpty(temperature) ? 0 : (temperature < 35 ? 2 : temperature <= 38.4 ? 0 : 2)) + (isEmpty(avpu) ? 0 : (avpu === '160282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : avpu === '162645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : avpu === '162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 2 : 3)) + (isEmpty(systolicBP) ? 0 : (systolicBP <= 70 ? 3 : systolicBP <= 80 ? 2 : systolicBP <= 100 ? 1 : systolicBP <= 199 ? 0 : 2)) + (traumaVitalSigns === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 0)) >= 5) ? '47011223-3445-1237-5671-b6789abcdef0' : (!isEmpty(idYellow) || ((isEmpty(mobility) ? 0 : (mobility === '162750AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : mobility === '162751AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 2)) + (isEmpty(heartRate) ? 0 : (heartRate <= 40 ? 2 : heartRate <= 50 ? 1 : heartRate <= 100 ? 0 : heartRate <= 110 ? 1 : heartRate <= 129 ? 2 : 3)) + (isEmpty(respiratoryRate) ? 0 : (respiratoryRate <= 8 ? 2 : respiratoryRate <= 14 ? 0 : respiratoryRate <= 20 ? 1 : respiratoryRate <= 29 ? 2 : 3)) + (isEmpty(temperature) ? 0 : (temperature < 35 ? 2 : temperature <= 38.4 ? 0 : 2)) + (isEmpty(avpu) ? 0 : (avpu === '160282AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 0 : avpu === '162645AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : avpu === '162644AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 2 : 3)) + (isEmpty(systolicBP) ? 0 : (systolicBP <= 70 ? 3 : systolicBP <= 80 ? 2 : systolicBP <= 100 ? 1 : systolicBP <= 199 ? 0 : 2)) + (traumaVitalSigns === '1065AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' ? 1 : 0)) >= 3) ? '60900112-2334-0126-4560-4f0123456789' : '66566778-8990-6782-0126-a5678a012345'"
                 },
                 "answers": [
                   {

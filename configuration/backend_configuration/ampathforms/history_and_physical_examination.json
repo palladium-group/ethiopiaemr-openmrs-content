@@ -69,6 +69,15 @@
           "isExpanded": "true",
           "questions": [
             {
+              "label": "Previous admission",
+              "type": "obs",
+              "id": "previousAdmission",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "162156AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
+            },
+            {
               "type": "obsGroup",
               "id": "ComplaintLodgeByClient",
               "questionOptions": {
@@ -573,7 +582,7 @@
                   }
                 },
                 {
-                  "label": "Duration Unit",
+                  "label": "Duration type",
                   "type": "obs",
                   "id": "durationUnit",
                   "questionOptions": {
@@ -611,13 +620,14 @@
                   }
                 },
                 {
-                  "label": "Duration Value",
+                  "label": "Duration",
                   "type": "obs",
                   "id": "durationValue",
                   "questionOptions": {
                     "concept": "1731AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                     "rendering": "number",
-                    "step": 0.01
+                    "step": 0.01,
+                    "disallowDecimals": true
                   },
                   "hide": {
                     "hideWhenExpression": "isEmpty(cOmplaIntField)"
@@ -755,20 +765,461 @@
       "label": "Physical Examination",
       "sections": [
         {
+          "label": "Vital Signs",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Systolic BP (mmHg)",
+              "type": "obs",
+              "id": "sbp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "250",
+                "disallowDecimals": true
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 90 || myValue > 120)",
+                  "message": "Systolic BP outside the normal 90-120 mmHg range."
+                }
+              ]
+            },
+            {
+              "label": "Diastolic BP (mmHg)",
+              "type": "obs",
+              "id": "dbp",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5086AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "150",
+                "disallowDecimals": true
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 60 || myValue > 90)",
+                  "message": "Diastolic BP outside the normal 60-90 mmHg range."
+                }
+              ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "bpNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "6b6344d0-e269-52a0-8daa-634e7337ce1b"
+              }
+            },
+            {
+              "label": "Pulse rate (beats/min)",
+              "type": "obs",
+              "id": "pulse",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5087AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "230",
+                "disallowDecimals": true
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 60 || myValue > 100)",
+                  "message": "Pulse rate outside the normal 60-100 beats per minute range."
+                }
+              ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "pulseNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "5538f0be-764f-566e-bb6a-daccc5aabd20"
+              }
+            },
+            {
+              "label": "Respiratory rate (breaths/min)",
+              "type": "obs",
+              "id": "rr",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5242AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "99",
+                "disallowDecimals": true
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 12 || myValue > 20)",
+                  "message": "Respiratory rate outside the normal 12-20 breaths per minute range."
+                }
+              ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "rrNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "3661284f-64d4-5d68-a03e-9c3e483544c4"
+              }
+            },
+            {
+              "label": "Oxygen Saturation SpO2 (%)",
+              "type": "obs",
+              "id": "spo2",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5092AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "100",
+                "disallowDecimals": true
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && myValue < 90",
+                  "message": "SpO2 below 90 percent."
+                }
+              ]
+            },
+            {
+              "label": "Oxygen support",
+              "type": "obs",
+              "id": "oxygenDeliveryMethod",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "2c9764d5-f646-4c1b-898e-b6f426c028b9",
+                "answers": [
+                  {
+                    "label": "Room air",
+                    "concept": "162735AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                  },
+                  {
+                    "label": "Supplemental oxygen",
+                    "concept": "cf833575-ef91-5999-a3b6-0991705fb259"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Oxygen flow rate (L/min)",
+              "type": "obs",
+              "id": "oxygenFlowRate",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "a84241e7-a750-4821-8838-5f4d7ea18576",
+                "min": "0",
+                "max": "60",
+                "disallowDecimals": true
+              },
+              "hide": {
+                "hideWhenExpression": "oxygenDeliveryMethod !== 'cf833575-ef91-5999-a3b6-0991705fb259'"
+              }
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "spo2Note",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "141315d4-537c-5b8d-be88-8e3bdec49262"
+              }
+            },
+            {
+              "label": "Temperature (C)",
+              "type": "obs",
+              "id": "temperature",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "25",
+                "max": "43"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "tempNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "2adff6a8-61fe-5128-8f1f-16f4d03bd23d"
+              }
+            },
+            {
+              "label": "Pain Score",
+              "type": "obs",
+              "id": "painScore",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "166082AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "10",
+                "disallowDecimals": true
+              }
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "painNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "d57d427e-f878-5af7-905a-e91a9c730104"
+              }
+            },
+            {
+              "label": "Height (cm)",
+              "type": "obs",
+              "id": "height",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5090AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "10",
+                "max": "272"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^\\d{1,3}(\\.\\d{1,2})?$/.test(''+myValue)",
+                  "message": "Height takes up to 3 digits and 2 decimal places."
+                }
+              ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "heightNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a0b0ed65-f235-56cc-857a-911432a7238a"
+              }
+            },
+            {
+              "label": "Weight (kg)",
+              "type": "obs",
+              "id": "weight",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "5089AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "250"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "failsWhenExpression": "!isEmpty(myValue) && !/^-?\\d+(\\.\\d)?$/.test(''+myValue)",
+                  "message": "At most 1 decimal place allowed."
+                }
+              ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "weightNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "a363f94e-360d-52f2-9677-b8b8628a074e"
+              }
+            },
+            {
+              "label": "BMI (kg/m2)",
+              "type": "obs",
+              "id": "bmi",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "1342AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "max": "100",
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight)) ? null : calcBMI(height,weight)"
+                }
+              }
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "bmiNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "95577fb5-31b8-57bf-9bf4-dc998c0fc27a"
+              }
+            },
+            {
+              "label": "BMI Category",
+              "type": "obs",
+              "id": "bmiCategory",
+              "questionOptions": {
+                "rendering": "radio",
+                "concept": "255b89fc-8a01-4dae-90b3-613d65bb76bb",
+                "answers": [
+                  {
+                    "label": "Underweight",
+                    "concept": "f1ac86a2-5934-49c5-aecc-16426e6b1d59"
+                  },
+                  {
+                    "label": "Healthy Weight",
+                    "concept": "ad106589-fb33-4ce5-9159-0cf793996bce"
+                  },
+                  {
+                    "label": "Overweight",
+                    "concept": "590a7581-714a-4b47-a1c9-712501889e44"
+                  },
+                  {
+                    "label": "Obese",
+                    "concept": "9f2f66bf-dc75-47ac-b201-c891a9d5bbd6"
+                  }
+                ],
+                "calculate": {
+                  "calculateExpression": "(isEmpty(height) || isEmpty(weight) || Number(height) <= 0 || Number(weight) <= 0) ? null : (calcBMI(height,weight) < 18.5 ? 'f1ac86a2-5934-49c5-aecc-16426e6b1d59' : calcBMI(height,weight) < 25 ? 'ad106589-fb33-4ce5-9159-0cf793996bce' : calcBMI(height,weight) < 30 ? '590a7581-714a-4b47-a1c9-712501889e44' : '9f2f66bf-dc75-47ac-b201-c891a9d5bbd6')"
+                }
+              }
+            },
+            {
+              "label": "Body Surface Area (m2)",
+              "type": "obs",
+              "id": "bodySurfaceArea",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "980AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0",
+                "calculate": {
+                  "calculateExpression": "height && weight ? Math.round(Math.sqrt((Number(height) * Number(weight)) / 3600) * 100) / 100 : null"
+                }
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 1.7 || myValue > 1.9)",
+                  "message": "Body surface area outside the typical 1.7-1.9 square metre adult range."
+                }
+              ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "bsaNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "01ea14a6-8ff5-5c31-bd6c-66b92035047b"
+              }
+            },
+            {
+              "label": "Random Blood Sugar (mg/dl)",
+              "type": "obs",
+              "id": "rbs",
+              "questionOptions": {
+                "rendering": "number",
+                "concept": "887AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                "min": "0"
+              },
+              "validators": [
+                {
+                  "type": "js_expression",
+                  "warnsWhenExpression": "!isEmpty(myValue) && (myValue < 70 || myValue > 200)",
+                  "message": "Random blood sugar outside the normal 70-200 mg/dl range."
+                }
+              ]
+            },
+            {
+              "label": "Add note",
+              "type": "obs",
+              "id": "rbsNote",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "540850b4-902c-5098-a910-cbc3181112c4"
+              }
+            }
+          ]
+        },
+        {
           "label": "Physical Examination",
           "isExpanded": true,
           "questions": [
             {
-              "label": "Acif Sae Pe General Appearance",
+              "label": "General appearance normal",
+              "type": "obs",
+              "id": "generalAppearanceNormal",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "65838767-5df8-5bd7-86f3-370969d50ac6",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "label": "General Appearance",
               "type": "obs",
               "required": false,
               "id": "GeneralAppearance",
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "6f708192-a314-2345-f678-90123456bcde",
-                "rows": "2"
+                "rows": "2",
+                "calculate": {
+                  "calculateExpression": "generalAppearanceNormal ? 'Awake, Alert and Oriented. No acute distress.' : ''"
+                }
               },
               "validators": []
+            },
+            {
+              "label": "ECOG performance status",
+              "type": "obs",
+              "id": "ecogPerformanceStatus",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "717dbd4d-120c-503b-96f2-7c14aec9e709",
+                "answers": [
+                  {
+                    "label": "0 - Fully active, able to carry on all pre-disease performance without restriction",
+                    "concept": "d5517c5e-c36d-5b4a-9852-79e1e03f9d3d"
+                  },
+                  {
+                    "label": "1 - Restricted in physically strenuous activity but ambulatory and able to carry out light or sedentary work",
+                    "concept": "7d00fdfd-3e57-53e9-ba8b-042c14d629f1"
+                  },
+                  {
+                    "label": "2 - Ambulatory and capable of all self-care but unable to carry out any work activities; up and about more than 50% of waking hours",
+                    "concept": "b7ed859c-41da-546b-8cc5-18c7c3e627da"
+                  },
+                  {
+                    "label": "3 - Capable of only limited self-care, confined to bed or chair more than 50% of waking hours",
+                    "concept": "03e8315b-871f-5b79-8773-7e2ca431533e"
+                  },
+                  {
+                    "label": "4 - Completely disabled; cannot carry on any self-care; totally confined to bed or chair",
+                    "concept": "a5258d93-2a79-56b7-9efe-4fd2f37a1175"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "HEENT examination normal",
+              "type": "obs",
+              "id": "heentNormal",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "539d6a35-ce82-522a-b571-472352ab2f66",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
             },
             {
               "label": "HEENT",
@@ -778,9 +1229,25 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "70819203-b425-3456-0789-123456cdefab",
-                "rows": "2"
+                "rows": "2",
+                "calculate": {
+                  "calculateExpression": "heentNormal ? 'Pink conjunctiva, Non-icteric sclera, No periorbital edema.' : ''"
+                }
               },
               "validators": []
+            },
+            {
+              "label": "Lymphoglandular system examination normal",
+              "type": "obs",
+              "id": "lgsNormal",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "23396793-c43b-5731-9ec3-391017e5d473",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
             },
             {
               "label": "Lymphoglandular Systems (LGS)",
@@ -790,9 +1257,25 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "8192a314-c536-4567-1890-23456defabcd",
-                "rows": "2"
+                "rows": "2",
+                "calculate": {
+                  "calculateExpression": "lgsNormal ? 'Lymph nodes: There is no significantly enlarged lymphadenopathy in peripherally accessible lymph node areas. Thyroid: The thyroid gland is not enlarged. Breast: There is no breast lump or gynecomastia. Parotid gland: No parotid gland enlargement. Testicles: No testicular atrophy.' : ''"
+                }
               },
               "validators": []
+            },
+            {
+              "label": "Respiratory system examination normal",
+              "type": "obs",
+              "id": "respiratoryNormal",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "f06b1d02-ed9e-5972-85ed-7d01733a3381",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
             },
             {
               "label": "Respiratory System (RS)",
@@ -802,9 +1285,25 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "92a3b425-d647-5678-2901-3456efabcdef",
-                "rows": "2"
+                "rows": "2",
+                "calculate": {
+                  "calculateExpression": "respiratoryNormal ? 'The chest wall is symmetric and without deformity. No signs of trauma. Chest wall is non-tender. No signs of respiratory distress. Lung sounds are clear in all lobes bilaterally without rales, ronchi, or wheezes. Resonance is normal upon percussion of all lung fields.' : ''"
+                }
               },
               "validators": []
+            },
+            {
+              "label": "Cardiovascular system examination normal",
+              "type": "obs",
+              "id": "cvsNormal",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "10acd23f-3d3f-56de-ae2f-0be75973efc1",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
             },
             {
               "label": "Cardiovascular System (CVS)",
@@ -814,9 +1313,38 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "a3b4c536-e758-6789-3012-456fabcdef01",
-                "rows": "2"
+                "rows": "2",
+                "calculate": {
+                  "calculateExpression": "cvsNormal ? 'All accessible peripheral arteries are palpable, full in volume, and regular in rhythm. No distended neck veins. JVP is not raised. The external chest is normal in appearance without lifts, heaves, or thrills. PMI is not visible and is palpated in the 5th intercostal space at the midclavicular line. S1 and S2 are well heard and are of normal intensity. No murmur, gallop, or rub is auscultated.' : ''"
+                }
               },
               "validators": []
+            },
+            {
+              "label": "Abdominal examination normal",
+              "type": "obs",
+              "id": "abdominalNormal",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "7e5aa111-ec8f-577b-931f-8bcc92e636e3",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
+            },
+            {
+              "label": "Rectal examination not done",
+              "type": "obs",
+              "id": "rectalNotDone",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "d7edffbd-2a70-55de-9b7c-4abe7157281d",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
             },
             {
               "label": "The Abdomen and Pelvis",
@@ -826,9 +1354,25 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "b4c5d647-f869-789a-4123-567abcdef012",
-                "rows": "2"
+                "rows": "2",
+                "calculate": {
+                  "calculateExpression": "abdominalNormal ? ('The abdomen is soft, symmetric, and non-tender, without distension. No visible lesions or scars. The aorta is without bruit or visible pulsation. Umbilicus is midline without herniation. Bowel sounds are normoactive in all four quadrants. No masses, hepatomegaly, or splenomegaly are noted. ' + (rectalNotDone ? 'Rectal examination: not done.' : 'Rectal examination: Perianal skin is clean and intact. No external hemorrhoids, anal fissures, or fistulae. Normal resting anal tone. Anal canal and rectal walls are smooth and non-tender. No palpable masses, polyps, or strictures. Prostate is smooth, symmetrical, and rubbery or firm in consistency. Median sulcus is distinct and easily palpable between the left and right lobes. Non-tender with no nodules, hard areas, or asymmetry. Brown, soft stool present or clean glove. No gross or occult blood, pus, or excess mucus.')) : ''"
+                }
               },
               "validators": []
+            },
+            {
+              "label": "Genitourinary system examination normal",
+              "type": "obs",
+              "id": "gusNormal",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "aca0783d-6d09-53cd-8d2a-d965b99f0aa9",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
             },
             {
               "label": "Genitourinary System (GUS)",
@@ -838,9 +1382,25 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "e2b668ac-7efb-4344-8ea8-b7cb70976652",
-                "rows": "2"
+                "rows": "2",
+                "calculate": {
+                  "calculateExpression": "gusNormal ? 'There is no costovertebral angle or suprapubic tenderness. The kidneys are not palpable.' : ''"
+                }
               },
               "validators": []
+            },
+            {
+              "label": "Musculoskeletal system examination normal",
+              "type": "obs",
+              "id": "mskNormal",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "6db11d40-ca35-5871-b59d-74c1d770c370",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
             },
             {
               "label": "Musculoskeletal System (MSS)",
@@ -850,9 +1410,25 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "b07461a8-5b2f-4f1e-84a3-f94a0c5585a9",
-                "rows": "2"
+                "rows": "2",
+                "calculate": {
+                  "calculateExpression": "mskNormal ? 'Upper and lower extremities are atraumatic in appearance without tenderness or deformity. No swelling or erythema. No discrepancy between extremities. Full range of motion is noted at all joints. Muscle strength is 5/5 bilaterally. Tendon function is normal. Capillary refill is less than 3 seconds in all extremities.' : ''"
+                }
               },
               "validators": []
+            },
+            {
+              "label": "Integumentary system examination normal",
+              "type": "obs",
+              "id": "integumentaryNormal",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "84a5ab22-d3ed-5319-b01b-aed7740b390f",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
             },
             {
               "label": "Integumentary System (IS)",
@@ -862,9 +1438,25 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "91656b31-9ff8-4a99-a37e-55841170bea9",
-                "rows": "2"
+                "rows": "2",
+                "calculate": {
+                  "calculateExpression": "integumentaryNormal ? 'The skin is dry and warm. There is no rash, ulcers, bruising and purpura. There is no change in hair distribution. There is no discoloration of the nails and they do not show spooning. No palmar erythema. No palmar or plantar pallor. No spider angioma or spider nevi. No hyperpigmentation. No scratch marks.' : ''"
+                }
               },
               "validators": []
+            },
+            {
+              "label": "Nervous system examination normal",
+              "type": "obs",
+              "id": "cnsNormal",
+              "questionOptions": {
+                "rendering": "toggle",
+                "concept": "2b397cdb-c8d0-55b5-a104-6932c5665c81",
+                "toggleOptions": {
+                  "labelTrue": "Yes",
+                  "labelFalse": "No"
+                }
+              }
             },
             {
               "label": "Nervous System (NS)",
@@ -874,9 +1466,123 @@
               "questionOptions": {
                 "rendering": "textarea",
                 "concept": "f809a2b3-3ca3-b23e-8567-9ef012345678",
-                "rows": "2"
+                "rows": "2",
+                "calculate": {
+                  "calculateExpression": "cnsNormal ? 'The person is awake, alert, and oriented to person, place, and time with normal speech. Motor function is normal in all four extremities. Sensation is intact bilaterally. Reflexes 2+ bilaterally. Cranial nerves are intact. Cerebellar function is intact. Memory is normal, and thought process is intact. No gait abnormalities are appreciated.' : ''"
+                }
               },
               "validators": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Investigation",
+      "sections": [
+        {
+          "label": "Investigation",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Investigation",
+              "type": "obs",
+              "id": "investigationResult",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "f0bececd-0965-4f8f-85f3-c311a4aa57f4"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Assessment",
+      "sections": [
+        {
+          "label": "Assessment",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Primary Diagnosis",
+              "type": "obs",
+              "id": "primaryDiagnosis",
+              "questionOptions": {
+                "rendering": "problem",
+                "concept": "c3c38db3-cdf3-40dc-9850-8e2bc16943c0",
+                "isSearchable": true,
+                "datasource": {
+                  "name": "problem_datasource",
+                  "config": {
+                    "class": [
+                      "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "label": "Additional Diagnoses",
+              "type": "obsGroup",
+              "id": "additionalDiagnosisGroup",
+              "questionOptions": {
+                "rendering": "repeating",
+                "concept": "c37e8f82-bacf-41a9-a84f-341b1b77f321",
+                "repeatOptions": {
+                  "limit": "5",
+                  "addText": "Add another diagnosis"
+                }
+              },
+              "questions": [
+                {
+                  "label": "Diagnosis",
+                  "type": "obs",
+                  "id": "secondaryDiagnosis",
+                  "questionOptions": {
+                    "rendering": "problem",
+                    "concept": "bd8601e5-d7c2-4522-bef3-97911e650804",
+                    "isSearchable": true,
+                    "datasource": {
+                      "name": "problem_datasource",
+                      "config": {
+                        "class": [
+                          "8d4918b0-c2cc-11de-8d13-0010c6dffd0f"
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "label": "Diagnosis note",
+              "type": "obs",
+              "id": "diagnosisNote",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "5809a2b3-3ca3-b23e-8567-9ef012345678"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "label": "Plan",
+      "sections": [
+        {
+          "label": "Plan",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Plan",
+              "type": "obs",
+              "id": "plan",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "163104AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+              }
             }
           ]
         }
