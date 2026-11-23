@@ -1,0 +1,156 @@
+{
+  "name": "Hematopathology Request Form",
+  "uuid": "a4c5d6e7-4444-4a2b-8c3d-0e1f2a3b4c5d",
+  "version": "1.0",
+  "description": "Used to order a hematopathology examination from the laboratory: peripheral morphology, bone marrow aspirate morphology or flow cytometry, with the clinical history, recent CBC, provisional diagnosis and (for flow cytometry) the clinical suspicion and specimen source.",
+  "processor": "EncounterFormProcessor",
+  "encounter": "Lab Order",
+  "encounterType": "Lab Order",
+  "published": true,
+  "retired": false,
+  "referencedForms": [],
+  "pages": [
+    {
+      "label": "Hematopathology request",
+      "sections": [
+        {
+          "label": "Encounter details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Date",
+              "type": "encounterDatetime",
+              "id": "encDate",
+              "questionOptions": {
+                "rendering": "date"
+              },
+              "validators": [
+                {
+                  "type": "date",
+                  "allowFutureDates": "false"
+                }
+              ]
+            },
+            {
+              "label": "Provider",
+              "type": "encounterProvider",
+              "id": "encProvider",
+              "questionOptions": {
+                "rendering": "ui-select-extended",
+                "isSearchable": true
+              }
+            }
+          ]
+        },
+        {
+          "label": "Request details",
+          "isExpanded": "true",
+          "questions": [
+            {
+              "label": "Sample type",
+              "type": "obs",
+              "id": "hematopathologySampleType",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c5000010-5555-4a2b-8c3d-0e1f2a3b4c10",
+                "answers": [
+                  {
+                    "concept": "c5000001-5555-4a2b-8c3d-0e1f2a3b4c01",
+                    "label": "Peripheral morphology"
+                  },
+                  {
+                    "concept": "c5000002-5555-4a2b-8c3d-0e1f2a3b4c02",
+                    "label": "Bone marrow aspirate"
+                  },
+                  {
+                    "concept": "c5000003-5555-4a2b-8c3d-0e1f2a3b4c03",
+                    "label": "Flow cytometry"
+                  }
+                ]
+              }
+            },
+            {
+              "label": "Referring department",
+              "type": "obs",
+              "id": "referringDepartment",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "text",
+                "concept": "c2000012-2222-4a2b-8c3d-0e1f2a3b4c12"
+              }
+            },
+            {
+              "label": "Clinical history",
+              "type": "obs",
+              "id": "clinicalHistory",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c5000011-5555-4a2b-8c3d-0e1f2a3b4c11"
+              }
+            },
+            {
+              "label": "Recent CBC summary",
+              "type": "obs",
+              "id": "recentCbc",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c5000012-5555-4a2b-8c3d-0e1f2a3b4c12"
+              }
+            },
+            {
+              "label": "Provisional clinical diagnosis",
+              "type": "obs",
+              "id": "provisionalDiagnosis",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c5000013-5555-4a2b-8c3d-0e1f2a3b4c13"
+              }
+            },
+            {
+              "label": "Clinical suspicion / panel requested",
+              "type": "obs",
+              "id": "flowClinicalSuspicion",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "textarea",
+                "concept": "c5000014-5555-4a2b-8c3d-0e1f2a3b4c14"
+              },
+              "hide": {
+                "hideWhenExpression": "hematopathologySampleType !== 'c5000003-5555-4a2b-8c3d-0e1f2a3b4c03'"
+              }
+            },
+            {
+              "label": "Specimen source",
+              "type": "obs",
+              "id": "flowSpecimenSource",
+              "required": "true",
+              "questionOptions": {
+                "rendering": "select",
+                "concept": "c5000015-5555-4a2b-8c3d-0e1f2a3b4c15",
+                "answers": [
+                  {
+                    "concept": "c5000016-5555-4a2b-8c3d-0e1f2a3b4c16",
+                    "label": "Peripheral blood"
+                  },
+                  {
+                    "concept": "c5000017-5555-4a2b-8c3d-0e1f2a3b4c17",
+                    "label": "Bone marrow"
+                  },
+                  {
+                    "concept": "c5000018-5555-4a2b-8c3d-0e1f2a3b4c18",
+                    "label": "Fluid"
+                  }
+                ]
+              },
+              "hide": {
+                "hideWhenExpression": "hematopathologySampleType !== 'c5000003-5555-4a2b-8c3d-0e1f2a3b4c03'"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
